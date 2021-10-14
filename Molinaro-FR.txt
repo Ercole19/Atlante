@@ -1,0 +1,3 @@
+﻿1. The system shall provide the student with over-time statistical plots based on the frequency of every event type. 
+2. The system shall provide the uploading of pictures for the books to sell. 
+3. The system shall provide a button to set if the product's price is negotiable.
