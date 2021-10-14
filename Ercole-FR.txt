@@ -1,3 +1,5 @@
 1) The system shall acquire information about a tutor's CV and his subject matter and display such information to potential customers. 
+
 2) The system shall identify the on-sale used textbooks by their ISBN and allow their selling only if the book has the ISBN. 
+
 3) The system shall provide an upvote/downvote reviewing method to evaluate tutors.
