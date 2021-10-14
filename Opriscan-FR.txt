@@ -2,4 +2,4 @@
 
 2) The system shall provide the students with an editable calendar of their activities, labeling the different types of events. 
 
-2) The system shall provide plots based on the events of the calendar on user's demand. 
+3) The system shall provide plots based on the events of the calendar on user's demand. 
