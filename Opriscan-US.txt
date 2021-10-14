@@ -1,0 +1,5 @@
+1) As a student, I want to sell my old books, so that I can earn money from something I don't need anymore. 
+
+2) As a Tutor, I want to submit my CV, contact numbers and prices, so that students in need can contact me. 
+
+3) As a student, I want a calendar in which I can import my lessons schedule and insert events about my study sessions, so that I can keep track of how much I spend studying. 
