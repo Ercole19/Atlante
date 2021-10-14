@@ -1,3 +1,5 @@
 1) As a student, I want to receive plots based on the events from my calendar, so that I can monitor my progress and improve accordingly. 
-2) As a student, I want to keep track of the exams I have done with credits, so that I have an idea of how much remains before graduation. 
+
+2) As a student, I want to keep track of the exams I have done with credits, so that I have an idea of how much remains before graduation.
+
 3) As a student, I want to enter the grades of every exam and see my weighted average and arithmetic average, so that I can see my overall performance
