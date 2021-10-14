@@ -1,3 +1,5 @@
-﻿1. As a student, I want to see other students' reviews of a tutor, so that I can choose the best ones.
-2. As a student, I want to show images of the books I want to sell, so that I can be trusted by the buyers. 
-3. As a student, I want to show that the prices of the books I want to sell can be negotiable, so that I can sell  the books faster.
+﻿1) As a student, I want to see other students' reviews of a tutor, so that I can choose the best ones.
+
+2) As a student, I want to show images of the books I want to sell, so that I can be trusted by the buyers. 
+
+3) As a student, I want to show that the prices of the books I want to sell can be negotiable, so that I can sell  the books faster.
