@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Tutoring data</title>
+</head>
+
+<body>
+    <h1><p>Tutoring data:</p></h1>
+
+    <p>
+        All the information regarding the tutor:<br>
+        <ul>
+            <li>CV</li>
+            <li>Contact numbers: Phone numbers, emails, social media</li>
+            <li>Teached subjects</li>
+            <li>Prices</li>
+        </ul>
+    </p>
+</body>

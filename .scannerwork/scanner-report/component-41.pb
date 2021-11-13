@@ -1,0 +1,1 @@
+) 2xmlXhrRProgetti-Intellij/Atena/.idea/libraries/Maven__org_openjfx_javafx_web_17_0_0_1.xml

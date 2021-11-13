@@ -1,0 +1,1 @@
+ 2webXhr;Atlante's Dictionary/Dictionary entries/textbookSeller.html
