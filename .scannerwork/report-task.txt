@@ -1,7 +1,0 @@
-organization=ercole19
-projectKey=Ercole19_Atlante
-serverUrl=https://sonarcloud.io
-serverVersion=8.0.0.24741
-dashboardUrl=https://sonarcloud.io/dashboard?id=Ercole19_Atlante
-ceTaskId=AX0Z9ajk2xA90--Nuo-9
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AX0Z9ajk2xA90--Nuo-9

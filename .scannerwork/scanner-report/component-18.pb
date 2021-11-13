@@ -1,1 +1,0 @@
- 2xmlXhr1Progetti-Intellij/Atena/.idea/jarRepositories.xml

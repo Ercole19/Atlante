@@ -1,1 +1,0 @@
- 2xmlXhr+Progetti-Intellij/Atena/.idea/encodings.xml

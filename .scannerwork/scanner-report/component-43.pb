@@ -1,1 +1,0 @@
-+ 2xmlXhrRProgetti-Intellij/Atena/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml

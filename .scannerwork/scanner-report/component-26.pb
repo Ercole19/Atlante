@@ -1,1 +1,0 @@
- 2xmlXhrbProgetti-Intellij/Atena/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_7_1.xml

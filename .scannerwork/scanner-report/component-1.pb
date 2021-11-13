@@ -1,2 +1,0 @@
-Atlante :('!(,-+ "0#.?*&%)
-312$B'#https://github.com/Ercole19/AtlanteB*&https://travis-ci.org/Ercole19/AtlanteB.*https://github.com/Ercole19/Atlante/issuesB'#https://github.com/Ercole19/AtlanteRErcole19_Atlante
