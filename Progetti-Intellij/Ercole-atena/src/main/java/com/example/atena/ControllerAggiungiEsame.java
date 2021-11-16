@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 
-public class controllerAggiungiEsame {
+public class ControllerAggiungiEsame {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -44,14 +44,12 @@ public class controllerAggiungiEsame {
 
     public void confermaEsame (ActionEvent event) throws IOException {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        TextField NomeEsame = (TextField) stage.getScene().lookup("#Nome_Esame");
-        if (NomeEsame.getText().equals("")) {
-
-        }
-
-        else {
+        TextField nomeEsame = (TextField) stage.getScene().lookup("#Nome_Esame");
+        if (!(nomeEsame.getText().equals(""))) {
             stage.close();
         }
+
+
     }
 
     public void indietro(ActionEvent event){

@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class esamiHomepage extends Application {
+public class EsamiHomepage extends Application {
 
 
     public void start(Stage stage) throws IOException {
