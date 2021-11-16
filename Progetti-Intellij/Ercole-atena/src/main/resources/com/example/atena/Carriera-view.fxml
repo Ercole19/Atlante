@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="828.0" style="-fx-background-color: #faeeae;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.atena.controllerAggiungiEsame">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#deba84" height="47.0" stroke="BLACK" strokeType="INSIDE" width="828.0" />
+      <Text layoutX="345.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ATENA">
+         <font>
+            <Font name="Bookman Old Style" size="40.0" />
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text layoutX="65.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LA TUA CARRIERA">
+         <font>
+            <Font name="Bookman Old Style" size="25.0" />
+         </font>
+      </Text>
+      <Button layoutX="93.0" layoutY="568.0" mnemonicParsing="false" onAction="#Inizializza_Aggiungi_Esame" prefHeight="55.0" prefWidth="146.0" style="-fx-background-color: #8B4513;" text="Aggiungi esame" textFill="WHITE">
+         <font>
+            <Font name="Bookman Old Style" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="11.0" layoutY="11.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #8B4513;" text="Impostazioni" textFill="#fffdfd">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button layoutX="583.0" layoutY="568.0" mnemonicParsing="false" onAction="#Inizializza_Mostra_Media" prefHeight="55.0" prefWidth="146.0" style="-fx-background-color: #8B4513;" text="Mostra media" textFill="WHITE">
+         <font>
+            <Font name="Bookman Old Style" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>
