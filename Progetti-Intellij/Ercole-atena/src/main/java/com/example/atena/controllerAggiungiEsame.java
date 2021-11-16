@@ -11,7 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+import java.util.ResourceBundle;
 
 
 public class controllerAggiungiEsame {
@@ -46,14 +46,15 @@ public class controllerAggiungiEsame {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         TextField NomeEsame = (TextField) stage.getScene().lookup("#Nome_Esame");
         if (NomeEsame.getText().equals("")) {
-            System.out.println("Aggiungi un nome prima!");
+
         }
+
         else {
             stage.close();
         }
     }
 
-    public void Indietro(ActionEvent event){
+    public void indietro(ActionEvent event){
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
     }
