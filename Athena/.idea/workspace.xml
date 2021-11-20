@@ -4,33 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e7b4627a-926c-4826-9b2e-feccea1185ee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_linux_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_win_11_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_linux_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_win_11_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_linux_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_win_11_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_linux_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_win_11_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_media_linux_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_media_win_11_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_web_linux_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_web_win_11_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Athena.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Athena.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/athena/BookShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/athena/BookShopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/athena/BookshopClass.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/athena/ControllerAggiungiEsame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/athena/ControllerAggiungiEsame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/athena/EsamiHomepage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/athena/EsamiHomepage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/athena/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/athena/MainPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/AddEventScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/AddEventScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/Aggiungi_Esame_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/Aggiungi_Esame_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/CalendarPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/CalendarPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/Carriera-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/Carriera-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/MainPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/PlotPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/PlotPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/bookshop-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/bookshop-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/search-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/search-view.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="e7b4627a-926c-4826-9b2e-feccea1185ee" name="Changes" comment="" />
     <list id="854cebe1-af8d-47ed-846a-906abe5e9bf2" name="Changes by seb" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/hello-view.fxml" beforeDir="false" />
     </list>
@@ -53,24 +27,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/resources/com/example/athena/Carriera-view.fxml">
-      <ranges>
-        <range start1="11" end1="12" start2="11" end2="12" changelist="e9a22e65-5037-4f52-8748-78e8097f2f00" />
-        <range start1="25" end1="26" start2="25" end2="26" changelist="e7b4627a-926c-4826-9b2e-feccea1185ee" />
-        <range start1="56" end1="56" start2="56" end2="64" changelist="e7b4627a-926c-4826-9b2e-feccea1185ee" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/java/com/example/athena/ControllerAggiungiEsame.java">
-      <ranges>
-        <range start1="0" end1="1" start2="0" end2="1" changelist="e7b4627a-926c-4826-9b2e-feccea1185ee" />
-        <range start1="12" end1="12" start2="12" end2="15" changelist="e9a22e65-5037-4f52-8748-78e8097f2f00" />
-        <range start1="40" end1="41" start2="43" end2="43" changelist="e9a22e65-5037-4f52-8748-78e8097f2f00" />
-        <range start1="43" end1="56" start2="45" end2="50" changelist="e9a22e65-5037-4f52-8748-78e8097f2f00" />
-        <range start1="60" end1="61" start2="54" end2="54" changelist="e7b4627a-926c-4826-9b2e-feccea1185ee" />
-      </ranges>
-    </file>
   </component>
   <component name="ProjectId" id="21BdATQ0suM9WIsN3JVqeRD9DI6" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -133,7 +89,7 @@
       <option name="presentableId" value="Default" />
       <updated>1637418273616</updated>
       <workItem from="1637418277281" duration="1495000" />
-      <workItem from="1637424074684" duration="3977000" />
+      <workItem from="1637424074684" duration="4395000" />
     </task>
     <task id="LOCAL-00001" summary="Commit of main Athena project directory">
       <created>1637418427718</created>
@@ -156,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637419146145</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Commit Login, Homepage, Calendar, Plots, Events pages">
+      <created>1637428356687</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1637428356687</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
