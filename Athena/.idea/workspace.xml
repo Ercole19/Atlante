@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e7b4627a-926c-4826-9b2e-feccea1185ee" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/athena/LoginPageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/athena/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/athena/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/LoginPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/LoginPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +25,17 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/example/athena" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/example/athena" />
+      <recent name="$PROJECT_DIR$/src/main/resources/com/example/athena" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -55,7 +69,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1637418273616</updated>
-      <workItem from="1637418277281" duration="622000" />
+      <workItem from="1637418277281" duration="1495000" />
     </task>
     <task id="LOCAL-00001" summary="Commit of main Athena project directory">
       <created>1637418427718</created>
@@ -71,7 +85,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637418594040</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Commit Login, Homepage, Calendar, Plots, Events pages">
+      <created>1637419146145</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1637419146145</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -80,6 +101,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Commit of main Athena project directory" />
     <MESSAGE value="Commit presetting of stage's size" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit presetting of stage's size" />
+    <MESSAGE value="Commit Login, Homepage, Calendar, Plots, Events pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit Login, Homepage, Calendar, Plots, Events pages" />
   </component>
 </project>
