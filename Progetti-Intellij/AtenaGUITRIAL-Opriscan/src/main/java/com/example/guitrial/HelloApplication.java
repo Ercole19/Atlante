@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -13,6 +14,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -22,7 +24,6 @@ import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.attribute.PosixFileAttributes;
 import java.util.Objects;
@@ -31,6 +32,20 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
+        Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml")) ;
+        Scene scene = new Scene(root, 1280, 720) ;
+
+        stage.setTitle("Athena");
+        stage.setScene(scene) ;
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+
+    private void noFXMLBuilder(Stage stage)
+    {
         //Scene 1
         Group root1 = new Group() ;
         Scene scene1 = new Scene(root1, 1280, 720);
@@ -75,7 +90,7 @@ public class HelloApplication extends Application {
         welcome.setFont(Font.font("Roboto", FontWeight.BOLD, 64));
 
         Button reachCalendar = new Button("Calendar") ;
-        Image calendarIcon = new Image(new FileInputStream("src/main/java/com/example/guitrial/calendarIcon.png")) ;
+        Image calendarIcon = new Image("file:src/main/java/com/example/guitrial/calendarIcon.png") ;
         BackgroundImage calendarImage = new BackgroundImage(calendarIcon, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT) ;
         Background calendarBackground = new Background(calendarImage) ;
         reachCalendar.setBackground(calendarBackground);
@@ -207,12 +222,14 @@ public class HelloApplication extends Application {
             }
         });
 
-        stage.setTitle("Athena");
-        stage.setScene(scene1);
-        stage.show();
-    }
+        //root3.setOnMouseMoved(new EventHandler<MouseEvent>() {
+        //    @Override
+        //    public void handle(MouseEvent mouseEvent) {
+        //        System.out.println(mouseEvent.getSceneX()) ;
+        //        System.out.println(mouseEvent.getSceneY()) ;
+        //    }
+        //});
 
-    public static void main(String[] args) {
-        launch();
+        stage.setScene(scene1);
     }
 }

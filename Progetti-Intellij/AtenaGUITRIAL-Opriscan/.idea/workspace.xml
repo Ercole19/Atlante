@@ -4,7 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6be60e8b-cf30-439c-b62a-04e435445903" name="Changes" comment="" />
+    <list default="true" id="6be60e8b-cf30-439c-b62a-04e435445903" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/guitrial/LoginPageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/guitrial/PlotPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/guitrial/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/guitrial/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/guitrial/AddEventScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/guitrial/AddEventScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/guitrial/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/guitrial/LoginPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/guitrial/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/guitrial/MainPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/guitrial/AddEventScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/guitrial/AddEventScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/guitrial/HelloApplication$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/guitrial/HelloApplication$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/guitrial/HelloApplication$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/guitrial/HelloApplication$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/guitrial/HelloApplication$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/guitrial/HelloApplication$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/guitrial/HelloApplication$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/guitrial/HelloApplication$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/guitrial/HelloApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/guitrial/HelloApplication.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +29,12 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/example/guitrial/HelloApplication.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="20awKnGXpTWmWVhm4mu0h7AdInW" />
   <component name="ProjectViewState">
@@ -26,7 +45,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/example/guitrial" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Homework/GUITRIAL" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -63,6 +82,28 @@
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>$USER_HOME$/.subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="$PROJECT_DIR$" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="$PROJECT_DIR$" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="6be60e8b-cf30-439c-b62a-04e435445903" name="Changes" comment="" />
@@ -81,6 +122,10 @@
       <workItem from="1636888489092" duration="910000" />
       <workItem from="1636890063488" duration="2837000" />
       <workItem from="1636894892605" duration="73000" />
+      <workItem from="1636897642310" duration="122000" />
+      <workItem from="1636903456290" duration="38000" />
+      <workItem from="1636903729431" duration="464000" />
+      <workItem from="1637098065165" duration="7012000" />
     </task>
     <servers />
   </component>
