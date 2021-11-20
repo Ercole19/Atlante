@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e7b4627a-926c-4826-9b2e-feccea1185ee" name="Changes" comment="" />
+    <list default="true" id="e7b4627a-926c-4826-9b2e-feccea1185ee" name="Changes" comment="Commit Login, Homepage, Calendar, Plots, Events pages">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/athena/BookShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/athena/BookShopController.java" afterDir="false" />
+    </list>
     <list id="854cebe1-af8d-47ed-846a-906abe5e9bf2" name="Changes by seb" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/hello-view.fxml" beforeDir="false" />
     </list>
@@ -89,7 +91,7 @@
       <option name="presentableId" value="Default" />
       <updated>1637418273616</updated>
       <workItem from="1637418277281" duration="1495000" />
-      <workItem from="1637424074684" duration="4395000" />
+      <workItem from="1637424074684" duration="4456000" />
     </task>
     <task id="LOCAL-00001" summary="Commit of main Athena project directory">
       <created>1637418427718</created>
@@ -119,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637428356687</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Commit Login, Homepage, Calendar, Plots, Events pages">
+      <created>1637428523117</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1637428523117</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
