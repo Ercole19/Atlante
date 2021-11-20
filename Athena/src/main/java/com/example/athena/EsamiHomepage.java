@@ -1,4 +1,4 @@
-package com.example.atena;
+package com.example.athena;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;

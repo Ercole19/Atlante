@@ -5,12 +5,72 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e7b4627a-926c-4826-9b2e-feccea1185ee" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_linux_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_win_11_0_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_linux_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_win_11_0_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_linux_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_win_11_0_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_linux_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_win_11_0_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_media_linux_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_media_win_11_0_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_web_linux_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_web_win_11_0_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Athena.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Athena.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/athena/BookShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/athena/BookShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/athena/BookshopClass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/athena/ControllerAggiungiEsame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/athena/ControllerAggiungiEsame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/athena/EsamiHomepage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/athena/EsamiHomepage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/athena/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/athena/MainPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/AddEventScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/AddEventScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/Aggiungi_Esame_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/Aggiungi_Esame_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/CalendarPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/CalendarPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/Carriera-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/Carriera-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/MainPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/PlotPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/PlotPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/bookshop-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/bookshop-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/search-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/search-view.fxml" afterDir="false" />
+    </list>
+    <list id="854cebe1-af8d-47ed-846a-906abe5e9bf2" name="Changes by seb" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/hello-view.fxml" beforeDir="false" />
+    </list>
+    <list id="e9a22e65-5037-4f52-8748-78e8097f2f00" name="Changes by simon" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/athena/ControllerAggiungiEsame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/athena/ControllerAggiungiEsame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/Carriera-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/Carriera-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/athena/Mostra_Media_View.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/athena/Mostra_Media_View.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/resources/com/example/athena/Carriera-view.fxml">
+      <ranges>
+        <range start1="11" end1="12" start2="11" end2="12" changelist="e9a22e65-5037-4f52-8748-78e8097f2f00" />
+        <range start1="25" end1="26" start2="25" end2="26" changelist="e7b4627a-926c-4826-9b2e-feccea1185ee" />
+        <range start1="56" end1="56" start2="56" end2="64" changelist="e7b4627a-926c-4826-9b2e-feccea1185ee" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/com/example/athena/ControllerAggiungiEsame.java">
+      <ranges>
+        <range start1="0" end1="1" start2="0" end2="1" changelist="e7b4627a-926c-4826-9b2e-feccea1185ee" />
+        <range start1="12" end1="12" start2="12" end2="15" changelist="e9a22e65-5037-4f52-8748-78e8097f2f00" />
+        <range start1="40" end1="41" start2="43" end2="43" changelist="e9a22e65-5037-4f52-8748-78e8097f2f00" />
+        <range start1="43" end1="56" start2="45" end2="50" changelist="e9a22e65-5037-4f52-8748-78e8097f2f00" />
+        <range start1="60" end1="61" start2="54" end2="54" changelist="e7b4627a-926c-4826-9b2e-feccea1185ee" />
+      </ranges>
+    </file>
   </component>
   <component name="ProjectId" id="21BdATQ0suM9WIsN3JVqeRD9DI6" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -22,11 +82,16 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/example/athena" />
+    <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -56,26 +121,9 @@
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration" cleanupOnStartRun="true">
-    <configuration>$USER_HOME$/.subversion</configuration>
+    <configuration>C:\Users\molim\AppData\Roaming\Subversion</configuration>
     <supportedVersion>125</supportedVersion>
-  </component>
-  <component name="SvnFileUrlMappingImpl">
-    <option name="myMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="$PROJECT_DIR$" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
-    <option name="myMoreRealMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="$PROJECT_DIR$" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
+    <option name="runUnderTerminal" value="true" />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -84,9 +132,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1637418273616</updated>
-      <workItem from="1637418277281" duration="1955000" />
-      <workItem from="1637420532574" duration="178000" />
-      <workItem from="1637421719718" duration="615000" />
+      <workItem from="1637418277281" duration="1495000" />
+      <workItem from="1637424074684" duration="3977000" />
     </task>
     <task id="LOCAL-00001" summary="Commit of main Athena project directory">
       <created>1637418427718</created>
@@ -109,14 +156,7 @@
       <option name="project" value="LOCAL" />
       <updated>1637419146145</updated>
     </task>
-    <task id="LOCAL-00004" summary="Commit LoginController and changes to HelloApplication">
-      <created>1637419961274</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1637419961274</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,7 +166,10 @@
     <MESSAGE value="Commit of main Athena project directory" />
     <MESSAGE value="Commit presetting of stage's size" />
     <MESSAGE value="Commit Login, Homepage, Calendar, Plots, Events pages" />
-    <MESSAGE value="Commit LoginController and changes to HelloApplication" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit LoginController and changes to HelloApplication" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit Login, Homepage, Calendar, Plots, Events pages" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

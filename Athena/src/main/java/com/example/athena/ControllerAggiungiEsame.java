@@ -1,4 +1,4 @@
-package com.example.atena;
+package com.example.athena;
 
 
 import javafx.event.ActionEvent;
@@ -55,7 +55,6 @@ public class ControllerAggiungiEsame {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
     }
-
 
 
 

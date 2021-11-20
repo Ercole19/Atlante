@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df377d28-b966-4877-80b6-6b3fcbc408ef" name="Changes" comment="bookshopGui">
+    <list default="true" id="df377d28-b966-4877-80b6-6b3fcbc408ef" name="Changes" comment="upload">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/demo.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Athena/src/main/resources/com/example/athena/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Athena/src/main/resources/com/example/athena/MainPage.fxml" afterDir="false" />
     </list>
-    <list id="8925712e-7042-401c-8d34-5cc07fe88f17" name="Changes by simon" comment="" />
+    <list id="48039ed9-f89d-4560-9593-7d300748bd0a" name="Changes by seb" comment="">
+      <change beforePath="$PROJECT_DIR$/Athena/src/main/java/com/example/athena/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Athena/src/main/java/com/example/athena/MainPageController.java" afterDir="false" />
+    </list>
+    <list id="8925712e-7042-401c-8d34-5cc07fe88f17" name="Changes by simon" comment="">
+      <change beforePath="$PROJECT_DIR$/Athena/src/main/java/com/example/athena/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Athena/src/main/java/com/example/athena/MainPageController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +21,15 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/Athena/src/main/java/com/example/athena/MainPageController.java">
+      <ranges>
+        <range start1="6" end1="8" start2="6" end2="11" changelist="8925712e-7042-401c-8d34-5cc07fe88f17" />
+        <range start1="10" end1="12" start2="13" end2="19" changelist="8925712e-7042-401c-8d34-5cc07fe88f17" />
+        <range start1="13" end1="13" start2="20" end2="54" changelist="48039ed9-f89d-4560-9593-7d300748bd0a" />
+      </ranges>
+    </file>
   </component>
   <component name="ProjectId" id="20E8evtNzS0vemyyU2xGALMpwGe" />
   <component name="ProjectLevelVcsManager">
@@ -36,7 +50,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="openjdk-17" />
-    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/bookshop page" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Athena" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -73,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637416224822</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="upload">
+      <created>1637420644623</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1637420644623</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -91,6 +112,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="bookshopGui" />
-    <option name="LAST_COMMIT_MESSAGE" value="bookshopGui" />
+    <MESSAGE value="upload" />
+    <option name="LAST_COMMIT_MESSAGE" value="upload" />
   </component>
 </project>

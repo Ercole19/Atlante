@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.guitrial.PlotPage">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.PlotPageController">
     <children>
         <Text layoutX="443.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ATHENA" textOrigin="CENTER">
             <font>
@@ -26,8 +26,8 @@
         </yAxis>
       </StackedBarChart>
       <Button layoutX="1027.0" layoutY="639.0" mnemonicParsing="false" text="Export" />
-      <Button layoutX="22.0" layoutY="146.0" mnemonicParsing="false" text="Back" />
-      <Button layoutX="1183.0" layoutY="80.0" mnemonicParsing="false" text="Logout" />
+      <Button layoutX="22.0" layoutY="146.0" mnemonicParsing="false" onAction="#clickOnBackButton" text="Back" />
+      <Button layoutX="1183.0" layoutY="80.0" mnemonicParsing="false" onAction="#onLogoutButtonClick" text="Logout" />
       <Text layoutX="91.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plots">
          <font>
             <Font size="48.0" />

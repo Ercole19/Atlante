@@ -23,7 +23,7 @@
             <Font name="Bookman Old Style" size="25.0" />
          </font>
       </Text>
-      <Button layoutX="93.0" layoutY="568.0" mnemonicParsing="false" onAction="#initAggiungiEsame" prefHeight="55.0" prefWidth="146.0" style="-fx-background-color: #8B4513;" text="Aggiungi esame" textFill="WHITE">
+      <Button layoutX="345.0" layoutY="568.0" mnemonicParsing="false" onAction="#initAggiungiEsame" prefHeight="55.0" prefWidth="146.0" style="-fx-background-color: #8B4513;" text="Aggiungi esame" textFill="WHITE">
          <font>
             <Font name="Bookman Old Style" size="15.0" />
          </font>
@@ -54,5 +54,13 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <Button layoutX="90.0" layoutY="568.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="55.0" prefWidth="146.0" style="-fx-background-color: #8B4513;" text="indietro" textFill="WHITE">
+         <font>
+            <Font name="Bookman Old Style" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>
