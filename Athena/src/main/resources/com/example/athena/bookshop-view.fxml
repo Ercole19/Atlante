@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.BookShopController">
+   <children>
+      <AnchorPane layoutX="243.0" layoutY="257.0" prefHeight="538.0" prefWidth="797.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" AnchorPane.leftAnchor="243.0">
+         <children>
+            <AnchorPane layoutX="33.0" layoutY="84.0">
+               <children>
+                  <AnchorPane prefHeight="132.0" prefWidth="706.0" style="-fx-background-color: #12657f; -fx-background-radius: 20;">
+                     <children>
+                        <Text fill="#ffd775" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recently used labels:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <AnchorPane fx:id="maths" layoutX="33.0" layoutY="46.0" prefHeight="61.0" prefWidth="155.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;">
+                           <children>
+                              <Text fill="#fcfcfc" layoutX="28.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maths">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Text>
+                              <Button mnemonicParsing="false" onAction="#maths" opacity="0.0" prefHeight="61.0" prefWidth="155.0" text="mathsBtn" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="comps" layoutX="204.0" layoutY="46.0" prefHeight="61.0" prefWidth="313.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;">
+                           <children>
+                              <Text fill="#fcfcfc" layoutX="14.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Computer science">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Text>
+                              <Button mnemonicParsing="false" onAction="#comps" opacity="0.0" prefHeight="61.0" prefWidth="321.0" text="csButton" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <Text fill="WHITE" layoutX="46.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add label:" wrappingWidth="270.13671875">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="243.0" layoutY="183.0" prefHeight="61.0" prefWidth="797.0" style="-fx-background-color: #ffd775; -fx-background-radius: 20;" AnchorPane.leftAnchor="243.0">
+         <children>
+            <AnchorPane layoutX="713.0" layoutY="5.0" prefHeight="50.0" prefWidth="73.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;" />
+            <TextField fx:id="textF" layoutX="10.0" layoutY="4.0" prefHeight="51.0" prefWidth="692.0" promptText="search book name or ISBN" style="-fx-background-radius: 16; -fx-background-color: #ffffff;">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
+            <ImageView fitHeight="50.0" fitWidth="82.0" layoutX="709.0" layoutY="4.0">
+               <image>
+                  <Image url="@../../../assets/searchBtn.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="searchBtn" layoutX="713.0" layoutY="4.0" mnemonicParsing="false" onAction="#onSearchButtonClick" opacity="0.0" prefHeight="50.0" prefWidth="73.0" style="-fx-background-color: #2d8bba;" text="searchBtn" />
+         </children>
+      </AnchorPane>
+      <AnchorPane opacity="0.79" prefHeight="50.0" prefWidth="1280.0" style="-fx-background-color: #2d8bba;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <ImageView fitHeight="50.0" fitWidth="95.0" AnchorPane.rightAnchor="-12.0">
+         <image>
+            <Image url="@../../../assets/guff.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/settingsBtn.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="settingsBtn" layoutX="10.0" layoutY="5.0" mnemonicParsing="false" onAction="#onSettingsButtonClick" opacity="0.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #2d8bba;" text="settingsBtn" />
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="55.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/homeBtn.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="homeBtn" layoutX="55.0" layoutY="3.0" mnemonicParsing="false" onAction="#onHomeButtonClick" opacity="0.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #2d8bba;" text="homeBtn" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1013.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="67.0">
+         <image>
+            <Image url="@../../../assets/title.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="55.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/backBtn.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="backBtn" layoutX="55.0" layoutY="183.0" mnemonicParsing="false" onAction="#onBackButtonClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn" />
+      <ImageView fitHeight="40.0" fitWidth="436.0" layoutX="243.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="243.0">
+         <image>
+            <Image url="@../../../assets/shopHeader.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="139.0" layoutX="610.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="610.0">
+         <image>
+            <Image url="@../../../assets/bookShopIcon.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
