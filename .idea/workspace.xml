@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df377d28-b966-4877-80b6-6b3fcbc408ef" name="Changes" comment="bookshopGui" />
+    <list default="true" id="df377d28-b966-4877-80b6-6b3fcbc408ef" name="Changes" comment="bookshopGui">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/demo.iml" beforeDir="false" />
+    </list>
+    <list id="8925712e-7042-401c-8d34-5cc07fe88f17" name="Changes by simon" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,10 +36,19 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="openjdk-17" />
-    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/bookshop page/.idea/libraries" />
+    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/bookshop page" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Athena" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.example.demo.HelloApplication" />
+      <module name="demo" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -53,7 +66,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637416156805</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="bookshopGui">
+      <created>1637416224822</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1637416224822</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
