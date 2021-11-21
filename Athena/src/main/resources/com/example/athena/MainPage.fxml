@@ -40,11 +40,6 @@
          </font>
       </Text>
       <Button layoutX="1183.0" layoutY="80.0" mnemonicParsing="false" onAction="#onLogoutButtonClick" text="Logout" />
-      <SubScene fill="#d11d1d" height="226.0" layoutX="34.0" layoutY="257.0" width="246.0">
-        <root>
-          <Region />
-        </root>
-      </SubScene>
     </children>
 
 </AnchorPane>

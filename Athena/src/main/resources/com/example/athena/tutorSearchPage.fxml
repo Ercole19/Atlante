@@ -23,7 +23,7 @@
             <Font size="48.0" />
          </font>
       </Text>
-      <Button layoutX="22.0" layoutY="146.0" mnemonicParsing="false" text="Back" />
+      <Button layoutX="22.0" layoutY="146.0" mnemonicParsing="false" onAction="#clickOnBackButton" text="Back" />
       <TextField layoutX="94.0" layoutY="202.0" prefHeight="56.0" prefWidth="1100.0" promptText="Enter tutor's name...">
          <font>
             <Font size="26.0" />
@@ -36,5 +36,7 @@
           <Region />
         </root>
       </SubScene>
+      <Button layoutX="1079.0" layoutY="146.0" mnemonicParsing="false" onAction="#clickOnReviewTutorButton" text="Review a Tutor" />
+      <Button layoutX="1183.0" layoutY="80.0" mnemonicParsing="false" onAction="#onLogoutButtonClick" text="Logout" />
    </children>
 </AnchorPane>

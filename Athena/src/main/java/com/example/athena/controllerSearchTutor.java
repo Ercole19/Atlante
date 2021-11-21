@@ -33,4 +33,27 @@ public class controllerSearchTutor {
         scene = new Scene(root) ;
         stage.setScene(scene);
     }
+
+    public void clickOnBackButton(ActionEvent event) throws IOException
+    {
+        root = load(Objects.requireNonNull(getClass().getResource("MainPage.fxml")));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+    }
+
+    public void clickOnReviewTutorButton(ActionEvent event) throws IOException
+    {
+        root = load(Objects.requireNonNull(getClass().getResource("TutorReviewPage.fxml")));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+    }
+
+    public void onLogoutButtonClick(ActionEvent event) throws IOException {
+        root = load(Objects.requireNonNull(getClass().getResource("LoginPage.fxml")));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+    }
 }
