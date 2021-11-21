@@ -45,13 +45,13 @@ public class MainPageController {
         stage.setScene(scene);
     }
 
-    /* @FXML
-    public void onTutorButtonClick()  {
-        root = FXMLLoader.load(Objects.requireNotNull(getClass().getResource(TODO));
+
+    public void onTutorButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("tutorSearchPage.fxml")));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-    }*/
+    }
 
     public void onLogoutButtonClick(ActionEvent event) throws IOException {
         root = load(Objects.requireNonNull(getClass().getResource("LoginPage.fxml")));
