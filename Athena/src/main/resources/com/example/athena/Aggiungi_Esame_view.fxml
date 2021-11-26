@@ -28,7 +28,7 @@
          </cursor>
       </Button>
       <TextField fx:id="Nome_Esame" layoutX="17.0" layoutY="91.0" prefHeight="26.0" prefWidth="414.0" />
-      <TextField fx:id="Voto_Esame" layoutX="18.0" layoutY="166.0" prefHeight="26.0" prefWidth="414.0" />
+      <TextField fx:id="votoEsame" layoutX="18.0" layoutY="166.0" prefHeight="26.0" prefWidth="414.0" />
       <TextField fx:id="CFU_Esame" layoutX="18.0" layoutY="246.0" prefHeight="26.0" prefWidth="414.0" />
       <Text layoutX="18.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome">
          <font>
@@ -51,7 +51,7 @@
             <Font name="Bookman Old Style" size="20.0" />
          </font>
       </Text>
-      <DatePicker layoutX="19.0" layoutY="322.0" />
+      <DatePicker fx:id="Data_Esame" layoutX="19.0" layoutY="322.0" />
       <Text layoutX="21.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data">
          <font>
             <Font name="Bookman Old Style" size="13.0" />
