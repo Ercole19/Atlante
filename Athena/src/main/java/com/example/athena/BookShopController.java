@@ -40,7 +40,7 @@ public class BookShopController {
 
     @FXML
     protected void onHomeButtonClick(ActionEvent event) throws IOException {
-        root = load(Objects.requireNonNull(getClass().getResource("MainPage.fxml")));
+        root = load(Objects.requireNonNull(getClass().getResource("MainPageStudents.fxml")));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -63,7 +63,7 @@ public class BookShopController {
 
     @FXML
     protected void onBackButtonClick(ActionEvent event) throws IOException {
-        root = load(Objects.requireNonNull(getClass().getResource("MainPage.fxml")));
+        root = load(Objects.requireNonNull(getClass().getResource("MainPageStudents.fxml")));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

@@ -28,7 +28,7 @@
             <Font size="26.0" />
          </font>
       </Button>
-      <Button layoutX="687.0" layoutY="578.0" mnemonicParsing="false" text="Login as Tutor">
+      <Button layoutX="687.0" layoutY="578.0" mnemonicParsing="false" onAction="#switchtoTutorMainPage" text="Login as Tutor">
          <font>
             <Font size="26.0" />
          </font>
