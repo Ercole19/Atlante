@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.TutorPersonalPageController">
+    <Button layoutX="1183.0" layoutY="80.0" mnemonicParsing="false" onAction="#onLogoutButtonClick" text="Logout" />
+    <Text layoutX="442.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ATHENA">
+        <font>
+            <Font size="96.0" />
+        </font>
+    </Text>
+    <Label layoutX="145.0" layoutY="277.0" text="Rap history">
+        <font>
+          <Font size="24.0" />
+        </font>
+    </Label>
+    <Text layoutX="120.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subjects :">
+        <font>
+          <Font size="24.0" />
+        </font>
+    </Text>
+    <Label layoutX="75.0" layoutY="127.0" text="Welcome back, Kanye East">
+        <font>
+          <Font size="48.0" />
+        </font>
+    </Label>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faeeae" height="194.0" layoutX="973.0" layoutY="187.0" stroke="BLACK" strokeType="INSIDE" width="238.0" />
+    <Text layoutX="998.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mettere foto qua">
+        <font>
+          <Font size="24.0" />
+        </font>
+    </Text>
+    <CheckBox layoutX="150.0" layoutY="427.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="171.0" selected="true" text="Negotiable pirce">
+        <font>
+          <Font size="16.0" />
+        </font>
+    </CheckBox>
+    <Text layoutX="129.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prices ">
+        <font>
+          <Font size="24.0" />
+        </font>
+    </Text>
+    <Text layoutX="132.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available days :">
+        <font>
+          <Font size="24.0" />
+        </font>
+    </Text>
+    <Text layoutX="546.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="About me :">
+        <font>
+          <Font size="24.0" />
+        </font>
+    </Text>
+    <Button layoutX="1151.0" layoutY="441.0" mnemonicParsing="false" text="Edit" />
+    <Button layoutX="1057.0" layoutY="442.0" mnemonicParsing="false" text="Edit" />
+    <Button layoutX="1061.0" layoutY="525.0" mnemonicParsing="false" onAction="#onCVButtonClick" text="Edit CV" />
+    <Text layoutX="978.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recapiti">
+        <font>
+          <Font size="24.0" />
+        </font>
+    </Text>
+   <Button layoutX="948.0" layoutY="443.0" mnemonicParsing="false" text="Edit" />
+   <Button layoutX="691.0" layoutY="148.0" mnemonicParsing="false" text="Confirm" />
+   <TextArea layoutX="589.0" layoutY="271.0" prefHeight="123.0" prefWidth="265.0" />
+   <TextField layoutX="159.0" layoutY="383.0" promptText="Inserisci una tariffa..." />
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+   <Text layoutX="423.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+   <Text layoutX="323.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Euro all'ora">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Text>
+   <CheckBox layoutX="62.0" layoutY="525.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" selected="true" text="Monday">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </CheckBox>
+   <CheckBox layoutX="191.0" layoutY="523.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" text="Monday">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </CheckBox>
+   <CheckBox layoutX="57.0" layoutY="567.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" text="Monday">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </CheckBox>
+   <CheckBox layoutX="187.0" layoutY="568.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" selected="true" text="Monday">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </CheckBox>
+   <CheckBox layoutX="62.0" layoutY="612.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" text="Monday">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </CheckBox>
+   <CheckBox layoutX="188.0" layoutY="611.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" selected="true" text="Monday">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </CheckBox>
+</AnchorPane>

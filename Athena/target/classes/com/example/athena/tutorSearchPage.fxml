@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.SubScene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.controllerSearchTutor">
+   <children>
+      <Text layoutX="442.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ATHENA">
+         <font>
+            <Font size="96.0" />
+         </font>
+      </Text>
+
+      <Text layoutX="91.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search for a tutor">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Text>
+      <Button layoutX="22.0" layoutY="146.0" mnemonicParsing="false" onAction="#clickOnBackButton" text="Back" />
+      <TextField layoutX="94.0" layoutY="202.0" prefHeight="56.0" prefWidth="1100.0" promptText="Enter tutor's name...">
+         <font>
+            <Font size="26.0" />
+         </font></TextField>
+      <Button layoutX="1109.0" layoutY="217.0" mnemonicParsing="false" onAction="#clickOnSearch" text="Cerca" />
+      <RadioButton layoutX="116.0" layoutY="327.0" mnemonicParsing="false" text="Sort by best reviews" textAlignment="RIGHT" />
+      <ChoiceBox layoutX="103.0" layoutY="276.0" prefWidth="150.0" />
+      <SubScene fx:id="searchResults" height="325.0" layoutX="94.0" layoutY="358.0" width="1100.0">
+        <root>
+          <Region />
+        </root>
+      </SubScene>
+      <Button layoutX="1079.0" layoutY="146.0" mnemonicParsing="false" onAction="#clickOnReviewTutorButton" text="Review a Tutor" />
+      <Button layoutX="1183.0" layoutY="80.0" mnemonicParsing="false" onAction="#onLogoutButtonClick" text="Logout" />
+   </children>
+</AnchorPane>
