@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,11 +21,6 @@ public class BookShopController {
     private Parent root;
     private Stage stage;
     private Scene scene;
-
-    @FXML
-    AnchorPane maths;
-    @FXML
-    AnchorPane comps;
 
     @FXML
     protected void onSettingsButtonClick() { System.out.println(4);}
@@ -46,13 +40,11 @@ public class BookShopController {
         root = load(Objects.requireNonNull(getClass().getResource("search-view.fxml")));
         SubScene searchSub = (SubScene) scene.lookup("#results");
         Label label = (Label) scene.lookup("#resLab");
-        if (res.equals("")){label.setText("No results for " + res);}
+        if (!res.equals("")){label.setText("No results for " + res);}
         else{label.setText("please write something to search");}
         label.setStyle("-fx-opacity: 1");
         searchSub.setRoot(root);
         searchSub.setStyle("-fx-opacity: 1");
-        maths.setStyle("-fx-background-color: #2d8bba");
-        comps.setStyle("-fx-background-color: #2d8bba");
     }
 
     @FXML
@@ -63,13 +55,10 @@ public class BookShopController {
         stage.setScene(scene);
     }
 
-    @FXML
-    protected void maths(){
-        maths.setStyle("-fx-background-color: #2d8bfa");
-    }
-
-    @FXML
-    protected void comps(){
-        comps.setStyle("-fx-background-color: #2d8bfa");
+    public void onLogoutButtonClick(ActionEvent event) throws IOException {
+        root = load(Objects.requireNonNull(getClass().getResource("LoginPage.fxml")));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
     }
 }
