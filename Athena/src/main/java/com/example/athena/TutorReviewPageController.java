@@ -32,14 +32,14 @@ public class TutorReviewPageController
         root = load(Objects.requireNonNull(getClass().getResource("tutorPersonalReview.fxml"))) ;
         scene = ((Node) event.getSource()).getScene() ;
         SubScene reviewSubscene = (SubScene) scene.lookup("#reviewSectionPrompt") ;
-        reviewSubscene.setRoot(root) ;
+        reviewSubscene.setRoot(root);
     }
 
-    public void clickOnSubmitReviewButton(ActionEvent event) throws IOException
+    public void clickOnSubmitReviewButton(ActionEvent event)
     {
         scene = ((Node) event.getSource()).getScene() ;
         SubScene reviewSubscene = (SubScene) scene.lookup("#reviewSectionPrompt") ;
-        reviewSubscene.setRoot(new AnchorPane()) ;
+        reviewSubscene.setRoot(new AnchorPane());
     }
 
     public void onLogoutButtonClick(ActionEvent event) throws IOException {

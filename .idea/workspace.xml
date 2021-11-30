@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df377d28-b966-4877-80b6-6b3fcbc408ef" name="Changes" comment="upload">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Athena/src/main/resources/com/example/athena/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Athena/src/main/resources/com/example/athena/MainPage.fxml" afterDir="false" />
-    </list>
-    <list id="48039ed9-f89d-4560-9593-7d300748bd0a" name="Changes by seb" comment="">
-      <change beforePath="$PROJECT_DIR$/Athena/src/main/java/com/example/athena/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Athena/src/main/java/com/example/athena/MainPageController.java" afterDir="false" />
-    </list>
-    <list id="8925712e-7042-401c-8d34-5cc07fe88f17" name="Changes by simon" comment="">
-      <change beforePath="$PROJECT_DIR$/Athena/src/main/java/com/example/athena/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Athena/src/main/java/com/example/athena/MainPageController.java" afterDir="false" />
-    </list>
+    <list default="true" id="df377d28-b966-4877-80b6-6b3fcbc408ef" name="Changes" comment="upload" />
+    <list id="48039ed9-f89d-4560-9593-7d300748bd0a" name="Changes by seb" comment="" />
+    <list id="8925712e-7042-401c-8d34-5cc07fe88f17" name="Changes by simon" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,15 +14,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/Athena/src/main/java/com/example/athena/MainPageController.java">
-      <ranges>
-        <range start1="6" end1="8" start2="6" end2="11" changelist="8925712e-7042-401c-8d34-5cc07fe88f17" />
-        <range start1="10" end1="12" start2="13" end2="19" changelist="8925712e-7042-401c-8d34-5cc07fe88f17" />
-        <range start1="13" end1="13" start2="20" end2="54" changelist="48039ed9-f89d-4560-9593-7d300748bd0a" />
-      </ranges>
-    </file>
   </component>
   <component name="ProjectId" id="20E8evtNzS0vemyyU2xGALMpwGe" />
   <component name="ProjectLevelVcsManager">
