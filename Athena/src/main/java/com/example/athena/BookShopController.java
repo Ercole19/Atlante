@@ -46,7 +46,7 @@ public class BookShopController {
         root = load(Objects.requireNonNull(getClass().getResource("search-view.fxml")));
         SubScene searchSub = (SubScene) scene.lookup("#results");
         Label label = (Label) scene.lookup("#resLab");
-        if (res != ""){label.setText("No results for " + res);}
+        if (res.equals("")){label.setText("No results for " + res);}
         else{label.setText("please write something to search");}
         label.setStyle("-fx-opacity: 1");
         searchSub.setRoot(root);
