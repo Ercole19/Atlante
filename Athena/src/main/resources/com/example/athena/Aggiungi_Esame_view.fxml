@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="450.0" style="-fx-background-color: #faeeae;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.AggiungiEsameController">
    <children>
-      <Button layoutX="52.0" layoutY="427.0" mnemonicParsing="false" onAction="#ConfermaEsame" prefHeight="65.0" prefWidth="110.0" style="-fx-background-color: #8B4513;" text="Conferma" textFill="WHITE">
+      <Button layoutX="51.0" layoutY="450.0" mnemonicParsing="false" onAction="#ConfermaEsame" onKeyPressed="#ConfermaEsame" prefHeight="65.0" prefWidth="110.0" style="-fx-background-color: #8B4513;" text="Conferma" textFill="WHITE">
          <font>
             <Font name="Bookman Old Style" size="15.0" />
          </font>
@@ -19,7 +19,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="292.0" layoutY="427.0" mnemonicParsing="false" onAction="#indietro" prefHeight="65.0" prefWidth="110.0" style="-fx-background-color: #8B4513;" text="Indietro" textFill="WHITE">
+      <Button layoutX="294.0" layoutY="450.0" mnemonicParsing="false" onAction="#indietro" prefHeight="65.0" prefWidth="110.0" style="-fx-background-color: #8B4513; -fx-border-color: #000000;" text="Indietro" textFill="WHITE">
          <font>
             <Font name="Bookman Old Style" size="15.0" />
          </font>

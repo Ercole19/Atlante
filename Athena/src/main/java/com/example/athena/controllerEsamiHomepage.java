@@ -43,6 +43,17 @@ public class controllerEsamiHomepage {
         stage.showAndWait();
     }
 
+    public void initCareerStatus () throws IOException {
+        root = FXMLLoader.load(getClass().getResource("carrerStatusView.fxml"));
+        stage = new Stage();
+        stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("La tua media");
+        stage.showAndWait();
+    }
+
     public void onBackButtonClick(ActionEvent event) throws IOException {
         root = load(Objects.requireNonNull(getClass().getResource("MainPageStudents.fxml")));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();

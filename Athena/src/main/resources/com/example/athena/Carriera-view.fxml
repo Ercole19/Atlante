@@ -18,12 +18,12 @@
          </font>
       </Text>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Text layoutX="65.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I TUOI ESAMI">
+      <Text layoutX="208.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I TUOI ESAMI">
          <font>
             <Font name="Bookman Old Style" size="25.0" />
          </font>
       </Text>
-      <Button layoutX="345.0" layoutY="568.0" mnemonicParsing="false" onAction="#initAggiungiEsame" prefHeight="55.0" prefWidth="146.0" style="-fx-background-color: #8B4513;" text="Aggiungi esame" textFill="WHITE">
+      <Button layoutX="82.0" layoutY="568.0" mnemonicParsing="false" onAction="#initAggiungiEsame" prefHeight="55.0" prefWidth="146.0" style="-fx-background-color: #8B4513;" text="Aggiungi esame" textFill="WHITE">
          <font>
             <Font name="Bookman Old Style" size="15.0" />
          </font>
@@ -35,7 +35,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button layoutX="583.0" layoutY="568.0" mnemonicParsing="false" onAction="#initMostraMedia" prefHeight="55.0" prefWidth="146.0" style="-fx-background-color: #8B4513;" text="Mostra media" textFill="WHITE">
+      <Button layoutX="336.0" layoutY="568.0" mnemonicParsing="false" onAction="#initMostraMedia" prefHeight="55.0" prefWidth="146.0" style="-fx-background-color: #8B4513;" text="Mostra media" textFill="WHITE">
          <font>
             <Font name="Bookman Old Style" size="15.0" />
          </font>
@@ -54,7 +54,15 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="90.0" layoutY="568.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="55.0" prefWidth="146.0" style="-fx-background-color: #8B4513;" text="indietro" textFill="WHITE">
+      <Button layoutX="22.0" layoutY="75.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="29.0" prefWidth="120.0" style="-fx-background-color: #8B4513;" text="indietro" textFill="WHITE">
+         <font>
+            <Font name="Bookman Old Style" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="563.0" layoutY="568.0" mnemonicParsing="false" onAction="#initCareerStatus" prefHeight="55.0" prefWidth="198.0" style="-fx-background-color: #8B4513;" text="Avanzamento carriera" textFill="WHITE">
          <font>
             <Font name="Bookman Old Style" size="15.0" />
          </font>
