@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df377d28-b966-4877-80b6-6b3fcbc408ef" name="Changes" comment="upload" />
+    <list default="true" id="df377d28-b966-4877-80b6-6b3fcbc408ef" name="Changes" comment="upload">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_11_2021_15_54_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_11_2021_15_54__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <list id="48039ed9-f89d-4560-9593-7d300748bd0a" name="Changes by seb" comment="" />
     <list id="8925712e-7042-401c-8d34-5cc07fe88f17" name="Changes by simon" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,16 +39,19 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="jdk.selected.JAVA_MODULE" value="openjdk-17" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Athena" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
     <configuration name="Athena" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="com.example.demo.HelloApplication" />
-      <module name="demo" />
+      <option name="ALTERNATIVE_JRE_PATH" value="corretto-17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.example.athena.HelloApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -56,6 +65,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1635598488230</updated>
+      <workItem from="1638366982350" duration="38000" />
+      <workItem from="1638367063755" duration="463000" />
+      <workItem from="1638367564833" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="bookshopGui">
       <created>1637416156805</created>
@@ -80,6 +92,9 @@
     </task>
     <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
