@@ -10,21 +10,27 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+import static javafx.fxml.FXMLLoader.load;
+
 public class LoginPageController {
+
+    private Parent root;
+    private Stage stage;
+    private Scene scene;
 
     public void switchToMainPage(ActionEvent event) throws IOException
     {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPageStudents.fxml"))) ;
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
-        Scene scene = new Scene(root) ;
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPageStudents.fxml"))) ;
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
+        scene = new Scene(root) ;
         stage.setScene(scene) ;
     }
 
     public void switchtoTutorMainPage(ActionEvent event) throws IOException
     {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPageTutor.fxml"))) ;
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
-        Scene scene = new Scene(root) ;
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPageTutor.fxml"))) ;
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
+        scene = new Scene(root) ;
         stage.setScene(scene) ;
     }
 }

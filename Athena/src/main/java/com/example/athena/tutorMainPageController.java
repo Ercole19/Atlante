@@ -13,6 +13,7 @@ import static javafx.fxml.FXMLLoader.load;
 
 public class tutorMainPageController {
 
+    HelloApplication Btn = new HelloApplication();
     private Parent root;
     private Stage stage;
     private Scene scene;
@@ -27,10 +28,7 @@ public class tutorMainPageController {
     }
 
     public void onLogoutButtonClick(ActionEvent event) throws IOException {
-        root = load(Objects.requireNonNull(getClass().getResource("LoginPage.fxml")));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
+        Btn.logoutBtn(event);
     }
 
 }

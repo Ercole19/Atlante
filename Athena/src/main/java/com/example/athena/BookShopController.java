@@ -17,7 +17,7 @@ import static javafx.fxml.FXMLLoader.load;
 
 public class BookShopController {
 
-    @FXML
+    HelloApplication Btn = new HelloApplication();
     private Parent root;
     private Stage stage;
     private Scene scene;
@@ -37,11 +37,19 @@ public class BookShopController {
     protected void onSearchButtonClick(ActionEvent event) throws IOException {
         scene = ((Node) event.getSource()).getScene();
         String res = ((TextField) scene.lookup("#textF")).getText();
-        root = load(Objects.requireNonNull(getClass().getResource("search-view.fxml")));
+        Label label;
+        label =  (Label) scene.lookup("#resLab");
         SubScene searchSub = (SubScene) scene.lookup("#results");
-        Label label = (Label) scene.lookup("#resLab");
-        if (!res.equals("")){label.setText("No results for " + res);}
-        else{label.setText("please write something to search");}
+        if (!res.equals("")){
+            label.setStyle("-fx-opacity: 0");
+            label =  (Label) scene.lookup("#resLab1");
+            root = load(Objects.requireNonNull(getClass().getResource("Search-view.fxml")));
+            label.setText(res + ":");
+        }
+        else{
+            root = load(Objects.requireNonNull(getClass().getResource("VoidSearch-view.fxml")));
+            label.setText("please write something to search");
+        }
         label.setStyle("-fx-opacity: 1");
         searchSub.setRoot(root);
         searchSub.setStyle("-fx-opacity: 1");
@@ -55,10 +63,15 @@ public class BookShopController {
         stage.setScene(scene);
     }
 
-    public void onLogoutButtonClick(ActionEvent event) throws IOException {
-        root = load(Objects.requireNonNull(getClass().getResource("LoginPage.fxml")));
+    @FXML
+    protected void onBookBtnClick(ActionEvent event) throws IOException{
+        root = load(Objects.requireNonNull(getClass().getResource("BuyBookPage.fxml")));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+    }
+
+    public void onLogoutButtonClick(ActionEvent event) throws IOException {
+        Btn.logoutBtn(event);
     }
 }
