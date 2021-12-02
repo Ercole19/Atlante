@@ -1,8 +1,26 @@
 package com.example.athena;
 
-public class SubjectLabels
+public enum SubjectLabels
 {
-    public static String COMPUTER_SCIENCE = "Computer Science" ;
-    public static String CALCULUS_1 = "Calculus 1" ;
-    public static String GEOMETRY = "Geometry" ;
+    COMPUTER_SCIENCE,
+    CALCULUS_1,
+    GEOMETRY ;
+
+    public static String printValue(SubjectLabels enumVal) throws Exception
+    {
+        switch(enumVal)
+        {
+            case COMPUTER_SCIENCE:
+                return "Computer science" ;
+
+            case CALCULUS_1:
+                return "Calculus 1" ;
+
+            case GEOMETRY:
+                return "Geometry" ;
+
+            default :
+                throw new Exception() ;
+        }
+    }
 }
