@@ -2,73 +2,70 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="828.0" style="-fx-background-color: #faeeae;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.controllerEsamiHomepage">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.controllerEsamiHomepage">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#deba84" height="47.0" stroke="BLACK" strokeType="INSIDE" width="828.0" />
-      <Text layoutX="345.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ATENA">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2d8bba" height="75.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text fill="#ffd775" layoutX="289.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TAKEN EXAMS">
          <font>
             <Font name="Bookman Old Style" size="40.0" />
          </font>
       </Text>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Text layoutX="208.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I TUOI ESAMI">
+      <Button layoutX="167.0" layoutY="568.0" mnemonicParsing="false" onAction="#initAggiungiEsame" prefHeight="55.0" prefWidth="217.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Add Exam" textFill="WHITE">
          <font>
-            <Font name="Bookman Old Style" size="25.0" />
-         </font>
-      </Text>
-      <Button layoutX="82.0" layoutY="568.0" mnemonicParsing="false" onAction="#initAggiungiEsame" prefHeight="55.0" prefWidth="146.0" style="-fx-background-color: #8B4513;" text="Aggiungi esame" textFill="WHITE">
-         <font>
-            <Font name="Bookman Old Style" size="15.0" />
+            <Font name="Bookman Old Style" size="20.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="11.0" layoutY="11.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #8B4513;" text="Impostazioni" textFill="#fffdfd">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button layoutX="336.0" layoutY="568.0" mnemonicParsing="false" onAction="#initMostraMedia" prefHeight="55.0" prefWidth="146.0" style="-fx-background-color: #8B4513;" text="Mostra media" textFill="WHITE">
+      <Button layoutX="545.0" layoutY="568.0" mnemonicParsing="false" onAction="#initMostraMedia" prefHeight="55.0" prefWidth="163.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Show average" textFill="WHITE">
          <font>
-            <Font name="Bookman Old Style" size="15.0" />
+            <Font name="Bookman Old Style" size="20.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TableView editable="true" layoutX="66.0" layoutY="128.0" prefHeight="404.0" prefWidth="696.0" style="-fx-background-color: #deba84;" tableMenuButtonVisible="true">
-        <columns>
-          <TableColumn prefWidth="161.5999984741211" text="Nome " />
-          <TableColumn prefWidth="168.0" text="Voto" />
-            <TableColumn prefWidth="166.40005493164062" text="CFU" />
-            <TableColumn prefWidth="135.20001220703125" text="Data" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
-      <Button layoutX="22.0" layoutY="75.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="29.0" prefWidth="120.0" style="-fx-background-color: #8B4513;" text="indietro" textFill="WHITE">
+      <Button layoutX="835.0" layoutY="567.0" mnemonicParsing="false" onAction="#initCareerStatus" prefHeight="55.0" prefWidth="254.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Career Status" textFill="WHITE">
          <font>
-            <Font name="Bookman Old Style" size="15.0" />
+            <Font name="Bookman Old Style" size="20.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="563.0" layoutY="568.0" mnemonicParsing="false" onAction="#initCareerStatus" prefHeight="55.0" prefWidth="198.0" style="-fx-background-color: #8B4513;" text="Avanzamento carriera" textFill="WHITE">
-         <font>
-            <Font name="Bookman Old Style" size="15.0" />
-         </font>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="962.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/title.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="1171.0" layoutY="14.0">
+         <image>
+            <Image url="@../../../assets/guff.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="37.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/backBtn.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="backBtn" layoutX="36.0" layoutY="94.0" mnemonicParsing="false" onAction="#onBackButtonClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <ImageView fitHeight="128.0" fitWidth="218.0" layoutX="77.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/examsSymbol.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

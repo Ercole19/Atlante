@@ -13,7 +13,7 @@
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2d8bba" height="75.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Text fill="#ffd775" layoutX="223.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TAKEN EXAMS">
+      <Text fill="#ffd775" layoutX="289.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TAKEN EXAMS">
          <font>
             <Font name="Bookman Old Style" size="40.0" />
          </font>
@@ -29,14 +29,6 @@
       <Button layoutX="545.0" layoutY="568.0" mnemonicParsing="false" onAction="#initMostraMedia" prefHeight="55.0" prefWidth="163.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Show average" textFill="WHITE">
          <font>
             <Font name="Bookman Old Style" size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button layoutX="31.0" layoutY="111.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="29.0" prefWidth="120.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Back" textFill="WHITE">
-         <font>
-            <Font name="Bookman Old Style" size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -58,6 +50,21 @@
       <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="1171.0" layoutY="14.0">
          <image>
             <Image url="@../../../assets/guff.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="37.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/backBtn.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="backBtn" layoutX="36.0" layoutY="94.0" mnemonicParsing="false" onAction="#onBackButtonClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="128.0" fitWidth="218.0" layoutX="77.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/examsSymbol.png" />
          </image>
       </ImageView>
    </children>
