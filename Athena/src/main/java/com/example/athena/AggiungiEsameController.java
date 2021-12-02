@@ -23,7 +23,7 @@ public class AggiungiEsameController {
     public void ConfermaEsame(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         TextField nomeEsame = (TextField) stage.getScene().lookup("#Nome_Esame");
-        TextField votoEsame = (TextField) stage.getScene().lookup("#votoEsame");
+        TextField votoEsame = (TextField) stage.getScene().lookup("#Voto_Esame");
         TextField CFUEsame = (TextField) stage.getScene().lookup(("#CFU_Esame"));
         DatePicker dataEsame = (DatePicker) stage.getScene().lookup("#Data_Esame");
         String nome = nomeEsame.getText();
