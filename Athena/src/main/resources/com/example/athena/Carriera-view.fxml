@@ -57,15 +57,15 @@
             <Image url="@../../../assets/backBtn.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="128.0" fitWidth="217.0" layoutX="78.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/examsSymbol.png" />
+         </image>
+      </ImageView>
       <Button fx:id="backBtn" layoutX="36.0" layoutY="94.0" mnemonicParsing="false" onAction="#onBackButtonClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fitHeight="128.0" fitWidth="218.0" layoutX="77.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../assets/examsSymbol.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>
