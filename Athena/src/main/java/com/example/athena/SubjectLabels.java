@@ -1,12 +1,14 @@
 package com.example.athena;
 
+import java.util.ArrayList;
+
 public enum SubjectLabels
 {
     COMPUTER_SCIENCE,
     CALCULUS_1,
     GEOMETRY ;
 
-    public static String printValue(SubjectLabels enumVal) throws Exception
+    public static String printValue(SubjectLabels enumVal)
     {
         switch(enumVal)
         {
@@ -19,8 +21,20 @@ public enum SubjectLabels
             case GEOMETRY:
                 return "Geometry" ;
 
-            default :
-                throw new Exception() ;
+            default:
+                return "" ;
         }
+    }
+
+    public static ArrayList<String> getAllLabels()
+    {
+        ArrayList<String> retVal = new ArrayList<>() ;
+
+        for(SubjectLabels label: SubjectLabels.values())
+        {
+            retVal.add(SubjectLabels.printValue(label)) ;
+        }
+
+        return retVal ;
     }
 }

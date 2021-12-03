@@ -21,7 +21,7 @@
             <Font size="48.0" />
          </font>
       </Text>
-      <TextField layoutX="100.0" layoutY="200.0" prefHeight="56.0" prefWidth="1100.0" promptText="Enter tutor's name..." style="-fx-background-radius: 20;">
+      <TextField fx:id="searchBar" layoutX="100.0" layoutY="200.0" prefHeight="56.0" prefWidth="1100.0" promptText="Enter tutor's name..." style="-fx-background-radius: 20;">
          <font>
             <Font size="26.0" />
          </font></TextField>
@@ -37,7 +37,7 @@
             <Font size="18.0" />
          </font></RadioButton>
       <ChoiceBox layoutX="103.0" layoutY="276.0" prefWidth="150.0" />
-      <SubScene fx:id="searchResults" fill="#002730" height="325.0" layoutX="94.0" layoutY="358.0" width="1100.0">
+      <SubScene fx:id="resultsBox" fill="#002730" height="325.0" layoutX="94.0" layoutY="358.0" width="1100.0">
         <root>
           <Region />
         </root>

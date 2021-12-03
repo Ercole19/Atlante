@@ -1,13 +1,17 @@
 package com.example.athena;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import static javafx.fxml.FXMLLoader.load;
@@ -18,13 +22,19 @@ public class controllerSearchTutor {
     private Stage stage ;
     private Parent root ;
 
+    @FXML
+    TextField searchBar ;
 
-    public void clickOnSearch(ActionEvent event) throws IOException
+    @FXML
+    SubScene resultsBox ;
+
+    public void clickOnSearch()
     {
-        Parent root = load(Objects.requireNonNull(getClass().getResource("resultScreen.fxml")));
-        scene = (Scene) ((Node) event.getSource()).getScene() ;
-        SubScene myScene = (SubScene) scene.lookup("#searchResults") ;
-        myScene.setRoot(root) ;
+        SearchTutorUseCaseController controller = new SearchTutorUseCaseController() ;
+        ArrayList<TutorSearchResultEntity> results =  controller.formatSearchResults(searchBar.getText()) ;
+        SearchResultsFormatterGraphicalController graphControl = new SearchResultsFormatterGraphicalController() ;
+        AnchorPane subSceneElems = graphControl.buildTutorSearchResultsScene(resultsBox.getWidth(), resultsBox.getHeight(), results) ;
+        resultsBox.setRoot(subSceneElems) ;
     }
     public void clickOnPersonalPage(ActionEvent event) throws IOException
     {
