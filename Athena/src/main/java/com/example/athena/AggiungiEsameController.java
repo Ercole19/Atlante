@@ -42,7 +42,7 @@ public class AggiungiEsameController {
         try {
               voto = Integer.parseInt(Voto);
         } catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, " Metti un voto valido " , ButtonType.CLOSE);
+            Alert alert = new Alert(Alert.AlertType.ERROR, " Fill correctly all the fields " , ButtonType.CLOSE);
             alert.showAndWait();
             return ;
 
@@ -51,19 +51,19 @@ public class AggiungiEsameController {
         try {
             cfu = Integer.parseInt(Cfu);
         } catch (NumberFormatException e ){
-            Alert alert = new Alert(Alert.AlertType.ERROR, " Metti dei cfu  validi " , ButtonType.CLOSE);
+            Alert alert = new Alert(Alert.AlertType.ERROR, " Fill correctly all the fields " , ButtonType.CLOSE);
             alert.showAndWait();
             return ;
 
         }
 
         if ( (nome.equals("")) || (voto<18 || voto>30) || (cfu<0 || cfu >15) ) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, " Dati inseriti non validi " , ButtonType.CLOSE);
+            Alert alert = new Alert(Alert.AlertType.ERROR, " Fill correctly all the fields " , ButtonType.CLOSE);
             alert.showAndWait();
         }
         else {
             esameDaAggiungere = new entityExam(nome, voto ,cfu ,data);
-            System.out.println("Esame Aggiunto :)");
+            System.out.println("Exam added succesfully :)");
             stage.close();
 
         }

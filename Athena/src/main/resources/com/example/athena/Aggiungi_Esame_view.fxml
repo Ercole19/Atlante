@@ -29,7 +29,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TextField fx:id="Nome_Esame" layoutX="14.0" layoutY="175.0" prefHeight="26.0" prefWidth="507.0" />
+      <TextField fx:id="Nome_Esame" layoutX="14.0" layoutY="175.0" prefHeight="26.0" prefWidth="507.0" promptText="Vote of your exam (must be not null)" />
       <Text fill="#ffd775" layoutX="17.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
          <font>
             <Font name="Bookman Old Style" size="19.0" />
@@ -67,7 +67,7 @@
             <Image url="@../../../assets/guff.png" />
          </image>
       </ImageView>
-      <TextField fx:id="Voto_Esame" layoutX="14.0" layoutY="242.0" prefHeight="26.0" prefWidth="507.0" />
-      <TextField fx:id="CFU_Esame" layoutX="14.0" layoutY="310.0" prefHeight="26.0" prefWidth="507.0" />
+      <TextField fx:id="Voto_Esame" layoutX="14.0" layoutY="242.0" prefHeight="26.0" prefWidth="507.0" promptText="Vote of your exam (must be between 18 and 30)" />
+      <TextField fx:id="CFU_Esame" layoutX="14.0" layoutY="310.0" prefHeight="26.0" prefWidth="507.0" promptText="CFU of your exam ( must be between 0 and 15)" />
    </children>
 </AnchorPane>
