@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="767.0" prefWidth="1312.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.MainPageController">
+<AnchorPane minWidth="-Infinity" prefHeight="767.0" prefWidth="1331.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.MainPageController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#002730" height="711.0" layoutY="56.0" stroke="BLACK" strokeType="INSIDE" width="1330.0" />
       <AnchorPane layoutX="-26.0" layoutY="-6.0" opacity="0.79" prefHeight="62.0" prefWidth="1356.0" style="-fx-background-color: #2d8bba;">
@@ -56,9 +56,19 @@
             <Font size="50.0" />
          </font>
       </Text>
-      <ImageView fitHeight="338.0" fitWidth="401.0" layoutX="245.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="338.0" fitWidth="401.0" layoutX="255.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../assets/calendarSymbol.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="185.0" fitWidth="337.0" layoutX="1034.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@tutorSymbol.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="204.0" fitWidth="383.0" layoutX="507.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@examsSymbolBlue.png" />
          </image>
       </ImageView>
       <Text layoutX="346.0" layoutY="585.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calendar">
@@ -78,13 +88,14 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button layoutX="1079.0" layoutY="56.0" mnemonicParsing="false" onAction="#onTutorButtonClick" opacity="0.0" prefHeight="710.0" prefWidth="251.0" style="-fx-background-color: #ff6e27;">
+      <Button layoutX="1079.0" layoutY="56.0" mnemonicParsing="false" onAction="#onTutorButtonClick" opacity="0.0" prefHeight="710.0" prefWidth="272.0" style="-fx-background-color: #ff6e27;">
          <font>
             <Font size="30.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
+         </cursor>
+      </Button>
       <Button layoutX="809.0" layoutY="55.0" mnemonicParsing="false" onAction="#onShopButtonClick" opacity="0.0" prefHeight="711.0" prefWidth="271.0" style="-fx-background-color: #fb8500;">
          <font>
             <Font size="30.0" />
@@ -100,6 +111,16 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <ImageView fitHeight="219.0" fitWidth="340.0" layoutX="-23.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/homeWrite.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="47.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/studentWrite.png" />
+         </image>
+      </ImageView>
    </children>
 
 </AnchorPane>
