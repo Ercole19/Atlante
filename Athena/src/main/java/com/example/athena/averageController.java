@@ -32,8 +32,8 @@ public class averageController implements Initializable {
         XYChart.Series series = new XYChart.Series();
         series.setName("Average");
 
-        series.getData().add(new XYChart.Data<String,Number>("12/01/2020", 28));
-        series.getData().add(new XYChart.Data<String , Number>("17/02/2020", 26));
+        series.getData().add(new XYChart.Data<String,Number>("12/01/2020", 28)) ;
+        series.getData().add(new XYChart.Data<String , Number>("17/02/2020", 26)) ;
 
 
 

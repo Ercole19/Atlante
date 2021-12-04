@@ -61,10 +61,6 @@ public class controllerEsamiHomepage {
         stage.setScene(scene);
     }
 
-        public void indietro (ActionEvent event) {
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.close();
-        }
 
 
 }
