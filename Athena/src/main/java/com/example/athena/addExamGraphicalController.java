@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ public class addExamGraphicalController {
     @FXML
     private DatePicker dataEsame;
 
+
     public void confermaEsame(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
          String nome = nomeEsame.getText();
@@ -31,7 +33,6 @@ public class addExamGraphicalController {
          examEntityBean examBean = new examEntityBean(nome , Voto , CFU , data);
          addExamUseCaseController useCaseController = new addExamUseCaseController() ;
          useCaseController.addExam(examBean);
-         stage.close();
 
 
 
