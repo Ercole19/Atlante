@@ -1,110 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.TutorEditPageController">
-    <Button layoutX="1183.0" layoutY="80.0" mnemonicParsing="false" onAction="#onLogoutButtonClick" text="Logout" />
-    <Text layoutX="442.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ATHENA">
-        <font>
-            <Font size="96.0" />
-        </font>
-    </Text>
-    <Label layoutX="145.0" layoutY="277.0" text="Rap history">
-        <font>
-          <Font size="24.0" />
-        </font>
-    </Label>
-    <Text layoutX="120.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subjects :">
-        <font>
-          <Font size="24.0" />
-        </font>
-    </Text>
-    <Label layoutX="75.0" layoutY="127.0" text="Welcome back, Kanye East">
-        <font>
-          <Font size="48.0" />
-        </font>
-    </Label>
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faeeae" height="194.0" layoutX="973.0" layoutY="187.0" stroke="BLACK" strokeType="INSIDE" width="238.0" />
-    <Text layoutX="998.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mettere foto qua">
-        <font>
-          <Font size="24.0" />
-        </font>
-    </Text>
-    <CheckBox layoutX="150.0" layoutY="427.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="171.0" selected="true" text="Negotiable pirce">
-        <font>
-          <Font size="16.0" />
-        </font>
-    </CheckBox>
-    <Text layoutX="129.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prices ">
-        <font>
-          <Font size="24.0" />
-        </font>
-    </Text>
-    <Text layoutX="132.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available days :">
-        <font>
-          <Font size="24.0" />
-        </font>
-    </Text>
-    <Text layoutX="546.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="About me :">
-        <font>
-          <Font size="24.0" />
-        </font>
-    </Text>
-    <Button layoutX="1151.0" layoutY="441.0" mnemonicParsing="false" text="Edit" />
-    <Button layoutX="1057.0" layoutY="442.0" mnemonicParsing="false" text="Edit" />
-    <Button layoutX="1061.0" layoutY="525.0" mnemonicParsing="false" onAction="#onCVButtonClick" text="Edit CV" />
-    <Text layoutX="978.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recapiti">
-        <font>
-          <Font size="24.0" />
-        </font>
-    </Text>
-   <Button layoutX="948.0" layoutY="443.0" mnemonicParsing="false" text="Edit" />
-   <Button layoutX="691.0" layoutY="148.0" mnemonicParsing="false" onAction="#onConfirmButtonClick" text="Confirm" />
-   <TextArea layoutX="589.0" layoutY="271.0" prefHeight="123.0" prefWidth="265.0" />
-   <TextField layoutX="159.0" layoutY="383.0" promptText="Inserisci una tariffa..." />
-   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-   <Text layoutX="423.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-   <Text layoutX="323.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Euro all'ora">
-      <font>
-         <Font size="24.0" />
-      </font>
-   </Text>
-   <CheckBox layoutX="62.0" layoutY="525.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" selected="true" text="Monday">
-      <font>
-         <Font size="16.0" />
-      </font>
-   </CheckBox>
-   <CheckBox layoutX="191.0" layoutY="523.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" text="Monday">
-      <font>
-         <Font size="16.0" />
-      </font>
-   </CheckBox>
-   <CheckBox layoutX="57.0" layoutY="567.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" text="Monday">
-      <font>
-         <Font size="16.0" />
-      </font>
-   </CheckBox>
-   <CheckBox layoutX="187.0" layoutY="568.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" selected="true" text="Monday">
-      <font>
-         <Font size="16.0" />
-      </font>
-   </CheckBox>
-   <CheckBox layoutX="62.0" layoutY="612.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" text="Monday">
-      <font>
-         <Font size="16.0" />
-      </font>
-   </CheckBox>
-   <CheckBox layoutX="188.0" layoutY="611.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" selected="true" text="Monday">
-      <font>
-         <Font size="16.0" />
-      </font>
-   </CheckBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.TutorEditPageController">
+   <children>
+      <AnchorPane opacity="0.79" prefHeight="50.0" prefWidth="1280.0" style="-fx-background-color: #2d8bba;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="977.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../assets/title.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="1175.0" layoutY="-1.0">
+               <image>
+                  <Image url="@../../../assets/guff.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#014a61" height="670.0" layoutX="273.0" layoutY="66.0" stroke="BLACK" strokeType="INSIDE" width="1018.0" />
+      <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#ffd775" height="85.0" layoutX="343.0" layoutY="92.0" stroke="BLACK" strokeType="INSIDE" width="703.0" />
+      <Label layoutX="377.0" layoutY="111.0" prefHeight="46.0" prefWidth="223.0" text="Kanye East" textFill="#002730">
+         <font>
+            <Font name="Bookman Old Style" size="35.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="textArea1" layoutX="325.0" layoutY="189.0" prefHeight="182.0" prefWidth="297.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@textAreaStyle.css" text="About me  : &#10;&#10;Hi I am Kanye East PHD student in rap history" wrapText="true">
+         <font>
+            <Font name="Bookman Old Style" size="20.0" />
+         </font>
+         <styleClass>
+            <String fx:value="content" />
+            <String fx:value="scroll-pane" />
+            <String fx:value="text-area" />
+            <String fx:value="viewport" />
+         </styleClass>
+      </TextArea>
+      <TextArea fx:id="textArea11" layoutX="656.0" layoutY="201.0" prefHeight="182.0" prefWidth="297.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@textAreaStyle.css" text="My courses : &#10;&#10;Analisi 1 , Geometria, ISPW&#10;" wrapText="true">
+         <font>
+            <Font name="Bookman Old Style" size="20.0" />
+         </font>
+         <styleClass>
+            <String fx:value="content" />
+            <String fx:value="scroll-pane" />
+            <String fx:value="text-area" />
+            <String fx:value="viewport" />
+         </styleClass>
+      </TextArea>
+      <TextArea fx:id="textArea111" layoutX="359.0" layoutY="400.0" prefHeight="182.0" prefWidth="297.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@textAreaStyle.css" text="Prices : 15 euros per hour&#10; &#10;Available Days : Mon/Wed/Sun" wrapText="true">
+         <font>
+            <Font name="Bookman Old Style" size="20.0" />
+         </font>
+         <styleClass>
+            <String fx:value="content" />
+            <String fx:value="scroll-pane" />
+            <String fx:value="text-area" />
+            <String fx:value="viewport" />
+         </styleClass>
+      </TextArea>
+      <TextArea fx:id="textArea1111" layoutX="670.0" layoutY="409.0" prefHeight="182.0" prefWidth="297.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@textAreaStyle.css" text="My contact numbers :&#10;&#10;email...&#10;tel...&#10;" wrapText="true">
+         <font>
+            <Font name="Bookman Old Style" size="20.0" />
+         </font>
+         <styleClass>
+            <String fx:value="content" />
+            <String fx:value="scroll-pane" />
+            <String fx:value="text-area" />
+            <String fx:value="viewport" />
+         </styleClass>
+      </TextArea>
+      <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="14.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/backBtn.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="backBtn" layoutX="24.0" layoutY="84.0" mnemonicParsing="false" onAction="#clickOnBackButton" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="41.0" layoutY="498.0" mnemonicParsing="false" onAction="#onCVButtonClick" prefHeight="46.0" prefWidth="198.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Upload CV " textFill="WHITE">
+         <font>
+            <Font name="Bookman Old Style" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TextArea fx:id="textArea11111" editable="false" layoutX="334.0" layoutY="615.0" prefHeight="78.0" prefWidth="664.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@textAreaStyle.css" text="Tutor reviews : ...." wrapText="true">
+         <font>
+            <Font name="Bookman Old Style" size="20.0" />
+         </font>
+         <styleClass>
+            <String fx:value="content" />
+            <String fx:value="scroll-pane" />
+            <String fx:value="text-area" />
+            <String fx:value="viewport" />
+         </styleClass>
+      </TextArea>
+      <ImageView fitHeight="296.0" fitWidth="290.0" layoutX="972.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/guff.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="41.0" layoutY="575.0" mnemonicParsing="false" onAction="#onConfirmButtonClick" prefHeight="46.0" prefWidth="198.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Confirm" textFill="WHITE">
+         <font>
+            <Font name="Bookman Old Style" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="25.0" layoutY="644.0" mnemonicParsing="false" onAction="#onConfirmButtonClick" prefHeight="46.0" prefWidth="233.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Upload Profile Photo" textFill="WHITE">
+         <font>
+            <Font name="Bookman Old Style" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
 </AnchorPane>

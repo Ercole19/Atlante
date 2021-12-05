@@ -41,5 +41,18 @@
             <Font size="24.0" />
          </font>
       </PasswordField>
+      <Text fill="#ffd775" layoutX="904.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New User?" textOrigin="CENTER">
+         <font>
+            <Font size="65.0" />
+         </font>
+      </Text>
+      <Button layoutX="975.0" layoutY="332.0" mnemonicParsing="false" onAction="#switchToSignUpPage" style="-fx-background-radius: 20; -fx-background-color: #2d8bba;" text="Sign Up" textFill="WHITE">
+         <font>
+            <Font size="26.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>
