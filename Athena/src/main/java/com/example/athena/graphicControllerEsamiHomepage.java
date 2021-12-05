@@ -16,7 +16,7 @@ import static javafx.fxml.FXMLLoader.load;
 
 
 
-public class controllerEsamiHomepage {
+public class graphicControllerEsamiHomepage {
     private Stage stage;
     private Scene scene;
     private Parent root;

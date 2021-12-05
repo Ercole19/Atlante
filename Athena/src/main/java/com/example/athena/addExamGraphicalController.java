@@ -4,47 +4,34 @@ package com.example.athena;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
-import java.util.Locale;
 
 
 public class addExamGraphicalController {
     @FXML
-    private TextField Nome_Esame;
+    private TextField nomeEsame;
     @FXML
-    private TextField Voto_Esame;
+    private TextField votoEsame;
     @FXML
-    private TextField CFU_Esame;
+    private TextField cfuEsame;
     @FXML
-    private DatePicker Data_Esame;
-
-    private int voto;
-
-    private int cfu;
-
-    private String nome;
-    private LocalDate data;
-    private String Voto ;
-    private String CFU ;
+    private DatePicker dataEsame;
 
     private  examEntityBean examBean;
-    private addExamUseCaseController controllerUseCase ;
 
-    public void ConfermaEsame(ActionEvent event) {
+    public void confermaEsame(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-         nome = Nome_Esame.getText();
-         data = Data_Esame.getValue();
-         Voto = Voto_Esame.getText();
-         CFU = CFU_Esame.getText();
+         String nome = nomeEsame.getText();
+         LocalDate data = dataEsame.getValue();
+         String Voto = votoEsame.getText();
+         String CFU = cfuEsame.getText();
 
-         examBean = new examEntityBean(nome , Voto , CFU , data);
-         controllerUseCase = new addExamUseCaseController(examBean) ;
+         examEntityBean examBean = new examEntityBean(nome , Voto , CFU , data);
+         addExamUseCaseController controllerUseCase = new addExamUseCaseController(examBean) ;
          stage.close();
 
 
