@@ -21,8 +21,6 @@ public class addExamGraphicalController {
     @FXML
     private DatePicker dataEsame;
 
-    private  examEntityBean examBean;
-
     public void confermaEsame(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
          String nome = nomeEsame.getText();
