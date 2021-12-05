@@ -29,7 +29,8 @@ public class addExamGraphicalController {
          String CFU = cfuEsame.getText();
 
          examEntityBean examBean = new examEntityBean(nome , Voto , CFU , data);
-         addExamUseCaseController controllerUseCase = new addExamUseCaseController(examBean) ;
+         addExamUseCaseController useCaseController = new addExamUseCaseController() ;
+         useCaseController.addExam(examBean);
          stage.close();
 
 
