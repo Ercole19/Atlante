@@ -11,25 +11,24 @@ public class examEntityBean {
     private int cfuEsame;
     private LocalDate date;
 
-    public examEntityBean (String nomeString , String votoString , String cfuString , LocalDate esameData) {
-        try {
-            this.votoEsame = Integer.parseInt(votoString);
-        } catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, " Fill correctly all the fields ", ButtonType.CLOSE);
-            alert.showAndWait();
-            return;
+    public examEntityBean () {
 
-        }
-        try {
+    }
+
+    public void setCfuEsame(String  cfuString) throws NumberFormatException {
             this.cfuEsame = Integer.parseInt(cfuString);
-        } catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, " Fill correctly all the fields ", ButtonType.CLOSE);
-            alert.showAndWait();
-            return;
+    }
 
-        }
-        this.examName = nomeString ;
-        this.date = esameData ;
+    public void setExamName(String examName) {
+        this.examName = examName;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setVotoEsame(String votoString)  throws  NumberFormatException{
+            this.votoEsame = Integer.parseInt(votoString);
     }
 
     public int getCfuEsame() {
