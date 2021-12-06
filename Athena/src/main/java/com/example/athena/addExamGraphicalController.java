@@ -43,7 +43,7 @@ public class addExamGraphicalController {
              return ;
          }
          addExamUseCaseController useCaseController = new addExamUseCaseController() ;
-         useCaseController.addExam(examBean);
+         useCaseController.addExam(examBean , event );
 
 
 
