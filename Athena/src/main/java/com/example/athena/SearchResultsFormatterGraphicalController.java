@@ -2,15 +2,12 @@ package com.example.athena;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -20,46 +17,48 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class SearchResultsFormatterGraphicalController
+public class SearchResultsFormatterGraphicalController extends SearchResultFormatterComponent
 {
+    @Override
     public AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, ArrayList<TutorSearchResultEntity> results)
     {
-        float sceneHeight = (results.size())*100.0f ;
-        VBox graphicalList = new VBox() ;
-        graphicalList.setPrefSize(containerWidth, Math.min(sceneHeight, containerHeight));
+        double sceneHeight = (results.size())*100.0f ;
 
         if(containerHeight < sceneHeight)
         {
-            //This is part of a decorator pattern, now simplified
-            ScrollBar scrollBar = new ScrollBar() ;
-            scrollBar.setOrientation(Orientation.VERTICAL) ;
+            containerWidth = containerWidth - 10 ;
         }
+
+        VBox graphicalList = new VBox() ;
+        graphicalList.setPrefSize(containerWidth, sceneHeight) ;
 
         for(TutorSearchResultEntity result: results)
         {
-            AnchorPane entryPane = new AnchorPane() ;
-            entryPane.setPrefSize(containerWidth, 100) ;
-            entryPane.setStyle("-fx-background-color: #faeeae") ;
-            entryPane.setStyle("-fx-background-color: #000000") ;
+            GridPane entryBox = new GridPane() ;
+            entryBox.setPrefSize(containerWidth, 100) ;
+            entryBox.setStyle("-fx-background-color: #faeeae") ;
+            entryBox.setStyle("-fx-border-color: #000000") ;
+
+            entryBox.getRowConstraints().add(new RowConstraints(100)) ;
+            setColumnConstraint(30, entryBox) ;
+            setColumnConstraint(30, entryBox) ;
+            setColumnConstraint(30, entryBox) ;
+            setColumnConstraint(10, entryBox) ;
 
             Label nameLabel = new Label(result.getName() + "" + result.getSurname()) ;
             nameLabel.setFont(new Font("System", 26)) ;
-            nameLabel.setLayoutX(containerWidth*5/100) ;
-            nameLabel.setLayoutY(30) ;
+            entryBox.add(nameLabel, 0, 0) ;
 
             Label subjectLabel = new Label(result.getTaughtSubject()) ;
             subjectLabel.setFont(new Font("System", 26)) ;
-            nameLabel.setLayoutX(containerWidth*30/100) ;
-            nameLabel.setLayoutY(30) ;
+            entryBox.add(subjectLabel, 1, 0) ;
 
             Label starsLabel = new Label(result.getStarNumber()) ;
             starsLabel.setFont(new Font("System", 26)) ;
-            nameLabel.setLayoutX(containerWidth*60/100) ;
-            nameLabel.setLayoutY(30) ;
+            entryBox.add(starsLabel, 2, 0) ;
 
             Button visitPage = new Button("Visit page") ;
-            nameLabel.setLayoutX(containerWidth*80/100) ;
-            nameLabel.setLayoutY(30) ;
+            entryBox.add(visitPage, 3, 0) ;
 
             visitPage.setOnAction(new EventHandler<>() {
                 @Override
@@ -79,11 +78,16 @@ public class SearchResultsFormatterGraphicalController
                 }
             });
 
-            entryPane.getChildren().addAll(nameLabel, subjectLabel, starsLabel, visitPage) ;
-
-            graphicalList.getChildren().add(entryPane) ;
+            graphicalList.getChildren().add(entryBox) ;
         }
 
         return new AnchorPane(graphicalList) ;
+    }
+
+    private void setColumnConstraint(double percent, GridPane pane)
+    {
+        ColumnConstraints columnConstraint = new ColumnConstraints() ;
+        columnConstraint.setPercentWidth(percent) ;
+        pane.getColumnConstraints().add(columnConstraint) ;
     }
 }
