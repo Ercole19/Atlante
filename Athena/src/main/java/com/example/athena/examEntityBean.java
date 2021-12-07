@@ -1,5 +1,7 @@
 package com.example.athena;
 
+
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -15,8 +17,15 @@ public class examEntityBean {
 
     }
 
-    public void setCfuEsame(String  cfuString) throws NumberFormatException {
-            this.cfuEsame = Integer.parseInt(cfuString);
+    public void setCfuEsame(String  cfuString)  {
+            try {
+                cfuEsame = Integer.parseInt(cfuString) ;
+            } catch (NumberFormatException e )  {
+                Alert alert = new Alert(Alert.AlertType.ERROR, " Exam fields are not valid, check if you fill them correctly  ", ButtonType.CLOSE);
+                alert.showAndWait();
+                return;
+
+            }
     }
 
     public void setExamName(String examName) {
@@ -27,8 +36,13 @@ public class examEntityBean {
         this.date = date;
     }
 
-    public void setVotoEsame(String votoString)  throws  NumberFormatException{
-            this.votoEsame = Integer.parseInt(votoString);
+    public void setVotoEsame(String votoString) {
+        try {
+            votoEsame = Integer.parseInt(votoString) ;
+        }catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, " Exam fields are not valid, check if you fill them correctly  ", ButtonType.CLOSE);
+            alert.showAndWait();
+        }
     }
 
     public int getCfuEsame() {
