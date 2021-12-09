@@ -17,22 +17,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class SearchResultsFormatterGraphicalController extends SearchResultFormatterComponent
+public class SearchResultFormatterView extends SearchResultFormatterComponent
 {
     @Override
-    public AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, ArrayList<TutorSearchResultEntity> results)
+    public AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, ArrayList<TutorSearchResultBean> results)
     {
         double sceneHeight = (results.size())*100.0f ;
 
-        if(containerHeight < sceneHeight)
-        {
-            containerWidth = containerWidth - 10 ;
-        }
-
         VBox graphicalList = new VBox() ;
         graphicalList.setPrefSize(containerWidth, sceneHeight) ;
+        graphicalList.setId("resultList") ;
 
-        for(TutorSearchResultEntity result: results)
+        for(TutorSearchResultBean result: results)
         {
             GridPane entryBox = new GridPane() ;
             entryBox.setPrefSize(containerWidth, 100) ;

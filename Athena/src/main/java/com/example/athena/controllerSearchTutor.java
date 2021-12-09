@@ -31,9 +31,13 @@ public class controllerSearchTutor {
     public void clickOnSearch()
     {
         SearchTutorUseCaseController controller = new SearchTutorUseCaseController() ;
-        ArrayList<TutorSearchResultEntity> results =  controller.formatSearchResults(searchBar.getText()) ;
-        SearchResultsFormatterGraphicalController graphControl = new SearchResultsFormatterGraphicalController() ;
-        AnchorPane subSceneElems = graphControl.buildTutorSearchResultsScene(resultsBox.getWidth(), resultsBox.getHeight(), results) ;
+        ArrayList<TutorSearchResultBean> results =  controller.formatSearchResults(searchBar.getText()) ; //Another bean should be added
+        SearchResultFormatterComponent resultView = new SearchResultFormatterView() ;
+        if(resultsBox.getHeight() < results.size()*100.0)
+        {
+            resultView = new SearchResultFormatterScrollBar(resultView) ;
+        }
+        AnchorPane subSceneElems = resultView.buildTutorSearchResultsScene(resultsBox.getWidth(), resultsBox.getHeight(), results) ;
         resultsBox.setRoot(subSceneElems) ;
     }
     public void clickOnPersonalPage(ActionEvent event) throws IOException

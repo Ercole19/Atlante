@@ -1,13 +1,13 @@
 package com.example.athena;
 
-public class TutorSearchResultEntity
+public class TutorSearchResultBean
 {
     private final String name ;
     private final String surname ;
     private final String taughtSubject ;
     private final String starNumber ;
 
-    public TutorSearchResultEntity(String name, String surname, String taughtSubject, float starNumber)
+    public TutorSearchResultBean(String name, String surname, String taughtSubject, float starNumber)
     {
         this.name = name ;
         this.surname = surname ;

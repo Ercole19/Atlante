@@ -4,17 +4,27 @@ import java.util.ArrayList;
 
 public class SearchTutorUseCaseController
 {
-    public ArrayList<TutorSearchResultEntity> formatSearchResults(String query)
+    public ArrayList<TutorSearchResultBean> formatSearchResults(String query)
     {
-        ArrayList<TutorSearchResultEntity> result = new ArrayList<>();
+        ArrayList<TutorSearchResultBean> result = new ArrayList<>();
 
         if(!query.isEmpty())
         {
-            TutorSearchResultEntity kanye = new TutorSearchResultEntity("Kanye", "East", "Rap History", 3.5f);
-            TutorSearchResultEntity btuni = new TutorSearchResultEntity("Carlo", "Btuni", "Lettere", 4.0f);
+            if(query.contentEquals("kanye"))
+            {
+                for(int i = 0; i < 10; i++)
+                {
+                    TutorSearchResultBean kanye = new TutorSearchResultBean("Kanye", "East", "Rap History", 3.5f);
+                    result.add(kanye);
+                }
+            }
+            else {
+                TutorSearchResultBean kanye = new TutorSearchResultBean("Kanye", "East", "Rap History", 3.5f);
+                TutorSearchResultBean btuni = new TutorSearchResultBean("Carlo", "Btuni", "Lettere", 4.0f);
 
-            result.add(kanye);
-            result.add(btuni);
+                result.add(kanye);
+                result.add(btuni);
+            }
         }
 
         return result ;
