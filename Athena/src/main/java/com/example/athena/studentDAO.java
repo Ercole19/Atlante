@@ -7,7 +7,8 @@ public class studentDAO {
     private  String USER = "root";
     private  String PASS = "Salamandra230!";
     private  String DB_URL = "jdbc:mysql://localhost:3306/atena";
-    private String query = "SELECT * FROM utenti WHERE email = ? and password = ?";
+    private String queryFind = "SELECT * FROM utenti WHERE email = ? and password = ?";
+    private String queryRegister = "INSERT INTO  utenti values (? , ?)" ;
 
     public boolean findStudent (String emailUtente, String pass)  {
 
@@ -17,7 +18,7 @@ public class studentDAO {
         try {
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            stmt = (PreparedStatement) connection.prepareStatement(query , ResultSet.TYPE_SCROLL_INSENSITIVE , ResultSet.CONCUR_READ_ONLY);
+            stmt = (PreparedStatement) connection.prepareStatement(queryFind , ResultSet.TYPE_SCROLL_INSENSITIVE , ResultSet.CONCUR_READ_ONLY);
 
             stmt.setString(1 , emailUtente);
 
@@ -41,7 +42,24 @@ public class studentDAO {
         return false;
     }
     public void registerUser(String email , String password)  {
-        //TO-DO
+
+        PreparedStatement stmt = null;
+        Connection connection = null;
+
+        try {
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            stmt = (PreparedStatement) connection.prepareStatement(queryRegister);
+
+            stmt.setString(1 , email);
+
+            stmt.setString(2 , password);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
     }
 }
