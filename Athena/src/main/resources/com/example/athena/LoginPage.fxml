@@ -15,7 +15,7 @@
             <Font size="96.0" />
          </font>
       </Text>
-      <TextField layoutX="484.0" layoutY="235.0" promptText="Username..." style="-fx-background-radius: 20;">
+      <TextField fx:id="emailField" layoutX="484.0" layoutY="235.0" promptText="Username..." style="-fx-background-radius: 20;">
          <font>
             <Font size="24.0" />
          </font>
@@ -36,7 +36,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <PasswordField layoutX="487.0" layoutY="360.0" prefHeight="51.0" prefWidth="298.0" promptText="Password..." style="-fx-background-radius: 20;">
+      <PasswordField fx:id="passField" layoutX="487.0" layoutY="360.0" prefHeight="51.0" prefWidth="298.0" promptText="Password..." style="-fx-background-radius: 20;">
          <font>
             <Font size="24.0" />
          </font>
