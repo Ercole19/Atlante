@@ -1,5 +1,8 @@
 package com.example.athena;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
 import java.sql.*;
 
 public class studentDAO {
@@ -47,15 +50,31 @@ public class studentDAO {
         Connection connection = null;
 
         try {
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            stmt = (PreparedStatement) connection.prepareStatement(queryRegister);
+                connection = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            stmt.setString(1 , email);
+                stmt = connection.prepareStatement(queryRegister, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            stmt.setString(2 , password);
+                stmt.setString(1, email);
 
-            stmt.executeUpdate();
+                stmt.setString(2, password);
+
+                stmt.executeUpdate();
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Registration successfull", ButtonType.CLOSE);
+                alert.showAndWait();
+
+
+
+
+
+
+
+
+
+
+
+
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
