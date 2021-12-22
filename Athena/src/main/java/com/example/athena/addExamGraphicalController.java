@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 public class addExamGraphicalController {
@@ -26,7 +27,7 @@ public class addExamGraphicalController {
 
     public void confermaEsame(ActionEvent event) {
          String nome = nomeEsame.getText();
-         LocalDate data = dataEsame.getValue();
+         String data  = dataEsame.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) ;
          String Voto = votoEsame.getText();
          String CFU = cfuEsame.getText();
 

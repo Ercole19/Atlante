@@ -20,7 +20,7 @@ public class addExamUseCaseController {
 
             } else {
                 entityExam  esameDaAggiungere = new entityExam(esameBean.getExamName(), esameBean.getVotoEsame(), esameBean.getCfuEsame(), esameBean.getDate());
-                System.out.println("Exam added ! :) ");
+                System.out.println(esameBean.getDate());
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 stage.close();
 

@@ -11,7 +11,7 @@ public class examEntityBean {
     private String examName;
     private int votoEsame;
     private int cfuEsame;
-    private LocalDate date;
+    private String  date;
 
     public examEntityBean () {
 
@@ -32,8 +32,8 @@ public class examEntityBean {
         this.examName = examName;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDate(String data ) {
+        this.date = data ;
     }
 
     public void setVotoEsame(String votoString) {
@@ -53,7 +53,7 @@ public class examEntityBean {
         return votoEsame;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
