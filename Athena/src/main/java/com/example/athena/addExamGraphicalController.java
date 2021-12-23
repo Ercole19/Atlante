@@ -19,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 
 
 public class addExamGraphicalController {
+    private String oldExamName ;
 
     @FXML
     private TextField nomeEsame;
@@ -47,7 +48,7 @@ public class addExamGraphicalController {
              examBean.setDate(data);
 
          addExamUseCaseController useCaseController = new addExamUseCaseController() ;
-         useCaseController.addExam(examBean , event , update);
+         useCaseController.addExam(examBean , event , update , oldExamName);
 
 
 
@@ -83,6 +84,10 @@ public class addExamGraphicalController {
     }
     public void setUpdate (boolean valore) {
         update = valore  ;
+    }
+
+    public void setOldExamName (String oldName) {
+        oldExamName = oldName ;
     }
 
 

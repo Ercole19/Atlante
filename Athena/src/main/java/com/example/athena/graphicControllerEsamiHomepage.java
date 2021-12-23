@@ -155,6 +155,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
                         controller.setVotoEsame(String.valueOf(exam.getVotoEsame()));
                         controller.setCfuEsame(String.valueOf(exam.getCfuEsame()));
                         controller.setDataEsame(exam.getDate());
+                        controller.setOldExamName(exam.getExamName());
                         controller.setUpdate(true);
                         Parent parent = fxmlLoader.getRoot() ;
                         Stage stage = new Stage() ;

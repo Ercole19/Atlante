@@ -84,7 +84,7 @@ public class examDAO {
 
     }
 
-    public void updateExam (examEntityBean beanExam ) {
+    public void updateExam (examEntityBean beanExam ,String oldName ) {
         try {
             Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
             PreparedStatement stm = connection.prepareStatement(updateQuery) ;
@@ -92,7 +92,7 @@ public class examDAO {
             stm.setString(2, String.valueOf(beanExam.getVotoEsame()));
             stm.setString(3, String.valueOf(beanExam.getCfuEsame()));
             stm.setString(4, beanExam.getDate());
-            stm.setString(5 , beanExam.getExamName());
+            stm.setString(5 , oldName);
             stm.executeUpdate() ;
 
 
