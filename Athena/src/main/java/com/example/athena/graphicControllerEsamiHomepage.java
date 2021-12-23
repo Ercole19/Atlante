@@ -7,15 +7,22 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import org.controlsfx.glyphfont.FontAwesome;
+import org.w3c.dom.events.MouseEvent;
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -40,8 +47,10 @@ public class graphicControllerEsamiHomepage implements Initializable {
     private TableColumn<examEntityBean , Integer> colCfu ;
     @FXML
     private TableColumn<examEntityBean, LocalDate> colDate ;
+    @FXML
+    private TableColumn<examEntityBean , Void> colEDit ;
 
-    private ObservableList<examEntityBean> examList ;
+    private ObservableList<examEntityBean> examList  = FXCollections.observableArrayList() ;
     private examDAO examDao ;
 
 
@@ -79,10 +88,28 @@ public class graphicControllerEsamiHomepage implements Initializable {
     }
 
     public void onBackButtonClick(ActionEvent event) throws IOException {
+        refreshTable();
         root = load(Objects.requireNonNull(getClass().getResource("MainPageStudents.fxml")));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+
+    }
+
+
+    public void refreshTable() {
+        examList.clear() ;
+
+        examDao = new examDAO() ;
+        examList = examDao.getExamlist() ;
+
+        examTable.setItems(examList) ;
+
+
+
+
+
+
     }
 
 
@@ -92,12 +119,93 @@ public class graphicControllerEsamiHomepage implements Initializable {
         colVote.setCellValueFactory(new PropertyValueFactory<examEntityBean , Integer>("votoEsame"));
         colCfu.setCellValueFactory(new PropertyValueFactory<examEntityBean , Integer>("cfuEsame"));
         colDate.setCellValueFactory(new PropertyValueFactory<examEntityBean , LocalDate>("date"));
+        javafx.util.Callback<TableColumn<examEntityBean, Void>, TableCell<examEntityBean, Void>> cellFactory = new javafx.util.Callback<TableColumn<examEntityBean , Void> , TableCell<examEntityBean , Void>>() {
 
-        examList = FXCollections.observableArrayList() ;
+
+            @Override
+            public TableCell<examEntityBean, Void> call(TableColumn<examEntityBean, Void> examEntityBeanVoidTableColumn) {
+                final TableCell<examEntityBean , Void> cell = new TableCell<examEntityBean , Void>() {
+
+
+
+            @Override
+            public void updateItem (Void item , boolean empty ) {
+                super.updateItem(item , empty);
+                if (empty ) {
+                    setGraphic(null);
+                }
+                else {
+                    final Text cancella = new Text("-") ;
+                    cancella.setFont(Font.font("Arial Rounded MT Bold" , 40)  );
+                    cancella.setFill(Color.RED);
+
+                    final Button editButton = new Button("Edit ") ;
+
+                    editButton.setOnAction(event -> {
+                        examEntityBean exam = examTable.getSelectionModel().getSelectedItem();
+                        FXMLLoader fxmlLoader =  new FXMLLoader();
+                        fxmlLoader.setLocation(getClass().getResource("Aggiungi_Esame_view.fxml" ));
+                        try {
+                            fxmlLoader.load();
+                        }catch (IOException exc) {
+                            exc.getCause() ;
+                        }
+                        addExamGraphicalController controller = fxmlLoader.getController() ;
+                        controller.setNomeEsame(exam.getExamName());
+                        controller.setVotoEsame(String.valueOf(exam.getVotoEsame()));
+                        controller.setCfuEsame(String.valueOf(exam.getCfuEsame()));
+                        controller.setDataEsame(exam.getDate());
+                        controller.setUpdate(true);
+                        Parent parent = fxmlLoader.getRoot() ;
+                        Stage stage = new Stage() ;
+                        stage.setScene(new Scene(parent) );
+                        stage.initStyle(StageStyle.UTILITY);
+                        stage.show();
+
+
+
+
+
+                    });
+
+
+                    cancella.setOnMouseClicked( event -> {
+                        try {
+                            examEntityBean exam = examTable.getSelectionModel().getSelectedItem();
+                            examDAO esameD = new examDAO() ;
+
+
+
+                            esameD.deleteExam(exam.getExamName());
+                            refreshTable();
+                        }catch (Exception exc) {
+                            exc.getCause() ;
+                        }
+                    });
+
+                    HBox managebtn = new HBox(editButton , cancella) ;
+                    managebtn.setStyle("-fx-alignment : center");
+                    HBox.setMargin(editButton, new Insets(2,2,0,3)) ;
+                    HBox.setMargin(cancella , new Insets(2,3,0,2));
+                    setGraphic(managebtn) ;
+
+                }
+            }
+
+
+                } ;
+                return cell ;
+            }
+        };
+        colEDit.setCellFactory(cellFactory);
+
+
+
 
         examDao = new examDAO() ;
         examList = examDao.getExamlist() ;
         examTable.setItems(examList) ;
+
 
     }
 }

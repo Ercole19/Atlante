@@ -3,18 +3,23 @@ package com.example.athena;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
 public class addExamGraphicalController {
+
     @FXML
     private TextField nomeEsame;
     @FXML
@@ -24,12 +29,15 @@ public class addExamGraphicalController {
     @FXML
     private DatePicker dataEsame;
 
+    private boolean update ;
 
-    public void confermaEsame(ActionEvent event) {
-         String nome = nomeEsame.getText();
-         String data  = dataEsame.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) ;
-         String Voto = votoEsame.getText();
-         String CFU = cfuEsame.getText();
+
+
+    public void confermaEsame(ActionEvent event) throws IOException {
+          String nome = nomeEsame.getText();
+          String data  = dataEsame.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) ;
+          String Voto = votoEsame.getText();
+          String CFU = cfuEsame.getText();
 
          examEntityBean examBean = new examEntityBean();
 
@@ -39,7 +47,13 @@ public class addExamGraphicalController {
              examBean.setDate(data);
 
          addExamUseCaseController useCaseController = new addExamUseCaseController() ;
-         useCaseController.addExam(examBean , event );
+         useCaseController.addExam(examBean , event , update);
+
+
+
+
+
+
 
 
 
@@ -50,4 +64,26 @@ public class addExamGraphicalController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
     }
+
+    public void setNomeEsame (String nome) {
+        nomeEsame.setText(nome);
+    }
+
+    public void setVotoEsame (String voto) {
+        votoEsame.setText(voto);
+    }
+
+    public void setCfuEsame (String cfu) {
+        cfuEsame.setText(cfu) ;
+
+    }
+    public  void setDataEsame (String data) {
+        dataEsame.setValue(LocalDate.parse(data));
+
+    }
+    public void setUpdate (boolean valore) {
+        update = valore  ;
+    }
+
+
 }

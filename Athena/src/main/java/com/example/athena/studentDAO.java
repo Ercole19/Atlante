@@ -46,6 +46,7 @@ public class studentDAO {
     }
     public void registerUser(String email , String password)  {
 
+
         PreparedStatement stmt = null;
         Connection connection = null;
 
