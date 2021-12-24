@@ -54,12 +54,12 @@
             <Font name="Bookman Old Style" size="20.0" />
          </font>
       </Text>
-      <Label layoutX="233.0" layoutY="180.0" text="26" textFill="#ffd775">
+      <Label fx:id="labelAverageArit" layoutX="233.0" layoutY="180.0" text="26" textFill="#ffd775">
          <font>
             <Font name="Bookman Old Style" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="233.0" layoutY="298.0" text="25,4" textFill="#ffd775">
+      <Label fx:id="labelAverageWei" layoutX="233.0" layoutY="298.0" text="25,4" textFill="#ffd775">
          <font>
             <Font name="Bookman Old Style" size="20.0" />
          </font>
@@ -71,10 +71,10 @@
       </Text>
       <LineChart fx:id="averageGraph" layoutX="277.0" layoutY="150.0" prefHeight="470.0" prefWidth="738.0">
         <xAxis>
-          <CategoryAxis label="Andamento nel tempo" side="BOTTOM" style="-fx-background-color: #ffffff;" />
+          <CategoryAxis fx:id="axisTime" label="Andamento nel tempo" side="BOTTOM" style="-fx-background-color: #ffffff;" />
         </xAxis>
         <yAxis>
-          <NumberAxis forceZeroInRange="false" lowerBound="18.0" side="LEFT" upperBound="30.0" />
+          <NumberAxis fx:id="axisVote" forceZeroInRange="false" lowerBound="18.0" side="LEFT" upperBound="30.0" />
         </yAxis>
       </LineChart>
    </children>
