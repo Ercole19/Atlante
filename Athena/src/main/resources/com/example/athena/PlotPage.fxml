@@ -12,12 +12,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.PlotPageController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.PlotPageGraphicalController">
     <children>
-      <ChoiceBox layoutX="79.0" layoutY="295.0" prefHeight="42.0" prefWidth="251.0" />
-      <StackedBarChart layoutX="357.0" layoutY="269.0" prefHeight="425.0" prefWidth="774.0">
+      <ChoiceBox fx:id="activityTypeChoiceBox" layoutX="79.0" layoutY="295.0" prefHeight="42.0" prefWidth="310.0" />
+      <StackedBarChart fx:id="activitiesPlot" layoutX="448.0" layoutY="263.0" prefHeight="425.0" prefWidth="774.0">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <CategoryAxis fx:id="activityPlot" side="BOTTOM" />
         </xAxis>
         <yAxis>
           <NumberAxis side="LEFT" />
@@ -47,7 +47,7 @@
             <Image url="@../../../assets/backBtn.png" />
          </image>
       </ImageView>
-      <Button layoutX="85.0" layoutY="596.0" mnemonicParsing="false" onAction="#clickOnBackButton" prefHeight="51.0" prefWidth="219.0" style="-fx-background-radius: 20; -fx-background-color: #2d8bba;" text="Export" textFill="WHITE">
+      <Button layoutX="79.0" layoutY="597.0" mnemonicParsing="false" onAction="#clickOnBackButton" prefHeight="51.0" prefWidth="219.0" style="-fx-background-radius: 20; -fx-background-color: #2d8bba;" text="Export" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
@@ -65,6 +65,17 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <ChoiceBox fx:id="timePeriodChoiceBox" layoutX="79.0" layoutY="401.0" prefHeight="42.0" prefWidth="310.0" />
+      <Text fill="#ffd775" layoutX="79.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select activity to plot:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#ffd775" layoutX="80.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select time period:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
     </children>
 
 </AnchorPane>
