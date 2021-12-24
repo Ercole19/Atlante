@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 
@@ -17,12 +18,36 @@ public class careerStatusController implements Initializable {
     @FXML
     private PieChart examsPieChart;
     @FXML
+    private PieChart examsPieChartcfu ;
+    private examDAO exam ;
+    @FXML
+    private Label totalExams ;
+    @FXML
+    private Label takenExams ;
+    @FXML
+    private Label gainedCfus ;
+    @FXML
+    private Label totalCfus ;
+
+    @FXML
     public void initialize(URL url , ResourceBundle rb) {
-        ObservableList<PieChart.Data> examsPieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Esami dati" , 45) ,
-                new PieChart.Data("Esami mancanti" , 55)
-        );
+        ObservableList<PieChart.Data> examsPieChartData = FXCollections.observableArrayList() ;
+        ObservableList<PieChart.Data> examsPieChartDatacfus = FXCollections.observableArrayList() ;
+        exam = new examDAO() ;
+        examsPieChartData = exam.loadData() ;
+        examsPieChartDatacfus = exam.loadData2() ;
+        int esamiDAti = (int) exam.getTotalExams();
+        int esamiTotali = Integer.parseInt(totalExams.getText()) ;
+        int cfuDati = (int) exam.getTotalCfus() ;
+        int cfuTotali = Integer.parseInt(totalCfus.getText()) ;
+        examsPieChartData.add(new PieChart.Data("Esami mancanti" , esamiTotali-esamiDAti)) ;
+        examsPieChartDatacfus.add(new PieChart.Data("cfu mancanti " , cfuTotali - cfuDati)) ;
+
+        takenExams.setText(String.valueOf(esamiDAti));
+        gainedCfus.setText(String.valueOf(cfuDati));
+
         examsPieChart.setData(examsPieChartData);
+        examsPieChartcfu.setData(examsPieChartDatacfus) ;
         examsPieChart.setStartAngle(90);
 
     }

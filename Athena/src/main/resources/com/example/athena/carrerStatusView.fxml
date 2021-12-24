@@ -3,6 +3,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,7 +21,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Text fill="#ffd775" layoutX="34.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Taken Exams : 10 / 23" wrappingWidth="256.4166259765625">
+      <Text fill="#ffd775" layoutX="34.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Taken Exams : " wrappingWidth="256.4166259765625">
          <font>
             <Font name="Bookman Old Style" size="20.0" />
          </font>
@@ -31,7 +32,7 @@
             <Font name="Bookman Old Style" size="25.0" />
          </font>
       </Text>
-      <Text fill="#ffd775" layoutX="541.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gained CFUs : 75 / 180" wrappingWidth="249.21673583984375">
+      <Text fill="#ffd775" layoutX="541.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gained CFUs : " wrappingWidth="249.21673583984375">
          <font>
             <Font name="Bookman Old Style" size="20.0" />
          </font>
@@ -47,5 +48,36 @@
             <Image url="@../../../assets/guff.png" />
          </image>
       </ImageView>
+      <Label fx:id="takenExams" layoutX="195.0" layoutY="149.0" text="0" textFill="#ffd775">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="totalExams" layoutX="244.0" layoutY="149.0" text="30" textFill="#ffd775">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="224.0" layoutY="148.0" text="/" textFill="#ffd775">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <PieChart fx:id="examsPieChartcfu" layoutX="470.0" layoutY="207.0" prefHeight="316.0" prefWidth="390.0" style="-fx-background-color: #002730;" title="Exams' completion" />
+      <Label fx:id="gainedCfus" layoutX="695.0" layoutY="149.0" text="0" textFill="#ffd775">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="725.0" layoutY="149.0" text="/" textFill="#ffd775">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="totalCfus" layoutX="740.0" layoutY="149.0" text="180" textFill="#ffd775">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

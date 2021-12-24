@@ -2,6 +2,7 @@ package com.example.athena;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 
 import java.sql.*;
@@ -174,8 +175,8 @@ public class examDAO {
     }
 
     public Number  getAverageWeighted  () {
-        int voti = 0 ;
-        int cfus = 0 ;
+        double voti = 0 ;
+        double  cfus = 0 ;
         double average = 0;
 
 
@@ -184,8 +185,8 @@ public class examDAO {
             Statement stm = connection.createStatement();
             ResultSet set = stm.executeQuery("SELECT (Voto) , (CFU)  FROM esami ORDER BY Data ASC");
             while (set.next()) {
-                int voto = set.getInt("Voto") ;
-                int cfu = set.getInt("CFU") ;
+                double voto = set.getDouble("Voto") ;
+                double  cfu = set.getDouble("CFU") ;
                 cfus = cfus + cfu ;
                 voti = voti + (voto *cfu) ;
                 average = voti / cfus ;
@@ -201,6 +202,78 @@ public class examDAO {
 
         return average ;
     }
+
+
+
+     public ObservableList < PieChart.Data > loadData() {
+        String query = "select P, C From PIE "; //ORDER BY P asc
+        ObservableList < PieChart.Data > piechartdata;
+        piechartdata = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL , USER ,PASS ) ;
+            ResultSet set = connection.createStatement().executeQuery("SELECT COUNT(Nome) as esamiDati from esami");
+            while (set.next()) {
+                piechartdata.add(new PieChart.Data("Esami dati" , set.getInt("esamiDati"))) ;
+
+            }
+        } catch (Exception e) {
+            e.getCause() ;
+
+        }
+        return piechartdata ;
+    }
+
+
+    public Number getTotalExams () {
+        int count = 0 ;
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL , USER , PASS ) ;
+            ResultSet set = connection.createStatement().executeQuery("SELECT (Nome)  from esami") ;
+            while  (set.next()) {
+                count++ ;
+            }
+        }catch (SQLException exc) {
+            exc.getErrorCode() ;
+
+        }return count ;
+    }
+
+
+    public ObservableList < PieChart.Data > loadData2() {
+        ObservableList < PieChart.Data > piechartdata;
+        piechartdata = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL , USER ,PASS ) ;
+            ResultSet set = connection.createStatement().executeQuery("SELECT SUM(CFU) as cfus from esami");
+            while (set.next()) {
+                piechartdata.add(new PieChart.Data("CFU possseduti " , set.getInt("cfus"))) ;
+
+            }
+        } catch (Exception e) {
+            e.getCause() ;
+
+        }
+        return piechartdata ;
+    }
+
+
+
+    public Number getTotalCfus () {
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL , USER , PASS ) ;
+            ResultSet set = connection.createStatement().executeQuery("SELECT SUM(CFU) as cfus  from esami") ;
+            while  (set.next()) {
+                return set.getInt("cfus") ;
+            }
+        }catch (SQLException exc) {
+            exc.getErrorCode() ;
+
+        }return null ;
+    }
+
+
 
 
 
