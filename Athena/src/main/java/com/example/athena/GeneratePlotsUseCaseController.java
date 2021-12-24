@@ -1,11 +1,9 @@
 package com.example.athena;
 
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class GeneratePlotsUseCaseController
 {

@@ -37,13 +37,9 @@ public class TutorPersonalPageController
 
     public void onCVButtonClick(ActionEvent event) throws IOException
     {
-        AnchorPane root = new AnchorPane() ;
-        root.setPrefSize(600, 800) ;
-        Label CV = new Label("Lorem Ipsum Dolor Sit Amet") ;
-        root.getChildren().add(CV) ;
-        Scene CVScene = new Scene(root) ;
+        root = load(Objects.requireNonNull(getClass().getResource("tutorCVView.fxml"))) ;
         Stage tempStage = new Stage() ;
-        tempStage.setScene(CVScene) ;
+        tempStage.setScene(new Scene(root)) ;
         tempStage.initModality(Modality.APPLICATION_MODAL) ;
         tempStage.setResizable(false) ;
         tempStage.setTitle("CV") ;
