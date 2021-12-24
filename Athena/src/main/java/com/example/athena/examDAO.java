@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class examDAO {
     private String USER = "root";
@@ -18,6 +17,8 @@ public class examDAO {
     private String sortedExams = "SELECT  Voto , Data  from  esami order by Data ASC";
     private ObservableList<examEntityBean> examlist;
     private examEntityBean exam;
+
+
 
 
     public ObservableList<examEntityBean> getExamlist() {
@@ -120,6 +121,89 @@ public class examDAO {
         return list;
 
     }
+
+
+    public Number  getAverage () {
+
+
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            Statement stm = connection.createStatement();
+            ResultSet set = stm.executeQuery("SELECT AVG(VOTO) as media  FROM esami");
+            while (set.next()) {
+                return set.getDouble("media");
+
+            }
+        } catch (SQLException exc) {
+            exc.getErrorCode();
+        }
+
+        return null ;
+    }
+
+    public ObservableList<XYChart.Data<String, Number>> getSortedExamsWeighted() {
+        Integer cfus = 0 ;
+        double average = 0.0;
+        double counterVoti = 0.0;
+
+        ObservableList<XYChart.Data<String, Number>> list = FXCollections.observableArrayList();
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            Statement statement = connection.createStatement();
+            ResultSet set = statement.executeQuery("SELECT  Voto , Data , CFU  from  esami order by Data ASC");
+
+            while (set.next()) {
+
+                String Data = set.getString("Data");
+                int voto = set.getInt("Voto");
+                int cfu = set.getInt("CFU") ;
+                cfus = cfus + cfu ;
+                counterVoti = counterVoti + (voto * cfu );
+
+                average = (counterVoti) / cfus;
+                list.add(new XYChart.Data<>(Data, average));
+
+
+
+            }
+        } catch (SQLException ex) {
+            ex.getErrorCode();
+        }
+        return list;
+
+    }
+
+    public Number  getAverageWeighted  () {
+        int voti = 0 ;
+        int cfus = 0 ;
+        double average = 0;
+
+
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            Statement stm = connection.createStatement();
+            ResultSet set = stm.executeQuery("SELECT (Voto) , (CFU)  FROM esami ORDER BY Data ASC");
+            while (set.next()) {
+                int voto = set.getInt("Voto") ;
+                int cfu = set.getInt("CFU") ;
+                cfus = cfus + cfu ;
+                voti = voti + (voto *cfu) ;
+                average = voti / cfus ;
+                System.out.println(average);
+
+
+
+            }
+
+        } catch (SQLException exc) {
+            exc.getErrorCode();
+        }
+
+        return average ;
+    }
+
+
+
 
 
 }
