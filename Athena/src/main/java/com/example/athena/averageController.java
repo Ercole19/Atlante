@@ -21,13 +21,13 @@ public class averageController implements Initializable {
     @FXML
     private Label labelAverageWei ;
 
-    private examDao exam ;
+    private examdao exam ;
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        exam = new examDao() ;
+        exam = new examdao() ;
 
         ObservableList<XYChart.Data<String, Number>> data = exam.getSortedExams() ;
         ObservableList<XYChart.Data<String, Number>> data2 = exam.getSortedExamsWeighted() ;

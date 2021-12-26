@@ -7,7 +7,7 @@ import javafx.scene.chart.XYChart;
 
 import java.sql.*;
 
-public class examDao {
+public class examdao {
     private String user = "root" ;
     private String pass = "Salamandra230!" ;
     private String dbUrl = "jdbc:mysql://localhost:3306/atena" ;
@@ -47,11 +47,8 @@ public class examDao {
     }
 
     public void addExam(examEntityBean beanExam) {
-        Connection connection = null ;
-        PreparedStatement stm = null ;
-        try {
-            connection = DriverManager.getConnection(dbUrl, user, pass);
-            stm =connection.prepareStatement(addQuery, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+        try (Connection connection = DriverManager.getConnection(dbUrl, user, pass);PreparedStatement stm =connection.prepareStatement(addQuery, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE) ){
 
             stm.setString(1, beanExam.getExamName());
             stm.setString(2, String.valueOf(beanExam.getVotoEsame()));
@@ -59,48 +56,27 @@ public class examDao {
             stm.setString(4, beanExam.getDate());
             stm.executeUpdate();
 
-
         } catch (Exception exc) {
             exc.getCause();
         }
-        finally {
-            try {
-                stm.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
 
-        }
 
     }
 
     public void deleteExam(String nome)  {
-        Connection connection = null ;
-        PreparedStatement stm = null ;
-        try {
-            connection = DriverManager.getConnection(dbUrl, user, pass) ;
-            stm = connection.prepareStatement(deleteQuery) ;
+
+        try (Connection connection = DriverManager.getConnection(dbUrl, user, pass) ; PreparedStatement stm = connection.prepareStatement(deleteQuery)) {
             stm.setString(1, nome);
             stm.execute();
         }catch (SQLException exc) {
-            exc.getErrorCode() ;
-        }finally {
-            try {
-                stm.close();
-                connection.close() ;
-            } catch (SQLException ec) {
-                ec.getErrorCode() ;
-            }
+            exc.getErrorCode();
         }
     }
 
     public void updateExam(examEntityBean beanExam, String oldName) {
-        Connection connection = null ;
-        PreparedStatement stm = null ;
-        try {
-             connection = DriverManager.getConnection(dbUrl, user, pass);
-             stm = connection.prepareStatement(updateQuery);
+
+        try(Connection connection = DriverManager.getConnection(dbUrl , user , pass) ; PreparedStatement stm = connection.prepareStatement(updateQuery)) {
+
             stm.setString(1, beanExam.getExamName());
             stm.setString(2, String.valueOf(beanExam.getVotoEsame()));
             stm.setString(3, String.valueOf(beanExam.getCfuEsame()));
@@ -111,29 +87,20 @@ public class examDao {
 
         } catch (SQLException exc) {
             exc.getErrorCode();
-        } finally {
-            try {
-                stm.close();
-                connection.close();
-            } catch (SQLException exc ) {
-                exc.getErrorCode() ;
-            }
         }
     }
 
     public ObservableList<XYChart.Data<String, Number>> getSortedExams() {
 
         ObservableList<XYChart.Data<String, Number>> list = FXCollections.observableArrayList();
-        Connection connection = null ;
-        Statement statement = null ;
-        try {
+
+        try (Connection connection = DriverManager.getConnection(dbUrl , user , pass) ; Statement statement = connection.createStatement()){
             Integer count = 1;
             double average = 0.0;
             double counterVoti = 0.0 ;
             String data ;
             int voto ;
-            connection = DriverManager.getConnection(dbUrl, user, pass);
-            statement = connection.createStatement();
+
             ResultSet set = statement.executeQuery(sortedExams) ;
 
             while (set.next()) {
@@ -150,27 +117,14 @@ public class examDao {
             }
         } catch (SQLException ex) {
             ex.getErrorCode();
-        } finally {
-            try {
-                statement.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.getErrorCode() ;
-            }
         }
         return list;
-
     }
 
 
     public Number  getAverage () {
-        Connection connection = null ;
-        Statement stm = null ;
 
-
-        try {
-            connection = DriverManager.getConnection(dbUrl, user, pass);
-            stm = connection.createStatement();
+        try (Connection connection = DriverManager.getConnection(dbUrl , user ,pass) ; Statement stm = connection.createStatement()){
             ResultSet set = stm.executeQuery("SELECT AVG(VOTO) as media  FROM esami");
             while (set.next()) {
                 return set.getDouble("media");
@@ -178,30 +132,21 @@ public class examDao {
             }
         } catch (SQLException exc) {
             exc.getErrorCode();
-        } finally {
-            try {
-                stm.close();
-                connection.close();
-            } catch (SQLException exc)  {
-                exc.getErrorCode() ;
-            }
         }
 
         return null ;
     }
 
     public ObservableList<XYChart.Data<String, Number>> getSortedExamsWeighted() {
-        Connection connection =  null ;
-        Statement statement = null ;
+
         ObservableList<XYChart.Data<String, Number>> list = FXCollections.observableArrayList();
-        try {
+        try (Connection connection = DriverManager.getConnection(dbUrl , user , pass) ; Statement statement = connection.createStatement()){
             int  cfus = 0 ;
             double average = 0.0;
             double counterVoti = 0.0;
             int voto ;
             int cfu ;
-            connection = DriverManager.getConnection(dbUrl, user, pass);
-            statement = connection.createStatement();
+
             ResultSet set = statement.executeQuery("SELECT  Voto , Data , CFU  from  esami order by Data ASC");
 
             while (set.next()) {
@@ -220,14 +165,8 @@ public class examDao {
             }
         } catch (SQLException ex) {
             ex.getErrorCode();
-        } finally {
-            try {
-                statement.close();
-                connection.close();
-            } catch (SQLException exc )  {
-                exc.getErrorCode() ;
-            }
         }
+
         return list;
 
     }
@@ -236,12 +175,9 @@ public class examDao {
         double voti = 0 ;
         double  cfus = 0 ;
         double average = 0;
-        Connection connection = null ;
-        Statement stm = null;
 
-        try {
-            connection = DriverManager.getConnection(dbUrl, user, pass);
-            stm = connection.createStatement();
+        try(Connection connection = DriverManager.getConnection(dbUrl,user,pass) ; Statement stm = connection.createStatement()) {
+
             ResultSet set = stm.executeQuery("SELECT (Voto) , (CFU)  FROM esami ORDER BY Data ASC");
             while (set.next()) {
                 double voto = set.getDouble("Voto") ;
@@ -252,13 +188,6 @@ public class examDao {
             }
         } catch (SQLException exc) {
             exc.getErrorCode();
-        } finally {
-            try {
-                stm.close();
-                connection.close();
-            } catch (SQLException exc) {
-                exc.getErrorCode() ;
-            }
         }
 
         return average ;
@@ -269,12 +198,10 @@ public class examDao {
      public ObservableList < PieChart.Data > loadData() {
         ObservableList < PieChart.Data > piechartdata;
         piechartdata = FXCollections.observableArrayList();
-        Connection connection = null ;
-        ResultSet set = null ;
 
-        try {
-            connection = DriverManager.getConnection(dbUrl, user, pass) ;
-            set = connection.createStatement().executeQuery("SELECT COUNT(Nome) as esamiDati from esami");
+
+        try (Connection connection = DriverManager.getConnection(dbUrl,user,pass) ; ResultSet set = connection.createStatement().executeQuery("SELECT COUNT(Nome) as esamiDati from esami")) {
+
             while (set.next()) {
                 piechartdata.add(new PieChart.Data("Esami dati" , set.getInt("esamiDati"))) ;
 
@@ -282,50 +209,36 @@ public class examDao {
         } catch (Exception e) {
             e.getCause() ;
 
-        } finally {
-            try {
-                set.close();
-                connection.close();
-            }catch (SQLException e)  {
-                e.getErrorCode() ;
-            }
         }
+
         return piechartdata ;
     }
 
 
     public Number getTotalExams () {
         int count = 0 ;
-        Connection connection = null ;
-        ResultSet set = null ;
-        try {
-            connection = DriverManager.getConnection(dbUrl, user, pass) ;
-            set = connection.createStatement().executeQuery("SELECT (Nome)  from esami") ;
+
+        try (Connection connection = DriverManager.getConnection(dbUrl, user, pass) ;
+         ResultSet set = connection.createStatement().executeQuery("SELECT (Nome)  from esami") ;) {
+
             while  (set.next()) {
                 count++ ;
             }
         }catch (SQLException exc) {
             exc.getErrorCode() ;
 
-        }finally {
-            try {
-                set.close() ;
-                connection.close();
-            } catch (SQLException e) {
-                e.getErrorCode() ;
-            }
+
         }
         return count ;}
 
     public ObservableList < PieChart.Data > loadData2() {
         ObservableList < PieChart.Data > piechartdata;
         piechartdata = FXCollections.observableArrayList();
-        Connection connection = null ;
-        ResultSet set = null ;
 
-        try {
-            connection = DriverManager.getConnection(dbUrl, user, pass) ;
-            set = connection.createStatement().executeQuery("SELECT SUM(CFU) as cfus from esami");
+
+        try (Connection connection = DriverManager.getConnection(dbUrl, user, pass) ;
+         ResultSet set = connection.createStatement().executeQuery("SELECT SUM(CFU) as cfus from esami");){
+
             while (set.next()) {
                 piechartdata.add(new PieChart.Data("CFU possseduti " , set.getInt("cfus"))) ;
 
@@ -333,13 +246,6 @@ public class examDao {
         } catch (Exception e) {
             e.getCause() ;
 
-        } finally {
-            try {
-                set.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.getErrorCode() ;
-            }
         }
         return piechartdata ;
     }
@@ -347,23 +253,17 @@ public class examDao {
 
 
     public Number getTotalCfus () {
-        Connection connection = null ;
-        ResultSet set = null ;
-        try {
-            connection = DriverManager.getConnection(dbUrl, user, pass) ;
-            set = connection.createStatement().executeQuery("SELECT SUM(CFU) as cfus  from esami") ;
+
+        try (Connection connection = DriverManager.getConnection(dbUrl, user, pass) ;
+        ResultSet set = connection.createStatement().executeQuery("SELECT SUM(CFU) as cfus  from esami") ;){
+
             while  (set.next()) {
                 return set.getInt("cfus") ;
             }
         }catch (SQLException exc) {
             exc.getErrorCode() ;
 
-        }finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.getErrorCode() ;
-            }
+
         }
         return null ;
     }

@@ -27,7 +27,7 @@ public class addExamUseCaseController {
             if (!(update)) {
 
 
-                examDao esame = new examDao();
+                examdao esame = new examdao();
                 esame.addExam(esameBean);
 
 
@@ -36,7 +36,7 @@ public class addExamUseCaseController {
 
 
             } else {
-                examDao esame = new examDao();
+                examdao esame = new examdao();
                 esame.updateExam(esameBean , oldName);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.close();

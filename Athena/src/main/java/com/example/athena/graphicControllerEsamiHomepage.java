@@ -49,7 +49,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
     private TableColumn<examEntityBean , Void> colEDit ;
 
     private ObservableList<examEntityBean> examList  = FXCollections.observableArrayList() ;
-    private com.example.athena.examDao examDao ;
+    private examdao examDao ;
 
 
     public void initAggiungiEsame () throws IOException {
@@ -98,7 +98,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
     public void refreshTable() {
         examList.clear() ;
 
-        examDao = new examDao() ;
+        examDao = new examdao() ;
         examList = examDao.getExamlist() ;
 
         examTable.setItems(examList) ;
@@ -171,7 +171,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
                     cancella.setOnMouseClicked( event -> {
                         try {
                             examEntityBean exam = examTable.getSelectionModel().getSelectedItem();
-                            com.example.athena.examDao esameD = new examDao() ;
+                            examdao esameD = new examdao() ;
 
 
 
@@ -201,7 +201,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
 
 
 
-        examDao = new examDao() ;
+        examDao = new examdao() ;
         examList = examDao.getExamlist() ;
         examTable.setItems(examList) ;
 
