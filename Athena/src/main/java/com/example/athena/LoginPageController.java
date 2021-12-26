@@ -12,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Objects;
 
 import static javafx.fxml.FXMLLoader.load;
@@ -22,7 +21,7 @@ public class LoginPageController {
     private Parent root;
     private Stage stage;
     private Scene scene;
-    private studentDAO stDAO ;
+    private studentdao stDAO ;
     @FXML
     private TextField emailField ;
     @FXML
@@ -34,7 +33,7 @@ public class LoginPageController {
     {
         String email = emailField.getText() ;
         String password = passField.getText() ;
-        stDAO = new studentDAO() ;
+        stDAO = new studentdao() ;
         if (stDAO.findStudent(email , password)) {
             Alert alert = new Alert(Alert.AlertType.NONE , "Access granted !" , ButtonType.CLOSE) ;
             alert.showAndWait();

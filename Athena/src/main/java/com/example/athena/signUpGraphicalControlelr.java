@@ -2,7 +2,6 @@ package com.example.athena;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,7 +19,7 @@ public class signUpGraphicalControlelr {
     private Parent root;
     private Stage stage;
     private Scene scene;
-    private studentDAO stDAO;
+    private studentdao stDAO;
     @FXML
     private TextField emailField;
     @FXML
@@ -37,7 +36,7 @@ public class signUpGraphicalControlelr {
     public void onConfirmButtonClick (ActionEvent event) throws IOException {
         String email = emailField.getText() ;
         String password = passField.getText() ;
-        stDAO = new studentDAO() ;
+        stDAO = new studentdao() ;
         if (!(stDAO.findStudent(email , password))) {
             stDAO.registerUser(email , password);
             Alert alert =new Alert(Alert.AlertType.CONFIRMATION , "Registration Successful" , ButtonType.CLOSE) ;
