@@ -38,15 +38,25 @@ public class examDao {
                 examlist.add(exam);
 
             }
-            set.close();
-            stm.close();
-            connection.close();
+
 
 
         } catch (SQLException  exc) {
             exc.getMessage();
         }
+        finally {
+            try {
+                if(stm!= null ) {
+                    stm.close();
+                }
+                if (connection!= null ) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
+        }
         return examlist;
 
     }
