@@ -21,8 +21,8 @@ public class examDao {
 
 
     public ObservableList<examEntityBean> getExamlist()  {
-        Connection connection = null ;
         Statement stm = null ;
+        Connection connection = null ;
         ObservableList<examEntityBean> examlist = FXCollections.observableArrayList();
         try {
             connection = DriverManager.getConnection(dbUrl, user, pass);
@@ -38,20 +38,15 @@ public class examDao {
                 examlist.add(exam);
 
             }
+            set.close();
+            stm.close();
+            connection.close();
 
 
         } catch (SQLException  exc) {
             exc.getMessage();
         }
-        finally {
-            try {
-                stm.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
 
-        }
         return examlist;
 
     }
