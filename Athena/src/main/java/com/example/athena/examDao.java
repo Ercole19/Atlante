@@ -45,8 +45,8 @@ public class examDao {
         }
         finally {
             try {
-                connection.close();
                 stm.close();
+                connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -75,8 +75,8 @@ public class examDao {
         }
         finally {
             try {
-                connection.close();
                 stm.close();
+                connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -97,8 +97,8 @@ public class examDao {
             exc.getErrorCode() ;
         }finally {
             try {
-                connection.close() ;
                 stm.close();
+                connection.close() ;
             } catch (SQLException ec) {
                 ec.getErrorCode() ;
             }
@@ -123,8 +123,8 @@ public class examDao {
             exc.getErrorCode();
         } finally {
             try {
-                connection.close();
                 stm.close();
+                connection.close();
             } catch (SQLException exc ) {
                 exc.getErrorCode() ;
             }
@@ -160,6 +160,13 @@ public class examDao {
             }
         } catch (SQLException ex) {
             ex.getErrorCode();
+        } finally {
+            try {
+                statement.close();
+                connection.close();
+            } catch (SQLException e) {
+                e.getErrorCode() ;
+            }
         }
         return list;
 
@@ -183,8 +190,8 @@ public class examDao {
             exc.getErrorCode();
         } finally {
             try {
-                connection.close();
                 stm.close();
+                connection.close();
             } catch (SQLException exc)  {
                 exc.getErrorCode() ;
             }
@@ -225,8 +232,8 @@ public class examDao {
             ex.getErrorCode();
         } finally {
             try {
-                connection.close();
                 statement.close();
+                connection.close();
             } catch (SQLException exc )  {
                 exc.getErrorCode() ;
             }
@@ -257,8 +264,8 @@ public class examDao {
             exc.getErrorCode();
         } finally {
             try {
-                connection.close();
                 stm.close();
+                connection.close();
             } catch (SQLException exc) {
                 exc.getErrorCode() ;
             }
@@ -273,10 +280,11 @@ public class examDao {
         ObservableList < PieChart.Data > piechartdata;
         piechartdata = FXCollections.observableArrayList();
         Connection connection = null ;
+        ResultSet set = null ;
 
         try {
             connection = DriverManager.getConnection(dbUrl, user, pass) ;
-            ResultSet set = connection.createStatement().executeQuery("SELECT COUNT(Nome) as esamiDati from esami");
+            set = connection.createStatement().executeQuery("SELECT COUNT(Nome) as esamiDati from esami");
             while (set.next()) {
                 piechartdata.add(new PieChart.Data("Esami dati" , set.getInt("esamiDati"))) ;
 
@@ -286,6 +294,7 @@ public class examDao {
 
         } finally {
             try {
+                set.close();
                 connection.close();
             }catch (SQLException e)  {
                 e.getErrorCode() ;
@@ -298,9 +307,10 @@ public class examDao {
     public Number getTotalExams () {
         int count = 0 ;
         Connection connection = null ;
+        ResultSet set = null ;
         try {
             connection = DriverManager.getConnection(dbUrl, user, pass) ;
-            ResultSet set = connection.createStatement().executeQuery("SELECT (Nome)  from esami") ;
+            set = connection.createStatement().executeQuery("SELECT (Nome)  from esami") ;
             while  (set.next()) {
                 count++ ;
             }
@@ -309,6 +319,7 @@ public class examDao {
 
         }finally {
             try {
+                set.close() ;
                 connection.close();
             } catch (SQLException e) {
                 e.getErrorCode() ;
@@ -320,10 +331,11 @@ public class examDao {
         ObservableList < PieChart.Data > piechartdata;
         piechartdata = FXCollections.observableArrayList();
         Connection connection = null ;
+        ResultSet set = null ;
 
         try {
             connection = DriverManager.getConnection(dbUrl, user, pass) ;
-            ResultSet set = connection.createStatement().executeQuery("SELECT SUM(CFU) as cfus from esami");
+            set = connection.createStatement().executeQuery("SELECT SUM(CFU) as cfus from esami");
             while (set.next()) {
                 piechartdata.add(new PieChart.Data("CFU possseduti " , set.getInt("cfus"))) ;
 
@@ -333,6 +345,7 @@ public class examDao {
 
         } finally {
             try {
+                set.close();
                 connection.close();
             } catch (SQLException e) {
                 e.getErrorCode() ;
@@ -345,9 +358,10 @@ public class examDao {
 
     public Number getTotalCfus () {
         Connection connection = null ;
+        ResultSet set = null ;
         try {
             connection = DriverManager.getConnection(dbUrl, user, pass) ;
-            ResultSet set = connection.createStatement().executeQuery("SELECT SUM(CFU) as cfus  from esami") ;
+            set = connection.createStatement().executeQuery("SELECT SUM(CFU) as cfus  from esami") ;
             while  (set.next()) {
                 return set.getInt("cfus") ;
             }
@@ -356,6 +370,7 @@ public class examDao {
 
         }finally {
             try {
+                set.close();
                 connection.close();
             } catch (SQLException e) {
                 e.getErrorCode() ;
