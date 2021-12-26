@@ -21,12 +21,10 @@ public class examDao {
 
 
     public ObservableList<examEntityBean> getExamlist()  {
-        Connection connection = null ;
         ObservableList<examEntityBean> examlist = FXCollections.observableArrayList();
-        try {
-            connection = DriverManager.getConnection(dbUrl, user, pass);
-            Statement stm = connection.createStatement();
-            ResultSet set = stm.executeQuery(getQuery);
+        try (Connection connection = DriverManager.getConnection(dbUrl , user ,pass) ; Statement
+        statement = connection.createStatement() ) {
+            ResultSet set = statement.executeQuery(getQuery);
 
             while (set.next()) {
                 examEntityBean exam = new examEntityBean();
@@ -43,16 +41,7 @@ public class examDao {
         } catch (SQLException  exc) {
             exc.getMessage();
         }
-        finally {
-            try {
-                if (connection!= null ) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
 
-        }
         return examlist;
 
     }
