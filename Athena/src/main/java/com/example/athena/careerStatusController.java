@@ -19,7 +19,7 @@ public class careerStatusController implements Initializable {
     private PieChart examsPieChart;
     @FXML
     private PieChart examsPieChartcfu ;
-    private examDAO exam ;
+    private examDao exam ;
     @FXML
     private Label totalExams ;
     @FXML
@@ -33,7 +33,7 @@ public class careerStatusController implements Initializable {
     public void initialize(URL url , ResourceBundle rb) {
         ObservableList<PieChart.Data> examsPieChartData = FXCollections.observableArrayList() ;
         ObservableList<PieChart.Data> examsPieChartDatacfus = FXCollections.observableArrayList() ;
-        exam = new examDAO() ;
+        exam = new examDao() ;
         examsPieChartData = exam.loadData() ;
         examsPieChartDatacfus = exam.loadData2() ;
         int esamiDAti = (int) exam.getTotalExams();

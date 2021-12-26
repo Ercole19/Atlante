@@ -20,8 +20,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.controlsfx.glyphfont.FontAwesome;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -51,7 +49,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
     private TableColumn<examEntityBean , Void> colEDit ;
 
     private ObservableList<examEntityBean> examList  = FXCollections.observableArrayList() ;
-    private examDAO examDao ;
+    private com.example.athena.examDao examDao ;
 
 
     public void initAggiungiEsame () throws IOException {
@@ -100,7 +98,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
     public void refreshTable() {
         examList.clear() ;
 
-        examDao = new examDAO() ;
+        examDao = new examDao() ;
         examList = examDao.getExamlist() ;
 
         examTable.setItems(examList) ;
@@ -173,7 +171,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
                     cancella.setOnMouseClicked( event -> {
                         try {
                             examEntityBean exam = examTable.getSelectionModel().getSelectedItem();
-                            examDAO esameD = new examDAO() ;
+                            com.example.athena.examDao esameD = new examDao() ;
 
 
 
@@ -203,7 +201,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
 
 
 
-        examDao = new examDAO() ;
+        examDao = new examDao() ;
         examList = examDao.getExamlist() ;
         examTable.setItems(examList) ;
 

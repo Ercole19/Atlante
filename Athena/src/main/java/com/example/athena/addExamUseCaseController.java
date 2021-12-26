@@ -1,16 +1,12 @@
 package com.example.athena;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 import static javafx.fxml.FXMLLoader.load;
 
@@ -31,7 +27,7 @@ public class addExamUseCaseController {
             if (!(update)) {
 
 
-                examDAO esame = new examDAO();
+                examDao esame = new examDao();
                 esame.addExam(esameBean);
 
 
@@ -40,7 +36,7 @@ public class addExamUseCaseController {
 
 
             } else {
-                examDAO esame = new examDAO();
+                examDao esame = new examDao();
                 esame.updateExam(esameBean , oldName);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.close();

@@ -1,24 +1,15 @@
 package com.example.athena;
 
-import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.text.DecimalFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 
@@ -30,13 +21,13 @@ public class averageController implements Initializable {
     @FXML
     private Label labelAverageWei ;
 
-    private examDAO exam ;
+    private examDao exam ;
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        exam = new examDAO() ;
+        exam = new examDao() ;
 
         ObservableList<XYChart.Data<String, Number>> data = exam.getSortedExams() ;
         ObservableList<XYChart.Data<String, Number>> data2 = exam.getSortedExamsWeighted() ;
