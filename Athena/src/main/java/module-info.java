@@ -11,10 +11,8 @@ module com.example.athena {
     requires eu.hansolo.tilesfx;
     requires java.sql;
 
-    opens com.example.athena to javafx.fxml;
-    exports com.example.athena;
-    exports com.example.athena.GraphicalController;
     opens com.example.athena.GraphicalController to javafx.fxml;
+    exports com.example.athena.GraphicalController;
     exports com.example.athena.UseCaseControllers;
     opens com.example.athena.UseCaseControllers to javafx.fxml;
     exports com.example.athena.View;

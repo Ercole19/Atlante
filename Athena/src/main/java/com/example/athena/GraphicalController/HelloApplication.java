@@ -1,5 +1,6 @@
 package com.example.athena.GraphicalController;
 
+import com.example.athena.GraphicalController.SceneSwitcher;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
