@@ -13,4 +13,12 @@ module com.example.athena {
 
     opens com.example.athena to javafx.fxml;
     exports com.example.athena;
+    exports com.example.athena.GraphicalController;
+    opens com.example.athena.GraphicalController to javafx.fxml;
+    exports com.example.athena.UseCaseControllers;
+    opens com.example.athena.UseCaseControllers to javafx.fxml;
+    exports com.example.athena.View;
+    opens com.example.athena.View to javafx.fxml;
+    exports com.example.athena.View.SceneDecorators;
+    opens com.example.athena.View.SceneDecorators to javafx.fxml;
 }

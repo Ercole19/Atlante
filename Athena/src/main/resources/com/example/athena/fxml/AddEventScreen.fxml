@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.GraphicalController.AddEventController">
+   <children>
+      <Text fill="WHITE" layoutX="131.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert a new Event">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <TextField layoutX="19.0" layoutY="106.0" prefHeight="49.0" prefWidth="563.0" promptText="Insert the event's name..." style="-fx-background-radius: 20;">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </TextField>
+      <DatePicker layoutX="19.0" layoutY="228.0" prefHeight="49.0" prefWidth="351.0" />
+      <Text fill="WHITE" layoutX="19.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event's start :">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="19.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event's end :">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <DatePicker layoutX="19.0" layoutY="351.0" prefHeight="49.0" prefWidth="351.0" />
+      <TextField alignment="TOP_LEFT" layoutX="19.0" layoutY="500.0" prefHeight="210.0" prefWidth="563.0" promptText="Insert the event's details..." style="-fx-background-radius: 20;">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </TextField>
+      <Spinner layoutX="384.0" layoutY="228.0" prefHeight="49.0" prefWidth="91.0" />
+      <Spinner layoutX="491.0" layoutY="228.0" prefHeight="49.0" prefWidth="91.0" />
+      <Spinner layoutX="384.0" layoutY="351.0" prefHeight="49.0" prefWidth="91.0" />
+      <Spinner layoutX="491.0" layoutY="351.0" prefHeight="49.0" prefWidth="91.0" />
+      <Text layoutX="479.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Text layoutX="479.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Button layoutX="217.0" layoutY="726.0" mnemonicParsing="false" onAction="#clickOnAddEvent" style="-fx-background-radius: 20; -fx-background-color: #ffc22a;" text="Add event" textFill="WHITE">
+         <font>
+            <Font size="26.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ChoiceBox layoutX="19.0" layoutY="435.0" prefHeight="30.0" prefWidth="252.0" />
+      <Button layoutX="530.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickOnX" style="-fx-background-color: #ffc22a; -fx-background-radius: 20;" text="X">
+         <font>
+            <Font size="26.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>
