@@ -17,7 +17,7 @@ public class studentdao {
 
 
 
-        try (Connection connection = DriverManager.getConnection(dburl, user, this.pass);
+        try (Connection connection = DriverManager.getConnection(dburl, user, pass);
              PreparedStatement stmt =connection.prepareStatement(queryFind , ResultSet.TYPE_SCROLL_INSENSITIVE , ResultSet.CONCUR_READ_ONLY)){
 
             stmt.setString(1 , emailUtente);
