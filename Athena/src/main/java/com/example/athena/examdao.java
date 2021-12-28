@@ -14,8 +14,8 @@ public class examdao {
     private String getQuery = "SELECT * FROM esami" ;
     private String deleteQuery = "DELETE FROM esami WHERE Nome = ?" ;
     private String addQuery = " INSERT INTO esami  VALUES (?,?,?,?); " ;
-    private String updateQuery = "UPDATE `esami` SET `Nome` = ? , `Voto` = ? , `CFU` = ? , `Data` = ?  WHERE (`Nome` = ? )  " ;
-    private String sortedExams = "SELECT  Voto , Data  from  esami order by Data ASC";
+    private String updateQuery = "UPDATE `esami` SET `Nome` = ? , `Voto` = ? , `CFU` = ? , `Data` = ?  WHERE (`Nome` = ? ) " ;
+    private String sortedExams = "SELECT  Voto , Data  from  esami order by Data ASC" ;
 
 
 

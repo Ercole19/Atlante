@@ -7,10 +7,10 @@ import java.sql.*;
 
 public class studentdao {
 
-    private  String user = "root";
-    private  String pass = "Salamandra230!";
-    private  String dburl = "jdbc:mysql://localhost:3306/atena";
-    private String queryFind = "SELECT * FROM utenti WHERE email = ? and password = ?";
+    private  String user = "test" ;
+    private  String pass = "test10";
+    private  String dburl = "jdbc:mysql://192.168.1.69:3306/atena" ;
+    private String queryFind = "SELECT * FROM utenti WHERE email = ? and password = ?" ;
     private String queryRegister = "INSERT INTO  utenti values (? , ?)" ;
 
     public boolean findStudent (String emailUtente, String pass)  {

@@ -73,7 +73,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="990.0" layoutY="56.0" mnemonicParsing="false" opacity="0.0" prefHeight="710.0" prefWidth="340.0" style="-fx-background-color: #ffc22a;">
+      <Button layoutX="990.0" layoutY="56.0" mnemonicParsing="false" onAction="#onReviewsClick" opacity="0.0" prefHeight="710.0" prefWidth="340.0" style="-fx-background-color: #ffc22a;">
          <font>
             <Font size="30.0" />
          </font>
