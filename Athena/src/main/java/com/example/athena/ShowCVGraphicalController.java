@@ -17,6 +17,6 @@ public class ShowCVGraphicalController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         WebEngine engine = cvWebView.getEngine() ;
-        engine.load("file:///home/seb/Documents/Universita/ISPW/Atlante.git/trunk/Athena/src/main/resources/assets/CV.html") ;
+        engine.load("file://" + System.getProperty("user.dir") + "/src/main/resources/assets/CV.html") ;
     }
 }

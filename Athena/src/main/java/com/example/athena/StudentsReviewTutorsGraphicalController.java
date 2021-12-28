@@ -13,7 +13,7 @@ import java.util.Objects;
 
 import static javafx.fxml.FXMLLoader.load;
 
-public class TutorReviewPageController
+public class StudentsReviewTutorsGraphicalController
 {
     private Parent root;
     private Stage stage;

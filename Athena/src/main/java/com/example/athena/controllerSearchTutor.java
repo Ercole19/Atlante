@@ -58,7 +58,7 @@ public class controllerSearchTutor {
 
     public void clickOnReviewTutorButton(ActionEvent event) throws IOException
     {
-        root = load(Objects.requireNonNull(getClass().getResource("TutorReviewPage.fxml")));
+        root = load(Objects.requireNonNull(getClass().getResource("StudentsReviewTutorsView.fxml")));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

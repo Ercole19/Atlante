@@ -31,4 +31,11 @@ public class tutorMainPageController {
         Btn.logoutBtn(event);
     }
 
+    public void onReviewsClick(ActionEvent event) throws IOException
+    {
+        root = load(Objects.requireNonNull(getClass().getResource("TutorReviewPageView.fxml")));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+    }
 }
