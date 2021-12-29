@@ -9,7 +9,7 @@ public class studentdao {
 
     private String user = "test" ;
     private String Password = "test" ;
-    private String dbUrl = "jdbc:mysql://127.0.0.1:3306/athena" ;
+    private String dbUrl = "jdbc:mysql://192.168.1.84:3306/athena" ;
     private String queryFind = " SELECT * FROM studenti WHERE  email = ? and password = ? " ;
     private String queryRegister = " INSERT INTO  studenti values (? , ?) " ;
     private static String driver  = "com.mysql.jdbc.Driver" ;
