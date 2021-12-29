@@ -52,33 +52,39 @@ public class graphicControllerEsamiHomepage implements Initializable {
 
 
     public void initAggiungiEsame () throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Aggiungi_Esame_view.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        SceneSwitcher switcher = new SceneSwitcher() ;
+        loader.setLocation(switcher.generateUrl("Aggiungi_Esame_view.fxml"));
         stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
-        scene = new Scene(root);
+        scene = new Scene(loader.load());
         stage.setTitle("Aggiungi esame");
         stage.setScene(scene);
         stage.showAndWait();
 
     }
     public void initMostraMedia () throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Mostra_Media_View.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        SceneSwitcher switcher = new SceneSwitcher() ;
+        loader.setLocation(switcher.generateUrl("Mostra_Media_View.fxml"));
         stage = new Stage();
         stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
-        scene = new Scene(root);
+        scene = new Scene(loader.load());
         stage.setScene(scene);
         stage.setTitle("La tua media");
         stage.showAndWait();
     }
 
     public void initCareerStatus () throws IOException {
-        root = FXMLLoader.load(getClass().getResource("carrerStatusView.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        SceneSwitcher switcher = new SceneSwitcher() ;
+        loader.setLocation(switcher.generateUrl("carrerStatusView.fxml"));
         stage = new Stage();
         stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
-        scene = new Scene(root);
+        scene = new Scene(loader.load());
         stage.setScene(scene);
         stage.setTitle("La tua media");
         stage.showAndWait();

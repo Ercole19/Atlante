@@ -10,8 +10,8 @@ import java.sql.*;
 
 public class examdao {
     private String user = "root" ;
-    private String pass = "Salamandra230!" ;
-    private String dbUrl = "jdbc:mysql://localhost:3306/atena" ;
+    private String pass = "Salamandra230?" ;
+    private String dbUrl = "jdbc:mysql://localhost:3306/athena" ;
     private String getQuery = "SELECT * FROM esami" ;
     private String deleteQuery = "DELETE FROM esami WHERE Nome = ?" ;
     private String addQuery = " INSERT INTO esami  VALUES (?,?,?,?); " ;

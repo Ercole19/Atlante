@@ -29,19 +29,15 @@ public class LoginPageController {
     private TextField passField;
 
     public void switchToMainPage(ActionEvent event) throws IOException
-            //email = emailprova
-            // pass = passprova
     {
         String email = emailField.getText() ;
         String password = passField.getText() ;
         stDAO = new studentdao() ;
         if (stDAO.findStudent(email , password)) {
             Alert alert = new Alert(Alert.AlertType.NONE , "Access granted !" , ButtonType.CLOSE) ;
-            alert.showAndWait();
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPageStudents.fxml")));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
+            alert.showAndWait() ;
+            SceneSwitcher switcher = new SceneSwitcher() ;
+            switcher.switcher(event , "MainPageStudents.fxml");
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR , "Access failed !" , ButtonType.CLOSE) ;
@@ -57,7 +53,7 @@ public class LoginPageController {
 
     public void switchToSignUpPage(ActionEvent event ) throws IOException {
         SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "SingUpView.fxml");
+        switcher.switcher(event, "signUpView.fxml");
 
     }
 

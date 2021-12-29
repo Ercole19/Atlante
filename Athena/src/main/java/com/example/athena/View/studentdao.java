@@ -7,18 +7,16 @@ import java.sql.*;
 
 public class studentdao {
 
-    private  String user = "root" ;
-    private  String pass = "Salamandra230!";
-    private  String dburl = "jdbc:mysql://localhost:3306/atena" ;
-    private String queryFind = "SELECT * FROM utenti WHERE email = ? and password = ?" ;
-    private String queryRegister = "INSERT INTO  utenti values (? , ?)" ;
+    private String user = "root" ;
+    private String Password = "Salamandra230?" ;
+    private String dbUrl = "jdbc:mysql://localhost:3306/athena" ;
+    private String queryFind = " SELECT * FROM studenti WHERE  email = ? and password = ? " ;
+    private String queryRegister = " INSERT INTO  studenti values (? , ?) " ;
 
     public boolean findStudent (String emailUtente, String pass)  {
 
-
-
-        try (Connection connection = DriverManager.getConnection(dburl, user, pass);
-             PreparedStatement stmt =connection.prepareStatement(queryFind , ResultSet.TYPE_SCROLL_INSENSITIVE , ResultSet.CONCUR_READ_ONLY)){
+        try (Connection connection = DriverManager.getConnection(dbUrl, user , Password );
+             PreparedStatement stmt = connection.prepareStatement(queryFind , ResultSet.TYPE_SCROLL_INSENSITIVE , ResultSet.CONCUR_READ_ONLY)){
 
             stmt.setString(1 , emailUtente);
             stmt.setString(2 , pass);
@@ -29,11 +27,18 @@ public class studentdao {
                 return true;
 
             }
+            else {
+                return false ;
+            }
 
 
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.getMessage();
+            e.getErrorCode();
+            e.getCause();
+            e.getSQLState();
+            e.getLocalizedMessage();
         }
 
 
@@ -41,7 +46,7 @@ public class studentdao {
     }
     public void registerUser(String email , String password)  {
 
-        try (Connection connection = DriverManager.getConnection(dburl, user, pass);
+        try (Connection connection = DriverManager.getConnection(dbUrl, user, Password );
              PreparedStatement stmt = connection.prepareStatement(queryRegister, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);){
                 stmt.setString(1, email);
                 stmt.setString(2, password);
