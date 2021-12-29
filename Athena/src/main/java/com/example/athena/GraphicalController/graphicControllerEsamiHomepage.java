@@ -138,7 +138,8 @@ public class graphicControllerEsamiHomepage implements Initializable {
                     editButton.setOnAction(event -> {
                         examEntityBean exam = examTable.getSelectionModel().getSelectedItem();
                         FXMLLoader fxmlLoader =  new FXMLLoader();
-                        fxmlLoader.setLocation(getClass().getResource("Aggiungi_Esame_view.fxml" ));
+                        SceneSwitcher switcher = new SceneSwitcher() ;
+                        fxmlLoader.setLocation(switcher.generateUrl("Aggiungi_Esame_view.fxml")) ;
                         try {
                             fxmlLoader.load();
                         }catch (IOException exc) {

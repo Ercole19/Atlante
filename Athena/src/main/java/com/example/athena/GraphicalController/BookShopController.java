@@ -2,6 +2,7 @@ package com.example.athena.GraphicalController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.Node;
@@ -41,11 +42,17 @@ public class BookShopController {
         if (!res.equals("")){
             label.setStyle("-fx-opacity: 0");
             label =  (Label) scene.lookup("#resLab1");
-            root = load(Objects.requireNonNull(getClass().getResource("Search-view.fxml")));
+            FXMLLoader loader = new FXMLLoader();
+            SceneSwitcher switcher = new SceneSwitcher() ;
+            loader.setLocation(switcher.generateUrl("Search-view.fxml"));
+            root = loader.load() ;
             label.setText(res + ":");
         }
         else{
-            root = load(Objects.requireNonNull(getClass().getResource("VoidSearch-view.fxml")));
+            FXMLLoader loader = new FXMLLoader();
+            SceneSwitcher switcher = new SceneSwitcher() ;
+            loader.setLocation(switcher.generateUrl("VoidSearch-view.fxml"));
+            root = loader.load() ;
             label.setText("please write something to search");
         }
         label.setStyle("-fx-opacity: 1");

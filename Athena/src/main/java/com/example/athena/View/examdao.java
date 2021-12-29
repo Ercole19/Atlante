@@ -9,19 +9,25 @@ import javafx.scene.chart.XYChart;
 import java.sql.*;
 
 public class examdao {
-    private String user = "root" ;
-    private String pass = "Salamandra230?" ;
+    private String user = "test" ;
+    private String pass = "test" ;
     private String dbUrl = "jdbc:mysql://localhost:3306/athena" ;
     private String getQuery = "SELECT * FROM esami" ;
     private String deleteQuery = "DELETE FROM esami WHERE Nome = ?" ;
     private String addQuery = " INSERT INTO esami  VALUES (?,?,?,?); " ;
     private String updateQuery = "UPDATE `esami` SET `Nome` = ? , `Voto` = ? , `CFU` = ? , `Data` = ?  WHERE (`Nome` = ? ) " ;
     private String sortedExams = "SELECT  Voto , Data  from  esami order by Data ASC" ;
+    private static String driver  = "com.mysql.jdbc.Driver" ;
 
 
 
 
     public ObservableList<examEntityBean> getExamlist()  {
+        try {
+            Class.forName(driver) ;
+        } catch (ClassNotFoundException e ) {
+            e.getMessage() ;
+        }
         ObservableList<examEntityBean> examlist = FXCollections.observableArrayList();
         try (Connection connection = DriverManager.getConnection(dbUrl , user ,pass) ; Statement
         statement = connection.createStatement() ) {
@@ -48,6 +54,11 @@ public class examdao {
     }
 
     public void addExam(examEntityBean beanExam) {
+        try {
+            Class.forName(driver) ;
+        } catch (ClassNotFoundException e ) {
+            e.getMessage() ;
+        }
 
         try (Connection connection = DriverManager.getConnection(dbUrl, user, pass);PreparedStatement stm =connection.prepareStatement(addQuery, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE) ){
 
@@ -65,6 +76,11 @@ public class examdao {
     }
 
     public void deleteExam(String nome)  {
+        try {
+            Class.forName(driver) ;
+        } catch (ClassNotFoundException e ) {
+            e.getMessage() ;
+        }
 
         try (Connection connection = DriverManager.getConnection(dbUrl, user, pass) ; PreparedStatement stm = connection.prepareStatement(deleteQuery)) {
             stm.setString(1, nome);
@@ -75,6 +91,11 @@ public class examdao {
     }
 
     public void updateExam(examEntityBean beanExam, String oldName) {
+        try {
+            Class.forName(driver) ;
+        } catch (ClassNotFoundException e ) {
+            e.getMessage() ;
+        }
 
         try(Connection connection = DriverManager.getConnection(dbUrl , user , pass) ; PreparedStatement stm = connection.prepareStatement(updateQuery)) {
 
@@ -92,6 +113,11 @@ public class examdao {
     }
 
     public ObservableList<XYChart.Data<String, Number>> getSortedExams() {
+        try {
+            Class.forName(driver) ;
+        } catch (ClassNotFoundException e ) {
+            e.getMessage() ;
+        }
 
         ObservableList<XYChart.Data<String, Number>> list = FXCollections.observableArrayList();
 
@@ -124,6 +150,11 @@ public class examdao {
 
 
     public Number  getAverage () {
+        try {
+            Class.forName(driver) ;
+        } catch (ClassNotFoundException e ) {
+            e.getMessage() ;
+        }
 
         try (Connection connection = DriverManager.getConnection(dbUrl , user ,pass) ; Statement stm = connection.createStatement()){
             ResultSet set = stm.executeQuery("SELECT AVG(VOTO) as media  FROM esami");
@@ -139,6 +170,11 @@ public class examdao {
     }
 
     public ObservableList<XYChart.Data<String, Number>> getSortedExamsWeighted() {
+        try {
+            Class.forName(driver) ;
+        } catch (ClassNotFoundException e ) {
+            e.getMessage() ;
+        }
 
         ObservableList<XYChart.Data<String, Number>> list = FXCollections.observableArrayList();
         try (Connection connection = DriverManager.getConnection(dbUrl , user , pass) ; Statement statement = connection.createStatement()){
@@ -173,6 +209,11 @@ public class examdao {
     }
 
     public Number  getAverageWeighted  () {
+        try {
+            Class.forName(driver) ;
+        } catch (ClassNotFoundException e ) {
+            e.getMessage() ;
+        }
         double voti = 0 ;
         double  cfus = 0 ;
         double average = 0;
@@ -197,6 +238,11 @@ public class examdao {
 
 
      public ObservableList < PieChart.Data > loadData() {
+         try {
+             Class.forName(driver) ;
+         } catch (ClassNotFoundException e ) {
+             e.getMessage() ;
+         }
         ObservableList < PieChart.Data > piechartdata;
         piechartdata = FXCollections.observableArrayList();
 
@@ -217,6 +263,11 @@ public class examdao {
 
 
     public Number getTotalExams () {
+        try {
+            Class.forName(driver) ;
+        } catch (ClassNotFoundException e ) {
+            e.getMessage() ;
+        }
         int count = 0 ;
 
         try (Connection connection = DriverManager.getConnection(dbUrl, user, pass) ;
@@ -233,6 +284,11 @@ public class examdao {
         return count ;}
 
     public ObservableList < PieChart.Data > loadData2() {
+        try {
+            Class.forName(driver) ;
+        } catch (ClassNotFoundException e ) {
+            e.getMessage() ;
+        }
         ObservableList < PieChart.Data > piechartdata;
         piechartdata = FXCollections.observableArrayList();
 
@@ -254,6 +310,11 @@ public class examdao {
 
 
     public Number getTotalCfus () {
+        try {
+            Class.forName(driver) ;
+        } catch (ClassNotFoundException e ) {
+            e.getMessage() ;
+        }
 
         try (Connection connection = DriverManager.getConnection(dbUrl, user, pass) ;
         ResultSet set = connection.createStatement().executeQuery("SELECT SUM(CFU) as cfus  from esami") ;){
