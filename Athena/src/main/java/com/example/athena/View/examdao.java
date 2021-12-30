@@ -11,7 +11,7 @@ import java.sql.*;
 public class examdao {
     private String user = "test" ;
     private String pass = "test" ;
-    private String dbUrl = "jdbc:mysql://192.168.1.84:3306/athena" ;
+    private String dbUrl = "jdbc:mysql://192.168.1.102:3306/athena" ;
     private String getQuery = "SELECT * FROM esami" ;
     private String deleteQuery = "DELETE FROM esami WHERE Nome = ?" ;
     private String addQuery = " INSERT INTO esami  VALUES (?,?,?,?); " ;
