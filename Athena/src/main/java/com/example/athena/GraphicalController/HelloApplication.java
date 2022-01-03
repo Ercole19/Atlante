@@ -32,13 +32,6 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    public void logoutBtn(ActionEvent event) throws IOException {
-        root = load(Objects.requireNonNull(getClass().getResource("LoginPage.fxml")));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-    }
-
     public static void main(String[] args) {
         launch();
     }

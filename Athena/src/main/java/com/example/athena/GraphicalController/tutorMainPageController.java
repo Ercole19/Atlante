@@ -8,21 +8,19 @@ import static javafx.fxml.FXMLLoader.load;
 
 public class tutorMainPageController {
 
-    HelloApplication Btn = new HelloApplication();
+    SceneSwitcher switcher = new SceneSwitcher();
 
 
     public void onPersonalPageButtonClick(ActionEvent event) throws IOException {
-        SceneSwitcher switcher = new SceneSwitcher();
         switcher.switcher(event, "tutorEditingPage.fxml");
     }
 
     public void onLogoutButtonClick(ActionEvent event) throws IOException {
-        Btn.logoutBtn(event);
+        switcher.switcher(event, "LoginPage.fxml");
     }
 
     public void onReviewsClick(ActionEvent event) throws IOException
     {
-        SceneSwitcher switcher = new SceneSwitcher();
         switcher.switcher(event, "TutorReviewPageView.fxml");
     }
 }
