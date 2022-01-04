@@ -9,12 +9,13 @@ import javafx.scene.chart.XYChart;
 import java.sql.*;
 
 public class examdao {
+    private String emailcurrent =  com.example.athena.View.user.getUser().getEmail() ;
     private String user = "test" ;
     private String pass = "test" ;
-    private String dbUrl = "jdbc:mysql://192.168.1.102:3306/athena" ;
-    private String getQuery = "SELECT * FROM esami" ;
+    private String dbUrl = "jdbc:mysql://192.168.1.77:3306/athena" ;
+    private String getquery = "SELECT Nome , Voto , CFU , Data FROM esami WHERE email = ? " ;
     private String deleteQuery = "DELETE FROM esami WHERE Nome = ?" ;
-    private String addQuery = " INSERT INTO esami  VALUES (?,?,?,?); " ;
+    private String addQuery = " INSERT INTO esami  VALUES (?,?,?,?,?); " ;
     private String updateQuery = "UPDATE `esami` SET `Nome` = ? , `Voto` = ? , `CFU` = ? , `Data` = ?  WHERE (`Nome` = ? ) " ;
     private String sortedExams = "SELECT  Voto , Data  from  esami order by Data ASC" ;
     private static String driver  = "com.mysql.jdbc.Driver" ;
@@ -29,9 +30,10 @@ public class examdao {
             e.getMessage() ;
         }
         ObservableList<examEntityBean> examlist = FXCollections.observableArrayList();
-        try (Connection connection = DriverManager.getConnection(dbUrl , user ,pass) ; Statement
-        statement = connection.createStatement() ) {
-            ResultSet set = statement.executeQuery(getQuery);
+        try (Connection connection = DriverManager.getConnection(dbUrl , user ,pass) ; PreparedStatement
+        statement = connection.prepareStatement(getquery) ) {
+            statement.setString(1 , emailcurrent);
+            ResultSet set = statement.executeQuery() ;
 
             while (set.next()) {
                 examEntityBean exam = new examEntityBean();
@@ -60,12 +62,13 @@ public class examdao {
             e.getMessage() ;
         }
 
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, pass);PreparedStatement stm =connection.prepareStatement(addQuery, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE) ){
+        try (Connection connection = DriverManager.getConnection(dbUrl, user, pass);PreparedStatement stm =connection.prepareStatement(addQuery, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)  ){
 
             stm.setString(1, beanExam.getExamName());
             stm.setString(2, String.valueOf(beanExam.getVotoEsame()));
             stm.setString(3, String.valueOf(beanExam.getCfuEsame()));
             stm.setString(4, beanExam.getDate());
+            stm.setString(5, emailcurrent);
             stm.executeUpdate();
 
         } catch (Exception exc) {

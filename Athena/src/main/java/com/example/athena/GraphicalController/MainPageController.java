@@ -1,4 +1,5 @@
 package com.example.athena.GraphicalController;
+import com.example.athena.View.user;
 
 import javafx.event.ActionEvent;
 
@@ -8,7 +9,11 @@ import static javafx.fxml.FXMLLoader.load;
 
 public class MainPageController {
 
+
+
+
     public void onExamsButtonClick(ActionEvent event) throws IOException {
+
         SceneSwitcher switcher = new SceneSwitcher();
         switcher.switcher(event, "Carriera-view.fxml");
 

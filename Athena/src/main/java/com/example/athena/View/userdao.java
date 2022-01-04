@@ -5,13 +5,15 @@ import javafx.scene.control.ButtonType;
 
 import java.sql.*;
 
-public class studentdao {
+public class userdao {
+
+    private String email ;
 
     private String user = "test" ;
     private String Password = "test" ;
-    private String dbUrl = "jdbc:mysql://192.168.1.102:3306/athena" ;
-    private String queryFind = " SELECT * FROM studenti WHERE  email = ? and password = ? " ;
-    private String queryRegister = " INSERT INTO  studenti values (? , ?) " ;
+    private String dbUrl = "jdbc:mysql://192.168.1.77/athena" ;
+    private String queryFind = " SELECT * FROM utenti WHERE  email = ? and password = ? " ;
+    private String queryRegister = " INSERT INTO athena.utenti (email, password) VALUES (? , ? )" ;
     private static String driver  = "com.mysql.jdbc.Driver" ;
 
     public boolean findStudent (String emailUtente, String pass)  {
@@ -46,7 +48,7 @@ public class studentdao {
 
         return false;
     }
-    public void registerUser(String email , String password)  {
+    public Boolean registerUser(String email , String password)  {
         try {
             Class.forName(driver) ;
         } catch (ClassNotFoundException e ) {
@@ -60,10 +62,17 @@ public class studentdao {
                 stmt.executeUpdate();
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Registration successfull", ButtonType.CLOSE);
                 alert.showAndWait();
+                return true ;
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        } catch (SQLException exception) {
+            if (exception.getMessage().equals("Email not correct type another one")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR , "Email not valid") ;
+                alert.showAndWait();
+            }
+            else {
+                System.out.println(exception.getMessage());
+            }
+        } return false ;
     }
 }
 
