@@ -12,12 +12,18 @@ public class examdao {
     private String emailcurrent =  com.example.athena.View.user.getUser().getEmail() ;
     private String user = "test" ;
     private String pass = "test" ;
-    private String dbUrl = "jdbc:mysql://192.168.1.77:3306/athena" ;
+    private String dbUrl = "jdbc:mysql://192.168.1.79:3306/athena" ;
     private String getquery = "SELECT Nome , Voto , CFU , Data FROM esami WHERE email = ? " ;
-    private String deleteQuery = "DELETE FROM esami WHERE Nome = ?" ;
+    private String deleteQuery = "DELETE FROM esami WHERE Nome = ? and email = ?" ;
     private String addQuery = " INSERT INTO esami  VALUES (?,?,?,?,?); " ;
-    private String updateQuery = "UPDATE `esami` SET `Nome` = ? , `Voto` = ? , `CFU` = ? , `Data` = ?  WHERE (`Nome` = ? ) " ;
-    private String sortedExams = "SELECT  Voto , Data  from  esami order by Data ASC" ;
+    private String updateQuery = "UPDATE `esami` SET `Nome` = ? , `Voto` = ? , `CFU` = ? , `Data` = ?  WHERE (`Nome` = ? ) and email = ? " ;
+    private String sortedExams = "SELECT  Voto , Data  from  esami order by Data ASC where email = ?" ;
+    private String weightedsortedExams = "SELECT  Voto , Data , CFU  from  esami WHERE email =  ? order by Data ASC " ;
+    private String getaverage = "SELECT AVG(VOTO) as media  FROM esami WHERE email = ?" ;
+    private String getexamsdate = "SELECT (Voto) , (CFU)  FROM esami WHERE email = ? ORDER BY Data ASC " ;
+    private String countExams = "SELECT COUNT(Nome) as esamiDati from esami WHERE email = ?" ;
+    private String getExams = "SELECT (Nome)  from esami WHERE email = ?" ;
+    private String getcfusum = "SELECT SUM(CFU) as cfus from esami WHERE email = ?" ;
     private static String driver  = "com.mysql.jdbc.Driver" ;
 
 
@@ -87,6 +93,7 @@ public class examdao {
 
         try (Connection connection = DriverManager.getConnection(dbUrl, user, pass) ; PreparedStatement stm = connection.prepareStatement(deleteQuery)) {
             stm.setString(1, nome);
+            stm.setString(2,emailcurrent);
             stm.execute();
         }catch (SQLException exc) {
             exc.getErrorCode();
@@ -107,6 +114,7 @@ public class examdao {
             stm.setString(3, String.valueOf(beanExam.getCfuEsame()));
             stm.setString(4, beanExam.getDate());
             stm.setString(5, oldName);
+            stm.setString(6,emailcurrent);
             stm.executeUpdate();
 
 
@@ -124,7 +132,8 @@ public class examdao {
 
         ObservableList<XYChart.Data<String, Number>> list = FXCollections.observableArrayList();
 
-        try (Connection connection = DriverManager.getConnection(dbUrl , user , pass) ; Statement statement = connection.createStatement()){
+        try (Connection connection = DriverManager.getConnection(dbUrl , user , pass) ; PreparedStatement statement = connection.prepareStatement(sortedExams)){
+            statement.setString(1,emailcurrent);
             Integer count = 1;
             double average = 0.0;
             double counterVoti = 0.0 ;
@@ -159,8 +168,9 @@ public class examdao {
             e.getMessage() ;
         }
 
-        try (Connection connection = DriverManager.getConnection(dbUrl , user ,pass) ; Statement stm = connection.createStatement()){
-            ResultSet set = stm.executeQuery("SELECT AVG(VOTO) as media  FROM esami");
+        try (Connection connection = DriverManager.getConnection(dbUrl , user ,pass) ; PreparedStatement stm = connection.prepareStatement(getaverage)){
+            stm.setString(1,emailcurrent);
+            ResultSet set = stm.executeQuery();
             while (set.next()) {
                 return set.getDouble("media");
 
@@ -180,14 +190,15 @@ public class examdao {
         }
 
         ObservableList<XYChart.Data<String, Number>> list = FXCollections.observableArrayList();
-        try (Connection connection = DriverManager.getConnection(dbUrl , user , pass) ; Statement statement = connection.createStatement()){
+        try (Connection connection = DriverManager.getConnection(dbUrl , user , pass) ; PreparedStatement statement = connection.prepareStatement(weightedsortedExams)){
+            statement.setString(1,emailcurrent);
             int  cfus = 0 ;
             double average = 0.0;
             double counterVoti = 0.0;
             int voto ;
             int cfu ;
 
-            ResultSet set = statement.executeQuery("SELECT  Voto , Data , CFU  from  esami order by Data ASC");
+            ResultSet set = statement.executeQuery();
 
             while (set.next()) {
 
@@ -221,9 +232,9 @@ public class examdao {
         double  cfus = 0 ;
         double average = 0;
 
-        try(Connection connection = DriverManager.getConnection(dbUrl,user,pass) ; Statement stm = connection.createStatement()) {
-
-            ResultSet set = stm.executeQuery("SELECT (Voto) , (CFU)  FROM esami ORDER BY Data ASC");
+        try(Connection connection = DriverManager.getConnection(dbUrl,user,pass) ; PreparedStatement stm = connection.prepareStatement(getexamsdate)) {
+            stm.setString(1,emailcurrent);
+            ResultSet set = stm.executeQuery();
             while (set.next()) {
                 double voto = set.getDouble("Voto") ;
                 double  cfu = set.getDouble("CFU") ;
@@ -250,8 +261,9 @@ public class examdao {
         piechartdata = FXCollections.observableArrayList();
 
 
-        try (Connection connection = DriverManager.getConnection(dbUrl,user,pass) ; ResultSet set = connection.createStatement().executeQuery("SELECT COUNT(Nome) as esamiDati from esami")) {
-
+        try (Connection connection = DriverManager.getConnection(dbUrl,user,pass) ; PreparedStatement statement =  connection.prepareStatement(getExams)) {
+            statement.setString(1,emailcurrent);
+            ResultSet set = statement.executeQuery() ;
             while (set.next()) {
                 piechartdata.add(new PieChart.Data("Esami dati" , set.getInt("esamiDati"))) ;
 
@@ -274,7 +286,9 @@ public class examdao {
         int count = 0 ;
 
         try (Connection connection = DriverManager.getConnection(dbUrl, user, pass) ;
-         ResultSet set = connection.createStatement().executeQuery("SELECT (Nome)  from esami") ;) {
+         PreparedStatement statement = connection.prepareStatement(countExams) ;) {
+            statement.setString(1,emailcurrent);
+            ResultSet set = statement.executeQuery() ;
 
             while  (set.next()) {
                 count++ ;
@@ -297,8 +311,8 @@ public class examdao {
 
 
         try (Connection connection = DriverManager.getConnection(dbUrl, user, pass) ;
-         ResultSet set = connection.createStatement().executeQuery("SELECT SUM(CFU) as cfus from esami");){
-
+         PreparedStatement statement = connection.prepareStatement(getcfusum)){
+             ResultSet set = statement.executeQuery() ;
             while (set.next()) {
                 piechartdata.add(new PieChart.Data("CFU possseduti " , set.getInt("cfus"))) ;
 
@@ -320,8 +334,9 @@ public class examdao {
         }
 
         try (Connection connection = DriverManager.getConnection(dbUrl, user, pass) ;
-        ResultSet set = connection.createStatement().executeQuery("SELECT SUM(CFU) as cfus  from esami") ;){
-
+        PreparedStatement statement = connection.prepareStatement(getcfusum)){
+            statement.setString(1 , emailcurrent);
+         ResultSet set = statement.executeQuery() ;
             while  (set.next()) {
                 return set.getInt("cfus") ;
             }

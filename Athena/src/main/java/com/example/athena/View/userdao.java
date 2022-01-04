@@ -11,7 +11,7 @@ public class userdao {
 
     private String user = "test" ;
     private String Password = "test" ;
-    private String dbUrl = "jdbc:mysql://192.168.1.77/athena" ;
+    private String dbUrl = "jdbc:mysql://192.168.1.79/athena" ;
     private String queryFind = " SELECT * FROM utenti WHERE  email = ? and password = ? " ;
     private String queryRegister = " INSERT INTO athena.utenti (email, password) VALUES (? , ? )" ;
     private static String driver  = "com.mysql.jdbc.Driver" ;
