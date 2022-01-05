@@ -5,17 +5,15 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.GraphicalController.CalendarPageController">
     <children>
-      <ImageView fitHeight="367.0" fitWidth="632.0" layoutX="411.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../assets/calendarImage.png" />
-         </image>
-      </ImageView>
-      <Text fill="#ffd775" layoutX="494.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calendar">
+      <Text fill="#ffd775" layoutX="495.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calendar">
          <font>
             <Font size="48.0" />
          </font>
@@ -58,20 +56,38 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="252.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="251.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../assets/backBtn.png" />
          </image>
       </ImageView>
-      <Button layoutX="254.0" layoutY="141.0" mnemonicParsing="false" onAction="#clickOnBackButton" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+      <Button layoutX="251.0" layoutY="88.0" mnemonicParsing="false" onAction="#clickOnBackButton" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fitHeight="103.0" fitWidth="182.0" layoutX="320.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="103.0" fitWidth="182.0" layoutX="310.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../assets/calendarSymbolyellow.png" />
          </image>
       </ImageView>
+      <GridPane accessibleText="ppp" gridLinesVisible="true" layoutX="323.0" layoutY="212.0" prefHeight="466.0" prefWidth="899.0" style="-fx-background-color: #ffffff;">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
     </children>
 </AnchorPane>

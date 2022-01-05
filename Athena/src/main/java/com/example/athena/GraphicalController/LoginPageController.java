@@ -26,12 +26,23 @@ public class LoginPageController {
         String password = passField.getText() ;
         stDAO = new userdao() ;
         if (stDAO.findStudent(email , password)) {
-            Alert alert = new Alert(Alert.AlertType.NONE , "Access granted !" , ButtonType.CLOSE) ;
-            alert.showAndWait() ;
-            SceneSwitcher switcher = new SceneSwitcher() ;
-            switcher.switcher(event , "MainPageStudents.fxml");
-            currentuser = currentuser.getUser() ;
-            currentuser.setEmail(email);
+
+            if (stDAO.getuserType(email).equals("student")) {
+                Alert alert = new Alert(Alert.AlertType.NONE, "Access granted !", ButtonType.CLOSE);
+                alert.showAndWait();
+                SceneSwitcher switcher = new SceneSwitcher();
+                switcher.switcher(event, "MainPageStudents.fxml");
+                currentuser = currentuser.getUser();
+                currentuser.setEmail(email);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.NONE, "Access granted !", ButtonType.CLOSE);
+                alert.showAndWait();
+                SceneSwitcher switcher = new SceneSwitcher();
+                switcher.switcher(event, "MainPageTutor.fxml");
+                currentuser = currentuser.getUser();
+                currentuser.setEmail(email);
+
+            }
 
 
         }

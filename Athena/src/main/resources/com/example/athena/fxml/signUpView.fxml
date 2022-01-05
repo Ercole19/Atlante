@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -44,22 +45,12 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <TextField layoutX="196.0" layoutY="235.0" prefHeight="51.0" prefWidth="919.0" promptText="Confirm Email" style="-fx-background-radius: 20;">
+      <TextField fx:id="confirmEmailField" layoutX="196.0" layoutY="235.0" prefHeight="51.0" prefWidth="919.0" promptText="Confirm Email" style="-fx-background-radius: 20;">
          <font>
             <Font size="24.0" />
          </font>
       </TextField>
-      <TextField fx:id="passField" layoutX="196.0" layoutY="310.0" prefHeight="51.0" prefWidth="919.0" promptText="Password" style="-fx-background-radius: 20;">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </TextField>
-      <TextField layoutX="196.0" layoutY="390.0" prefHeight="51.0" prefWidth="919.0" promptText="Confirm Password" style="-fx-background-radius: 20;">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </TextField>
-      <RadioButton layoutX="263.0" layoutY="522.0" mnemonicParsing="false" text="Student" textFill="WHITE">
+      <RadioButton fx:id="studentRadiobutton" layoutX="263.0" layoutY="522.0" mnemonicParsing="false" text="Student" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
@@ -69,12 +60,7 @@
             <Font size="40.0" />
          </font>
       </Text>
-      <RadioButton layoutX="553.0" layoutY="522.0" mnemonicParsing="false" text="Tutor" textFill="WHITE">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </RadioButton>
-      <RadioButton layoutX="866.0" layoutY="522.0" mnemonicParsing="false" text="Both" textFill="WHITE">
+      <RadioButton fx:id="tutorRadiobutton" layoutX="866.0" layoutY="522.0" mnemonicParsing="false" text="Tutor" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
@@ -89,5 +75,15 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <PasswordField fx:id="passField" layoutX="196.0" layoutY="312.0" prefHeight="51.0" prefWidth="919.0" promptText="Password" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </PasswordField>
+      <PasswordField fx:id="confirmPassField" layoutX="196.0" layoutY="389.0" prefHeight="51.0" prefWidth="919.0" promptText="Confirm Password" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </PasswordField>
    </children>
 </AnchorPane>
