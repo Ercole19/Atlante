@@ -8,7 +8,7 @@ public class coursedao {
     private String emailcurrent =  com.example.athena.View.user.getUser().getEmail() ;
     private String user = "test" ;
     private String pass = "test" ;
-    private String dbUrl = "jdbc:mysql://192.168.1.95:3306/athena" ;
+    private String dbUrl = "jdbc:mysql://78.13.228.115:3306/athena" ;
     private String add = "INSERT INTO corsi (Nome , emailtutor) VALUES (?,?)" ;
     private String delete = "DELETE FROM corsi WHERE Nome = ? and emailtutor = ?" ;
     private String getCourses = "SELECT Nome FROM corsi WHERE emailtutor = ?" ;

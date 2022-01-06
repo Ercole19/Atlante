@@ -12,7 +12,7 @@ public class userdao {
 
     private String user = "test" ;
     private String Password = "test" ;
-    private String dbUrl = "jdbc:mysql://192.168.1.95/athena" ;
+    private String dbUrl = "jdbc:mysql://78.13.228.115/athena" ;
     private String queryFind = " SELECT * FROM utenti WHERE  email = ? and password = ? " ;
     private String queryRegister = " INSERT INTO athena.utenti (email, password, type ) VALUES (? , ? , ? )" ;
     private String getType = "SELECT type FROM utenti WHERE email = ?" ;

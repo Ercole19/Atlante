@@ -12,7 +12,7 @@ public class examdao {
     private String emailcurrent =  com.example.athena.View.user.getUser().getEmail() ;
     private String user = "test" ;
     private String pass = "test" ;
-    private String dbUrl = "jdbc:mysql://192.168.1.94:3306/athena" ;
+    private String dbUrl = "jdbc:mysql://78.13.228.115:3306/athena" ;
     private String getquery = "SELECT Nome , Voto , CFU , Data FROM esami WHERE email = ? " ;
     private String deleteQuery = "DELETE FROM esami WHERE Nome = ? and email = ?" ;
     private String addQuery = " INSERT INTO esami  VALUES (?,?,?,?,?); " ;
