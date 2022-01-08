@@ -43,6 +43,8 @@ public class controllerSearchTutor {
         AnchorPane subSceneElems = resultView.buildTutorSearchResultsScene(resultsBox.getWidth(), resultsBox.getHeight(), results) ;
         resultsBox.setRoot(subSceneElems) ;
     }
+
+    @Deprecated //To remove
     public void clickOnPersonalPage(ActionEvent event) throws IOException
     {
         SceneSwitcher switcher = new SceneSwitcher();

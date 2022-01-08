@@ -23,7 +23,14 @@ public class SceneSwitcher {
     public URL generateUrl(String fxmlToLoad) {
         URL returnUrl = null;
         try {
-            returnUrl = new URL("file:/" + System.getProperty("user.dir") + "/src/main/resources/com/example/athena/fxml/" + fxmlToLoad) ;
+            if(System.getProperty("os.name").contains("Windows"))
+            {
+                returnUrl = new URL("file:/" + System.getProperty("user.dir") + "/src/main/resources/com/example/athena/fxml/" + fxmlToLoad) ;
+            }
+            else if(System.getProperty("os.name").contains("Linux"))
+            {
+                returnUrl = new URL("file://" + System.getProperty("user.dir") + "/src/main/resources/com/example/athena/fxml/" + fxmlToLoad);
+            }
         }
         catch(MalformedURLException e)
         {

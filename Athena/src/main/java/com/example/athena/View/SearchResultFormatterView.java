@@ -1,5 +1,6 @@
 package com.example.athena.View;
 
+import com.example.athena.GraphicalController.SceneSwitcher;
 import com.example.athena.GraphicalController.TutorSearchResultBean;
 import com.example.athena.View.SceneDecorators.SearchResultFormatterComponent;
 import javafx.event.ActionEvent;
@@ -64,7 +65,7 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent
                 {
                     Parent root = null ;
                     try {
-                        root = load(Objects.requireNonNull(getClass().getResource("tutorPersonalPage.fxml"))) ;
+                        root = load((new SceneSwitcher()).generateUrl("tutorPersonalPage.fxml")) ;
                     } catch (IOException e) {
                         e.printStackTrace() ;
                     }

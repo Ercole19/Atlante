@@ -2,7 +2,10 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -36,40 +39,76 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Text fill="#ffd775" layoutX="24.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate a review code:">
+      <Text fill="#ffd775" layoutX="24.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate a review code:">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="studentUsername" layoutX="22.0" layoutY="360.0" prefHeight="46.0" prefWidth="432.0" promptText="Enter the student's username...">
+      <TextField fx:id="studentUsername" layoutX="22.0" layoutY="300.0" prefHeight="46.0" prefWidth="432.0" promptText="Enter the student's username...">
          <font>
             <Font size="24.0" />
          </font>
       </TextField>
-      <Button layoutX="24.0" layoutY="425.0" mnemonicParsing="false" onAction="#generateReviewCode" style="-fx-background-radius: 20; -fx-background-color: #2d8bba;" text="Generate Code" textFill="WHITE">
+      <Button layoutX="24.0" layoutY="486.0" mnemonicParsing="false" onAction="#generateReviewCode" style="-fx-background-radius: 20; -fx-background-color: #2d8bba;" text="Generate Code" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Label fx:id="resultMessage" alignment="CENTER" layoutX="472.0" layoutY="481.0" prefHeight="51.0" prefWidth="350.0" textFill="#ffd775">
+      <Label fx:id="resultMessage" alignment="CENTER" layoutX="472.0" layoutY="555.0" prefHeight="51.0" prefWidth="350.0" textFill="#ffd775">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="reviewCode" alignment="CENTER" layoutX="472.0" layoutY="572.0" prefHeight="51.0" prefWidth="350.0" textFill="#ffd775">
+      <Label fx:id="reviewCode" alignment="CENTER" layoutX="472.0" layoutY="644.0" prefHeight="51.0" prefWidth="350.0" textFill="#ffd775">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Text fill="#ffd775" layoutX="785.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your current review stars:">
+      <Text fill="#ffd775" layoutX="840.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your current review stars:">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Label fx:id="starsNumber" alignment="CENTER" layoutX="766.0" layoutY="206.0" prefHeight="51.0" prefWidth="350.0" textFill="#ffd775">
+      <Label fx:id="starsNumber" alignment="CENTER" layoutX="821.0" layoutY="155.0" prefHeight="51.0" prefWidth="350.0" textFill="#ffd775">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
+      <Text fill="#ffd775" layoutX="24.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select the subject:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <ChoiceBox fx:id="subjectChoiceBox" layoutX="22.0" layoutY="401.0" prefHeight="46.0" prefWidth="432.0" />
+      <Text fill="#ffd775" layoutX="561.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select the day of the tutoring:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <DatePicker fx:id="dayDatePicker" editable="false" layoutX="561.0" layoutY="300.0" prefHeight="46.0" prefWidth="214.0" />
+      <Text fill="#ffd775" layoutX="561.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select the time of the tutoring:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Spinner fx:id="startHourSpinner" editable="true" layoutX="562.0" layoutY="403.0" prefHeight="46.0" prefWidth="91.0" />
+      <Spinner fx:id="startMinuteSpinner" editable="true" layoutX="669.0" layoutY="403.0" prefHeight="46.0" prefWidth="91.0" />
+      <Text fill="#ffd775" layoutX="657.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Spinner fx:id="endHourSpinner" editable="true" layoutX="798.0" layoutY="404.0" prefHeight="46.0" prefWidth="91.0" />
+      <Spinner fx:id="endMinuteSpinner" editable="true" layoutX="905.0" layoutY="404.0" prefHeight="46.0" prefWidth="91.0" />
+      <Text fill="#ffd775" layoutX="893.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Text fill="#ffd775" layoutX="775.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

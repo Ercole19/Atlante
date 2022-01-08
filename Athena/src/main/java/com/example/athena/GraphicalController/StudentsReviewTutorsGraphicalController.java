@@ -25,7 +25,7 @@ public class StudentsReviewTutorsGraphicalController
 
     public void clickOnSubmitButton(ActionEvent event) throws IOException
     {
-        root = load(Objects.requireNonNull(getClass().getResource("tutorPersonalReview.fxml"))) ;
+        root = load((new SceneSwitcher()).generateUrl("tutorPersonalReview.fxml")) ;
         scene = ((Node) event.getSource()).getScene() ;
         SubScene reviewSubscene = (SubScene) scene.lookup("#reviewSectionPrompt") ;
         reviewSubscene.setRoot(root);
