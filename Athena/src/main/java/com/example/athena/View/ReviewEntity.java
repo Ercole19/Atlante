@@ -1,6 +1,6 @@
 package com.example.athena.View;
 
-import javafx.util.converter.LocalTimeStringConverter;
+import com.example.athena.Exceptions.TutorReviewException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,22 +16,46 @@ public class ReviewEntity
     private LocalTime endTime ;
 
 
-    public ReviewEntity(String reviewCode,String username, SubjectLabels subject, LocalDate day, int startHour, int startMinute,
-                                       int endHour, int endMinute)
+    public ReviewEntity(String reviewCode,String tutorUsername, String studentUsername, SubjectLabels subject, LocalDate day,
+                        int startHour, int startMinute, int endHour, int endMinute)
     {
         setReviewCode(reviewCode);
-        setStudentUsername(username) ;
-        setTutorUsername(user.getUser().getEmail()) ;
+        setStudentUsername(studentUsername) ;
+        setTutorUsername(tutorUsername) ;
         setSubject(subject) ;
         setDay(day) ;
         setStartTime(startHour, startMinute) ;
         setEndTime(endHour, endMinute) ;
     }
 
-    public void toDB()
+    public ReviewEntity(String reviewCode, String tutorUsername, String studentUsername, SubjectLabels subject, LocalDate day,
+                        LocalTime startTime, LocalTime endTime)
+    {
+        setReviewCode(reviewCode);
+        setStudentUsername(studentUsername) ;
+        setTutorUsername(tutorUsername) ;
+        setSubject(subject) ;
+        setDay(day) ;
+        setStartTime(startTime) ;
+        setEndTime(endTime) ;
+    }
+
+    public void toDB() throws TutorReviewException
     {
         ReviewDAO reviewDao = new ReviewDAO() ;
         reviewDao.addReview(this.reviewCode, this.tutorUsername, this.studentUsername, this.day, this.subject, this.startTime, this.endTime) ;
+    }
+
+    public static ReviewEntity getFromDB(String reviewCode) throws TutorReviewException
+    {
+        ReviewDAO reviewDAO = new ReviewDAO() ;
+        return reviewDAO.getReview(reviewCode) ;
+    }
+
+    public static void removeFromDB(String reviewCode) throws TutorReviewException
+    {
+        ReviewDAO reviewDAO = new ReviewDAO() ;
+        reviewDAO.deleteReview(reviewCode) ;
     }
 
     public void setReviewCode(String reviewCode)
@@ -89,6 +113,11 @@ public class ReviewEntity
         this.startTime = LocalTime.of(hour, minute) ;
     }
 
+    public void setStartTime(LocalTime time)
+    {
+        this.startTime = time ;
+    }
+
     public LocalTime getStartTime()
     {
         return this.startTime ;
@@ -97,6 +126,11 @@ public class ReviewEntity
     public void setEndTime(int hour, int minute)
     {
         this.endTime = LocalTime.of(hour, minute) ;
+    }
+
+    public void setEndTime(LocalTime time)
+    {
+        this.endTime = time ;
     }
 
     public LocalTime getEndTime()

@@ -1,5 +1,6 @@
 package com.example.athena.GraphicalController;
 
+import com.example.athena.Exceptions.TutorReviewException;
 import com.example.athena.UseCaseControllers.ReviewTutorUseCaseController;
 import com.example.athena.View.StringHoursConverter;
 import com.example.athena.View.SubjectLabels;
@@ -107,9 +108,14 @@ public class TutorReviewPageGraphicalController implements Initializable
 
         ReviewTutorUseCaseController controller = new ReviewTutorUseCaseController() ;
 
-        String generatedCode = controller.generateReview(dataBean) ;
-
-        reviewCode.setText(generatedCode) ;
-        resultMessage.setText("Here is your review code") ;
+        try
+        {
+            String generatedCode = controller.generateReview(dataBean) ;
+            reviewCode.setText(generatedCode) ;
+            resultMessage.setText("Here is your review code") ;
+        }catch (TutorReviewException e)
+        {
+            resultMessage.setText(e.getMessage()) ;
+        }
     }
 }

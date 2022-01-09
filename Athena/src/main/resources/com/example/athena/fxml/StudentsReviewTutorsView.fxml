@@ -19,7 +19,7 @@
                 <Font size="48.0" />
             </font>
         </Text>
-      <TextField layoutX="276.0" layoutY="221.0" prefHeight="49.0" prefWidth="742.0" promptText="Enter a review code recieved from a tutor..." style="-fx-background-radius: 20;">
+      <TextField fx:id="reviewCodeTextField" layoutX="276.0" layoutY="221.0" prefHeight="49.0" prefWidth="742.0" promptText="Enter a review code recieved from a tutor..." style="-fx-background-radius: 20;">
          <font>
             <Font size="26.0" />
          </font>
@@ -29,7 +29,7 @@
                 <Region />
             </root>
         </SubScene>
-      <Button layoutX="900.0" layoutY="230.0" mnemonicParsing="false" onAction="#clickOnSubmitButton" prefHeight="38.0" prefWidth="89.0" style="-fx-background-radius: 20; -fx-background-color: #2d8bba;" text="Submit" textFill="WHITE">
+      <Button layoutX="915.0" layoutY="226.0" mnemonicParsing="false" onAction="#clickOnSubmitButton" prefHeight="38.0" prefWidth="89.0" style="-fx-background-radius: 20; -fx-background-color: #2d8bba;" text="Submit" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>

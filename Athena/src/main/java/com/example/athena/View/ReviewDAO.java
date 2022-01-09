@@ -1,25 +1,22 @@
 package com.example.athena.View;
 
+import com.example.athena.Exceptions.TutorReviewException;
+
 import java.sql.* ;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.temporal.TemporalField;
 
-public class ReviewDAO
+public class ReviewDAO extends AbstractDAO
 {
-    private String user = "test" ;
-    private String pass = "test" ;
-    private String dbUrl = "jdbc:mysql://78.13.228.115:3306/athena" ;
-
     private String addReview = "INSERT INTO reviews(reviewCode, tutorUsername, studentUsername, tutoringDay, tutoringSubject, startTime, endTime) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?)" ;
     private String getReview = "SELECT * FROM reviews WHERE reviewCode = ?" ;
     private String deleteReview = "DELETE FROM reviews WHERE reviewCode = ?" ;
 
     public void addReview(String reviewCode, String tutorUsername, String studentUsername, LocalDate tutoringDay, SubjectLabels tutoringSubject,
-                          LocalTime startTime, LocalTime endTime)
+                          LocalTime startTime, LocalTime endTime) throws TutorReviewException
     {
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, pass); PreparedStatement statement = connection.prepareStatement(addReview))
+        try (PreparedStatement statement = this.getConnection().prepareStatement(addReview))
         {
             statement.setString(1, reviewCode) ;
             statement.setString(2, tutorUsername) ;
@@ -34,29 +31,46 @@ public class ReviewDAO
             statement.executeUpdate() ;
         }catch (SQLException e)
         {
-            e.printStackTrace() ;
+            throw new TutorReviewException("Error in loading the information") ;
         }
     }
 
-    public void getReview(String reviewCode)
+    public ReviewEntity getReview(String reviewCode) throws TutorReviewException
     {
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, pass); PreparedStatement statement = connection.prepareStatement(getReview))
+        try (PreparedStatement statement = this.getConnection().prepareStatement(getReview))
         {
             statement.setString(1, reviewCode) ;
+            ResultSet resultTutoring = statement.executeQuery() ;
+
+            if(resultTutoring.next())
+            {
+                String studentUsername = resultTutoring.getString(3) ;
+                if(!studentUsername.equals(user.getUser().getEmail())) throw new TutorReviewException("No information found") ;
+                String reviewedTutor = resultTutoring.getString(2) ;
+                Date reviewDay = resultTutoring.getDate(4) ;
+                String reviewSubject = resultTutoring.getString(5) ;
+                Time startTime = resultTutoring.getTime(6) ;
+                Time endTime = resultTutoring.getTime(7) ;
+
+                return new ReviewEntity(reviewCode, reviewedTutor, user.getUser().getEmail(), SubjectLabels.valueOf(reviewSubject),
+                        reviewDay.toLocalDate(), startTime.toLocalTime(), endTime.toLocalTime()) ;
+            }
+            else throw new TutorReviewException("No information found") ;
         }catch (SQLException e)
         {
-            e.printStackTrace() ;
+            throw new TutorReviewException("Failed to retrieve from DB") ;
         }
     }
 
-    public void deleteReview(String reviewCode)
+    public void deleteReview(String reviewCode) throws TutorReviewException
     {
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, pass); PreparedStatement statement = connection.prepareStatement(deleteReview))
+        try (PreparedStatement statement = this.getConnection().prepareStatement(deleteReview))
         {
             statement.setString(1, reviewCode) ;
+            statement.executeUpdate() ;
         }catch (SQLException e)
         {
-            e.printStackTrace() ;
+            throw new TutorReviewException("Failed to remove from DB") ;
         }
     }
 }
