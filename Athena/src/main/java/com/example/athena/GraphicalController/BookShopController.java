@@ -9,6 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 import java.io.IOException;
 
@@ -18,7 +20,11 @@ public class BookShopController {
     SceneSwitcher switcher = new SceneSwitcher();
 
     @FXML
-    protected void onSettingsButtonClick() { System.out.println(4);}
+    protected void onSettingsButtonClick(ActionEvent event) {
+        Scene scene = ((Node) event.getSource()).getScene();
+        WebEngine webEngine = ((WebView)scene.lookup("#webComponent")).getEngine();
+        webEngine.load("file:///C:/Users/molim/IdeaProjects/Atlante/Athena/src/main/resources/com/example/athena/fxml/openLibAPI.html");
+        System.out.println(4);}
 
     @FXML
     protected void onHomeButtonClick(ActionEvent event) throws IOException {
