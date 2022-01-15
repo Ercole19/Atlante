@@ -23,7 +23,7 @@ public class BookShopController {
     protected void onSettingsButtonClick(ActionEvent event) {
         Scene scene = ((Node) event.getSource()).getScene();
         WebEngine webEngine = ((WebView)scene.lookup("#webComponent")).getEngine();
-        webEngine.load("file:///C:/Users/molim/IdeaProjects/Atlante/Athena/src/main/resources/com/example/athena/fxml/openLibAPI.html");
+        webEngine.load("file://" + System.getProperty("user.dir") +"/src/main/resources/com/example/athena/fxml/openLibAPI.html");
         System.out.println(4);}
 
     @FXML
