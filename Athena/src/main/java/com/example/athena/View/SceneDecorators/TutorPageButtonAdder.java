@@ -18,7 +18,7 @@ public class TutorPageButtonAdder extends TutorPageDecorator{
     public Parent build()
     {
         AnchorPane originalScene = (AnchorPane) super.build();
-        Object controller = originalScene.getProperties().get("fx:controller") ;
+        Object controller = originalScene.getProperties().get("foo") ;
         originalScene.getChildren().addAll(getButton(controller));
         return originalScene ;
     }

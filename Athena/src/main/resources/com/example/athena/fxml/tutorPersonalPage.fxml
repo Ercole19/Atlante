@@ -33,7 +33,7 @@
          <Font name="Bookman Old Style" size="35.0" />
       </font>
    </Label>
-   <TextArea fx:id="textArea1" editable="false" layoutX="325.0" layoutY="189.0" prefHeight="182.0" prefWidth="297.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@textAreaStyle.css" text="About me  : &#10;&#10;Hi I am Kanye East PHD student in rap history" wrapText="true">
+   <TextArea fx:id="aboutme" layoutX="325.0" layoutY="189.0" prefHeight="182.0" prefWidth="297.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@textAreaStyle.css" text="About me  : &#10;&#10;Hi I am Kanye East PHD student in rap history" wrapText="true">
       .a={
       border-radius:10px
       border: 1px solid #000
@@ -48,7 +48,7 @@
          <String fx:value="viewport" />
       </styleClass>
    </TextArea>
-   <TextArea fx:id="textArea11" editable="false" layoutX="656.0" layoutY="201.0" prefHeight="182.0" prefWidth="297.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@textAreaStyle.css" text="My courses : &#10;&#10;Analisi 1 , Geometria, ISPW&#10;" wrapText="true">
+   <TextArea fx:id="coursesArea" layoutX="656.0" layoutY="201.0" prefHeight="182.0" prefWidth="297.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@textAreaStyle.css" text="My courses : &#10;&#10;Analisi 1 , Geometria, ISPW&#10;" wrapText="true">
       <font>
          <Font name="Bookman Old Style" size="20.0" />
       </font>
@@ -59,7 +59,7 @@
          <String fx:value="viewport" />
       </styleClass>
    </TextArea>
-   <TextArea fx:id="textArea111" editable="false" layoutX="359.0" layoutY="400.0" prefHeight="182.0" prefWidth="297.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@textAreaStyle.css" text="Prices : 15 euros per hour&#10; &#10;Available Days : Mon/Wed/Sun" wrapText="true">
+   <TextArea fx:id="sessioninfos" layoutX="359.0" layoutY="400.0" prefHeight="182.0" prefWidth="297.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@textAreaStyle.css" text="Prices : 15 euros per hour&#10; &#10;Available Days : Mon/Wed/Sun" wrapText="true">
       <font>
          <Font name="Bookman Old Style" size="20.0" />
       </font>
@@ -70,7 +70,7 @@
          <String fx:value="viewport" />
       </styleClass>
    </TextArea>
-   <TextArea fx:id="textArea1111" editable="false" layoutX="670.0" layoutY="409.0" prefHeight="182.0" prefWidth="297.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@textAreaStyle.css" text="My contact numbers :&#10;&#10;email...&#10;tel...&#10;" wrapText="true">
+   <TextArea fx:id="contactnumbers" layoutX="670.0" layoutY="409.0" prefHeight="182.0" prefWidth="297.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@textAreaStyle.css" text="My contact numbers :&#10;&#10;email...&#10;tel...&#10;" wrapText="true">
       <font>
          <Font name="Bookman Old Style" size="20.0" />
       </font>
@@ -115,4 +115,10 @@
          <Image url="@../../../../assets/guff.png" />
       </image>
    </ImageView>
+   <userData>
+      <fx:reference source="controller" />
+   </userData>
+   <properties>
+      <foo><fx:reference source="controller" /></foo>
+   </properties>
 </AnchorPane>

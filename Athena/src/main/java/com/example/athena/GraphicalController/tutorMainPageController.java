@@ -1,6 +1,13 @@
 package com.example.athena.GraphicalController;
 
+import com.example.athena.View.SceneDecorators.TutorPageButtonAdder;
+import com.example.athena.View.SceneDecorators.TutorPageComponent;
+import com.example.athena.View.SceneDecorators.TutorPageView;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -12,7 +19,10 @@ public class tutorMainPageController {
 
 
     public void onPersonalPageButtonClick(ActionEvent event) throws IOException {
-        switcher.switcher(event, "tutorEditingPage.fxml");
+        TutorPageComponent component = new TutorPageButtonAdder(new TutorPageView()) ;
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(component.build());
+        stage.setScene(scene);
     }
 
     public void onLogoutButtonClick(ActionEvent event) throws IOException {
