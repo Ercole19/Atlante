@@ -4,6 +4,7 @@ import com.example.athena.Exceptions.TutorReviewException;
 import com.example.athena.UseCaseControllers.ReviewTutorUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,6 +23,8 @@ public class StudentsReviewTutorsGraphicalController
 {
     private Parent root;
     private Scene scene;
+
+    private String code ;
 
     @FXML
     private TextField reviewCodeTextField ;
@@ -42,7 +45,10 @@ public class StudentsReviewTutorsGraphicalController
 
             TutoringInformationBean reviewInfo = reviewController.reviewTutor(new ReviewCodeBean(reviewCode)) ;
 
-            root = load((new SceneSwitcher()).generateUrl("tutorPersonalReview.fxml")) ;
+            FXMLLoader loader = new FXMLLoader((new SceneSwitcher()).generateUrl("tutorPersonalReview.fxml")) ;
+            root = loader.load() ;
+            StudentsReviewTutorsGraphicalController subsceneController = loader.getController() ;
+            subsceneController.setCode(reviewCode) ;
 
             Label tutorName = (Label) root.lookup("#tutorName") ;
             Label tutoringSubject = (Label) root.lookup("#tutoringSubject") ;
@@ -98,7 +104,7 @@ public class StudentsReviewTutorsGraphicalController
             return ;
         }
 
-        SendReviewBean reviewBean = new SendReviewBean(reviewStars) ;
+        SendReviewBean reviewBean = new SendReviewBean(reviewStars, this.code) ;
         ReviewTutorUseCaseController controller = new ReviewTutorUseCaseController() ;
 
         try
@@ -116,5 +122,10 @@ public class StudentsReviewTutorsGraphicalController
 
         SceneSwitcher switcher = new SceneSwitcher() ;
         switcher.switcher(event, "LoginPage.fxml") ;
+    }
+
+    public void setCode(String code)
+    {
+        this.code = code ;
     }
 }

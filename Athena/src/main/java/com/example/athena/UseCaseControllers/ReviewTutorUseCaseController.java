@@ -34,7 +34,6 @@ public class ReviewTutorUseCaseController
     {
         String code = reviewCode.getReviewCode() ;
         ReviewEntity review = ReviewEntity.getFromDB(code) ;
-        LastCodeRememberer.writeLastCode(code) ;
 
         return new TutoringInformationBean(review.getTutorUsername(), review.getSubject().toString(), review.getDay(),
                 review.getStartTime(), review.getEndTime()) ;
@@ -43,6 +42,6 @@ public class ReviewTutorUseCaseController
     public void sendReview(SendReviewBean review) throws TutorReviewException
     {
 
-        ReviewEntity.removeFromDB(LastCodeRememberer.getLastCode()) ;
+        ReviewEntity.removeFromDB(review.getCode()) ;
     }
 }
