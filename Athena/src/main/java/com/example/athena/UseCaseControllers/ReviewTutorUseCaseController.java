@@ -1,5 +1,7 @@
 package com.example.athena.UseCaseControllers;
 
+import com.example.athena.Boundaries.SendReviewCodeEmailBoundary;
+import com.example.athena.Exceptions.SendEmailException;
 import com.example.athena.Exceptions.TutorReviewException;
 import com.example.athena.GraphicalController.ReviewCodeBean;
 import com.example.athena.GraphicalController.ReviewTutorSendUsernameBean;
@@ -11,7 +13,7 @@ import java.time.LocalDate;
 
 public class ReviewTutorUseCaseController
 {
-    public String generateReview(ReviewTutorSendUsernameBean usernameBean) throws TutorReviewException
+    public String generateReview(ReviewTutorSendUsernameBean usernameBean) throws TutorReviewException, SendEmailException
     {
         String studentUsername = usernameBean.getUsername() ;
         SubjectLabels subject = usernameBean.getSubject() ;
@@ -26,6 +28,8 @@ public class ReviewTutorUseCaseController
         ReviewEntity review = new ReviewEntity(reviewCode, user.getUser().getEmail(), studentUsername, subject, day,
                 startHour, startMinute, endHour, endMinute) ;
         review.toDB() ;
+
+        SendReviewCodeEmailBoundary.sendEmail(studentUsername, reviewCode) ;
 
         return reviewCode ;
     }
