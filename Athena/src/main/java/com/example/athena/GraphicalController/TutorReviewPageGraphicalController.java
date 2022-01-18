@@ -91,7 +91,8 @@ public class TutorReviewPageGraphicalController implements Initializable
         try
         {
             subject = SubjectLabels.valueOf(subjectChoiceBox.getValue()) ;
-        }catch (IllegalArgumentException | NullPointerException e)
+        }
+        catch (IllegalArgumentException | NullPointerException e)
         {
             resultMessage.setText("Enter a subject for the review!") ;
             return ;
@@ -114,7 +115,8 @@ public class TutorReviewPageGraphicalController implements Initializable
             String generatedCode = controller.generateReview(dataBean) ;
             reviewCode.setText(generatedCode) ;
             resultMessage.setText("Here is your review code") ;
-        }catch (TutorReviewException|SendEmailException e)
+        }
+        catch (TutorReviewException|SendEmailException e)
         {
             resultMessage.setText(e.getMessage()) ;
         }
