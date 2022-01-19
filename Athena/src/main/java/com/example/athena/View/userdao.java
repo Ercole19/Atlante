@@ -14,7 +14,7 @@ public class userdao {
     private String Password = "test" ;
     private String dbUrl = "jdbc:mysql://78.13.228.115/athena" ;
     private String queryFind = " SELECT * FROM utenti WHERE  email = ? and password = ? " ;
-    private String queryRegister = " INSERT INTO athena.utenti (email, password, type ) VALUES (? , ? , ? )" ;
+    private String queryRegister = " INSERT INTO athena.utenti (email, password, type , nome  ,surname ) VALUES (? , ? , ? , ? , ? )" ;
     private String getType = "SELECT type FROM utenti WHERE email = ?" ;
     private String filltutor = "SELECT  aboutme ,  sessioninfos  , contactnumbers  FROM athena.tutordescription WHERE emailuser = ? " ;
     private String setTutor = "INSERT INTO `athena`.`tutordescription` (aboutme, sessioninfos, contactnumbers, emailuser) VALUES (? ,? ,?,?)";
@@ -54,7 +54,7 @@ public class userdao {
 
         return false;
     }
-    public Boolean registerUser(String email , String password , String type)  {
+    public Boolean registerUser(String email , String password , String type , String name , String surname)  {
         try {
             Class.forName(driver) ;
         } catch (ClassNotFoundException e ) {
@@ -66,6 +66,8 @@ public class userdao {
                 stmt.setString(1, email);
                 stmt.setString(2, password);
                 stmt.setString(3 , type );
+                stmt.setString(4,name);
+                stmt.setString(5,surname);
                 stmt.executeUpdate();
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Registration successfull", ButtonType.CLOSE);
                 alert.showAndWait();

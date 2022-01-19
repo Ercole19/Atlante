@@ -16,7 +16,9 @@ public class signUpGraphicalController {
     @FXML
     private TextField passField;
     @FXML
-    private TextField confirmEmailField ;
+    private TextField nameField ;
+    @FXML
+    private TextField surnameField ;
     @FXML
     private TextField confirmPassField ;
     @FXML
@@ -31,9 +33,10 @@ public class signUpGraphicalController {
     public void onConfirmButtonClick (ActionEvent event) throws IOException {
         String email = emailField.getText() ;
         String password = passField.getText() ;
-        String emailConfirm = confirmEmailField.getText() ;
+        String nome = nameField.getText() ;
+        String cognome = surnameField.getText() ;
         String passConfirm = confirmPassField.getText() ;
-        if (email.equals(emailConfirm) & password.equals(passConfirm)) {
+        if (password.equals(passConfirm)) {
             String userType;
             if (studentRadiobutton.isSelected()) {
                 userType = "student" ;
@@ -43,7 +46,7 @@ public class signUpGraphicalController {
                 userType = "tutor" ;
             }
             userdao stDAO = new userdao();
-            if (stDAO.registerUser(email, password , userType)) {
+            if (stDAO.registerUser(email, password , userType , nome , cognome)) {
                 SceneSwitcher switcher = new SceneSwitcher();
                 switcher.switcher(event, "LoginPage.fxml");
             }
