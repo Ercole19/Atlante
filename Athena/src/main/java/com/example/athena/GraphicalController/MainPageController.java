@@ -27,7 +27,7 @@ public class MainPageController {
 
     public void onShopButtonClick(ActionEvent event) throws IOException {
         SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "bookshop-view-try.fxml");
+        switcher.switcher(event, "bookshop-choose-view.fxml");
     }
 
 

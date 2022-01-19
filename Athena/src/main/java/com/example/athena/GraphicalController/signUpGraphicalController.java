@@ -3,19 +3,14 @@ package com.example.athena.GraphicalController;
 import com.example.athena.View.userdao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static javafx.fxml.FXMLLoader.load;
 
-public class signUpGraphicalControlelr {
-    private userdao stDAO;
+public class signUpGraphicalController {
     @FXML
     private TextField emailField;
     @FXML
@@ -26,10 +21,6 @@ public class signUpGraphicalControlelr {
     private TextField confirmPassField ;
     @FXML
     private RadioButton studentRadiobutton ;
-    @FXML
-    private RadioButton tutorRadiobutton ;
-    private String userType ;
-
 
     public void onBackButtonClick(ActionEvent event) throws IOException {
 
@@ -43,6 +34,7 @@ public class signUpGraphicalControlelr {
         String emailConfirm = confirmEmailField.getText() ;
         String passConfirm = confirmPassField.getText() ;
         if (email.equals(emailConfirm) & password.equals(passConfirm)) {
+            String userType;
             if (studentRadiobutton.isSelected()) {
                 userType = "student" ;
 
@@ -50,7 +42,7 @@ public class signUpGraphicalControlelr {
             else {
                 userType = "tutor" ;
             }
-            stDAO = new userdao();
+            userdao stDAO = new userdao();
             if (stDAO.registerUser(email, password , userType)) {
                 SceneSwitcher switcher = new SceneSwitcher();
                 switcher.switcher(event, "LoginPage.fxml");

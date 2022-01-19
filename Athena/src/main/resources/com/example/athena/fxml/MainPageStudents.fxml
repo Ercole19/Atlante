@@ -9,118 +9,119 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minWidth="-Infinity" prefHeight="767.0" prefWidth="1331.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.GraphicalController.MainPageController">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#002730" height="711.0" layoutY="56.0" stroke="BLACK" strokeType="INSIDE" width="1330.0" />
-      <AnchorPane layoutX="-26.0" layoutY="-6.0" opacity="0.79" prefHeight="62.0" prefWidth="1356.0" style="-fx-background-color: #2d8bba;">
-         <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1032.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../assets/title.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="1233.0" layoutY="9.0">
-               <image>
-                  <Image url="@../../../../assets/guff.png" />
-               </image>
-            </ImageView>
-            <Button layoutX="37.0" layoutY="10.0" mnemonicParsing="false" onAction="#onLogoutButtonClick" prefHeight="43.0" prefWidth="99.0" style="-fx-background-radius: 20; -fx-background-color: #ffc22a;" text="Logout">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="1079.0" layoutY="56.0" prefHeight="711.0" prefWidth="251.0" style="-fx-background-color: #ff6e27;" />
-      <AnchorPane layoutX="809.0" layoutY="56.0" prefHeight="711.0" prefWidth="271.0" style="-fx-background-color: #fb8500;" />
-      <AnchorPane layoutX="310.0" layoutY="56.0" prefHeight="711.0" prefWidth="258.0" style="-fx-background-color: #ffc22a;" />
-      <AnchorPane layoutX="567.0" layoutY="56.0" prefHeight="711.0" prefWidth="243.0" style="-fx-background-color: #fd9e02;">
-         <children>
-            <Text layoutX="47.0" layoutY="531.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exams" wrappingWidth="149.5498046875">
-               <font>
-                  <Font size="50.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
-      <ImageView fitHeight="290.0" fitWidth="482.0" layoutX="701.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../assets/shopSymbolMainPage.png" />
-         </image>
-      </ImageView>
-      <Text layoutX="884.0" layoutY="585.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shop">
-         <font>
-            <Font size="50.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="338.0" fitWidth="401.0" layoutX="255.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../assets/calendarSymbol.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="185.0" fitWidth="337.0" layoutX="1034.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@tutorSymbol.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="204.0" fitWidth="383.0" layoutX="507.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@examsSymbolBlue.png" />
-         </image>
-      </ImageView>
-      <Text layoutX="346.0" layoutY="585.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calendar">
-         <font>
-            <Font size="50.0" />
-         </font>
-      </Text>
-      <Text layoutX="1089.0" layoutY="587.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seek Tutor">
-         <font>
-            <Font size="50.0" />
-         </font>
-      </Text>
-      <Button layoutX="310.0" layoutY="56.0" mnemonicParsing="false" onAction="#onCalendarButtonClick" opacity="0.0" prefHeight="710.0" prefWidth="258.0" style="-fx-background-color: #ffc22a;">
-         <font>
-            <Font size="30.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button layoutX="1079.0" layoutY="56.0" mnemonicParsing="false" onAction="#onTutorButtonClick" opacity="0.0" prefHeight="710.0" prefWidth="272.0" style="-fx-background-color: #ff6e27;">
-         <font>
-            <Font size="30.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button layoutX="809.0" layoutY="55.0" mnemonicParsing="false" onAction="#onShopButtonClick" opacity="0.0" prefHeight="711.0" prefWidth="271.0" style="-fx-background-color: #fb8500;">
-         <font>
-            <Font size="30.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button layoutX="567.0" layoutY="55.0" mnemonicParsing="false" onAction="#onExamsButtonClick" opacity="0.0" prefHeight="710.0" prefWidth="243.0" style="-fx-background-color: #fd9e02;">
-         <font>
-            <Font size="30.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <ImageView fitHeight="219.0" fitWidth="340.0" layoutX="-23.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../assets/homeWrite.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="47.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../assets/studentWrite.png" />
-         </image>
-      </ImageView>
-   </children>
+<AnchorPane minWidth="-Infinity" prefHeight="767.0" prefWidth="1331.0" xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.athena.GraphicalController.MainPageController">
 
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#002730" height="711.0" layoutY="56.0" stroke="BLACK"
+              strokeType="INSIDE" width="1330.0"/>
+   <AnchorPane layoutX="-26.0" layoutY="-6.0" opacity="0.79" prefHeight="62.0" prefWidth="1356.0"
+               style="-fx-background-color: #2d8bba;">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1032.0" layoutY="4.0" pickOnBounds="true"
+                 preserveRatio="true">
+         <Image url="@../../../../assets/title.png"/>
+      </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="1233.0" layoutY="9.0">
+         <Image url="@../../../../assets/guff.png"/>
+      </ImageView>
+      <Button layoutX="37.0" layoutY="10.0" mnemonicParsing="false" onAction="#onLogoutButtonClick" prefHeight="43.0"
+              prefWidth="99.0" style="-fx-background-radius: 20; -fx-background-color: #ffc22a;" text="Logout">
+         <font>
+            <Font size="20.0"/>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND"/>
+         </cursor>
+      </Button>
+   </AnchorPane>
+   <AnchorPane layoutX="1079.0" layoutY="56.0" prefHeight="711.0" prefWidth="251.0"
+               style="-fx-background-color: #ff6e27;"/>
+   <AnchorPane layoutX="809.0" layoutY="56.0" prefHeight="711.0" prefWidth="271.0"
+               style="-fx-background-color: #fb8500;"/>
+   <AnchorPane layoutX="310.0" layoutY="56.0" prefHeight="711.0" prefWidth="258.0"
+               style="-fx-background-color: #ffc22a;"/>
+   <AnchorPane layoutX="567.0" layoutY="56.0" prefHeight="711.0" prefWidth="243.0"
+               style="-fx-background-color: #fd9e02;">
+      <Text layoutX="47.0" layoutY="531.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exams"
+            wrappingWidth="149.5498046875">
+         <font>
+            <Font size="50.0"/>
+         </font>
+      </Text>
+   </AnchorPane>
+   <ImageView fitHeight="290.0" fitWidth="482.0" layoutX="701.0" layoutY="259.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../../../../assets/shopSymbolMainPage.png"/>
+   </ImageView>
+   <Text layoutX="884.0" layoutY="585.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shop">
+      <font>
+         <Font size="50.0"/>
+      </font>
+   </Text>
+   <ImageView fitHeight="338.0" fitWidth="401.0" layoutX="255.0" layoutY="305.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../../../../assets/calendarSymbol.png"/>
+   </ImageView>
+   <ImageView fitHeight="185.0" fitWidth="337.0" layoutX="1034.0" layoutY="291.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../../../../assets/tutorSymbol.png"/>
+   </ImageView>
+   <ImageView fitHeight="204.0" fitWidth="383.0" layoutX="507.0" layoutY="298.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../../../../assets/examsSymbolBlue.png"/>
+   </ImageView>
+   <Text layoutX="346.0" layoutY="585.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calendar">
+      <font>
+         <Font size="50.0"/>
+      </font>
+   </Text>
+   <Text layoutX="1089.0" layoutY="587.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seek Tutor">
+      <font>
+         <Font size="50.0"/>
+      </font>
+   </Text>
+   <Button layoutX="310.0" layoutY="56.0" mnemonicParsing="false" onAction="#onCalendarButtonClick" opacity="0.0"
+           prefHeight="710.0" prefWidth="258.0" style="-fx-background-color: #ffc22a;">
+      <font>
+         <Font size="30.0"/>
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND"/>
+      </cursor>
+   </Button>
+   <Button layoutX="1079.0" layoutY="56.0" mnemonicParsing="false" onAction="#onTutorButtonClick" opacity="0.0"
+           prefHeight="710.0" prefWidth="272.0" style="-fx-background-color: #ff6e27;">
+      <font>
+         <Font size="30.0"/>
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND"/>
+      </cursor>
+   </Button>
+   <Button layoutX="809.0" layoutY="55.0" mnemonicParsing="false" onAction="#onShopButtonClick" opacity="0.0"
+           prefHeight="711.0" prefWidth="271.0" style="-fx-background-color: #fb8500;">
+      <font>
+         <Font size="30.0"/>
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND"/>
+      </cursor>
+   </Button>
+   <Button layoutX="567.0" layoutY="55.0" mnemonicParsing="false" onAction="#onExamsButtonClick" opacity="0.0"
+           prefHeight="710.0" prefWidth="243.0" style="-fx-background-color: #fd9e02;">
+      <font>
+         <Font size="30.0"/>
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND"/>
+      </cursor>
+   </Button>
+   <ImageView fitHeight="219.0" fitWidth="340.0" layoutX="-23.0" layoutY="233.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../../../../assets/homeWrite.png"/>
+   </ImageView>
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="47.0" layoutY="382.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../../../../assets/studentWrite.png"/>
+   </ImageView>
 </AnchorPane>
