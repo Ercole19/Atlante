@@ -59,9 +59,18 @@ public class TutorPersonalPageController implements Initializable
         tempStage.showAndWait() ;
     }
     public void onConfirmButtonClick(ActionEvent event) throws IOException {
-        String[] infos = user.filltutorinfos();
         user = new userdao();
-        if (infos.equals(null)) {
+        String[] infos = user.filltutorinfos();
+        boolean empty = true ;
+        for (Object ob : infos) {
+            if (ob != null) {
+                empty = false ;
+                break ;
+            }
+        }
+
+
+        if (empty) {
 
             user.settutorinfos(aboutme.getText(),  sessioninfos.getText(), contactnumbers.getText());
         }

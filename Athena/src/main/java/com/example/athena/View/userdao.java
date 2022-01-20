@@ -12,12 +12,13 @@ public class userdao {
 
     private String user = "test" ;
     private String Password = "test" ;
-    private String dbUrl = "jdbc:mysql://78.13.228.115/athena" ;
+    private String dbUrl = "jdbc:mysql://78.13.194.135/athena" ;
     private String queryFind = " SELECT * FROM utenti WHERE  email = ? and password = ? " ;
     private String queryRegister = " INSERT INTO athena.utenti (email, password, type , nome  ,surname ) VALUES (? , ? , ? , ? , ? )" ;
     private String getType = "SELECT type FROM utenti WHERE email = ?" ;
     private String filltutor = "SELECT  aboutme ,  sessioninfos  , contactnumbers  FROM athena.tutordescription WHERE emailuser = ? " ;
     private String setTutor = "INSERT INTO `athena`.`tutordescription` (aboutme, sessioninfos, contactnumbers, emailuser) VALUES (? ,? ,?,?)";
+    private String searchTutor = "select utenti.nome , surname , corsi.nomecorso from athena.tutordescription join athena.corsi on tutordescription.emailuser = corsi.emailtutor join athena.utenti on tutordescription.emailuser = utenti.email where ? in (select nomecorso from athena.corsi) and corsi.nomecorso = ?; " ;
     private String updatetutor = "UPDATE athena.tutordescription SET aboutme = ?,  sessioninfos=?, contactnumbers=?  WHERE emailuser= ?"    ;
     private static String driver  = "com.mysql.jdbc.Driver" ;
     private String emailcurrent =  com.example.athena.View.user.getUser().getEmail() ;
@@ -159,6 +160,31 @@ public class userdao {
      }
 
  }
+    public String[] findTutorByCourse (String corso) {
+        String[] tutorInfos = new String[500] ;
+        int i = 0 ;
+        try (Connection connection = DriverManager.getConnection(dbUrl , user , Password) ; PreparedStatement statement = connection.prepareStatement(searchTutor) ) {
+            statement.setString(1 , corso);
+            statement.setString(2 , corso);
+            //declare with size
+            ResultSet set = statement.executeQuery() ;
+            while (set.next()) {
+                tutorInfos[i] = set.getString(1) ;
+                tutorInfos[i+1] = set.getString(2) ;
+                tutorInfos[i + 2] = set.getString(3) ;
+                i = i+ 3 ;
+
+
+
+            }
+
+        }catch (SQLException exc ) {
+            exc.getMessage() ;
+        }
+
+        return tutorInfos ;
+
+    }
 
 
 

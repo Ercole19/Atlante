@@ -8,7 +8,7 @@ public abstract class AbstractDAO
 {
     private static final String user = "test" ;
     private static final String pass = "test" ;
-    private static final String dbUrl = "jdbc:mysql://78.13.228.115:3306/athena" ;
+    private static final String dbUrl = "jdbc:mysql://78.13.194.135:3306/athena" ;
 
     private static Connection dbConnection = null ;
 
