@@ -42,18 +42,6 @@
    <ImageView fitHeight="75.0" fitWidth="139.0" layoutX="610.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="637.0" AnchorPane.leftAnchor="610.0" AnchorPane.rightAnchor="536.6666717529297" AnchorPane.topAnchor="88.0">
       <Image url="@../../../../assets/bookShopIcon.png" />
    </ImageView>
-   <AnchorPane layoutX="1124.0" layoutY="92.0" prefHeight="24.0" prefWidth="82.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;">
-      <Text fill="#fcfcfc" layoutX="7.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="logout" wrappingWidth="82.0">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <Button mnemonicParsing="false" onAction="#onLogoutButtonClick" opacity="0.0" prefHeight="34.0" prefWidth="89.0" text="backBtn">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-   </AnchorPane>
    <AnchorPane layoutX="746.0" layoutY="362.0" prefHeight="169.0" prefWidth="324.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;">
       <Text fill="#ffd775" layoutX="68.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUY" wrappingWidth="238.13671875">
          <font>
