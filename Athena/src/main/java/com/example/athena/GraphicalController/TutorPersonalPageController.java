@@ -14,7 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+import com.example.athena.View.user ;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -37,11 +37,20 @@ public class TutorPersonalPageController implements Initializable
     private TextArea contactnumbers ;
     private userdao user ;
     private coursedao corso ;
+
+
     public void clickOnBackButton(ActionEvent event) throws IOException
     {
         SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "tutorSearchPage.fxml");
+        String tipo = (String) user.getuserType(com.example.athena.View.user.getUser().getEmail());
+        if (tipo.equals("student")) {
+            switcher.switcher(event, "tutorSearchPage.fxml");
+        }
+        else {
+        switcher.switcher(event, "MainPageTutor.fxml");
     }
+    }
+
 
     public void onLogoutButtonClick(ActionEvent event) throws IOException {
         SceneSwitcher switcher = new SceneSwitcher();
