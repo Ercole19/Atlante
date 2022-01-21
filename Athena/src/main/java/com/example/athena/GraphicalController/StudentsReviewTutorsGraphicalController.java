@@ -15,6 +15,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 import static javafx.fxml.FXMLLoader.load;
@@ -118,14 +120,13 @@ public class StudentsReviewTutorsGraphicalController
         }
     }
 
-    public void onLogoutButtonClick(ActionEvent event) throws IOException {
-
-        SceneSwitcher switcher = new SceneSwitcher() ;
-        switcher.switcher(event, "LoginPage.fxml") ;
-    }
-
     public void setCode(String code)
     {
         this.code = code ;
+    }
+
+    public void postInitialize(ArrayList<Object> params) {
+        String code = (String) params.get(0) ;
+        setCode(code) ;
     }
 }
