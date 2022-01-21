@@ -21,7 +21,7 @@ import java.util.Objects;
 
 import static javafx.fxml.FXMLLoader.load;
 
-public class StudentsReviewTutorsGraphicalController
+public class StudentsReviewTutorsGraphicalController implements PostInitialize
 {
     private Parent root;
     private Scene scene;
@@ -47,10 +47,8 @@ public class StudentsReviewTutorsGraphicalController
 
             TutoringInformationBean reviewInfo = reviewController.reviewTutor(new ReviewCodeBean(reviewCode)) ;
 
-            FXMLLoader loader = new FXMLLoader((new SceneSwitcher()).generateUrl("tutorPersonalReview.fxml")) ;
-            root = loader.load() ;
-            StudentsReviewTutorsGraphicalController subsceneController = loader.getController() ;
-            subsceneController.setCode(reviewCode) ;
+            SceneSwitcher switcher = new SceneSwitcher() ;
+            switcher.switcher(event, "tutorPersonalReview.fxml", new ArrayList<>(Collections.singleton(reviewCode)));
 
             Label tutorName = (Label) root.lookup("#tutorName") ;
             Label tutoringSubject = (Label) root.lookup("#tutoringSubject") ;

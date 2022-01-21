@@ -1,6 +1,7 @@
 package com.example.athena.GraphicalController;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,6 +10,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+
 import static javafx.fxml.FXMLLoader.load;
 
 public class SceneSwitcher {
@@ -18,6 +21,16 @@ public class SceneSwitcher {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+    }
+
+    public void switcher(ActionEvent event, String fxml, ArrayList<Object> params) throws IOException {
+        FXMLLoader loader = new FXMLLoader(generateUrl(fxml)) ;
+        Parent root = loader.load() ;
+        PostInitialize post = loader.getController() ;
+        post.postInitialize(params) ;
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene) ;
     }
 
     public URL generateUrl(String fxmlToLoad) {
