@@ -15,20 +15,8 @@ public class BookShopController {
     SceneSwitcher switcher = new SceneSwitcher();
 
     @FXML
-    protected void onSettingsButtonClick(ActionEvent event) {
-        Scene scene = ((Node) event.getSource()).getScene();
-        WebEngine webEngine = ((WebView)scene.lookup("#webComponent")).getEngine();
-        webEngine.load("Athena/src/main/resources/com/example/athena/fxml/openLibAPI.html");
-        System.out.println(4);}
-
-    @FXML
     protected void onHomeButtonClick(ActionEvent event) throws IOException {
         switcher.switcher(event, "MainPageStudents.fxml");
-    }
-
-    @FXML
-    protected void onSearchButtonClick(){
-
     }
 
     @FXML
@@ -39,10 +27,6 @@ public class BookShopController {
     @FXML
     protected void onBookBtnClick(ActionEvent event) throws IOException{
         switcher.switcher(event, "BuyBookPage.fxml");
-    }
-
-    public void onLogoutButtonClick(ActionEvent event) throws IOException {
-        switcher.switcher(event, "LoginPage.fxml");
     }
 
     public void onBuyButtonClick(ActionEvent event) throws IOException {
