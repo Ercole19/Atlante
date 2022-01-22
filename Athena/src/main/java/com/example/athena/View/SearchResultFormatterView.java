@@ -3,22 +3,14 @@ package com.example.athena.View;
 import com.example.athena.GraphicalController.SceneSwitcher;
 import com.example.athena.GraphicalController.TutorSearchResultBean;
 import com.example.athena.View.SceneDecorators.SearchResultFormatterComponent;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
-
-import static javafx.fxml.FXMLLoader.load ;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.Collections;
 
 public class SearchResultFormatterView extends SearchResultFormatterComponent
 {
@@ -59,21 +51,13 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent
             Button visitPage = new Button("Visit page") ;
             entryBox.add(visitPage, 3, 0) ;
 
-            visitPage.setOnAction(new EventHandler<>() {
-                @Override
-                public void handle(ActionEvent actionEvent)
-                {
-                    Parent root = null ;
-                    try {
-                        root = load((new SceneSwitcher()).generateUrl("tutorPersonalPage.fxml")) ;
-                    } catch (IOException e) {
-                        e.printStackTrace() ;
-                    }
+            visitPage.setOnAction(actionEvent -> {
 
-                    Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow() ;
-                    assert root != null ;
-                    Scene scene = new Scene(root) ;
-                    stage.setScene(scene) ;
+                SceneSwitcher switcher = new SceneSwitcher() ;
+                try {
+                    switcher.switcher(actionEvent, "tutorPersonalPage.fxml", new ArrayList<>(Collections.singleton(result.getId())));
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             });
 

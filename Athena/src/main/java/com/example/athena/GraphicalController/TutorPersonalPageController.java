@@ -17,13 +17,14 @@ import javafx.stage.Stage;
 import com.example.athena.View.user ;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static javafx.fxml.FXMLLoader.load ;
 
-public class TutorPersonalPageController implements Initializable
+public class TutorPersonalPageController implements Initializable ,PostInitialize
 {
 
     private Parent root ;
@@ -48,13 +49,7 @@ public class TutorPersonalPageController implements Initializable
         }
         else {
         switcher.switcher(event, "MainPageTutor.fxml");
-    }
-    }
-
-
-    public void onLogoutButtonClick(ActionEvent event) throws IOException {
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "LoginPage.fxml");
+        }
     }
 
     public void onCVButtonClick(ActionEvent event) throws IOException
@@ -67,6 +62,7 @@ public class TutorPersonalPageController implements Initializable
         tempStage.setTitle("CV") ;
         tempStage.showAndWait() ;
     }
+
     public void onConfirmButtonClick(ActionEvent event) throws IOException {
         user = new userdao();
         String[] infos = user.filltutorinfos();
@@ -77,7 +73,6 @@ public class TutorPersonalPageController implements Initializable
                 break ;
             }
         }
-
 
         if (empty) {
 
@@ -91,6 +86,7 @@ public class TutorPersonalPageController implements Initializable
         SceneSwitcher switcher = new SceneSwitcher();
         switcher.switcher(event, "MainPageTutor.fxml");
     }
+
     public void onCVButtonClicktutor(ActionEvent event) throws IOException
     {
         AnchorPane root = new AnchorPane() ;
@@ -105,6 +101,7 @@ public class TutorPersonalPageController implements Initializable
         tempStage.setTitle("CV") ;
         tempStage.showAndWait() ;
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         user = new  userdao() ;
@@ -113,6 +110,7 @@ public class TutorPersonalPageController implements Initializable
 
         String[] infos = user.filltutorinfos();
         List<String> courses = corso.fillCourses() ;
+
         if (infos.equals(null)) {
             aboutme.setText("");
             sessioninfos.setText("");
@@ -130,6 +128,7 @@ public class TutorPersonalPageController implements Initializable
 
 
     }
+
     public void onaddcoursebuttoclick() throws IOException{
         FXMLLoader loader = new FXMLLoader();
         SceneSwitcher switcher = new SceneSwitcher() ;
@@ -141,5 +140,9 @@ public class TutorPersonalPageController implements Initializable
         stage.setTitle("Add course");
         stage.setScene(scene);
         stage.showAndWait();
+    }
+
+    public void postInitialize(ArrayList<Object> params){
+
     }
 }

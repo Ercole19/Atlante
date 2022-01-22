@@ -2,7 +2,6 @@ package com.example.athena.UseCaseControllers;
 
 import com.example.athena.GraphicalController.TutorSearchResultBean;
 import com.example.athena.View.userdao;
-import com.example.athena.View.userdao ;
 
 import java.util.ArrayList;
 
@@ -26,6 +25,7 @@ public class SearchTutorUseCaseController
 
         return result ;
     }
+
     public ArrayList<TutorSearchResultBean> formatSearchResultsByName(String query)
     {
         int i = 0 ;

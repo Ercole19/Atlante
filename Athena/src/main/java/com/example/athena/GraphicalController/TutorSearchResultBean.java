@@ -13,6 +13,7 @@ public class TutorSearchResultBean
         this.surname = surname ;
         this.taughtSubject = taughtSubject ;
         this.starNumber = String.format("%f*", starNumber) ;
+        this.id = id ;
     }
 
     public String getName()
@@ -34,4 +35,6 @@ public class TutorSearchResultBean
     {
         return this.starNumber ;
     }
+
+    public String getId() { return this.id ;}
 }

@@ -2,7 +2,6 @@ package com.example.athena.View;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextArea;
 
 import java.sql.*;
 
@@ -148,7 +147,6 @@ public class userdao {
             statement.setString(1, about);
             statement.setString(2, sesinf);
             statement.setString(3, contnum);
-            statement.setString(4, emailcurrent);
             System.out.println(statement);
             statement.executeUpdate();
         } catch (SQLException exc) {
