@@ -18,11 +18,11 @@ public class userdao {
     private String getType = "SELECT type FROM utenti WHERE email = ?";
     private String filltutor = "SELECT  aboutme ,  sessioninfos  , contactnumbers  FROM athena.tutordescription WHERE emailuser = ? ";
     private String setTutor = "INSERT INTO `athena`.`tutordescription` (aboutme, sessioninfos, contactnumbers, emailuser) VALUES (? ,? ,?,?)";
-    private String searchTutor = "select utenti.nome , surname , corsi.nomecorso from athena.tutordescription join athena.corsi on tutordescription.emailuser = corsi.emailtutor join athena.utenti on tutordescription.emailuser = utenti.email where ? in (select nomecorso from athena.corsi) and corsi.nomecorso = ?; ";
+    private String searchTutor = "select utenti.nome , utenti.surname , corsi.nomecorso , utenti.email from athena.tutordescription join athena.corsi on tutordescription.emailuser = corsi.emailtutor join athena.utenti on tutordescription.emailuser = utenti.email where ? in (select nomecorso from athena.corsi) and corsi.nomecorso = ?; ";
     private String updatetutor = "UPDATE athena.tutordescription SET aboutme = ?,  sessioninfos=?, contactnumbers=?  WHERE emailuser= ?";
-    private String searchByName = "SELECT  utenti.nome ,  utenti.surname , corsi.nomecorso FROM athena.utenti join athena.tutordescription on utenti.email = tutordescription.emailuser join athena.corsi on utenti.email = corsi.emailtutor WHERE CONCAT( nome,  ' ', surname ) LIKE  concat ('%' , ? , '%')";
+    private String searchByName = "SELECT  utenti.nome ,  utenti.surname , corsi.nomecorso , utenti.email FROM athena.utenti join athena.tutordescription on utenti.email = tutordescription.emailuser join athena.corsi on utenti.email = corsi.emailtutor WHERE CONCAT( nome,  ' ', surname ) LIKE  concat ('%' , ? , '%')";
     private static String driver = "com.mysql.jdbc.Driver";
-    private String emailcurrent = com.example.athena.View.user.getUser().getEmail();
+
 
     public boolean findStudent(String emailUtente, String pass) {
         try {
@@ -109,7 +109,7 @@ public class userdao {
     public String[] filltutorinfos() {
         String[] strArray1 = new String[3];
         try (Connection connection = DriverManager.getConnection(dbUrl, user, Password); PreparedStatement statement = connection.prepareStatement(filltutor)) {
-            statement.setString(1, emailcurrent);
+
             //declare with size
             ResultSet set = statement.executeQuery();
             while (set.next()) {
@@ -135,7 +135,7 @@ public class userdao {
             statement.setString(1, about);
             statement.setString(2, sesinf);
             statement.setString(3, contnum);
-            statement.setString(4, emailcurrent);
+
             System.out.println(statement);
             statement.executeUpdate();
         } catch (SQLException exc) {
@@ -169,7 +169,8 @@ public class userdao {
                 tutorInfos[i] = set.getString(1);
                 tutorInfos[i + 1] = set.getString(2);
                 tutorInfos[i + 2] = set.getString(3);
-                i = i + 3;
+                tutorInfos[i + 3] = set.getString(4) ;
+                i = i + 4;
 
 
             }
@@ -193,7 +194,8 @@ public class userdao {
                 tutorInfos[i] = set.getString(1);
                 tutorInfos[i + 1] = set.getString(2);
                 tutorInfos[i + 2] = set.getString(3);
-                i = i + 3;
+                tutorInfos[i + 3] = set.getString(4);
+                i = i + 4;
 
 
             }

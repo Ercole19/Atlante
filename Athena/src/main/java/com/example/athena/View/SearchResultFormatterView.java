@@ -82,7 +82,7 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent
 
         return new AnchorPane(graphicalList) ;
     }
-
+ 
     private void setColumnConstraint(double percent, GridPane pane)
     {
         ColumnConstraints columnConstraint = new ColumnConstraints() ;

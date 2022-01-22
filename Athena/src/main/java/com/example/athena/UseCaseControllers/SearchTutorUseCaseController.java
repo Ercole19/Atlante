@@ -17,9 +17,9 @@ public class SearchTutorUseCaseController
         ArrayList<TutorSearchResultBean> result = new ArrayList<>();
         do {
 
-            TutorSearchResultBean kanye = new TutorSearchResultBean(tutorinfos[i], tutorinfos[i+1], tutorinfos[i+2], 3.5f);
+            TutorSearchResultBean kanye = new TutorSearchResultBean(tutorinfos[i], tutorinfos[i+1], tutorinfos[i+2], 3.5f , tutorinfos[i+3]);
             result.add(kanye);
-            i = i + 3 ;
+            i = i + 4;
         }while (tutorinfos[i] != null) ;
 
 
@@ -33,9 +33,9 @@ public class SearchTutorUseCaseController
         ArrayList<TutorSearchResultBean> result = new ArrayList<>();
         do {
 
-            TutorSearchResultBean kanye = new TutorSearchResultBean(tutorinfos[i], tutorinfos[i+1], tutorinfos[i+2], 3.5f);
+            TutorSearchResultBean kanye = new TutorSearchResultBean(tutorinfos[i], tutorinfos[i+1], tutorinfos[i+2], 3.5f, tutorinfos[i+3]);
             result.add(kanye);
-            i = i + 3 ;
+            i = i + 4 ;
         }while (tutorinfos[i] != null) ;
 
 

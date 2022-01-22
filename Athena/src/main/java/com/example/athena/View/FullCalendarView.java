@@ -87,10 +87,9 @@ public class FullCalendarView {
 
             ap.setDate(calendarDate);
 
-
-                ap.setTopAnchor(txt, 5.0);
-                ap.setLeftAnchor(txt, 5.0);
-                ap.getChildren().add(txt) ;
+            ap.setTopAnchor(txt, 5.0);
+            ap.setLeftAnchor(txt, 5.0);
+            ap.getChildren().add(txt) ;
 
 
 

@@ -48,7 +48,7 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
             TutoringInformationBean reviewInfo = reviewController.reviewTutor(new ReviewCodeBean(reviewCode)) ;
 
             SceneSwitcher switcher = new SceneSwitcher() ;
-            switcher.switcher(event, "tutorPersonalReview.fxml", new ArrayList<>(Collections.singleton(reviewCode)));
+            root = switcher.preload( "tutorPersonalReview.fxml", new ArrayList<>(Collections.singleton(reviewCode)));
 
             Label tutorName = (Label) root.lookup("#tutorName") ;
             Label tutoringSubject = (Label) root.lookup("#tutoringSubject") ;
