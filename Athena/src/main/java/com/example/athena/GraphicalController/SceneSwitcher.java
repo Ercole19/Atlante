@@ -24,14 +24,20 @@ public class SceneSwitcher {
     }
 
     public void switcher(ActionEvent event, String fxml, ArrayList<Object> params) throws IOException {
-        FXMLLoader loader = new FXMLLoader(generateUrl(fxml)) ;
-        Parent root = loader.load() ;
-        PostInitialize post = loader.getController() ;
-        post.postInitialize(params) ;
+        Parent root = preload(fxml, params) ;
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene) ;
     }
+
+    public Parent preload(String fxml, ArrayList<Object> params) throws IOException{
+        FXMLLoader loader = new FXMLLoader(generateUrl(fxml)) ;
+        Parent root = loader.load() ;
+        PostInitialize post = loader.getController() ;
+        post.postInitialize(params) ;
+        return root ;
+    }
+
 
     public URL generateUrl(String fxmlToLoad) {
         URL returnUrl = null;

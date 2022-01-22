@@ -12,11 +12,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class SearchResultFormatterView extends SearchResultFormatterComponent
-{
+public class SearchResultFormatterView extends SearchResultFormatterComponent {
     @Override
     public AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, ArrayList<TutorSearchResultBean> results)
     {
+
         double sceneHeight = (results.size())*100.0f ;
 
         VBox graphicalList = new VBox() ;
