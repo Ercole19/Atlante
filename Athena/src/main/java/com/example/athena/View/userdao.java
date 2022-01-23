@@ -167,7 +167,7 @@ public class userdao {
                 tutorInfos[i] = set.getString(1);
                 tutorInfos[i + 1] = set.getString(2);
                 tutorInfos[i + 2] = set.getString(3);
-                tutorInfos[i + 3] = String.valueOf(set.getFloat(4));
+                tutorInfos[i + 3] = Float.toString(set.getFloat(4));
                 tutorInfos[i + 4] = set.getString(5) ;
                 i = i + 5 ;
 

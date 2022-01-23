@@ -17,12 +17,12 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <TextField layoutX="19.0" layoutY="106.0" prefHeight="49.0" prefWidth="563.0" promptText="Insert the event's name..." style="-fx-background-radius: 20;">
+      <TextField fx:id="eventName" layoutX="19.0" layoutY="106.0" prefHeight="49.0" prefWidth="563.0" promptText="Insert the event's name..." style="-fx-background-radius: 20;">
          <font>
             <Font size="26.0" />
          </font>
       </TextField>
-      <DatePicker layoutX="19.0" layoutY="228.0" prefHeight="49.0" prefWidth="351.0" />
+      <DatePicker fx:id="eventDate" layoutX="19.0" layoutY="228.0" prefHeight="49.0" prefWidth="351.0" />
       <Text fill="WHITE" layoutX="19.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event's start :">
          <font>
             <Font size="26.0" />
@@ -33,22 +33,21 @@
             <Font size="26.0" />
          </font>
       </Text>
-      <DatePicker layoutX="19.0" layoutY="351.0" prefHeight="49.0" prefWidth="351.0" />
-      <TextField alignment="TOP_LEFT" layoutX="19.0" layoutY="500.0" prefHeight="210.0" prefWidth="563.0" promptText="Insert the event's details..." style="-fx-background-radius: 20;">
+      <TextField fx:id="eventDescription" alignment="TOP_LEFT" layoutX="19.0" layoutY="500.0" prefHeight="210.0" prefWidth="563.0" promptText="Insert the event's details...(MAX 50 LETTERS)" style="-fx-background-radius: 20;">
          <font>
             <Font size="26.0" />
          </font>
       </TextField>
-      <Spinner layoutX="384.0" layoutY="228.0" prefHeight="49.0" prefWidth="91.0" />
-      <Spinner layoutX="491.0" layoutY="228.0" prefHeight="49.0" prefWidth="91.0" />
-      <Spinner layoutX="384.0" layoutY="351.0" prefHeight="49.0" prefWidth="91.0" />
-      <Spinner layoutX="491.0" layoutY="351.0" prefHeight="49.0" prefWidth="91.0" />
+      <Spinner fx:id="startHourSpinner" editable="true" layoutX="384.0" layoutY="228.0" prefHeight="49.0" prefWidth="91.0" />
+      <Spinner fx:id="startMinuteSpinner" editable="true" layoutX="491.0" layoutY="228.0" prefHeight="49.0" prefWidth="91.0" />
+      <Spinner fx:id="endHourSpinner" editable="true" layoutX="130.0" layoutY="351.0" prefHeight="49.0" prefWidth="91.0" />
+      <Spinner fx:id="endMinuteSpinner" editable="true" layoutX="280.0" layoutY="351.0" prefHeight="49.0" prefWidth="91.0" />
       <Text layoutX="479.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
          <font>
             <Font size="26.0" />
          </font>
       </Text>
-      <Text layoutX="479.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+      <Text layoutX="250.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
          <font>
             <Font size="26.0" />
          </font>

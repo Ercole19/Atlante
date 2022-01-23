@@ -14,12 +14,12 @@ public class SearchTutorUseCaseController
         int i = 0 ;
         String[] tutorinfos = user.findTutorByCourse(query) ;
         ArrayList<TutorSearchResultBean> result = new ArrayList<>();
-        do {
+        while (tutorinfos[i] != null) {
 
             TutorSearchResultBean kanye = new TutorSearchResultBean(tutorinfos[i], tutorinfos[i+1], tutorinfos[i+2], Float.parseFloat(tutorinfos[i+3]) , tutorinfos[i+4]);
             result.add(kanye);
             i = i + 5;
-        }while (tutorinfos[i] != null) ;
+        }
 
 
 
@@ -31,12 +31,12 @@ public class SearchTutorUseCaseController
         int i = 0 ;
         String[] tutorinfos = user.findTutorByName(query) ;
         ArrayList<TutorSearchResultBean> result = new ArrayList<>();
-        do {
+        while (tutorinfos[i] != null) {
 
             TutorSearchResultBean kanye = new TutorSearchResultBean(tutorinfos[i], tutorinfos[i+1], tutorinfos[i+2], Float.parseFloat(tutorinfos[i+3]), tutorinfos[i+4]);
             result.add(kanye);
             i = i + 5 ;
-        }while (tutorinfos[i] != null) ;
+        }
 
 
 
