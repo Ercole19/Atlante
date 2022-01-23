@@ -58,6 +58,12 @@ public class ReviewEntity
         reviewDAO.deleteReview(reviewCode) ;
     }
 
+    public static void finalizeReview (int reviewStars , String reviewCode) throws TutorReviewException {
+        ReviewDAO reviewDAO = new ReviewDAO() ;
+        reviewDAO.finalizee(reviewCode , reviewStars) ;
+
+    }
+
     public void setReviewCode(String reviewCode)
     {
         this.reviewCode = reviewCode ;

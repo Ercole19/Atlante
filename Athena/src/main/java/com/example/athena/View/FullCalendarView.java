@@ -81,15 +81,16 @@ public class FullCalendarView {
         // Populate the calendar with day numbers
         for (AnchorPaneNode ap : allCalendarDays) {
             if (ap.getChildren().size() != 0) {
-                ap.getChildren().remove(0);
+                ap.getChildren().clear();
             }
             Text txt = new Text(String.valueOf(calendarDate.getDayOfMonth()));
+            Text txt2 = new Text("Ciao") ;
 
             ap.setDate(calendarDate);
-
+            ap.setBottomAnchor(txt2 , 4.0) ;
             ap.setTopAnchor(txt, 5.0);
             ap.setLeftAnchor(txt, 5.0);
-            ap.getChildren().add(txt) ;
+            ap.getChildren().addAll(txt , txt2) ;
 
 
 

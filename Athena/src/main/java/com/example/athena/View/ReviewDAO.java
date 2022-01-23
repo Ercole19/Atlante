@@ -12,6 +12,7 @@ public class ReviewDAO extends AbstractDAO
             "VALUES (?, ?, ?, ?, ?, ?, ?)" ;
     private String getReview = "SELECT * FROM reviews WHERE reviewCode = ?" ;
     private String deleteReview = "DELETE FROM reviews WHERE reviewCode = ?" ;
+    private String finalizeReview ="CALL athena.finalize(? , ?)" ;
 
     public void addReview(String reviewCode, String tutorUsername, String studentUsername, LocalDate tutoringDay, SubjectLabels tutoringSubject,
                           LocalTime startTime, LocalTime endTime) throws TutorReviewException
@@ -72,5 +73,19 @@ public class ReviewDAO extends AbstractDAO
         {
             throw new TutorReviewException("Failed to remove from DB") ;
         }
+    }
+    public void finalizee(String reviewCode , int reviewStars) throws TutorReviewException {
+
+        try (PreparedStatement statement = this.getConnection().prepareStatement(finalizeReview)) {
+            statement.setString(1 , reviewCode);
+            statement.setInt(2 , reviewStars);
+            statement.executeQuery() ;
+
+        } catch (SQLException exc) {
+            throw new TutorReviewException("Failed to connect to DB") ;
+        }
+
+
+
     }
 }

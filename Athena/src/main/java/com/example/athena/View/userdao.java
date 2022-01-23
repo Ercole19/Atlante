@@ -7,7 +7,7 @@ import java.sql.*;
 
 public class userdao {
 
-    private String email;
+
 
     private String user = "test";
     private String Password = "test";
@@ -17,9 +17,9 @@ public class userdao {
     private String getType = "SELECT type FROM utenti WHERE email = ?";
     private String filltutor = "SELECT  aboutme ,  sessioninfos  , contactnumbers  FROM athena.tutordescription WHERE emailuser = ? ";
     private String setTutor = "INSERT INTO `athena`.`tutordescription` (aboutme, sessioninfos, contactnumbers, emailuser) VALUES (? ,? ,?,?)";
-    private String searchTutor = "select utenti.nome , utenti.surname , corsi.nomecorso , utenti.email from athena.tutordescription join athena.corsi on tutordescription.emailuser = corsi.emailtutor join athena.utenti on tutordescription.emailuser = utenti.email where ? in (select nomecorso from athena.corsi) and corsi.nomecorso = ?; ";
+    private String searchTutor = "select utenti.nome , utenti.surname , corsi.nomecorso , tutordescription.Average , utenti.email from athena.tutordescription join athena.corsi on tutordescription.emailuser = corsi.emailtutor join athena.utenti on tutordescription.emailuser = utenti.email where ? in (select nomecorso from athena.corsi) and corsi.nomecorso = ?; ";
     private String updatetutor = "UPDATE athena.tutordescription SET aboutme = ?,  sessioninfos=?, contactnumbers=?  WHERE emailuser= ?";
-    private String searchByName = "SELECT  utenti.nome ,  utenti.surname , corsi.nomecorso , utenti.email FROM athena.utenti join athena.tutordescription on utenti.email = tutordescription.emailuser join athena.corsi on utenti.email = corsi.emailtutor WHERE CONCAT( nome,  ' ', surname ) LIKE  concat ('%' , ? , '%')";
+    private String searchByName = "SELECT  utenti.nome ,  utenti.surname , corsi.nomecorso , tutordescription.Average ,  utenti.email FROM athena.utenti join athena.tutordescription on utenti.email = tutordescription.emailuser join athena.corsi on utenti.email = corsi.emailtutor WHERE CONCAT( nome,  ' ', surname ) LIKE  concat ('%' , ? , '%')";
     private static String driver = "com.mysql.jdbc.Driver";
 
 
@@ -167,8 +167,9 @@ public class userdao {
                 tutorInfos[i] = set.getString(1);
                 tutorInfos[i + 1] = set.getString(2);
                 tutorInfos[i + 2] = set.getString(3);
-                tutorInfos[i + 3] = set.getString(4) ;
-                i = i + 4;
+                tutorInfos[i + 3] = String.valueOf(set.getFloat(4));
+                tutorInfos[i + 4] = set.getString(5) ;
+                i = i + 5 ;
 
 
             }
@@ -192,8 +193,9 @@ public class userdao {
                 tutorInfos[i] = set.getString(1);
                 tutorInfos[i + 1] = set.getString(2);
                 tutorInfos[i + 2] = set.getString(3);
-                tutorInfos[i + 3] = set.getString(4);
-                i = i + 4;
+                tutorInfos[i + 3] = Float.toString(set.getFloat(4));
+                tutorInfos[i + 4] = set.getString(5) ;
+                i = i + 5 ;
 
 
             }

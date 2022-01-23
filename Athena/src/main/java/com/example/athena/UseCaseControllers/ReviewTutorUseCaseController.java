@@ -46,6 +46,6 @@ public class ReviewTutorUseCaseController
     public void sendReview(SendReviewBean review) throws TutorReviewException
     {
 
-        ReviewEntity.removeFromDB(review.getCode()) ;
+        ReviewEntity.finalizeReview(review.getReviewStars() , review.getCode());
     }
 }
