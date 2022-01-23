@@ -19,10 +19,10 @@ public class TutorPageButtonAdder extends TutorPageDecorator{
     {
         AnchorPane originalScene = (AnchorPane) super.build();
         Object controller = originalScene.getProperties().get("foo") ;
+        setBackButton(originalScene, controller) ;
         originalScene.getChildren().addAll(getButton(controller));
         return originalScene ;
     }
-
 
     public ArrayList<Button> getButton(Object controller) {
         TutorPersonalPageController graphController = (TutorPersonalPageController) controller;
@@ -68,4 +68,17 @@ public class TutorPageButtonAdder extends TutorPageDecorator{
         });
 
         return buttons;
-    }}
+    }
+
+    private void setBackButton(AnchorPane originalScene, Object controller)
+    {
+        ((Button) originalScene.lookup("#backBtn")).setOnAction(event -> {
+
+            try {
+                ((TutorPersonalPageController)controller).clickOnBackButtonTutor(event); ;
+            } catch (IOException e) {
+                e.printStackTrace() ;
+            }
+        });
+    }
+}

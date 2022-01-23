@@ -18,7 +18,7 @@ public class SearchTutorUseCaseController
 
             TutorSearchResultBean kanye = new TutorSearchResultBean(tutorinfos[i], tutorinfos[i+1], tutorinfos[i+2], Float.parseFloat(tutorinfos[i+3]) , tutorinfos[i+4]);
             result.add(kanye);
-            i = i + 4;
+            i = i + 5;
         }while (tutorinfos[i] != null) ;
 
 

@@ -29,6 +29,8 @@ public class TutorPersonalPageController implements Initializable ,PostInitializ
 
     private Parent root ;
     @FXML
+    private AnchorPane rootPane ;
+    @FXML
     private TextArea aboutme;
     @FXML
     private TextArea coursesArea ;
@@ -40,16 +42,16 @@ public class TutorPersonalPageController implements Initializable ,PostInitializ
     private coursedao corso ;
 
 
+    public void clickOnBackButtonTutor(ActionEvent event) throws IOException
+    {
+        SceneSwitcher switcher = new SceneSwitcher() ;
+        switcher.switcher(event, "MainPageTutor.fxml");
+    }
+
     public void clickOnBackButton(ActionEvent event) throws IOException
     {
-        SceneSwitcher switcher = new SceneSwitcher();
-        String tipo = (String) user.getuserType(com.example.athena.View.user.getUser().getEmail());
-        if (tipo.equals("student")) {
-            switcher.switcher(event, "tutorSearchPage.fxml");
-        }
-        else {
-        switcher.switcher(event, "MainPageTutor.fxml");
-        }
+        SceneSwitcher switcher = new SceneSwitcher() ;
+        switcher.switcher(event, "tutorSearchPage.fxml") ;
     }
 
     public void onCVButtonClick(ActionEvent event) throws IOException
@@ -104,6 +106,8 @@ public class TutorPersonalPageController implements Initializable ,PostInitializ
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        rootPane.getProperties().put("foo", this) ;
         user = new  userdao() ;
         corso = new coursedao() ;
 

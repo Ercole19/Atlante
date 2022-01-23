@@ -13,7 +13,7 @@ public class TutorSearchResultBean
         this.name = name ;
         this.surname = surname ;
         this.taughtSubject = taughtSubject ;
-        this.starNumber = String.format("%f*", starNumber) ;
+        this.starNumber = String.format("%.2f*", starNumber) ;
         this.id = id ;
     }
 
