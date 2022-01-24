@@ -2,6 +2,7 @@ package com.example.athena.View.SceneDecorators;
 
 import com.example.athena.GraphicalController.SearchResultsGraphicalController;
 import com.example.athena.GraphicalController.TutorSearchResultBean;
+import com.example.athena.GraphicalController.eventBean;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Orientation;
@@ -35,6 +36,30 @@ public class SearchResultFormatterScrollBar extends  SearchResultFormatterDecora
 
         return resultPane ;
     }
+
+
+
+
+
+    @Override
+    public AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, ArrayList<eventBean> results)
+    {
+        AnchorPane resultPane = super.buildEventSearchResultsScene(containerWidth -20, containerHeight, results) ;
+        resultPane.setPrefSize(containerWidth, containerHeight) ;
+        ScrollBar scrollBar = this.getScrollBar(containerWidth, containerHeight, results.size()*100.0) ;
+        resultPane.getChildren().add(scrollBar) ;
+
+        scrollBar.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number newVal) {
+                SearchResultsGraphicalController pageGraphController = new SearchResultsGraphicalController() ;
+                pageGraphController.scrollResults((VBox) resultPane.lookup("#resultList"), newVal) ;
+            }
+        });
+
+        return resultPane ;
+    }
+
 
     private ScrollBar getScrollBar(double containerWidth, double containerHeight, double listSize)
     {

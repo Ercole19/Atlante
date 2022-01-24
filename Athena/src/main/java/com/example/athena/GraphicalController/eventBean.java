@@ -26,6 +26,18 @@ public class eventBean {
         this.start = inizio ;
     }
 
+    public void setStartbyString (String start) {
+        LocalTime inizio = LocalTime.parse(start) ;
+        this.start = inizio ;
+    }
+
+
+    public void setEndbyString (String end) {
+        LocalTime fine = LocalTime.parse(end) ;
+        this.end = fine ;
+    }
+
+
     public void setEnd(int hours , int minutes) {
         LocalTime fine = LocalTime.of(hours, minutes);
         this.end = fine ;

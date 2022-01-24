@@ -84,13 +84,12 @@ public class FullCalendarView {
                 ap.getChildren().clear();
             }
             Text txt = new Text(String.valueOf(calendarDate.getDayOfMonth()));
-            Text txt2 = new Text("Ciao") ;
+
 
             ap.setDate(calendarDate);
-            ap.setBottomAnchor(txt2 , 4.0) ;
             ap.setTopAnchor(txt, 5.0);
             ap.setLeftAnchor(txt, 5.0);
-            ap.getChildren().addAll(txt , txt2) ;
+            ap.getChildren().add(txt) ;
 
 
 

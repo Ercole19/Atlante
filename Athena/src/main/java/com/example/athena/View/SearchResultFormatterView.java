@@ -2,6 +2,7 @@ package com.example.athena.View;
 
 import com.example.athena.GraphicalController.SceneSwitcher;
 import com.example.athena.GraphicalController.TutorSearchResultBean;
+import com.example.athena.GraphicalController.eventBean;
 import com.example.athena.View.SceneDecorators.SearchResultFormatterComponent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -73,4 +74,63 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
         columnConstraint.setPercentWidth(percent) ;
         pane.getColumnConstraints().add(columnConstraint) ;
     }
+
+
+
+
+    @Override
+    public AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, ArrayList<eventBean> results)
+    {
+
+        double sceneHeight = (results.size())*100.0f ;
+
+        VBox graphicalList = new VBox() ;
+        graphicalList.setPrefSize(containerWidth, sceneHeight) ;
+        graphicalList.setId("resultList") ;
+
+        for(eventBean result: results)
+        {
+            GridPane entryBox = new GridPane() ;
+            entryBox.setPrefSize(containerWidth, 100) ;
+            entryBox.setStyle("-fx-background-color: #faeeae") ;
+            entryBox.setStyle("-fx-border-color: #000000") ;
+
+            entryBox.getRowConstraints().add(new RowConstraints(100)) ;
+            setColumnConstraint(20, entryBox) ;
+            setColumnConstraint(20, entryBox) ;
+            setColumnConstraint(20, entryBox) ;
+            setColumnConstraint(20, entryBox) ;
+            setColumnConstraint(20, entryBox) ;
+            setColumnConstraint(20, entryBox) ;
+
+
+            Label nameLabel = new Label(result.getName()) ;
+            nameLabel.setFont(new Font("System", 26)) ;
+            entryBox.add(nameLabel, 0, 0) ;
+
+            Label subjectLabel = new Label(result.getStart().toString()) ;
+            subjectLabel.setFont(new Font("System", 26)) ;
+            entryBox.add(subjectLabel, 1, 0) ;
+
+            Label starsLabel = new Label(result.getEnd().toString()) ;
+            starsLabel.setFont(new Font("System", 26)) ;
+            entryBox.add(starsLabel, 2, 0) ;
+
+            Button visitPage = new Button("Description") ;
+            entryBox.add(visitPage, 3, 0) ;
+
+            Button delete = new Button("delete") ;
+            entryBox.add(delete, 4, 0) ;
+
+            Button edit = new Button("edit") ;
+            entryBox.add(edit, 5, 0) ;
+
+
+            graphicalList.getChildren().add(entryBox) ;
+        }
+
+        return new AnchorPane(graphicalList) ;
+    }
+
+
 }

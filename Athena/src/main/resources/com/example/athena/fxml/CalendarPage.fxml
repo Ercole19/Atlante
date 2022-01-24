@@ -67,6 +67,6 @@
           <Region />
         </root>
       </SubScene>
-      <Button layoutX="310.0" layoutY="301.0" mnemonicParsing="false" onAction="#showCalendar" text="Button" />
+      <Button layoutX="310.0" layoutY="301.0" mnemonicParsing="false"  text="Button" />
     </children>
 </AnchorPane>
