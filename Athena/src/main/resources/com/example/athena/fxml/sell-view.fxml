@@ -14,7 +14,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.GraphicalController.sellController">
    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2d8bba" height="75.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-   <Button layoutX="547.0" layoutY="618.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="217.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Add Book to Sell" textFill="WHITE">
+   <Button layoutX="547.0" layoutY="618.0" mnemonicParsing="false" onAction="#onSellBtnClick" prefHeight="55.0" prefWidth="217.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Add Book to Sell" textFill="WHITE">
       <font>
          <Font name="Bookmark Old Style" size="20.0" />
       </font>
@@ -64,5 +64,5 @@
          <Image url="@../../../../assets/homeBtn.png" />
       </image>
    </ImageView>
-   <Button layoutX="21.0" layoutY="15.0" mnemonicParsing="false" onAction="#onHomeButtonClick" opacity="0.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #2d8bba;" text="homeBtn" />
+   <Button layoutX="21.0" layoutY="15.0" mnemonicParsing="false"  opacity="0.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #2d8bba;" text="homeBtn" />
 </AnchorPane>
