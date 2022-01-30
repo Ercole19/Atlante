@@ -1,6 +1,6 @@
 package com.example.athena.UseCaseControllers;
 
-import com.example.athena.View.ActivityTypesEnum;
+import com.example.athena.Entities.ActivityTypesEnum;
 import com.example.athena.GraphicalController.ActivityPlotsBean;
 import com.example.athena.GraphicalController.PlotSearchQueryBean;
 import javafx.scene.chart.XYChart;

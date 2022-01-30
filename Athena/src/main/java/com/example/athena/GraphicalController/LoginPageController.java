@@ -1,13 +1,13 @@
 package com.example.athena.GraphicalController;
 
-import com.example.athena.View.userdao;
+import com.example.athena.Entities.userdao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import java.io.IOException;
-import com.example.athena.View.user;
+import com.example.athena.Entities.user;
 
 
 

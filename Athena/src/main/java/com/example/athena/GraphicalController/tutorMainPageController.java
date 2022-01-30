@@ -2,10 +2,9 @@ package com.example.athena.GraphicalController;
 
 import com.example.athena.View.SceneDecorators.TutorPageButtonAdder;
 import com.example.athena.View.SceneDecorators.TutorPageComponent;
-import com.example.athena.View.SceneDecorators.TutorPageView;
+import com.example.athena.View.TutorPageView;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 

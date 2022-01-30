@@ -1,6 +1,6 @@
 package com.example.athena.GraphicalController;
 
-import com.example.athena.View.SubjectLabels;
+import com.example.athena.Entities.SubjectLabels;
 
 import java.time.LocalDate;
 

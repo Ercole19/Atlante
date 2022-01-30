@@ -1,4 +1,4 @@
-package com.example.athena.View;
+package com.example.athena.Entities;
 
 import javafx.util.StringConverter;
 

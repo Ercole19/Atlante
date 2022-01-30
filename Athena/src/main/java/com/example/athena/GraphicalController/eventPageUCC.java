@@ -1,18 +1,11 @@
 package com.example.athena.GraphicalController;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import com.example.athena.View.eventDao ;
-import java.io.IOException;
-import java.net.URL;
+import com.example.athena.Entities.eventDao;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 
 public class eventPageUCC  {

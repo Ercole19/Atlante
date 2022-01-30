@@ -1,8 +1,7 @@
 package com.example.athena.GraphicalController;
 
-import com.example.athena.View.coursedao;
-import com.example.athena.View.user;
-import com.example.athena.View.userdao;
+import com.example.athena.Entities.coursedao;
+import com.example.athena.Entities.userdao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +13,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import com.example.athena.View.user ;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;

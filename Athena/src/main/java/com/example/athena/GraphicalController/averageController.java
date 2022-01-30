@@ -1,6 +1,6 @@
 package com.example.athena.GraphicalController;
 
-import com.example.athena.View.examdao;
+import com.example.athena.Entities.examdao;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

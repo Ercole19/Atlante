@@ -1,4 +1,4 @@
-package com.example.athena.View;
+package com.example.athena.Entities;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -9,7 +9,7 @@ public class eventDao extends AbstractDAO {
     private String user = "test";
     private String Password = "test";
     private String dbUrl = "jdbc:mysql://78.13.194.135/athena";
-    private String email = com.example.athena.View.user.getUser().getEmail();
+    private String email = com.example.athena.Entities.user.getUser().getEmail();
     private String addQuery = "INSERT INTO athena.events (`dataEvento`, `eventName`, `eventStart`, `eventEnd`, `eventDesc`, `user`) values (?,?,?,?,?,?)" ;
     private String getEventInfo = "select eventName , eventStart , eventEnd , eventDesc from athena.events where dataEvento = ? and user = ? " ;
 

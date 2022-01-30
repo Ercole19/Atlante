@@ -1,5 +1,5 @@
 package com.example.athena.GraphicalController;
-import com.example.athena.View.coursedao ;
+import com.example.athena.Entities.coursedao;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 

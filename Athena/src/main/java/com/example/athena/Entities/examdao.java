@@ -1,4 +1,4 @@
-package com.example.athena.View;
+package com.example.athena.Entities;
 
 import com.example.athena.GraphicalController.examEntityBean;
 import javafx.collections.FXCollections;
@@ -9,7 +9,7 @@ import javafx.scene.chart.XYChart;
 import java.sql.*;
 
 public class examdao {
-    private String emailcurrent =  com.example.athena.View.user.getUser().getEmail() ;
+    private String emailcurrent =  com.example.athena.Entities.user.getUser().getEmail() ;
     private String user = "test" ;
     private String pass = "test" ;
     private String dbUrl = "jdbc:mysql://78.13.194.135:3306/athena" ;

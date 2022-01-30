@@ -3,14 +3,12 @@ package com.example.athena.GraphicalController;
 import com.example.athena.Exceptions.SendEmailException;
 import com.example.athena.Exceptions.TutorReviewException;
 import com.example.athena.UseCaseControllers.ReviewTutorUseCaseController;
-import com.example.athena.View.StringHoursConverter;
-import com.example.athena.View.SubjectLabels;
-import com.example.athena.View.TutorReviewCodesGenerator;
+import com.example.athena.Entities.StringHoursConverter;
+import com.example.athena.Entities.SubjectLabels;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;

@@ -1,7 +1,7 @@
 package com.example.athena.UseCaseControllers;
 
 import com.example.athena.GraphicalController.TutorSearchResultBean;
-import com.example.athena.View.userdao;
+import com.example.athena.Entities.userdao;
 
 import java.util.ArrayList;
 

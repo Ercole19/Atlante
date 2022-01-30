@@ -1,13 +1,10 @@
 package com.example.athena.GraphicalController;
 
-import com.example.athena.View.StringHoursConverter;
-import com.example.athena.View.SubjectLabels;
+import com.example.athena.Entities.StringHoursConverter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
@@ -16,7 +13,6 @@ import javafx.stage.Stage;
 import com.example.athena.UseCaseControllers.addEventUCC ;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AddEventController implements Initializable  {

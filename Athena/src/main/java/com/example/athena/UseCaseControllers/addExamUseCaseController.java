@@ -1,7 +1,7 @@
 package com.example.athena.UseCaseControllers;
 
 import com.example.athena.GraphicalController.examEntityBean;
-import com.example.athena.View.examdao;
+import com.example.athena.Entities.examdao;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;

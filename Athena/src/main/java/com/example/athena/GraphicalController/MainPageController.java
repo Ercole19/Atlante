@@ -1,5 +1,4 @@
 package com.example.athena.GraphicalController;
-import com.example.athena.View.user;
 
 import javafx.event.ActionEvent;
 

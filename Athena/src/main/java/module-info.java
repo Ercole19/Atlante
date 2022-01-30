@@ -21,4 +21,8 @@ module com.example.athena {
     opens com.example.athena.View to javafx.fxml;
     exports com.example.athena.View.SceneDecorators;
     opens com.example.athena.View.SceneDecorators to javafx.fxml;
+    exports com.example.servers;
+    opens com.example.servers to javafx.fxml;
+    exports com.example.athena.Entities;
+    opens com.example.athena.Entities to javafx.fxml;
 }

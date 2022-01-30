@@ -1,8 +1,8 @@
 package com.example.athena.GraphicalController;
 
-import com.example.athena.View.ActivityTypesEnum;
+import com.example.athena.Entities.ActivityTypesEnum;
 import com.example.athena.UseCaseControllers.GeneratePlotsUseCaseController;
-import com.example.athena.View.TimePeriodsEnum;
+import com.example.athena.Entities.TimePeriodsEnum;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

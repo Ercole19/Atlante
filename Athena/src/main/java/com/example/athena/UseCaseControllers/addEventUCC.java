@@ -2,8 +2,7 @@ package com.example.athena.UseCaseControllers;
 
 
 import com.example.athena.GraphicalController.eventBean;
-import com.example.athena.View.eventDao ;
-import com.example.athena.View.user ;
+import com.example.athena.Entities.eventDao;
 
 public class addEventUCC {
 

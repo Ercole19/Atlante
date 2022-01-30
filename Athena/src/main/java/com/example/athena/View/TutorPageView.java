@@ -1,4 +1,5 @@
-package com.example.athena.View.SceneDecorators;
+package com.example.athena.View;
+import com.example.athena.View.SceneDecorators.TutorPageComponent;
 import javafx.scene.Parent;
 import com.example.athena.GraphicalController.SceneSwitcher;
 

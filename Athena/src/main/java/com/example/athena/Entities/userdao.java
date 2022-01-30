@@ -1,4 +1,4 @@
-package com.example.athena.View;
+package com.example.athena.Entities;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

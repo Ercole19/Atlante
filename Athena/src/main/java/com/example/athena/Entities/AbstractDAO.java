@@ -1,4 +1,4 @@
-package com.example.athena.View;
+package com.example.athena.Entities;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
