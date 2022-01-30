@@ -10,7 +10,6 @@ module com.example.athena {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.sql;
-    requires com.google.gson;
     requires java.mail;
 
     opens com.example.athena.GraphicalController to javafx.fxml;
