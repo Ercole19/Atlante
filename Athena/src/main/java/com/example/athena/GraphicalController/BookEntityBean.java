@@ -1,13 +1,16 @@
 package com.example.athena.GraphicalController;
 
+import com.example.athena.Exceptions.BookException;
+
 public class BookEntityBean {
 
     private final String title ;
     private final String ISBN ;
-    private final float price ;
+    private final String price ;
     private final Boolean isNegotiable ;
 
-    public BookEntityBean(String title , String ISBN, float price, Boolean isNegotiable){
+    public BookEntityBean(String title , String ISBN, String price, Boolean isNegotiable)throws BookException{
+        sintacticCheck(ISBN, price);
         this.title = title;
         this.ISBN = ISBN;
         this.price = price;
@@ -22,11 +25,17 @@ public class BookEntityBean {
         return this.ISBN;
     }
 
-    public float getPrice(){
+    public String getPrice(){
         return this.price;
     }
 
     public Boolean getNegotiable() {
         return this.isNegotiable;
     }
-}
+
+    public void sintacticCheck(String ISBN, String price) throws BookException
+    {
+        if (!((ISBN.matches("[0-9]{10}") || ISBN.matches("[0-9]{13}")) && price.matches("[0-9]+[,.][0-9]*"))){
+            throw new BookException("Error in ISBN or price formats") ;
+    }
+}}
