@@ -12,16 +12,16 @@ module com.example.athena {
     requires java.sql;
     requires java.mail;
 
-    opens com.example.athena.GraphicalController to javafx.fxml;
-    exports com.example.athena.GraphicalController;
-    exports com.example.athena.UseCaseControllers;
-    opens com.example.athena.UseCaseControllers to javafx.fxml;
-    exports com.example.athena.View;
-    opens com.example.athena.View to javafx.fxml;
-    exports com.example.athena.View.SceneDecorators;
-    opens com.example.athena.View.SceneDecorators to javafx.fxml;
+    opens com.example.athena.graphical_controller to javafx.fxml;
+    exports com.example.athena.graphical_controller;
+    exports com.example.athena.use_case_controllers;
+    opens com.example.athena.use_case_controllers to javafx.fxml;
+    exports com.example.athena.view;
+    opens com.example.athena.view to javafx.fxml;
+    exports com.example.athena.view.scene_decorators;
+    opens com.example.athena.view.scene_decorators to javafx.fxml;
     exports com.example.servers;
     opens com.example.servers to javafx.fxml;
-    exports com.example.athena.Entities;
-    opens com.example.athena.Entities to javafx.fxml;
+    exports com.example.athena.entities;
+    opens com.example.athena.entities to javafx.fxml;
 }
