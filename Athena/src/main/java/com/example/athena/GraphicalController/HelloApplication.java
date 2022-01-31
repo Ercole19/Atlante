@@ -13,9 +13,7 @@ import static javafx.fxml.FXMLLoader.load;
 
 public class HelloApplication extends Application {
 
-    private Parent root;
-    private Stage stage;
-    private Scene scene;
+  
 
     @Override
     public void start(Stage stage) throws IOException {

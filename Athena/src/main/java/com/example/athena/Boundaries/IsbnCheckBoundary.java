@@ -12,14 +12,18 @@ import java.util.Scanner;
 
 public class IsbnCheckBoundary {
 
+
+    private IsbnCheckBoundary() {
+
+    }
+
     public static void ISBNcheck(String isbn) throws ISBNException {
-        try{
-                String url = "https://openlibrary.org/isbn/"+ isbn + ".json";
-                String json = new Scanner(new URL(url).openStream(), StandardCharsets.UTF_8).useDelimiter("\\A").next();
-                System.out.println(json);
+        String url = "https://openlibrary.org/isbn/"+ isbn + ".json" ;
+        try(InputStream stream = new URL (url).openStream()){
+            String json = new Scanner( stream , StandardCharsets.UTF_8).useDelimiter("\\A").next();
         }
         catch (FileNotFoundException | MalformedURLException e)  {
-            System.out.println(e.getMessage()) ;
+            e.getMessage() ;
             throw new ISBNException("Submitted ISBN does not exist");
         }
         catch (IOException e) {

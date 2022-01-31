@@ -11,9 +11,6 @@ public class examEntityBean {
     private int cfuEsame;
     private String  date;
 
-    public examEntityBean () {
-
-    }
 
     public void setCfuEsame(String  cfuString)  {
             try {

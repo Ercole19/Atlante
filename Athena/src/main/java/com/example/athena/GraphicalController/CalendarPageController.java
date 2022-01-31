@@ -20,7 +20,6 @@ import static javafx.fxml.FXMLLoader.load;
 
 public class CalendarPageController implements Initializable {
 
-    private Parent root;
     private Stage stage;
     private Scene scene;
     @FXML
@@ -54,10 +53,6 @@ public class CalendarPageController implements Initializable {
     }
 
 
-    /*public void showCalendar() {
-       calendario.setRoot(new FullCalendarView(YearMonth.now()).getView());
-
-    }*/
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

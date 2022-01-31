@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class AnchorPaneNode extends AnchorPane {
     // Date associated with this pane
     private LocalDate date;
-    private String event ;
+
 
     /**
      * Create a anchor pane node. Date is not assigned in the constructor.
@@ -105,7 +105,6 @@ public class AnchorPaneNode extends AnchorPane {
     public LocalDate getDate() {
         return this.date;
     }
-    public void setEvent (String event) {this.event = event;}
     public void setDate(LocalDate date) {
         this.date = date;
     }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class SearchResultFormatterView extends SearchResultFormatterComponent {
+    private final String font = "System";
     @Override
     public AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, ArrayList<TutorSearchResultBean> results)
     {
@@ -38,15 +39,15 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
             setColumnConstraint(10, entryBox) ;
 
             Label nameLabel = new Label(result.getName() + "" + result.getSurname()) ;
-            nameLabel.setFont(new Font("System", 26)) ;
+            nameLabel.setFont(new Font(font, 26)) ;
             entryBox.add(nameLabel, 0, 0) ;
 
             Label subjectLabel = new Label(result.getTaughtSubject()) ;
-            subjectLabel.setFont(new Font("System", 26)) ;
+            subjectLabel.setFont(new Font(font, 26)) ;
             entryBox.add(subjectLabel, 1, 0) ;
 
             Label starsLabel = new Label(result.getStarNumber()) ;
-            starsLabel.setFont(new Font("System", 26)) ;
+            starsLabel.setFont(new Font(font, 26)) ;
             entryBox.add(starsLabel, 2, 0) ;
 
             Button visitPage = new Button("Visit page") ;
@@ -85,6 +86,7 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
 
         double sceneHeight = (results.size())*100.0f ;
 
+
         VBox graphicalList = new VBox() ;
         graphicalList.setPrefSize(containerWidth, sceneHeight) ;
         graphicalList.setId("resultList") ;
@@ -106,15 +108,15 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
 
 
             Label nameLabel = new Label(result.getName()) ;
-            nameLabel.setFont(new Font("System", 26)) ;
+            nameLabel.setFont(new Font(font, 26)) ;
             entryBox.add(nameLabel, 0, 0) ;
 
             Label subjectLabel = new Label(result.getStart().toString()) ;
-            subjectLabel.setFont(new Font("System", 26)) ;
+            subjectLabel.setFont(new Font(font, 26)) ;
             entryBox.add(subjectLabel, 1, 0) ;
 
             Label starsLabel = new Label(result.getEnd().toString()) ;
-            starsLabel.setFont(new Font("System", 26)) ;
+            starsLabel.setFont(new Font(font, 26)) ;
             entryBox.add(starsLabel, 2, 0) ;
 
             Button visitPage = new Button("Description") ;

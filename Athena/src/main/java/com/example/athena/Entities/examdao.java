@@ -8,11 +8,8 @@ import javafx.scene.chart.XYChart;
 
 import java.sql.*;
 
-public class examdao {
+public class examdao extends AbstractDAO {
     private String emailcurrent =  com.example.athena.Entities.user.getUser().getEmail() ;
-    private String user = "test" ;
-    private String pass = "test" ;
-    private String dbUrl = "jdbc:mysql://78.13.194.135:3306/athena" ;
     private String getquery = "SELECT Nome , Voto , CFU , Data FROM esami WHERE email = ? " ;
     private String deleteQuery = "DELETE FROM esami WHERE Nome = ? and email = ?" ;
     private String addQuery = " INSERT INTO esami  VALUES (?,?,?,?,?); " ;
@@ -36,8 +33,8 @@ public class examdao {
             e.getMessage() ;
         }
         ObservableList<examEntityBean> examlist = FXCollections.observableArrayList();
-        try (Connection connection = DriverManager.getConnection(dbUrl , user ,pass) ; PreparedStatement
-        statement = connection.prepareStatement(getquery) ) {
+        try ( PreparedStatement
+        statement = this.getConnection().prepareStatement(getquery) ) {
             statement.setString(1 , emailcurrent);
             ResultSet set = statement.executeQuery() ;
 
@@ -68,7 +65,7 @@ public class examdao {
             e.getMessage() ;
         }
 
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, pass);PreparedStatement stm =connection.prepareStatement(addQuery, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)  ){
+        try (PreparedStatement stm =this.getConnection().prepareStatement(addQuery, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)  ){
 
             stm.setString(1, beanExam.getExamName());
             stm.setString(2, String.valueOf(beanExam.getVotoEsame()));
@@ -91,7 +88,7 @@ public class examdao {
             e.getMessage() ;
         }
 
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, pass) ; PreparedStatement stm = connection.prepareStatement(deleteQuery)) {
+        try ( PreparedStatement stm = this.getConnection().prepareStatement(deleteQuery)) {
             stm.setString(1, nome);
             stm.setString(2,emailcurrent);
             stm.execute();
@@ -107,7 +104,7 @@ public class examdao {
             e.getMessage() ;
         }
 
-        try(Connection connection = DriverManager.getConnection(dbUrl , user , pass) ; PreparedStatement stm = connection.prepareStatement(updateQuery)) {
+        try( PreparedStatement stm = this.getConnection().prepareStatement(updateQuery)) {
 
             stm.setString(1, beanExam.getExamName());
             stm.setString(2, String.valueOf(beanExam.getVotoEsame()));
@@ -132,7 +129,7 @@ public class examdao {
 
         ObservableList<XYChart.Data<String, Number>> list = FXCollections.observableArrayList();
 
-        try (Connection connection = DriverManager.getConnection(dbUrl , user , pass) ; PreparedStatement statement = connection.prepareStatement(sortedExams)){
+        try (PreparedStatement statement =this.getConnection().prepareStatement(sortedExams)){
             statement.setString(1,emailcurrent);
             Integer count = 1;
             double average = 0.0;
@@ -168,7 +165,7 @@ public class examdao {
             e.getMessage() ;
         }
 
-        try (Connection connection = DriverManager.getConnection(dbUrl , user ,pass) ; PreparedStatement stm = connection.prepareStatement(getaverage)){
+        try ( PreparedStatement stm = this.getConnection().prepareStatement(getaverage)){
             stm.setString(1,emailcurrent);
             ResultSet set = stm.executeQuery();
             while (set.next()) {
@@ -190,7 +187,7 @@ public class examdao {
         }
 
         ObservableList<XYChart.Data<String, Number>> list = FXCollections.observableArrayList();
-        try (Connection connection = DriverManager.getConnection(dbUrl , user , pass) ; PreparedStatement statement = connection.prepareStatement(weightedsortedExams)){
+        try ( PreparedStatement statement = this.getConnection().prepareStatement(weightedsortedExams)){
             statement.setString(1,emailcurrent);
             int  cfus = 0 ;
             double average = 0.0;
@@ -232,7 +229,7 @@ public class examdao {
         double  cfus = 0 ;
         double average = 0;
 
-        try(Connection connection = DriverManager.getConnection(dbUrl,user,pass) ; PreparedStatement stm = connection.prepareStatement(getexamsdate)) {
+        try( PreparedStatement stm = this.getConnection().prepareStatement(getexamsdate)) {
             stm.setString(1,emailcurrent);
             ResultSet set = stm.executeQuery();
             while (set.next()) {
@@ -261,7 +258,7 @@ public class examdao {
         piechartdata = FXCollections.observableArrayList();
 
 
-        try (Connection connection = DriverManager.getConnection(dbUrl,user,pass) ; PreparedStatement statement =  connection.prepareStatement(getExams)) {
+        try ( PreparedStatement statement =  this.getConnection().prepareStatement(getExams)) {
             statement.setString(1,emailcurrent);
             ResultSet set = statement.executeQuery() ;
             while (set.next()) {
@@ -285,8 +282,7 @@ public class examdao {
         }
         int count = 0 ;
 
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, pass) ;
-         PreparedStatement statement = connection.prepareStatement(countExams) ;) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement(countExams) ;) {
             statement.setString(1,emailcurrent);
             ResultSet set = statement.executeQuery() ;
 
@@ -310,8 +306,7 @@ public class examdao {
         piechartdata = FXCollections.observableArrayList();
 
 
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, pass) ;
-         PreparedStatement statement = connection.prepareStatement(getcfusum)){
+        try (PreparedStatement statement = this.getConnection().prepareStatement(getcfusum)){
              ResultSet set = statement.executeQuery() ;
             while (set.next()) {
                 piechartdata.add(new PieChart.Data("CFU possseduti " , set.getInt("cfus"))) ;
@@ -333,8 +328,7 @@ public class examdao {
             e.getMessage() ;
         }
 
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, pass) ;
-        PreparedStatement statement = connection.prepareStatement(getcfusum)){
+        try (PreparedStatement statement = this.getConnection().prepareStatement(getcfusum)){
             statement.setString(1 , emailcurrent);
          ResultSet set = statement.executeQuery() ;
             while  (set.next()) {

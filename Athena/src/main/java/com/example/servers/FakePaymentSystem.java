@@ -3,12 +3,13 @@ package com.example.servers;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Random;
+import java.security.SecureRandom;
+
 
 public class FakePaymentSystem
 {
     private ServerSocket serverSocket ;
-    private final Random random ;
+    private final SecureRandom random ;
 
     private FakePaymentSystem()
     {
@@ -20,7 +21,7 @@ public class FakePaymentSystem
             e.printStackTrace() ;
             System.exit(1) ;
         }
-        random = new Random(42) ;
+        random = new SecureRandom() ;
     }
 
     private boolean executePayment()
@@ -49,9 +50,9 @@ public class FakePaymentSystem
     public static void main(String[] args)
     {
         FakePaymentSystem paymentSystem = new FakePaymentSystem() ;
-        while(true)
-        {
-            paymentSystem.clientAcceptance() ;
-        }
+        //while(true)
+        //{
+          //  paymentSystem.clientAcceptance() ;
+        //}
     }
 }

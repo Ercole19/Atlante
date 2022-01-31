@@ -6,7 +6,7 @@ public abstract class TutorPageDecorator extends TutorPageComponent {
 
     private TutorPageComponent component ;
 
-    public  TutorPageDecorator(TutorPageComponent component)
+    protected TutorPageDecorator(TutorPageComponent component)
     {
         this.component = component ;
     }

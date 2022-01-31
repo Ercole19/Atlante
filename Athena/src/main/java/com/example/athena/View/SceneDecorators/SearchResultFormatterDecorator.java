@@ -10,7 +10,7 @@ public abstract class SearchResultFormatterDecorator extends SearchResultFormatt
 {
     private SearchResultFormatterComponent component ;
 
-    public SearchResultFormatterDecorator(SearchResultFormatterComponent component)
+    protected SearchResultFormatterDecorator(SearchResultFormatterComponent component)
     {
         this.component = component ;
     }

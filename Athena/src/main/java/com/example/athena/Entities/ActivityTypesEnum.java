@@ -2,5 +2,5 @@ package com.example.athena.Entities;
 
 public enum ActivityTypesEnum
 {
-    All, Study_session, Lecture_Time, Other
+    ALL, STUDY_SESSION, LECTURE_TIME, OTHER
 }

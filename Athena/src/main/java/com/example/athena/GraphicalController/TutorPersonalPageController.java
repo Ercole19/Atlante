@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 
 import static javafx.fxml.FXMLLoader.load ;
 
-public class TutorPersonalPageController implements Initializable ,PostInitialize
+public class TutorPersonalPageController implements Initializable
 {
 
     private Parent root ;
@@ -90,10 +90,10 @@ public class TutorPersonalPageController implements Initializable ,PostInitializ
 
     public void onCVButtonClicktutor(ActionEvent event) throws IOException
     {
-        AnchorPane root = new AnchorPane() ;
-        root.setPrefSize(600, 800) ;
+        AnchorPane anchorPane = new AnchorPane() ;
+        anchorPane.setPrefSize(600, 800) ;
         Label CV = new Label("Lorem Ipsum Dolor Sit Amet") ;
-        root.getChildren().add(CV) ;
+        anchorPane.getChildren().add(CV) ;
         Scene CVScene = new Scene(root) ;
         Stage tempStage = new Stage() ;
         tempStage.setScene(CVScene) ;
@@ -114,7 +114,7 @@ public class TutorPersonalPageController implements Initializable ,PostInitializ
         String[] infos = user.filltutorinfos();
         List<String> courses = corso.fillCourses() ;
 
-        if (infos.equals(null)) {
+        if (infos == null) {
             aboutme.setText("");
             sessioninfos.setText("");
             contactnumbers.setText("");
@@ -145,7 +145,5 @@ public class TutorPersonalPageController implements Initializable ,PostInitializ
         stage.showAndWait();
     }
 
-    public void postInitialize(ArrayList<Object> params){
 
-    }
 }

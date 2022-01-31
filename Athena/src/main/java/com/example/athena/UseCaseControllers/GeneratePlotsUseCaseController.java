@@ -14,25 +14,25 @@ public class GeneratePlotsUseCaseController
     {
         ArrayList<XYChart.Series<String, Number>> plotsList  = new ArrayList<>() ;
         String activityType = searchQuery.getActivityType().replace(" ", "_") ;
-        String periodType = searchQuery.getPeriodTypeType().replace(" ", "_") ;
+
 
         switch(ActivityTypesEnum.valueOf(activityType))
         {
-            case All :
+            case ALL :
                 plotsList.add(retrieveSeriesLectureTime()) ;
                 plotsList.add(retrieveSeriesStudySession()) ;
                 plotsList.add(retrieveSeriesOther()) ;
                 return new ActivityPlotsBean(plotsList) ;
 
-            case Lecture_Time :
+            case LECTURE_TIME:
                 plotsList.add(retrieveSeriesLectureTime()) ;
                 return new ActivityPlotsBean(plotsList) ;
 
-            case Study_session :
+            case STUDY_SESSION:
                 plotsList.add(retrieveSeriesStudySession()) ;
                 return new ActivityPlotsBean(plotsList) ;
 
-            case Other :
+            case OTHER:
                 plotsList.add(retrieveSeriesOther()) ;
                 return new ActivityPlotsBean(plotsList) ;
 

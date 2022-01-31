@@ -22,9 +22,6 @@ import static javafx.fxml.FXMLLoader.load;
 
 public class PlotPageGraphicalController implements Initializable
 {
-    private Parent root;
-    private Stage stage;
-    private Scene scene;
 
     @FXML
     private ChoiceBox<String> activityTypeChoiceBox ;
@@ -41,11 +38,7 @@ public class PlotPageGraphicalController implements Initializable
         switcher.switcher(event, "CalendarPage.fxml");
     }
 
-    public void onLogoutButtonClick(ActionEvent event) throws IOException {
-        root = load(Objects.requireNonNull(getClass().getResource("LoginPage.fxml")));
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "LoginPage.fxml");
-    }
+
 
     public void generatePlot()
     {

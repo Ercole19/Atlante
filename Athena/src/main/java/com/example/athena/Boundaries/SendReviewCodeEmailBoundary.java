@@ -14,6 +14,12 @@ public class SendReviewCodeEmailBoundary
 
     private static final byte[] buff = new byte[256] ;
 
+
+    private SendReviewCodeEmailBoundary(){
+
+    }
+
+
     private static void createConnection() throws IOException
     {
         InetAddress address = InetAddress.getByName("localhost");

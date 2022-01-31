@@ -21,9 +21,7 @@ import static javafx.fxml.FXMLLoader.load;
 
 public class controllerSearchTutor {
 
-    private Scene scene;
-    private Stage stage ;
-    private Parent root ;
+
 
     @FXML
     TextField searchBar ;
@@ -80,7 +78,6 @@ public class controllerSearchTutor {
     }
 
     public void onLogoutButtonClick(ActionEvent event) throws IOException {
-        root = load(Objects.requireNonNull(getClass().getResource("LoginPage.fxml")));
         SceneSwitcher switcher = new SceneSwitcher();
         switcher.switcher(event, "LoginPage.fxml");
     }

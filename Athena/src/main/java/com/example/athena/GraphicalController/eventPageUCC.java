@@ -26,7 +26,6 @@ public class eventPageUCC  {
             evento.setEndbyString(eventinfos[i + 2]);
             evento.setDescription(eventinfos[i + 3]);
             result.add(evento);
-            System.out.println(evento.getEnd().toString());
             i = i + 4;
         }
 

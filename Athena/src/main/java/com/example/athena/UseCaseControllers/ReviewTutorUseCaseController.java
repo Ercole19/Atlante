@@ -12,6 +12,7 @@ import com.example.athena.GraphicalController.ReviewTutorSendUsernameBean;
 import com.example.athena.GraphicalController.SendReviewBean;
 import com.example.athena.GraphicalController.TutoringInformationBean;
 
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 
 public class ReviewTutorUseCaseController
@@ -19,14 +20,14 @@ public class ReviewTutorUseCaseController
     public String generateReview(ReviewTutorSendUsernameBean usernameBean) throws TutorReviewException, SendEmailException
     {
         String studentUsername = usernameBean.getUsername() ;
-        SubjectLabels subject = usernameBean.getSubject() ;
-        LocalDate day = usernameBean.getDay() ;
-        int startHour = usernameBean.getStartHour() ;
-        int startMinute = usernameBean.getStartMinute() ;
-        int endHour = usernameBean.getEndHour() ;
-        int endMinute = usernameBean.getEndMinute() ;
 
-        String reviewCode = TutorReviewCodesGenerator.generateReviewCode(5) ;
+
+        String reviewCode = null;
+        try {
+            reviewCode = TutorReviewCodesGenerator.generateReviewCode(5);
+        } catch (NoSuchAlgorithmException e) {
+            throw new TutorReviewException("Unable to generate review code");
+        }
 
         ReviewEntity review = new ReviewEntity(reviewCode, user.getUser().getEmail(), studentUsername, subject, day,
                 startHour, startMinute, endHour, endMinute) ;

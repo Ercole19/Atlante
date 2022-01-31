@@ -2,5 +2,5 @@ package com.example.athena.Entities;
 
 public enum TimePeriodsEnum
 {
-    Last_week, Last_two_weeks, Last_Month, From_beginning
+    LAST_WEEK, LAST_TWO_WEEKS, LAST_MONTH, FROM_BEGINNING
 }

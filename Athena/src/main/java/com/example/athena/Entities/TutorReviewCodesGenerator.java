@@ -1,12 +1,19 @@
 package com.example.athena.Entities;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class TutorReviewCodesGenerator
 {
-    public static String generateReviewCode(int length)
+    private TutorReviewCodesGenerator(){
+
+    }
+
+
+    public static String generateReviewCode(int length) throws NoSuchAlgorithmException
     {
-        Random random = new Random() ;
+        Random random = SecureRandom.getInstanceStrong();
         String charsPool = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" ;
         char[] code = new char[length] ;
         for(int i = 0; i < length; i++)

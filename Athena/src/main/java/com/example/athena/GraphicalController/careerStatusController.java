@@ -32,8 +32,8 @@ public class careerStatusController implements Initializable {
 
     @FXML
     public void initialize(URL url , ResourceBundle rb) {
-        ObservableList<PieChart.Data> examsPieChartData = FXCollections.observableArrayList() ;
-        ObservableList<PieChart.Data> examsPieChartDatacfus = FXCollections.observableArrayList() ;
+        ObservableList<PieChart.Data> examsPieChartData ;
+        ObservableList<PieChart.Data> examsPieChartDatacfus  ;
         exam = new examdao() ;
         examsPieChartData = exam.loadData() ;
         examsPieChartDatacfus = exam.loadData2() ;

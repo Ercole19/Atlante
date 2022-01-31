@@ -5,13 +5,10 @@ import javafx.scene.control.ButtonType;
 
 import java.sql.*;
 
-public class userdao {
+public class userdao extends AbstractDAO {
 
 
 
-    private String user = "test";
-    private String Password = "test";
-    private String dbUrl = "jdbc:mysql://78.13.194.135/athena";
     private String queryFind = " SELECT * FROM utenti WHERE  email = ? and password = ? ";
     private String queryRegister = " INSERT INTO athena.utenti (email, password, type , nome  ,surname ) VALUES (? , ? , ? , ? , ? )";
     private String getType = "SELECT type FROM utenti WHERE email = ?";
@@ -30,8 +27,7 @@ public class userdao {
             e.getMessage();
         }
 
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, Password);
-             PreparedStatement stmt = connection.prepareStatement(queryFind, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+        try (PreparedStatement stmt = this.getConnection().prepareStatement(queryFind, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
 
             stmt.setString(1, emailUtente);
             stmt.setString(2, pass);
@@ -61,8 +57,7 @@ public class userdao {
             e.getMessage();
         }
 
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, Password);
-             PreparedStatement stmt = connection.prepareStatement(queryRegister, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);) {
+        try (PreparedStatement stmt = this.getConnection().prepareStatement(queryRegister, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);) {
             stmt.setString(1, email);
             stmt.setString(2, password);
             stmt.setString(3, type);
@@ -78,7 +73,7 @@ public class userdao {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Email not valid");
                 alert.showAndWait();
             } else {
-                System.out.println(exception.getMessage());
+                exception.getMessage() ;
             }
         }
         return false;
@@ -87,7 +82,7 @@ public class userdao {
 
     public Object getuserType(String email) {
 
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, Password); PreparedStatement statement = connection.prepareStatement(getType)) {
+        try ( PreparedStatement statement = this.getConnection().prepareStatement(getType)) {
 
             statement.setString(1, email);
             ResultSet set = statement.executeQuery();
@@ -107,7 +102,7 @@ public class userdao {
 
     public String[] filltutorinfos() {
         String[] strArray1 = new String[3];
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, Password); PreparedStatement statement = connection.prepareStatement(filltutor)) {
+        try ( PreparedStatement statement = this.getConnection().prepareStatement(filltutor)) {
 
             //declare with size
             ResultSet set = statement.executeQuery();
@@ -115,7 +110,6 @@ public class userdao {
                 strArray1[0] = set.getString(1);
                 strArray1[1] = set.getString(2);
                 strArray1[2] = set.getString(3);
-                System.out.println(strArray1);
 
 
             }
@@ -130,12 +124,12 @@ public class userdao {
 
 
     public void settutorinfos(String about, String sesinf, String contnum) {
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, Password); PreparedStatement statement = connection.prepareStatement(setTutor, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
+        try ( PreparedStatement statement = this.getConnection().prepareStatement(setTutor, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
             statement.setString(1, about);
             statement.setString(2, sesinf);
             statement.setString(3, contnum);
 
-            System.out.println(statement);
+
             statement.executeUpdate();
         } catch (SQLException exc) {
             exc.getMessage();
@@ -143,11 +137,11 @@ public class userdao {
     }
 
     public void updatetutorinfos(String about, String sesinf, String contnum) {
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, Password); PreparedStatement statement = connection.prepareStatement(updatetutor, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
+        try ( PreparedStatement statement = this.getConnection().prepareStatement(updatetutor, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
             statement.setString(1, about);
             statement.setString(2, sesinf);
             statement.setString(3, contnum);
-            System.out.println(statement);
+
             statement.executeUpdate();
         } catch (SQLException exc) {
             exc.getMessage();
@@ -158,7 +152,7 @@ public class userdao {
     public String[] findTutorByCourse(String corso) {
         String[] tutorInfos = new String[500];
         int i = 0;
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, Password); PreparedStatement statement = connection.prepareStatement(searchTutor)) {
+        try ( PreparedStatement statement = this.getConnection().prepareStatement(searchTutor)) {
             statement.setString(1, corso);
             statement.setString(2, corso);
             //declare with size
@@ -185,7 +179,7 @@ public class userdao {
     public String[] findTutorByName(String nome) {
         String[] tutorInfos = new String[500];
         int i = 0;
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, Password); PreparedStatement statement = connection.prepareStatement(searchByName)) {
+        try ( PreparedStatement statement = this.getConnection().prepareStatement(searchByName)) {
             statement.setString(1, nome);
             //declare with size
             ResultSet set = statement.executeQuery();

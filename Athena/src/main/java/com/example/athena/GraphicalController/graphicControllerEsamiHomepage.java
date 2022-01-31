@@ -33,7 +33,7 @@ import static javafx.fxml.FXMLLoader.load;
 public class graphicControllerEsamiHomepage implements Initializable {
     private Stage stage;
     private Scene scene;
-    private Parent root;
+
     @FXML
     private TableView<examEntityBean> examTable ;
     @FXML
@@ -133,7 +133,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
                     cancella.setFont(Font.font("Arial Rounded MT Bold" , 40)  );
                     cancella.setFill(Color.RED);
 
-                    final Button editButton = new Button("Edit ") ;
+                    editButton = new Button("Edit ") ;
 
                     editButton.setOnAction(event -> {
                         examEntityBean exam = examTable.getSelectionModel().getSelectedItem();
@@ -142,6 +142,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
                         fxmlLoader.setLocation(switcher.generateUrl("Aggiungi_Esame_view.fxml")) ;
                         try {
                             fxmlLoader.load();
+
                         }catch (IOException exc) {
                             exc.getCause() ;
                         }
@@ -153,7 +154,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
                         controller.setOldExamName(exam.getExamName());
                         controller.setUpdate(true);
                         Parent parent = fxmlLoader.getRoot() ;
-                        Stage stage = new Stage() ;
+                        stage = new Stage() ;
                         stage.setScene(new Scene(parent) );
                         stage.initStyle(StageStyle.UTILITY);
                         stage.show();
@@ -190,7 +191,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
 
 
                 } ;
-                return cell ;
+
             }
         };
         colEDit.setCellFactory(cellFactory);
