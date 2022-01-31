@@ -5,8 +5,6 @@ package com.example.athena.GraphicalController;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
-import java.time.LocalDate;
-
 public class examEntityBean {
     private String examName;
     private int votoEsame;

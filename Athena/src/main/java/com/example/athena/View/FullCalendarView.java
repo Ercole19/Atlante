@@ -2,20 +2,14 @@ package com.example.athena.View;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import com.example.athena.View.AnchorPaneNode ;
-import javafx.util.converter.LocalDateTimeStringConverter;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class FullCalendarView {
     private ArrayList<AnchorPaneNode> allCalendarDays = new ArrayList<>(35);

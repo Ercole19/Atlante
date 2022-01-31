@@ -1,11 +1,6 @@
 package com.example.athena.Entities;
 
 
-
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.Locale;
-
 public class entityExam {
     protected String nome;
     protected int voto;

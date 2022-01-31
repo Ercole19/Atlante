@@ -2,10 +2,6 @@ package com.example.athena.GraphicalController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 
 import java.io.IOException;
 

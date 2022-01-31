@@ -4,7 +4,6 @@ import com.example.athena.Exceptions.TutorReviewException;
 import com.example.athena.UseCaseControllers.ReviewTutorUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,7 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Objects;
 
 import static javafx.fxml.FXMLLoader.load;
 

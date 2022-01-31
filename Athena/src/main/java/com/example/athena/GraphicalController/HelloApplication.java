@@ -1,9 +1,6 @@
 package com.example.athena.GraphicalController;
 
-import com.example.athena.GraphicalController.SceneSwitcher;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -11,7 +8,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 
 import static javafx.fxml.FXMLLoader.load;
 

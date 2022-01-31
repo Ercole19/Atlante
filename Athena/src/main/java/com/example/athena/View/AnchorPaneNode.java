@@ -1,8 +1,6 @@
 package com.example.athena.View;
 
 import com.example.athena.GraphicalController.SceneSwitcher;
-import com.example.athena.GraphicalController.TutorSearchResultBean;
-import com.example.athena.UseCaseControllers.SearchTutorUseCaseController;
 import com.example.athena.View.SceneDecorators.SearchResultFormatterComponent;
 import com.example.athena.View.SceneDecorators.SearchResultFormatterScrollBar;
 import javafx.fxml.FXMLLoader;
