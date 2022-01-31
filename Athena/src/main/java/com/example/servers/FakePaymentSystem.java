@@ -1,10 +1,16 @@
 package com.example.servers;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.SecureRandom;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.StreamHandler;
 
 
 public class FakePaymentSystem implements Runnable
@@ -12,11 +18,15 @@ public class FakePaymentSystem implements Runnable
     private ServerSocket serverSocket ;
     private final SecureRandom random ;
     private byte[] buffer = new byte[5] ;
+    private Logger logger ;
 
     private FakePaymentSystem()
     {
         try {
             serverSocket = new ServerSocket(6351) ;
+            logger = Logger.getLogger(this.getClass().getName()) ;
+            logger.addHandler(new StreamHandler(new BufferedOutputStream(new FileOutputStream("src/main/resources/fakePaymentSystemLog")),
+                    new SimpleFormatter())) ;
         }
         catch (IOException e)
         {
@@ -38,8 +48,16 @@ public class FakePaymentSystem implements Runnable
             Socket clientSocket = this.serverSocket.accept();
             byte[] buff = new byte[2] ;
 
-            if(this.executePayment()) buff[0] = 't' ;
-            else buff[0] = 'f' ;
+            if(this.executePayment())
+            {
+                buff[0] = 't' ;
+                logger.log(Level.INFO, "Payment successful for {0}", clientSocket.getInetAddress()) ;
+            }
+            else
+            {
+                buff[0] = 'f' ;
+                logger.log(Level.INFO,"Payment failed for {0}", clientSocket.getInetAddress()) ;
+            }
 
             clientSocket.getOutputStream().write(buff, 0, buff.length) ;
         }
@@ -69,7 +87,7 @@ public class FakePaymentSystem implements Runnable
             int readChars ;
             do
             {
-                System.out.println("Type 'quit' to quit") ;
+                logger.log(Level.INFO, "Type 'quit' to quit") ;
                 readChars = System.in.read(buffer, 0, 5) ;
             }while(readChars != 5 || Arrays.equals(buffer, "quit".getBytes())) ;
         }catch (IOException e)

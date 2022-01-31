@@ -1,5 +1,6 @@
 package com.example.athena.use_case_controllers;
 
+import com.example.athena.boundaries.SendReviewCodeEmailBoundary;
 import com.example.athena.entities.ReviewEntity;
 import com.example.athena.entities.TutorReviewCodesGenerator;
 import com.example.athena.exceptions.SendEmailException;
@@ -16,8 +17,6 @@ public class ReviewTutorUseCaseController
     public String generateReview(ReviewTutorSendUsernameBean usernameBean) throws TutorReviewException, SendEmailException
     {
 
-
-
         String reviewCode = null;
         try {
             reviewCode = TutorReviewCodesGenerator.generateReviewCode(5);
@@ -28,7 +27,7 @@ public class ReviewTutorUseCaseController
         ReviewEntity review = new ReviewEntity(usernameBean, reviewCode) ;
         review.toDB() ;
 
-        //SendReviewCodeEmailBoundary.sendEmail(studentUsername, reviewCode) ;
+        SendReviewCodeEmailBoundary.sendEmail(usernameBean.getUsername(), reviewCode) ;
 
         return reviewCode ;
     }

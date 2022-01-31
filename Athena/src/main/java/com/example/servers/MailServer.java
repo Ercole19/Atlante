@@ -8,6 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.Properties;
+import java.util.logging.*;
 
 public class MailServer
 {
@@ -15,8 +16,14 @@ public class MailServer
 
     private static final byte[] buff = new byte[256] ;
 
+    private static final Logger LOGGER = Logger.getLogger(MailServer.class.getName()) ;
+
     public static void main(String[] args) throws IOException
     {
+        StreamHandler myHandler = new StreamHandler(new BufferedOutputStream(new FileOutputStream("src/main/resources/mailServerLog")),
+                new SimpleFormatter()) ;
+        LOGGER.addHandler(myHandler) ;
+
         try
         {
             socket = new ServerSocket(4545) ;
@@ -35,10 +42,10 @@ public class MailServer
         properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory") ;
         properties.put("mail.smtp.ssl.checkserveridentity", true) ;
 
-        System.out.println("Insert the smtp username: ") ;
-        String username = new String(buff, 0, System.in.read(buff)) ;
-        System.out.println("Insert the smtp password: ") ;
-        String password = new String(buff, 0, System.in.read(buff)) ;
+        LOGGER.log(Level.INFO, "Insert the smtp username: ") ;
+        String username = new String(buff, 0, System.in.read(buff) -1) ;
+        LOGGER.log(Level.INFO, "Insert the smtp password: ") ;
+        String password = new String(buff, 0, System.in.read(buff) -1) ;
 
         Session session = Session.getDefaultInstance(properties, new Authenticator() {
             @Override
@@ -71,7 +78,7 @@ public class MailServer
 
                 Transport.send(message) ;
 
-                System.out.println("Message sent to " + tokens[0]) ;
+                LOGGER.log(Level.INFO,"Message sent to {0}", tokens[0]) ;
 
                 out.write("T".getBytes(), 0, "T".length()) ;
             }catch (MessagingException e)
