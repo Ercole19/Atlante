@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static javafx.fxml.FXMLLoader.NULL_KEYWORD;
 import static javafx.fxml.FXMLLoader.load;
 
 public class SceneSwitcher {
@@ -39,9 +40,8 @@ public class SceneSwitcher {
     }
 
 
-    public URL generateUrl(String fxmlToLoad) {
+    public URL generateUrl(String fxmlToLoad)throws MalformedURLException {
         URL returnUrl = null;
-        try {
             if(System.getProperty("os.name").contains("Windows"))
             {
                 returnUrl = new URL("file:/" + System.getProperty("user.dir") + "/src/main/resources/com/example/athena/fxml/" + fxmlToLoad) ;
@@ -50,13 +50,6 @@ public class SceneSwitcher {
             {
                 returnUrl = new URL("file://" + System.getProperty("user.dir") + "/src/main/resources/com/example/athena/fxml/" + fxmlToLoad);
             }
-        }
-        catch(MalformedURLException e)
-        {
-            e.printStackTrace() ;
-        }
-        finally {
-            return returnUrl ;
-        }
+            return returnUrl;
     }
 }

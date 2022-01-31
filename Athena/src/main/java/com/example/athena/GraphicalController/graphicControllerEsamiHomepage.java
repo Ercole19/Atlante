@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -143,8 +144,8 @@ public class graphicControllerEsamiHomepage implements Initializable {
                         examEntityBean exam = examTable.getSelectionModel().getSelectedItem();
                         FXMLLoader fxmlLoader =  new FXMLLoader();
                         SceneSwitcher switcher = new SceneSwitcher() ;
-                        fxmlLoader.setLocation(switcher.generateUrl("Aggiungi_Esame_view.fxml")) ;
                         try {
+                            fxmlLoader.setLocation(switcher.generateUrl("Aggiungi_Esame_view.fxml")) ;
                             fxmlLoader.load();
 
                         }catch (IOException exc) {
