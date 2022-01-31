@@ -29,11 +29,10 @@ public class ReviewTutorUseCaseController
             throw new TutorReviewException("Unable to generate review code");
         }
 
-        ReviewEntity review = new ReviewEntity(reviewCode, user.getUser().getEmail(), studentUsername, subject, day,
-                startHour, startMinute, endHour, endMinute) ;
+        ReviewEntity review = new ReviewEntity(usernameBean, reviewCode) ;
         review.toDB() ;
 
-        SendReviewCodeEmailBoundary.sendEmail(studentUsername, reviewCode) ;
+        //SendReviewCodeEmailBoundary.sendEmail(studentUsername, reviewCode) ;
 
         return reviewCode ;
     }

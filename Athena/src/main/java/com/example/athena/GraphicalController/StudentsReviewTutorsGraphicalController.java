@@ -75,27 +75,27 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
         root = reviewSubscene.getRoot() ;
 
         int reviewStars ;
-        RadioButton button ;
-
-        if((button = ((RadioButton) root.lookup("#oneStarButton"))).isSelected())
+        RadioButton button = (RadioButton) root.lookup("#oneStarButton") ;
+        String selectedButtonID = (String) button.getToggleGroup().getSelectedToggle().getProperties().get("fx:id") ;
+        if(selectedButtonID.equals("#oneStarButton"))
         {
-            reviewStars = Integer.parseInt(button.getText()) ;
+            reviewStars = 1 ;
         }
-        else if((button = ((RadioButton) root.lookup("#twoStarButton"))).isSelected())
+        else if(selectedButtonID.equals("#twoStarButton"))
         {
-            reviewStars = Integer.parseInt(button.getText()) ;
+            reviewStars = 2 ;
         }
-        else if((button = ((RadioButton) root.lookup("#threeStarButton"))).isSelected())
+        else if(selectedButtonID.equals("#threeStarButton"))
         {
-            reviewStars = Integer.parseInt(button.getText()) ;
+            reviewStars = 3 ;
         }
-        else if((button = ((RadioButton) root.lookup("#fourStarButton"))).isSelected())
+        else if(selectedButtonID.equals("#fourStarButton"))
         {
-            reviewStars = Integer.parseInt(button.getText()) ;
+            reviewStars = 4 ;
         }
-        else if((button = ((RadioButton) root.lookup("#fiveStarButton"))).isSelected())
+        else if(selectedButtonID.equals("#fiveStarButton"))
         {
-            reviewStars = Integer.parseInt(button.getText()) ;
+            reviewStars = 5 ;
         }
         else
         {

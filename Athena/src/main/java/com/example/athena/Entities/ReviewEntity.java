@@ -1,6 +1,7 @@
 package com.example.athena.Entities;
 
 import com.example.athena.Exceptions.TutorReviewException;
+import com.example.athena.GraphicalController.ReviewTutorSendUsernameBean;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,16 +17,15 @@ public class ReviewEntity
     private LocalTime endTime ;
 
 
-    public ReviewEntity(String reviewCode,String tutorUsername, String studentUsername, SubjectLabels subject, LocalDate day,
-                        int startHour, int startMinute, int endHour, int endMinute)
+    public ReviewEntity(ReviewTutorSendUsernameBean usernameBean, String reviewCode)
     {
-        setReviewCode(reviewCode);
-        setStudentUsername(studentUsername) ;
-        setTutorUsername(tutorUsername) ;
-        setSubject(subject) ;
-        setDay(day) ;
-        setStartTime(startHour, startMinute) ;
-        setEndTime(endHour, endMinute) ;
+        setReviewCode(reviewCode) ;
+        setStudentUsername(usernameBean.getUsername()) ;
+        setTutorUsername(user.getUser().getEmail()) ;
+        setSubject(usernameBean.getSubject()) ;
+        setDay(usernameBean.getDay()) ;
+        setStartTime(usernameBean.getStartHour(), usernameBean.getStartMinute()) ;
+        setEndTime(usernameBean.getEndHour(), usernameBean.getEndMinute()) ;
     }
 
     public ReviewEntity(String reviewCode, String tutorUsername, String studentUsername, SubjectLabels subject, LocalDate day,

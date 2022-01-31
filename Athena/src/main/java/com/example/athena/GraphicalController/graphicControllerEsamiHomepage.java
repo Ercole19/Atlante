@@ -118,18 +118,22 @@ public class graphicControllerEsamiHomepage implements Initializable {
 
             @Override
             public TableCell<examEntityBean, Void> call(TableColumn<examEntityBean, Void> examEntityBeanVoidTableColumn) {
-                final TableCell<examEntityBean , Void> cell = new TableCell<examEntityBean , Void>() {
+                return new TableCell<examEntityBean , Void>() {
 
 
 
             @Override
             public void updateItem (Void item , boolean empty ) {
                 super.updateItem(item , empty);
+
+                Text cancella = null ;
+                Button editButton = null ;
+                HBox managebtn = null ;
                 if (empty ) {
                     setGraphic(null);
                 }
                 else {
-                    final Text cancella = new Text("-") ;
+                    cancella = new Text("-") ;
                     cancella.setFont(Font.font("Arial Rounded MT Bold" , 40)  );
                     cancella.setFill(Color.RED);
 
@@ -180,7 +184,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
                         }
                     });
 
-                    HBox managebtn = new HBox(editButton , cancella) ;
+                    managebtn = new HBox(editButton , cancella) ;
                     managebtn.setStyle("-fx-alignment : center");
                     HBox.setMargin(editButton, new Insets(2,2,0,3)) ;
                     HBox.setMargin(cancella , new Insets(2,3,0,2));

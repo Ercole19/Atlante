@@ -34,6 +34,7 @@ public class MailServer
         properties.put("mail.smtp.auth", "true") ;
         properties.put("mail.smtp.socketFactory.port", "465") ;
         properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory") ;
+        properties.put("mail.smtp.ssl.checkserveridentity", true) ;
 
         System.out.println("Insert the smtp username: ") ;
         String username = new String(buff, 0, System.in.read(buff)) ;
