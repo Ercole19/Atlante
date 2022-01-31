@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 
-public class FakePaymentSystem
+public class FakePaymentSystem implements Runnable
 {
     private ServerSocket serverSocket ;
     private final SecureRandom random ;
+    private byte[] buffer = new byte[5] ;
 
     private FakePaymentSystem()
     {
@@ -47,12 +49,33 @@ public class FakePaymentSystem
         }
     }
 
+
+
     public static void main(String[] args)
     {
         FakePaymentSystem paymentSystem = new FakePaymentSystem() ;
-        //while(true)
-        //{
-          //  paymentSystem.clientAcceptance() ;
-        //}
+        (new Thread(paymentSystem)).start() ;
+        do
+        {
+            paymentSystem.clientAcceptance() ;
+        }while(!Arrays.equals(paymentSystem.buffer, "quit".getBytes())) ;
+    }
+
+    @Override
+    public void run()
+    {
+        try
+        {
+            int readChars ;
+            do
+            {
+                System.out.println("Type 'quit' to quit") ;
+                readChars = System.in.read(buffer, 0, 5) ;
+            }while(readChars != 5 || Arrays.equals(buffer, "quit".getBytes())) ;
+        }catch (IOException e)
+        {
+            buffer = "quit".getBytes() ;
+            System.exit(1) ;
+        }
     }
 }

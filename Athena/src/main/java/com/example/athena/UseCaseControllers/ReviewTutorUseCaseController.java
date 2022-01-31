@@ -2,9 +2,7 @@ package com.example.athena.UseCaseControllers;
 
 import com.example.athena.Boundaries.SendReviewCodeEmailBoundary;
 import com.example.athena.Entities.ReviewEntity;
-import com.example.athena.Entities.SubjectLabels;
 import com.example.athena.Entities.TutorReviewCodesGenerator;
-import com.example.athena.Entities.user;
 import com.example.athena.Exceptions.SendEmailException;
 import com.example.athena.Exceptions.TutorReviewException;
 import com.example.athena.GraphicalController.ReviewCodeBean;
@@ -13,14 +11,12 @@ import com.example.athena.GraphicalController.SendReviewBean;
 import com.example.athena.GraphicalController.TutoringInformationBean;
 
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
 
 public class ReviewTutorUseCaseController
 {
     public String generateReview(ReviewTutorSendUsernameBean usernameBean) throws TutorReviewException, SendEmailException
     {
         String studentUsername = usernameBean.getUsername() ;
-
 
         String reviewCode = null;
         try {
@@ -32,7 +28,7 @@ public class ReviewTutorUseCaseController
         ReviewEntity review = new ReviewEntity(usernameBean, reviewCode) ;
         review.toDB() ;
 
-        //SendReviewCodeEmailBoundary.sendEmail(studentUsername, reviewCode) ;
+        SendReviewCodeEmailBoundary.sendEmail(studentUsername, reviewCode) ;
 
         return reviewCode ;
     }
@@ -48,7 +44,6 @@ public class ReviewTutorUseCaseController
 
     public void sendReview(SendReviewBean review) throws TutorReviewException
     {
-
         ReviewEntity.finalizeReview(review.getReviewStars() , review.getCode());
     }
 }

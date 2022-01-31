@@ -23,7 +23,6 @@ public class MailServer
         }
         catch(SocketException e)
         {
-            System.out.println(e.getMessage()) ;
             System.exit(1) ;
         }
 

@@ -21,7 +21,7 @@ public abstract class SearchResultFormatterDecorator extends SearchResultFormatt
         return this.component.buildTutorSearchResultsScene(containerWidth, containerHeight, results);
     }
 
-
+    @Override
     public AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, ArrayList<eventBean> results)
     {
         return this.component.buildEventSearchResultsScene(containerWidth, containerHeight, results);

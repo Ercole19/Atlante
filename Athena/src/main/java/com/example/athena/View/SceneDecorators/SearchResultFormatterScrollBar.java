@@ -22,42 +22,14 @@ public class SearchResultFormatterScrollBar extends  SearchResultFormatterDecora
     public AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, ArrayList<TutorSearchResultBean> results)
     {
         AnchorPane resultPane = super.buildTutorSearchResultsScene(containerWidth -20, containerHeight, results) ;
-        resultPane.setPrefSize(containerWidth, containerHeight) ;
-        ScrollBar scrollBar = this.getScrollBar(containerWidth, containerHeight, results.size()*100.0) ;
-        resultPane.getChildren().add(scrollBar) ;
-
-        scrollBar.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number newVal) {
-                SearchResultsGraphicalController pageGraphController = new SearchResultsGraphicalController() ;
-                pageGraphController.scrollResults((VBox) resultPane.lookup("#resultList"), newVal) ;
-            }
-        });
-
-        return resultPane ;
+        return applyScrollBar(resultPane, containerWidth, containerHeight, results.size()*100.0) ;
     }
-
-
-
-
 
     @Override
     public AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, ArrayList<eventBean> results)
     {
         AnchorPane resultPane = super.buildEventSearchResultsScene(containerWidth -20, containerHeight, results) ;
-        resultPane.setPrefSize(containerWidth, containerHeight) ;
-        ScrollBar scrollBar = this.getScrollBar(containerWidth, containerHeight, results.size()*100.0) ;
-        resultPane.getChildren().add(scrollBar) ;
-
-        scrollBar.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number newVal) {
-                SearchResultsGraphicalController pageGraphController = new SearchResultsGraphicalController() ;
-                pageGraphController.scrollResults((VBox) resultPane.lookup("#resultList"), newVal) ;
-            }
-        });
-
-        return resultPane ;
+        return applyScrollBar(resultPane, containerWidth, containerHeight, results.size()*100.0) ;
     }
 
 
@@ -70,5 +42,22 @@ public class SearchResultFormatterScrollBar extends  SearchResultFormatterDecora
         scrollBar.setMin(0) ;
         scrollBar.setMax(listSize - containerHeight + 25.0) ;
         return scrollBar ;
+    }
+
+    private AnchorPane applyScrollBar(AnchorPane pane, double containerWidth, double containerHeight, double size)
+    {
+        pane.setPrefSize(containerWidth, containerHeight) ;
+        ScrollBar scrollBar = this.getScrollBar(containerWidth, containerHeight, size) ;
+        pane.getChildren().add(scrollBar) ;
+
+        scrollBar.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number newVal) {
+                SearchResultsGraphicalController pageGraphController = new SearchResultsGraphicalController() ;
+                pageGraphController.scrollResults((VBox) pane.lookup("#resultList"), newVal) ;
+            }
+        });
+
+        return pane ;
     }
 }
