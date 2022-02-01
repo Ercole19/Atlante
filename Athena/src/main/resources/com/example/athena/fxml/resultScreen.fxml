@@ -17,7 +17,7 @@
                         <Font size="26.0" />
                      </font>
                   </Label>
-                  <Button layoutX="930.0" layoutY="36.0" mnemonicParsing="false" onAction="#clickOnPersonalPage" prefHeight="26.0" prefWidth="95.0" text="Visit page" />
+                  <Button layoutX="930.0" layoutY="36.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Visit page" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="100.0" prefWidth="1099.0" style="-fx-background-color: #faeeae; -fx-border-color: #000000;">
@@ -27,7 +27,7 @@
                         <Font size="26.0" />
                      </font>
                   </Label>
-                  <Button layoutX="932.0" layoutY="37.0" mnemonicParsing="false" onAction="#clickOnPersonalPage" prefHeight="26.0" prefWidth="95.0" text="Visit page" />
+                  <Button layoutX="932.0" layoutY="37.0" mnemonicParsing="false"  prefHeight="26.0" prefWidth="95.0" text="Visit page" />
                </children>
             </AnchorPane>
          </children>

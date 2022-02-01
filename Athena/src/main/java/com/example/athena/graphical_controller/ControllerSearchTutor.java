@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javafx.fxml.FXMLLoader.load;
 
 public class ControllerSearchTutor {
 
@@ -52,15 +51,6 @@ public class ControllerSearchTutor {
         resultsBox.setRoot(subSceneElems) ;
     }
 
-
-
-    @Deprecated //To remove
-    public void clickOnPersonalPage(ActionEvent event) throws IOException
-    {
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "tutorPersonalPage.fxml");
-    }
-
     public void clickOnBackButton(ActionEvent event) throws IOException
     {
 
@@ -72,10 +62,5 @@ public class ControllerSearchTutor {
     {
         SceneSwitcher switcher = new SceneSwitcher();
         switcher.switcher(event, "StudentsReviewTutorsView.fxml");
-    }
-
-    public void onLogoutButtonClick(ActionEvent event) throws IOException {
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "LoginPage.fxml");
     }
 }

@@ -1,7 +1,9 @@
 package com.example.athena.view;
+import com.example.athena.boundaries.IsbnCheckBoundary;
 import com.example.athena.view.scene_decorators.TutorPageComponent;
 import javafx.scene.Parent;
 import com.example.athena.graphical_controller.SceneSwitcher;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
@@ -18,7 +20,8 @@ public class TutorPageView extends TutorPageComponent
         }
         catch(IOException e)
         {
-            e.printStackTrace();
+            Logger logger = Logger.getLogger(IsbnCheckBoundary.class);
+            logger.error("error!", e);
         }
         return null;
     }

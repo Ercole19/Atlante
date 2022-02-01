@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public abstract class SearchResultFormatterDecorator extends SearchResultFormatterComponent
 {
-    private SearchResultFormatterComponent component ;
+    private final SearchResultFormatterComponent component ;
 
     protected SearchResultFormatterDecorator(SearchResultFormatterComponent component)
     {
@@ -26,7 +26,5 @@ public abstract class SearchResultFormatterDecorator extends SearchResultFormatt
     {
         return this.component.buildEventSearchResultsScene(containerWidth, containerHeight, results);
     }
-
-
 
 }

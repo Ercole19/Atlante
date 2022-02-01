@@ -11,6 +11,7 @@ module com.example.athena {
     requires eu.hansolo.tilesfx;
     requires java.sql;
     requires java.mail;
+    requires log4j;
 
     opens com.example.athena.graphical_controller to javafx.fxml;
     exports com.example.athena.graphical_controller;
