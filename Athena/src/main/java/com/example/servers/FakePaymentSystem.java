@@ -1,5 +1,7 @@
 package com.example.servers;
 
+import com.example.athena.boundaries.IsbnCheckBoundary;
+
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,7 +20,7 @@ public class FakePaymentSystem implements Runnable
     private ServerSocket serverSocket ;
     private final SecureRandom random ;
     private byte[] buffer = new byte[5] ;
-    private Logger logger ;
+    private Logger logger;
 
     private FakePaymentSystem()
     {
@@ -30,7 +32,8 @@ public class FakePaymentSystem implements Runnable
         }
         catch (IOException e)
         {
-            e.printStackTrace() ;
+            org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(IsbnCheckBoundary.class);
+            logger.error("error!", e);
             System.exit(1) ;
         }
         random = new SecureRandom() ;
@@ -63,7 +66,8 @@ public class FakePaymentSystem implements Runnable
         }
         catch (IOException e)
         {
-            e.printStackTrace() ;
+            org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(IsbnCheckBoundary.class);
+            logger.error("error!", e);
         }
     }
 

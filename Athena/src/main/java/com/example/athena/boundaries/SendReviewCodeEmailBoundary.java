@@ -1,6 +1,7 @@
 package com.example.athena.boundaries;
 
 import com.example.athena.exceptions.SendEmailException;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.net.*;
@@ -44,7 +45,8 @@ public class SendReviewCodeEmailBoundary
         }
         catch(IOException e)
         {
-            e.printStackTrace() ;
+            Logger logger = Logger.getLogger(IsbnCheckBoundary.class);
+            logger.error("error!", e);
         }
     }
 

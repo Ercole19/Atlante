@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
+import org.apache.log4j.Logger;
 
 
 public class IsbnCheckBoundary {
@@ -21,14 +22,14 @@ public class IsbnCheckBoundary {
     public static void isbnCheck(String isbn) throws ISBNException {
         String url = "https://openlibrary.org/isbn/"+ isbn + ".json" ;
         try(InputStream stream = new URL (url).openStream()){
-            String json = new Scanner( stream , StandardCharsets.UTF_8).useDelimiter("\\A").next();
+            new Scanner( stream , StandardCharsets.UTF_8).useDelimiter("\\A").next();
         }
         catch (FileNotFoundException | MalformedURLException e)  {
-            e.getMessage() ;
             throw new ISBNException("Submitted ISBN does not exist");
         }
         catch (IOException e) {
-           e.printStackTrace();
+            Logger logger = Logger.getLogger(IsbnCheckBoundary.class);
+            logger.error("error!", e);
         }
     }
 }
