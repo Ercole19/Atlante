@@ -5,10 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import com.example.athena.use_case_controllers.AddEventUCC;
 import java.io.IOException;
@@ -59,13 +56,20 @@ public class AddEventController implements Initializable  {
         eventt.setStart(startHourSpinner.getValue() , startMinuteSpinner.getValue());
         eventt.setEnd(endHourSpinner.getValue() , endMinuteSpinner.getValue());
         eventt.setDescription(eventDescription.getText());
-        AddEventUCC addEventUCC = new AddEventUCC() ;
-        addEventUCC.addEvent(eventt , update , oldEventName);
+
+        if (eventt.getDescription().length() > 50 | eventt.getStart().isAfter(eventt.getEnd())){
+            Alert alert = new Alert(Alert.AlertType.ERROR , "Data not valid" , ButtonType.CLOSE) ;
+            alert.showAndWait();
+        }
+        else {
+            AddEventUCC addEventUCC = new AddEventUCC();
+            addEventUCC.addEvent(eventt, update, oldEventName);
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
+            stage.close() ;
+        }
 
 
 
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
-        stage.close() ;
     }
 
     public void clickOnX(ActionEvent event) throws IOException
@@ -105,8 +109,8 @@ public class AddEventController implements Initializable  {
         eventDate.setValue( data);
     }
 
-    public void setEventDescription(String Description) {
-        eventDescription.setText(Description);
+    public void setEventDescription(String description) {
+        eventDescription.setText(description);
     }
 
     public void setStartHourSpinner(int startHour) {
