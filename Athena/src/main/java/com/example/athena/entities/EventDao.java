@@ -7,8 +7,8 @@ import java.time.LocalTime;
 public class EventDao extends AbstractDAO {
 
     private String email = User.getUser().getEmail();
-    private String addQuery = "INSERT INTO athena.events (`dataEvento`, `eventName`, `eventStart`, `eventEnd`, `eventDesc`, `user`) values (?,?,?,?,?,?)" ;
-    private String getEventInfo = "select eventName , eventStart , eventEnd , eventDesc from athena.events where dataEvento = ? and user = ? " ;
+    private String addQuery = "INSERT INTO athena.eventi (`dataEvento`, `eventName`, `eventStart`, `eventEnd`, `eventDesc`, `utente`) values (?,?,?,?,?,?)" ;
+    private String getEventInfo = "select eventName , eventStart , eventEnd , eventDesc , dataEvento from athena.eventi where dataEvento = ? and utente = ? " ;
 
     public void addEvent(LocalDate data , String name , LocalTime start ,LocalTime end , String description) {
 
@@ -42,7 +42,8 @@ public class EventDao extends AbstractDAO {
                 eventinfos[i + 1] = String.valueOf(set.getTime(2));
                 eventinfos[i + 2] = String.valueOf(set.getTime(3));
                 eventinfos[i + 3] = set.getString(4) ;
-                i = i + 4 ;
+                eventinfos[i+4] = String.valueOf(set.getDate(5));
+                i = i + 5 ;
 
 
             }
@@ -53,6 +54,21 @@ public class EventDao extends AbstractDAO {
 
         return eventinfos ;
 
+    }
+
+    public void delete(String nome , LocalDate date) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement("call athena.delete_event(?,? ,?)" )) {
+
+            statement.setString(1,nome);
+            statement.setString(2,email);
+            statement.setDate(3, Date.valueOf(date));
+
+            statement.execute();
+
+
+        }catch (SQLException exc) {
+            exc.getMessage();
+        }
     }
 
 

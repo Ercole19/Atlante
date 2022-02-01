@@ -26,8 +26,9 @@ public class EventPageUcc {
             evento.setStartbyString(eventinfos[i + 1]);
             evento.setEndbyString(eventinfos[i + 2]);
             evento.setDescription(eventinfos[i + 3]);
+            evento.setDate(LocalDate.parse(eventinfos[i+4]));
             result.add(evento);
-            i = i + 4;
+            i = i + 5;
         }
 
 

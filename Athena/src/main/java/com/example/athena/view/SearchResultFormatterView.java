@@ -1,9 +1,11 @@
 package com.example.athena.view;
 
+import com.example.athena.entities.EventDao;
 import com.example.athena.graphical_controller.SceneSwitcher;
 import com.example.athena.graphical_controller.TutorSearchResultBean;
 import com.example.athena.graphical_controller.EventBean;
 import com.example.athena.view.scene_decorators.SearchResultFormatterComponent;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -12,6 +14,8 @@ import javafx.scene.text.Font;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SearchResultFormatterView extends SearchResultFormatterComponent {
     private static final String FONT = "System";
@@ -123,6 +127,12 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
             entryBox.add(visitPage, 3, 0) ;
 
             Button delete = new Button("delete") ;
+            delete.setOnAction(event -> {
+                EventDao eventDao = new EventDao() ;
+                eventDao.delete(result.getName() , result.getDate()) ;
+                entryBox.setStyle("-fx-border-color: #ffffff") ;
+                deleteRow(entryBox, entryBox.getRowIndex(delete));
+            });
             entryBox.add(delete, 4, 0) ;
 
             Button edit = new Button("edit") ;
@@ -133,6 +143,29 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
         }
 
         return new AnchorPane(graphicalList) ;
+    }
+
+
+    static void deleteRow(GridPane grid, final int row) {
+        Set<Node> deleteNodes = new HashSet<>();
+        for (Node child : grid.getChildren()) {
+            // get index from child
+            Integer rowIndex = GridPane.getRowIndex(child);
+
+            // handle null values for index=0
+            int r = rowIndex == null ? 0 : rowIndex;
+
+            if (r > row) {
+                // decrement rows for rows after the deleted row
+                GridPane.setRowIndex(child, r-1);
+            } else if (r == row) {
+                // collect matching rows for deletion
+                deleteNodes.add(child);
+            }
+        }
+
+        // remove nodes from row
+        grid.getChildren().removeAll(deleteNodes);
     }
 
 
