@@ -3,7 +3,7 @@ package com.example.athena.graphical_controller;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class eventBean {
+public class EventBean {
 
 
 

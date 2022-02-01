@@ -2,7 +2,7 @@ package com.example.athena.view.scene_decorators;
 
 import com.example.athena.graphical_controller.SearchResultsGraphicalController;
 import com.example.athena.graphical_controller.TutorSearchResultBean;
-import com.example.athena.graphical_controller.eventBean;
+import com.example.athena.graphical_controller.EventBean;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Orientation;
@@ -26,7 +26,7 @@ public class SearchResultFormatterScrollBar extends  SearchResultFormatterDecora
     }
 
     @Override
-    public AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, ArrayList<eventBean> results)
+    public AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, ArrayList<EventBean> results)
     {
         AnchorPane resultPane = super.buildEventSearchResultsScene(containerWidth -20, containerHeight, results) ;
         return applyScrollBar(resultPane, containerWidth, containerHeight, results.size()*100.0) ;

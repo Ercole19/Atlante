@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import static javafx.fxml.FXMLLoader.load;
 
@@ -23,18 +24,18 @@ public class SceneSwitcher {
         stage.setScene(scene);
     }
 
-    public void switcher(ActionEvent event, String fxml, ArrayList<Object> params) throws IOException {
+    public void switcher(ActionEvent event, String fxml, List<Object> params) throws IOException {
         Parent root = preload(fxml, params) ;
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene) ;
     }
 
-    public Parent preload(String fxml, ArrayList<Object> params) throws IOException{
+    public Parent preload(String fxml, List<Object> params) throws IOException{
         FXMLLoader loader = new FXMLLoader(generateUrl(fxml)) ;
         Parent root = loader.load() ;
         PostInitialize post = loader.getController() ;
-        post.postInitialize(params) ;
+        post.postInitialize((ArrayList<Object>) params) ;
         return root ;
     }
 
@@ -43,11 +44,11 @@ public class SceneSwitcher {
         URL returnUrl = null;
             if(System.getProperty("os.name").contains("Windows"))
             {
-                returnUrl = new URL("file:/" + System.getProperty("User.dir") + "/src/main/resources/com/example/athena/fxml/" + fxmlToLoad) ;
+                returnUrl = new URL("file:/" + System.getProperty("user.dir") + "/src/main/resources/com/example/athena/fxml/" + fxmlToLoad) ;
             }
             else if(System.getProperty("os.name").contains("Linux"))
             {
-                returnUrl = new URL("file://" + System.getProperty("User.dir") + "/src/main/resources/com/example/athena/fxml/" + fxmlToLoad);
+                returnUrl = new URL("file://" + System.getProperty("user.dir") + "/src/main/resources/com/example/athena/fxml/" + fxmlToLoad);
             }
             return returnUrl;
     }

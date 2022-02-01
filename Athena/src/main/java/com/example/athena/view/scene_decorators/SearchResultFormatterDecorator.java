@@ -1,7 +1,7 @@
 package com.example.athena.view.scene_decorators;
 
 import com.example.athena.graphical_controller.TutorSearchResultBean;
-import com.example.athena.graphical_controller.eventBean;
+import com.example.athena.graphical_controller.EventBean;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public abstract class SearchResultFormatterDecorator extends SearchResultFormatt
     }
 
     @Override
-    public AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, ArrayList<eventBean> results)
+    public AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, ArrayList<EventBean> results)
     {
         return this.component.buildEventSearchResultsScene(containerWidth, containerHeight, results);
     }

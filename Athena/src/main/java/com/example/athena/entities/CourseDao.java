@@ -33,7 +33,7 @@ public class CourseDao extends AbstractDAO {
 
     }
     public List<String> fillCourses () {
-        List<String> corsi = new ArrayList<String>() ;
+        List<String> corsi = new ArrayList<>() ;
         try ( PreparedStatement statement = this.getConnection().prepareStatement(getCourses, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
             statement.setString(1, emailcurrent);
             ResultSet set = statement.executeQuery() ;

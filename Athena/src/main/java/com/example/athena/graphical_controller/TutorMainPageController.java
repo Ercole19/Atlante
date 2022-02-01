@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import static javafx.fxml.FXMLLoader.load;
 
-public class tutorMainPageController {
+public class TutorMainPageController {
 
     SceneSwitcher switcher = new SceneSwitcher();
 

@@ -3,7 +3,7 @@ import com.example.athena.entities.CourseDao;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class addCourseGraphicContoller {
+public class AddCourseGraphicContoller {
     private CourseDao corso ;
     @FXML
     private TextField coursefield ;

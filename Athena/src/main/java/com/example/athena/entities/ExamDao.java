@@ -1,6 +1,6 @@
 package com.example.athena.entities;
 
-import com.example.athena.graphical_controller.examEntityBean;
+import com.example.athena.graphical_controller.ExamEntityBean;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
@@ -26,20 +26,20 @@ public class ExamDao extends AbstractDAO {
 
 
 
-    public ObservableList<examEntityBean> getExamlist()  {
+    public ObservableList<ExamEntityBean> getExamlist()  {
         try {
             Class.forName(driver) ;
         } catch (ClassNotFoundException e ) {
             e.getMessage() ;
         }
-        ObservableList<examEntityBean> examlist = FXCollections.observableArrayList();
+        ObservableList<ExamEntityBean> examlist = FXCollections.observableArrayList();
         try ( PreparedStatement
         statement = this.getConnection().prepareStatement(getquery) ) {
             statement.setString(1 , emailcurrent);
             ResultSet set = statement.executeQuery() ;
 
             while (set.next()) {
-                examEntityBean exam = new examEntityBean();
+                ExamEntityBean exam = new ExamEntityBean();
                 exam.setExamName(set.getString("Nome"));
                 exam.setVotoEsame(set.getString("Voto"));
                 exam.setCfuEsame(set.getString("CFU"));
@@ -58,7 +58,7 @@ public class ExamDao extends AbstractDAO {
 
     }
 
-    public void addExam(examEntityBean beanExam) {
+    public void addExam(ExamEntityBean beanExam) {
         try {
             Class.forName(driver) ;
         } catch (ClassNotFoundException e ) {
@@ -97,7 +97,7 @@ public class ExamDao extends AbstractDAO {
         }
     }
 
-    public void updateExam(examEntityBean beanExam, String oldName) {
+    public void updateExam(ExamEntityBean beanExam, String oldName) {
         try {
             Class.forName(driver) ;
         } catch (ClassNotFoundException e ) {

@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 
-public class buyController {
+public class BuyController {
     SceneSwitcher switcher = new SceneSwitcher();
 
     @FXML

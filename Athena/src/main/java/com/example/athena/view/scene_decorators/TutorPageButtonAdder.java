@@ -74,11 +74,14 @@ public class TutorPageButtonAdder extends TutorPageDecorator{
     {
         ((Button) originalScene.lookup("#backBtn")).setOnAction(event -> {
 
+
             try {
-                ((TutorPersonalPageController)controller).clickOnBackButtonTutor(event); ;
+                ((TutorPersonalPageController)controller).clickOnBackButtonTutor(event);
             } catch (IOException e) {
-                e.printStackTrace() ;
+                e.printStackTrace();
             }
+
+
         });
     }
 }

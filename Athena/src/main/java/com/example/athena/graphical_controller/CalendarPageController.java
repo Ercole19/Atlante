@@ -19,8 +19,7 @@ import static javafx.fxml.FXMLLoader.load;
 
 public class CalendarPageController implements Initializable {
 
-    private Stage stage;
-    private Scene scene;
+
     @FXML
     private SubScene calendario ;
 
@@ -36,10 +35,10 @@ public class CalendarPageController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         SceneSwitcher switcher = new SceneSwitcher() ;
         loader.setLocation(switcher.generateUrl("AddEventScreen.fxml"));
-        stage = new Stage() ;
+        Stage stage = new Stage() ;
         stage.initModality(Modality.APPLICATION_MODAL) ;
         stage.setResizable(false) ;
-        scene = new Scene(loader.load()) ;
+        Scene scene = new Scene(loader.load()) ;
         stage.setTitle("Add a new event") ;
         stage.setScene(scene) ;
         stage.showAndWait() ;

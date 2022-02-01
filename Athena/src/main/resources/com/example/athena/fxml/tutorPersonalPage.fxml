@@ -110,9 +110,5 @@
          <String fx:value="viewport" />
       </styleClass>
    </TextArea>
-   <ImageView fitHeight="296.0" fitWidth="290.0" layoutX="972.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../../../../assets/guff.png" />
-      </image>
-   </ImageVi
+
 </AnchorPane>

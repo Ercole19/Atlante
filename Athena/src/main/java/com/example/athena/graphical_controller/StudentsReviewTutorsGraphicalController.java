@@ -23,7 +23,7 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
 {
     private Parent root;
     private Scene scene;
-    private final String REVIEW_SECTION_PROMPT = "#reviewSectionPrompt";
+    private static final String reviewSectionPrompt = "#reviewSectionPrompt";
     private String code ;
 
     @FXML
@@ -57,13 +57,13 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
             tutoringDay.setText(reviewInfo.getTutoringDaysHour()) ;
 
             scene = ((Node) event.getSource()).getScene() ;
-            SubScene reviewSubscene = (SubScene) scene.lookup(REVIEW_SECTION_PROMPT) ;
+            SubScene reviewSubscene = (SubScene) scene.lookup(reviewSectionPrompt) ;
             reviewSubscene.setRoot(root) ;
         }catch(TutorReviewException exception)
         {
             root = load((new SceneSwitcher()).generateUrl("ErrorInReviewView.fxml")) ;
             scene = ((Node) event.getSource()).getScene() ;
-            SubScene reviewSubscene = (SubScene) scene.lookup(REVIEW_SECTION_PROMPT) ;
+            SubScene reviewSubscene = (SubScene) scene.lookup(reviewSectionPrompt) ;
             reviewSubscene.setRoot(root) ;
         }
     }
@@ -71,7 +71,7 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
     public void clickOnSubmitReviewButton(ActionEvent event) throws IOException
     {
         scene = ((Node) event.getSource()).getScene() ;
-        SubScene reviewSubscene = (SubScene) scene.lookup(REVIEW_SECTION_PROMPT) ;
+        SubScene reviewSubscene = (SubScene) scene.lookup(reviewSectionPrompt) ;
         root = reviewSubscene.getRoot() ;
 
         int reviewStars ;

@@ -37,7 +37,7 @@ public class TutorPersonalPageController implements Initializable
     @FXML
     private TextArea contactnumbers ;
     private UserDao user ;
-    private CourseDao corso ;
+
 
 
     public void clickOnBackButtonTutor(ActionEvent event) throws IOException
@@ -91,11 +91,11 @@ public class TutorPersonalPageController implements Initializable
     {
         AnchorPane anchorPane = new AnchorPane() ;
         anchorPane.setPrefSize(600, 800) ;
-        Label CV = new Label("Lorem Ipsum Dolor Sit Amet") ;
-        anchorPane.getChildren().add(CV) ;
-        Scene CVScene = new Scene(root) ;
+        Label cv = new Label("Lorem Ipsum Dolor Sit Amet") ;
+        anchorPane.getChildren().add(cv) ;
+        Scene cvscene = new Scene(root) ;
         Stage tempStage = new Stage() ;
-        tempStage.setScene(CVScene) ;
+        tempStage.setScene(cvscene) ;
         tempStage.initModality(Modality.APPLICATION_MODAL) ;
         tempStage.setResizable(false) ;
         tempStage.setTitle("CV") ;
@@ -107,7 +107,7 @@ public class TutorPersonalPageController implements Initializable
 
         rootPane.getProperties().put("foo", this) ;
         user = new UserDao() ;
-        corso = new CourseDao() ;
+        CourseDao corso = new CourseDao() ;
 
 
         String[] infos = user.filltutorinfos();

@@ -1,13 +1,13 @@
 package com.example.athena.use_case_controllers;
 
 
-import com.example.athena.graphical_controller.eventBean;
+import com.example.athena.graphical_controller.EventBean;
 import com.example.athena.entities.EventDao;
 
-public class addEventUCC {
+public class AddEventUCC {
 
 
-    public void addEvent(eventBean evento) {
+    public void addEvent(EventBean evento) {
 
 
         EventDao eventDao = new EventDao() ;

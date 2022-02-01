@@ -12,10 +12,11 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static javafx.fxml.FXMLLoader.load;
 
-public class controllerSearchTutor {
+public class ControllerSearchTutor {
 
 
 
@@ -28,26 +29,26 @@ public class controllerSearchTutor {
     public void clickOnSearch()
     {
         SearchTutorUseCaseController controller = new SearchTutorUseCaseController() ;
-        ArrayList<TutorSearchResultBean> results =  controller.formatSearchResultsByCourse(searchBar.getText()) ; //Another bean should be added
+        List<TutorSearchResultBean> results =  controller.formatSearchResultsByCourse(searchBar.getText()) ; //Another bean should be added
         SearchResultFormatterComponent resultView = new SearchResultFormatterView() ;
         if(resultsBox.getHeight() < results.size()*100.0)
         {
             resultView = new SearchResultFormatterScrollBar(resultView) ;
         }
-        AnchorPane subSceneElems = resultView.buildTutorSearchResultsScene(resultsBox.getWidth(), resultsBox.getHeight(), results) ;
+        AnchorPane subSceneElems = resultView.buildTutorSearchResultsScene(resultsBox.getWidth(), resultsBox.getHeight(), (ArrayList<TutorSearchResultBean>) results) ;
         resultsBox.setRoot(subSceneElems) ;
     }
 
     public void clickOnSearchByName()
     {
         SearchTutorUseCaseController controller = new SearchTutorUseCaseController() ;
-        ArrayList<TutorSearchResultBean> results =  controller.formatSearchResultsByName(searchBar.getText()) ; //Another bean should be added
+        List<TutorSearchResultBean> results =  controller.formatSearchResultsByName(searchBar.getText()) ; //Another bean should be added
         SearchResultFormatterComponent resultView = new SearchResultFormatterView() ;
         if(resultsBox.getHeight() < results.size()*100.0)
         {
             resultView = new SearchResultFormatterScrollBar(resultView) ;
         }
-        AnchorPane subSceneElems = resultView.buildTutorSearchResultsScene(resultsBox.getWidth(), resultsBox.getHeight(), results) ;
+        AnchorPane subSceneElems = resultView.buildTutorSearchResultsScene(resultsBox.getWidth(), resultsBox.getHeight(), (ArrayList<TutorSearchResultBean>) results) ;
         resultsBox.setRoot(subSceneElems) ;
     }
 

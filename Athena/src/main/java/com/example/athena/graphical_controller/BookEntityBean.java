@@ -5,14 +5,14 @@ import com.example.athena.exceptions.BookException;
 public class BookEntityBean {
 
     private final String title ;
-    private final String ISBN ;
+    private final String isbn;
     private final String price ;
     private final Boolean isNegotiable ;
 
-    public BookEntityBean(String title , String ISBN, String price, Boolean isNegotiable)throws BookException{
-        sintacticCheck(ISBN, price);
+    public BookEntityBean(String title , String isbn, String price, Boolean isNegotiable)throws BookException{
+        sintacticCheck(isbn, price);
         this.title = title;
-        this.ISBN = ISBN;
+        this.isbn = isbn;
         this.price = price;
         this.isNegotiable = isNegotiable;
     }
@@ -21,8 +21,8 @@ public class BookEntityBean {
         return this.title;
     }
 
-    public String getISBN(){
-        return this.ISBN;
+    public String getIsbn(){
+        return this.isbn;
     }
 
     public String getPrice(){
@@ -33,9 +33,9 @@ public class BookEntityBean {
         return this.isNegotiable;
     }
 
-    public void sintacticCheck(String ISBN, String price) throws BookException
+    public void sintacticCheck(String isbn, String price) throws BookException
     {
-        if (!((ISBN.matches("[0-9]{10}") || ISBN.matches("[0-9]{13}")) && price.matches("[0-9]+[,.][0-9]*"))){
+        if (!((isbn.matches("[0-9]{10}") || isbn.matches("[0-9]{13}")) && price.matches("[0-9]+[,.][0-9]*"))){
             throw new BookException("Error in ISBN or price formats") ;
     }
 }}

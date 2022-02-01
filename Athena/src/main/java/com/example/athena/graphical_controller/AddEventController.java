@@ -10,7 +10,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import com.example.athena.use_case_controllers.addEventUCC ;
+import com.example.athena.use_case_controllers.AddEventUCC;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -49,13 +49,13 @@ public class AddEventController implements Initializable  {
     public void clickOnAddEvent(ActionEvent event) throws IOException
     {
 
-        eventBean eventt = new eventBean() ;
+        EventBean eventt = new EventBean() ;
         eventt.setDate(eventDate.getValue());
         eventt.setName(eventName.getText());
         eventt.setStart(startHourSpinner.getValue() , startMinuteSpinner.getValue());
         eventt.setEnd(endHourSpinner.getValue() , endMinuteSpinner.getValue());
         eventt.setDescription(eventDescription.getText());
-        addEventUCC addEventUCC = new addEventUCC() ;
+        AddEventUCC addEventUCC = new AddEventUCC() ;
         addEventUCC.addEvent(eventt);
 
 

@@ -13,7 +13,7 @@ import java.io.IOException;
 public class LoginPageController {
 
     private User currentuser ;
-    private UserDao stDAO ;
+
     @FXML
     private TextField emailField ;
     @FXML
@@ -23,7 +23,7 @@ public class LoginPageController {
     {
         String email = emailField.getText() ;
         String password = passField.getText() ;
-        stDAO = new UserDao() ;
+        UserDao stDAO = new UserDao() ;
         if (stDAO.findStudent(email , password)) {
 
             if (stDAO.getuserType(email).equals("student")) {

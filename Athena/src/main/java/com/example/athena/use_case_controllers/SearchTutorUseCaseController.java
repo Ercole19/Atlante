@@ -4,12 +4,13 @@ import com.example.athena.graphical_controller.TutorSearchResultBean;
 import com.example.athena.entities.UserDao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchTutorUseCaseController
 {
     UserDao user = new UserDao() ;
 
-    public ArrayList<TutorSearchResultBean> formatSearchResultsByCourse(String query)
+    public List<TutorSearchResultBean> formatSearchResultsByCourse(String query)
     {
         int i = 0 ;
         String[] tutorinfos = user.findTutorByCourse(query) ;
@@ -26,7 +27,7 @@ public class SearchTutorUseCaseController
         return result ;
     }
 
-    public ArrayList<TutorSearchResultBean> formatSearchResultsByName(String query)
+    public List<TutorSearchResultBean> formatSearchResultsByName(String query)
     {
         int i = 0 ;
         String[] tutorinfos = user.findTutorByName(query) ;

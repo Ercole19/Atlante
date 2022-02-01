@@ -10,14 +10,15 @@ import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import com.example.athena.graphical_controller.eventPageUCC;
+import com.example.athena.graphical_controller.EventPageUcc;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import com.example.athena.graphical_controller.eventBean ;
+import com.example.athena.graphical_controller.EventBean;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AnchorPaneNode extends AnchorPane {
     // Date associated with this pane
@@ -41,8 +42,8 @@ public class AnchorPaneNode extends AnchorPane {
                 label.setText(String.valueOf(this.getDate()));
                 SubScene result = (SubScene) root.lookup("#results") ;
 
-                eventPageUCC controller = new eventPageUCC() ;
-                ArrayList<eventBean> results =  controller.formatSearchResultsByDate(this.getDate()) ; //Another bean should be added
+                EventPageUcc controller = new EventPageUcc() ;
+                List<EventBean> results =  controller.formatSearchResultsByDate(this.getDate()) ; //Another bean should be added
                 SearchResultFormatterComponent resultView = new SearchResultFormatterView() ;
 
                 if(result.getHeight() < results.size()*100.0)
@@ -50,7 +51,7 @@ public class AnchorPaneNode extends AnchorPane {
                     resultView = new SearchResultFormatterScrollBar(resultView) ;
                 }
 
-                AnchorPane subSceneElems = resultView.buildEventSearchResultsScene(result.getWidth(), result.getHeight(), results) ;
+                AnchorPane subSceneElems = resultView.buildEventSearchResultsScene(result.getWidth(), result.getHeight(), (ArrayList<EventBean>) results) ;
                 result.setRoot(subSceneElems) ;
 
 

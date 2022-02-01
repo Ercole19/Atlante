@@ -1,6 +1,6 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.graphical_controller.examEntityBean;
+import com.example.athena.graphical_controller.ExamEntityBean;
 import com.example.athena.entities.ExamDao;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -12,13 +12,13 @@ import java.io.IOException;
 
 import static javafx.fxml.FXMLLoader.load;
 
-public class addExamUseCaseController {
+public class AddExamUseCaseController {
 
 
 
 
 
-    public void addExam (examEntityBean esameBean , ActionEvent event , boolean update , String oldName) throws IOException {
+    public void addExam (ExamEntityBean esameBean , ActionEvent event , boolean update , String oldName) throws IOException {
 
 
         if ((esameBean.getExamName().equals("")) || (esameBean.getVotoEsame() < 18 || esameBean.getVotoEsame() > 30) || (esameBean.getCfuEsame() < 0 || esameBean.getCfuEsame() > 15) ) {

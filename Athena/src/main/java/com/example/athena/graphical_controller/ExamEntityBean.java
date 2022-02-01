@@ -5,7 +5,7 @@ package com.example.athena.graphical_controller;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
-public class examEntityBean {
+public class ExamEntityBean {
     private String examName;
     private int votoEsame;
     private int cfuEsame;
@@ -18,7 +18,7 @@ public class examEntityBean {
             } catch (NumberFormatException e )  {
                 Alert alert = new Alert(Alert.AlertType.ERROR, " Exam fields are not valid, check if you fill them correctly  ", ButtonType.CLOSE);
                 alert.showAndWait();
-                return;
+
 
             }
     }

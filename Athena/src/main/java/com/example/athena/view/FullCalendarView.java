@@ -10,6 +10,7 @@ import javafx.scene.text.Text;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FullCalendarView {
     private ArrayList<AnchorPaneNode> allCalendarDays = new ArrayList<>(35);
@@ -94,7 +95,7 @@ public class FullCalendarView {
 
 
         // Change the title of the calendar
-        calendarTitle.setText(yearMonth.getMonth().toString() + " " + String.valueOf(yearMonth.getYear()));
+        calendarTitle.setText(yearMonth.getMonth().toString() + " " + yearMonth.getYear());
     }
 
     /**
@@ -117,11 +118,11 @@ public class FullCalendarView {
         return view;
     }
 
-    public ArrayList<AnchorPaneNode> getAllCalendarDays() {
+    public List<AnchorPaneNode> getAllCalendarDays() {
         return allCalendarDays;
     }
 
-    public void setAllCalendarDays(ArrayList<AnchorPaneNode> allCalendarDays) {
-        this.allCalendarDays = allCalendarDays;
+    public void setAllCalendarDays(List<AnchorPaneNode> allCalendarDays) {
+        this.allCalendarDays = (ArrayList<AnchorPaneNode>) allCalendarDays;
     }
 }

@@ -8,8 +8,8 @@ import com.example.athena.graphical_controller.BookEntityBean;
 public class SellBooksUseCaseController {
 
     public void putOnSale(BookEntityBean book) throws ISBNException {
-        IsbnCheckBoundary.isbnCheck(book.getISBN()) ;
-        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getISBN(), Float.parseFloat(book.getPrice()), book.getNegotiable()) ;
+        IsbnCheckBoundary.isbnCheck(book.getIsbn()) ;
+        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable()) ;
         bookE.toDB() ;
     }
 }

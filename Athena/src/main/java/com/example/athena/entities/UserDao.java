@@ -33,13 +33,7 @@ public class UserDao extends AbstractDAO {
             stmt.setString(2, pass);
             ResultSet rs = stmt.executeQuery();
 
-            if (rs.first()) {
-
-                return true;
-
-            } else {
-                return false;
-            }
+            return rs.first();
 
 
         } catch (SQLException e) {

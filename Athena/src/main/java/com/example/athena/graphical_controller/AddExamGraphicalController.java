@@ -1,7 +1,7 @@
 package com.example.athena.graphical_controller;
 
 
-import com.example.athena.use_case_controllers.addExamUseCaseController;
+import com.example.athena.use_case_controllers.AddExamUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
-public class addExamGraphicalController {
+public class AddExamGraphicalController {
     private String oldExamName ;
 
     @FXML
@@ -33,17 +33,17 @@ public class addExamGraphicalController {
     public void confermaEsame(ActionEvent event) throws IOException {
           String nome = nomeEsame.getText();
           String data  = dataEsame.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) ;
-          String Voto = votoEsame.getText();
-          String CFU = cfuEsame.getText();
+          String voto = votoEsame.getText();
+          String cfu = cfuEsame.getText();
 
-         examEntityBean examBean = new examEntityBean();
+         ExamEntityBean examBean = new ExamEntityBean();
 
              examBean.setExamName(nome);
-             examBean.setVotoEsame(Voto);
-             examBean.setCfuEsame(CFU);
+             examBean.setVotoEsame(voto);
+             examBean.setCfuEsame(cfu);
              examBean.setDate(data);
 
-         addExamUseCaseController useCaseController = new addExamUseCaseController() ;
+         AddExamUseCaseController useCaseController = new AddExamUseCaseController() ;
          useCaseController.addExam(examBean , event , update , oldExamName);
 
 

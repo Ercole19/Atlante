@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class averageController implements Initializable {
+public class AverageController implements Initializable {
     @FXML
     private LineChart<String , Number> averageGraph;
     @FXML
@@ -22,13 +22,13 @@ public class averageController implements Initializable {
     @FXML
     private Label labelAverageWei ;
 
-    private ExamDao exam ;
+
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        exam = new ExamDao() ;
+        ExamDao exam = new ExamDao() ;
 
         ObservableList<XYChart.Data<String, Number>> data = exam.getSortedExams() ;
         ObservableList<XYChart.Data<String, Number>> data2 = exam.getSortedExamsWeighted() ;

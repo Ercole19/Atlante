@@ -14,12 +14,12 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class careerStatusController implements Initializable {
+public class CareerStatusController implements Initializable {
     @FXML
     private PieChart examsPieChart;
     @FXML
     private PieChart examsPieChartcfu ;
-    private ExamDao exam ;
+
     @FXML
     private Label totalExams ;
     @FXML
@@ -33,7 +33,7 @@ public class careerStatusController implements Initializable {
     public void initialize(URL url , ResourceBundle rb) {
         ObservableList<PieChart.Data> examsPieChartData ;
         ObservableList<PieChart.Data> examsPieChartDatacfus  ;
-        exam = new ExamDao() ;
+        ExamDao exam = new ExamDao() ;
         examsPieChartData = exam.loadData() ;
         examsPieChartDatacfus = exam.loadData2() ;
         int esamiDAti = (int) exam.getTotalExams();

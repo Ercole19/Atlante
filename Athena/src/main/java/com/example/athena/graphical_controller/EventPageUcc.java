@@ -6,21 +6,22 @@ import com.example.athena.entities.EventDao;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class eventPageUCC  {
+public class EventPageUcc {
     @FXML
     private Label label1 ;
 
     EventDao course = new EventDao() ;
 
-    public ArrayList<eventBean> formatSearchResultsByDate(LocalDate data) {
+    public List<EventBean> formatSearchResultsByDate(LocalDate data) {
         int i = 0 ;
         String[] eventinfos = course.findeventinfo(data.toString()) ;
-        ArrayList<eventBean> result = new ArrayList<>();
+        ArrayList<EventBean> result = new ArrayList<>();
         while (eventinfos[i] != null) {
 
-            eventBean evento = new eventBean() ;
+            EventBean evento = new EventBean() ;
             evento.setName(eventinfos[i]);
             evento.setStartbyString(eventinfos[i + 1]);
             evento.setEndbyString(eventinfos[i + 2]);

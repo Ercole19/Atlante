@@ -30,24 +30,24 @@ import static javafx.fxml.FXMLLoader.load;
 
 
 
-public class graphicControllerEsamiHomepage implements Initializable {
+public class GraphicControllerEsamiHomepage implements Initializable {
     private Stage stage;
     private Scene scene;
 
     @FXML
-    private TableView<examEntityBean> examTable ;
+    private TableView<ExamEntityBean> examTable ;
     @FXML
-    private TableColumn<examEntityBean , String> colName ;
+    private TableColumn<ExamEntityBean, String> colName ;
     @FXML
-    private TableColumn<examEntityBean , Integer> colVote ;
+    private TableColumn<ExamEntityBean, Integer> colVote ;
     @FXML
-    private TableColumn<examEntityBean , Integer> colCfu ;
+    private TableColumn<ExamEntityBean, Integer> colCfu ;
     @FXML
-    private TableColumn<examEntityBean, LocalDate> colDate ;
+    private TableColumn<ExamEntityBean, LocalDate> colDate ;
     @FXML
-    private TableColumn<examEntityBean , Void> colEDit ;
+    private TableColumn<ExamEntityBean, Void> colEDit ;
 
-    private ObservableList<examEntityBean> examList  = FXCollections.observableArrayList() ;
+    private ObservableList<ExamEntityBean> examList  = FXCollections.observableArrayList() ;
     private ExamDao examDao ;
 
 
@@ -109,16 +109,16 @@ public class graphicControllerEsamiHomepage implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colName.setCellValueFactory(new PropertyValueFactory<examEntityBean, String>("examName"));
-        colVote.setCellValueFactory(new PropertyValueFactory<examEntityBean , Integer>("votoEsame"));
-        colCfu.setCellValueFactory(new PropertyValueFactory<examEntityBean , Integer>("cfuEsame"));
-        colDate.setCellValueFactory(new PropertyValueFactory<examEntityBean , LocalDate>("date"));
-        javafx.util.Callback<TableColumn<examEntityBean, Void>, TableCell<examEntityBean, Void>> cellFactory = new javafx.util.Callback<TableColumn<examEntityBean , Void> , TableCell<examEntityBean , Void>>() {
+        colName.setCellValueFactory(new PropertyValueFactory<ExamEntityBean, String>("examName"));
+        colVote.setCellValueFactory(new PropertyValueFactory<ExamEntityBean, Integer>("votoEsame"));
+        colCfu.setCellValueFactory(new PropertyValueFactory<ExamEntityBean, Integer>("cfuEsame"));
+        colDate.setCellValueFactory(new PropertyValueFactory<ExamEntityBean, LocalDate>("date"));
+        javafx.util.Callback<TableColumn<ExamEntityBean, Void>, TableCell<ExamEntityBean, Void>> cellFactory = new javafx.util.Callback<TableColumn<ExamEntityBean, Void> , TableCell<ExamEntityBean, Void>>() {
 
 
             @Override
-            public TableCell<examEntityBean, Void> call(TableColumn<examEntityBean, Void> examEntityBeanVoidTableColumn) {
-                return new TableCell<examEntityBean , Void>() {
+            public TableCell<ExamEntityBean, Void> call(TableColumn<ExamEntityBean, Void> examEntityBeanVoidTableColumn) {
+                return new TableCell<ExamEntityBean, Void>() {
 
 
 
@@ -140,7 +140,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
                     editButton = new Button("Edit ") ;
 
                     editButton.setOnAction(event -> {
-                        examEntityBean exam = examTable.getSelectionModel().getSelectedItem();
+                        ExamEntityBean exam = examTable.getSelectionModel().getSelectedItem();
                         FXMLLoader fxmlLoader =  new FXMLLoader();
                         SceneSwitcher switcher = new SceneSwitcher() ;
                         try {
@@ -150,7 +150,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
                         }catch (IOException exc) {
                             exc.getCause() ;
                         }
-                        addExamGraphicalController controller = fxmlLoader.getController() ;
+                        AddExamGraphicalController controller = fxmlLoader.getController() ;
                         controller.setNomeEsame(exam.getExamName());
                         controller.setVotoEsame(String.valueOf(exam.getVotoEsame()));
                         controller.setCfuEsame(String.valueOf(exam.getCfuEsame()));
@@ -172,7 +172,7 @@ public class graphicControllerEsamiHomepage implements Initializable {
 
                     cancella.setOnMouseClicked( event -> {
                         try {
-                            examEntityBean exam = examTable.getSelectionModel().getSelectedItem();
+                            ExamEntityBean exam = examTable.getSelectionModel().getSelectedItem();
                             ExamDao esameD = new ExamDao() ;
 
 

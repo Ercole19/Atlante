@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class sellController {
+public class SellController {
 
     private final SceneSwitcher switcher = new SceneSwitcher();
 

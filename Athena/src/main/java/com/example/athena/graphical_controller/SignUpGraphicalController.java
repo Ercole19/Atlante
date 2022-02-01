@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 
-public class signUpGraphicalController {
+public class SignUpGraphicalController {
     @FXML
     private TextField emailField;
     @FXML

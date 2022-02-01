@@ -2,7 +2,7 @@ package com.example.athena.view;
 
 import com.example.athena.graphical_controller.SceneSwitcher;
 import com.example.athena.graphical_controller.TutorSearchResultBean;
-import com.example.athena.graphical_controller.eventBean;
+import com.example.athena.graphical_controller.EventBean;
 import com.example.athena.view.scene_decorators.SearchResultFormatterComponent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class SearchResultFormatterView extends SearchResultFormatterComponent {
-    private final String font = "System";
+    private static final String font = "System";
     @Override
     public AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, ArrayList<TutorSearchResultBean> results)
     {
@@ -81,7 +81,7 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
 
 
     @Override
-    public AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, ArrayList<eventBean> results)
+    public AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, ArrayList<EventBean> results)
     {
 
         double sceneHeight = (results.size())*100.0f ;
@@ -91,7 +91,7 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
         graphicalList.setPrefSize(containerWidth, sceneHeight) ;
         graphicalList.setId("resultList") ;
 
-        for(eventBean result: results)
+        for(EventBean result: results)
         {
             GridPane entryBox = new GridPane() ;
             entryBox.setPrefSize(containerWidth, 100) ;
