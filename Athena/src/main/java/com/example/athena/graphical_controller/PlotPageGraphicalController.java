@@ -50,7 +50,8 @@ public class PlotPageGraphicalController implements Initializable
     {
         for(ActivityTypesEnum e: ActivityTypesEnum.values())
         {
-           activityTypeChoiceBox.getItems().add(e.toString().replace("_", " ")) ;
+            String entry = e.toString().replace("_", " ").toLowerCase() ;
+            activityTypeChoiceBox.getItems().add(entry.substring(0,1).toUpperCase() + entry.substring(1)) ;
         }
 
         activityTypeChoiceBox.setValue("All") ;
@@ -64,7 +65,8 @@ public class PlotPageGraphicalController implements Initializable
 
         for(TimePeriodsEnum e: TimePeriodsEnum.values())
         {
-            timePeriodChoiceBox.getItems().add(e.toString().replace("_", " ")) ;
+            String entry = e.toString().replace("_", " ").toLowerCase() ;
+            timePeriodChoiceBox.getItems().add(entry.substring(0,1).toUpperCase() + entry.substring(1)) ;
         }
 
         timePeriodChoiceBox.setValue("From beginning") ;

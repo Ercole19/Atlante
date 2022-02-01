@@ -16,13 +16,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static javafx.fxml.FXMLLoader.load ;
 
-public class TutorPersonalPageController implements Initializable
+public class TutorPersonalPageController implements Initializable, PostInitialize
 {
 
     private Parent root ;
@@ -145,4 +146,30 @@ public class TutorPersonalPageController implements Initializable
     }
 
 
+    @Override
+    public void postInitialize(ArrayList<Object> params)
+    {
+        user = new UserDao() ;
+        CourseDao corso = new CourseDao() ;
+
+
+        String[] infos = user.filltutorinfos();
+        List<String> courses = corso.fillCourses() ;
+
+        if (infos == null) {
+            aboutme.setText("");
+            sessioninfos.setText("");
+            contactnumbers.setText("");
+        }
+        else {
+            aboutme.setText(infos[0]);
+            sessioninfos.setText(infos[1]);
+            contactnumbers.setText(infos[2]);
+        }
+
+        for (int i = 0 ; i< courses.size() ; i++) {
+            coursesArea.appendText(courses.get(i) + "\n" );
+        }
+
+    }
 }

@@ -13,7 +13,7 @@ public class GeneratePlotsUseCaseController
     public ActivityPlotsBean evaluateQuery(PlotSearchQueryBean searchQuery)
     {
         ArrayList<XYChart.Series<String, Number>> plotsList  = new ArrayList<>() ;
-        String activityType = searchQuery.getActivityType().replace(" ", "_") ;
+        String activityType = searchQuery.getActivityType().replace(" ", "_").toUpperCase() ;
 
 
         switch(ActivityTypesEnum.valueOf(activityType))
