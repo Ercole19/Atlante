@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import com.example.athena.use_case_controllers.AddEventUCC;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class AddEventController implements Initializable  {
@@ -40,6 +41,9 @@ public class AddEventController implements Initializable  {
         @FXML
         private TextField eventName;
 
+        private boolean update ;
+        private String oldEventName ;
+
 
 
 
@@ -56,7 +60,7 @@ public class AddEventController implements Initializable  {
         eventt.setEnd(endHourSpinner.getValue() , endMinuteSpinner.getValue());
         eventt.setDescription(eventDescription.getText());
         AddEventUCC addEventUCC = new AddEventUCC() ;
-        addEventUCC.addEvent(eventt);
+        addEventUCC.addEvent(eventt , update , oldEventName);
 
 
 
@@ -86,5 +90,42 @@ public class AddEventController implements Initializable  {
         prepareFactory(startMinuteSpinner, 0, 59) ;
         prepareFactory(endHourSpinner, 0, 23) ;
         prepareFactory(endMinuteSpinner, 0, 59) ;
+    }
+
+    public void setOldEventName(String oldname) {
+        oldEventName = oldname ;
+    }
+
+
+    public void setEventName(String nome) {
+        eventName.setText(nome);
+    }
+
+    public void setEventDate(LocalDate data) {
+        eventDate.setValue( data);
+    }
+
+    public void setEventDescription(String Description) {
+        eventDescription.setText(Description);
+    }
+
+    public void setStartHourSpinner(int startHour) {
+        startHourSpinner.getValueFactory().setValue(startHour);
+    }
+
+    public void setStartMinuteSpinner(int startMinute) {
+        startMinuteSpinner.getValueFactory().setValue(startMinute);
+    }
+
+    public void setEndHourSpinner(int endHour) {
+        endHourSpinner.getValueFactory().setValue(endHour);
+    }
+
+    public void setEndMinuteSpinner(int endMinute) {
+        endMinuteSpinner.getValueFactory().setValue(endMinute);
+    }
+    public void setUpdate (boolean cond) {
+        update = cond;
+
     }
 }

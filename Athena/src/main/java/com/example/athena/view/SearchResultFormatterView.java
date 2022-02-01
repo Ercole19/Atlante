@@ -1,17 +1,26 @@
 package com.example.athena.view;
 
 import com.example.athena.entities.EventDao;
+import com.example.athena.graphical_controller.AddEventController;
 import com.example.athena.graphical_controller.SceneSwitcher;
 import com.example.athena.graphical_controller.TutorSearchResultBean;
 import com.example.athena.graphical_controller.EventBean;
 import com.example.athena.view.scene_decorators.SearchResultFormatterComponent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -123,8 +132,29 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
             starsLabel.setFont(new Font(FONT, 26)) ;
             entryBox.add(starsLabel, 2, 0) ;
 
-            Button visitPage = new Button("Description") ;
-            entryBox.add(visitPage, 3, 0) ;
+            Button description = new Button("Description") ;
+            description.setOnAction(event -> {
+                FXMLLoader loader = new FXMLLoader();
+                SceneSwitcher switcher = new SceneSwitcher();
+                try {
+                    loader.setLocation(switcher.generateUrl("EventDescription.fxml"));
+                    loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Parent root = loader.getRoot();
+                Text testo = (Text) root.lookup("#description");
+                testo.setText(result.getDescription());
+                Stage stage =new Stage();
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
+
+
+            });
+
+
+
+            entryBox.add(description, 3, 0) ;
 
             Button delete = new Button("delete") ;
             delete.setOnAction(event -> {
@@ -136,6 +166,37 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
             entryBox.add(delete, 4, 0) ;
 
             Button edit = new Button("edit") ;
+            edit.setOnAction(event -> {
+                FXMLLoader loader = new FXMLLoader();
+                SceneSwitcher switcher = new SceneSwitcher() ;
+                try {
+                    loader.setLocation(switcher.generateUrl("AddEventScreen.fxml")) ;
+                    loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                AddEventController addEventController = loader.getController();
+                addEventController.setEventName(result.getName());
+                addEventController.setEventDate(result.getDate());
+                addEventController.setStartHourSpinner(result.getStart().getHour());
+                addEventController.setStartMinuteSpinner(result.getStart().getMinute());
+                addEventController.setEndHourSpinner(result.getEnd().getHour());
+                addEventController.setEndMinuteSpinner(result.getEnd().getMinute());
+                addEventController.setEventDescription(result.getDescription());
+                addEventController.setOldEventName(result.getName());
+                addEventController.setUpdate(true);
+
+
+                Parent parent = loader.getRoot() ;
+                DatePicker datePicker = (DatePicker) parent.lookup("#eventDate");
+                datePicker.setDisable(true);
+                Stage stage = new Stage() ;
+                stage.setScene(new Scene(parent) );
+                stage.initStyle(StageStyle.UTILITY);
+                stage.show();
+
+
+            });
             entryBox.add(edit, 5, 0) ;
 
 
