@@ -25,10 +25,12 @@ public class ControllerSearchTutor {
     @FXML
     SubScene resultsBox ;
 
-    public void clickOnSearch()
+    boolean byName = true ;
+
+    public void clickOnSearchByCourse()
     {
         SearchTutorUseCaseController controller = new SearchTutorUseCaseController() ;
-        List<TutorSearchResultBean> results =  controller.formatSearchResultsByCourse(searchBar.getText()) ; //Another bean should be added
+        List<TutorSearchResultBean> results =  controller.formatSearchResults(searchBar.getText() , !(byName)) ; //Another bean should be added
         SearchResultFormatterComponent resultView = new SearchResultFormatterView() ;
         if(resultsBox.getHeight() < results.size()*100.0)
         {
@@ -41,7 +43,7 @@ public class ControllerSearchTutor {
     public void clickOnSearchByName()
     {
         SearchTutorUseCaseController controller = new SearchTutorUseCaseController() ;
-        List<TutorSearchResultBean> results =  controller.formatSearchResultsByName(searchBar.getText()) ; //Another bean should be added
+        List<TutorSearchResultBean> results =  controller.formatSearchResults(searchBar.getText() , byName) ; //Another bean should be added
         SearchResultFormatterComponent resultView = new SearchResultFormatterView() ;
         if(resultsBox.getHeight() < results.size()*100.0)
         {

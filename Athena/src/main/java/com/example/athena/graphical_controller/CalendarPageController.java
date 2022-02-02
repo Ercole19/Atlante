@@ -24,13 +24,16 @@ public class CalendarPageController implements Initializable {
     private SubScene calendario ;
 
 
-    public void clickOnBackButton(ActionEvent event) throws IOException
+    public void clickOnBackButton(ActionEvent event)
     {
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "MainPageStudents.fxml");
+        try {
+            switchScene("MainPageStudents.fxml" , event);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void clickOnAddEvent(ActionEvent event) throws IOException
+    public void clickOnAddEvent() throws IOException
     {
         FXMLLoader loader = new FXMLLoader();
         SceneSwitcher switcher = new SceneSwitcher() ;
@@ -44,10 +47,20 @@ public class CalendarPageController implements Initializable {
         stage.showAndWait() ;
     }
 
-    public void clickOnPlots(ActionEvent event) throws IOException
+    public void clickOnPlots(ActionEvent event)
     {
+        try {
+            switchScene("PlotPage.fxml" , event);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void switchScene(String fxml , ActionEvent event) throws IOException {
+
         SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "PlotPage.fxml");
+        switcher.switcher(event, fxml);
+
     }
 
 

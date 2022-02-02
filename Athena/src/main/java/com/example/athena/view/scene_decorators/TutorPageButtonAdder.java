@@ -1,6 +1,7 @@
 package com.example.athena.view.scene_decorators;
 
 import com.example.athena.graphical_controller.TutorPersonalPageController;
+import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -72,7 +73,7 @@ public class TutorPageButtonAdder extends TutorPageDecorator{
 
     private void setBackButton(AnchorPane originalScene, Object controller)
     {
-        ((Button) originalScene.lookup("#backBtn")).setOnAction(event -> {
+        ((Button) originalScene.lookup("#backBtn")).setOnAction( event -> {
 
 
             try {

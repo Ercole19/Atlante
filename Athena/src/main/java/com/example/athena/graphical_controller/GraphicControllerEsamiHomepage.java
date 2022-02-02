@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,20 +18,16 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-import static javafx.fxml.FXMLLoader.load;
 
 
 
 public class GraphicControllerEsamiHomepage implements Initializable {
-    private Stage stage;
-    private Scene scene;
+
 
     @FXML
     private TableView<ExamEntityBean> examTable ;
@@ -52,43 +47,47 @@ public class GraphicControllerEsamiHomepage implements Initializable {
 
 
     public void initAggiungiEsame () throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        SceneSwitcher switcher = new SceneSwitcher() ;
-        loader.setLocation(switcher.generateUrl("Aggiungi_Esame_view.fxml"));
-        stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setResizable(false);
-        scene = new Scene(loader.load());
-        stage.setTitle("Aggiungi esame");
-        stage.setScene(scene);
-        stage.showAndWait();
+
+        initNewScene("Aggiungi_Esame_View.fxml" , "Add exam");
 
     }
     public void initMostraMedia () throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        SceneSwitcher switcher = new SceneSwitcher() ;
-        loader.setLocation(switcher.generateUrl("Mostra_Media_View.fxml"));
-        stage = new Stage();
-        stage.setResizable(false);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        scene = new Scene(loader.load());
-        stage.setScene(scene);
-        stage.setTitle("La tua media");
-        stage.showAndWait();
+        initNewScene("Mostra_Media_View.fxml" , "Average");
     }
 
     public void initCareerStatus () throws IOException {
+        initNewScene("carrerStatusView.fxml" , "Career");
+    }
+
+
+    public void initNewScene(String fxml , String windowtext ) throws IOException {
+
         FXMLLoader loader = new FXMLLoader();
         SceneSwitcher switcher = new SceneSwitcher() ;
-        loader.setLocation(switcher.generateUrl("carrerStatusView.fxml"));
-        stage = new Stage();
+        loader.setLocation(switcher.generateUrl(fxml));
+        Stage stage = new Stage();
         stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
-        scene = new Scene(loader.load());
+        Scene scene = new Scene(loader.load());
         stage.setScene(scene);
-        stage.setTitle("La tua media");
+        stage.setTitle(windowtext);
         stage.showAndWait();
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
 
     public void onBackButtonClick(ActionEvent event) throws IOException {
         refreshTable();

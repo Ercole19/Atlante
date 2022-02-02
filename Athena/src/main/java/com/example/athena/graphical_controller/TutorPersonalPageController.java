@@ -5,6 +5,7 @@ import com.example.athena.entities.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,6 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,7 @@ import java.util.ResourceBundle;
 
 import static javafx.fxml.FXMLLoader.load ;
 
-public class TutorPersonalPageController implements Initializable, PostInitialize
+public class TutorPersonalPageController implements  PostInitialize , Initializable
 {
 
     private Parent root ;
@@ -43,25 +45,26 @@ public class TutorPersonalPageController implements Initializable, PostInitializ
 
     public void clickOnBackButtonTutor(ActionEvent event) throws IOException
     {
-        SceneSwitcher switcher = new SceneSwitcher() ;
-        switcher.switcher(event, "MainPageTutor.fxml");
+        switchScene(event , "MainPageTutor.fxml");
     }
 
     public void clickOnBackButton(ActionEvent event) throws IOException
     {
+
+        switchScene(event, "tutorSearchPage.fxml");
+    }
+
+
+
+
+    public void switchScene(ActionEvent event , String fxml) throws IOException {
         SceneSwitcher switcher = new SceneSwitcher() ;
-        switcher.switcher(event, "tutorSearchPage.fxml") ;
+        switcher.switcher(event, fxml) ;
     }
 
     public void onCVButtonClick(ActionEvent event) throws IOException
     {
-        root = load(Objects.requireNonNull(getClass().getResource("tutorCVView.fxml"))) ;
-        Stage tempStage = new Stage() ;
-        tempStage.setScene(new Scene(root)) ;
-        tempStage.initModality(Modality.APPLICATION_MODAL) ;
-        tempStage.setResizable(false) ;
-        tempStage.setTitle("CV") ;
-        tempStage.showAndWait() ;
+        initScene("tutorCVView.fxml " , "CV");
     }
 
     public void onConfirmButtonClick(ActionEvent event) throws IOException {
@@ -103,52 +106,36 @@ public class TutorPersonalPageController implements Initializable, PostInitializ
         tempStage.showAndWait() ;
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        rootPane.getProperties().put("foo", this) ;
-        user = new UserDao() ;
-        CourseDao corso = new CourseDao() ;
-
-
-        String[] infos = user.filltutorinfos();
-        List<String> courses = corso.fillCourses() ;
-
-        if (infos == null) {
-            aboutme.setText("");
-            sessioninfos.setText("");
-            contactnumbers.setText("");
-        }
-        else {
-            aboutme.setText(infos[0]);
-            sessioninfos.setText(infos[1]);
-            contactnumbers.setText(infos[2]);
-        }
-
-        for (int i = 0 ; i< courses.size() ; i++) {
-            coursesArea.appendText(courses.get(i) + "\n" );
-        }
-
-
-    }
 
     public void onaddcoursebuttoclick() throws IOException{
+        initScene("addcourse.fxml" , "Add course");
+    }
+
+
+
+    public void initScene(String fxml , String windowText) throws IOException
+    {
+
         FXMLLoader loader = new FXMLLoader();
         SceneSwitcher switcher = new SceneSwitcher() ;
-        loader.setLocation(switcher.generateUrl("addcourse.fxml"));
+        loader.setLocation(switcher.generateUrl(fxml));
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         Scene scene = new Scene(loader.load());
-        stage.setTitle("Add course");
+        stage.setTitle(windowText);
         stage.setScene(scene);
         stage.showAndWait();
+
     }
 
 
     @Override
     public void postInitialize(ArrayList<Object> params)
     {
+
+
         user = new UserDao() ;
         CourseDao corso = new CourseDao() ;
 
@@ -171,5 +158,10 @@ public class TutorPersonalPageController implements Initializable, PostInitializ
             coursesArea.appendText(courses.get(i) + "\n" );
         }
 
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        rootPane.getProperties().put("foo", this) ;
     }
 }

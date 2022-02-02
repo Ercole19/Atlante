@@ -143,38 +143,37 @@ public class UserDao extends AbstractDAO {
 
     }
 
-    public String[] findTutorByCourse(String corso) {
+
+
+
+
+
+
+    public String[] findTutor(String query , boolean byname) {
+        String prepStatement;
+
+        if (byname) {
+            prepStatement = searchByName ;
+        }
+        else {
+            prepStatement = searchTutor;
+        }
+
         String[] tutorInfos = new String[500];
         int i = 0;
-        try ( PreparedStatement statement = this.getConnection().prepareStatement(searchTutor)) {
-            statement.setString(1, corso);
-            statement.setString(2, corso);
-            //declare with size
-            ResultSet set = statement.executeQuery();
-            while (set.next()) {
-                tutorInfos[i] = set.getString(1);
-                tutorInfos[i + 1] = set.getString(2);
-                tutorInfos[i + 2] = set.getString(3);
-                tutorInfos[i + 3] = Float.toString(set.getFloat(4));
-                tutorInfos[i + 4] = set.getString(5) ;
-                i = i + 5 ;
+        try ( PreparedStatement statement = this.getConnection().prepareStatement(prepStatement)) {
 
+            if (byname) {
+
+                statement.setString(1,query);
+
+            }
+            else {
+                statement.setString(1, query);
+                statement.setString(2, query);
 
             }
 
-        } catch (SQLException exc) {
-            exc.getMessage();
-        }
-
-        return tutorInfos;
-
-    }
-
-    public String[] findTutorByName(String nome) {
-        String[] tutorInfos = new String[500];
-        int i = 0;
-        try ( PreparedStatement statement = this.getConnection().prepareStatement(searchByName)) {
-            statement.setString(1, nome);
             //declare with size
             ResultSet set = statement.executeQuery();
             while (set.next()) {
