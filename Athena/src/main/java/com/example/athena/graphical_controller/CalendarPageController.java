@@ -29,7 +29,7 @@ public class CalendarPageController implements Initializable {
         try {
             switchScene("MainPageStudents.fxml" , event);
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 
@@ -44,7 +44,7 @@ public class CalendarPageController implements Initializable {
         try {
             switchScene("PlotPage.fxml" , event);
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 

@@ -21,17 +21,13 @@ public class ExamDao extends AbstractDAO {
     private String countExams = "SELECT COUNT(Nome) as esamiDati from esami WHERE email_utente = ?" ;
     private String getExams = "SELECT (Nome)  from esami WHERE email_utente = ?" ;
     private String getcfusum = "SELECT SUM(CFU) as cfus from esami WHERE email_utente = ?" ;
-    private static String driver  = "com.mysql.jdbc.Driver" ;
+    private String dataEsame = "Data_Esame" ;
 
 
 
 
     public ObservableList<ExamEntityBean> getExamlist()  {
-        try {
-            Class.forName(driver) ;
-        } catch (ClassNotFoundException e ) {
-            e.getMessage() ;
-        }
+
         ObservableList<ExamEntityBean> examlist = FXCollections.observableArrayList();
         try ( PreparedStatement
         statement = this.getConnection().prepareStatement(getquery) ) {
@@ -43,7 +39,7 @@ public class ExamDao extends AbstractDAO {
                 exam.setExamName(set.getString("Nome"));
                 exam.setVotoEsame(set.getString("Voto"));
                 exam.setCfuEsame(set.getString("CFU"));
-                exam.setDate(set.getString("Data_Esame"));
+                exam.setDate(set.getString(dataEsame));
                 examlist.add(exam);
 
             }
@@ -59,11 +55,6 @@ public class ExamDao extends AbstractDAO {
     }
 
     public void addExam(ExamEntityBean beanExam) {
-        try {
-            Class.forName(driver) ;
-        } catch (ClassNotFoundException e ) {
-            e.getMessage() ;
-        }
 
         try (PreparedStatement stm =this.getConnection().prepareStatement(addQuery, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)  ){
 
@@ -82,11 +73,6 @@ public class ExamDao extends AbstractDAO {
     }
 
     public void deleteExam(String nome)  {
-        try {
-            Class.forName(driver) ;
-        } catch (ClassNotFoundException e ) {
-            e.getMessage() ;
-        }
 
         try ( PreparedStatement stm = this.getConnection().prepareStatement(deleteQuery)) {
             stm.setString(1, nome);
@@ -98,11 +84,7 @@ public class ExamDao extends AbstractDAO {
     }
 
     public void updateExam(ExamEntityBean beanExam, String oldName) {
-        try {
-            Class.forName(driver) ;
-        } catch (ClassNotFoundException e ) {
-            e.getMessage() ;
-        }
+
 
         try( PreparedStatement stm = this.getConnection().prepareStatement(updateQuery)) {
 
@@ -137,7 +119,7 @@ public class ExamDao extends AbstractDAO {
 
             while (set.next()) {
 
-                data = set.getString("Data_Esame");
+                data = set.getString(dataEsame);
                 voto = set.getInt("Voto");
                 counterVoti = counterVoti + voto;
 
@@ -155,11 +137,7 @@ public class ExamDao extends AbstractDAO {
 
 
     public Number  getAverage () {
-        try {
-            Class.forName(driver) ;
-        } catch (ClassNotFoundException e ) {
-            e.getMessage() ;
-        }
+
 
         try ( PreparedStatement stm = this.getConnection().prepareStatement(getaverage)){
             stm.setString(1,emailcurrent);
@@ -176,11 +154,6 @@ public class ExamDao extends AbstractDAO {
     }
 
     public ObservableList<XYChart.Data<String, Number>> getSortedExamsWeighted() {
-        try {
-            Class.forName(driver) ;
-        } catch (ClassNotFoundException e ) {
-            e.getMessage() ;
-        }
 
         ObservableList<XYChart.Data<String, Number>> list = FXCollections.observableArrayList();
         try ( PreparedStatement statement = this.getConnection().prepareStatement(weightedsortedExams)){
@@ -195,7 +168,7 @@ public class ExamDao extends AbstractDAO {
 
             while (set.next()) {
 
-                String data = set.getString("Data_Esame");
+                String data = set.getString(dataEsame);
                 voto = set.getInt("Voto");
                 cfu = set.getInt("CFU") ;
                 cfus = cfus + cfu ;
@@ -216,11 +189,7 @@ public class ExamDao extends AbstractDAO {
     }
 
     public Number  getAverageWeighted  () {
-        try {
-            Class.forName(driver) ;
-        } catch (ClassNotFoundException e ) {
-            e.getMessage() ;
-        }
+
         double voti = 0 ;
         double  cfus = 0 ;
         double average = 0;
