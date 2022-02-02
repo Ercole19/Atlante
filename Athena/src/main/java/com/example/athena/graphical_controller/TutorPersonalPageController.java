@@ -64,7 +64,8 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
 
     public void onCVButtonClick(ActionEvent event) throws IOException
     {
-        initScene("tutorCVView.fxml " , "CV");
+        SceneSwitcher switcher = new SceneSwitcher() ;
+        switcher.popup("tutorCVView.fxml " , "CV") ;
     }
 
     public void onConfirmButtonClick(ActionEvent event) throws IOException {
@@ -107,27 +108,9 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     }
 
 
-
     public void onaddcoursebuttoclick() throws IOException{
-        initScene("addcourse.fxml" , "Add course");
-    }
-
-
-
-    public void initScene(String fxml , String windowText) throws IOException
-    {
-
-        FXMLLoader loader = new FXMLLoader();
         SceneSwitcher switcher = new SceneSwitcher() ;
-        loader.setLocation(switcher.generateUrl(fxml));
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setResizable(false);
-        Scene scene = new Scene(loader.load());
-        stage.setTitle(windowText);
-        stage.setScene(scene);
-        stage.showAndWait();
-
+        switcher.popup("addcourse.fxml" , "Add course") ;
     }
 
 

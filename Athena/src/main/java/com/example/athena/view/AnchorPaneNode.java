@@ -34,37 +34,16 @@ public class AnchorPaneNode extends AnchorPane {
         // Add action handler for mouse clicked
         this.setOnMouseClicked(mouseEvent -> {
             try {
-                FXMLLoader loader = new FXMLLoader();
-                SceneSwitcher switcher = new SceneSwitcher() ;
-                loader.setLocation(switcher.generateUrl("eventPage.fxml"));
-                Parent root = loader.load() ;
-                Label label = (Label) root.lookup("#label1");
-                label.setText(String.valueOf(this.getDate()));
-                SubScene result = (SubScene) root.lookup("#results") ;
 
                 EventPageUcc controller = new EventPageUcc() ;
                 List<EventBean> results =  controller.formatSearchResultsByDate(this.getDate()) ; //Another bean should be added
-                SearchResultFormatterComponent resultView = new SearchResultFormatterView() ;
 
-                if(result.getHeight() < results.size()*100.0)
-                {
-                    resultView = new SearchResultFormatterScrollBar(resultView) ;
-                }
+                SceneSwitcher switcher = new SceneSwitcher() ;
+                ArrayList<Object> params = new ArrayList<>() ;
+                params.add(String.valueOf(this.getDate())) ;
+                params.add(results) ;
+                switcher.popup("eventPage.fxml", "Event infos", params) ;
 
-                AnchorPane subSceneElems = resultView.buildEventSearchResultsScene(result.getWidth(), result.getHeight(), (ArrayList<EventBean>) results) ;
-                result.setRoot(subSceneElems) ;
-
-
-
-
-
-                Stage stage = new Stage();
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setResizable(false);
-                Scene scene = new Scene(root);
-                stage.setTitle("Event infos");
-                stage.setScene(scene);
-                stage.showAndWait();
             } catch (IOException e) {
                 e.printStackTrace();
             }

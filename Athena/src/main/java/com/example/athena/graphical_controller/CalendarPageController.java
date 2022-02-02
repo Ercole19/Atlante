@@ -35,16 +35,8 @@ public class CalendarPageController implements Initializable {
 
     public void clickOnAddEvent() throws IOException
     {
-        FXMLLoader loader = new FXMLLoader();
         SceneSwitcher switcher = new SceneSwitcher() ;
-        loader.setLocation(switcher.generateUrl("AddEventScreen.fxml"));
-        Stage stage = new Stage() ;
-        stage.initModality(Modality.APPLICATION_MODAL) ;
-        stage.setResizable(false) ;
-        Scene scene = new Scene(loader.load()) ;
-        stage.setTitle("Add a new event") ;
-        stage.setScene(scene) ;
-        stage.showAndWait() ;
+        switcher.popup("AddEventScreen.fxml", "Add a new event") ;
     }
 
     public void clickOnPlots(ActionEvent event)

@@ -20,13 +20,6 @@ public class SellController {
     }
 
     public void onSellBtnClick() throws IOException{
-        FXMLLoader loader = new FXMLLoader(switcher.generateUrl( "sellBookModule.fxml")) ;
-        Stage stage = new Stage() ;
-        stage.initModality(Modality.APPLICATION_MODAL) ;
-        stage.setResizable(false) ;
-        Scene scene = new Scene(loader.load()) ;
-        stage.setTitle("Sell a book") ;
-        stage.setScene(scene) ;
-        stage.showAndWait() ;
+        switcher.popup("sellBookModule.fxml", "Sell a book") ;
     }
 }

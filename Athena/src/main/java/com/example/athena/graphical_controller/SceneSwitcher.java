@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,6 +30,29 @@ public class SceneSwitcher {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene) ;
+    }
+
+    public void popup(String fxml, String title) throws IOException
+    {
+        Parent root = load(generateUrl(fxml)) ;
+        prepare_popup(root, title) ;
+    }
+
+    public void popup(String fxml, String title, List<Object> params) throws IOException
+    {
+        Parent root = preload(fxml, params) ;
+        prepare_popup(root, title) ;
+    }
+
+    private void prepare_popup(Parent root, String title)
+    {
+        Stage stage = new Stage() ;
+        stage.initModality(Modality.APPLICATION_MODAL) ;
+        stage.setResizable(false) ;
+        Scene scene = new Scene(root) ;
+        stage.setTitle(title) ;
+        stage.setScene(scene) ;
+        stage.showAndWait() ;
     }
 
     public Parent preload(String fxml, List<Object> params) throws IOException{

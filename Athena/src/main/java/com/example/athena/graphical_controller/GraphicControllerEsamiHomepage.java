@@ -48,45 +48,19 @@ public class GraphicControllerEsamiHomepage implements Initializable {
 
     public void initAggiungiEsame () throws IOException {
 
-        initNewScene("Aggiungi_Esame_View.fxml" , "Add exam");
+        SceneSwitcher switcher = new SceneSwitcher() ;
+        switcher.popup("Aggiungi_Esame_View.fxml" , "Add exam") ;
 
     }
     public void initMostraMedia () throws IOException {
-        initNewScene("Mostra_Media_View.fxml" , "Average");
+        SceneSwitcher switcher = new SceneSwitcher() ;
+        switcher.popup("Mostra_Media_View.fxml" , "Average") ;
     }
 
     public void initCareerStatus () throws IOException {
-        initNewScene("carrerStatusView.fxml" , "Career");
-    }
-
-
-    public void initNewScene(String fxml , String windowtext ) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader();
         SceneSwitcher switcher = new SceneSwitcher() ;
-        loader.setLocation(switcher.generateUrl(fxml));
-        Stage stage = new Stage();
-        stage.setResizable(false);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        Scene scene = new Scene(loader.load());
-        stage.setScene(scene);
-        stage.setTitle(windowtext);
-        stage.showAndWait();
-
-
-
-
+        switcher.popup("carrerStatusView.fxml" , "Career") ;
     }
-
-
-
-
-
-
-
-
-
-
 
 
     public void onBackButtonClick(ActionEvent event) throws IOException {
