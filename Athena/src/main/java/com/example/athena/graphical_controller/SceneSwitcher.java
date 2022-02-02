@@ -35,16 +35,16 @@ public class SceneSwitcher {
     public void popup(String fxml, String title) throws IOException
     {
         Parent root = load(generateUrl(fxml)) ;
-        prepare_popup(root, title) ;
+        preparePopup(root, title) ;
     }
 
     public void popup(String fxml, String title, List<Object> params) throws IOException
     {
         Parent root = preload(fxml, params) ;
-        prepare_popup(root, title) ;
+        preparePopup(root, title) ;
     }
 
-    private void prepare_popup(Parent root, String title)
+    private void preparePopup(Parent root, String title)
     {
         Stage stage = new Stage() ;
         stage.initModality(Modality.APPLICATION_MODAL) ;
