@@ -37,7 +37,7 @@
             <Font name="Bookman Old Style" size="20.0" />
          </font>
       </Text>
-      <PieChart fx:id="examsPieChart" layoutX="37.0" layoutY="200.0" prefHeight="316.0" prefWidth="390.0" style="-fx-background-color: #002730;" title="Exams' completion" />
+      <PieChart fx:id="examsPieChart" layoutX="37.0" layoutY="200.0" prefHeight="316.0" prefWidth="390.0" style="-fx-background-color: #002730;" stylesheets="@../../../../css/piechart.css" title="Exams' completion" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="582.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../assets/title.png" />
@@ -63,7 +63,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <PieChart fx:id="examsPieChartcfu" layoutX="470.0" layoutY="207.0" prefHeight="316.0" prefWidth="390.0" style="-fx-background-color: #002730;" title="Exams' completion" />
+      <PieChart fx:id="examsPieChartcfu" layoutX="470.0" layoutY="207.0" prefHeight="316.0" prefWidth="390.0" style="-fx-background-color: #002730;" stylesheets="@../../../../css/piechart.css" title="CFU's completion" />
       <Label fx:id="gainedCfus" layoutX="695.0" layoutY="149.0" text="0" textFill="#ffd775">
          <font>
             <Font size="20.0" />

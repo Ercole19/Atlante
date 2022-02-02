@@ -14,16 +14,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static javafx.fxml.FXMLLoader.load ;
 
 public class TutorPersonalPageController implements  PostInitialize , Initializable
 {

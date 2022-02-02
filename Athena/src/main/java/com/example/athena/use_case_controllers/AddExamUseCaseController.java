@@ -18,7 +18,7 @@ public class AddExamUseCaseController {
 
 
 
-    public void addExam (ExamEntityBean esameBean , ActionEvent event , boolean update , String oldName) throws IOException {
+    public void addExam (ExamEntityBean esameBean , ActionEvent event , boolean update , String oldName) {
 
 
         if ((esameBean.getExamName().equals("")) || (esameBean.getVotoEsame() < 18 || esameBean.getVotoEsame() > 30) || (esameBean.getCfuEsame() < 0 || esameBean.getCfuEsame() > 15) ) {

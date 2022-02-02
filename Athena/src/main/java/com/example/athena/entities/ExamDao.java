@@ -10,17 +10,17 @@ import java.sql.*;
 
 public class ExamDao extends AbstractDAO {
     private String emailcurrent =  User.getUser().getEmail() ;
-    private String getquery = "SELECT Nome , Voto , CFU , Data FROM esami WHERE email = ? " ;
-    private String deleteQuery = "DELETE FROM esami WHERE Nome = ? and email = ?" ;
+    private String getquery = "SELECT Nome , Voto , CFU , Data_Esame FROM esami WHERE email_utente = ? " ;
+    private String deleteQuery = "DELETE FROM esami WHERE Nome = ? and email_utente = ?" ;
     private String addQuery = " INSERT INTO esami  VALUES (?,?,?,?,?); " ;
-    private String updateQuery = "UPDATE `esami` SET `Nome` = ? , `Voto` = ? , `CFU` = ? , `Data` = ?  WHERE (`Nome` = ? ) and email = ? " ;
-    private String sortedExams = "SELECT  Voto , Data  from  esami order by Data ASC where email = ?" ;
-    private String weightedsortedExams = "SELECT  Voto , Data , CFU  from  esami WHERE email =  ? order by Data ASC " ;
-    private String getaverage = "SELECT AVG(VOTO) as media  FROM esami WHERE email = ?" ;
-    private String getexamsdate = "SELECT (Voto) , (CFU)  FROM esami WHERE email = ? ORDER BY Data ASC " ;
-    private String countExams = "SELECT COUNT(Nome) as esamiDati from esami WHERE email = ?" ;
-    private String getExams = "SELECT (Nome)  from esami WHERE email = ?" ;
-    private String getcfusum = "SELECT SUM(CFU) as cfus from esami WHERE email = ?" ;
+    private String updateQuery = "UPDATE `esami` SET `Nome` = ? , `Voto` = ? , `CFU` = ? , `Data_Esame` = ?  WHERE (`Nome` = ? ) and email_utente = ? " ;
+    private String sortedExams = "SELECT  Voto , Data_Esame   from  esami WHERE email_utente =  ? order by Data_Esame" ;
+    private String weightedsortedExams = "SELECT  Voto , Data_Esame , CFU  from  esami WHERE email_utente =  ? order by Data_Esame  " ;
+    private String getaverage = "SELECT AVG(VOTO) as media  FROM esami WHERE email_utente = ?" ;
+    private String getexamsdate = "SELECT (Voto) , (CFU)  FROM esami WHERE email_utente = ? ORDER BY Data_Esame ASC " ;
+    private String countExams = "SELECT COUNT(Nome) as esamiDati from esami WHERE email_utente = ?" ;
+    private String getExams = "SELECT (Nome)  from esami WHERE email_utente = ?" ;
+    private String getcfusum = "SELECT SUM(CFU) as cfus from esami WHERE email_utente = ?" ;
     private static String driver  = "com.mysql.jdbc.Driver" ;
 
 
@@ -43,7 +43,7 @@ public class ExamDao extends AbstractDAO {
                 exam.setExamName(set.getString("Nome"));
                 exam.setVotoEsame(set.getString("Voto"));
                 exam.setCfuEsame(set.getString("CFU"));
-                exam.setDate(set.getString("Data"));
+                exam.setDate(set.getString("Data_Esame"));
                 examlist.add(exam);
 
             }
@@ -121,11 +121,7 @@ public class ExamDao extends AbstractDAO {
     }
 
     public ObservableList<XYChart.Data<String, Number>> getSortedExams() {
-        try {
-            Class.forName(driver) ;
-        } catch (ClassNotFoundException e ) {
-            e.getMessage() ;
-        }
+
 
         ObservableList<XYChart.Data<String, Number>> list = FXCollections.observableArrayList();
 
@@ -137,11 +133,11 @@ public class ExamDao extends AbstractDAO {
             String data ;
             int voto ;
 
-            ResultSet set = statement.executeQuery(sortedExams) ;
+            ResultSet set = statement.executeQuery() ;
 
             while (set.next()) {
 
-                data = set.getString("Data");
+                data = set.getString("Data_Esame");
                 voto = set.getInt("Voto");
                 counterVoti = counterVoti + voto;
 
@@ -199,7 +195,7 @@ public class ExamDao extends AbstractDAO {
 
             while (set.next()) {
 
-                String data = set.getString("Data");
+                String data = set.getString("Data_Esame");
                 voto = set.getInt("Voto");
                 cfu = set.getInt("CFU") ;
                 cfus = cfus + cfu ;
@@ -249,20 +245,17 @@ public class ExamDao extends AbstractDAO {
 
 
      public ObservableList < PieChart.Data > loadData() {
-         try {
-             Class.forName(driver) ;
-         } catch (ClassNotFoundException e ) {
-             e.getMessage() ;
-         }
+
+
         ObservableList < PieChart.Data > piechartdata;
         piechartdata = FXCollections.observableArrayList();
 
 
-        try ( PreparedStatement statement =  this.getConnection().prepareStatement(getExams)) {
+        try ( PreparedStatement statement =  this.getConnection().prepareStatement(countExams)) {
             statement.setString(1,emailcurrent);
             ResultSet set = statement.executeQuery() ;
             while (set.next()) {
-                piechartdata.add(new PieChart.Data("Esami dati" , set.getInt("esamiDati"))) ;
+                piechartdata.add(new PieChart.Data("Esami dati" , set.getInt(1))) ;
 
             }
         } catch (Exception e) {
@@ -275,14 +268,10 @@ public class ExamDao extends AbstractDAO {
 
 
     public Number getTotalExams () {
-        try {
-            Class.forName(driver) ;
-        } catch (ClassNotFoundException e ) {
-            e.getMessage() ;
-        }
+
         int count = 0 ;
 
-        try (PreparedStatement statement = this.getConnection().prepareStatement(countExams) ;) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement(getExams) ) {
             statement.setString(1,emailcurrent);
             ResultSet set = statement.executeQuery() ;
 
@@ -297,19 +286,17 @@ public class ExamDao extends AbstractDAO {
         return count ;}
 
     public ObservableList < PieChart.Data > loadData2() {
-        try {
-            Class.forName(driver) ;
-        } catch (ClassNotFoundException e ) {
-            e.getMessage() ;
-        }
+
         ObservableList < PieChart.Data > piechartdata;
         piechartdata = FXCollections.observableArrayList();
 
 
         try (PreparedStatement statement = this.getConnection().prepareStatement(getcfusum)){
+
+            statement.setString(1 , emailcurrent) ;
              ResultSet set = statement.executeQuery() ;
             while (set.next()) {
-                piechartdata.add(new PieChart.Data("CFU possseduti " , set.getInt("cfus"))) ;
+                piechartdata.add(new PieChart.Data("CFU possseduti " , set.getInt(1))) ;
 
             }
         } catch (Exception e) {
@@ -322,17 +309,13 @@ public class ExamDao extends AbstractDAO {
 
 
     public Number getTotalCfus () {
-        try {
-            Class.forName(driver) ;
-        } catch (ClassNotFoundException e ) {
-            e.getMessage() ;
-        }
+
 
         try (PreparedStatement statement = this.getConnection().prepareStatement(getcfusum)){
             statement.setString(1 , emailcurrent);
          ResultSet set = statement.executeQuery() ;
             while  (set.next()) {
-                return set.getInt("cfus") ;
+                return set.getInt(1) ;
             }
         }catch (SQLException exc) {
             exc.getErrorCode() ;

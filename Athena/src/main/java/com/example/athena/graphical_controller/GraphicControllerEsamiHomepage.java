@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -130,6 +131,11 @@ public class GraphicControllerEsamiHomepage implements Initializable {
                         controller.setDataEsame(exam.getDate());
                         controller.setOldExamName(exam.getExamName());
                         controller.setUpdate(true);
+
+                        Parent root = fxmlLoader.getRoot();
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(root));
+                        stage.showAndWait();
 
 
 

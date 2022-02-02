@@ -57,7 +57,7 @@ public class AddEventController implements Initializable  {
         eventt.setEnd(endHourSpinner.getValue() , endMinuteSpinner.getValue());
         eventt.setDescription(eventDescription.getText());
 
-        if (eventt.getDescription().length() > 50 | eventt.getStart().isAfter(eventt.getEnd())){
+        if (eventt.getDescription().length() > 50 | eventt.getStart().isAfter(eventt.getEnd()) | eventt.getName().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR , "Data not valid" , ButtonType.CLOSE) ;
             alert.showAndWait();
         }

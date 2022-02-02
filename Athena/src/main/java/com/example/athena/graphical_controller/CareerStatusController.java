@@ -31,15 +31,16 @@ public class CareerStatusController implements Initializable {
 
     @FXML
     public void initialize(URL url , ResourceBundle rb) {
-        ObservableList<PieChart.Data> examsPieChartData ;
-        ObservableList<PieChart.Data> examsPieChartDatacfus  ;
+
         ExamDao exam = new ExamDao() ;
-        examsPieChartData = exam.loadData() ;
-        examsPieChartDatacfus = exam.loadData2() ;
+        ObservableList<PieChart.Data> examsPieChartData  = exam.loadData() ;
+        ObservableList<PieChart.Data> examsPieChartDatacfus  = exam.loadData2() ;
+
         int esamiDAti = (int) exam.getTotalExams();
         int esamiTotali = Integer.parseInt(totalExams.getText()) ;
         int cfuDati = (int) exam.getTotalCfus() ;
         int cfuTotali = Integer.parseInt(totalCfus.getText()) ;
+
         examsPieChartData.add(new PieChart.Data("Esami mancanti" , esamiTotali-esamiDAti)) ;
         examsPieChartDatacfus.add(new PieChart.Data("cfu mancanti " , cfuTotali - cfuDati)) ;
 
