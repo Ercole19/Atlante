@@ -60,7 +60,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ChoiceBox layoutX="19.0" layoutY="435.0" prefHeight="30.0" prefWidth="252.0" />
+      <ChoiceBox fx:id="eventType" layoutX="19.0" layoutY="435.0" prefHeight="30.0" prefWidth="252.0" />
       <Button layoutX="530.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickOnX" style="-fx-background-color: #ffc22a; -fx-background-radius: 20;" text="X">
          <font>
             <Font size="26.0" />

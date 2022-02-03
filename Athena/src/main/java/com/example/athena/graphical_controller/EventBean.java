@@ -1,5 +1,7 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.entities.ActivityTypesEnum;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -12,6 +14,7 @@ public class EventBean {
     private LocalTime start ;
     private LocalTime end ;
     private String description ;
+    private String type ;
 
     public void setDate(LocalDate date) {
         this.date = date;
@@ -19,6 +22,11 @@ public class EventBean {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setType(String type)
+    {
+        this.type = type.toUpperCase().replace(" ", "_") ;
     }
 
     public void setStart(int hours , int minutes) {
@@ -65,5 +73,10 @@ public class EventBean {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getType()
+    {
+        return this.type ;
     }
 }

@@ -12,10 +12,10 @@ public class AddEventUCC {
 
         EventDao eventDao = new EventDao() ;
         if (!update) {
-            eventDao.addEvent(evento.getDate(), evento.getName(), evento.getStart(), evento.getEnd(), evento.getDescription());
+            eventDao.addEvent(evento.getDate(), evento.getName(), evento.getStart(), evento.getEnd(), evento.getDescription(), evento.getType());
         }
         else {
-            eventDao.updateEvento(evento.getDate() , evento.getName() , evento.getStart(), evento.getEnd(), evento.getDescription() , oldname);
+            eventDao.updateEvento(evento.getDate() , evento.getName() , evento.getStart(), evento.getEnd(), evento.getDescription() , oldname, evento.getType());
         }
 
 

@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.entities.ActivityTypesEnum;
 import com.example.athena.entities.StringHoursConverter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,6 +39,9 @@ public class AddEventController implements Initializable  {
         @FXML
         private TextField eventName;
 
+        @FXML
+        private ChoiceBox<String> eventType ;
+
         private boolean update ;
         private String oldEventName ;
 
@@ -56,6 +60,7 @@ public class AddEventController implements Initializable  {
         eventt.setStart(startHourSpinner.getValue() , startMinuteSpinner.getValue());
         eventt.setEnd(endHourSpinner.getValue() , endMinuteSpinner.getValue());
         eventt.setDescription(eventDescription.getText());
+        eventt.setType(eventType.getValue()) ;
 
         if (eventt.getDescription().length() > 50 | eventt.getStart().isAfter(eventt.getEnd()) | eventt.getName().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR , "Data not valid" , ButtonType.CLOSE) ;
@@ -94,6 +99,14 @@ public class AddEventController implements Initializable  {
         prepareFactory(startMinuteSpinner, 0, 59) ;
         prepareFactory(endHourSpinner, 0, 23) ;
         prepareFactory(endMinuteSpinner, 0, 59) ;
+
+        for(ActivityTypesEnum type : ActivityTypesEnum.values())
+        {
+            String name = type.name() ;
+            eventType.getItems().add(name.charAt(0) + name.substring(1).toLowerCase().replace("_", " ")) ;
+        }
+
+        eventType.setValue("Select the event...") ;
     }
 
     public void setOldEventName(String oldname) {

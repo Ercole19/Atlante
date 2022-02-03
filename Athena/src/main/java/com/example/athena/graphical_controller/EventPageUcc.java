@@ -34,8 +34,9 @@ public class EventPageUcc implements PostInitialize{
             evento.setEndbyString(eventinfos[i + 2]);
             evento.setDescription(eventinfos[i + 3]);
             evento.setDate(LocalDate.parse(eventinfos[i+4]));
+            evento.setType(eventinfos[i+5]) ;
             result.add(evento);
-            i = i + 5;
+            i = i + 6;
         }
 
 
