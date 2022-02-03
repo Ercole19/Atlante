@@ -32,8 +32,8 @@ public class FakePaymentSystem implements Runnable
         }
         catch (IOException e)
         {
-            org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(IsbnCheckBoundary.class);
-            logger.error("error!", e);
+            org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(IsbnCheckBoundary.class);
+            log.error("error!", e);
             System.exit(1) ;
         }
         random = new SecureRandom() ;
@@ -66,8 +66,8 @@ public class FakePaymentSystem implements Runnable
         }
         catch (IOException e)
         {
-            org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(IsbnCheckBoundary.class);
-            logger.error("error!", e);
+            org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(IsbnCheckBoundary.class);
+            log.error("error!", e);
         }
     }
 
