@@ -113,24 +113,29 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
 
             entryBox.getRowConstraints().add(new RowConstraints(100)) ;
             setColumnConstraint(20, entryBox) ;
+            setColumnConstraint(15, entryBox) ;
+            setColumnConstraint(15, entryBox) ;
             setColumnConstraint(20, entryBox) ;
-            setColumnConstraint(20, entryBox) ;
-            setColumnConstraint(20, entryBox) ;
-            setColumnConstraint(20, entryBox) ;
-            setColumnConstraint(20, entryBox) ;
+            setColumnConstraint(10, entryBox) ;
+            setColumnConstraint(10, entryBox) ;
+            setColumnConstraint(10, entryBox) ;
 
 
             Label nameLabel = new Label(result.getName()) ;
             nameLabel.setFont(new Font(FONT, 26)) ;
             entryBox.add(nameLabel, 0, 0) ;
 
-            Label subjectLabel = new Label(result.getStart().toString()) ;
-            subjectLabel.setFont(new Font(FONT, 26)) ;
-            entryBox.add(subjectLabel, 1, 0) ;
+            Label startTimeLabel = new Label(result.getStart().toString()) ;
+            startTimeLabel.setFont(new Font(FONT, 26)) ;
+            entryBox.add(startTimeLabel, 1, 0) ;
 
-            Label starsLabel = new Label(result.getEnd().toString()) ;
-            starsLabel.setFont(new Font(FONT, 26)) ;
-            entryBox.add(starsLabel, 2, 0) ;
+            Label endTimeLabel = new Label(result.getEnd().toString()) ;
+            endTimeLabel.setFont(new Font(FONT, 26)) ;
+            entryBox.add(endTimeLabel, 2, 0) ;
+
+            Label eventTypeLabel = new Label(result.getType().charAt(0) + result.getType().substring(1).toLowerCase().replace("_", " ")) ;
+            eventTypeLabel.setFont(new Font(FONT, 26)) ;
+            entryBox.add(eventTypeLabel, 3, 0) ;
 
             Button description = new Button("Description") ;
             description.setOnAction(event -> {
@@ -154,7 +159,7 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
 
 
 
-            entryBox.add(description, 3, 0) ;
+            entryBox.add(description, 4, 0) ;
 
             Button delete = new Button("delete") ;
             delete.setOnAction(event -> {
@@ -163,7 +168,7 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
                 entryBox.setStyle("-fx-border-color: #ffffff") ;
                 deleteRow(entryBox, entryBox.getRowIndex(delete));
             });
-            entryBox.add(delete, 4, 0) ;
+            entryBox.add(delete, 5, 0) ;
 
             Button edit = new Button("edit") ;
             edit.setOnAction(event -> {
@@ -197,7 +202,7 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
 
 
             });
-            entryBox.add(edit, 5, 0) ;
+            entryBox.add(edit, 6, 0) ;
 
 
             graphicalList.getChildren().add(entryBox) ;

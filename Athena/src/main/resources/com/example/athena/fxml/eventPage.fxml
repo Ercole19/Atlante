@@ -8,22 +8,22 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="513.0" prefWidth="862.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.EventPageUcc">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.EventPageUcc">
 
    <children>
-      <Label fx:id="label1" layoutX="384.0" layoutY="31.0" text="Label">
+      <Label fx:id="label1" layoutX="423.0" layoutY="36.0" text="Label">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <Text layoutX="593.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="events">
+      <Text layoutX="531.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="events">
          <font>
             <Font size="24.0" />
          </font></Text>
-      <SubScene fx:id="results" height="293.0" layoutX="31.0" layoutY="89.0" width="799.0">
+      <SubScene fx:id="results" height="293.0" layoutX="17.0" layoutY="104.0" width="966.0">
         <root>
           <Region />
         </root>
       </SubScene>
-      <Button layoutX="447.0" layoutY="439.0" mnemonicParsing="false" text="Button" />
+      <Button layoutX="469.0" layoutY="437.0" mnemonicParsing="false" text="Button" />
    </children>
 </AnchorPane>
