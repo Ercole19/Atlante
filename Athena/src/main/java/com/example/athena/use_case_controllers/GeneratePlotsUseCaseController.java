@@ -1,6 +1,7 @@
 package com.example.athena.use_case_controllers;
 
 import com.example.athena.entities.ActivityTypesEnum;
+import com.example.athena.entities.PlottingOptionsEnum;
 import com.example.athena.graphical_controller.ActivityPlotsBean;
 import com.example.athena.graphical_controller.PlotSearchQueryBean;
 import javafx.scene.chart.XYChart;
@@ -16,7 +17,7 @@ public class GeneratePlotsUseCaseController
         String activityType = searchQuery.getActivityType().replace(" ", "_").toUpperCase() ;
 
 
-        switch(ActivityTypesEnum.valueOf(activityType))
+        switch(PlottingOptionsEnum.valueOf(activityType))
         {
             case ALL :
                 plotsList.add(retrieveSeriesLectureTime()) ;
