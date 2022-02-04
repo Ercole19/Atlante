@@ -6,9 +6,9 @@ import java.util.List;
 
 public class CourseDao extends AbstractDAO {
     private final String emailcurrent =  User.getUser().getEmail() ;
-    private String add = "INSERT INTO corsi (Nome , emailtutor) VALUES (?,?)" ;
-    private String delete = "DELETE FROM corsi WHERE Nome = ? and emailtutor = ?" ;
-    private String getCourses = "SELECT Nome FROM corsi WHERE emailtutor = ?" ;
+    private String add = "INSERT INTO corsi (nomecorso , emailtutor) VALUES (?,?)" ;
+    private String delete = "DELETE FROM corsi WHERE nomecorso = ? and emailtutor = ?" ;
+    private String getCourses = "SELECT nomecorso FROM corsi WHERE emailtutor = ?" ;
 
 
 
@@ -32,10 +32,10 @@ public class CourseDao extends AbstractDAO {
         }
 
     }
-    public List<String> fillCourses () {
+    public List<String> fillCourses (String email) {
         List<String> corsi = new ArrayList<>() ;
-        try ( PreparedStatement statement = this.getConnection().prepareStatement(getCourses, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
-            statement.setString(1, emailcurrent);
+        try ( PreparedStatement statement = this.getConnection().prepareStatement(getCourses)) {
+            statement.setString(1, email);
             ResultSet set = statement.executeQuery() ;
             while (set.next()){
                 corsi.add(set.getString(1)) ;

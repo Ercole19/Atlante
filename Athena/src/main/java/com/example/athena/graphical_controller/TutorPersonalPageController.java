@@ -4,7 +4,6 @@ import com.example.athena.entities.CourseDao;
 import com.example.athena.entities.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -12,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 public class TutorPersonalPageController implements  PostInitialize , Initializable
 {
 
-    private Parent root ;
+
     @FXML
     private AnchorPane rootPane ;
     @FXML
@@ -35,7 +35,16 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     private TextArea sessioninfos ;
     @FXML
     private TextArea contactnumbers ;
+    @FXML
+    private TextArea reviewsArea;
+    @FXML
+    private Label nometutor;
+    @FXML
+    private Label cognometutor;
+
+
     private UserDao user ;
+
 
 
 
@@ -66,7 +75,7 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
 
     public void onConfirmButtonClick(ActionEvent event) throws IOException {
         user = new UserDao();
-        String[] infos = user.filltutorinfos();
+        String[] infos = user.filltutorinfos(com.example.athena.entities.User.getUser().getEmail());
         boolean empty = true ;
         for (Object ob : infos) {
             if (ob != null) {
@@ -94,7 +103,7 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
         anchorPane.setPrefSize(600, 800) ;
         Label cv = new Label("Lorem Ipsum Dolor Sit Amet") ;
         anchorPane.getChildren().add(cv) ;
-        Scene cvscene = new Scene(root) ;
+        Scene cvscene = new Scene(anchorPane) ;
         Stage tempStage = new Stage() ;
         tempStage.setScene(cvscene) ;
         tempStage.initModality(Modality.APPLICATION_MODAL) ;
@@ -118,29 +127,43 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
         user = new UserDao() ;
         CourseDao corso = new CourseDao() ;
 
+        String[] informazioni = user.getName((String) params.get(0));
+        Float avg = user.getAvg((String) params.get(0));
 
-        String[] infos = user.filltutorinfos();
-        List<String> courses = corso.fillCourses() ;
+
+        String[] infos = user.filltutorinfos((String) params.get(0));
+
+        List<String> courses = corso.fillCourses((String) params.get(0)) ;
 
         if (infos == null) {
-            aboutme.setText("");
-            sessioninfos.setText("");
-            contactnumbers.setText("");
+            aboutme.appendText("");
+            sessioninfos.appendText("");
+            contactnumbers.appendText("");
+            reviewsArea.appendText("No data");
         }
         else {
-            aboutme.setText(infos[0]);
-            sessioninfos.setText(infos[1]);
-            contactnumbers.setText(infos[2]);
+            aboutme.appendText(infos[0]);
+            sessioninfos.appendText(infos[1]);
+            contactnumbers.appendText(infos[2]);
+            if (avg==0.0){
+                reviewsArea.appendText("No reviews");
+            }
+            else {
+                reviewsArea.appendText(String.valueOf(avg));
+            }
+
         }
 
         for (int i = 0 ; i< courses.size() ; i++) {
             coursesArea.appendText(courses.get(i) + "\n" );
         }
 
+        nometutor.setText(informazioni[0]);
+        cognometutor.setText(informazioni[1]);
+
+
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        rootPane.getProperties().put("foo", this) ;
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle) {rootPane.getProperties().put("foo", this) ;}
 }

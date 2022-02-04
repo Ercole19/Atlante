@@ -28,6 +28,7 @@ import java.util.Set;
 
 public class SearchResultFormatterView extends SearchResultFormatterComponent {
     private static final String FONT = "System";
+
     @Override
     public AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, ArrayList<TutorSearchResultBean> results)
     {
@@ -59,7 +60,9 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
             subjectLabel.setFont(new Font(FONT, 26)) ;
             entryBox.add(subjectLabel, 1, 0) ;
 
-            Label starsLabel = new Label(result.getStarNumber()) ;
+
+            Label starsLabel = new Label(result.getStarNumber());
+
             starsLabel.setFont(new Font(FONT, 26)) ;
             entryBox.add(starsLabel, 2, 0) ;
 

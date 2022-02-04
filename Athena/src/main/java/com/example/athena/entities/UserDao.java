@@ -4,9 +4,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 import java.sql.*;
+import java.util.List;
 
 public class UserDao extends AbstractDAO {
-
 
 
     private String queryFind = " SELECT * FROM utenti WHERE  email = ? and password = ? ";
@@ -67,7 +67,7 @@ public class UserDao extends AbstractDAO {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Email not valid");
                 alert.showAndWait();
             } else {
-                exception.getMessage() ;
+                exception.getMessage();
             }
         }
         return false;
@@ -76,7 +76,7 @@ public class UserDao extends AbstractDAO {
 
     public Object getuserType(String email) {
 
-        try ( PreparedStatement statement = this.getConnection().prepareStatement(getType)) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement(getType)) {
 
             statement.setString(1, email);
             ResultSet set = statement.executeQuery();
@@ -94,9 +94,13 @@ public class UserDao extends AbstractDAO {
 
     }
 
-    public String[] filltutorinfos() {
+    public String[] filltutorinfos(String email) {
         String[] strArray1 = new String[3];
-        try ( PreparedStatement statement = this.getConnection().prepareStatement(filltutor)) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement(filltutor)) {
+
+
+            statement.setString(1, email);
+
 
             //declare with size
             ResultSet set = statement.executeQuery();
@@ -118,7 +122,7 @@ public class UserDao extends AbstractDAO {
 
 
     public void settutorinfos(String about, String sesinf, String contnum) {
-        try ( PreparedStatement statement = this.getConnection().prepareStatement(setTutor, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement(setTutor, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
             statement.setString(1, about);
             statement.setString(2, sesinf);
             statement.setString(3, contnum);
@@ -131,7 +135,7 @@ public class UserDao extends AbstractDAO {
     }
 
     public void updatetutorinfos(String about, String sesinf, String contnum) {
-        try ( PreparedStatement statement = this.getConnection().prepareStatement(updatetutor, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement(updatetutor, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
             statement.setString(1, about);
             statement.setString(2, sesinf);
             statement.setString(3, contnum);
@@ -144,31 +148,24 @@ public class UserDao extends AbstractDAO {
     }
 
 
-
-
-
-
-
-    public String[] findTutor(String query , boolean byname) {
+    public String[] findTutor(String query, boolean byname) {
         String prepStatement;
 
         if (byname) {
-            prepStatement = searchByName ;
-        }
-        else {
+            prepStatement = searchByName;
+        } else {
             prepStatement = searchTutor;
         }
 
         String[] tutorInfos = new String[500];
         int i = 0;
-        try ( PreparedStatement statement = this.getConnection().prepareStatement(prepStatement)) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement(prepStatement)) {
 
             if (byname) {
 
-                statement.setString(1,query);
+                statement.setString(1, query);
 
-            }
-            else {
+            } else {
                 statement.setString(1, query);
                 statement.setString(2, query);
 
@@ -181,8 +178,8 @@ public class UserDao extends AbstractDAO {
                 tutorInfos[i + 1] = set.getString(2);
                 tutorInfos[i + 2] = set.getString(3);
                 tutorInfos[i + 3] = Float.toString(set.getFloat(4));
-                tutorInfos[i + 4] = set.getString(5) ;
-                i = i + 5 ;
+                tutorInfos[i + 4] = set.getString(5);
+                i = i + 5;
 
 
             }
@@ -195,6 +192,50 @@ public class UserDao extends AbstractDAO {
 
 
     }
+
+
+    public String[] getName(String email) {
+
+        String[] infos = new String[2];
+        try (PreparedStatement statement = this.getConnection().prepareStatement("select nome,surname from athena.utenti where email = ? ")) {
+
+            statement.setString(1,email);
+            ResultSet set = statement.executeQuery();
+            while (set.next()){
+                infos[0] = set.getString(1);
+                infos[1] = set.getString(2);
+            }
+
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return infos;
+    }
+
+
+    public float getAvg(String email) {
+        float avg = 0;
+
+        try (PreparedStatement statement = this.getConnection().prepareStatement("select average from athena.tutordescription where emailuser =?")){
+
+            statement.setString(1,email);
+            ResultSet set = statement.executeQuery();
+
+            while (set.next()){
+                avg = set.getFloat(1);
+            }
+
+
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return avg;
+
+    }
+
+
+
+
 }
 
 
