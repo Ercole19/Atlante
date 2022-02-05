@@ -30,7 +30,7 @@ public class EventEntity
     {
         EventDao dao = new EventDao() ;
 
-        LocalDate start = LocalDate.MIN ;
+        LocalDate start = LocalDate.of(1970, 01, 01) ;
 
         switch(timeSpan)
         {
