@@ -3,6 +3,8 @@ package com.example.athena.entities;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.*;
 import java.sql.*;
 import java.util.List;
 
@@ -17,15 +19,11 @@ public class UserDao extends AbstractDAO {
     private String searchTutor = "select utenti.nome , utenti.surname , corsi.nomecorso , tutordescription.Average , utenti.email from athena.tutordescription join athena.corsi on tutordescription.emailuser = corsi.emailtutor join athena.utenti on tutordescription.emailuser = utenti.email where ? in (select nomecorso from athena.corsi) and corsi.nomecorso = ?; ";
     private String updatetutor = "UPDATE athena.tutordescription SET aboutme = ?,  sessioninfos=?, contactnumbers=?  WHERE emailuser= ?";
     private String searchByName = "SELECT  utenti.nome ,  utenti.surname , corsi.nomecorso , tutordescription.Average ,  utenti.email FROM athena.utenti join athena.tutordescription on utenti.email = tutordescription.emailuser join athena.corsi on utenti.email = corsi.emailtutor WHERE CONCAT( nome,  ' ', surname ) LIKE  concat ('%' , ? , '%')";
-    private static String driver = "com.mysql.jdbc.Driver";
+    private String insertCV ="update athena.tutordescription  set CV = ?    where emailuser = ?" ;
 
 
     public boolean findStudent(String emailUtente, String pass) {
-        try {
-            Class.forName(driver);
-        } catch (ClassNotFoundException e) {
-            e.getMessage();
-        }
+
 
         try (PreparedStatement stmt = this.getConnection().prepareStatement(queryFind, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
 
@@ -45,11 +43,7 @@ public class UserDao extends AbstractDAO {
     }
 
     public Boolean registerUser(String email, String password, String type, String name, String surname) {
-        try {
-            Class.forName(driver);
-        } catch (ClassNotFoundException e) {
-            e.getMessage();
-        }
+
 
         try (PreparedStatement stmt = this.getConnection().prepareStatement(queryRegister, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);) {
             stmt.setString(1, email);
@@ -234,8 +228,37 @@ public class UserDao extends AbstractDAO {
     }
 
 
+    public void inserisciCV(File cv) {
+        try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(insertCV) ) {
+            preparedStatement.setBlob(1, new BufferedInputStream(new FileInputStream(cv))) ;
+            preparedStatement.setString(2 , com.example.athena.entities.User.getUser().getEmail());
+            preparedStatement.execute();
 
 
+        } catch (SQLException | FileNotFoundException exc) {
+            System.out.println(exc.getMessage());
+        }
+    }
+
+
+    public void getCV(String email) {
+        try(PreparedStatement statement = this.getConnection().prepareStatement("Select CV from athena.tutordescription where emailuser = ? ")) {
+
+            statement.setString(1, email);
+            ResultSet set = statement.executeQuery();
+
+            while (set.next()) {
+                byte[] cvBytes = set.getBlob(1).getBytes(1, (int) set.getBlob(1).length());
+                File file = new File("src/main/resources/assets/tempCV.html");
+                OutputStream writeStream = new FileOutputStream(file);
+                writeStream.write(cvBytes, 0, cvBytes.length);
+                writeStream.close();
+            }
+
+        }catch (SQLException  | IOException exc) {
+            exc.getMessage() ;
+        }
+    }
 }
 
 

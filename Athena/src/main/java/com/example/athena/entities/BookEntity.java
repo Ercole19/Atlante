@@ -1,5 +1,7 @@
 package com.example.athena.entities;
 
+import java.io.File;
+
 public class BookEntity {
 
     private final String title ;

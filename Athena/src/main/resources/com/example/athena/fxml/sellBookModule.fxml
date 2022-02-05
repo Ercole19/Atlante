@@ -38,7 +38,7 @@
          </font>
       </Text>
       <ImageView fitHeight="244.0" fitWidth="188.0" layoutX="151.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="194.0" layoutY="703.0" mnemonicParsing="false" text="Upload image" />
+      <Button layoutX="194.0" layoutY="703.0" mnemonicParsing="false" onAction="#onUploadBtnClick" text="Upload image" />
       <CheckBox fx:id="bookNegotiability" layoutX="31.0" layoutY="370.0" mnemonicParsing="false" text="Negotiable" textFill="WHITE">
          <font>
             <Font size="24.0" />

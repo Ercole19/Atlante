@@ -64,5 +64,7 @@
          <Image url="@../../../../assets/homeBtn.png" />
       </image>
    </ImageView>
-   <Button layoutX="21.0" layoutY="15.0" mnemonicParsing="false"  opacity="0.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #2d8bba;" text="homeBtn" />
+   <Button layoutX="21.0" layoutY="15.0" mnemonicParsing="false" opacity="0.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #2d8bba;" text="homeBtn" />
+   <ImageView fx:id="blob" fitHeight="150.0" fitWidth="200.0" layoutX="708.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" />
+   <Button layoutX="207.0" layoutY="593.0" mnemonicParsing="false" onAction="#onBlobButtonClick" text="Button" />
 </AnchorPane>

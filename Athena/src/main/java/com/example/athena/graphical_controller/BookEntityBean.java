@@ -2,6 +2,8 @@ package com.example.athena.graphical_controller;
 
 import com.example.athena.exceptions.BookException;
 
+import java.io.File;
+
 public class BookEntityBean {
 
     private final String title ;

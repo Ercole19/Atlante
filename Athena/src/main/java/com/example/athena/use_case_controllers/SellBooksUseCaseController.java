@@ -10,7 +10,7 @@ public class SellBooksUseCaseController {
 
     public void putOnSale(BookEntityBean book) throws ISBNException {
         isbnCheck(book.getIsbn()) ;
-        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable()) ;
+        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable() , book.getImage()) ;
         bookE.toDB() ;
     }
 }

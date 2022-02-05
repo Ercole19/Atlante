@@ -62,7 +62,7 @@ public class TutorPageButtonAdder extends TutorPageDecorator{
         });
         buttonCV.setOnAction(event -> {
             try {
-            graphController.onCVButtonClicktutor(event);
+            graphController.onCVButtonClicktutor();
         } catch (IOException e ){
             e.printStackTrace();
         }

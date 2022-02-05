@@ -4,12 +4,13 @@ import java.sql.*;
 
 public class BookDao extends AbstractDAO {
 
+
     private final String email = User.getUser().getEmail();
 
 
-    public void insertBook(String title , String isbn , Float price , boolean negotiability) {
-        String insertQuery = "insert into athena.books values (?,?,?,?,?)";
-        try (PreparedStatement statement = this.getConnection().prepareStatement(insertQuery)){
+    public void insertBook(String title , String isbn , Float price , boolean negotiability, File image) {
+        String insertQuery = "insert into athena.books values (?,?,?,?,?,?)";
+        try (PreparedStatement statement = this.getConnection().prepareStatement(insertQuery)) {
 
              statement.setString(1, title);
              statement.setString(2, isbn);
@@ -51,5 +52,24 @@ public class BookDao extends AbstractDAO {
 
     }
 
+    public Image getImage() {
+
+        try (PreparedStatement statement = this.getConnection().prepareStatement("Select image from athena.books")) {
+
+            ResultSet set = statement.executeQuery();
+
+            while (set.next()) {
+                byte[] imageBytes = set.getBlob(1).getBytes(1, (int) set.getBlob(1).length());
+                File file = new File("src/main/resources/assets/temp.jpg") ;
+                OutputStream writeStream = new FileOutputStream(file) ;
+                writeStream.write(imageBytes, 0, imageBytes.length);
+                writeStream.close() ;
+            }
+
+        } catch (SQLException |  IOException exc){
+            exc.getMessage();
+        }
+        return new Image(new File("src/main/resources/assets/temp.jpg").toURI().toString());
+    }
 
 }
