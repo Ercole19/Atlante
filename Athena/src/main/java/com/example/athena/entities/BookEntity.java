@@ -8,12 +8,14 @@ public class BookEntity {
     private final String isbn;
     private final float price ;
     private final Boolean isNegotiable ;
+    private final File image;
 
-    public BookEntity(String title , String isbn, float price, Boolean isNegotiable){
+    public BookEntity(String title , String isbn, float price, Boolean isNegotiable, File image){
         this.title = title;
         this.isbn = isbn;
         this.price = price;
         this.isNegotiable = isNegotiable;
+        this.image = image;
     }
 
     public String getBookTitle() {
@@ -32,9 +34,12 @@ public class BookEntity {
         return this.isNegotiable;
     }
 
+    public File getImage() {return this.image;}
+
+
     public void toDB()
     {
         BookDao dao = new BookDao() ;
-        dao.insertBook(this.getBookTitle(), this.getIsbn(), this.getPrice(), this.getNegotiable()) ;
+        dao.insertBook(this.getBookTitle(), this.getIsbn(), this.getPrice(), this.getNegotiable(), this.getImage()) ;
     }
 }

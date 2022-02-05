@@ -2,12 +2,12 @@ package com.example.athena.graphical_controller;
 
 import com.example.athena.entities.CourseDao;
 import com.example.athena.entities.UserDao;
+import com.example.athena.use_case_controllers.ViewTutorPageUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
@@ -100,7 +100,7 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
         switcher.switcher(event, "MainPageTutor.fxml");
     }
 
-    public void onCVButtonClicktutor(ActionEvent event) throws IOException
+    public void onCVButtonClicktutor() throws IOException
     {
         AnchorPane anchorPane = new AnchorPane() ;
         anchorPane.setPrefSize(600, 800) ;

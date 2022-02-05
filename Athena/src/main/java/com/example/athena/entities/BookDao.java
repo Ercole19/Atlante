@@ -1,5 +1,8 @@
 package com.example.athena.entities;
 
+import javafx.scene.image.Image;
+
+import java.io.*;
 import java.sql.*;
 
 public class BookDao extends AbstractDAO {

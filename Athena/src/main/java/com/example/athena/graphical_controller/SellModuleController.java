@@ -3,11 +3,13 @@ package com.example.athena.graphical_controller;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
 import com.example.athena.use_case_controllers.SellBooksUseCaseController;
+import javax.swing.JFileChooser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +23,8 @@ public class SellModuleController {
     private TextField bookPrice ;
     @FXML
     private CheckBox bookNegotiability ;
+
+    private File file;
 
     public void onConfirmButtonClick() {
 
@@ -36,8 +40,20 @@ public class SellModuleController {
         }
     }
     @FXML
-    protected void onBackButtonClick(ActionEvent event) throws IOException {
+    public void onBackButtonClick(ActionEvent event) throws IOException {
         SceneSwitcher switcher = new SceneSwitcher();
         switcher.switcher(event, "bookshop-choose-view.fxml");
     }
+
+    public void onUploadBtnClick(ActionEvent event) {
+        JFileChooser fc = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "JPG & PNG Images", "jpg", "png");
+        fc.setFileFilter(filter);
+        int returnVal = fc.showOpenDialog(null);
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+             this.file = fc.getSelectedFile();
+        }
+    }
+
 }

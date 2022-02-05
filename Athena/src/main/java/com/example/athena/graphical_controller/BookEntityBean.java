@@ -10,13 +10,15 @@ public class BookEntityBean {
     private final String isbn;
     private final String price ;
     private final Boolean isNegotiable ;
+    private final File image;
 
-    public BookEntityBean(String title , String isbn, String price, Boolean isNegotiable)throws BookException{
+    public BookEntityBean(String title , String isbn, String price, Boolean isNegotiable, File image)throws BookException{
         sintacticCheck(isbn, price);
         this.title = title;
         this.isbn = isbn;
         this.price = price;
         this.isNegotiable = isNegotiable;
+        this.image = image;
     }
 
     public String getBookTitle() {
@@ -34,6 +36,8 @@ public class BookEntityBean {
     public Boolean getNegotiable() {
         return this.isNegotiable;
     }
+
+    public File getImage() {return this.image; }
 
     public void sintacticCheck(String isbn, String price) throws BookException
     {
