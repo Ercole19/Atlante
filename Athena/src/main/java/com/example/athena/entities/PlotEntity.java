@@ -41,16 +41,16 @@ public class PlotEntity
             }
         }
 
-        XYChart.Series<String, Long> series = new XYChart.Series<>() ;
+        XYChart.Series<String, Long> newSeries = new XYChart.Series<>() ;
         LocalDate today = LocalDate.now() ;
 
         while(startDay.isBefore(today))
         {
-            series.getData().add(new XYChart.Data<>(startDay.toString(), map.getOrDefault(startDay, 0L))) ;
+            newSeries.getData().add(new XYChart.Data<>(startDay.toString(), map.getOrDefault(startDay, 0L))) ;
             startDay = startDay.plusDays(1) ;
         }
 
-        this.series = series ;
+        this.series = newSeries ;
     }
 
     private void getEventsToPlot() throws EventException

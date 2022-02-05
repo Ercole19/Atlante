@@ -44,7 +44,6 @@ public class GeneratePlotsUseCaseController
 
     private XYChart.Series<String, Long> retrieveSeries(ActivityTypesEnum type, TimePeriodsEnum from) throws PlottingException
     {
-        PlotEntity plot = new PlotEntity(type, from) ;
-        return plot.getSeries() ;
+        return (new PlotEntity(type, from)).getSeries() ;
     }
 }
