@@ -20,10 +20,11 @@ public class BookDao extends AbstractDAO {
              statement.setFloat(3, price);
              statement.setBoolean(4, negotiability);
              statement.setString(5 ,email);
+             statement.setBlob(6, new BufferedInputStream(new FileInputStream(image))) ;
              statement.execute() ;
 
              }
-         catch (SQLException exc) {
+         catch (SQLException | FileNotFoundException exc) {
                 exc.getMessage() ;
          }
 

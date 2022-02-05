@@ -73,8 +73,10 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
 
                 SceneSwitcher switcher = new SceneSwitcher() ;
                 try {
-
-                    switcher.switcher(actionEvent, "tutorPersonalPage.fxml", new ArrayList<>(Collections.singleton(result.getId())));
+                    ArrayList<Object> params = new ArrayList<>() ;
+                    params.add(result.getId()) ;
+                    params.add(true) ;
+                    switcher.switcher(actionEvent, "tutorPersonalPage.fxml", params) ;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

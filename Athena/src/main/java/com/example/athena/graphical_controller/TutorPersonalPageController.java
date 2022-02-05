@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -48,7 +49,7 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
 
     private File file ;
 
-
+    private String email ;
 
 
     public void clickOnBackButtonTutor(ActionEvent event) throws IOException
@@ -73,7 +74,12 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     public void onCVButtonClick(ActionEvent event) throws IOException
     {
         SceneSwitcher switcher = new SceneSwitcher() ;
-        switcher.popup("tutorCVView.fxml " , "CV") ;
+        ViewTutorPageUseCaseController tutorPage = new ViewTutorPageUseCaseController();
+        tutorPage.getCV(this.email);
+        String name = "tempCV.html" ;
+        ArrayList<Object> params = new ArrayList<>() ;
+        params.add(name) ;
+        switcher.popup("tutorCVView.fxml " , "CV", params) ;
     }
 
     public void onConfirmButtonClick(ActionEvent event) throws IOException {
@@ -102,17 +108,17 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
 
     public void onCVButtonClicktutor() throws IOException
     {
-        AnchorPane anchorPane = new AnchorPane() ;
-        anchorPane.setPrefSize(600, 800) ;
-        Label cv = new Label("Lorem Ipsum Dolor Sit Amet") ;
-        anchorPane.getChildren().add(cv) ;
-        Scene cvscene = new Scene(anchorPane) ;
-        Stage tempStage = new Stage() ;
-        tempStage.setScene(cvscene) ;
-        tempStage.initModality(Modality.APPLICATION_MODAL) ;
-        tempStage.setResizable(false) ;
-        tempStage.setTitle("CV") ;
-        tempStage.showAndWait() ;
+        JFileChooser fc = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "HTML files", "html") ;
+        fc.setFileFilter(filter);
+        int returnVal = fc.showOpenDialog(null);
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+            this.file = fc.getSelectedFile();
+        }
+
+        user = new UserDao();
+        user.inserisciCV(file);
     }
 
 
@@ -126,7 +132,7 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     public void postInitialize(ArrayList<Object> params)
     {
 
-
+        this.email = (String) params.get(0) ;
         user = new UserDao() ;
         CourseDao corso = new CourseDao() ;
 
@@ -165,6 +171,12 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
         cognometutor.setText(informazioni[1]);
 
 
+        if((boolean)params.get(1))
+        {
+            aboutme.setEditable(false) ;
+            sessioninfos.setEditable(false) ;
+            contactnumbers.setEditable(false) ;
+        }
     }
 
     @Override
