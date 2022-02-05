@@ -16,7 +16,8 @@ public class EventDao extends AbstractDAO {
 
     private String getEventsByTypeSpan = "SELECT eventName, eventStart, eventEnd, eventDesc, dataEvento " +
                                          "FROM athena.eventi " +
-                                         "WHERE utente = ? AND type = ? AND dataEvento >= ?" ;
+                                         "WHERE utente = ? AND type = ? AND dataEvento >= ? " +
+                                         "ORDER BY dataEvento" ;
 
 
     public void addEvent(LocalDate data , String name , LocalTime start ,LocalTime end , String description , String type) {

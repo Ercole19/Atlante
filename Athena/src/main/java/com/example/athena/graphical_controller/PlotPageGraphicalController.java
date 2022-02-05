@@ -1,12 +1,14 @@
 package com.example.athena.graphical_controller;
 
 import com.example.athena.entities.PlottingOptionsEnum;
+import com.example.athena.exceptions.PlottingException;
 import com.example.athena.use_case_controllers.GeneratePlotsUseCaseController;
 import com.example.athena.entities.TimePeriodsEnum;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.StackedBarChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 
 import java.io.IOException;
@@ -23,7 +25,7 @@ public class PlotPageGraphicalController implements Initializable
     private ChoiceBox<String> timePeriodChoiceBox ;
 
     @FXML
-    private StackedBarChart<String, Number> activitiesPlot ;
+    private StackedBarChart<String, Long> activitiesPlot ;
 
     public void clickOnBackButton(ActionEvent event) throws IOException
     {
@@ -33,11 +35,18 @@ public class PlotPageGraphicalController implements Initializable
 
     public void generatePlot()
     {
-        activitiesPlot.getData().clear() ;
-        PlotSearchQueryBean queryBean = new PlotSearchQueryBean(activityTypeChoiceBox.getValue(), timePeriodChoiceBox.getValue()) ;
-        GeneratePlotsUseCaseController plotsController = new GeneratePlotsUseCaseController() ;
-        ActivityPlotsBean plotsBean = plotsController.evaluateQuery(queryBean) ;
-        activitiesPlot.getData().addAll(plotsBean.getActivityPlots()) ;
+        try
+        {
+            activitiesPlot.getData().clear() ;
+            PlotSearchQueryBean queryBean = new PlotSearchQueryBean(activityTypeChoiceBox.getValue(), timePeriodChoiceBox.getValue()) ;
+            GeneratePlotsUseCaseController plotsController = new GeneratePlotsUseCaseController() ;
+            ActivityPlotsBean plotsBean = plotsController.evaluateQuery(queryBean) ;
+            activitiesPlot.getData().addAll(plotsBean.getActivityPlots()) ;
+        }catch (PlottingException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred, here the details:\n" + e.getMessage()) ;
+            alert.showAndWait() ;
+        }
     }
 
     @Override

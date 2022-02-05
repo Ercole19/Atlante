@@ -4,6 +4,7 @@ import com.example.athena.exceptions.EventException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 public class EventEntity
@@ -25,7 +26,7 @@ public class EventEntity
         this.setType(type) ;
     }
 
-    public static List<EventEntity> getEvents(ActivityTypesEnum type, TimePeriodsEnum timeSpan) throws EventException
+    public static List<EventEntity> getEventsByTypeSpan(ActivityTypesEnum type, TimePeriodsEnum timeSpan) throws EventException
     {
         EventDao dao = new EventDao() ;
 
@@ -47,6 +48,11 @@ public class EventEntity
         }
 
         return dao.getEntitiesByTypeSpan(type, start) ;
+    }
+
+    public long getSpanMinutes()
+    {
+        return Long.divideUnsigned(this.end.toEpochSecond(this.getDay(), ZoneOffset.UTC) - this.start.toEpochSecond(this.getDay(), ZoneOffset.UTC), 60) ;
     }
 
     public void setName(String name)
@@ -77,5 +83,30 @@ public class EventEntity
     public void setType(ActivityTypesEnum type)
     {
         this.type = type ;
+    }
+
+    public String getName()
+    {
+        return this.name ;
+    }
+
+    public LocalDate getDay()
+    {
+        return this.day ;
+    }
+
+    public LocalTime getStart()
+    {
+        return this.start ;
+    }
+
+    public LocalTime getEnd()
+    {
+        return this.end ;
+    }
+
+    public String getDescription()
+    {
+        return this.description ;
     }
 }

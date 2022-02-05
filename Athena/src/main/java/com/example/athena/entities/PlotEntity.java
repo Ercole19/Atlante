@@ -1,9 +1,10 @@
 package com.example.athena.entities;
 
 import com.example.athena.exceptions.EventException;
+import com.example.athena.exceptions.PlottingException;
 import javafx.scene.chart.XYChart;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,23 +13,70 @@ public class PlotEntity
     private ActivityTypesEnum type ;
     private TimePeriodsEnum timeSpan ;
     private List<EventEntity> eventsToPlot ;
-    private XYChart.Series<String, Number> series ;
+    private XYChart.Series<String, Long> series ;
+
+    public PlotEntity(ActivityTypesEnum type, TimePeriodsEnum timeSpan)
+    {
+        setType(type) ;
+        setTimeSpan(timeSpan) ;
+    }
 
     private void generateSeries() throws EventException
     {
-        this.getEventsToPlot() ;
-        this.series = new XYChart.Series<>() ;
+        HashMap<LocalDate, Long> map = new HashMap<>() ;
 
+        getEventsToPlot() ;
+        LocalDate startDay = this.eventsToPlot.get(0).getDay();
 
+        for(EventEntity event : this.eventsToPlot)
+        {
+            if(!map.containsKey(event.getDay()))
+            {
+                map.put(event.getDay(), event.getSpanMinutes()) ;
+            }
+            else
+            {
+                Long lastSpan = map.get(event.getDay()) ;
+                map.replace(event.getDay(), event.getSpanMinutes() + lastSpan) ;
+            }
+        }
+
+        XYChart.Series<String, Long> series = new XYChart.Series<>() ;
+        LocalDate today = LocalDate.now() ;
+
+        while(startDay.isBefore(today))
+        {
+            series.getData().add(new XYChart.Data<>(startDay.toString(), map.getOrDefault(startDay, 0L))) ;
+            startDay = startDay.plusDays(1) ;
+        }
+
+        this.series = series ;
     }
 
     private void getEventsToPlot() throws EventException
     {
-        this.eventsToPlot = EventEntity.getEvents(this.type, this.timeSpan) ;
+        this.eventsToPlot = EventEntity.getEventsByTypeSpan(this.type, this.timeSpan) ;
     }
 
-    public XYChart.Series<String, Number> getSeries()
+    public XYChart.Series<String, Long> getSeries() throws PlottingException
     {
-        return this.series ;
+        try
+        {
+            generateSeries() ;
+            return this.series ;
+        }catch (EventException e)
+        {
+            throw new PlottingException("Unable to create plot: failed to retrieve events\nDetails: " + e.getMessage()) ;
+        }
+    }
+
+    public void setType(ActivityTypesEnum type)
+    {
+        this.type = type ;
+    }
+
+    public void setTimeSpan(TimePeriodsEnum span)
+    {
+        this.timeSpan = span ;
     }
 }

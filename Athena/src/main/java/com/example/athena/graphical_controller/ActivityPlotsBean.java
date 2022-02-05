@@ -6,19 +6,19 @@ import java.util.ArrayList;
 
 public class ActivityPlotsBean
 {
-    private ArrayList<XYChart.Series<String, Number>> activityPlots ;
+    private ArrayList<XYChart.Series<String, Long>> activityPlots ;
 
-    public ActivityPlotsBean(ArrayList<XYChart.Series<String, Number>> activityPlots)
+    public ActivityPlotsBean(ArrayList<XYChart.Series<String, Long>> activityPlots)
     {
         this.setActivityPlots(activityPlots) ;
     }
 
-    public void setActivityPlots(ArrayList<XYChart.Series<String, Number>> activityPlots)
+    public void setActivityPlots(ArrayList<XYChart.Series<String, Long>> activityPlots)
     {
         this.activityPlots = activityPlots ;
     }
 
-    public ArrayList<XYChart.Series<String, Number>> getActivityPlots()
+    public ArrayList<XYChart.Series<String, Long>> getActivityPlots()
     {
         return this.activityPlots ;
     }
