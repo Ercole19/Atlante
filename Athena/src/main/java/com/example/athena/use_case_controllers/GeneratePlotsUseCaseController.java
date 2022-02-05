@@ -17,7 +17,8 @@ public class GeneratePlotsUseCaseController
     {
         ArrayList<XYChart.Series<String, Long>> plotsList  = new ArrayList<>() ;
         String activityType = searchQuery.getActivityType().replace(" ", "_").toUpperCase() ;
-        TimePeriodsEnum from = TimePeriodsEnum.valueOf(searchQuery.getPeriodType()) ;
+        String period = searchQuery.getPeriodType().replace(" ", "_").toUpperCase() ;
+        TimePeriodsEnum from = TimePeriodsEnum.valueOf(period) ;
 
         switch(PlottingOptionsEnum.valueOf(activityType))
         {
