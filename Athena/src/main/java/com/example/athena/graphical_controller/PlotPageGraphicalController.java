@@ -72,7 +72,6 @@ public class PlotPageGraphicalController implements Initializable
 
         timePeriodChoiceBox.setOnAction(event -> generatePlot());
 
-        activitiesPlot.getXAxis().setTickLabelsVisible(false) ;
         activitiesPlot.setAnimated(false) ;
 
         generatePlot() ;

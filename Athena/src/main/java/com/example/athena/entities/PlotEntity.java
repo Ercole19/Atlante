@@ -26,6 +26,13 @@ public class PlotEntity
         HashMap<LocalDate, Long> map = new HashMap<>() ;
 
         getEventsToPlot() ;
+
+        if(this.eventsToPlot.isEmpty())
+        {
+            this.series = new XYChart.Series<>() ;
+            return ;
+        }
+
         LocalDate startDay = this.eventsToPlot.get(0).getDay();
 
         for(EventEntity event : this.eventsToPlot)
