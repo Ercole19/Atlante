@@ -1,10 +1,9 @@
 package com.example.athena.graphical_controller;
 
-import com.example.athena.entities.ActivityTypesEnum;
+import com.example.athena.entities.PlottingOptionsEnum;
 import com.example.athena.use_case_controllers.GeneratePlotsUseCaseController;
 import com.example.athena.entities.TimePeriodsEnum;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.StackedBarChart;
@@ -13,8 +12,6 @@ import javafx.scene.control.ChoiceBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static javafx.fxml.FXMLLoader.load;
 
 public class PlotPageGraphicalController implements Initializable
 {
@@ -34,8 +31,6 @@ public class PlotPageGraphicalController implements Initializable
         switcher.switcher(event, "CalendarPage.fxml");
     }
 
-
-
     public void generatePlot()
     {
         activitiesPlot.getData().clear() ;
@@ -48,7 +43,7 @@ public class PlotPageGraphicalController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        for(ActivityTypesEnum e: ActivityTypesEnum.values())
+        for(PlottingOptionsEnum e: PlottingOptionsEnum.values())
         {
             String entry = e.toString().replace("_", " ").toLowerCase() ;
             activityTypeChoiceBox.getItems().add(entry.substring(0,1).toUpperCase() + entry.substring(1)) ;
@@ -56,12 +51,7 @@ public class PlotPageGraphicalController implements Initializable
 
         activityTypeChoiceBox.setValue("All") ;
 
-        activityTypeChoiceBox.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                generatePlot() ;
-            }
-        });
+        activityTypeChoiceBox.setOnAction(event -> generatePlot());
 
         for(TimePeriodsEnum e: TimePeriodsEnum.values())
         {
@@ -71,12 +61,7 @@ public class PlotPageGraphicalController implements Initializable
 
         timePeriodChoiceBox.setValue("From beginning") ;
 
-        timePeriodChoiceBox.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                generatePlot() ;
-            }
-        });
+        timePeriodChoiceBox.setOnAction(event -> generatePlot());
 
         activitiesPlot.getXAxis().setTickLabelsVisible(false) ;
         activitiesPlot.setAnimated(false) ;

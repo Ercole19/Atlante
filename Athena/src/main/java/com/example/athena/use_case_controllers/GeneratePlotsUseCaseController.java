@@ -2,6 +2,7 @@ package com.example.athena.use_case_controllers;
 
 import com.example.athena.entities.ActivityTypesEnum;
 import com.example.athena.entities.PlottingOptionsEnum;
+import com.example.athena.entities.TimePeriodsEnum;
 import com.example.athena.graphical_controller.ActivityPlotsBean;
 import com.example.athena.graphical_controller.PlotSearchQueryBean;
 import javafx.scene.chart.XYChart;
@@ -20,7 +21,7 @@ public class GeneratePlotsUseCaseController
         switch(PlottingOptionsEnum.valueOf(activityType))
         {
             case ALL :
-                plotsList.add(retrieveSeriesLectureTime()) ;
+                plotsList.add(retrieveSeriesLectureTime(searchQuery.getPeriodType())) ;
                 plotsList.add(retrieveSeriesStudySession()) ;
                 plotsList.add(retrieveSeriesOther()) ;
                 return new ActivityPlotsBean(plotsList) ;
@@ -43,23 +44,18 @@ public class GeneratePlotsUseCaseController
         }
     }
 
-    private XYChart.Series<String, Number> retrieveSeriesLectureTime()
+    private XYChart.Series<String, Number> retrieveSeries(PlottingOptionsEnum type, TimePeriodsEnum from)
+    {
+        XYChart.Series<String, Number> retrievedSeries = new XYChart.Series<>() ;
+    }
+
+    private XYChart.Series<String, Number> retrieveSeriesLectureTime(String timeSpan)
     {
         XYChart.Series<String, Number> retrievedSeries = new XYChart.Series<>() ;
 
         retrievedSeries.setName("LectureTime") ;
 
-        Calendar calendar = Calendar.getInstance() ;
 
-        Number[] times = {4, 6, 6, 8, 2, 0, 0} ;
-
-        for(int i = 0; i < 7; i++)
-        {
-            calendar.set(2021, 12, 20 + i) ;
-            retrievedSeries.getData().add(new XYChart.Data<>(calendar.getTime().toString(), times[i])) ;
-        }
-
-        return retrievedSeries ;
     }
 
     private XYChart.Series<String, Number> retrieveSeriesStudySession()

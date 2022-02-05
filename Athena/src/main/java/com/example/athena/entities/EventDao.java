@@ -1,14 +1,22 @@
 package com.example.athena.entities;
 
+import com.example.athena.exceptions.EventException;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventDao extends AbstractDAO {
 
     private String email = User.getUser().getEmail();
     private String addQuery = "INSERT INTO athena.eventi (`dataEvento`, `eventName`, `eventStart`, `eventEnd`, `eventDesc`, `utente`, `type`) values (?,?,?,?,?,?,?)" ;
     private String getEventInfo = "select eventName , eventStart , eventEnd , eventDesc , dataEvento, type from athena.eventi where dataEvento = ? and utente = ? " ;
+
+    private String getEventsByTypeSpan = "SELECT eventName, eventStart, eventEnd, eventDesc, dataEvento " +
+                                         "FROM athena.eventi " +
+                                         "WHERE utente = ? AND type = ? AND dataEvento >= ?" ;
 
 
     public void addEvent(LocalDate data , String name , LocalTime start ,LocalTime end , String description , String type) {
@@ -93,5 +101,34 @@ public class EventDao extends AbstractDAO {
         }
     }
 
+    public List<EventEntity> getEntitiesByTypeSpan(ActivityTypesEnum type, LocalDate timeSpan) throws EventException
+    {
+        try(PreparedStatement statement = this.getConnection().prepareStatement(getEventsByTypeSpan))
+        {
+            ArrayList<EventEntity> events = new ArrayList<>() ;
+            Date start = Date.valueOf(timeSpan) ;
 
+            statement.setString(1, User.getUser().getEmail()) ;
+            statement.setString(2, type.toString()) ;
+            statement.setDate(3, start) ;
+
+            ResultSet results = statement.executeQuery() ;
+
+            while(results.next())
+            {
+                String eventName = results.getString(1) ;
+                LocalTime startTime = results.getTime(2).toLocalTime() ;
+                LocalTime endTime = results.getTime(3).toLocalTime() ;
+                String eventDescription = results.getString(4) ;
+                LocalDate eventDay = results.getDate(5).toLocalDate() ;
+
+                events.add(new EventEntity(eventName, eventDay, startTime, endTime, eventDescription, type)) ;
+            }
+
+            return events ;
+        }catch(SQLException e)
+        {
+            throw new EventException("Error in retrieving entities, details follow: " + e.getMessage()) ;
+        }
+    }
 }

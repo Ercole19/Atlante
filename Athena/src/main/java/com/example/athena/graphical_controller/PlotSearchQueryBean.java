@@ -26,7 +26,7 @@ public class PlotSearchQueryBean
         return this.activityType ;
     }
 
-    public String getPeriodTypeType()
+    public String getPeriodType()
     {
         return this.periodType ;
     }
