@@ -1,4 +1,4 @@
-package com.example.servers;
+package com.example.servers ;
 
 import javax.mail.* ;
 import javax.mail.internet.AddressException;
@@ -8,6 +8,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +23,7 @@ public class MailServer implements Runnable {
 
     private static Session session;
 
-    private static final byte[] buff = new byte[256];
+    private static final byte[] buff = new byte[128];
 
     private static InternetAddress sender;
 
@@ -82,7 +83,7 @@ public class MailServer implements Runnable {
             Socket clientSocket;
             while(!quit) {
                 clientSocket = socket.accept();
-                InputStream in = new BufferedInputStream(clientSocket.getInputStream());
+                InputStream in = clientSocket.getInputStream();
 
                 String receivedMessage = new String(buff, 0, in.read(buff));
 
@@ -93,13 +94,13 @@ public class MailServer implements Runnable {
                     REGISTRATIONQUEUE.add(wrapper);
                 } else if (setting.equals('N')) {
                     String dateToParse = receivedMessage.substring(1, receivedMessage.indexOf(";"));
-                    List<String> elements = REMINDERSMAP.getOrDefault(LocalDateTime.parse(dateToParse), new ArrayList<>());
-                    elements.add(receivedMessage.substring(receivedMessage.indexOf(";")) + 1);
+                    List<String> elements = REMINDERSMAP.getOrDefault(LocalDateTime.parse(dateToParse).truncatedTo(ChronoUnit.MINUTES), new ArrayList<>());
+                    elements.add(receivedMessage.substring(receivedMessage.indexOf(";") +1));
                     REMINDERSMAP.put(LocalDateTime.parse(dateToParse), elements);
 
-                    OutputStream out = new BufferedOutputStream(clientSocket.getOutputStream());
+                    OutputStream out = clientSocket.getOutputStream() ;
 
-                    out.write("T".getBytes(), 0, "T".length());
+                    out.write("T".getBytes());
                 }
             }
         }
@@ -141,11 +142,21 @@ public class MailServer implements Runnable {
 
         private static void sendMessage() throws IOException
         {
-            try (OutputStream out = new BufferedOutputStream(clientSocket.getOutputStream())){
-                CommandSocketWrapper wrapper = REGISTRATIONQUEUE.take();
+            CommandSocketWrapper wrapper ;
+            try {
+                wrapper = REGISTRATIONQUEUE.take();
                 tokens = wrapper.getCommand().split(";");
+                clientSocket = wrapper.getClientSocket() ;
+            }catch (InterruptedException e)
+            {
+                LOGGER.log(Level.SEVERE, "Error in retrieving from queue. Details: {0}", e.getMessage());
+                Thread.currentThread().interrupt() ;
+            }
 
-                clientSocket = wrapper.getClientSocket();
+            OutputStream out = null ;
+            try{
+
+                out = clientSocket.getOutputStream() ;
 
                 MimeMessage message = new MimeMessage(session);
                 message.setFrom(sender);
@@ -156,18 +167,17 @@ public class MailServer implements Runnable {
 
                 Transport.send(message);
 
-                out.write("T".getBytes(), 0, "T".length());
+                out.write("T".getBytes());
 
                 LOGGER.log(Level.INFO, "Message sent to {0}", tokens[0]);
-            } catch (InterruptedException e) {
-                LOGGER.log(Level.SEVERE, "Error in retrieving from queue. Details: {0}", e.getMessage());
-                Thread.currentThread().interrupt() ;
-            } catch (MessagingException e) {
-                OutputStream out = new BufferedOutputStream(clientSocket.getOutputStream()) ;
+            }  catch (MessagingException e) {
+                out = clientSocket.getOutputStream() ;
                 LOGGER.log(Level.SEVERE, "Error in sending email. Error message following {0}", e.getMessage());
-                out.write("F".getBytes(), 0, "F".length());
+                out.write("F".getBytes());
                 out.close() ;
             } finally {
+                assert out != null ;
+                out.close() ;
                 assert clientSocket != null;
                 clientSocket.close();
             }
@@ -186,14 +196,14 @@ public class MailServer implements Runnable {
             LocalDateTime actual;
             String[] tokens = null;
 
-            while (true) {
+            while (!quit) {
                 try {
-                    actual = LocalDateTime.now();
+                    actual = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES) ;
 
                     if (!actual.equals(lastSent)) {
                         lastSent = actual;
                         List<String> reminders = REMINDERSMAP.get(actual);
-                        if (reminders.isEmpty()) continue;
+                        if (reminders == null) continue;
 
                         for (String remainder : reminders) {
                             tokens = remainder.split(";");
@@ -225,7 +235,7 @@ public class MailServer implements Runnable {
             do {
                 LOGGER.log(Level.INFO, "Type 'quit' to quit");
                 readChars = System.in.read(buffer, 0, 5);
-            } while (readChars != 5 || !Arrays.equals(buffer, "quit".getBytes())) ;
+            } while (readChars != 5 || Arrays.equals(buffer, "quit".getBytes())) ;
 
             updateQuit(true) ;
 
