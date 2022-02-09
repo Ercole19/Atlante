@@ -1,7 +1,5 @@
 package com.example.athena.graphical_controller;
 
-import com.example.athena.entities.ActivityTypesEnum;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -17,6 +15,11 @@ public class EventBean {
 
     private boolean isThereAReminder ;
     private LocalDateTime dateOfReminder ;
+
+    public EventBean()
+    {
+
+    }
 
     public EventBean(LocalDate date, String name, LocalTime start, LocalTime end, String description, String type, EventReminderWrapperBean wrapperBean)
     {
