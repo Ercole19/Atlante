@@ -78,7 +78,27 @@ public class AddEventController implements Initializable  {
         EventReminderWrapperBean wrapperBean ;
         if(setReminderCheckBox.isSelected())
         {
-            wrapperBean = new EventReminderWrapperBean(true, reminderHour.getValue(), reminderMinute.getValue()) ;
+            switch (ReminderTypesEnum.valueOf(reminderType.getValue().toUpperCase().replace(" ", "_")))
+            {
+                case AN_HOUR_BEFORE:
+                    wrapperBean = new EventReminderWrapperBean(true, 1, 0) ;
+                    break ;
+                case HALF_AND_AN_HOUR_BEFORE:
+                    wrapperBean = new EventReminderWrapperBean(true, 1, 30) ;
+                    break ;
+                case TWO_HOURS_BEFORE:
+                    wrapperBean = new EventReminderWrapperBean(true, 2, 0) ;
+                    break ;
+                case ONE_DAY_BEFORE:
+                    wrapperBean = new EventReminderWrapperBean(true, 24, 0) ;
+                    break ;
+                case CUSTOM:
+                    wrapperBean = new EventReminderWrapperBean(true, reminderHour.getValue(), reminderMinute.getValue()) ;
+                    break ;
+                default:
+                    wrapperBean = new EventReminderWrapperBean(false) ;
+                    break ;
+            }
         }
         else
         {

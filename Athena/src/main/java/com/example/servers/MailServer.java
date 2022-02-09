@@ -214,10 +214,13 @@ public class MailServer implements Runnable {
                             message.setSubject("Remainder of your event");
                             message.setText("This email is a reminder for your event: \n" +
                                     tokens[1] + "\n" +
-                                    "from " + tokens[2] + " to " + tokens[3]);
+                                    "on " + tokens[2] + " from " + tokens[3] + " to " + tokens[4] + ".\n" +
+                                    "Details: " + tokens[5]) ;
 
                             Transport.send(message);
                         }
+
+                        REMINDERSMAP.remove(actual) ;
                     }
                 } catch (MessagingException e) {
                     LOGGER.log(Level.SEVERE, "Unable to send remainder message to {0}", tokens[0]);

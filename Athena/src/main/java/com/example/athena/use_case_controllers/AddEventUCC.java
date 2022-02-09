@@ -24,6 +24,7 @@ public class AddEventUCC {
 
         if(evento.getIsThereAReminder())
         {
+            if(evento.getDateOfReminder().isBefore(LocalDateTime.now())) throw new SendEmailException("The reminder would have to be sent before now") ;
             SetReminderEmailBoundary.sendToServer(evento.getDateOfReminder(), evento.getName(), evento.getDate(), evento.getStart(),
                     evento.getEnd(), evento.getDescription()) ;
         }
