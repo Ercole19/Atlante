@@ -3,11 +3,10 @@ package com.example.athena.graphical_controller;
 import com.example.athena.entities.ActivityTypesEnum;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class EventBean {
-
-
 
     private LocalDate date ;
     private String name ;
@@ -15,6 +14,31 @@ public class EventBean {
     private LocalTime end ;
     private String description ;
     private String type ;
+
+    private boolean isThereAReminder ;
+    private LocalDateTime dateOfReminder ;
+
+    public EventBean(LocalDate date, String name, LocalTime start, LocalTime end, String description, String type, EventReminderWrapperBean wrapperBean)
+    {
+        setDate(date) ;
+        setName(name) ;
+        setStart(start);
+        setEnd(end) ;
+        setDescription(description) ;
+        setType(type) ;
+        setIsThereAReminder(wrapperBean.getIsThereAReminder()) ;
+        if(isThereAReminder) setDateOfReminder(wrapperBean.getHoursBefore(), wrapperBean.getMinutesBefore()) ;
+    }
+
+    public void setIsThereAReminder(boolean value)
+    {
+        this.isThereAReminder = value ;
+    }
+
+    private void setDateOfReminder(int hoursBefore, int minutesBefore)
+    {
+        this.dateOfReminder = LocalDateTime.of(this.getDate(), this.getStart()).minusHours(hoursBefore).minusMinutes(minutesBefore) ;
+    }
 
     public void setDate(LocalDate date) {
         this.date = date;
@@ -29,9 +53,8 @@ public class EventBean {
         this.type = type.toUpperCase().replace(" ", "_") ;
     }
 
-    public void setStart(int hours , int minutes) {
-        LocalTime inizio = LocalTime.of(hours, minutes);
-        this.start = inizio ;
+    public void setStart(LocalTime start) {
+        this.start = start ;
     }
 
     public void setStartbyString (String start) {
@@ -46,9 +69,8 @@ public class EventBean {
     }
 
 
-    public void setEnd(int hours , int minutes) {
-        LocalTime fine = LocalTime.of(hours, minutes);
-        this.end = fine ;
+    public void setEnd(LocalTime end) {
+        this.end = end ;
     }
 
     public void setDescription(String description) {
@@ -78,5 +100,15 @@ public class EventBean {
     public String getType()
     {
         return this.type ;
+    }
+
+    public boolean getIsThereAReminder()
+    {
+        return this.isThereAReminder ;
+    }
+
+    public LocalDateTime getDateOfReminder()
+    {
+        return this.dateOfReminder ;
     }
 }
