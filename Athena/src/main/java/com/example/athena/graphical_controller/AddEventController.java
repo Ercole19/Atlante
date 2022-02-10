@@ -177,13 +177,11 @@ public class AddEventController implements Initializable  {
         toggleReminderChoiceBox(false) ;
         toggleReminderElements(false) ;
 
-        setReminderCheckBox.setOnAction(event -> {
-            toggleReminderChoiceBox(setReminderCheckBox.isSelected()) ;
-        });
+        setReminderCheckBox.setOnAction(event ->
+            toggleReminderChoiceBox(setReminderCheckBox.isSelected())) ;
 
-        reminderType.setOnAction(event -> {
-            toggleReminderElements(reminderType.getValue().equals("Custom")) ;
-        });
+        reminderType.setOnAction(event ->
+            toggleReminderElements(reminderType.getValue().equals("Custom"))) ;
     }
 
     private void disable(Node node)

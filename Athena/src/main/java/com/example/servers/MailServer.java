@@ -121,69 +121,18 @@ public class MailServer implements Runnable {
     }
 
     private static class RegisterService implements Runnable {
-
-        private static Socket clientSocket ;
-        private static String[] tokens ;
-
         @Override
         public void run() {
             registrations();
         }
 
         public static void registrations() {
-            tokens = null;
-
             while (!quit) {
                 try {
-                    clientSocket = null;
-                    sendMessage() ;
+                    sendMessageRegistrationReview('R');
                 } catch (IOException e) {
-                    Object[] params = {tokens[0], e.getMessage()};
-                    LOGGER.log(Level.SEVERE, "Error in writing response to {0}. Details follow: {1}", params);
+                    LOGGER.log(Level.SEVERE, "Error in writing response. Details follow: {0}", e.getMessage());
                 }
-            }
-        }
-
-        private static void sendMessage() throws IOException
-        {
-            CommandSocketWrapper wrapper ;
-            try {
-                wrapper = REGISTRATIONQUEUE.take();
-                tokens = wrapper.getCommand().split(";");
-                clientSocket = wrapper.getClientSocket() ;
-            }catch (InterruptedException e)
-            {
-                LOGGER.log(Level.SEVERE, "Error in retrieving from queue. Details: {0}", e.getMessage());
-                Thread.currentThread().interrupt() ;
-            }
-
-            OutputStream out = null ;
-            try{
-
-                out = clientSocket.getOutputStream() ;
-
-                MimeMessage message = new MimeMessage(session);
-                message.setFrom(sender);
-                message.addRecipient(Message.RecipientType.TO, new InternetAddress(tokens[0]));
-                message.setSubject("Confirm your registration");
-                message.setText("Your confirmation code is: " + tokens[1] + "\n" +
-                        "If you didn't request this code, please ignore the message.");
-
-                Transport.send(message);
-
-                out.write("T".getBytes());
-
-                LOGGER.log(Level.INFO, "Message sent to {0}", tokens[0]);
-            }  catch (MessagingException e) {
-                out = clientSocket.getOutputStream() ;
-                LOGGER.log(Level.SEVERE, "Error in sending email. Error message following {0}", e.getMessage());
-                out.write("F".getBytes());
-                out.close() ;
-            } finally {
-                assert out != null ;
-                out.close() ;
-                assert clientSocket != null;
-                clientSocket.close();
             }
         }
     }
@@ -236,8 +185,6 @@ public class MailServer implements Runnable {
 
     private static class ReviewService implements Runnable
     {
-        private static Socket clientSocket ;
-        private static String[] tokens ;
 
         @Override
         public void run() {
@@ -246,60 +193,12 @@ public class MailServer implements Runnable {
 
         private static void reviewsSending()
         {
-            tokens = null;
-
             while (!quit) {
                 try {
-                    clientSocket = null;
-                    sendReviewCode() ;
+                    sendMessageRegistrationReview('T') ;
                 } catch (IOException e) {
-                    Object[] params = {tokens[0], e.getMessage()};
-                    LOGGER.log(Level.SEVERE, "Error in writing response to {0}. Details follow: {1}", params);
+                    LOGGER.log(Level.SEVERE, "Error in writing response. Details follow: {0}", e.getMessage());
                 }
-            }
-        }
-
-        private static void sendReviewCode() throws IOException
-        {
-            CommandSocketWrapper wrapper ;
-            try {
-                wrapper = REVIEWSQUEUE.take();
-                tokens = wrapper.getCommand().split(";");
-                clientSocket = wrapper.getClientSocket() ;
-            }catch (InterruptedException e)
-            {
-                LOGGER.log(Level.SEVERE, "Error in retrieving from queue. Details: {0}", e.getMessage());
-                Thread.currentThread().interrupt() ;
-            }
-
-            OutputStream out = null ;
-            try{
-
-                out = clientSocket.getOutputStream() ;
-
-                MimeMessage message = new MimeMessage(session);
-                message.setFrom(sender);
-                message.addRecipient(Message.RecipientType.TO, new InternetAddress(tokens[0]));
-                message.setSubject("A review code form a Tutor") ;
-                message.setText("A tutor has sent you a review code for a tutoring you had with him.\n" +
-                        "The code is" + tokens[1] + "\n" +
-                        "If you didn't request this code, please ignore the message.");
-
-                Transport.send(message);
-
-                out.write("T".getBytes());
-
-                LOGGER.log(Level.INFO, "Message sent to {0}", tokens[0]);
-            }  catch (MessagingException e) {
-                out = clientSocket.getOutputStream() ;
-                LOGGER.log(Level.SEVERE, "Error in sending email. Error message following {0}", e.getMessage());
-                out.write("F".getBytes());
-                out.close() ;
-            } finally {
-                assert out != null ;
-                out.close() ;
-                assert clientSocket != null;
-                clientSocket.close();
             }
         }
     }
@@ -327,5 +226,68 @@ public class MailServer implements Runnable {
     public static synchronized void updateQuit(boolean value)
     {
         quit = value ;
+    }
+
+    private static void sendMessageRegistrationReview(char kind) throws IOException
+    {
+        String[] tokens = null ;
+        Socket clientSocket = null;
+        CommandSocketWrapper wrapper ;
+        try {
+            if(kind == 'T')
+            {
+                wrapper = REVIEWSQUEUE.take();
+            }
+            else
+            {
+                wrapper = REGISTRATIONQUEUE.take() ;
+            }
+            tokens = wrapper.getCommand().split(";");
+            clientSocket = wrapper.getClientSocket() ;
+        }catch (InterruptedException e)
+        {
+            LOGGER.log(Level.SEVERE, "Error in retrieving from queue. Details: {0}", e.getMessage());
+            Thread.currentThread().interrupt() ;
+        }
+
+        OutputStream out = null ;
+        try{
+
+            assert clientSocket != null;
+            out = clientSocket.getOutputStream() ;
+
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(sender);
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(tokens[0]));
+            if(kind == 'T')
+            {
+                message.setSubject("A review code form a Tutor") ;
+                message.setText("A tutor has sent you a review code for a tutoring you had with him.\n" +
+                        "The code is" + tokens[1] + "\n" +
+                        "If you didn't request this code, please ignore the message.");
+            }
+            else
+            {
+                message.setSubject("Confirm your registration") ;
+                message.setText("Your confirmation code is: " + tokens[1] + "\n" +
+                        "If you didn't request this code, please ignore the message.");
+            }
+
+            Transport.send(message);
+
+            out.write("T".getBytes());
+
+            LOGGER.log(Level.INFO, "Message sent to {0}", tokens[0]);
+
+        }  catch (MessagingException e) {
+            out = clientSocket.getOutputStream() ;
+            LOGGER.log(Level.SEVERE, "Error in sending email. Error message following {0}", e.getMessage());
+            out.write("F".getBytes());
+            out.close() ;
+        } finally {
+            assert out != null ;
+            out.close() ;
+            clientSocket.close();
+        }
     }
 }

@@ -15,6 +15,11 @@ import java.time.LocalTime;
 
 public class SetReminderEmailBoundary
 {
+    private SetReminderEmailBoundary()
+    {
+
+    }
+
     private static final byte[] buff = new byte[128] ;
 
     public static void sendToServer(EventBean eventInfo) throws SendEmailException
