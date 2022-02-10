@@ -29,9 +29,11 @@ public class MailServer implements Runnable {
 
     private static final Logger LOGGER = Logger.getLogger(MailServer.class.getName());
 
-    private static final LinkedBlockingQueue<CommandSocketWrapper> REGISTRATIONQUEUE = new LinkedBlockingQueue<>();
+    private static final LinkedBlockingQueue<CommandSocketWrapper> REGISTRATIONQUEUE = new LinkedBlockingQueue<>() ;
 
-    private static final ConcurrentHashMap<LocalDateTime, List<String>> REMINDERSMAP = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<LocalDateTime, List<String>> REMINDERSMAP = new ConcurrentHashMap<>() ;
+
+    private static final LinkedBlockingQueue<CommandSocketWrapper> REVIEWSQUEUE = new LinkedBlockingQueue<>() ;
 
     private static boolean quit = false;
 
@@ -72,12 +74,14 @@ public class MailServer implements Runnable {
 
             session.setDebug(true);
 
-            Thread registerThread = new Thread(new RegisterService());
-            Thread notifierThread = new Thread(new NotificationService());
-            Thread quitThread = new Thread(new MailServer()) ;
+            Thread registerThread = new Thread(new RegisterService(), "registrations");
+            Thread notifierThread = new Thread(new NotificationService(), "notifications");
+            Thread reviewThread = new Thread(new ReviewService(), "reviews") ;
+            Thread quitThread = new Thread(new MailServer(), "quitting") ;
 
-            registerThread.start();
-            notifierThread.start();
+            registerThread.start() ;
+            notifierThread.start() ;
+            reviewThread.start() ;
             quitThread.start() ;
 
             Socket clientSocket;
@@ -230,6 +234,76 @@ public class MailServer implements Runnable {
 
     }
 
+    private static class ReviewService implements Runnable
+    {
+        private static Socket clientSocket ;
+        private static String[] tokens ;
+
+        @Override
+        public void run() {
+            reviewsSending() ;
+        }
+
+        private static void reviewsSending()
+        {
+            tokens = null;
+
+            while (!quit) {
+                try {
+                    clientSocket = null;
+                    sendReviewCode() ;
+                } catch (IOException e) {
+                    Object[] params = {tokens[0], e.getMessage()};
+                    LOGGER.log(Level.SEVERE, "Error in writing response to {0}. Details follow: {1}", params);
+                }
+            }
+        }
+
+        private static void sendReviewCode() throws IOException
+        {
+            CommandSocketWrapper wrapper ;
+            try {
+                wrapper = REVIEWSQUEUE.take();
+                tokens = wrapper.getCommand().split(";");
+                clientSocket = wrapper.getClientSocket() ;
+            }catch (InterruptedException e)
+            {
+                LOGGER.log(Level.SEVERE, "Error in retrieving from queue. Details: {0}", e.getMessage());
+                Thread.currentThread().interrupt() ;
+            }
+
+            OutputStream out = null ;
+            try{
+
+                out = clientSocket.getOutputStream() ;
+
+                MimeMessage message = new MimeMessage(session);
+                message.setFrom(sender);
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(tokens[0]));
+                message.setSubject("A review code form a Tutor") ;
+                message.setText("A tutor has sent you a review code for a tutoring you had with him.\n" +
+                        "The code is" + tokens[1] + "\n" +
+                        "If you didn't request this code, please ignore the message.");
+
+                Transport.send(message);
+
+                out.write("T".getBytes());
+
+                LOGGER.log(Level.INFO, "Message sent to {0}", tokens[0]);
+            }  catch (MessagingException e) {
+                out = clientSocket.getOutputStream() ;
+                LOGGER.log(Level.SEVERE, "Error in sending email. Error message following {0}", e.getMessage());
+                out.write("F".getBytes());
+                out.close() ;
+            } finally {
+                assert out != null ;
+                out.close() ;
+                assert clientSocket != null;
+                clientSocket.close();
+            }
+        }
+    }
+
     @Override
     public void run() {
         try {
@@ -241,6 +315,7 @@ public class MailServer implements Runnable {
             } while (readChars != 5 || Arrays.equals(buffer, "quit".getBytes())) ;
 
             updateQuit(true) ;
+            System.exit(1) ;
 
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error in reading from stdin. Exiting.") ;

@@ -2,6 +2,7 @@ package com.example.athena.boundaries;
 
 import com.example.athena.entities.User;
 import com.example.athena.exceptions.SendEmailException;
+import com.example.athena.graphical_controller.EventBean;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,8 +17,15 @@ public class SetReminderEmailBoundary
 {
     private static final byte[] buff = new byte[128] ;
 
-    public static void sendToServer(LocalDateTime moment, String name, LocalDate day, LocalTime start, LocalTime end, String description) throws SendEmailException
+    public static void sendToServer(EventBean eventInfo) throws SendEmailException
     {
+        LocalDateTime moment = eventInfo.getDateOfReminder() ;
+        String name = eventInfo.getName() ;
+        LocalDate day = eventInfo.getDate() ;
+        LocalTime start = eventInfo.getStart() ;
+        LocalTime end = eventInfo.getEnd() ;
+        String description = eventInfo.getDescription() ;
+
         String query = String.format("N%s;%s;%s;%s;%s;%s;%s;", moment.toString(), User.getUser().getEmail(), name, day, start, end, description) ;
 
         try

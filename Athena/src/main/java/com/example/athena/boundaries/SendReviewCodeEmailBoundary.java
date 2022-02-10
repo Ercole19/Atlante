@@ -50,8 +50,10 @@ public class SendReviewCodeEmailBoundary
         }
     }
 
-    public static void sendEmail(String recipient, String code) throws SendEmailException
+    public static void sendEmail(ReviewViaMailBean mailInformation) throws SendEmailException
     {
+        String recipient = mailInformation.getRecipient() ;
+        String code = mailInformation.getCode() ;
         try
         {
             createConnection() ;

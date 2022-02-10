@@ -7,7 +7,6 @@ import com.example.athena.graphical_controller.EventBean;
 import com.example.athena.entities.EventDao;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 public class AddEventUCC {
 
@@ -25,8 +24,7 @@ public class AddEventUCC {
         if(evento.getIsThereAReminder())
         {
             if(evento.getDateOfReminder().isBefore(LocalDateTime.now())) throw new SendEmailException("The reminder would have to be sent before now") ;
-            SetReminderEmailBoundary.sendToServer(evento.getDateOfReminder(), evento.getName(), evento.getDate(), evento.getStart(),
-                    evento.getEnd(), evento.getDescription()) ;
+            SetReminderEmailBoundary.sendToServer(evento) ;
         }
     }
 }
