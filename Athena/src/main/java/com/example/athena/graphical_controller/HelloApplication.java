@@ -23,6 +23,7 @@ public class HelloApplication extends Application {
         stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void main(String[] args) {

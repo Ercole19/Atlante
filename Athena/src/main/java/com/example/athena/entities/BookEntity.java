@@ -1,6 +1,7 @@
 package com.example.athena.entities;
 
 import java.io.File;
+import java.util.List;
 
 public class BookEntity {
 
@@ -8,9 +9,9 @@ public class BookEntity {
     private final String isbn;
     private final float price ;
     private final Boolean isNegotiable ;
-    private final File image;
+    private final List<File> image;
 
-    public BookEntity(String title , String isbn, float price, Boolean isNegotiable, File image){
+    public BookEntity(String title , String isbn, float price, Boolean isNegotiable, List<File> image){
         this.title = title;
         this.isbn = isbn;
         this.price = price;
@@ -34,12 +35,12 @@ public class BookEntity {
         return this.isNegotiable;
     }
 
-    public File getImage() {return this.image;}
+    public List<File> getImage() {return this.image;}
 
 
     public void toDB()
     {
         BookDao dao = new BookDao() ;
-        dao.insertBook(this.getBookTitle(), this.getIsbn(), this.getPrice(), this.getNegotiable(), this.getImage()) ;
+       dao.insertBook(this.getBookTitle(), this.getIsbn(), this.getPrice(), this.getNegotiable(), this.getImage()) ;
     }
 }

@@ -6,9 +6,13 @@ import com.example.athena.use_case_controllers.SellBooksUseCaseController;
 import javax.swing.JFileChooser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.io.File;
@@ -23,8 +27,27 @@ public class SellModuleController {
     private TextField bookPrice ;
     @FXML
     private CheckBox bookNegotiability ;
+    @FXML
+    private ImageView bookImage;
 
-    private File file;
+    @FXML
+    private Button leftArrow ;
+
+    @FXML
+    private ImageView leftArrowImage ;
+
+    @FXML
+    private Button rightArrow;
+
+    @FXML
+    private ImageView rightArrowImage ;
+
+    @FXML
+    private Button confirmButton ;
+
+    private List<Image> images ;
+    private int index ;
+    private List<File> file;
 
     public void onConfirmButtonClick() {
 
@@ -46,14 +69,40 @@ public class SellModuleController {
     }
 
     public void onUploadBtnClick(ActionEvent event) {
+
         JFileChooser fc = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "JPG & PNG Images", "jpg", "png");
         fc.setFileFilter(filter);
         int returnVal = fc.showOpenDialog(null);
-        if(returnVal == JFileChooser.APPROVE_OPTION) {
-             this.file = fc.getSelectedFile();
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            this.images.add(new Image(String.valueOf(fc.getSelectedFile().toURI()))) ;
+            this.file.add(fc.getSelectedFile());
+            this.bookImage.setImage(images.get(images.size() - 1));
+            shiftIndex(images.size() - 1);
         }
+
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.file = new ArrayList<>() ;
+        this.images = new ArrayList<>() ;
+        disable(leftArrow) ;
+        disable(leftArrowImage) ;
+        disable(rightArrowImage) ;
+        disable(rightArrow) ;
+    }
+
+    @Override
+    public void postInitialize(ArrayList<Object> params) {
+        BookEntityBean bean = (BookEntityBean)params.get(0) ;
+        bookTitle.setText(bean.getBookTitle());
+        bookISBN.setDisable(true) ;
+        bookPrice.setText(bean.getPrice());
+        bookNegotiability.setSelected(bean.getNegotiable());
+
+        confirmButton.setText("Update") ;
+        confirmButton.setOnAction(this::onUpdateButtonClick) ;
+    }
 }

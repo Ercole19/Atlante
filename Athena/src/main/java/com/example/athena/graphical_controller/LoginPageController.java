@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 
+
 public class LoginPageController {
 
     private User currentuser ;
@@ -19,8 +20,7 @@ public class LoginPageController {
     @FXML
     private TextField passField;
 
-    public void switchToMainPage(ActionEvent event) throws IOException
-    {
+    public void switchToMainPage(ActionEvent event) throws IOException {
         String email = emailField.getText() ;
         String password = passField.getText() ;
         UserDao stDAO = new UserDao() ;
@@ -63,8 +63,7 @@ public class LoginPageController {
 
     }
 
-    public void switchFast(ActionEvent event) throws IOException
-    {
+    public void switchFast(ActionEvent event) throws IOException {
         SceneSwitcher switcher = new SceneSwitcher();
         switcher.switcher(event, "MainPageStudents.fxml");
     }

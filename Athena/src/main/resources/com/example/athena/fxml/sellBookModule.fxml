@@ -37,33 +37,33 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <ImageView fitHeight="244.0" fitWidth="188.0" layoutX="151.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="194.0" layoutY="703.0" mnemonicParsing="false" onAction="#onUploadBtnClick" text="Upload image" />
+      <ImageView fx:id="bookImage" fitHeight="244.0" fitWidth="188.0" layoutX="197.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="449.0" layoutY="305.0" mnemonicParsing="false" onAction="#onUploadBtnClick" text="Upload image" />
       <CheckBox fx:id="bookNegotiability" layoutX="31.0" layoutY="370.0" mnemonicParsing="false" text="Negotiable" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </CheckBox>
-      <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="48.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leftArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="90.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../assets/backBtn.png" />
          </image>
       </ImageView>
-      <Button layoutX="43.0" layoutY="534.0" mnemonicParsing="false" onAction="#onBackButtonClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="354.0" layoutY="533.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="rightArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="410.0" layoutY="533.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../assets/backBtn.png" />
          </image>
       </ImageView>
-      <Button layoutX="53.0" layoutY="544.0" mnemonicParsing="false" onAction="#onBackButtonClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+      <Button fx:id="leftArrow" layoutX="90.0" layoutY="544.0" mnemonicParsing="false" onAction="#onLeftArrowClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="confirmButton" layoutX="432.0" layoutY="713.0" mnemonicParsing="false" onAction="#onConfirmButtonClick" text="Confirm" />
+      <Button fx:id="confirmButton" layoutX="269.0" layoutY="719.0" mnemonicParsing="false" onAction="#onConfirmButtonClick" text="Confirm" />
+      <Button fx:id="rightArrow" layoutX="410.0" layoutY="530.0" mnemonicParsing="false" onAction="#onRightArrowClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

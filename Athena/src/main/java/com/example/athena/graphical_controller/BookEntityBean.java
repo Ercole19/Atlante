@@ -3,6 +3,7 @@ package com.example.athena.graphical_controller;
 import com.example.athena.exceptions.BookException;
 
 import java.io.File;
+import java.util.List;
 
 public class BookEntityBean {
 
@@ -10,9 +11,9 @@ public class BookEntityBean {
     private final String isbn;
     private final String price ;
     private final Boolean isNegotiable ;
-    private final File image;
+    private final List<File> image;
 
-    public BookEntityBean(String title , String isbn, String price, Boolean isNegotiable, File image)throws BookException{
+    public BookEntityBean(String title , String isbn, String price, Boolean isNegotiable, List<File> image)throws BookException{
         sintacticCheck(isbn, price);
         this.title = title;
         this.isbn = isbn;
@@ -37,7 +38,7 @@ public class BookEntityBean {
         return this.isNegotiable;
     }
 
-    public File getImage() {return this.image; }
+    public List<File> getImage() {return this.image; }
 
     public void sintacticCheck(String isbn, String price) throws BookException
     {

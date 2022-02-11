@@ -36,13 +36,13 @@
          <Cursor fx:constant="HAND" />
       </cursor>
    </Button>
-   <TableView layoutX="93.0" layoutY="220.0" prefHeight="346.0" prefWidth="1103.0">
+   <TableView fx:id="bookTable" layoutX="93.0" layoutY="220.0" prefHeight="346.0" prefWidth="1103.0">
       <columns>
-         <TableColumn prefWidth="222.0" text="Name" />
-         <TableColumn prefWidth="222.0" text="ISBN 10" />
+         <TableColumn fx:id="colName" prefWidth="222.0" text="Name" />
+         <TableColumn fx:id="colIsbn" prefWidth="222.0" text="ISBN 10" />
          <TableColumn prefWidth="222.0" text="ISBN 13" />
-         <TableColumn prefWidth="222.0" text="Price" />
-         <TableColumn prefWidth="222.0" text="Edit/Remove" />
+         <TableColumn fx:id="colPrice" prefWidth="222.0" text="Price" />
+         <TableColumn fx:id="colManage" prefWidth="222.0" text="Edit/Remove" />
       </columns>
    </TableView>
    <Button layoutX="985.0" layoutY="118.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="163.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Refresh " textFill="WHITE">
@@ -65,6 +65,4 @@
       </image>
    </ImageView>
    <Button layoutX="21.0" layoutY="15.0" mnemonicParsing="false" opacity="0.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #2d8bba;" text="homeBtn" />
-   <ImageView fx:id="blob" fitHeight="150.0" fitWidth="200.0" layoutX="708.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" />
-   <Button layoutX="207.0" layoutY="593.0" mnemonicParsing="false" onAction="#onBlobButtonClick" text="Button" />
 </AnchorPane>

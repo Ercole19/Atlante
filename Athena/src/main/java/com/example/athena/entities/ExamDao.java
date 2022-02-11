@@ -26,7 +26,7 @@ public class ExamDao extends AbstractDAO {
 
 
 
-    public ObservableList<ExamEntityBean> getExamlist()  {
+    public ObservableList<ExamEntityBean>  getExamlist()  {
 
         ObservableList<ExamEntityBean> examlist = FXCollections.observableArrayList();
         try ( PreparedStatement

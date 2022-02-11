@@ -4,6 +4,8 @@ import javafx.scene.image.Image;
 
 import java.io.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookDao extends AbstractDAO {
 
@@ -11,17 +13,30 @@ public class BookDao extends AbstractDAO {
     private final String email = User.getUser().getEmail();
 
 
-    public void insertBook(String title , String isbn , Float price , boolean negotiability, File image) {
-        String insertQuery = "insert into athena.books values (?,?,?,?,?,?)";
-        try (PreparedStatement statement = this.getConnection().prepareStatement(insertQuery)) {
+    public void insertBook(String title , String isbn , Float price , boolean negotiability, List<File> images) {
+        String insertQuery = "insert into athena.books values (?,?,?,?,?)";
+        try (PreparedStatement statement = this.getConnection().prepareStatement(insertQuery) ; PreparedStatement statement2 = this.getConnection().prepareStatement(insertImagesQuery)) {
 
-             statement.setString(1, title);
-             statement.setString(2, isbn);
-             statement.setFloat(3, price);
-             statement.setBoolean(4, negotiability);
-             statement.setString(5 ,email);
-             statement.setBlob(6, new BufferedInputStream(new FileInputStream(image))) ;
-             statement.execute() ;
+            statement.setString(1, title);
+            statement.setString(2, isbn);
+            statement.setFloat(3, price);
+            statement.setBoolean(4, negotiability);
+            statement.setString(5 ,email);
+            statement.execute() ;
+
+            statement2.setString(1,email);
+            statement2.setString(2,isbn);
+
+
+            for (File file : images) {
+                statement2.setBlob(3, new BufferedInputStream(new FileInputStream(file)));
+                statement2.setString(4,file.getName());
+                statement2.execute();
+            }
+
+
+
+
 
              }
          catch (SQLException | FileNotFoundException exc) {
