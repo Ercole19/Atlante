@@ -248,7 +248,7 @@ public class UserDao extends AbstractDAO {
             ResultSet set = statement.executeQuery();
 
             while (set.next()) {
-                byte[] cvBytes = set.getBlob(1).getBytes(1, (int) set.getBlob(1).length());
+                byte[] cvBytes = set.getBlob(1).getBytes(0, (int) set.getBlob(1).length());
                 File file = new File("src/main/resources/assets/tempCV.html");
                 OutputStream writeStream = new FileOutputStream(file);
                 writeStream.write(cvBytes, 0, cvBytes.length);

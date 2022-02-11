@@ -43,4 +43,16 @@ public class BookEntity {
         BookDao dao = new BookDao() ;
        dao.insertBook(this.getBookTitle(), this.getIsbn(), this.getPrice(), this.getNegotiable(), this.getImage()) ;
     }
+
+    public void updateInDB()
+    {
+        BookDao dao = new BookDao() ;
+        dao.updateBookInfos(this.getBookTitle(), this.getIsbn(), this.getPrice(), this.getNegotiable() , this.getImage());
+    }
+
+    public void removeFromDB()
+    {
+        BookDao dao = new BookDao() ;
+        dao.deleteBook(this.getIsbn()) ;
+    }
 }

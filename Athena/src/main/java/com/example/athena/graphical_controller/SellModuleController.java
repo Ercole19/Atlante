@@ -17,8 +17,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class SellModuleController {
+public class SellModuleController implements Initializable , PostInitialize {
     @FXML
     private TextField bookTitle ;
     @FXML
@@ -49,12 +53,14 @@ public class SellModuleController {
     private int index ;
     private List<File> file;
 
-    public void onConfirmButtonClick() {
+    public void onConfirmButtonClick(ActionEvent event)  {
 
         try {
             BookEntityBean book = new BookEntityBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , file);
             SellBooksUseCaseController sellBooksUseCaseController = new SellBooksUseCaseController();
             sellBooksUseCaseController.putOnSale(book);
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
+            stage.close();
         }
         catch (ISBNException | BookException e){
             Alert alert = new Alert(Alert.AlertType.ERROR) ;
@@ -62,6 +68,23 @@ public class SellModuleController {
             alert.showAndWait() ;
         }
     }
+
+    public void onUpdateButtonClick(ActionEvent event)
+    {
+        try {
+            BookEntityBean book = new BookEntityBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , file);
+            SellBooksUseCaseController sellBooksUseCaseController = new SellBooksUseCaseController();
+            sellBooksUseCaseController.updateProduct(book);
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
+            stage.close();
+        }
+        catch (ISBNException | BookException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR) ;
+            alert.setContentText(e.getMessage()) ;
+            alert.showAndWait() ;
+        }
+    }
+
     @FXML
     public void onBackButtonClick(ActionEvent event) throws IOException {
         SceneSwitcher switcher = new SceneSwitcher();
@@ -82,6 +105,62 @@ public class SellModuleController {
             shiftIndex(images.size() - 1);
         }
 
+    }
+
+    public void onLeftArrowClick()
+    {
+        shiftIndex(--index) ;
+        this.bookImage.setImage(this.images.get(this.index)) ;
+    }
+
+    public void onRightArrowClick()
+    {
+        shiftIndex(++index) ;
+        this.bookImage.setImage(this.images.get(index)) ;
+    }
+
+    private void disable(Node node)
+    {
+        node.setDisable(true) ;
+        node.setVisible(false) ;
+    }
+
+    private void enable(Node node)
+    {
+        node.setVisible(true) ;
+        node.setDisable(false) ;
+    }
+
+    private void shiftIndex(int position)
+    {
+        if(position < 0) position = 0 ;
+        if(position > this.images.size() -1) position = this.images.size() -1 ;
+        this.index = position ;
+        checkIndex() ;
+    }
+    private void checkIndex()
+    {
+        if(this.index == images.size() -1)
+        {
+            disable(rightArrow) ;
+            disable(rightArrowImage) ;
+        }
+        else
+        {
+            enable(rightArrow) ;
+            enable(rightArrowImage) ;
+        }
+
+        if(this.index == 0)
+        {
+            disable(leftArrow) ;
+            disable(leftArrowImage) ;
+        }
+        else
+        {
+            enable(leftArrow);
+            enable(leftArrowImage);
+        }
     }
 
     @Override

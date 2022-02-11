@@ -31,7 +31,22 @@ public class SellController implements Initializable {
     private final SceneSwitcher switcher = new SceneSwitcher();
 
     @FXML
-    private ImageView blob;
+    private TableView<BookEntityBean> bookTable ;
+
+    @FXML
+    private TableColumn<BookEntityBean, String> colName ;
+
+    @FXML
+    private TableColumn<BookEntityBean, String> colIsbn ;
+
+    @FXML
+    private TableColumn<BookEntityBean, Float> colPrice ;
+
+    @FXML
+    private TableColumn<BookEntityBean, Void> colManage ;
+
+
+    private ObservableList<BookEntityBean> bookList  = FXCollections.observableArrayList() ;
 
     @FXML
     protected void onBackButtonClick(ActionEvent event) throws IOException {

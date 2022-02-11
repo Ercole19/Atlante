@@ -16,4 +16,21 @@ public class SellBooksUseCaseController {
         BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable() , book.getImage()) ;
         bookE.toDB() ;
     }
+
+    public void updateProduct(BookEntityBean book) throws ISBNException
+    {
+        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable() , book.getImage()) ;
+        bookE.updateInDB() ;
+    }
+
+    public void deleteProduct(BookEntityBean book)
+    {
+        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable() , book.getImage()) ;
+        bookE.removeFromDB() ;
+    }
+
+  /*  public List<BookEntityBean> getBookList() {
+        List<BookEntity> bookList = new ArrayList<>() ;
+
+    }*/
 }
