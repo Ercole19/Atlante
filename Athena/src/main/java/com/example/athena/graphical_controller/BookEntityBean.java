@@ -22,6 +22,7 @@ public class BookEntityBean {
         this.image = image;
     }
 
+
     public String getBookTitle() {
         return this.title;
     }

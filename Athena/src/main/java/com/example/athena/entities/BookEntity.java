@@ -8,8 +8,12 @@ public class BookEntity {
     private final String title ;
     private final String isbn;
     private final float price ;
-    private final Boolean isNegotiable ;
-    private final List<File> image;
+    private final  Boolean isNegotiable  ;
+    private final List<File> image   ;
+
+
+
+
 
     public BookEntity(String title , String isbn, float price, Boolean isNegotiable, List<File> image){
         this.title = title;
@@ -18,6 +22,9 @@ public class BookEntity {
         this.isNegotiable = isNegotiable;
         this.image = image;
     }
+
+
+
 
     public String getBookTitle() {
         return this.title;

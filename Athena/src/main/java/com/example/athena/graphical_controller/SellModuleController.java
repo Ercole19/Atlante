@@ -18,9 +18,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+
 
 public class SellModuleController implements Initializable , PostInitialize {
     @FXML
@@ -49,14 +52,19 @@ public class SellModuleController implements Initializable , PostInitialize {
     @FXML
     private Button confirmButton ;
 
+    @FXML
+    private Button deleteButton;
+
+
     private List<Image> images ;
     private int index ;
-    private List<File> file;
+    private List<File> files;
+    private BookEntityBean bean ;
 
     public void onConfirmButtonClick(ActionEvent event)  {
 
         try {
-            BookEntityBean book = new BookEntityBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , file);
+            BookEntityBean book = new BookEntityBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , files);
             SellBooksUseCaseController sellBooksUseCaseController = new SellBooksUseCaseController();
             sellBooksUseCaseController.putOnSale(book);
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
@@ -72,7 +80,7 @@ public class SellModuleController implements Initializable , PostInitialize {
     public void onUpdateButtonClick(ActionEvent event)
     {
         try {
-            BookEntityBean book = new BookEntityBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , file);
+            BookEntityBean book = new BookEntityBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , files);
             SellBooksUseCaseController sellBooksUseCaseController = new SellBooksUseCaseController();
             sellBooksUseCaseController.updateProduct(book);
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
@@ -91,7 +99,7 @@ public class SellModuleController implements Initializable , PostInitialize {
         switcher.switcher(event, "bookshop-choose-view.fxml");
     }
 
-    public void onUploadBtnClick(ActionEvent event) {
+    public void onUploadBtnClick() {
 
         JFileChooser fc = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -100,7 +108,7 @@ public class SellModuleController implements Initializable , PostInitialize {
         int returnVal = fc.showOpenDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             this.images.add(new Image(String.valueOf(fc.getSelectedFile().toURI()))) ;
-            this.file.add(fc.getSelectedFile());
+            this.files.add(fc.getSelectedFile());
             this.bookImage.setImage(images.get(images.size() - 1));
             shiftIndex(images.size() - 1);
         }
@@ -165,7 +173,7 @@ public class SellModuleController implements Initializable , PostInitialize {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.file = new ArrayList<>() ;
+        this.files = new ArrayList<>() ;
         this.images = new ArrayList<>() ;
         disable(leftArrow) ;
         disable(leftArrowImage) ;
@@ -175,13 +183,44 @@ public class SellModuleController implements Initializable , PostInitialize {
 
     @Override
     public void postInitialize(ArrayList<Object> params) {
-        BookEntityBean bean = (BookEntityBean)params.get(0) ;
+        bean = (BookEntityBean) params.get(0);
         bookTitle.setText(bean.getBookTitle());
-        bookISBN.setDisable(true) ;
+        bookISBN.setText(bean.getIsbn());
+        bookISBN.setDisable(true);
         bookPrice.setText(bean.getPrice());
         bookNegotiability.setSelected(bean.getNegotiable());
 
-        confirmButton.setText("Update") ;
-        confirmButton.setOnAction(this::onUpdateButtonClick) ;
+        confirmButton.setText("Update");
+        confirmButton.setOnAction(this::onUpdateButtonClick);
+
+        for (File file : bean.getImage()) {
+            this.images.add(new Image(String.valueOf(file.toURI())));
+            files.add(file);
+        }
+        if (images.isEmpty()) {
+            bookImage.setImage(null);
+        } else {
+
+            bookImage.setImage(images.get(images.size() - 1));
+            shiftIndex(images.size() - 1);
+        }
+    }
+
+
+    public void deleteImage () throws IOException, BookException {
+
+        BookEntityBean book = new BookEntityBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , files);
+
+        SellBooksUseCaseController controller = new SellBooksUseCaseController() ;
+
+        File image  = files.get(index) ;
+        byte[] fileContent = Files.readAllBytes(image.toPath());
+
+
+        controller.deleteImage(book, fileContent);
+        Stage stage = (Stage) deleteButton.getScene().getWindow();
+        stage.close();
+
+
     }
 }

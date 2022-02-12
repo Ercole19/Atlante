@@ -1,5 +1,9 @@
 package com.example.athena.entities;
 
+import com.example.athena.graphical_controller.ExamEntityBean;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,7 +16,7 @@ public class BookDao extends AbstractDAO {
     private final String updateQuery = "UPDATE athena.books set title = ? , price = ? , negotiable = ? where email = ? and isbn = ?" ;
     private final String deleteImagesQuery = "call fdòoh" ;
     private final String deleteBookQuery = "call er5" ;
-    private final String getBookList = "SELECT title, isbn, price from athena.books where email = ?";
+    private final String getBookList = "SELECT title, isbn, price, negotiable from athena.books where email = ?";
     private final String getBookImage = "SELECT image from athena.book_images where email = ? and isbn  = ?" ;
     private final String email = User.getUser().getEmail();
 
@@ -20,6 +24,8 @@ public class BookDao extends AbstractDAO {
     public void insertBook(String title , String isbn , Float price , boolean negotiability, List<File> images) {
         String insertQuery = "insert into athena.books values (?,?,?,?,?)";
         try (PreparedStatement statement = this.getConnection().prepareStatement(insertQuery) ; PreparedStatement statement2 = this.getConnection().prepareStatement(insertImagesQuery)) {
+
+
 
             statement.setString(1, title);
             statement.setString(2, isbn);
@@ -81,6 +87,11 @@ public class BookDao extends AbstractDAO {
 
         try (PreparedStatement statement = this.getConnection().prepareStatement(updateQuery) ; PreparedStatement statement2 = this.getConnection().prepareStatement(insertImagesQuery)) {
 
+
+
+
+
+
             statement.setString(1,title);
             statement.setFloat(2,price);
             statement.setBoolean(3,negotiability);
@@ -137,8 +148,8 @@ public class BookDao extends AbstractDAO {
     }
 
 
-    public List<BookEntity> getList () {
-        List<BookEntity> list = new ArrayList<>() ;
+    public ObservableList<BookEntity>  getList () {
+        ObservableList<BookEntity> list = FXCollections.observableArrayList() ;
 
         try(PreparedStatement statement = this.getConnection().prepareStatement(getBookList))
         {
@@ -148,6 +159,12 @@ public class BookDao extends AbstractDAO {
                 String title = set.getString(1) ;
                 String isbn = set.getString(2) ;
                 Float price = set.getFloat(3) ;
+                boolean negotiable = set.getBoolean(4) ;
+                List<File> images = getBookImages(isbn);
+
+                BookEntity book = new BookEntity(title, isbn, price, negotiable, images) ;
+
+                list.add(book);
 
 
             }
@@ -162,6 +179,7 @@ public class BookDao extends AbstractDAO {
 
     private List<File> getBookImages(String isbn)
     {
+        int i = 0 ;
         List<File> list = new ArrayList<>();
         try(PreparedStatement statement = this.getConnection().prepareStatement(getBookImage))
         {
@@ -172,16 +190,40 @@ public class BookDao extends AbstractDAO {
 
             while(set.next())
             {
-                byte[] image = set.getBlob(1).getBytes(0,(int) set.getBlob(1).length()) ;
+                byte[] image = set.getBlob(1).getBytes(1,(int) set.getBlob(1).length()) ;
 
-                //list.add();
+                File file = new File("src/main/resources/book_images/tempImage" + i + ".png");
+                OutputStream writeStream = new FileOutputStream(file);
+                writeStream.write(image, 0, image.length);
+                writeStream.close();
+
+                list.add(file);
+                i = i + 1 ;
             }
 
         }
-        catch(SQLException e)
+        catch(SQLException | IOException e)
         {
             e.printStackTrace() ;
         }
         return list ;
+    }
+
+
+    public void deleteImage(String isbn, byte[] image) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement("delete from athena.book_images where isbn = ? and email = ? and image = ?")){
+            Blob blob = this.getConnection().createBlob() ;
+            blob.setBytes(1, image) ;
+            statement.setString(1,isbn);
+            statement.setString(2,email);
+            statement.setBlob(3,blob);
+
+            statement.execute() ;
+
+
+
+        } catch (SQLException exc) {
+            exc.getMessage() ;
+        }
     }
 }

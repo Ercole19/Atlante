@@ -45,7 +45,7 @@
          <TableColumn fx:id="colManage" prefWidth="222.0" text="Edit/Remove" />
       </columns>
    </TableView>
-   <Button layoutX="985.0" layoutY="118.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="163.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Refresh " textFill="WHITE">
+   <Button layoutX="985.0" layoutY="118.0" mnemonicParsing="false" onAction="#refreshTable" prefHeight="55.0" prefWidth="163.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Refresh " textFill="WHITE">
       <font>
          <Font name="Bookmark Old Style" size="20.0" />
       </font>
