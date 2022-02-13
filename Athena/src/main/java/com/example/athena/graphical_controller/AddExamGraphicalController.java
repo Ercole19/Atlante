@@ -5,17 +5,17 @@ import com.example.athena.use_case_controllers.AddExamUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 
-public class AddExamGraphicalController {
-    private String oldExamName ;
+public class AddExamGraphicalController implements PostInitialize {
 
     @FXML
     private TextField nomeEsame;
@@ -25,66 +25,71 @@ public class AddExamGraphicalController {
     private TextField cfuEsame;
     @FXML
     private DatePicker dataEsame;
-
-    private boolean update ;
-
-
-
-    public void confermaEsame(ActionEvent event) throws IOException {
-          String nome = nomeEsame.getText();
-          String data  = dataEsame.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) ;
-          String voto = votoEsame.getText();
-          String cfu = cfuEsame.getText();
-
-         ExamEntityBean examBean = new ExamEntityBean();
-
-             examBean.setExamName(nome);
-             examBean.setVotoEsame(voto);
-             examBean.setCfuEsame(cfu);
-             examBean.setDate(data);
-
-         AddExamUseCaseController useCaseController = new AddExamUseCaseController() ;
-         useCaseController.addExam(examBean , event , update , oldExamName);
+    @FXML
+    private Button confirm;
+    private String oldName ;
 
 
+    public void confermaEsame() {
+        String nome = nomeEsame.getText();
+        String data = dataEsame.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String voto = votoEsame.getText();
+        String cfu = cfuEsame.getText();
+
+        ExamEntityBean examBean = new ExamEntityBean();
+
+        examBean.setExamName(nome);
+        examBean.setVotoEsame(voto);
+        examBean.setCfuEsame(cfu);
+        examBean.setDate(data);
+
+        AddExamUseCaseController useCaseController = new AddExamUseCaseController();
+        useCaseController.addExam(examBean);
+    }
 
 
+    public void updateExam(ActionEvent event) {
 
+        ExamEntityBean bean = new ExamEntityBean() ;
 
+        bean.setExamName(nomeEsame.getText());
+        bean.setVotoEsame(votoEsame.getText());
+        bean.setCfuEsame(cfuEsame.getText());
+        bean.setDate(String.valueOf(dataEsame.getValue()));
 
+        AddExamUseCaseController controller = new AddExamUseCaseController() ;
+        controller.updateExamFromDB(bean, oldName);
 
-
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
 
 
     }
-    public void indietro(ActionEvent event){
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+
+    public void indietro(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
-    public void setNomeEsame (String nome) {
-        nomeEsame.setText(nome);
-    }
+    @Override
+    public void postInitialize(ArrayList<Object> params) {
 
-    public void setVotoEsame (String voto) {
-        votoEsame.setText(voto);
-    }
 
-    public void setCfuEsame (String cfu) {
-        cfuEsame.setText(cfu) ;
+        ExamEntityBean exam = (ExamEntityBean) params.get(0);
+        oldName = exam.getExamName() ;
 
-    }
-    public  void setDataEsame (String data) {
-        dataEsame.setValue(LocalDate.parse(data));
+        nomeEsame.setText(exam.getExamName());
+        votoEsame.setText(String.valueOf(exam.getVotoEsame()));
+        cfuEsame.setText(String.valueOf(exam.getCfuEsame()));
+        dataEsame.setValue(LocalDate.parse(exam.getDate()));
 
-    }
-    public void setUpdate (boolean valore) {
-        update = valore  ;
-    }
 
-    public void setOldExamName (String oldName) {
-        oldExamName = oldName ;
+        confirm.setText("Update");
+        confirm.setOnAction(this::updateExam) ;
     }
 
 
 }
+
+

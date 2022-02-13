@@ -1,10 +1,11 @@
 package com.example.athena.entities;
 
-import com.example.athena.graphical_controller.ExamEntityBean;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ public class BookDao extends AbstractDAO {
 
     private final String insertImagesQuery= "insert into athena.book_images(email, isbn, image, image_name) values(?, ?, ?, ?)" ;
     private final String updateQuery = "UPDATE athena.books set title = ? , price = ? , negotiable = ? where email = ? and isbn = ?" ;
-    private final String deleteImagesQuery = "call fdòoh" ;
+    private final String deleteImagesQuery = "delete from athena.book_images where isbn = ? and email = ? " ;
     private final String deleteBookQuery = "call er5" ;
     private final String getBookList = "SELECT title, isbn, price, negotiable from athena.books where email = ?";
     private final String getBookImage = "SELECT image from athena.book_images where email = ? and isbn  = ?" ;
@@ -85,10 +86,15 @@ public class BookDao extends AbstractDAO {
 
     public void updateBookInfos(String title ,String isbn, Float price , boolean negotiability , List<File> images) {
 
-        try (PreparedStatement statement = this.getConnection().prepareStatement(updateQuery) ; PreparedStatement statement2 = this.getConnection().prepareStatement(insertImagesQuery)) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement(updateQuery) ) {
+
+            deleteBookImages(isbn);
 
 
+            for (File file : images) {
+                insertImage(isbn, file);
 
+            }
 
 
 
@@ -100,19 +106,11 @@ public class BookDao extends AbstractDAO {
 
             statement.execute() ;
 
-            deleteBookImages(isbn) ;
-
-            statement2.setString(1,email);
-            statement2.setString(2,isbn);
 
 
-            for (File file : images) {
-                statement2.setBlob(3, new BufferedInputStream(new FileInputStream(file)));
-                statement2.setString(4,file.getName());
-                statement2.execute();
-            }
 
-        } catch (SQLException | FileNotFoundException exc) {
+
+        } catch (SQLException  exc) {
             exc.getMessage() ;
         }
     }
@@ -121,8 +119,8 @@ public class BookDao extends AbstractDAO {
     {
         try(PreparedStatement statement = this.getConnection().prepareStatement(deleteImagesQuery))
         {
-            statement.setString(1, email) ;
-            statement.setString(2, isbn) ;
+            statement.setString(1, isbn) ;
+            statement.setString(2, email) ;
 
             statement.execute() ;
         }
@@ -226,4 +224,35 @@ public class BookDao extends AbstractDAO {
             exc.getMessage() ;
         }
     }
+
+
+
+
+public void insertImage(String isbn, File file) {
+
+        try (PreparedStatement statement = this.getConnection().prepareStatement("insert into athena.book_images values (?,?,?,?)")){
+
+            statement.setString(1,email);
+            statement.setString(2,isbn);
+
+            Blob blob = this.getConnection().createBlob();
+            blob.setBytes( 1, Files.readAllBytes(file.toPath())) ;
+            statement.setBlob(3,blob);
+            statement.setString(4,file.getName());
+
+            statement.execute();
+
+
+
+        } catch (SQLException | IOException exception) {
+            exception.getMessage();
+        }
+
+}
+
+
+
+
+
+
 }

@@ -2,6 +2,8 @@ package com.example.athena.graphical_controller;
 
 
 import com.example.athena.entities.ExamDao;
+import com.example.athena.use_case_controllers.ExamPageUCC;
+import com.example.athena.use_case_controllers.SellBooksUseCaseController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -42,6 +45,9 @@ public class GraphicControllerEsamiHomepage implements Initializable {
     private TableColumn<ExamEntityBean, LocalDate> colDate ;
     @FXML
     private TableColumn<ExamEntityBean, Void> colEDit ;
+    private Text cancella = null ;
+    private Button editButton = null ;
+    private HBox managebtn = null ;
 
     private ObservableList<ExamEntityBean> examList  = FXCollections.observableArrayList() ;
     private ExamDao examDao ;
@@ -74,10 +80,9 @@ public class GraphicControllerEsamiHomepage implements Initializable {
     public void refreshTable() {
         examList.clear() ;
 
-        examDao = new ExamDao() ;
-        examList = examDao.getExamlist() ;
+        ExamPageUCC controller = new ExamPageUCC() ;
 
-        examTable.setItems(examList) ;
+        examTable.setItems(controller.getList()) ;
     }
 
 
@@ -99,10 +104,6 @@ public class GraphicControllerEsamiHomepage implements Initializable {
             @Override
             public void updateItem (Void item , boolean empty ) {
                 super.updateItem(item , empty);
-
-                Text cancella = null ;
-                Button editButton = null ;
-                HBox managebtn = null ;
                 if (empty ) {
                     setGraphic(null);
                 }
@@ -115,32 +116,14 @@ public class GraphicControllerEsamiHomepage implements Initializable {
 
                     editButton.setOnAction(event -> {
                         ExamEntityBean exam = examTable.getSelectionModel().getSelectedItem();
-                        FXMLLoader fxmlLoader =  new FXMLLoader();
                         SceneSwitcher switcher = new SceneSwitcher() ;
+                        ArrayList<Object> params = new ArrayList<>() ;
+                        params.add(exam) ;
                         try {
-                            fxmlLoader.setLocation(switcher.generateUrl("Aggiungi_Esame_view.fxml")) ;
-                            fxmlLoader.load();
-
+                            switcher.popup("Aggiungi_Esame_view.fxml", "Edit your exam", params);
                         }catch (IOException exc) {
                             exc.getCause() ;
                         }
-                        AddExamGraphicalController controller = fxmlLoader.getController() ;
-                        controller.setNomeEsame(exam.getExamName());
-                        controller.setVotoEsame(String.valueOf(exam.getVotoEsame()));
-                        controller.setCfuEsame(String.valueOf(exam.getCfuEsame()));
-                        controller.setDataEsame(exam.getDate());
-                        controller.setOldExamName(exam.getExamName());
-                        controller.setUpdate(true);
-
-                        Parent root = fxmlLoader.getRoot();
-                        Stage stage = new Stage();
-                        stage.setScene(new Scene(root));
-                        stage.showAndWait();
-
-
-
-
-
 
                     });
 
@@ -175,12 +158,15 @@ public class GraphicControllerEsamiHomepage implements Initializable {
         };
         colEDit.setCellFactory(cellFactory);
 
+        ExamPageUCC controller = new ExamPageUCC() ;
+
+
+        examTable.setItems(controller.getList());
 
 
 
-        examDao = new ExamDao() ;
-        examList = examDao.getExamlist() ;
-        examTable.setItems(examList) ;
+
+
 
 
     }

@@ -15,4 +15,35 @@ public class EntityExam {
     }
 
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setVoto(int voto) {
+        this.voto = voto;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public void setCfu(int cfu) {
+        this.cfu = cfu;
+    }
+
+    public int getVoto() {
+        return voto;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getCfu() {
+        return cfu;
+    }
+
+    public String getData() {
+        return data;
+    }
 }

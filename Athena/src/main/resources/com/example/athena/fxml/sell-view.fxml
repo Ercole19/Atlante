@@ -38,7 +38,7 @@
    </Button>
    <TableView fx:id="bookTable" layoutX="93.0" layoutY="220.0" prefHeight="346.0" prefWidth="1103.0">
       <columns>
-         <TableColumn fx:id="colName" prefWidth="222.0" text="Name" />
+         <TableColumn fx:id="colName" prefWidth="222.0" text="Title" />
          <TableColumn fx:id="colIsbn" prefWidth="222.0" text="ISBN 10" />
          <TableColumn prefWidth="222.0" text="ISBN 13" />
          <TableColumn fx:id="colPrice" prefWidth="222.0" text="Price" />

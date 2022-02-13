@@ -36,7 +36,7 @@ public class SellBooksUseCaseController {
 
     public ObservableList<BookEntityBean> getBookList() throws BookException {
         ObservableList<BookEntityBean> bookBeanList = FXCollections.observableArrayList();
-        List<BookEntity> bookList = new ArrayList<>() ;
+        List<BookEntity> bookList  ;
         BookDao bookDao = new BookDao();
         bookList = bookDao.getList();
         for (BookEntity entity : bookList) {

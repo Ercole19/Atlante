@@ -11,20 +11,23 @@ import java.time.LocalDateTime;
 public class AddEventUCC {
 
 
-    public void addEvent(EventBean evento , boolean update , String oldname) throws SendEmailException {
+    public void addEvent(EventBean evento) throws SendEmailException {
 
         EventDao eventDao = new EventDao() ;
-        if (!update) {
-            eventDao.addEvent(evento.getDate(), evento.getName(), evento.getStart(), evento.getEnd(), evento.getDescription(), evento.getType());
-        }
-        else {
-            eventDao.updateEvento(evento.getDate() , evento.getName() , evento.getStart(), evento.getEnd(), evento.getDescription() , oldname, evento.getType());
-        }
+
+        eventDao.addEvent(evento.getDate(), evento.getName(), evento.getStart(), evento.getEnd(), evento.getDescription(), evento.getType());
+
 
         if(evento.getIsThereAReminder())
         {
             if(evento.getDateOfReminder().isBefore(LocalDateTime.now())) throw new SendEmailException("The reminder would have to be sent before now") ;
             SetReminderEmailBoundary.sendToServer(evento) ;
         }
+    }
+
+    public void update(EventBean bean, String oldname) {
+        EventDao dao  = new EventDao();
+        dao.updateEvento(bean.getDate(), bean.getName(), bean.getStart(), bean.getEnd(), bean.getDescription(), oldname, bean.getType());
+
     }
 }

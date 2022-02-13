@@ -24,6 +24,16 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
+        stage.setOnCloseRequest(event->
+        {
+            String pathname = System.getProperty("user.dir") + "/src/main/resources/book_images/" ;
+            File f = new File(pathname) ;
+            String[] pathnames = f.list();
+            for (String name : pathnames) {
+                File toDelete = new File(pathname + name);
+                toDelete.delete();
+            }
+        });
     }
 
     public static void main(String[] args) {

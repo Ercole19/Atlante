@@ -7,13 +7,14 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class ExamDao extends AbstractDAO {
     private String emailcurrent =  User.getUser().getEmail() ;
     private String getquery = "SELECT Nome , Voto , CFU , Data_Esame FROM esami WHERE email_utente = ? " ;
     private String deleteQuery = "DELETE FROM esami WHERE Nome = ? and email_utente = ?" ;
     private String addQuery = " INSERT INTO esami  VALUES (?,?,?,?,?); " ;
-    private String updateQuery = "UPDATE `esami` SET `Nome` = ? , `Voto` = ? , `CFU` = ? , `Data_Esame` = ?  WHERE (`Nome` = ? ) and email_utente = ? " ;
+    private String updateQuery = "UPDATE athena.esami SET `Nome` = ? , `Voto` = ? , `CFU` = ? , `Data_Esame` = ? where Nome = ? and email_utente = ? " ;
     private String sortedExams = "SELECT  Voto , Data_Esame   from  esami WHERE email_utente =  ? order by Data_Esame" ;
     private String weightedsortedExams = "SELECT  Voto , Data_Esame , CFU  from  esami WHERE email_utente =  ? order by Data_Esame  " ;
     private String getaverage = "SELECT AVG(VOTO) as media  FROM esami WHERE email_utente = ?" ;
@@ -26,20 +27,21 @@ public class ExamDao extends AbstractDAO {
 
 
 
-    public ObservableList<ExamEntityBean>  getExamlist()  {
+    public ObservableList<EntityExam>  getExamlist()  {
 
-        ObservableList<ExamEntityBean> examlist = FXCollections.observableArrayList();
+        ObservableList<EntityExam> examlist = FXCollections.observableArrayList();
         try ( PreparedStatement
         statement = this.getConnection().prepareStatement(getquery) ) {
             statement.setString(1 , emailcurrent);
             ResultSet set = statement.executeQuery() ;
 
             while (set.next()) {
-                ExamEntityBean exam = new ExamEntityBean();
-                exam.setExamName(set.getString("Nome"));
-                exam.setVotoEsame(set.getString("Voto"));
-                exam.setCfuEsame(set.getString("CFU"));
-                exam.setDate(set.getString(dataEsame));
+
+                String nome  = (set.getString("Nome"));
+                int voto = (Integer.parseInt(set.getString("Voto")));
+                int cfu = Integer.parseInt((set.getString("CFU")));
+                String date = (set.getString(dataEsame));
+                EntityExam exam = new EntityExam(nome, voto, cfu, date);
                 examlist.add(exam);
 
             }
@@ -54,14 +56,14 @@ public class ExamDao extends AbstractDAO {
 
     }
 
-    public void addExam(ExamEntityBean beanExam) {
+    public void addExam(EntityExam exam) {
 
         try (PreparedStatement stm =this.getConnection().prepareStatement(addQuery, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)  ){
 
-            stm.setString(1, beanExam.getExamName());
-            stm.setString(2, String.valueOf(beanExam.getVotoEsame()));
-            stm.setString(3, String.valueOf(beanExam.getCfuEsame()));
-            stm.setString(4, beanExam.getDate());
+            stm.setString(1, exam.getNome());
+            stm.setString(2, String.valueOf(exam.getVoto()));
+            stm.setString(3, String.valueOf(exam.getCfu()));
+            stm.setString(4, exam.getData());
             stm.setString(5, emailcurrent);
             stm.executeUpdate();
 
@@ -83,7 +85,7 @@ public class ExamDao extends AbstractDAO {
         }
     }
 
-    public void updateExam(ExamEntityBean beanExam, String oldName) {
+    public void updateExam(ExamEntityBean beanExam, String oldname) {
 
 
         try( PreparedStatement stm = this.getConnection().prepareStatement(updateQuery)) {
@@ -92,7 +94,7 @@ public class ExamDao extends AbstractDAO {
             stm.setString(2, String.valueOf(beanExam.getVotoEsame()));
             stm.setString(3, String.valueOf(beanExam.getCfuEsame()));
             stm.setString(4, beanExam.getDate());
-            stm.setString(5, oldName);
+            stm.setString(5,oldname);
             stm.setString(6,emailcurrent);
             stm.executeUpdate();
 

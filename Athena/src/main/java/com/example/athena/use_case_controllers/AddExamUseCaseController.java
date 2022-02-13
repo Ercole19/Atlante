@@ -1,5 +1,6 @@
 package com.example.athena.use_case_controllers;
 
+import com.example.athena.entities.EntityExam;
 import com.example.athena.graphical_controller.ExamEntityBean;
 import com.example.athena.entities.ExamDao;
 import javafx.event.ActionEvent;
@@ -18,42 +19,27 @@ public class AddExamUseCaseController {
 
 
 
-    public void addExam (ExamEntityBean esameBean , ActionEvent event , boolean update , String oldName) {
+    public void addExam (ExamEntityBean bean) {
 
 
-        if ((esameBean.getExamName().equals("")) || (esameBean.getVotoEsame() < 18 || esameBean.getVotoEsame() > 30) || (esameBean.getCfuEsame() < 0 || esameBean.getCfuEsame() > 15) ) {
+        if ((bean.getExamName().equals("")) || (bean.getVotoEsame() < 18 || bean.getVotoEsame() > 30) || (bean.getCfuEsame() < 0 || bean.getCfuEsame() > 15) ) {
             Alert alert = new Alert(Alert.AlertType.ERROR, " Exam fields are not valid, check if you fill them correctly  ", ButtonType.CLOSE);
             alert.showAndWait();
 
         } else {
-            if (!(update)) {
-
-
-                ExamDao esame = new ExamDao();
-                esame.addExam(esameBean);
-
-
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.close();
-
-
-            } else {
-                ExamDao esame = new ExamDao();
-                esame.updateExam(esameBean , oldName);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.close();
-
-            }
+             ExamDao esame = new ExamDao();
+             EntityExam exam = new EntityExam(bean.getExamName(), bean.getVotoEsame(), bean.getCfuEsame(), bean.getDate()) ;
+             esame.addExam(exam);
         }
+    }
 
+    public void updateExamFromDB(ExamEntityBean exam, String oldname) {
 
-
-        }
-
-
-
+        ExamDao dao = new ExamDao() ;
+        dao.updateExam(exam, oldname);
 
     }
+}
 
 
 

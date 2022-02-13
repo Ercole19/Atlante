@@ -177,33 +177,15 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
 
             Button edit = new Button("edit") ;
             edit.setOnAction(event -> {
-                FXMLLoader loader = new FXMLLoader();
                 SceneSwitcher switcher = new SceneSwitcher() ;
+                ArrayList<Object> params = new ArrayList<>() ;
+                params.add(result) ;
                 try {
-                    loader.setLocation(switcher.generateUrl("AddEventScreen.fxml")) ;
-                    loader.load();
+                   switcher.popup("AddEventScreen.fxml","Edit your event", params );
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                AddEventController addEventController = loader.getController();
-                addEventController.setEventName(result.getName());
-                addEventController.setEventDate(result.getDate());
-                addEventController.setStartHourSpinner(result.getStart().getHour());
-                addEventController.setStartMinuteSpinner(result.getStart().getMinute());
-                addEventController.setEndHourSpinner(result.getEnd().getHour());
-                addEventController.setEndMinuteSpinner(result.getEnd().getMinute());
-                addEventController.setEventDescription(result.getDescription());
-                addEventController.setOldEventName(result.getName());
-                addEventController.setUpdate(true);
 
-
-                Parent parent = loader.getRoot() ;
-                DatePicker datePicker = (DatePicker) parent.lookup("#eventDate");
-                datePicker.setDisable(true);
-                Stage stage = new Stage() ;
-                stage.setScene(new Scene(parent) );
-                stage.initStyle(StageStyle.UTILITY);
-                stage.show();
 
 
             });
