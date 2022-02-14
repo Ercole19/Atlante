@@ -16,7 +16,7 @@ public class BookDao extends AbstractDAO {
     private final String insertImagesQuery= "insert into athena.book_images(email, isbn, image, image_name) values(?, ?, ?, ?)" ;
     private final String updateQuery = "UPDATE athena.books set title = ? , price = ? , negotiable = ? where email = ? and isbn = ?" ;
     private final String deleteImagesQuery = "delete from athena.book_images where isbn = ? and email = ? " ;
-    private final String deleteBookQuery = "call er5" ;
+    private final String deleteBookQuery = "delete from athena.books where isbn = ? and email = ?" ;
     private final String getBookList = "SELECT title, isbn, price, negotiable from athena.books where email = ?";
     private final String getBookImage = "SELECT image from athena.book_images where email = ? and isbn  = ?" ;
     private final String email = User.getUser().getEmail();
@@ -134,8 +134,9 @@ public class BookDao extends AbstractDAO {
     {
         try(PreparedStatement statement = this.getConnection().prepareStatement(deleteBookQuery))
         {
-            statement.setString(1, email) ;
-            statement.setString(2, isbn) ;
+            statement.setString(1, isbn) ;
+            statement.setString(2, email) ;
+
 
             statement.execute() ;
         }

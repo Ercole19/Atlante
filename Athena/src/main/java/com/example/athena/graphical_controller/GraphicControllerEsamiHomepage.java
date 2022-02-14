@@ -121,6 +121,7 @@ public class GraphicControllerEsamiHomepage implements Initializable {
                         params.add(exam) ;
                         try {
                             switcher.popup("Aggiungi_Esame_view.fxml", "Edit your exam", params);
+                            refreshTable();
                         }catch (IOException exc) {
                             exc.getCause() ;
                         }

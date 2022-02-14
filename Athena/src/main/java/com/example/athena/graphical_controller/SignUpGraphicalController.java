@@ -1,6 +1,7 @@
 package com.example.athena.graphical_controller;
 
-import com.example.athena.entities.UserDao;
+
+import com.example.athena.use_case_controllers.SignUpUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -31,11 +32,13 @@ public class SignUpGraphicalController {
     }
 
     public void onConfirmButtonClick (ActionEvent event) throws IOException {
+
         String email = emailField.getText() ;
         String password = passField.getText() ;
         String nome = nameField.getText() ;
         String cognome = surnameField.getText() ;
         String passConfirm = confirmPassField.getText() ;
+
         if (password.equals(passConfirm)) {
             String userType;
             if (studentRadiobutton.isSelected()) {
@@ -45,8 +48,17 @@ public class SignUpGraphicalController {
             else {
                 userType = "tutor" ;
             }
-            UserDao stDAO = new UserDao();
-            if (stDAO.registerUser(email, password , userType , nome , cognome)) {
+
+            UserBean bean = new UserBean();
+            bean.setEmail(email);
+            bean.setPassword(password);
+            bean.setRole(userType);
+            bean.setName(nome);
+            bean.setSurname(cognome);
+
+            SignUpUCC controller = new SignUpUCC();
+
+            if (controller.register(bean)) {
                 SceneSwitcher switcher = new SceneSwitcher();
                 switcher.switcher(event, "LoginPage.fxml");
             }

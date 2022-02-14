@@ -1,6 +1,7 @@
 package com.example.athena.graphical_controller;
 
 import com.example.athena.entities.ExamDao;
+import com.example.athena.use_case_controllers.AverageUCC;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,39 +29,23 @@ public class AverageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ExamDao exam = new ExamDao() ;
+        AverageUCC controller = new AverageUCC() ;
 
-        ObservableList<XYChart.Data<String, Number>> data = exam.getSortedExams() ;
-        ObservableList<XYChart.Data<String, Number>> data2 = exam.getSortedExamsWeighted() ;
+        ObservableList<XYChart.Data<String, Number>> sortedExams = controller.retrieveExams();
+        ObservableList<XYChart.Data<String, Number>> weightedSortedExams = controller.retrieveExamsWeighted() ;
 
+        XYChart.Series<String, Number> series = new XYChart.Series<>("Artithmetic average ", sortedExams);
+        XYChart.Series<String, Number> series2 = new XYChart.Series<>("Weighted average ", weightedSortedExams);
 
-        XYChart.Series<String, Number> series = new XYChart.Series<>("Artithmetic average ", data);
-        XYChart.Series<String, Number> series2 = new XYChart.Series<>("Weighted average ", data2);
         averageGraph.getData().addAll(series , series2) ;
-        Number  media = exam.getAverage() ;
-        Number mediaW = exam.getAverageWeighted() ;
 
-        labelAverageArit.setText(String.valueOf(String.format("%.2f", media)));
+        Number average = controller.retrieveAverage() ;
+        Number weightedAverage = controller.retrieveWeightedAverage() ;
 
-        labelAverageWei.setText(String.valueOf(String.format("%.2f" , mediaW)));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        labelAverageArit.setText(String.valueOf(String.format("%.2f", average)));
+        labelAverageWei.setText(String.valueOf(String.format("%.2f" , weightedAverage)));
     }
+
     public void indietro(ActionEvent event){
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();

@@ -78,13 +78,5 @@
             <TableColumn fx:id="colEDit" prefWidth="222.0" text="Edit" />
         </columns>
       </TableView>
-      <Button layoutX="985.0" layoutY="118.0" mnemonicParsing="false" onAction="#refreshTable" prefHeight="55.0" prefWidth="163.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Refresh " textFill="WHITE">
-         <font>
-            <Font name="Bookman Old Style" size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
    </children>
 </AnchorPane>

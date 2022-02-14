@@ -98,15 +98,15 @@ public class AddEventController implements Initializable , PostInitialize{
         } else {
             wrapperBean = new EventReminderWrapperBean(false);
         }
+
         LocalTime start = LocalTime.of(startHourSpinner.getValue(), startMinuteSpinner.getValue());
         LocalTime end = LocalTime.of(endHourSpinner.getValue(), endMinuteSpinner.getValue());
-        EventBean eventToRegister = new EventBean(eventDate.getValue(), eventName.getText(), start, end, eventDescription.getText(),
-                eventType.getValue(), wrapperBean);
+        EventBean eventToRegister = new EventBean(eventDate.getValue(), eventName.getText(), start, end, eventDescription.getText(), eventType.getValue(), wrapperBean);
 
-        if (eventToRegister.getDescription().length() > 50 | eventToRegister.getStart().isAfter(eventToRegister.getEnd())
-                | eventToRegister.getName().equals("")) {
+        if (eventToRegister.getDescription().length() > 50 | eventToRegister.getStart().isAfter(eventToRegister.getEnd()) | eventToRegister.getName().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Data not valid", ButtonType.CLOSE);
             alert.showAndWait();
+
         } else {
             AddEventUCC addEventUCC = new AddEventUCC();
             try {
@@ -129,8 +129,7 @@ public class AddEventController implements Initializable , PostInitialize{
     }
 
     private void prepareFactory(Spinner<Integer> spinner, int rangeStart, int rangeEnd) {
-        SpinnerValueFactory<Integer> minutesValueFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(rangeStart, rangeEnd);
+        SpinnerValueFactory<Integer> minutesValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(rangeStart, rangeEnd);
         minutesValueFactory.setWrapAround(true);
         minutesValueFactory.setConverter(new StringHoursConverter(rangeStart, rangeEnd));
         minutesValueFactory.setValue(0);

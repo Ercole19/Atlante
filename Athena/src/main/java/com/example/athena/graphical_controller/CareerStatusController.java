@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller;
 
-import com.example.athena.entities.ExamDao;
+import com.example.athena.use_case_controllers.CareerStatusUCC;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,13 +32,13 @@ public class CareerStatusController implements Initializable {
     @FXML
     public void initialize(URL url , ResourceBundle rb) {
 
-        ExamDao exam = new ExamDao() ;
-        ObservableList<PieChart.Data> examsPieChartData  = exam.loadData() ;
-        ObservableList<PieChart.Data> examsPieChartDatacfus  = exam.loadData2() ;
+        CareerStatusUCC controller = new CareerStatusUCC() ;
+        ObservableList<PieChart.Data> examsPieChartData  = controller.retrieveExamPieChart() ;
+        ObservableList<PieChart.Data> examsPieChartDatacfus  = controller.retrieveExamPieChartCfus() ;
 
-        int esamiDAti = (int) exam.getTotalExams();
+        int esamiDAti = controller.retrieveTotalExams();
         int esamiTotali = Integer.parseInt(totalExams.getText()) ;
-        int cfuDati = (int) exam.getTotalCfus() ;
+        int cfuDati = controller.retrieveTotalCfus() ;
         int cfuTotali = Integer.parseInt(totalCfus.getText()) ;
 
         examsPieChartData.add(new PieChart.Data("Esami mancanti" , esamiTotali-esamiDAti)) ;

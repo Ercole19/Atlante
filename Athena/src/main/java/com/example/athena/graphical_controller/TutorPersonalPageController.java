@@ -2,6 +2,7 @@ package com.example.athena.graphical_controller;
 
 import com.example.athena.entities.CourseDao;
 import com.example.athena.entities.UserDao;
+import com.example.athena.use_case_controllers.TutorPersonalPageUCC;
 import com.example.athena.use_case_controllers.ViewTutorPageUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,7 +46,7 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     private Label cognometutor;
 
 
-    private UserDao user ;
+
 
     private File file ;
 
@@ -83,10 +84,19 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     }
 
     public void onConfirmButtonClick(ActionEvent event) throws IOException {
-        user = new UserDao();
-        String[] infos = user.filltutorinfos(com.example.athena.entities.User.getUser().getEmail());
+        TutorPersonalPageUCC controller = new TutorPersonalPageUCC() ;
+
+        UserBean bean = new UserBean() ;
+        TutorInfosBean infos = new TutorInfosBean();
+        infos.setAboutMe(aboutme.getText());
+        infos.setContactNumbers(contactnumbers.getText());
+        infos.setSessionInfos(sessioninfos.getText());
+
+        bean.setEmail(com.example.athena.entities.User.getUser().getEmail());
+        String[] tutorInfos = controller.getTutorInfos(bean);
         boolean empty = true ;
-        for (Object ob : infos) {
+
+        for (Object ob : tutorInfos) {
             if (ob != null) {
                 empty = false ;
                 break ;
@@ -95,11 +105,10 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
 
         if (empty) {
 
-            user.settutorinfos(aboutme.getText(),  sessioninfos.getText(), contactnumbers.getText());
+           controller.setTutorInformation(infos);
         }
         else {
-            user.updatetutorinfos(aboutme.getText(),  sessioninfos.getText(), contactnumbers.getText());
-
+            controller.updateTutorInformation(infos);
         }
 
         SceneSwitcher switcher = new SceneSwitcher();
@@ -108,6 +117,8 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
 
     public void onCVButtonClicktutor() throws IOException
     {
+        TutorPersonalPageUCC controller = new TutorPersonalPageUCC();
+
         JFileChooser fc = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "HTML files", "html") ;
@@ -117,8 +128,7 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
             this.file = fc.getSelectedFile();
         }
 
-        user = new UserDao();
-        user.inserisciCV(file);
+        controller.uploadCV(file);
     }
 
 
@@ -131,44 +141,40 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     @Override
     public void postInitialize(ArrayList<Object> params)
     {
+        UserBean bean = new UserBean();
+        bean.setEmail((String) params.get(0));
+        TutorPersonalPageUCC controller = new TutorPersonalPageUCC();
 
-        this.email = (String) params.get(0) ;
-        user = new UserDao() ;
-        CourseDao corso = new CourseDao() ;
+        String[] tutorName = controller.getTutorName(bean);
+        Float tutorAvgReviews = controller.getTutorReviewsAvg(bean);
+        String[] tutorInfos = controller.getTutorInfos(bean);
+        List<String> tutorCourses = controller.getTutorCourses(bean);
 
-        String[] informazioni = user.getName((String) params.get(0));
-        Float avg = user.getAvg((String) params.get(0));
-
-
-        String[] infos = user.filltutorinfos((String) params.get(0));
-
-        List<String> courses = corso.fillCourses((String) params.get(0)) ;
-
-        if (infos == null) {
+        if (tutorInfos == null) {
             aboutme.appendText("");
             sessioninfos.appendText("");
             contactnumbers.appendText("");
             reviewsArea.appendText("No data");
         }
         else {
-            aboutme.appendText(infos[0]);
-            sessioninfos.appendText(infos[1]);
-            contactnumbers.appendText(infos[2]);
-            if (avg==0.0){
+            aboutme.appendText(tutorInfos[0]);
+            sessioninfos.appendText(tutorInfos[1]);
+            contactnumbers.appendText(tutorInfos[2]);
+            if (tutorAvgReviews==0.0){
                 reviewsArea.appendText("No reviews");
             }
             else {
-                reviewsArea.appendText(String.valueOf(avg));
+                reviewsArea.appendText(String.valueOf(tutorAvgReviews));
             }
 
         }
 
-        for (int i = 0 ; i< courses.size() ; i++) {
-            coursesArea.appendText(courses.get(i) + "\n" );
+        for (int i = 0 ; i< tutorCourses.size() ; i++) {
+            coursesArea.appendText(tutorCourses.get(i) + "\n" );
         }
 
-        nometutor.setText(informazioni[0]);
-        cognometutor.setText(informazioni[1]);
+        nometutor.setText(tutorName[0]);
+        cognometutor.setText(tutorName[1]);
 
 
         if((boolean)params.get(1))

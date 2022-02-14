@@ -200,7 +200,6 @@ public class SellModuleController implements Initializable , PostInitialize {
         if (images.isEmpty()) {
             bookImage.setImage(null);
         } else {
-
             bookImage.setImage(images.get(images.size() - 1));
             shiftIndex(images.size() - 1);
         }
@@ -214,13 +213,10 @@ public class SellModuleController implements Initializable , PostInitialize {
         SellBooksUseCaseController controller = new SellBooksUseCaseController() ;
 
         File image  = files.get(index) ;
-        byte[] fileContent = Files.readAllBytes(image.toPath());
 
-
-        controller.deleteImage(book, fileContent);
+        controller.deleteImage(book, image);
         Stage stage = (Stage) deleteButton.getScene().getWindow();
         stage.close();
-
 
     }
 }

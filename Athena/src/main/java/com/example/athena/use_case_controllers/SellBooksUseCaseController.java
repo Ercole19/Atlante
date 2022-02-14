@@ -9,6 +9,9 @@ import com.example.athena.graphical_controller.ExamEntityBean;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,10 +54,11 @@ public class SellBooksUseCaseController {
     }
 
 
-    public void deleteImage(BookEntityBean bean, byte[] image){
+    public void deleteImage(BookEntityBean bean, File image) throws IOException {
 
-        BookDao dao =new BookDao() ;
-        dao.deleteImage(bean.getIsbn(), image);
+        BookDao dao = new BookDao() ;
+        byte[] fileContent = Files.readAllBytes(image.toPath());
+        dao.deleteImage(bean.getIsbn(), fileContent);
 
     }
 

@@ -117,7 +117,8 @@ public class SellController implements Initializable {
                                     params.add(book);
                                     try {
                                         switcher.popup("sellBookModule.fxml", "Edit your book", params);
-                                    } catch (IOException e) {
+                                        refreshTable();
+                                    } catch (IOException | BookException e) {
                                         e.printStackTrace();
                                     }
 
@@ -132,6 +133,7 @@ public class SellController implements Initializable {
                                     BookEntityBean book = bookTable.getSelectionModel().getSelectedItem();
                                     SellBooksUseCaseController controller = new SellBooksUseCaseController();
                                     controller.deleteProduct(book);
+                                    refreshTable();
 
                                 } catch (Exception exc) {
                                     exc.getCause();
