@@ -13,6 +13,7 @@ module com.example.athena {
     requires java.mail;
     requires log4j;
     requires java.desktop;
+    requires jsch;
 
     opens com.example.athena.graphical_controller to javafx.fxml;
     exports com.example.athena.graphical_controller;
