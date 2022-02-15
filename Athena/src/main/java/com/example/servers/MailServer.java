@@ -96,7 +96,13 @@ public class MailServer implements Runnable {
                 if (setting.equals('R')) {
                     CommandSocketWrapper wrapper = new CommandSocketWrapper(clientSocket, receivedMessage.substring(1));
                     REGISTRATIONQUEUE.add(wrapper);
-                } else if (setting.equals('N')) {
+                }
+                else if(setting.equals('T'))
+                {
+                    CommandSocketWrapper wrapper = new CommandSocketWrapper(clientSocket, receivedMessage.substring(1)) ;
+                    REVIEWSQUEUE.add(wrapper) ;
+                }
+                else if (setting.equals('N')) {
                     String dateToParse = receivedMessage.substring(1, receivedMessage.indexOf(";"));
                     List<String> elements = REMINDERSMAP.getOrDefault(LocalDateTime.parse(dateToParse).truncatedTo(ChronoUnit.MINUTES), new ArrayList<>());
                     elements.add(receivedMessage.substring(receivedMessage.indexOf(";") +1));
