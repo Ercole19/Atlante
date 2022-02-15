@@ -1,0 +1,6 @@
+Feb 10, 2022 3:10:15 PM com.example.servers.MailServer main
+INFO: Insert the smtp username: 
+Feb 10, 2022 3:10:21 PM com.example.servers.MailServer main
+INFO: Insert the smtp password: 
+Feb 10, 2022 3:10:22 PM com.example.servers.MailServer run
+INFO: Type 'quit' to quit
