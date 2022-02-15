@@ -1,5 +1,9 @@
 package com.example.athena.entities;
 
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
+
 import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -62,8 +66,8 @@ public abstract class AbstractDAO
 
         user = reader.readLine().substring(9);
         pass = reader.readLine().substring(9);
-        dbUrl = reader.readLine().substring(8);
-        dbAddress = reader.readLine().substring(7) ;
+        dbUrl = reader.readLine().substring(7);
+        dbAddress = reader.readLine().substring(10) ;
         username = reader.readLine().substring(11) ;
         password = reader.readLine().substring(11) ;
 
