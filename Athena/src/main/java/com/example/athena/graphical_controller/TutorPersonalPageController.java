@@ -1,6 +1,7 @@
 package com.example.athena.graphical_controller;
 
 import com.example.athena.entities.CourseDao;
+import com.example.athena.entities.User;
 import com.example.athena.entities.UserDao;
 import com.example.athena.use_case_controllers.TutorPersonalPageUCC;
 import com.example.athena.use_case_controllers.ViewTutorPageUseCaseController;
@@ -12,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -44,13 +46,15 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     private Label nometutor;
     @FXML
     private Label cognometutor;
+    @FXML
+    private Text reviewAverage;
 
 
 
 
     private File file ;
 
-    private String email ;
+    private String email  = User.getUser().getEmail();
 
 
     public void clickOnBackButtonTutor(ActionEvent event) throws IOException
@@ -93,19 +97,10 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
         infos.setSessionInfos(sessioninfos.getText());
 
         bean.setEmail(com.example.athena.entities.User.getUser().getEmail());
-        String[] tutorInfos = controller.getTutorInfos(bean);
-        boolean empty = true ;
+        List<String> tutorInfos = controller.getTutorInfos(bean);
 
-        for (Object ob : tutorInfos) {
-            if (ob != null) {
-                empty = false ;
-                break ;
-            }
-        }
-
-        if (empty) {
-
-           controller.setTutorInformation(infos);
+        if (tutorInfos.isEmpty()) {
+            controller.setTutorInformation(infos);
         }
         else {
             controller.updateTutorInformation(infos);
@@ -138,44 +133,56 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     }
 
 
-    @Override
-    public void postInitialize(ArrayList<Object> params)
-    {
-        UserBean bean = new UserBean();
-        bean.setEmail((String) params.get(0));
-        TutorPersonalPageUCC controller = new TutorPersonalPageUCC();
+
+
+    public void populatePage(UserBean bean) {
+
+        TutorPersonalPageUCC controller = new TutorPersonalPageUCC() ;
 
         String[] tutorName = controller.getTutorName(bean);
         Float tutorAvgReviews = controller.getTutorReviewsAvg(bean);
-        String[] tutorInfos = controller.getTutorInfos(bean);
+        List<String> tutorInfos = controller.getTutorInfos(bean);
         List<String> tutorCourses = controller.getTutorCourses(bean);
 
-        if (tutorInfos == null) {
-            aboutme.appendText("");
-            sessioninfos.appendText("");
-            contactnumbers.appendText("");
-            reviewsArea.appendText("No data");
+        if (tutorInfos.isEmpty()) {
+            aboutme.setText("No data");
+            sessioninfos.setText("No data");
+            contactnumbers.setText("No data");
+            reviewAverage.setText("No data");
         }
         else {
-            aboutme.appendText(tutorInfos[0]);
-            sessioninfos.appendText(tutorInfos[1]);
-            contactnumbers.appendText(tutorInfos[2]);
+            aboutme.setText(tutorInfos.get(0));
+            sessioninfos.setText(tutorInfos.get(1));
+            contactnumbers.setText(tutorInfos.get(2));
             if (tutorAvgReviews==0.0){
-                reviewsArea.appendText("No reviews");
+                reviewAverage.setText("No reviews");
             }
             else {
-                reviewsArea.appendText(String.valueOf(tutorAvgReviews));
+                reviewAverage.setText(String.valueOf(tutorAvgReviews));
             }
 
         }
 
-        for (int i = 0 ; i< tutorCourses.size() ; i++) {
-            coursesArea.appendText(tutorCourses.get(i) + "\n" );
+        for (String course : tutorCourses) {
+            coursesArea.appendText(course + "\n" );
         }
 
         nometutor.setText(tutorName[0]);
         cognometutor.setText(tutorName[1]);
 
+    }
+
+
+
+
+
+    @Override
+    public void postInitialize(ArrayList<Object> params)
+    {
+        UserBean bean = new UserBean();
+        this.email = (String) params.get(0);
+        bean.setEmail((String) params.get(0));
+        populatePage(bean);
 
         if((boolean)params.get(1))
         {
@@ -186,5 +193,11 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {rootPane.getProperties().put("foo", this) ;}
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+        rootPane.getProperties().put("foo", this) ;
+        UserBean bean = new UserBean() ;
+        bean.setEmail(this.email);
+        populatePage(bean);
+    }
 }

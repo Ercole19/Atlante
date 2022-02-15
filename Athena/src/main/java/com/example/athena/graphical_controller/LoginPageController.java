@@ -9,7 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import java.io.IOException;
-
+import java.util.ArrayList;
 
 
 public class LoginPageController {
@@ -48,9 +48,7 @@ public class LoginPageController {
                 switcher.switcher(event, "MainPageTutor.fxml");
                 currentuser = currentuser.getUser();
                 currentuser.setEmail(email);
-
             }
-
         }
 
         else {

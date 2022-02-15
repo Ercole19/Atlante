@@ -1,11 +1,13 @@
 package com.example.athena.entities;
 
+import javafx.collections.FXCollections;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao extends AbstractDAO {
@@ -88,8 +90,8 @@ public class UserDao extends AbstractDAO {
 
     }
 
-    public String[] filltutorinfos(String email) {
-        String[] strArray1 = new String[3];
+    public List<String> filltutorinfos(String email) {
+        List<String> infos = new ArrayList<>();
         try (PreparedStatement statement = this.getConnection().prepareStatement(filltutor)) {
 
 
@@ -99,18 +101,15 @@ public class UserDao extends AbstractDAO {
             //declare with size
             ResultSet set = statement.executeQuery();
             while (set.next()) {
-                strArray1[0] = set.getString(1);
-                strArray1[1] = set.getString(2);
-                strArray1[2] = set.getString(3);
-
-
+                infos.add(set.getString(1));
+                infos.add(set.getString(2));
+                infos.add(set.getString(3));
             }
-
         } catch (SQLException exc) {
             exc.getMessage();
         }
 
-        return strArray1;
+        return infos;
 
     }
 
@@ -133,6 +132,7 @@ public class UserDao extends AbstractDAO {
             statement.setString(1, about);
             statement.setString(2, sesinf);
             statement.setString(3, contnum);
+            statement.setString(4, User.getUser().getEmail());
 
             statement.executeUpdate();
         } catch (SQLException exc) {
@@ -248,8 +248,8 @@ public class UserDao extends AbstractDAO {
             ResultSet set = statement.executeQuery();
 
             while (set.next()) {
-                byte[] cvBytes = set.getBlob(1).getBytes(0, (int) set.getBlob(1).length());
-                File file = new File("src/main/resources/assets/tempCV.html");
+                byte[] cvBytes = set.getBlob(1).getBytes(1, (int) set.getBlob(1).length());
+                File file = new File("src/main/resources/tutor_cv/tempCV.html");
                 OutputStream writeStream = new FileOutputStream(file);
                 writeStream.write(cvBytes, 0, cvBytes.length);
                 writeStream.close();

@@ -1,5 +1,8 @@
 package com.example.athena.entities;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,16 +12,18 @@ public class CourseDao extends AbstractDAO {
     private String add = "INSERT INTO corsi (nomecorso , emailtutor) VALUES (?,?)" ;
     private String delete = "DELETE FROM corsi WHERE nomecorso = ? and emailtutor = ?" ;
     private String getCourses = "SELECT nomecorso FROM corsi WHERE emailtutor = ?" ;
+    private String checkQuery  = "SELECT * from corsi where nomecorso = ? and emailtutor= ?";
 
 
 
     public  void addCourse (String course) {
         try ( PreparedStatement statement =this.getConnection().prepareStatement(add)) {
-            statement.setString(1 , course);
-            statement.setString(2 , emailcurrent);
+            statement.setString(1, course);
+            statement.setString(2, emailcurrent);
             statement.executeUpdate() ;
         }catch (SQLException e ) {
-            e.getMessage() ;
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error in adding course", ButtonType.CLOSE) ;
+            alert.showAndWait() ;
         }
 
     }
@@ -28,7 +33,8 @@ public class CourseDao extends AbstractDAO {
             statement.setString(2 , emailcurrent);
             statement.executeUpdate() ;
         }catch (SQLException e ) {
-            e.getMessage() ;
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error in deleting course", ButtonType.CLOSE) ;
+            alert.showAndWait() ;
         }
 
     }
@@ -47,5 +53,22 @@ public class CourseDao extends AbstractDAO {
         }
         return corsi ;
 
+    }
+
+    public boolean checkCourseExist(String name) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement(checkQuery)){
+            statement.setString(1, name);
+            statement.setString(2, emailcurrent);
+
+            ResultSet set = statement.executeQuery();
+            if (set.next()){
+                return true ;
+            }
+
+        }
+        catch (SQLException e) {
+            e.getMessage();
+
+        }return false;
     }
 }

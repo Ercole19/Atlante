@@ -26,13 +26,22 @@ public class HelloApplication extends Application {
 
         stage.setOnCloseRequest(event->
         {
-            String pathname = System.getProperty("user.dir") + "/src/main/resources/book_images/" ;
-            File f = new File(pathname) ;
-            String[] pathnames = f.list();
-            for (String name : pathnames) {
-                File toDelete = new File(pathname + name);
-                toDelete.delete();
+            String pathnameBook = System.getProperty("user.dir") + "/src/main/resources/book_images/" ;
+            String pathnameCV = System.getProperty("user.dir") + "/src/main/resources/tutor_cv/" ;
+            File book = new File(pathnameBook) ;
+            File cv = new File(pathnameCV) ;
+            String[] pathnamesBook = book.list() ;
+            String[] pathnamesCV = cv.list() ;
+            for (String bookName : pathnamesBook) {
+                File bookToDelete = new File(pathnameBook + bookName);
+                bookToDelete.delete();
             }
+            for (String cvName : pathnamesCV) {
+                File cvToDelete = new File(pathnameCV + cvName) ;
+                cvToDelete.delete() ;
+            }
+
+
         });
     }
 

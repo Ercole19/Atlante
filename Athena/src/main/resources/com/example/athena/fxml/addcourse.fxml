@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.AddCourseGraphicContoller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.CourseGraphicContoller">
    <children>
       <TextField fx:id="coursefield" layoutX="40.0" layoutY="108.0" prefHeight="43.0" prefWidth="520.0" promptText="Course name" style="-fx-background-radius: 20;">
          <font>
@@ -20,6 +20,6 @@
       </Text>
       <Button layoutX="461.0" layoutY="305.0" mnemonicParsing="false" onAction="#onDeleteClick" prefHeight="43.0" prefWidth="88.0" style="-fx-background-radius: 20;" text="Delete" />
       <Button layoutX="250.0" layoutY="310.0" mnemonicParsing="false" onAction="#onAddClick" prefHeight="34.0" prefWidth="74.0" style="-fx-background-radius: 20;" text="Add" />
-      <Button layoutX="40.0" layoutY="302.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="63.0" style="-fx-background-radius: 20;" text="Back" />
+      <Button layoutX="40.0" layoutY="302.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="43.0" prefWidth="63.0" style="-fx-background-radius: 20;" text="Back" />
    </children>
 </AnchorPane>

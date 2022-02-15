@@ -42,6 +42,6 @@ public class ShowCVGraphicalController implements Initializable, PostInitialize
     @Override
     public void postInitialize(ArrayList<Object> params) {
         WebEngine engine = cvWebView.getEngine() ;
-        engine.load("file://" + System.getProperty("user.dir") + "/src/main/resources/assets/" + params.get(0)) ;
+        engine.load("file://" + System.getProperty("user.dir") + "/src/main/resources/tutor_cv/" + params.get(0)) ;
     }
 }

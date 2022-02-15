@@ -17,9 +17,9 @@ public class TutorPersonalPageUCC {
         return infos;
     }
 
-    public String[] getTutorInfos(UserBean bean) {
+    public List<String> getTutorInfos(UserBean bean) {
         UserDao dao = new UserDao() ;
-        String[] infos = dao.filltutorinfos(bean.getEmail());
+        List<String> infos = dao.filltutorinfos(bean.getEmail());
         return infos ;
     }
 

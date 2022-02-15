@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static javafx.fxml.FXMLLoader.load;
 
@@ -17,7 +18,7 @@ public class TutorMainPageController {
     SceneSwitcher switcher = new SceneSwitcher();
 
 
-    public void onPersonalPageButtonClick(ActionEvent event) throws IOException {
+    public void onPersonalPageButtonClick(ActionEvent event)  {
         TutorPageComponent component = new TutorPageButtonAdder(new TutorPageView()) ;
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(component.build());
@@ -32,4 +33,6 @@ public class TutorMainPageController {
     {
         switcher.switcher(event, "TutorReviewPageView.fxml");
     }
+
+
 }
