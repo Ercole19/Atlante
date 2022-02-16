@@ -5,6 +5,8 @@ import com.example.athena.graphical_controller.EventBean;
 import com.example.athena.graphical_controller.SceneSwitcher;
 import com.example.athena.graphical_controller.TutorSearchResultBean;
 import com.example.athena.view.scene_decorators.SearchResultFormatterComponent;
+import com.jcraft.jsch.IO;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -16,6 +18,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;

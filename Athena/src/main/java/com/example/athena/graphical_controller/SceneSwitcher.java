@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -31,6 +32,7 @@ public class SceneSwitcher {
         Scene scene = new Scene(root);
         stage.setScene(scene) ;
     }
+
 
     public void popup(String fxml, String title) throws IOException
     {
@@ -76,4 +78,10 @@ public class SceneSwitcher {
             }
             return returnUrl;
     }
+
+    public void switcher(MouseEvent mouseEvent, String fxml, List<Object> params) throws IOException {
+        Parent root = preload(fxml, params) ;
+        Stage stage= (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene) ;}
 }
