@@ -192,6 +192,8 @@ public class SellModuleController implements Initializable , PostInitialize {
 
         confirmButton.setText("Update");
         confirmButton.setOnAction(this::onUpdateButtonClick);
+        deleteButton.setDisable(false);
+        deleteButton.setVisible(true);
 
         for (File file : bean.getImage()) {
             this.images.add(new Image(String.valueOf(file.toURI())));

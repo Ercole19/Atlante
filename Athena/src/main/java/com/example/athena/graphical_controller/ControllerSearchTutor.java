@@ -7,6 +7,8 @@ import com.example.athena.use_case_controllers.SearchTutorUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.SubScene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
@@ -29,28 +31,48 @@ public class ControllerSearchTutor {
 
     public void clickOnSearchByCourse()
     {
-        SearchTutorUseCaseController controller = new SearchTutorUseCaseController() ;
-        List<TutorSearchResultBean> results =  controller.formatSearchResults(searchBar.getText() , !(byName)) ; //Another bean should be added
-        SearchResultFormatterComponent resultView = new SearchResultFormatterView() ;
-        if(resultsBox.getHeight() < results.size()*100.0)
-        {
-            resultView = new SearchResultFormatterScrollBar(resultView) ;
+        if(searchBar.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Insert something before!", ButtonType.CLOSE);
+            alert.showAndWait();
         }
-        AnchorPane subSceneElems = resultView.buildTutorSearchResultsScene(resultsBox.getWidth(), resultsBox.getHeight(), (ArrayList<TutorSearchResultBean>) results) ;
-        resultsBox.setRoot(subSceneElems) ;
+        else {
+            SearchTutorUseCaseController controller = new SearchTutorUseCaseController();
+            List<TutorSearchResultBean> results = controller.formatSearchResults(searchBar.getText(), !(byName)); //Another bean should be added
+            if (results.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "No results found", ButtonType.CLOSE);
+                alert.showAndWait();
+            } else {
+                SearchResultFormatterComponent resultView = new SearchResultFormatterView();
+                if (resultsBox.getHeight() < results.size() * 100.0) {
+                    resultView = new SearchResultFormatterScrollBar(resultView);
+                }
+                AnchorPane subSceneElems = resultView.buildTutorSearchResultsScene(resultsBox.getWidth(), resultsBox.getHeight(), (ArrayList<TutorSearchResultBean>) results);
+                resultsBox.setRoot(subSceneElems);
+            }
+        }
     }
 
     public void clickOnSearchByName()
     {
-        SearchTutorUseCaseController controller = new SearchTutorUseCaseController() ;
-        List<TutorSearchResultBean> results =  controller.formatSearchResults(searchBar.getText() , byName) ; //Another bean should be added
-        SearchResultFormatterComponent resultView = new SearchResultFormatterView() ;
-        if(resultsBox.getHeight() < results.size()*100.0)
-        {
-            resultView = new SearchResultFormatterScrollBar(resultView) ;
+        if(searchBar.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Insert something before!", ButtonType.CLOSE);
+            alert.showAndWait();
         }
-        AnchorPane subSceneElems = resultView.buildTutorSearchResultsScene(resultsBox.getWidth(), resultsBox.getHeight(), (ArrayList<TutorSearchResultBean>) results) ;
-        resultsBox.setRoot(subSceneElems) ;
+        else {
+            SearchTutorUseCaseController controller = new SearchTutorUseCaseController();
+            List<TutorSearchResultBean> results = controller.formatSearchResults(searchBar.getText(), byName); //Another bean should be added
+            if (results.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "No results found", ButtonType.CLOSE);
+                alert.showAndWait();
+            } else {
+                SearchResultFormatterComponent resultView = new SearchResultFormatterView();
+                if (resultsBox.getHeight() < results.size() * 100.0) {
+                    resultView = new SearchResultFormatterScrollBar(resultView);
+                }
+                AnchorPane subSceneElems = resultView.buildTutorSearchResultsScene(resultsBox.getWidth(), resultsBox.getHeight(), (ArrayList<TutorSearchResultBean>) results);
+                resultsBox.setRoot(subSceneElems);
+            }
+        }
     }
 
     public void clickOnBackButton(ActionEvent event) throws IOException
