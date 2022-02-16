@@ -151,7 +151,7 @@ public class SellModuleController implements Initializable , PostInitialize {
 
     private void checkIndex()
     {
-        if(this.index == images.size() -1)
+        if(images.size() == 0 || this.index == images.size() -1)
         {
             disable(rightArrow) ;
             disable(rightArrowImage) ;
@@ -208,7 +208,8 @@ public class SellModuleController implements Initializable , PostInitialize {
             files.add(file);
         }
         if (images.isEmpty()) {
-            bookImage.setImage(null);
+            Image icon = new Image(new File("src/main/resources/assets/upload2.jpg").toURI().toString());
+            this.bookImage.setImage(icon);
         } else {
             bookImage.setImage(images.get(images.size() - 1));
             shiftIndex(images.size() - 1);
