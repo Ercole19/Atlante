@@ -60,7 +60,6 @@ public class SellModuleController implements Initializable , PostInitialize {
     private List<Image> images ;
     private int index ;
     private List<File> files;
-    private BookEntityBean bean ;
 
     public void onConfirmButtonClick(ActionEvent event)  {
 
@@ -142,11 +141,14 @@ public class SellModuleController implements Initializable , PostInitialize {
 
     private void shiftIndex(int position)
     {
-        if(position < 0) position = 0 ;
-        if(position > this.images.size() -1) position = this.images.size() -1 ;
+        if(position < 0) {position = 0 ;}
+        else{
+            if(position > this.images.size() -1) position = this.images.size() -1 ;
+        }
         this.index = position ;
         checkIndex() ;
     }
+
     private void checkIndex()
     {
         if(this.index == images.size() -1)
@@ -183,8 +185,15 @@ public class SellModuleController implements Initializable , PostInitialize {
     }
 
     @Override
-    public void postInitialize(ArrayList<Object> params) {
-        bean = (BookEntityBean) params.get(0);
+    public void postInitialize(ArrayList<Object> params){
+            deleteButton.setOnAction(t -> {
+                try {
+                    deleteImage();
+                } catch (IOException |BookException e) {
+                    e.printStackTrace();
+                }
+            });
+        BookEntityBean bean = (BookEntityBean) params.get(0);
         bookTitle.setText(bean.getBookTitle());
         bookISBN.setText(bean.getIsbn());
         bookISBN.setDisable(true);
@@ -222,4 +231,19 @@ public class SellModuleController implements Initializable , PostInitialize {
         stage.close();
 
     }
+
+    public void deleteImageOnScreen (){
+        files.remove(index);
+        images.remove(index);
+        shiftIndex(--index);
+        if (index != 0){
+            this.bookImage.setImage(this.images.get(index)) ;
+        }
+        else {
+            Image icon = new Image(new File("src/main/resources/assets/upload2.jpg").toURI().toString());
+            this.bookImage.setImage(icon);
+            checkIndex();
+        }
+    }
+
 }
