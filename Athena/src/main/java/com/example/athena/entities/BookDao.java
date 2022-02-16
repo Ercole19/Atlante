@@ -16,16 +16,17 @@ import java.util.List;
 public class BookDao extends AbstractDAO {
 
 
-    private final String insertImagesQuery= "insert into athena.book_images(email, isbn, image, image_name) values(?, ?, ?, ?)" ;
-    private final String updateQuery = "UPDATE athena.books set title = ? , price = ? , negotiable = ? where email = ? and isbn = ?" ;
+    private final String insertImagesQuery= "INSERT INTO `athena`.`book_images` (email, isbn, image,image_name, count_image) VALUES (?,?,?,?,?)" ;
+    private final String updateQuery = "UPDATE athena.books set title_book = ? , price = ? , negotiable = ? where email_user = ? and isbn_book = ?" ;
     private final String deleteImagesQuery = "delete from athena.book_images where isbn = ? and email = ? " ;
-    private final String deleteBookQuery = "delete from athena.books where isbn = ? and email = ?" ;
-    private final String getBookList = "SELECT title, isbn, price, negotiable from athena.books where email = ?";
+    private final String deleteBookQuery = "delete from athena.books where isbn_book = ? and email_user = ?" ;
+    private final String getBookList = "SELECT title_book, isbn_book, price, negotiable from athena.books where email_user = ?";
     private final String getBookImage = "SELECT image from athena.book_images where email = ? and isbn  = ?" ;
+    private final String findBooks = "SELECT title_book, isbn_book, price, email_user, image from athena.books join athena.book_images on books.email_user = book_images.email where title_book = ? or isbn_book = ? and count_image = 1;";
     private final String email = User.getUser().getEmail();
 
 
-    public void insertBook(String title , String isbn , Float price , boolean negotiability, List<File> images) {
+    public void insertBook(String title , String isbn , Float price , boolean negotiability, List<File> images, int i) {
         String insertQuery = "insert into athena.books values (?,?,?,?,?)";
         try (PreparedStatement statement = this.getConnection().prepareStatement(insertQuery) ; PreparedStatement statement2 = this.getConnection().prepareStatement(insertImagesQuery)) {
 
@@ -45,7 +46,9 @@ public class BookDao extends AbstractDAO {
             for (File file : images) {
                 statement2.setBlob(3, new BufferedInputStream(new FileInputStream(file)));
                 statement2.setString(4,file.getName());
+                statement2.setInt(5,i);
                 statement2.execute();
+                i++;
             }
 
 
@@ -90,16 +93,14 @@ public class BookDao extends AbstractDAO {
     public void updateBookInfos(String title ,String isbn, Float price , boolean negotiability , List<File> images) {
 
         try (PreparedStatement statement = this.getConnection().prepareStatement(updateQuery) ) {
-
+            int i = 0;
             deleteBookImages(isbn);
 
-
             for (File file : images) {
-                insertImage(isbn, file);
+                insertImage(isbn, file,i);
+                i++;
 
             }
-
-
 
             statement.setString(1,title);
             statement.setFloat(2,price);
@@ -114,7 +115,7 @@ public class BookDao extends AbstractDAO {
 
 
         } catch (SQLException  exc) {
-            exc.getMessage() ;
+            exc.printStackTrace(); ;
         }
     }
 
@@ -225,16 +226,16 @@ public class BookDao extends AbstractDAO {
 
 
         } catch (SQLException exc) {
-            exc.getMessage() ;
+            exc.printStackTrace(); ;
         }
     }
 
 
 
 
-public void insertImage(String isbn, File file) {
+public void insertImage(String isbn, File file, int i) {
 
-        try (PreparedStatement statement = this.getConnection().prepareStatement("insert into athena.book_images values (?,?,?,?)")){
+        try (PreparedStatement statement = this.getConnection().prepareStatement("insert into athena.book_images values (?,?,?,?,?)")){
 
             statement.setString(1,email);
             statement.setString(2,isbn);
@@ -243,20 +244,43 @@ public void insertImage(String isbn, File file) {
             blob.setBytes( 1, Files.readAllBytes(file.toPath())) ;
             statement.setBlob(3,blob);
             statement.setString(4,file.getName());
+            statement.setInt(5,i);
 
             statement.execute();
 
 
 
         } catch (SQLException | IOException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         }
 
 }
 
+public List<BookEntity> findBooks(String book) {
 
+        List<BookEntity> books = new ArrayList<>() ;
+        int i = 0;
 
+        try (PreparedStatement statement = this.getConnection().prepareStatement(findBooks)){
+            statement.setString(1, book);
+            statement.setString(2, book);
 
+            ResultSet set = statement.executeQuery();
+            while (set.next()) {
+                byte[] image = set.getBlob(5).getBytes(1,(int) set.getBlob(5).length()) ;
 
+                File file = new File("image.png");
+                OutputStream writeStream = new FileOutputStream(file);
+                writeStream.write(image, 0, image.length);
+                writeStream.close();
+                BookEntity bookEntity = new BookEntity(set.getString(1), set.getString(2), set.getFloat(3), set.getString(4), file);
+                books.add(bookEntity);
+            }
+
+        } catch (SQLException | IOException exc) {
+            exc.printStackTrace();
+        }
+        return books;
+}
 
 }

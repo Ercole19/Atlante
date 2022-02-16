@@ -6,10 +6,12 @@ import java.util.List;
 public class BookEntity {
 
     private final String title ;
-    private final String isbn;
-    private final float price ;
-    private final  Boolean isNegotiable  ;
-    private final List<File> image   ;
+    private final String isbn  ;
+    private final float price   ;
+    private final  Boolean isNegotiable;
+    private final List<File> image  ;
+    private final File file  ;
+    private final String owner ;
 
 
 
@@ -21,7 +23,21 @@ public class BookEntity {
         this.price = price;
         this.isNegotiable = isNegotiable;
         this.image = image;
+        this.file = null ;
+        this.owner = null ;
     }
+
+    public BookEntity(String title, String isbn, float price, String email, File image) {
+        this.title = title ;
+        this.isbn = isbn ;
+        this.price = price ;
+        this.owner = email ;
+        this.file = image ;
+        this.image = null ;
+        this.isNegotiable = null ;
+
+    }
+
 
 
 
@@ -44,11 +60,19 @@ public class BookEntity {
 
     public List<File> getImage() {return this.image;}
 
+    public String getOwner() {
+        return this.owner;
+    }
+
+    public File getFile() {
+        return this.file;
+    }
 
     public void toDB()
     {
         BookDao dao = new BookDao() ;
-       dao.insertBook(this.getBookTitle(), this.getIsbn(), this.getPrice(), this.getNegotiable(), this.getImage()) ;
+        int i = 1;
+       dao.insertBook(this.getBookTitle(), this.getIsbn(), this.getPrice(), this.getNegotiable(), this.getImage(), i) ;
     }
 
     public void updateInDB()

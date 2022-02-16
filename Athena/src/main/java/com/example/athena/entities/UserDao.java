@@ -166,8 +166,6 @@ public class UserDao extends AbstractDAO {
                 tutorInfos[i + 3] = Float.toString(set.getFloat(4));
                 tutorInfos[i + 4] = set.getString(5);
                 i = i + 5;
-
-
             }
 
         } catch (SQLException exc) {

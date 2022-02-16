@@ -186,13 +186,7 @@ public class SellModuleController implements Initializable , PostInitialize {
 
     @Override
     public void postInitialize(ArrayList<Object> params){
-            deleteButton.setOnAction(t -> {
-                try {
-                    deleteImage();
-                } catch (IOException |BookException e) {
-                    e.printStackTrace();
-                }
-            });
+
         BookEntityBean bean = (BookEntityBean) params.get(0);
         bookTitle.setText(bean.getBookTitle());
         bookISBN.setText(bean.getIsbn());
@@ -217,24 +211,17 @@ public class SellModuleController implements Initializable , PostInitialize {
     }
 
 
-    public void deleteImage () throws IOException, BookException {
 
-        BookEntityBean book = new BookEntityBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , files);
-
-        SellBooksUseCaseController controller = new SellBooksUseCaseController() ;
-
-        File image  = files.get(index) ;
-
-        controller.deleteImage(book, image);
-        deleteImageOnScreen();
-    }
 
     public void deleteImageOnScreen (){
         files.remove(index);
         images.remove(index);
         shiftIndex(--index);
-        if (index != 0){
+        if ((index == 0) && (images.size()>0) ){
             this.bookImage.setImage(this.images.get(index)) ;
+        }
+        else if(index != 0 && images.size()>0 && index<images.size()){
+            this.bookImage.setImage(this.images.get(index));
         }
         else {
             Image icon = new Image(new File("src/main/resources/assets/upload2.jpg").toURI().toString());
