@@ -1,7 +1,7 @@
 package com.example.athena.view.scene_decorators;
 
-import com.example.athena.graphical_controller.TutorSearchResultBean;
 import com.example.athena.graphical_controller.EventBean;
+import com.example.athena.graphical_controller.TutorSearchResultBean;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.ArrayList;

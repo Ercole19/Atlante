@@ -1,15 +1,11 @@
 package com.example.athena.graphical_controller;
 
-import com.example.athena.entities.CourseDao;
 import com.example.athena.entities.User;
-import com.example.athena.entities.UserDao;
 import com.example.athena.use_case_controllers.TutorPersonalPageUCC;
 import com.example.athena.use_case_controllers.ViewTutorPageUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
 import javafx.fxml.Initializable;
-
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
@@ -21,7 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 

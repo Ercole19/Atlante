@@ -1,13 +1,13 @@
 package com.example.athena.graphical_controller;
 
-import com.example.athena.entities.ExamDao;
 import com.example.athena.use_case_controllers.AverageUCC;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.chart.*;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 

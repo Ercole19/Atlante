@@ -3,7 +3,9 @@ package com.example.athena.entities;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

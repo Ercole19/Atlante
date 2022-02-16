@@ -1,8 +1,8 @@
 package com.example.athena.view.scene_decorators;
 
+import com.example.athena.graphical_controller.EventBean;
 import com.example.athena.graphical_controller.SearchResultsGraphicalController;
 import com.example.athena.graphical_controller.TutorSearchResultBean;
-import com.example.athena.graphical_controller.EventBean;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.AnchorPane;

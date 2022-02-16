@@ -4,7 +4,10 @@ import com.example.athena.exceptions.SendEmailException;
 import org.apache.log4j.Logger;
 
 import java.io.*;
-import java.net.*;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 
 public class SendReviewCodeEmailBoundary
 {

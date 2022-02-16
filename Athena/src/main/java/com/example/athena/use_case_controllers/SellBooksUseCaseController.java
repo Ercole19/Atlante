@@ -5,14 +5,12 @@ import com.example.athena.entities.BookEntity;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
 import com.example.athena.graphical_controller.BookEntityBean;
-import com.example.athena.graphical_controller.ExamEntityBean;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.athena.boundaries.IsbnCheckBoundary.isbnCheck;

@@ -1,14 +1,16 @@
 package com.example.athena.entities;
 
+import com.jcraft.jsch.*;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import com.jcraft.jsch.*;
 
 
 

@@ -1,28 +1,23 @@
 package com.example.athena.view;
 
 import com.example.athena.entities.EventDao;
-import com.example.athena.graphical_controller.AddEventController;
+import com.example.athena.graphical_controller.EventBean;
 import com.example.athena.graphical_controller.SceneSwitcher;
 import com.example.athena.graphical_controller.TutorSearchResultBean;
-import com.example.athena.graphical_controller.EventBean;
 import com.example.athena.view.scene_decorators.SearchResultFormatterComponent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 

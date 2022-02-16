@@ -3,19 +3,13 @@ package com.example.athena.graphical_controller;
 import com.example.athena.view.FullCalendarView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.SubScene;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.YearMonth;
 import java.util.ResourceBundle;
-
-import static javafx.fxml.FXMLLoader.load;
 
 public class CalendarPageController implements Initializable {
 

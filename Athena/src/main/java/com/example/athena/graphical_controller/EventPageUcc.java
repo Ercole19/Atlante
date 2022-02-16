@@ -1,12 +1,12 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.entities.EventDao;
 import com.example.athena.view.SearchResultFormatterView;
 import com.example.athena.view.scene_decorators.SearchResultFormatterComponent;
 import com.example.athena.view.scene_decorators.SearchResultFormatterScrollBar;
 import javafx.fxml.FXML;
 import javafx.scene.SubScene;
 import javafx.scene.control.Label;
-import com.example.athena.entities.EventDao;
 import javafx.scene.layout.AnchorPane;
 
 import java.time.LocalDate;

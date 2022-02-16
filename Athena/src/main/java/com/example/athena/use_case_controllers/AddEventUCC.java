@@ -2,9 +2,9 @@ package com.example.athena.use_case_controllers;
 
 
 import com.example.athena.boundaries.SetReminderEmailBoundary;
+import com.example.athena.entities.EventDao;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.graphical_controller.EventBean;
-import com.example.athena.entities.EventDao;
 
 import java.time.LocalDateTime;
 

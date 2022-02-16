@@ -1,19 +1,10 @@
 package com.example.athena.view;
 
-import com.example.athena.graphical_controller.SceneSwitcher;
-import com.example.athena.view.scene_decorators.SearchResultFormatterComponent;
-import com.example.athena.view.scene_decorators.SearchResultFormatterScrollBar;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.SubScene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import com.example.athena.graphical_controller.EventPageUcc;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import com.example.athena.graphical_controller.EventBean;
+import com.example.athena.graphical_controller.EventPageUcc;
+import com.example.athena.graphical_controller.SceneSwitcher;
+import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.time.LocalDate;
