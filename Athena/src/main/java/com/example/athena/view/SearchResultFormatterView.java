@@ -46,13 +46,16 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
             entryBox.setStyle("-fx-background-color: #faeeae") ;
             entryBox.setStyle("-fx-border-color: #000000") ;
 
-            entryBox.getColumnConstraints().add(new ColumnConstraints(100));
-            setRowConstraint(70, entryBox) ;
-            setRowConstraint(10, entryBox) ;
-            setRowConstraint(10, entryBox) ;
-            setRowConstraint(10, entryBox) ;
+            entryBox.getColumnConstraints().add(new ColumnConstraints(150));
+            setRowConstraint(40, entryBox) ;
+            setRowConstraint(20, entryBox) ;
+            setRowConstraint(20, entryBox) ;
+            setRowConstraint(20, entryBox) ;
 
             ImageView image = new ImageView(result.getFile().toURI().toString()) ;
+            image.setFitHeight(150);
+            image.setFitWidth(150);
+            image.setPreserveRatio(true);
             entryBox.add(image, 0, 0) ;
 
             Label titleLabel = new Label(result.getTitle()) ;
