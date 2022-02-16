@@ -1,14 +1,17 @@
 package com.example.athena.view.scene_decorators;
 
+import com.example.athena.graphical_controller.BookSearchResultBean;
 import com.example.athena.graphical_controller.EventBean;
 import com.example.athena.graphical_controller.SearchResultsGraphicalController;
 import com.example.athena.graphical_controller.TutorSearchResultBean;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchResultFormatterScrollBar extends  SearchResultFormatterDecorator
 {
@@ -20,18 +23,25 @@ public class SearchResultFormatterScrollBar extends  SearchResultFormatterDecora
     public AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, ArrayList<TutorSearchResultBean> results)
     {
         AnchorPane resultPane = super.buildTutorSearchResultsScene(containerWidth -20, containerHeight, results) ;
-        return applyScrollBar(resultPane, containerWidth, containerHeight, results.size()*100.0) ;
+        return applyVerticalScrollBar(resultPane, containerWidth, containerHeight, results.size()*100.0) ;
     }
 
     @Override
     public AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, ArrayList<EventBean> results)
     {
         AnchorPane resultPane = super.buildEventSearchResultsScene(containerWidth -20, containerHeight, results) ;
-        return applyScrollBar(resultPane, containerWidth, containerHeight, results.size()*100.0) ;
+        return applyVerticalScrollBar(resultPane, containerWidth, containerHeight, results.size()*100.0) ;
+    }
+
+    @Override
+    public AnchorPane buildBookSearchResultsScene(double containerWidth, double containerHeight, List<BookSearchResultBean> results)
+    {
+        AnchorPane resultPane = super.buildBookSearchResultsScene(containerWidth, containerHeight -20, results) ;
+        return applyHorizontalScrollBar(resultPane, containerWidth, containerHeight, results.size()*250.0) ;
     }
 
 
-    private ScrollBar getScrollBar(double containerWidth, double containerHeight, double listSize)
+    private ScrollBar getVerticalScrollBar(double containerWidth, double containerHeight, double listSize)
     {
         ScrollBar scrollBar = new ScrollBar() ;
         scrollBar.setOrientation(Orientation.VERTICAL) ;
@@ -42,15 +52,40 @@ public class SearchResultFormatterScrollBar extends  SearchResultFormatterDecora
         return scrollBar ;
     }
 
-    private AnchorPane applyScrollBar(AnchorPane pane, double containerWidth, double containerHeight, double size)
+    private ScrollBar getHorizontalScrollBar(double containerWidth, double containerHeight, double listSize)
+    {
+        ScrollBar scrollBar = new ScrollBar() ;
+        scrollBar.setOrientation(Orientation.HORIZONTAL) ;
+        scrollBar.setLayoutY(containerHeight -20) ;
+        scrollBar.setPrefSize(containerWidth, 20);
+        scrollBar.setMin(0) ;
+        scrollBar.setMax(listSize - containerHeight + 25.0) ;
+        return scrollBar ;
+    }
+
+    private AnchorPane applyVerticalScrollBar(AnchorPane pane, double containerWidth, double containerHeight, double size)
     {
         pane.setPrefSize(containerWidth, containerHeight) ;
-        ScrollBar scrollBar = this.getScrollBar(containerWidth, containerHeight, size) ;
+        ScrollBar scrollBar = this.getVerticalScrollBar(containerWidth, containerHeight, size) ;
         pane.getChildren().add(scrollBar) ;
 
         scrollBar.valueProperty().addListener((observableValue, number, newVal) -> {
             SearchResultsGraphicalController pageGraphController = new SearchResultsGraphicalController() ;
-            pageGraphController.scrollResults((VBox) pane.lookup("#resultList"), newVal) ;
+            pageGraphController.scrollResultsVertical((VBox) pane.lookup("#resultList"), newVal) ;
+        });
+
+        return pane ;
+    }
+
+    private AnchorPane applyHorizontalScrollBar(AnchorPane pane, double containerWidth, double containerHeight, double size)
+    {
+        pane.setPrefSize(containerWidth, containerHeight) ;
+        ScrollBar scrollBar = this.getHorizontalScrollBar(containerWidth, containerHeight, size) ;
+        pane.getChildren().add(scrollBar) ;
+
+        scrollBar.valueProperty().addListener((observableValue, number, newVal) -> {
+            SearchResultsGraphicalController pageGraphController = new SearchResultsGraphicalController() ;
+            pageGraphController.scrollResultsHorizontal((HBox) pane.lookup("#resultList"), newVal);
         });
 
         return pane ;

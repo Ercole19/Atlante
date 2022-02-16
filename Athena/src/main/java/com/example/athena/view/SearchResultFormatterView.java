@@ -1,6 +1,7 @@
 package com.example.athena.view;
 
 import com.example.athena.entities.EventDao;
+import com.example.athena.graphical_controller.BookSearchResultBean;
 import com.example.athena.graphical_controller.EventBean;
 import com.example.athena.graphical_controller.SceneSwitcher;
 import com.example.athena.graphical_controller.TutorSearchResultBean;
@@ -13,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -22,10 +24,67 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class SearchResultFormatterView extends SearchResultFormatterComponent {
     private static final String FONT = "System";
+
+    @Override
+    public AnchorPane buildBookSearchResultsScene(double containerWidth, double containerHeight, List<BookSearchResultBean> results)
+    {
+        double sceneWidth = (results.size())*100.0f ;
+
+        HBox graphicalList = new HBox();
+        graphicalList.setPrefSize(sceneWidth, containerHeight) ;
+        graphicalList.setId("resultsList");
+
+        for(BookSearchResultBean result : results)
+        {
+            GridPane entryBox = new GridPane() ;
+            entryBox.setPrefSize(250, containerHeight) ;
+            entryBox.setStyle("-fx-background-color: #faeeae") ;
+            entryBox.setStyle("-fx-border-color: #000000") ;
+
+            entryBox.getColumnConstraints().add(new ColumnConstraints(100));
+            setRowConstraint(70, entryBox) ;
+            setRowConstraint(10, entryBox) ;
+            setRowConstraint(10, entryBox) ;
+            setRowConstraint(10, entryBox) ;
+
+            ImageView image = new ImageView(result.getFile().toURI().toString()) ;
+            entryBox.add(image, 0, 0) ;
+
+            Label titleLabel = new Label(result.getTitle()) ;
+            titleLabel.setFont(new Font(FONT, 26)) ;
+            entryBox.add(titleLabel, 0, 1) ;
+
+            Label isbnLabel = new Label(result.getIsbn());
+            isbnLabel.setFont(new Font(FONT, 26));
+            entryBox.add(isbnLabel, 0, 2);
+
+            Label priceLabel = new Label(String.valueOf(result.getPrice()));
+            priceLabel.setFont(new Font(FONT, 26));
+            entryBox.add(priceLabel, 0, 3);
+
+            image.setOnMouseClicked(mouseEvent -> {
+                SceneSwitcher switcher = new SceneSwitcher();
+                try {
+                    List<Object> params = new ArrayList<>() ;
+                    params.add(result.getOwner());
+                    params.add(result.getIsbn());
+                    switcher.switcher(mouseEvent, "bookPage-view.fxml", params) ;
+                }
+                catch (IOException e){
+                    e.printStackTrace();
+                }
+            });
+
+            graphicalList.getChildren().add(entryBox) ;
+        }
+
+        return new AnchorPane(graphicalList) ;
+    }
 
     @Override
     public AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, ArrayList<TutorSearchResultBean> results)
@@ -93,7 +152,12 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
         pane.getColumnConstraints().add(columnConstraint) ;
     }
 
-
+    private void setRowConstraint(double percent, GridPane pane)
+    {
+        RowConstraints rowConstraint = new RowConstraints() ;
+        rowConstraint.setPercentHeight(percent) ;
+        pane.getRowConstraints().add(rowConstraint) ;
+    }
 
 
     @Override

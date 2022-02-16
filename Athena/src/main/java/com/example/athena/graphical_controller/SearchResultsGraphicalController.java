@@ -1,10 +1,16 @@
 package com.example.athena.graphical_controller;
 
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class SearchResultsGraphicalController
 {
-    public void scrollResults(VBox resultList, Number newVal)
+    public void scrollResultsVertical(VBox resultList, Number newVal)
+    {
+        resultList.setLayoutY(-newVal.doubleValue()) ;
+    }
+
+    public void scrollResultsHorizontal(HBox resultList, Number newVal)
     {
         resultList.setLayoutY(-newVal.doubleValue()) ;
     }
