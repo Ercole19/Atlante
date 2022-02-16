@@ -6,7 +6,10 @@ import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.sql.*;
+import java.sql.Blob;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

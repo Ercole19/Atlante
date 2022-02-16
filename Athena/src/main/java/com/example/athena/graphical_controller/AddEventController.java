@@ -4,6 +4,7 @@ import com.example.athena.entities.ActivityTypesEnum;
 import com.example.athena.entities.ReminderTypesEnum;
 import com.example.athena.entities.StringHoursConverter;
 import com.example.athena.exceptions.SendEmailException;
+import com.example.athena.use_case_controllers.AddEventUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,10 +12,8 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import com.example.athena.use_case_controllers.AddEventUCC;
-import java.io.IOException;
+
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -72,7 +71,7 @@ public class AddEventController implements Initializable , PostInitialize{
 
     private Stage stage;
 
-    public void clickOnAddEvent(ActionEvent event) throws IOException {
+    public void clickOnAddEvent(ActionEvent event){
 
         if (setReminderCheckBox.isSelected()) {
             switch (ReminderTypesEnum.valueOf(reminderType.getValue().toUpperCase().replace(" ", "_"))) {
@@ -123,7 +122,7 @@ public class AddEventController implements Initializable , PostInitialize{
 
     }
 
-    public void clickOnX(ActionEvent event) throws IOException {
+    public void clickOnX(ActionEvent event){
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }

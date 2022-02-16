@@ -1,9 +1,9 @@
 package com.example.athena.graphical_controller;
 
 import com.example.athena.entities.PlottingOptionsEnum;
+import com.example.athena.entities.TimePeriodsEnum;
 import com.example.athena.exceptions.PlottingException;
 import com.example.athena.use_case_controllers.GeneratePlotsUseCaseController;
-import com.example.athena.entities.TimePeriodsEnum;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

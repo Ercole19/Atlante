@@ -1,15 +1,14 @@
 package com.example.athena.graphical_controller;
 
 import com.example.athena.entities.User;
-import com.example.athena.entities.UserDao;
 import com.example.athena.use_case_controllers.LoginUseCaseControlller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+
 import java.io.IOException;
-import java.util.ArrayList;
 
 
 public class LoginPageController {

@@ -1,17 +1,14 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.view.TutorPageView;
 import com.example.athena.view.scene_decorators.TutorPageButtonAdder;
 import com.example.athena.view.scene_decorators.TutorPageComponent;
-import com.example.athena.view.TutorPageView;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import static javafx.fxml.FXMLLoader.load;
 
 public class TutorMainPageController {
 

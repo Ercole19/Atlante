@@ -1,6 +1,7 @@
 package com.example.athena.boundaries;
 
 import com.example.athena.exceptions.ISBNException;
+import org.apache.log4j.Logger;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,7 +10,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
-import org.apache.log4j.Logger;
 
 
 public class IsbnCheckBoundary {

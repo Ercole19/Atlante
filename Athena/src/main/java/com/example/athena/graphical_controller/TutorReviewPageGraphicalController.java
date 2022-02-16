@@ -1,10 +1,10 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.entities.StringHoursConverter;
+import com.example.athena.entities.SubjectLabels;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.TutorReviewException;
 import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
-import com.example.athena.entities.StringHoursConverter;
-import com.example.athena.entities.SubjectLabels;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-
-import static javafx.fxml.FXMLLoader.load;
 
 public class TutorReviewPageGraphicalController implements Initializable
 {

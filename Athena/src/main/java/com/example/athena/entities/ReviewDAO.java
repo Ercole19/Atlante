@@ -2,7 +2,7 @@ package com.example.athena.entities;
 
 import com.example.athena.exceptions.TutorReviewException;
 
-import java.sql.* ;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 

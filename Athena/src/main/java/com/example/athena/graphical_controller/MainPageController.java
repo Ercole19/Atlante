@@ -4,8 +4,6 @@ import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
-import static javafx.fxml.FXMLLoader.load;
-
 public class MainPageController {
 
 

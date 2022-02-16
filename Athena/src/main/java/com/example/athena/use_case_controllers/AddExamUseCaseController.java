@@ -1,17 +1,10 @@
 package com.example.athena.use_case_controllers;
 
 import com.example.athena.entities.EntityExam;
-import com.example.athena.graphical_controller.ExamEntityBean;
 import com.example.athena.entities.ExamDao;
-import javafx.event.ActionEvent;
-import javafx.scene.Node;
+import com.example.athena.graphical_controller.ExamEntityBean;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-
-import static javafx.fxml.FXMLLoader.load;
 
 public class AddExamUseCaseController {
 
