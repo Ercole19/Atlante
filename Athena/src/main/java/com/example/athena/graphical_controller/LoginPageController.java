@@ -72,4 +72,9 @@ public class LoginPageController {
         SceneSwitcher switcher = new SceneSwitcher();
         switcher.switcher(event, "MainPageStudents.fxml");
     }
+
+    public void fillFast(ActionEvent event) {
+        emailField.setText("alba@student.it");
+        passField.setText("tramonto");
+    }
 }

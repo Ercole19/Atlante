@@ -1,6 +1,7 @@
 package com.example.athena.graphical_controller;
 
 
+import com.example.athena.entities.User;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.use_case_controllers.SellBooksUseCaseController;
 import javafx.collections.FXCollections;
@@ -22,6 +23,7 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class SellController implements Initializable {
@@ -93,6 +95,7 @@ public class SellController implements Initializable {
 
                         Text cancella = null;
                         Button editButton = null;
+                        Button goToBookPage = null;
 
                         HBox managebtn = null;
                         if (empty) {
@@ -104,6 +107,7 @@ public class SellController implements Initializable {
 
 
                             editButton = new Button("Edit ");
+                            goToBookPage = new Button("Book Page");
 
                             editButton.setOnAction(event -> {
 
@@ -124,6 +128,22 @@ public class SellController implements Initializable {
                             });
 
 
+                            goToBookPage.setOnAction(event -> {
+                                BookEntityBean book = bookTable.getSelectionModel().getSelectedItem();
+                                List<Object> params = new ArrayList<>();
+                                book.setOwner(User.getUser().getEmail());
+                                params.add(book.getOwner());
+                                params.add(book.getIsbn());
+                                params.add(true) ; //I use this in bookpagecontroller postinitialize, if is true then owner is going to his book page and i disable report and buy butttons
+                                SceneSwitcher switcher = new SceneSwitcher();
+                                try {
+                                    switcher.switcher(event, "Book-Page2.fxml", params);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            });
+
+
                             cancella.setOnMouseClicked(event -> {
                                 try {
 
@@ -138,7 +158,7 @@ public class SellController implements Initializable {
                             });
 
 
-                            managebtn = new HBox(editButton, cancella);
+                            managebtn = new HBox(editButton, cancella, goToBookPage);
                             managebtn.setStyle("-fx-alignment : center");
                             HBox.setMargin(editButton, new Insets(2, 2, 0, 3));
                             HBox.setMargin(cancella, new Insets(2, 3, 0, 2));

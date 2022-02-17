@@ -12,14 +12,16 @@ public class BookEntityBean {
     private final String price ;
     private final Boolean isNegotiable ;
     private final List<File> image;
+    private String owner;
 
-    public BookEntityBean(String title , String isbn, String price, Boolean isNegotiable, List<File> image)throws BookException{
+    public BookEntityBean(String title , String isbn, String price, Boolean isNegotiable, List<File> image, String owner)throws BookException{
         sintacticCheck(isbn, price);
         this.title = title;
         this.isbn = isbn;
         this.price = price;
         this.isNegotiable = isNegotiable;
         this.image = image;
+        this.owner = owner ;
     }
 
 
@@ -40,6 +42,14 @@ public class BookEntityBean {
     }
 
     public List<File> getImage() {return this.image; }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
 
     public void sintacticCheck(String isbn, String price) throws BookException
     {

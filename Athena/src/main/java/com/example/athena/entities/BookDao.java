@@ -1,6 +1,8 @@
 package com.example.athena.entities;
 
 
+import com.example.athena.exceptions.BookException;
+import com.example.athena.graphical_controller.BookEntityBean;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -11,7 +13,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class BookDao extends AbstractDAO {
 
@@ -21,13 +25,18 @@ public class BookDao extends AbstractDAO {
     private final String deleteImagesQuery = "delete from athena.book_images where isbn = ? and email = ? " ;
     private final String deleteBookQuery = "delete from athena.books where isbn_book = ? and email_user = ?" ;
     private final String getBookList = "SELECT title_book, isbn_book, price, negotiable from athena.books where email_user = ?";
-    private final String getBookImage = "SELECT image from athena.book_images where email = ? and isbn  = ?" ;
-    private final String findBooks = "SELECT title_book, isbn_book, price, email_user, image from athena.books join athena.book_images on books.email_user = book_images.email where title_book = ? or isbn_book = ? and count_image = 1;";
+    private final String getBookImage = "SELECT image from athena.book_images where email = ? and isbn  = ? order by count_image" ;
+    private final String bookInfosQuery = "SELECT title_book, price, negotiable from athena.books where email_user = ? and isbn_book = ? ";
+    private final String findBooks = "SELECT title_book, isbn_book, price, email_user, image " +
+                                            "from athena.books join athena.book_images on books.email_user = book_images.email and books.isbn_book = book_images.isbn " +
+                                                   "where (title_book = ? or isbn_book = ?) and count_image = 1 and email_user != ?";
     private final String email = User.getUser().getEmail();
+    private int i = 0 ;
 
 
     public void insertBook(String title , String isbn , Float price , boolean negotiability, List<File> images, int i) {
         String insertQuery = "insert into athena.books values (?,?,?,?,?)";
+
         try (PreparedStatement statement = this.getConnection().prepareStatement(insertQuery) ; PreparedStatement statement2 = this.getConnection().prepareStatement(insertImagesQuery)) {
 
 
@@ -93,8 +102,9 @@ public class BookDao extends AbstractDAO {
     public void updateBookInfos(String title ,String isbn, Float price , boolean negotiability , List<File> images) {
 
         try (PreparedStatement statement = this.getConnection().prepareStatement(updateQuery) ) {
-            int i = 0;
+            int i = 1;
             deleteBookImages(isbn);
+
 
             for (File file : images) {
                 insertImage(isbn, file,i);
@@ -163,9 +173,9 @@ public class BookDao extends AbstractDAO {
                 String isbn = set.getString(2) ;
                 Float price = set.getFloat(3) ;
                 boolean negotiable = set.getBoolean(4) ;
-                List<File> images = getBookImages(isbn);
+                List<File> images = getBookImages(isbn, email);
 
-                BookEntity book = new BookEntity(title, isbn, price, negotiable, images) ;
+                BookEntity book = new BookEntity(title, isbn, price, negotiable, images, email) ;
 
                 list.add(book);
 
@@ -180,9 +190,9 @@ public class BookDao extends AbstractDAO {
         return list ;
     }
 
-    private List<File> getBookImages(String isbn)
+    private List<File> getBookImages(String isbn, String email)
     {
-        int i = 0 ;
+
         List<File> list = new ArrayList<>();
         try(PreparedStatement statement = this.getConnection().prepareStatement(getBookImage))
         {
@@ -264,6 +274,7 @@ public List<BookEntity> findBooks(String book) {
         try (PreparedStatement statement = this.getConnection().prepareStatement(findBooks)){
             statement.setString(1, book);
             statement.setString(2, book);
+            statement.setString(3, email);
 
             ResultSet set = statement.executeQuery();
             while (set.next()) {
@@ -281,6 +292,31 @@ public List<BookEntity> findBooks(String book) {
             exc.printStackTrace();
         }
         return books;
-}
+
+
+    }
+    public BookEntity getBookInformations(String email, String isbn) {
+        BookEntity book = null ;
+        try (PreparedStatement statement = this.getConnection().prepareStatement(bookInfosQuery)){
+
+            statement.setString(1, email);
+            statement.setString(2, isbn);
+
+            List<File> images = getBookImages(isbn, email);
+
+            ResultSet set = statement.executeQuery() ;
+            while (set.next()) {
+
+                book = new BookEntity(set.getString(1), isbn, set.getFloat(2), set.getBoolean(3),images,email);
+
+            }
+        } catch (SQLException exc){
+            exc.printStackTrace();
+        }
+        return book ;
+    }
+
+
+
 
 }

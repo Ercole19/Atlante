@@ -76,7 +76,8 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
                     List<Object> params = new ArrayList<>() ;
                     params.add(result.getOwner());
                     params.add(result.getIsbn());
-                    switcher.switcher(mouseEvent, "bookPage-view.fxml", params) ;
+                    params.add(false); //I use this in bookpagecontroller postinitialize, if it is false then an external user is going to a book page so i display report and buy buttons
+                    switcher.switcher(mouseEvent, "Book-Page2.fxml", params) ;
                 }
                 catch (IOException e){
                     e.printStackTrace();

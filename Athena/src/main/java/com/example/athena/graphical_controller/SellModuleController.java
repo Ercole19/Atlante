@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.entities.User;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
 import com.example.athena.use_case_controllers.SellBooksUseCaseController;
@@ -64,7 +65,7 @@ public class SellModuleController implements Initializable , PostInitialize {
     public void onConfirmButtonClick(ActionEvent event)  {
 
         try {
-            BookEntityBean book = new BookEntityBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , files);
+            BookEntityBean book = new BookEntityBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , files, User.getUser().getEmail());
             SellBooksUseCaseController sellBooksUseCaseController = new SellBooksUseCaseController();
             sellBooksUseCaseController.putOnSale(book);
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
@@ -80,7 +81,7 @@ public class SellModuleController implements Initializable , PostInitialize {
     public void onUpdateButtonClick(ActionEvent event)
     {
         try {
-            BookEntityBean book = new BookEntityBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , files);
+            BookEntityBean book = new BookEntityBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , files, User.getUser().getEmail());
             SellBooksUseCaseController sellBooksUseCaseController = new SellBooksUseCaseController();
             sellBooksUseCaseController.updateProduct(book);
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
@@ -205,8 +206,8 @@ public class SellModuleController implements Initializable , PostInitialize {
             Image icon = new Image(new File("src/main/resources/assets/upload2.jpg").toURI().toString());
             this.bookImage.setImage(icon);
         } else {
-            bookImage.setImage(images.get(images.size() - 1));
-            shiftIndex(images.size() - 1);
+            bookImage.setImage(images.get(0));
+            shiftIndex(0);
         }
     }
 

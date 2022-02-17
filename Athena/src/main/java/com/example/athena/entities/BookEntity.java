@@ -17,14 +17,14 @@ public class BookEntity {
 
 
 
-    public BookEntity(String title , String isbn, float price, Boolean isNegotiable, List<File> image){
+    public BookEntity(String title , String isbn, float price, Boolean isNegotiable, List<File> image, String owner){
         this.title = title;
         this.isbn = isbn;
         this.price = price;
         this.isNegotiable = isNegotiable;
         this.image = image;
         this.file = null ;
-        this.owner = null ;
+        this.owner = owner ;
     }
 
     public BookEntity(String title, String isbn, float price, String email, File image) {

@@ -2,6 +2,7 @@ package com.example.athena.use_case_controllers;
 
 import com.example.athena.entities.BookDao;
 import com.example.athena.entities.BookEntity;
+import com.example.athena.entities.User;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
 import com.example.athena.graphical_controller.BookEntityBean;
@@ -19,19 +20,19 @@ public class SellBooksUseCaseController {
 
     public void putOnSale(BookEntityBean book) throws ISBNException {
         isbnCheck(book.getIsbn()) ;
-        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable() , book.getImage()) ;
+        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable() , book.getImage(), User.getUser().getEmail()) ;
         bookE.toDB() ;
     }
 
     public void updateProduct(BookEntityBean book) throws ISBNException
     {
-        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable() , book.getImage()) ;
+        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable() , book.getImage(), User.getUser().getEmail()) ;
         bookE.updateInDB() ;
     }
 
     public void deleteProduct(BookEntityBean book)
     {
-        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable() , book.getImage()) ;
+        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable() , book.getImage(), User.getUser().getEmail()) ;
         bookE.removeFromDB() ;
     }
 
@@ -42,7 +43,7 @@ public class SellBooksUseCaseController {
         bookList = bookDao.getList();
         for (BookEntity entity : bookList) {
 
-            BookEntityBean bean = new BookEntityBean(entity.getBookTitle(), entity.getIsbn(), String.valueOf(entity.getPrice()), entity.getNegotiable(), entity.getImage());
+            BookEntityBean bean = new BookEntityBean(entity.getBookTitle(), entity.getIsbn(), String.valueOf(entity.getPrice()), entity.getNegotiable(), entity.getImage(), User.getUser().getEmail());
             bookBeanList.add(bean);
 
         }
