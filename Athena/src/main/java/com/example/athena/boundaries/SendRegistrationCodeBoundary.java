@@ -6,7 +6,6 @@ import java.io.IOException;
 
 public class SendRegistrationCodeBoundary extends SocketBoundary
 {
-    private static final byte[] buff = new byte[128] ;
 
     private SendRegistrationCodeBoundary(){
 
@@ -21,22 +20,11 @@ public class SendRegistrationCodeBoundary extends SocketBoundary
 
         try
         {
-            bZero() ;
-            writeQuery(query) ;
-            Socket socket = new Socket("localhost", 4545);
-            OutputStream out = socket.getOutputStream();
-            out.write(buff) ;
-
-            bZero() ;
-            InputStream in = socket.getInputStream();
-            int readChars = in.read(buff, 0, 2) ;
-            if(readChars != 2) throw new SendEmailException("Unknown response from server") ;
-
-            if(buff[0] == 'F') throw new SendEmailException("Server error...") ;
-
-            in.close() ;
-            out.close() ;
-            socket.close() ;
+            String retMessage = sendMessageGetResponse(query, 4545) ;
+            if(!retMessage.equals("OK"))
+            {
+                throw new SendEmailException(retMessage) ;
+            }
         }catch (IOException e)
         {
             throw new SendEmailException("Error in connection to server: " + e.getMessage()) ;

@@ -16,7 +16,7 @@ public class SendReviewCodeEmailBoundary
     private static OutputStream out ;
     private static InputStream in ;
 
-    private static final byte[] buff = new byte[256] ;
+    private static final byte[] buff = new byte[128] ;
 
 
     private SendReviewCodeEmailBoundary(){

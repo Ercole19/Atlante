@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class SetReminderEmailBoundary
+public class SetReminderEmailBoundary extends SocketBoundary
 {
     private SetReminderEmailBoundary()
     {
@@ -29,22 +29,11 @@ public class SetReminderEmailBoundary
 
         try
         {
-            bZero() ;
-            writeQuery(query) ;
-            Socket socket = new Socket("localhost", 4545);
-            OutputStream out = socket.getOutputStream();
-            out.write(buff) ;
-
-            bZero() ;
-            InputStream in = socket.getInputStream();
-            int readChars = in.read(buff) ;
-            if(readChars != 2) throw new SendEmailException("Unknown response from server") ;
-
-            if(buff[0] == 'F') throw new SendEmailException("Server error...") ;
-
-            in.close() ;
-            out.close() ;
-            socket.close() ;
+            String retVal = sendMessageGetResponse(query, 4545) ;
+            if(!retVal.equals("OK"))
+            {
+                throw new SendEmailException(retVal) ;
+            }
         }
         catch(IOException e)
         {

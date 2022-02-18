@@ -26,6 +26,7 @@ public class BookDao extends AbstractDAO {
     private final String findBooks = "SELECT title_book, isbn_book, price, email_user, image " +
                                             "from athena.books join athena.book_images on books.email_user = book_images.email and books.isbn_book = book_images.isbn " +
                                                    "where (title_book = ? or isbn_book = ?) and count_image = 1 and email_user != ?";
+    private final String finalizeQuery = "CALL finalizePurchase(?,?,?,?,?)" ;
     private final String email = User.getUser().getEmail();
     private int i = 0 ;
 
