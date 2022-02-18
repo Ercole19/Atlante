@@ -8,8 +8,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.BookShopController">
-   <AnchorPane layoutX="210.0" layoutY="362.0" prefHeight="167.0" prefWidth="324.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="765.0" prefWidth="1280.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.BookShopController">
+   <AnchorPane layoutX="49.0" layoutY="358.0" prefHeight="167.0" prefWidth="324.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;">
       <Text fill="#ffd775" layoutX="57.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELL" wrappingWidth="238.13671875">
          <font>
             <Font size="90.0" />
@@ -42,7 +42,7 @@
    <ImageView fitHeight="75.0" fitWidth="139.0" layoutX="610.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="637.0" AnchorPane.leftAnchor="610.0" AnchorPane.rightAnchor="536.6666717529297" AnchorPane.topAnchor="88.0">
       <Image url="@../../../../assets/bookShopIcon.png" />
    </ImageView>
-   <AnchorPane layoutX="746.0" layoutY="362.0" prefHeight="169.0" prefWidth="324.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;">
+   <AnchorPane layoutX="468.0" layoutY="360.0" prefHeight="169.0" prefWidth="324.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;">
       <Text fill="#ffd775" layoutX="68.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUY" wrappingWidth="238.13671875">
          <font>
             <Font size="90.0" />
@@ -50,7 +50,7 @@
       </Text>
       <Button layoutX="4.0" layoutY="6.0" mnemonicParsing="false" onAction="#onBuyButtonClick" opacity="0.0" prefHeight="169.0" prefWidth="327.0" style="-fx-background-color: #2d8bba;" text="sellBtn" />
    </AnchorPane>
-   <AnchorPane layoutX="493.0" layoutY="578.0" prefHeight="167.0" prefWidth="324.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;">
+   <AnchorPane layoutX="867.0" layoutY="365.0" prefHeight="167.0" prefWidth="324.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;">
       <children>
          <Text fill="#ffd775" layoutX="57.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recent Purchases" wrappingWidth="238.13671875">
             <font>

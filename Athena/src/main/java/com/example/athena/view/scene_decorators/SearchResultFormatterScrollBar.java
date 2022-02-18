@@ -1,9 +1,6 @@
 package com.example.athena.view.scene_decorators;
 
-import com.example.athena.graphical_controller.BookSearchResultBean;
-import com.example.athena.graphical_controller.EventBean;
-import com.example.athena.graphical_controller.SearchResultsGraphicalController;
-import com.example.athena.graphical_controller.TutorSearchResultBean;
+import com.example.athena.graphical_controller.*;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.AnchorPane;
@@ -38,6 +35,12 @@ public class SearchResultFormatterScrollBar extends  SearchResultFormatterDecora
     {
         AnchorPane resultPane = super.buildBookSearchResultsScene(containerWidth, containerHeight -20, results) ;
         return applyHorizontalScrollBar(resultPane, containerWidth, containerHeight, results.size()*250.0) ;
+    }
+
+    @Override
+    public AnchorPane buildRecentPurchaseResultScene(double containerWidth, double containerHeight, List<BookEntityBean> results) {
+        AnchorPane resultPane = super.buildRecentPurchaseResultScene(containerWidth -20, containerHeight, results) ;
+        return applyVerticalScrollBar(resultPane, containerWidth, containerHeight, results.size()*100.0) ;
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.athena.view.scene_decorators;
 
+import com.example.athena.graphical_controller.BookEntityBean;
 import com.example.athena.graphical_controller.BookSearchResultBean;
 import com.example.athena.graphical_controller.EventBean;
 import com.example.athena.graphical_controller.TutorSearchResultBean;
@@ -13,6 +14,7 @@ public abstract class SearchResultFormatterComponent
     public abstract AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, ArrayList<EventBean> results) ;
     public abstract AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, ArrayList<TutorSearchResultBean> results);
     public abstract AnchorPane buildBookSearchResultsScene(double containerWidth, double containerHeight, List<BookSearchResultBean> results);
+    public abstract AnchorPane buildRecentPurchaseResultScene(double containerWidth, double containerHeight, List<BookEntityBean> results);
 }
 
 

@@ -27,6 +27,18 @@ public class BookEntityBean {
         this.owner = owner ;
     }
 
+
+    public BookEntityBean (String owner, String title, String isbn, Float price) {
+        this.owner = owner;
+        this.title= title;
+        this.isbn= isbn;
+        this.price = String.valueOf(price);
+        this.isNegotiable = null;
+        this.image =null;
+
+    }
+
+
     public List<Image> getImageList(){
         List<Image> imageList = new ArrayList<>();
         for (File bookImage : this.image){

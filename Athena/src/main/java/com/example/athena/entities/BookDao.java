@@ -27,6 +27,7 @@ public class BookDao extends AbstractDAO {
                                             "from athena.books join athena.book_images on books.email_user = book_images.email and books.isbn_book = book_images.isbn " +
                                                    "where (title_book = ? or isbn_book = ?) and count_image = 1 and email_user != ?";
     private final String finalizeQuery = "CALL finalizePurchase(?,?,?,?,?)" ;
+    private String getResultsPurchase = "SELECT vendorEmail, bookTitle, bookIsbn, bookPrice from athena.recent_purchases where purchaserEmail = ?";
     private final String email = User.getUser().getEmail();
     private int i = 0 ;
 
@@ -328,6 +329,27 @@ public List<BookEntity> findBooks(String book) {
         }catch (SQLException exc) {
             exc.printStackTrace();
         }
+    }
+
+    public List<BookEntity> getBookResults(String email) {
+        List<BookEntity> books = new ArrayList<>();
+        try(PreparedStatement statement = this.getConnection().prepareStatement(getResultsPurchase)) {
+
+            statement.setString(1, email);
+
+            ResultSet set = statement.executeQuery();
+
+            while (set.next()) {
+                BookEntity book = new BookEntity(set.getString(1), set.getString(2), set.getString(3), set.getFloat(4));
+                books.add(book);
+            }
+
+
+
+        }catch (SQLException exc) {
+            exc.printStackTrace();
+        }
+        return books;
     }
 
 

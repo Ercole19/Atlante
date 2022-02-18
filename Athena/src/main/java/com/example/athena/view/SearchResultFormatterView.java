@@ -1,10 +1,7 @@
 package com.example.athena.view;
 
 import com.example.athena.entities.EventDao;
-import com.example.athena.graphical_controller.BookSearchResultBean;
-import com.example.athena.graphical_controller.EventBean;
-import com.example.athena.graphical_controller.SceneSwitcher;
-import com.example.athena.graphical_controller.TutorSearchResultBean;
+import com.example.athena.graphical_controller.*;
 import com.example.athena.view.scene_decorators.SearchResultFormatterComponent;
 import com.jcraft.jsch.IO;
 import javafx.event.ActionEvent;
@@ -89,6 +86,58 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
 
         return new AnchorPane(graphicalList) ;
     }
+
+    @Override
+    public AnchorPane buildRecentPurchaseResultScene(double containerWidth, double containerHeight, List<BookEntityBean> results) {
+        double sceneHeight = (results.size())*100.0f ;
+
+        VBox graphicalList = new VBox() ;
+        graphicalList.setPrefSize(containerWidth, sceneHeight) ;
+        graphicalList.setId("resultList") ;
+
+        for(BookEntityBean result: results) {
+            GridPane entryBox = new GridPane();
+            entryBox.setPrefSize(containerWidth, 100);
+            entryBox.setStyle("-fx-background-color: #faeeae");
+            entryBox.setStyle("-fx-border-color: #000000");
+
+
+            entryBox.getRowConstraints().add(new RowConstraints(100));
+            setColumnConstraint(25, entryBox);
+            setColumnConstraint(25, entryBox);
+            setColumnConstraint(25, entryBox);
+            setColumnConstraint(25, entryBox);
+
+
+            Label ownerLabel = new Label(result.getOwner());
+            ownerLabel.setFont(new Font(FONT, 26));
+            entryBox.add(ownerLabel, 0, 0);
+
+            Label titleLabel = new Label(result.getBookTitle());
+            titleLabel.setFont(new Font(FONT, 26));
+            entryBox.add(titleLabel, 1, 0);
+
+            Label isbnLabel = new Label(result.getIsbn());
+            isbnLabel.setFont(new Font(FONT, 26));
+            entryBox.add(isbnLabel, 2, 0);
+
+            Label priceLabel = new Label(result.getPrice());
+            priceLabel.setFont(new Font(FONT, 26));
+            entryBox.add(priceLabel, 3, 0);
+
+            Button visitPage = new Button("Report");
+            entryBox.add(visitPage, 4, 0);
+
+            visitPage.setOnAction(actionEvent -> {
+                System.out.println("Reported");
+            });
+
+            graphicalList.getChildren().add(entryBox);
+        }
+        return new AnchorPane(graphicalList) ;
+    }
+
+
 
     @Override
     public AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, ArrayList<TutorSearchResultBean> results)

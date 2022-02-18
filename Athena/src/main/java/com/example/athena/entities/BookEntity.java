@@ -38,6 +38,17 @@ public class BookEntity {
 
     }
 
+    public BookEntity (String owner, String title, String isbn, Float price) {
+        this.owner = owner;
+        this.title  = title;
+        this.isbn = isbn ;
+        this.price = price;
+        this.isNegotiable = null;
+        this.image = null;
+        this.file = null;
+
+    }
+
 
 
 
