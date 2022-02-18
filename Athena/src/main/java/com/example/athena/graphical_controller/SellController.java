@@ -46,7 +46,7 @@ public class SellController implements Initializable {
     private TableColumn<BookEntityBean, Void> colManage ;
 
 
-    private ObservableList<BookEntityBean> bookList  = FXCollections.observableArrayList() ;
+    private final ObservableList<BookEntityBean> bookList  = FXCollections.observableArrayList() ;
 
     @FXML
     protected void onBackButtonClick(ActionEvent event) throws IOException {
@@ -66,13 +66,6 @@ public class SellController implements Initializable {
         bookTable.setItems(controller.getBookList()) ;
     }
 
-
-
-
-
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colName.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -81,95 +74,91 @@ public class SellController implements Initializable {
         colManage.setCellValueFactory(new PropertyValueFactory<>("Manage"));
         javafx.util.Callback<TableColumn<BookEntityBean, Void>, TableCell<BookEntityBean, Void>> cellFactory = new javafx.util.Callback<>() {
 
-
-
             @Override
             public TableCell<BookEntityBean, Void> call(TableColumn<BookEntityBean, Void> BookEntityBeanVoidTableColumn) {
-                        return new TableCell<BookEntityBean, Void>() {
+                        return new TableCell<>() {
 
 
+                            @Override
+                            public void updateItem(Void item, boolean empty) {
+                                super.updateItem(item, empty);
 
-                    @Override
-                    public void updateItem (Void item , boolean empty ) {
-                        super.updateItem(item, empty);
+                                Text cancella;
+                                Button editButton;
+                                Button goToBookPage;
 
-                        Text cancella = null;
-                        Button editButton = null;
-                        Button goToBookPage = null;
-
-                        HBox managebtn = null;
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            cancella = new Text("-");
-                            cancella.setFont(Font.font("Arial Rounded MT Bold", 40));
-                            cancella.setFill(Color.RED);
-
-
-                            editButton = new Button("Edit ");
-                            goToBookPage = new Button("Book Page");
-
-                            editButton.setOnAction(event -> {
-
-                                BookEntityBean book = bookTable.getSelectionModel().getSelectedItem();
-
-                                    SceneSwitcher switcher = new SceneSwitcher();
-                                    ArrayList<Object> params = new ArrayList<>();
-                                    params.add(book);
-                                    try {
-                                        switcher.popup("sellBookModule.fxml", "Edit your book", params);
-                                        refreshTable();
-                                    } catch (IOException | BookException e) {
-                                        e.printStackTrace();
-                                    }
+                                HBox managebtn;
+                                if (empty) {
+                                    setGraphic(null);
+                                } else {
+                                    cancella = new Text("-");
+                                    cancella.setFont(Font.font("Arial Rounded MT Bold", 40));
+                                    cancella.setFill(Color.RED);
 
 
+                                    editButton = new Button("Edit ");
+                                    goToBookPage = new Button("Book Page");
 
-                            });
+                                    editButton.setOnAction(event -> {
+
+                                        BookEntityBean book = bookTable.getSelectionModel().getSelectedItem();
+
+                                        SceneSwitcher switcher = new SceneSwitcher();
+                                        ArrayList<Object> params = new ArrayList<>();
+                                        params.add(book);
+                                        try {
+                                            switcher.popup("sellBookModule.fxml", "Edit your book", params);
+                                            refreshTable();
+                                        } catch (IOException | BookException e) {
+                                            e.printStackTrace();
+                                        }
 
 
-                            goToBookPage.setOnAction(event -> {
-                                BookEntityBean book = bookTable.getSelectionModel().getSelectedItem();
-                                List<Object> params = new ArrayList<>();
-                                book.setOwner(User.getUser().getEmail());
-                                params.add(book.getOwner());
-                                params.add(book.getIsbn());
-                                params.add(true) ; //I use this in bookpagecontroller postinitialize, if is true then owner is going to his book page and i disable report and buy butttons
-                                SceneSwitcher switcher = new SceneSwitcher();
-                                try {
-                                    switcher.switcher(event, "Book-Page2.fxml", params);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
+                                    });
+
+
+                                    goToBookPage.setOnAction(event -> {
+                                        BookEntityBean book = bookTable.getSelectionModel().getSelectedItem();
+                                        List<Object> params = new ArrayList<>();
+                                        book.setOwner(User.getUser().getEmail());
+                                        params.add(book.getOwner());
+                                        params.add(book.getIsbn());
+                                        params.add(true); //I use this in bookpagecontroller postinitialize, if is true then owner is going to his book page and i disable report and buy butttons
+                                        SceneSwitcher switcher = new SceneSwitcher();
+                                        try {
+                                            switcher.switcher(event, "Book-Page2.fxml", params);
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    });
+
+
+                                    cancella.setOnMouseClicked(event -> {
+                                        try {
+
+                                            BookEntityBean book = bookTable.getSelectionModel().getSelectedItem();
+                                            SellBooksUseCaseController controller = new SellBooksUseCaseController();
+                                            controller.deleteProduct(book);
+                                            refreshTable();
+
+                                        } catch (Exception exc) {
+                                            exc.getCause();
+                                        }
+                                    });
+
+
+                                    managebtn = new HBox(editButton, cancella, goToBookPage);
+                                    managebtn.setStyle("-fx-alignment : center");
+                                    HBox.setMargin(editButton, new Insets(2, 2, 0, 3));
+                                    HBox.setMargin(cancella, new Insets(2, 3, 0, 2));
+                                    setGraphic(managebtn);
+
                                 }
-                            });
 
 
-                            cancella.setOnMouseClicked(event -> {
-                                try {
+                            }
 
-                                    BookEntityBean book = bookTable.getSelectionModel().getSelectedItem();
-                                    SellBooksUseCaseController controller = new SellBooksUseCaseController();
-                                    controller.deleteProduct(book);
-                                    refreshTable();
-
-                                } catch (Exception exc) {
-                                    exc.getCause();
-                                }
-                            });
-
-
-                            managebtn = new HBox(editButton, cancella, goToBookPage);
-                            managebtn.setStyle("-fx-alignment : center");
-                            HBox.setMargin(editButton, new Insets(2, 2, 0, 3));
-                            HBox.setMargin(cancella, new Insets(2, 3, 0, 2));
-                            setGraphic(managebtn);
-
-                        }
-
-
-                    }
-
-            };
+                        };
         }};
         colManage.setCellFactory(cellFactory) ;
 
