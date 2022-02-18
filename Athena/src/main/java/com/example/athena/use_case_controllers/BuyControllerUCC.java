@@ -1,20 +1,21 @@
 package com.example.athena.use_case_controllers;
 
+import com.example.athena.boundaries.PurchaseBoundary;
 import com.example.athena.entities.BookDao;
 import com.example.athena.entities.BookEntity;
 import com.example.athena.entities.User;
 import com.example.athena.graphical_controller.BookEntityBean;
 import com.example.athena.graphical_controller.BookSearchResultBean;
-import com.example.athena.graphical_controller.TutorSearchResultBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BuyControllerUCC {
 
+    static final private BookDao dao = new BookDao();
+
     public List<BookSearchResultBean> formatSearchResults(String query) {
 
-        BookDao dao = new BookDao();
         List<BookEntity> bookinfos = dao.findBooks(query);
         ArrayList<BookSearchResultBean> result = new ArrayList<>();
         for (BookEntity entity : bookinfos) {

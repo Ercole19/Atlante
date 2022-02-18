@@ -39,19 +39,14 @@ public class SellModuleController extends shiftImageController implements Initia
     private CheckBox bookNegotiability ;
     @FXML
     private ImageView bookImage;
-
     @FXML
     private Button leftArrow ;
-
     @FXML
     private ImageView leftArrowImage ;
-
     @FXML
     private Button rightArrow;
-
     @FXML
     private ImageView rightArrowImage ;
-
     @FXML
     private Button confirmButton ;
 

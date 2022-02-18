@@ -1,8 +1,6 @@
 package com.example.athena.entities;
 
 
-import com.example.athena.exceptions.BookException;
-import com.example.athena.graphical_controller.BookEntityBean;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -13,9 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 public class BookDao extends AbstractDAO {
 
@@ -308,9 +304,7 @@ public List<BookEntity> findBooks(String book) {
 
             ResultSet set = statement.executeQuery() ;
             while (set.next()) {
-
                 book = new BookEntity(set.getString(1), isbn, set.getFloat(2), set.getBoolean(3),images,email);
-
             }
         } catch (SQLException exc){
             exc.printStackTrace();

@@ -1,6 +1,7 @@
 package com.example.athena.graphical_controller;
 
 import com.example.athena.exceptions.BookException;
+import javafx.scene.image.Image;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,6 +25,14 @@ public class BookEntityBean {
         this.isNegotiable = isNegotiable;
         this.image = image;
         this.owner = owner ;
+    }
+
+    public List<Image> getImageList(){
+        List<Image> imageList = new ArrayList<>();
+        for (File bookImage : this.image){
+            imageList.add(new Image(new File(bookImage.getAbsolutePath()).toURI().toString()));
+        }
+        return imageList;
     }
 
 

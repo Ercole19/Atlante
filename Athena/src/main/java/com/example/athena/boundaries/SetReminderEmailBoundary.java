@@ -5,10 +5,6 @@ import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.graphical_controller.EventBean;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -19,8 +15,6 @@ public class SetReminderEmailBoundary
     {
 
     }
-
-    private static final byte[] buff = new byte[128] ;
 
     public static void sendToServer(EventBean eventInfo) throws SendEmailException
     {
@@ -55,26 +49,6 @@ public class SetReminderEmailBoundary
         catch(IOException e)
         {
             throw new SendEmailException("Error in connection to server: " + e.getMessage()) ;
-        }
-    }
-
-    private static void bZero()
-    {
-        for(int i = 0; i < 128; i++)
-        {
-            buff[i] = 0 ;
-        }
-    }
-
-    private static void writeQuery(String query) throws SendEmailException
-    {
-        if(query.length() > 128) throw new SendEmailException("Error, the message is too long") ;
-
-        int i = 0;
-        for(byte b : query.getBytes(StandardCharsets.UTF_8))
-        {
-            buff[i] = b ;
-            i++ ;
         }
     }
 }

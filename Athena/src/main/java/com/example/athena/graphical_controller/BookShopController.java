@@ -32,4 +32,8 @@ public class BookShopController {
     public void onSellButtonClick(ActionEvent event) throws IOException {
         switcher.switcher(event, "sell-view.fxml");
     }
+
+    public void onRecentPurchasesBtnClick(ActionEvent event)throws IOException{
+        switcher.switcher(event, "recentPurchasesScreen.fxml");
+    }
 }

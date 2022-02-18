@@ -13,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,8 +69,6 @@ public class BookPageController extends shiftImageController implements PostInit
 
         populatePage(book);
 
-
-
         if(!((boolean) params.get(2))) {
             buyButton.setVisible(true);
             buyButton.setDisable(false);
@@ -110,7 +107,8 @@ public class BookPageController extends shiftImageController implements PostInit
     }
 
     public void onBuyBookButtonClick(){
-        FakePaymentSystem.main(new String[]{});
+        BuyControllerUCC controller = new BuyControllerUCC();
+        controller.purchase(this.book);
     }
 
 }
