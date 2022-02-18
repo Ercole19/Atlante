@@ -27,7 +27,8 @@ import java.util.ResourceBundle;
 
 
 
-public class SellModuleController implements Initializable , PostInitialize {
+public class SellModuleController extends shiftImageController implements Initializable , PostInitialize {
+
     @FXML
     private TextField bookTitle ;
     @FXML
@@ -54,11 +55,6 @@ public class SellModuleController implements Initializable , PostInitialize {
     @FXML
     private Button confirmButton ;
 
-    @FXML
-    private Button deleteButton;
-
-
-    private List<Image> images ;
     private int index ;
     private List<File> files;
 
@@ -108,81 +104,27 @@ public class SellModuleController implements Initializable , PostInitialize {
         fc.setFileFilter(filter);
         int returnVal = fc.showOpenDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            this.images.add(new Image(String.valueOf(fc.getSelectedFile().toURI()))) ;
+            super.images.add(new Image(String.valueOf(fc.getSelectedFile().toURI()))) ;
             this.files.add(fc.getSelectedFile());
-            this.bookImage.setImage(images.get(images.size() - 1));
-            shiftIndex(images.size() - 1);
+            this.bookImage.setImage(super.images.get(images.size() - 1));
+            super.shiftIndex(images.size() - 1);
         }
 
     }
 
-    public void onLeftArrowClick()
-    {
-        shiftIndex(--index) ;
-        this.bookImage.setImage(this.images.get(this.index)) ;
-    }
-
-    public void onRightArrowClick()
-    {
-        shiftIndex(++index) ;
-        this.bookImage.setImage(this.images.get(index)) ;
-    }
-
-    private void disable(Node node)
-    {
-        node.setDisable(true) ;
-        node.setVisible(false) ;
-    }
-
-    private void enable(Node node)
-    {
-        node.setVisible(true) ;
-        node.setDisable(false) ;
-    }
-
-    private void shiftIndex(int position)
-    {
-        if(position < 0) {position = 0 ;}
-        else{
-            if(position > this.images.size() -1) position = this.images.size() -1 ;
-        }
-        this.index = position ;
-        checkIndex() ;
-    }
-
-    private void checkIndex()
-    {
-        if(images.size() == 0 || this.index == images.size() -1)
-        {
-            disable(rightArrow) ;
-            disable(rightArrowImage) ;
-        }
-        else
-        {
-            enable(rightArrow) ;
-            enable(rightArrowImage) ;
-        }
-
-        if(this.index == 0)
-        {
-            disable(leftArrow) ;
-            disable(leftArrowImage) ;
-        }
-        else
-        {
-            enable(leftArrow);
-            enable(leftArrowImage);
-        }
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.files = new ArrayList<>() ;
-        this.images = new ArrayList<>() ;
-        disable(leftArrow) ;
-        disable(leftArrowImage) ;
-        disable(rightArrowImage) ;
-        disable(rightArrow) ;
+        super.images = new ArrayList<>() ;
+
+        super.bookImage = this.bookImage;
+        super.leftArrow = leftArrow;
+        super.rightArrow = rightArrow ;
+        super.leftArrowImage = leftArrowImage ;
+        super.rightArrowImage = rightArrowImage ;
+
+        super.shiftIndex(-1);
     }
 
     @Override
@@ -199,7 +141,7 @@ public class SellModuleController implements Initializable , PostInitialize {
         confirmButton.setOnAction(this::onUpdateButtonClick);
 
         for (File file : bean.getImage()) {
-            this.images.add(new Image(String.valueOf(file.toURI())));
+            super.images.add(new Image(String.valueOf(file.toURI())));
             files.add(file);
         }
         if (images.isEmpty()) {
@@ -207,7 +149,7 @@ public class SellModuleController implements Initializable , PostInitialize {
             this.bookImage.setImage(icon);
         } else {
             bookImage.setImage(images.get(0));
-            shiftIndex(0);
+            super.shiftIndex(0);
         }
     }
 
@@ -219,10 +161,10 @@ public class SellModuleController implements Initializable , PostInitialize {
         images.remove(index);
         shiftIndex(--index);
         if ((index == 0) && (images.size()>0) ){
-            this.bookImage.setImage(this.images.get(index)) ;
+            this.bookImage.setImage(super.images.get(index)) ;
         }
         else if(index != 0 && images.size()>0 && index<images.size()){
-            this.bookImage.setImage(this.images.get(index));
+            this.bookImage.setImage(super.images.get(index));
         }
         else {
             Image icon = new Image(new File("src/main/resources/assets/upload2.jpg").toURI().toString());

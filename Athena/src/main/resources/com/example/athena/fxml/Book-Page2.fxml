@@ -28,7 +28,7 @@
    </AnchorPane>
    <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#014a61" height="641.0" layoutX="278.0" layoutY="79.0" stroke="BLACK" strokeType="INSIDE" width="1018.0" />
    <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#ffd775" height="85.0" layoutX="343.0" layoutY="92.0" stroke="BLACK" strokeType="INSIDE" width="703.0" />
-   <Label fx:id="titolo" layoutX="377.0" layoutY="111.0" prefHeight="46.0" prefWidth="223.0" text="Nome" textFill="#002730">
+   <Label fx:id="nome" layoutX="377.0" layoutY="111.0" prefHeight="46.0" prefWidth="223.0" text="Nome" textFill="#002730">
       <font>
          <Font name="Bookman Old Style" size="35.0" />
       </font>
@@ -38,7 +38,7 @@
          <Image url="@../../../../assets/backBtn.png" />
       </image>
    </ImageView>
-   <Button fx:id="backBtn" layoutX="24.0" layoutY="84.0" mnemonicParsing="false" onAction="#onBackBtnClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+   <Button fx:id="backBtn" layoutX="24.0" layoutY="84.0" mnemonicParsing="false" onAction="#onBackBtnClickSeller" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor>
@@ -51,7 +51,7 @@
          <Cursor fx:constant="HAND" />
       </cursor>
    </Button>
-   <Label fx:id="ISBN" layoutX="583.0" layoutY="111.0" prefHeight="46.0" prefWidth="223.0" text="Cognome" textFill="#002730">
+   <Label fx:id="cognome" layoutX="583.0" layoutY="111.0" prefHeight="46.0" prefWidth="223.0" text="Cognome" textFill="#002730">
       <font>
          <Font name="Bookman Old Style" size="35.0" />
       </font>
@@ -76,36 +76,28 @@
          <Font size="30.0" />
       </font>
    </Text>
-   <Button fx:id="reportButton" disable="true" layoutX="43.0" layoutY="594.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="198.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Report Seller" textFill="WHITE" visible="false">
-      <font>
-         <Font name="Bookman Old Style" size="20.0" />
-      </font>
-      <cursor>
-         <Cursor fx:constant="HAND" />
-      </cursor>
-   </Button>
    <ImageView fx:id="image" fitHeight="241.0" fitWidth="314.0" layoutX="793.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true" />
    <Text fill="WHITE" layoutX="848.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book Images:" textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="711.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="LArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="711.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../../../../assets/backBtn.png" />
       </image>
    </ImageView>
-   <Button layoutX="711.0" layoutY="348.0" mnemonicParsing="false" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+   <Button fx:id="LArrow" layoutX="711.0" layoutY="348.0" mnemonicParsing="false" onAction="#onLeftArrowClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor>
    </Button>
-   <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="1105.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true" rotate="178.3">
+   <ImageView fx:id="RArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="1105.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true" rotate="178.3">
       <image>
          <Image url="@../../../../assets/backBtn.png" />
       </image>
    </ImageView>
-   <Button layoutX="1105.0" layoutY="348.0" mnemonicParsing="false" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+   <Button fx:id="RArrow" layoutX="1105.0" layoutY="348.0" mnemonicParsing="false" onAction="#onRightArrowClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor>

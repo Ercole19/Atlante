@@ -53,8 +53,9 @@ public class SellController implements Initializable {
         switcher.switcher(event, "bookshop-choose-view.fxml");
     }
 
-    public void onSellBtnClick() throws IOException{
+    public void onSellBtnClick() throws IOException, BookException {
         switcher.popup("sellBookModule.fxml", "Sell a book") ;
+        refreshTable();
     }
 
 

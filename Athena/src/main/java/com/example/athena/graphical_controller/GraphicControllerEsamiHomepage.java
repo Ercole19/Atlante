@@ -55,6 +55,7 @@ public class GraphicControllerEsamiHomepage implements Initializable {
 
         SceneSwitcher switcher = new SceneSwitcher() ;
         switcher.popup("Aggiungi_Esame_View.fxml" , "Add exam") ;
+        refreshTable();
 
     }
     public void initMostraMedia () throws IOException {

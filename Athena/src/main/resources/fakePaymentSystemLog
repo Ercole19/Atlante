@@ -1,0 +1,4 @@
+feb 18, 2022 5:59:00 PM com.example.servers.FakePaymentSystem run
+INFORMAZIONI: Type 'quit' to quit
+feb 18, 2022 6:00:38 PM com.example.servers.FakePaymentSystem clientAcceptance
+INFORMAZIONI: Payment successful for /127.0.0.1

@@ -148,6 +148,8 @@ public class BookDao extends AbstractDAO {
     {
         try(PreparedStatement statement = this.getConnection().prepareStatement(deleteBookQuery))
         {
+            deleteBookImages(isbn);
+
             statement.setString(1, isbn) ;
             statement.setString(2, email) ;
 
@@ -314,6 +316,23 @@ public List<BookEntity> findBooks(String book) {
             exc.printStackTrace();
         }
         return book ;
+    }
+
+    public void finalizePurchase(String title, String isbn, Float price, String emailBuyer, String emailVendor)
+    {
+        try(PreparedStatement statement = this.getConnection().prepareStatement(finalizeQuery)) {
+
+            statement.setString(1, title);
+            statement.setString(2, isbn);
+            statement.setFloat(3, price);
+            statement.setString(4, emailBuyer);
+            statement.setString(5, emailVendor);
+
+            statement.execute();
+
+        }catch (SQLException exc) {
+            exc.printStackTrace();
+        }
     }
 
 

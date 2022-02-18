@@ -3,6 +3,8 @@ package com.example.athena.graphical_controller;
 import com.example.athena.exceptions.BookException;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookEntityBean {
