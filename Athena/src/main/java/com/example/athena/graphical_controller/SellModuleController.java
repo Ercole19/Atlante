@@ -152,14 +152,14 @@ public class SellModuleController extends shiftImageController implements Initia
 
 
     public void deleteImageOnScreen (){
-        files.remove(index);
-        images.remove(index);
-        shiftIndex(--index);
-        if ((index == 0) && (images.size()>0) ){
-            this.bookImage.setImage(super.images.get(index)) ;
+        this.files.remove(super.index);
+        super.images.remove(super.index);
+        super.shiftIndex(--super.index);
+        if ((super.index == 0) && (super.images.size()>0) ){
+            this.bookImage.setImage(super.images.get(super.index)) ;
         }
-        else if(index != 0 && images.size()>0 && index<images.size()){
-            this.bookImage.setImage(super.images.get(index));
+        else if(super.index != 0 && super.images.size()>0 && super.index<super.images.size()){
+            this.bookImage.setImage(super.images.get(super.index));
         }
         else {
             Image icon = new Image(new File("src/main/resources/assets/upload2.jpg").toURI().toString());

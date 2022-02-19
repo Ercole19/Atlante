@@ -3,6 +3,8 @@ package com.example.athena.entities;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -28,6 +30,7 @@ public class BookDao extends AbstractDAO {
                                                    "where (title_book = ? or isbn_book = ?) and count_image = 1 and email_user != ?";
     private final String finalizeQuery = "CALL finalizePurchase(?,?,?,?,?)" ;
     private String getResultsPurchase = "SELECT vendorEmail, bookTitle, bookIsbn, bookPrice from athena.recent_purchases where purchaserEmail = ?";
+    private String reportuery = "call athena.reportSeller(?,?)";
     private final String email = User.getUser().getEmail();
     private int i = 0 ;
 
@@ -350,6 +353,25 @@ public List<BookEntity> findBooks(String book) {
             exc.printStackTrace();
         }
         return books;
+    }
+
+
+    public void daoReportSeller(String buyer, String seller) {
+        try(PreparedStatement statement = this.getConnection().prepareStatement(reportuery)) {
+
+            statement.setString(1, buyer);
+            statement.setString(2, seller);
+
+            statement.execute();
+
+
+        } catch (SQLException exc) {
+            if (exc.getMessage().equals("Duplicate entry " + "'" +  seller + "-" + buyer + "'" +   " for key 'book_report.PRIMARY'")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "You already reported this seller!", ButtonType.CLOSE);
+                alert.showAndWait();
+            }
+
+        }
     }
 
 

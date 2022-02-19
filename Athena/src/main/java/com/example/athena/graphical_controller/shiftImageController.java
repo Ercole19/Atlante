@@ -10,7 +10,7 @@ import java.util.List;
 public abstract class shiftImageController {
 
     protected ImageView bookImage;
-    private int index;
+    protected int index;
     protected List<Image> images;
     protected Button rightArrow ;
     protected Button leftArrow ;

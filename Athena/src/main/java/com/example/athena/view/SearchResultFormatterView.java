@@ -103,10 +103,11 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
 
 
             entryBox.getRowConstraints().add(new RowConstraints(100));
-            setColumnConstraint(25, entryBox);
-            setColumnConstraint(25, entryBox);
-            setColumnConstraint(25, entryBox);
-            setColumnConstraint(25, entryBox);
+            setColumnConstraint(30, entryBox);
+            setColumnConstraint(15, entryBox);
+            setColumnConstraint(30, entryBox);
+            setColumnConstraint(15, entryBox);
+            setColumnConstraint(10, entryBox);
 
 
             Label ownerLabel = new Label(result.getOwner());
@@ -129,7 +130,14 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
             entryBox.add(visitPage, 4, 0);
 
             visitPage.setOnAction(actionEvent -> {
-                System.out.println("Reported");
+                SceneSwitcher switcher = new SceneSwitcher();
+                try {
+                    ArrayList<Object> params = new ArrayList<>();
+                    params.add(result);
+                    switcher.popup("reportChose.fxml", "Report page", params);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             });
 
             graphicalList.getChildren().add(entryBox);
