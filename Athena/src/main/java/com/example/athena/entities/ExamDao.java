@@ -271,8 +271,8 @@ public class ExamDao extends AbstractDAO {
                 piechartdata.add(new PieChart.Data("CFU possseduti " , set.getInt(1))) ;
 
             }
-        } catch (Exception e) {
-            e.getCause() ;
+        } catch (SQLException e) {
+            e.printStackTrace() ;
 
         }
         return piechartdata ;
@@ -286,11 +286,11 @@ public class ExamDao extends AbstractDAO {
         try (PreparedStatement statement = this.getConnection().prepareStatement(getcfusum)){
             statement.setString(1 , emailcurrent);
          ResultSet set = statement.executeQuery() ;
-            while  (set.next()) {
+            if  (set.next()) {
                 return set.getInt(1) ;
             }
         }catch (SQLException exc) {
-            exc.getErrorCode() ;
+            exc.printStackTrace();
 
 
         }

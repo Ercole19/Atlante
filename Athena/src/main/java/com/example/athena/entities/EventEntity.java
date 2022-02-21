@@ -109,4 +109,6 @@ public class EventEntity
     {
         return this.description ;
     }
+
+    public ActivityTypesEnum getType() {return type;}
 }

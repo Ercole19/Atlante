@@ -3,10 +3,11 @@ package com.example.athena.entities;
 import com.example.athena.exceptions.EventException;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+
 
 public class EventDao extends AbstractDAO {
 
@@ -18,6 +19,7 @@ public class EventDao extends AbstractDAO {
                                          "FROM athena.eventi " +
                                          "WHERE utente = ? AND type = ? AND dataEvento >= ? " +
                                          "ORDER BY dataEvento" ;
+    private String getDatesOfEvents = "SELECT * from athena.eventi where DATE_FORMAT(dataEvento, '%Y-%m') = ? and utente = ?" ;
 
 
     public void addEvent(LocalDate data , String name , LocalTime start ,LocalTime end , String description , String type) {
@@ -132,4 +134,33 @@ public class EventDao extends AbstractDAO {
             throw new EventException("Error in retrieving entities, details follow: " + e.getMessage()) ;
         }
     }
+
+    public List<EventEntity> getEventsByYearMonth(YearMonth yearMonth) throws EventException{
+        List<EventEntity> events = new ArrayList<>();
+        try(PreparedStatement statement = this.getConnection().prepareStatement(getDatesOfEvents)){
+
+            statement.setString(1, String.valueOf(yearMonth));
+            statement.setString(2, User.getUser().getEmail());
+            ResultSet set = statement.executeQuery();
+
+            while (set.next()) {
+                LocalDate eventDay = set.getDate(1).toLocalDate() ;
+                String eventName = set.getString(2) ;
+                LocalTime startTime = set.getTime(3).toLocalTime() ;
+                LocalTime endTime = set.getTime(4).toLocalTime() ;
+                String eventDescription = set.getString(5) ;
+                ActivityTypesEnum type = ActivityTypesEnum.valueOf(set.getString(7));
+
+                events.add(new EventEntity(eventName, eventDay, startTime, endTime, eventDescription, type)) ;
+            }
+
+        }
+        catch(SQLException e)
+        {
+            throw new EventException("Error in retrieving events, details follow: " + e.getMessage()) ;
+        }
+        return events ;
+    }
+
+
 }

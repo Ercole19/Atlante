@@ -37,7 +37,7 @@ public class AverageController implements Initializable {
         XYChart.Series<String, Number> series = new XYChart.Series<>("Artithmetic average ", sortedExams);
         XYChart.Series<String, Number> series2 = new XYChart.Series<>("Weighted average ", weightedSortedExams);
 
-        averageGraph.getData().addAll(series , series2) ;
+        averageGraph.getData().addAll(series, series2) ;
 
         Number average = controller.retrieveAverage() ;
         Number weightedAverage = controller.retrieveWeightedAverage() ;

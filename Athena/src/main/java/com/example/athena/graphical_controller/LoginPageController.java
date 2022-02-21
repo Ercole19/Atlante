@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class LoginPageController {
 
-    private User currentuser ;
+
 
     @FXML
     private TextField emailField ;
@@ -37,16 +37,14 @@ public class LoginPageController {
                 alert.showAndWait();
                 SceneSwitcher switcher = new SceneSwitcher();
                 switcher.switcher(event, "MainPageStudents.fxml");
-                currentuser = currentuser.getUser();
-                currentuser.setEmail(email);
+                User.getUser().setEmail(email);
 
             } else {
                 Alert alert = new Alert(Alert.AlertType.NONE, "Access granted !", ButtonType.CLOSE);
                 alert.showAndWait();
                 SceneSwitcher switcher = new SceneSwitcher();
                 switcher.switcher(event, "MainPageTutor.fxml");
-                currentuser = currentuser.getUser();
-                currentuser.setEmail(email);
+                User.getUser().setEmail(email);
             }
         }
 
