@@ -4,6 +4,7 @@ import com.example.athena.exceptions.EventException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.YearMonth;
 import java.time.ZoneOffset;
 import java.util.List;
 
@@ -53,6 +54,12 @@ public class EventEntity
     public long getSpanMinutes()
     {
         return Long.divideUnsigned(this.end.toEpochSecond(this.getDay(), ZoneOffset.UTC) - this.start.toEpochSecond(this.getDay(), ZoneOffset.UTC), 60) ;
+    }
+
+    public static List<EventEntity> getEventsByYearMonth(YearMonth month) throws EventException
+    {
+        EventDao dao = new EventDao() ;
+        return dao.getEventsByYearMonth(month) ;
     }
 
     public void setName(String name)

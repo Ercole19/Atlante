@@ -18,6 +18,8 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.YearMonth;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CalendarPageController implements Initializable {
@@ -26,6 +28,9 @@ public class CalendarPageController implements Initializable {
     @FXML
     private SubScene calendario ;
 
+    private YearMonth currentYearMonth ;
+    private FullCalendarView view ;
+    private CalendarEntity calendarEntity ;
 
     public void clickOnBackButton(ActionEvent event)
     {
