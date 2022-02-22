@@ -3,6 +3,7 @@ package com.example.athena.use_case_controllers;
 import com.example.athena.entities.BookDao;
 import com.example.athena.entities.BookEntity;
 import com.example.athena.entities.User;
+import com.example.athena.entities.UserDao;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
 import com.example.athena.graphical_controller.BookEntityBean;
@@ -59,6 +60,11 @@ public class SellBooksUseCaseController {
         byte[] fileContent = Files.readAllBytes(image.toPath());
         dao.deleteImage(bean.getIsbn(), fileContent);
 
+    }
+
+    public int getTotalReport(){
+        UserDao dao = new UserDao();
+        return  dao.getTotalReport();
     }
 
 }

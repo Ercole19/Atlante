@@ -1,6 +1,7 @@
 package com.example.athena.use_case_controllers;
 
 import com.example.athena.entities.ExamDao;
+import com.example.athena.entities.UserDao;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 
@@ -17,14 +18,24 @@ public class CareerStatusUCC {
         return examsPieChartDataCfus;
     }
 
-    public int retrieveTotalExams() {
+    public int retrieveTotalTakenExams() {
         ExamDao dao = new ExamDao() ;
         int totalExams = (int) dao.getTotalExams() ;
         return totalExams ;
     }
-    public int retrieveTotalCfus() {
+    public int retrieveTotalTakenCfus() {
         ExamDao dao = new ExamDao() ;
         int totalCfus = (int) dao.getTotalCfus() ;
         return totalCfus ;
+    }
+
+    public int retrieveTotalExams() {
+        UserDao dao = new UserDao();
+        return dao.getAllExams();
+    }
+
+    public int retrieveTotalCfus() {
+        UserDao dao = new UserDao();
+        return dao.getAllCfus();
     }
 }

@@ -9,9 +9,9 @@ import java.util.List;
 public class SearchTutorUseCaseController {
     UserDao user = new UserDao();
 
-    public List<TutorSearchResultBean> formatSearchResults(String query, boolean condition) {
+    public List<TutorSearchResultBean> formatSearchResults(String query, boolean condition, boolean byBestReviews) {
         int i = 0;
-        String[] tutorinfos = user.findTutor(query, condition);
+        String[] tutorinfos = user.findTutor(query, condition, byBestReviews);
         ArrayList<TutorSearchResultBean> result = new ArrayList<>();
         while (tutorinfos[i] != null) {
 

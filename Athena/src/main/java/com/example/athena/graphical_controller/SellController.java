@@ -10,10 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -54,8 +51,15 @@ public class SellController implements Initializable {
     }
 
     public void onSellBtnClick() throws IOException, BookException {
-        switcher.popup("sellBookModule.fxml", "Sell a book") ;
-        refreshTable();
+        SellBooksUseCaseController controller = new SellBooksUseCaseController();
+        if(controller.getTotalReport() > 50){
+            Alert alert = new Alert(Alert.AlertType.WARNING, "You can't sell books anymore, you received too many reports", ButtonType.CLOSE);
+            alert.showAndWait();
+        }
+        else {
+            switcher.popup("sellBookModule.fxml", "Sell a book");
+            refreshTable();
+        }
     }
 
 

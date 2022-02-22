@@ -30,7 +30,7 @@ public class AddExamGraphicalController implements PostInitialize {
     private String oldName ;
 
 
-    public void confermaEsame() {
+    public void confermaEsame(ActionEvent event) {
         String nome = nomeEsame.getText();
         String data = dataEsame.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String voto = votoEsame.getText();
@@ -45,6 +45,9 @@ public class AddExamGraphicalController implements PostInitialize {
 
         AddExamUseCaseController useCaseController = new AddExamUseCaseController();
         useCaseController.addExam(examBean);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
 

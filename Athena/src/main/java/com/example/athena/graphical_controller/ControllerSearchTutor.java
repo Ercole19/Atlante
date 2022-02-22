@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.SubScene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
@@ -22,10 +23,13 @@ import java.util.List;
 public class ControllerSearchTutor {
 
     @FXML
-    TextField searchBar ;
+    private TextField searchBar ;
 
     @FXML
-    SubScene resultsBox ;
+    private SubScene resultsBox ;
+
+    @FXML
+    private RadioButton sortByBestReviews;
 
     boolean byName = true ;
 
@@ -37,7 +41,7 @@ public class ControllerSearchTutor {
         }
         else {
             SearchTutorUseCaseController controller = new SearchTutorUseCaseController();
-            List<TutorSearchResultBean> results = controller.formatSearchResults(searchBar.getText(), !(byName)); //Another bean should be added
+            List<TutorSearchResultBean> results = controller.formatSearchResults(searchBar.getText(), !(byName), sortByBestReviews.isSelected()); //Another bean should be added
             if (results.isEmpty()) {
                 Parent error = new ErrorSceneView().createErrorScreen("No book has been found.", resultsBox.getWidth(), resultsBox.getHeight()) ;
                 resultsBox.setRoot(error) ;
@@ -61,7 +65,7 @@ public class ControllerSearchTutor {
         }
         else {
             SearchTutorUseCaseController controller = new SearchTutorUseCaseController();
-            List<TutorSearchResultBean> results = controller.formatSearchResults(searchBar.getText(), byName); //Another bean should be added
+            List<TutorSearchResultBean> results = controller.formatSearchResults(searchBar.getText(), byName, sortByBestReviews.isSelected()); //Another bean should be added
             if (results.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "No results found", ButtonType.CLOSE);
                 alert.showAndWait();

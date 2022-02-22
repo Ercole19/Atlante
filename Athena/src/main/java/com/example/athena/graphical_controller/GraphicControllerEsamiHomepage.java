@@ -43,12 +43,17 @@ public class GraphicControllerEsamiHomepage implements Initializable {
     private TableColumn<ExamEntityBean, LocalDate> colDate ;
     @FXML
     private TableColumn<ExamEntityBean, Void> colEDit ;
+    @FXML
+    private Button averageBtn;
+    @FXML
+    private Button careerBtn;
+
     private Text cancella = null ;
     private Button editButton = null ;
     private HBox managebtn = null ;
 
-    private ObservableList<ExamEntityBean> examList  = FXCollections.observableArrayList() ;
-    private ExamDao examDao ;
+    private final ObservableList<ExamEntityBean> examList  = FXCollections.observableArrayList() ;
+
 
 
     public void initAggiungiEsame () throws IOException {
@@ -56,6 +61,7 @@ public class GraphicControllerEsamiHomepage implements Initializable {
         SceneSwitcher switcher = new SceneSwitcher() ;
         switcher.popup("Aggiungi_Esame_View.fxml" , "Add exam") ;
         refreshTable();
+        disableIfEmpty();
 
     }
     public void initMostraMedia () throws IOException {
@@ -82,6 +88,24 @@ public class GraphicControllerEsamiHomepage implements Initializable {
         ExamPageUCC controller = new ExamPageUCC() ;
 
         examTable.setItems(controller.getList()) ;
+    }
+
+    public void disableIfEmpty() {
+        ExamPageUCC controller = new ExamPageUCC();
+        if (controller.getList().isEmpty())
+        {
+            averageBtn.setDisable(true);
+            careerBtn.setDisable(true);
+            averageBtn.setVisible(false);
+            careerBtn.setVisible(false);
+        }
+        else
+        {
+            averageBtn.setVisible(true);
+            averageBtn.setDisable(false);
+            careerBtn.setDisable(false);
+            careerBtn.setVisible(true);
+        }
     }
 
 
@@ -121,6 +145,7 @@ public class GraphicControllerEsamiHomepage implements Initializable {
                         try {
                             switcher.popup("Aggiungi_Esame_view.fxml", "Edit your exam", params);
                             refreshTable();
+                            disableIfEmpty();
                         }catch (IOException exc) {
                             exc.getCause() ;
                         }
@@ -137,6 +162,7 @@ public class GraphicControllerEsamiHomepage implements Initializable {
 
                             esameD.deleteExam(exam.getExamName());
                             refreshTable();
+                            disableIfEmpty();
                         }catch (Exception exc) {
                             exc.getCause() ;
                         }
@@ -162,6 +188,7 @@ public class GraphicControllerEsamiHomepage implements Initializable {
 
 
         examTable.setItems(controller.getList());
+        disableIfEmpty();
 
 
 

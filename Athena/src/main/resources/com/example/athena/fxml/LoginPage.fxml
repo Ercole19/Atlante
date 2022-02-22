@@ -20,7 +20,7 @@
             <Font size="24.0" />
          </font>
       </TextField>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="328.0" layoutY="578.0" mnemonicParsing="false" onAction="#switchToMainPage" prefHeight="49.0" prefWidth="254.0" style="-fx-background-radius: 20; -fx-background-color: #2d8bba;" text="Login as Student" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" layoutX="328.0" layoutY="578.0" mnemonicParsing="false" onAction="#switchToMainPage" prefHeight="49.0" prefWidth="254.0" style="-fx-background-radius: 20; -fx-background-color: #2d8bba;" text="Login as Student" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="26.0" />
          </font>
