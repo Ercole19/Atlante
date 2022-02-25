@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 
 import java.io.IOException;
@@ -17,6 +18,11 @@ import java.io.IOException;
 public class LoginPageController {
 
     private int totalAttempts = 0 ;
+    private int waitTimeMultiplier = 1;
+
+    private final SceneSwitcher switcher = new SceneSwitcher();
+
+    private Stage stage;
 
     @FXML
     private Button loginButton;
@@ -34,8 +40,9 @@ public class LoginPageController {
         bean.setPassword(password);
 
         LoginUseCaseControlller controlller = new LoginUseCaseControlller() ;
+        bean = controlller.findUser(bean);
 
-        if (controlller.findUser(bean)) {
+        if (bean.isUserFound()) {
 
             if (bean.getRole().equals("student")) {
                 Alert alert = new Alert(Alert.AlertType.NONE, "Access granted !", ButtonType.CLOSE);
@@ -47,14 +54,14 @@ public class LoginPageController {
             } else {
                 Alert alert = new Alert(Alert.AlertType.NONE, "Access granted !", ButtonType.CLOSE);
                 alert.showAndWait();
-                SceneSwitcher switcher = new SceneSwitcher();
-                switcher.switcher(event, "MainPageTutor.fxml");
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+                switcher.switcher(stage, "MainPageTutor.fxml");
                 User.getUser().setEmail(email);
             }
         }
 
         else {
-            if(totalAttempts < 4)
+            if(totalAttempts < 5)
             {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Access failed !", ButtonType.CLOSE);
                 alert.showAndWait();
@@ -62,7 +69,7 @@ public class LoginPageController {
             }
             else
             {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "Too many attempts, wait 10 seconds!", ButtonType.CLOSE);
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Too many failed attempts, wait " + 10*waitTimeMultiplier + " seconds!", ButtonType.CLOSE);
                 alert.showAndWait();
                 new Thread(() -> {
                     Platform.runLater(new Runnable() {
@@ -71,7 +78,7 @@ public class LoginPageController {
                         }
                     });
                     try {
-                        Thread.sleep(10000);
+                        Thread.sleep(10000L * waitTimeMultiplier);
                     }
                     catch(InterruptedException ex) {
                     }
@@ -79,8 +86,10 @@ public class LoginPageController {
                         public void run() {
                             loginButton.setDisable(false);
                         }
+
                     });
                 }).start();
+                waitTimeMultiplier++;
             }
         }
     }
@@ -98,8 +107,8 @@ public class LoginPageController {
     }
 
     public void switchFast(ActionEvent event) throws IOException {
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "MainPageStudents.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "MainPageStudents.fxml");
     }
 
     public void fillFast(ActionEvent event) {

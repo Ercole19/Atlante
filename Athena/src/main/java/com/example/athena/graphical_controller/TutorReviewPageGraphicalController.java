@@ -8,7 +8,9 @@ import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -50,7 +52,8 @@ public class TutorReviewPageGraphicalController implements Initializable
     public void clickOnBackButton(ActionEvent event) throws IOException
     {
         SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "MainPageTutor.fxml");
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        switcher.switcher(stage, "MainPageTutor.fxml");
     }
 
     @Override

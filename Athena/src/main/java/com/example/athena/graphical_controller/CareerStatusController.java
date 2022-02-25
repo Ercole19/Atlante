@@ -35,6 +35,9 @@ public class CareerStatusController implements Initializable {
     @FXML
     private Label totalCfus ;
 
+    private final SceneSwitcher switcher =  new SceneSwitcher();
+    private Stage stage;
+
     @FXML
     public void initialize(URL url , ResourceBundle rb) {
 
@@ -66,7 +69,7 @@ public class CareerStatusController implements Initializable {
         stage.close();
     }
 
-    public void onSetCfuBtn(ActionEvent event)
+    public void onSetCfuBtn()
     {
         SceneSwitcher switcher = new SceneSwitcher();
         ArrayList<Object> params = new ArrayList<>();
@@ -80,17 +83,13 @@ public class CareerStatusController implements Initializable {
         }
     }
 
-    public void onSetExamsBtn(ActionEvent event) {
-        SceneSwitcher switcher = new SceneSwitcher();
+    public void onSetExamsBtn() {
         ArrayList<Object> params = new ArrayList<>();
 
         params.add(false);
         params.add(this);
-        try {
-            switcher.popup("SetMAxCfuOrExams.fxml", "Set max cfus", params);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        switcher.popup("SetMAxCfuOrExams.fxml", "Set max cfus", params);
+
     }
 
     public void setTotalExams(int exmasTotal){

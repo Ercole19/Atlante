@@ -5,19 +5,21 @@ import com.example.athena.graphical_controller.UserBean;
 
 public class LoginUseCaseControlller {
 
-    public boolean findUser(UserBean bean) {
+    public UserBean findUser(UserBean bean) {
 
         UserDao dao = new UserDao() ;
         if (dao.findStudent(bean.getEmail(), bean.getPassword())){
 
+            bean.setUserFound(true);
             String role = (String) dao.getuserType(bean.getEmail());
             bean.setRole(role);
-
-            return true ;
+            return bean ;
         }
 
-      return false ;
+        bean.setUserFound(false);
+        return bean;
     }
+
 
 
 

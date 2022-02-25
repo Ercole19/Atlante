@@ -7,6 +7,7 @@ import com.example.athena.view.scene_decorators.SearchResultFormatterComponent;
 import com.example.athena.view.scene_decorators.SearchResultFormatterScrollBar;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.SubScene;
 import javafx.scene.control.Alert;
@@ -14,6 +15,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,6 +34,9 @@ public class ControllerSearchTutor {
     private RadioButton sortByBestReviews;
 
     boolean byName = true ;
+
+    private final SceneSwitcher switcher = new SceneSwitcher();
+    private Stage stage;
 
     public void clickOnSearchByCourse()
     {
@@ -80,16 +85,16 @@ public class ControllerSearchTutor {
         }
     }
 
-    public void clickOnBackButton(ActionEvent event) throws IOException
+    public void clickOnBackButton(ActionEvent event)
     {
 
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "MainPageStudents.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "MainPageStudents.fxml");
     }
 
-    public void clickOnReviewTutorButton(ActionEvent event) throws IOException
+    public void clickOnReviewTutorButton(ActionEvent event)
     {
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "StudentsReviewTutorsView.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "StudentsReviewTutorsView.fxml");
     }
 }

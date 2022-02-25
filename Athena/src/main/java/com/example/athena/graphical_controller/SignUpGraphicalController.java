@@ -4,9 +4,11 @@ package com.example.athena.graphical_controller;
 import com.example.athena.use_case_controllers.SignUpUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -24,11 +26,13 @@ public class SignUpGraphicalController {
     private TextField confirmPassField ;
     @FXML
     private RadioButton studentRadiobutton ;
+    private final SceneSwitcher switcher = new SceneSwitcher();
+    private Stage stage;
 
     public void onBackButtonClick(ActionEvent event) throws IOException {
 
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "LoginPage.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "LoginPage.fxml");
     }
 
     public void onConfirmButtonClick (ActionEvent event) throws IOException {
@@ -59,8 +63,8 @@ public class SignUpGraphicalController {
             SignUpUCC controller = new SignUpUCC();
 
             if (controller.register(bean)) {
-                SceneSwitcher switcher = new SceneSwitcher();
-                switcher.switcher(event, "LoginPage.fxml");
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+                switcher.switcher(stage, "LoginPage.fxml");
             }
         }
         else {

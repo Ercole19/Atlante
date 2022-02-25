@@ -6,12 +6,14 @@ import com.example.athena.use_case_controllers.BuyControllerUCC;
 import com.example.servers.FakePaymentSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,6 +55,9 @@ public class BookPageController extends shiftImageController implements PostInit
 
     private List<Image> bookImages;
 
+    private final SceneSwitcher switcher = new SceneSwitcher();
+    private Stage stage;
+
     @Override
     public void postInitialize(ArrayList<Object> params) {
 
@@ -87,23 +92,26 @@ public class BookPageController extends shiftImageController implements PostInit
         price.setText(book.getPrice());
         email.setText(book.getOwner());
         negotiable.setSelected(book.getNegotiable());
-        image.setImage(this.bookImages.get(0));
+        if(this.bookImages.isEmpty()){
+            image.setImage(null);
+        }
+        else {
+            image.setImage(this.bookImages.get(0));
+        }
+
         super.shiftIndex(0);
 
     }
     public void onBackBtnClick(ActionEvent event)  {
-        SceneSwitcher switcher = new SceneSwitcher();
-        try {
-            switcher.switcher(event, "buy-view.fxml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "buy-view.fxml");
+
     }
 
-    public void onBackBtnClickSeller(ActionEvent event) throws IOException
+    public void onBackBtnClickSeller(ActionEvent event)
     {
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event , "sell-view.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage , "sell-view.fxml");
     }
 
     public void onBuyBookButtonClick(){

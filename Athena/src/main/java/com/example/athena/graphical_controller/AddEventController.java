@@ -215,7 +215,14 @@ public class AddEventController implements Initializable , PostInitialize{
         }
         EventBean eventToUpdate = new EventBean(eventDate.getValue(), eventName.getText(), start, end, eventDescription.getText(), eventType.getValue(), wrapperBean);
 
-        controller.update(eventToUpdate, oldEventName);
+        try
+        {
+            controller.update(eventToUpdate, oldEventName);
+        }catch(SendEmailException e)
+        {
+            e.printStackTrace();
+        }
+
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();

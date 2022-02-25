@@ -10,12 +10,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,7 +27,7 @@ import java.util.ResourceBundle;
 
 public class SellController implements Initializable {
 
-    private final SceneSwitcher switcher = new SceneSwitcher();
+
 
     @FXML
     private TableView<BookEntityBean> bookTable ;
@@ -44,10 +46,13 @@ public class SellController implements Initializable {
 
 
     private final ObservableList<BookEntityBean> bookList  = FXCollections.observableArrayList() ;
+    private final SceneSwitcher switcher = new SceneSwitcher();
+    private Stage stage;
 
     @FXML
     protected void onBackButtonClick(ActionEvent event) throws IOException {
-        switcher.switcher(event, "bookshop-choose-view.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "bookshop-choose-view.fxml");
     }
 
     public void onSellBtnClick() throws IOException, BookException {
@@ -111,10 +116,11 @@ public class SellController implements Initializable {
                                         SceneSwitcher switcher = new SceneSwitcher();
                                         ArrayList<Object> params = new ArrayList<>();
                                         params.add(book);
+
+                                        switcher.popup("sellBookModule.fxml", "Edit your book", params);
                                         try {
-                                            switcher.popup("sellBookModule.fxml", "Edit your book", params);
                                             refreshTable();
-                                        } catch (IOException | BookException e) {
+                                        } catch (BookException e) {
                                             e.printStackTrace();
                                         }
 
@@ -130,11 +136,10 @@ public class SellController implements Initializable {
                                         params.add(book.getIsbn());
                                         params.add(true); //I use this in bookpagecontroller postinitialize, if is true then owner is going to his book page and i disable report and buy butttons
                                         SceneSwitcher switcher = new SceneSwitcher();
-                                        try {
-                                            switcher.switcher(event, "Book-Page2.fxml", params);
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
+
+                                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+                                        switcher.switcher(stage, "Book-Page2.fxml", params);
+
                                     });
 
 

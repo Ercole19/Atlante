@@ -69,16 +69,14 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
 
             image.setOnMouseClicked(mouseEvent -> {
                 SceneSwitcher switcher = new SceneSwitcher();
-                try {
-                    List<Object> params = new ArrayList<>() ;
-                    params.add(result.getOwner());
-                    params.add(result.getIsbn());
-                    params.add(false); //I use this in bookpagecontroller postinitialize, if it is false then an external user is going to a book page so i display report and buy buttons
-                    switcher.switcher(mouseEvent, "Book-Page2.fxml", params) ;
-                }
-                catch (IOException e){
-                    e.printStackTrace();
-                }
+                
+                List<Object> params = new ArrayList<>() ;
+                params.add(result.getOwner());
+                params.add(result.getIsbn());
+                params.add(false); //I use this in bookpagecontroller postinitialize, if it is false then an external user is going to a book page so i display report and buy buttons
+                Stage    stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow() ;
+                switcher.switcher(stage, "Book-Page2.fxml", params) ;
+               
             });
 
             graphicalList.getChildren().add(entryBox) ;
@@ -131,13 +129,11 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
 
             visitPage.setOnAction(actionEvent -> {
                 SceneSwitcher switcher = new SceneSwitcher();
-                try {
-                    ArrayList<Object> params = new ArrayList<>();
-                    params.add(result);
-                    switcher.popup("reportChose.fxml", "Report page", params);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                
+                ArrayList<Object> params = new ArrayList<>();
+                params.add(result);
+                switcher.popup("reportChose.fxml", "Report page", params);
+             
             });
 
             graphicalList.getChildren().add(entryBox);
@@ -190,14 +186,13 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
             visitPage.setOnAction(actionEvent -> {
 
                 SceneSwitcher switcher = new SceneSwitcher() ;
-                try {
-                    ArrayList<Object> params = new ArrayList<>() ;
-                    params.add(result.getId()) ;
-                    params.add(true) ;
-                    switcher.switcher(actionEvent, "tutorPersonalPage.fxml", params) ;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                
+                ArrayList<Object> params = new ArrayList<>() ;
+                params.add(result.getId()) ;
+                params.add(true) ;
+                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow() ;
+                switcher.switcher(stage, "tutorPersonalPage.fxml", params) ;
+               
             });
 
             graphicalList.getChildren().add(entryBox) ;
@@ -303,11 +298,9 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
                 SceneSwitcher switcher = new SceneSwitcher() ;
                 ArrayList<Object> params = new ArrayList<>() ;
                 params.add(result) ;
-                try {
-                   switcher.popup("AddEventScreen.fxml","Edit your event", params );
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                
+                switcher.popup("AddEventScreen.fxml","Edit your event", params );
+               
 
 
 

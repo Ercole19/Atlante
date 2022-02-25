@@ -8,8 +8,11 @@ import com.example.athena.view.scene_decorators.SearchResultFormatterScrollBar;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,7 +28,9 @@ public class RecentPurchasesGC implements Initializable {
 
     @FXML
     protected void onBackButtonClick(ActionEvent event) throws IOException {
-        switcher.switcher(event, "bookshop-choose-view.fxml");
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        SceneSwitcher switcher = new SceneSwitcher() ;
+        switcher.switcher(stage, "bookshop-choose-view.fxml");
     }
 
 

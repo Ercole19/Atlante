@@ -66,7 +66,7 @@ public abstract class shiftImageController {
             enable(rightArrowImage) ;
         }
 
-        if(this.index == 0)
+        if(this.index == 0 || this.index == -1)
         {
             disable(leftArrow) ;
             disable(leftArrowImage) ;

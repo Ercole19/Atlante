@@ -1,13 +1,17 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.exceptions.SizedAlert;
+import com.example.athena.use_case_controllers.ExitSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -19,11 +23,19 @@ import static javafx.fxml.FXMLLoader.load;
 
 public class SceneSwitcher {
 
-    public void switcher(ActionEvent event, String fxml) throws IOException {
-        Parent root = load(generateUrl(fxml)) ;
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+    private final String fatalError = "FATAL ERROR: The application is unable to change pages. If the problem persists after restarting, try reinstalling the application.";
+
+    public void switcher(Stage stage, String fxml) {
+        try
+        {
+            Parent root = load(generateUrl(fxml)) ;
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+        }catch (IOException e)
+        {
+            this.handleSwitcherException() ;
+        }
+
     }
 
     public void switcher(ActionEvent event, String fxml, List<Object> params) throws IOException {
@@ -34,15 +46,15 @@ public class SceneSwitcher {
     }
 
 
-    public void popup(String fxml, String title) throws IOException
+    public void popup(String fxml, String title)
     {
         Parent root = load(generateUrl(fxml)) ;
         preparePopup(root, title) ;
     }
 
-    public void popup(String fxml, String title, List<Object> params) throws IOException
+    public void popup (String fxml, String title, List<Object> params)
     {
-        Parent root = preload(fxml, params) ;
+        Parent root = preload(fxml, params);
         preparePopup(root, title) ;
     }
 
@@ -57,11 +69,18 @@ public class SceneSwitcher {
         stage.showAndWait() ;
     }
 
-    public Parent preload(String fxml, List<Object> params) throws IOException{
-        FXMLLoader loader = new FXMLLoader(generateUrl(fxml)) ;
-        Parent root = loader.load() ;
-        PostInitialize post = loader.getController() ;
-        post.postInitialize((ArrayList<Object>) params) ;
+    public Parent preload(String fxml, List<Object> params)  {
+        Parent root = null ;
+        try {
+            FXMLLoader loader = new FXMLLoader(generateUrl(fxml)) ;
+            root = loader.load() ;
+            PostInitialize post = loader.getController() ;
+            post.postInitialize((ArrayList<Object>) params) ;
+        } catch (IOException e) {
+            this.handleSwitcherException();
+        }
+
+        assert root != null ;
         return root ;
     }
 

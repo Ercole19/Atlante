@@ -12,8 +12,8 @@ import java.io.IOException;
 
 public class TutorMainPageController {
 
-    SceneSwitcher switcher = new SceneSwitcher();
-
+    private final SceneSwitcher switcher = new SceneSwitcher();
+    private Stage stage;
 
     public void onPersonalPageButtonClick(ActionEvent event)  {
         TutorPageComponent component = new TutorPageButtonAdder(new TutorPageView()) ;
@@ -22,13 +22,15 @@ public class TutorMainPageController {
         stage.setScene(scene);
     }
 
-    public void onLogoutButtonClick(ActionEvent event) throws IOException {
-        switcher.switcher(event, "LoginPage.fxml");
+    public void onLogoutButtonClick(ActionEvent event)  {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        switcher.switcher(stage, "LoginPage.fxml");
     }
 
-    public void onReviewsClick(ActionEvent event) throws IOException
+    public void onReviewsClick(ActionEvent event)
     {
-        switcher.switcher(event, "TutorReviewPageView.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "TutorReviewPageView.fxml");
     }
 
 

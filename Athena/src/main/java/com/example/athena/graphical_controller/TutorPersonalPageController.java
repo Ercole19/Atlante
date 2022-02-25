@@ -6,10 +6,12 @@ import com.example.athena.use_case_controllers.ViewTutorPageUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -44,6 +46,9 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     @FXML
     private Text reviewAverage;
 
+    private final SceneSwitcher switcher = new SceneSwitcher();
+    private Stage stage;
+
 
 
 
@@ -54,24 +59,17 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
 
     public void clickOnBackButtonTutor(ActionEvent event) throws IOException
     {
-        switchScene(event , "MainPageTutor.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "MainPageTutor.fxml") ;
     }
 
     public void clickOnBackButton(ActionEvent event) throws IOException
     {
-
-        switchScene(event, "tutorSearchPage.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "tutorSearchPage.fxml") ;
     }
 
-
-
-
-    public void switchScene(ActionEvent event , String fxml) throws IOException {
-        SceneSwitcher switcher = new SceneSwitcher() ;
-        switcher.switcher(event, fxml) ;
-    }
-
-    public void onCVButtonClick(ActionEvent event) throws IOException
+    public void onCVButtonClick()
     {
         SceneSwitcher switcher = new SceneSwitcher() ;
         ViewTutorPageUseCaseController tutorPage = new ViewTutorPageUseCaseController();
@@ -123,7 +121,6 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
 
 
     public void onaddcoursebuttoclick() throws IOException{
-        SceneSwitcher switcher = new SceneSwitcher() ;
         switcher.popup("addcourse.fxml" , "Add course") ;
     }
 

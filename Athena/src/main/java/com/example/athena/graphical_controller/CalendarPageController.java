@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,6 +32,8 @@ public class CalendarPageController implements Initializable {
     private YearMonth currentYearMonth ;
     private FullCalendarView view ;
     private CalendarEntity calendarEntity ;
+    private final SceneSwitcher switcher = new SceneSwitcher();
+    private Stage stage ;
 
     public void clickOnBackButton(ActionEvent event)
     {
@@ -43,17 +46,13 @@ public class CalendarPageController implements Initializable {
 
     public void clickOnAddEvent() throws IOException
     {
-        SceneSwitcher switcher = new SceneSwitcher() ;
         switcher.popup("AddEventScreen.fxml", "Add a new event") ;
     }
 
     public void clickOnPlots(ActionEvent event)
     {
-        try {
-            switchScene("PlotPage.fxml" , event);
-        } catch (IOException e) {
-            e.getMessage();
-        }
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "PlotPage.fxml");
     }
 
     public void switchScene(String fxml , ActionEvent event) throws IOException {

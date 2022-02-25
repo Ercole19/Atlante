@@ -7,6 +7,7 @@ public class UserBean {
     private String role ;
     private String name ;
     private String surname ;
+    private boolean userFound;
 
 
 
@@ -48,5 +49,13 @@ public class UserBean {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public void setUserFound(boolean userFound) {
+        this.userFound = userFound;
+    }
+
+    public boolean isUserFound() {
+        return userFound;
     }
 }

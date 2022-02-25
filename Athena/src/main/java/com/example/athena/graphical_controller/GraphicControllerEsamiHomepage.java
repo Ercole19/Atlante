@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -18,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -53,40 +55,36 @@ public class GraphicControllerEsamiHomepage implements Initializable {
     private HBox managebtn = null ;
 
     private final ObservableList<ExamEntityBean> examList  = FXCollections.observableArrayList() ;
+    private final SceneSwitcher switcher = new SceneSwitcher();
+    private Stage stage;
 
 
-
-    public void initAggiungiEsame () throws IOException {
-
-        SceneSwitcher switcher = new SceneSwitcher() ;
+    public void initAggiungiEsame ()  {
         switcher.popup("Aggiungi_Esame_View.fxml" , "Add exam") ;
         refreshTable();
         disableIfEmpty();
-
     }
-    public void initMostraMedia () throws IOException {
-        SceneSwitcher switcher = new SceneSwitcher() ;
+
+    public void initMostraMedia () {
         switcher.popup("Mostra_Media_View.fxml" , "Average") ;
     }
 
-    public void initCareerStatus () throws IOException {
-        SceneSwitcher switcher = new SceneSwitcher() ;
+    public void initCareerStatus ()  {
+
         switcher.popup("carrerStatusView.fxml" , "Career") ;
     }
 
 
     public void onBackButtonClick(ActionEvent event) throws IOException {
         refreshTable();
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "MainPageStudents.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "MainPageStudents.fxml");
      }
 
 
     public void refreshTable() {
         examList.clear() ;
-
         ExamPageUCC controller = new ExamPageUCC() ;
-
         examTable.setItems(controller.getList()) ;
     }
 

@@ -7,26 +7,31 @@ import com.example.athena.view.scene_decorators.SearchResultFormatterComponent;
 import com.example.athena.view.scene_decorators.SearchResultFormatterScrollBar;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.SubScene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
 
 public class BuyController {
-    private SceneSwitcher switcher = new SceneSwitcher();
+
 
     @FXML
     private TextField searchInput ;
 
     @FXML
     private SubScene resultPanel ;
+    private final SceneSwitcher switcher = new SceneSwitcher();
+    private Stage stage;
 
     @FXML
-    protected void onHomeButtonClick(ActionEvent event) throws IOException {
-        switcher.switcher(event, "MainPageStudents.fxml");
+    protected void onHomeButtonClick(ActionEvent event)  {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "MainPageStudents.fxml");
     }
 
     @FXML
@@ -53,7 +58,8 @@ public class BuyController {
 
     @FXML
     protected void onBackButtonClick(ActionEvent event) throws IOException {
-        switcher.switcher(event, "bookshop-choose-view.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        switcher.switcher(stage, "bookshop-choose-view.fxml");
     }
 
 }

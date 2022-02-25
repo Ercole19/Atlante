@@ -10,31 +10,30 @@ public class MainPageController {
 
 
     public void onExamsButtonClick(ActionEvent event) throws IOException {
-
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "Carriera-view.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "Carriera-view.fxml");
 
     }
 
     public void onCalendarButtonClick(ActionEvent event) throws IOException {
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "CalendarPage.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "CalendarPage.fxml");
     }
 
 
     public void onShopButtonClick(ActionEvent event) throws IOException {
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "bookshop-choose-view.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "bookshop-choose-view.fxml");
     }
 
 
     public void onTutorButtonClick(ActionEvent event) throws IOException {
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "tutorSearchPage.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "tutorSearchPage.fxml");
     }
 
     public void onLogoutButtonClick(ActionEvent event) throws IOException {
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "LoginPage.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "LoginPage.fxml");
     }
 }
