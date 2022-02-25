@@ -4,6 +4,7 @@ import com.example.athena.entities.ActivityTypesEnum;
 import com.example.athena.entities.ReminderTypesEnum;
 import com.example.athena.entities.StringHoursConverter;
 import com.example.athena.exceptions.SendEmailException;
+import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.AddEventUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -111,7 +112,7 @@ public class AddEventController implements Initializable , PostInitialize{
             try {
                 addEventUCC.addEvent(eventToRegister);
             } catch (SendEmailException e) {
-                Alert error = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.CLOSE);
+                SizedAlert error = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600, ButtonType.CLOSE);
                 error.showAndWait();
             }
 

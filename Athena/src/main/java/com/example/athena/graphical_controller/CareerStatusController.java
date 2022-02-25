@@ -71,16 +71,12 @@ public class CareerStatusController implements Initializable {
 
     public void onSetCfuBtn()
     {
-        SceneSwitcher switcher = new SceneSwitcher();
         ArrayList<Object> params = new ArrayList<>();
 
         params.add(true);
         params.add(this);//true if i want to set cfu, else exams. I will use this in a postInitialize
-        try {
-            switcher.popup("SetMAxCfuOrExams.fxml", "Set max cfus", params);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        switcher.popup("SetMAxCfuOrExams.fxml", "Set max cfus", params);
+
     }
 
     public void onSetExamsBtn() {

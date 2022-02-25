@@ -7,6 +7,7 @@ import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.graphical_controller.EventBean;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 public class AddEventUCC {
 
@@ -21,13 +22,18 @@ public class AddEventUCC {
         if(evento.getIsThereAReminder())
         {
             if(evento.getDateOfReminder().isBefore(LocalDateTime.now())) throw new SendEmailException("The reminder would have to be sent before now") ;
-            SetReminderEmailBoundary.sendToServer(evento) ;
+            SetReminderEmailBoundary.sendToServer(evento, false) ;
         }
     }
 
-    public void update(EventBean bean, String oldname) {
+    public void update(EventBean bean, String oldname) throws SendEmailException{
         EventDao dao  = new EventDao();
         dao.updateEvento(bean.getDate(), bean.getName(), bean.getStart(), bean.getEnd(), bean.getDescription(), oldname, bean.getType());
 
+        if(bean.getIsThereAReminder())
+        {
+            if(bean.getDateOfReminder().isBefore(LocalDateTime.now())) throw new SendEmailException("The reminder would have to be sent before now") ;
+            SetReminderEmailBoundary.sendToServer(bean, true) ;
+        }
     }
 }

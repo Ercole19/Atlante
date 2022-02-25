@@ -16,7 +16,7 @@ public class SetReminderEmailBoundary extends SocketBoundary
 
     }
 
-    public static void sendToServer(EventBean eventInfo) throws SendEmailException
+    public static void sendToServer(EventBean eventInfo, boolean update) throws SendEmailException
     {
         LocalDateTime moment = eventInfo.getDateOfReminder() ;
         String name = eventInfo.getName() ;
@@ -26,6 +26,11 @@ public class SetReminderEmailBoundary extends SocketBoundary
         String description = eventInfo.getDescription() ;
 
         String query = String.format("N%s;%s;%s;%s;%s;%s;%s;", moment.toString(), User.getUser().getEmail(), name, day, start, end, description) ;
+
+        if(update)
+        {
+            query = "U" + query.substring(1) ;
+        }
 
         try
         {

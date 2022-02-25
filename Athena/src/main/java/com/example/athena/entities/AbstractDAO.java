@@ -65,7 +65,6 @@ public abstract class AbstractDAO
         return dbConnection ;
     }
 
-
     protected static void getCredentials() {
         try(BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/dbConn")) ) {
 

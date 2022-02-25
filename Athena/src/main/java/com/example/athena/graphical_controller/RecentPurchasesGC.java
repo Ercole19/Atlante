@@ -22,7 +22,6 @@ import java.util.ResourceBundle;
 
 public class RecentPurchasesGC implements Initializable {
 
-    private SceneSwitcher switcher = new SceneSwitcher();
     @FXML
     private SubScene subScene;
 

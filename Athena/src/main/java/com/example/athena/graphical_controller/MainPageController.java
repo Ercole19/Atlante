@@ -1,13 +1,15 @@
 package com.example.athena.graphical_controller;
 
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class MainPageController {
 
-
-
+    private final  SceneSwitcher switcher = new SceneSwitcher();
+    private Stage stage;
 
     public void onExamsButtonClick(ActionEvent event) throws IOException {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;

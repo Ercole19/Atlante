@@ -2,11 +2,13 @@ package com.example.athena.graphical_controller;
 
 import com.example.athena.entities.CalendarEntity;
 import com.example.athena.exceptions.EventException;
+import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.view.AnchorPaneNode;
 import com.example.athena.view.FullCalendarView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.SubScene;
 import javafx.scene.control.Alert;
 import javafx.scene.paint.Paint;
@@ -37,14 +39,11 @@ public class CalendarPageController implements Initializable {
 
     public void clickOnBackButton(ActionEvent event)
     {
-        try {
-            switchScene("MainPageStudents.fxml" , event);
-        } catch (IOException e) {
-            e.getMessage();
-        }
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "MainPageStudents.fxml");
     }
 
-    public void clickOnAddEvent() throws IOException
+    public void clickOnAddEvent()
     {
         switcher.popup("AddEventScreen.fxml", "Add a new event") ;
     }
@@ -54,14 +53,6 @@ public class CalendarPageController implements Initializable {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         switcher.switcher(stage, "PlotPage.fxml");
     }
-
-    public void switchScene(String fxml , ActionEvent event) throws IOException {
-
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, fxml);
-
-    }
-
 
     public void populateCalendar(YearMonth yearMonth)  {
         // Get the date we want to start with on the calendar
@@ -76,7 +67,7 @@ public class CalendarPageController implements Initializable {
         }
         catch (EventException e)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600) ;
             alert.showAndWait() ;
             return ;
         }
@@ -122,18 +113,12 @@ public class CalendarPageController implements Initializable {
 
     public void loadEventsByDate(LocalDate day)
     {
-        try {
-            List<EventBean> results =  calendarEntity.getEvents(day); //Another bean should be added
-
-            SceneSwitcher switcher = new SceneSwitcher() ;
-            ArrayList<Object> params = new ArrayList<>() ;
-            params.add(String.valueOf(day));
-            params.add(results) ;
-            switcher.popup("eventPage.fxml", "Event infos", params) ;
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        List<EventBean> results =  calendarEntity.getEvents(day); //Another bean should be added
+        
+        ArrayList<Object> params = new ArrayList<>() ;
+        params.add(String.valueOf(day));
+        params.add(results) ;
+        switcher.popup("eventPage.fxml", "Event infos", params) ;
     }
 
     @Override

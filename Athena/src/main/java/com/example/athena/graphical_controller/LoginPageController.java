@@ -5,6 +5,7 @@ import com.example.athena.use_case_controllers.LoginUseCaseControlller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -47,8 +48,8 @@ public class LoginPageController {
             if (bean.getRole().equals("student")) {
                 Alert alert = new Alert(Alert.AlertType.NONE, "Access granted !", ButtonType.CLOSE);
                 alert.showAndWait();
-                SceneSwitcher switcher = new SceneSwitcher();
-                switcher.switcher(event, "MainPageStudents.fxml");
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+                switcher.switcher(stage, "MainPageStudents.fxml");
                 User.getUser().setEmail(email);
 
             } else {
@@ -94,15 +95,10 @@ public class LoginPageController {
         }
     }
 
-    public void switchtoTutorMainPage(ActionEvent event) throws IOException
-    {
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "MainPageTutor.fxml");
-    }
-
     public void switchToSignUpPage(ActionEvent event ) throws IOException {
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "signUpView.fxml");
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "signUpView.fxml");
 
     }
 

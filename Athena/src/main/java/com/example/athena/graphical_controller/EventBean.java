@@ -60,13 +60,13 @@ public class EventBean {
         this.start = start ;
     }
 
-    public void setStartbyString (String start) {
+    public void setStartByString(String start) {
         LocalTime inizio = LocalTime.parse(start) ;
         this.start = inizio ;
     }
 
 
-    public void setEndbyString (String end) {
+    public void setEndByString(String end) {
         LocalTime fine = LocalTime.parse(end) ;
         this.end = fine ;
     }

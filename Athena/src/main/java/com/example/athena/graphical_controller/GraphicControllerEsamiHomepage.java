@@ -140,16 +140,10 @@ public class GraphicControllerEsamiHomepage implements Initializable {
                         SceneSwitcher switcher = new SceneSwitcher() ;
                         ArrayList<Object> params = new ArrayList<>() ;
                         params.add(exam) ;
-                        try {
-                            switcher.popup("Aggiungi_Esame_view.fxml", "Edit your exam", params);
-                            refreshTable();
-                            disableIfEmpty();
-                        }catch (IOException exc) {
-                            exc.getCause() ;
-                        }
-
+                        switcher.popup("Aggiungi_Esame_view.fxml", "Edit your exam", params);
+                        refreshTable();
+                        disableIfEmpty();
                     });
-
 
                     cancella.setOnMouseClicked( event -> {
                         try {

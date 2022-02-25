@@ -33,7 +33,7 @@ public class CalendarEntity {
     public List<EventBean> getEvents(LocalDate day)
     {
         List<EventBean> events = new ArrayList<>();
-        for(EventEntity event : this.map.getOrDefault(day, new ArrayList<EventEntity>())) {
+        for(EventEntity event : this.map.getOrDefault(day, new ArrayList<>())) {
 
             EventBean eventBean = new EventBean();
             eventBean.setDate(event.getDay());

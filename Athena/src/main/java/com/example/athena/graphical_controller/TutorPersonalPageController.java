@@ -99,8 +99,8 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
             controller.updateTutorInformation(infos);
         }
 
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "MainPageTutor.fxml");
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "MainPageTutor.fxml");
     }
 
     public void onCVButtonClicktutor() throws IOException

@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +33,8 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
     public void clickOnBackButton(ActionEvent event) throws IOException
     {
         SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(event, "tutorSearchPage.fxml");
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        switcher.switcher(stage, "tutorSearchPage.fxml");
     }
 
     public void clickOnSubmitButton(ActionEvent event) throws IOException
@@ -61,7 +63,7 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
             reviewSubscene.setRoot(root) ;
         }catch(TutorReviewException exception)
         {
-            root = load((new SceneSwitcher()).generateUrl("ErrorInReviewView.fxml")) ;
+            root = new SceneSwitcher().preload("ErrorInReviewView.fxml") ;
             scene = ((Node) event.getSource()).getScene() ;
             SubScene reviewSubscene = (SubScene) scene.lookup(REVIEW_SECTION_PROMPT) ;
             reviewSubscene.setRoot(root) ;
@@ -111,7 +113,7 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
             reviewSubscene.setRoot(new AnchorPane()) ;
         }catch (TutorReviewException e)
         {
-            root = load((new SceneSwitcher()).generateUrl("ErrorInReviewView.fxml")) ;
+            root = new SceneSwitcher().preload("ErrorInReviewView.fxml") ;
             reviewSubscene.setRoot(root) ;
         }
     }

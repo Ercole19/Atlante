@@ -38,9 +38,9 @@ public class SceneSwitcher {
 
     }
 
-    public void switcher(ActionEvent event, String fxml, List<Object> params) throws IOException {
-        Parent root = preload(fxml, params) ;
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    public void switcher(Stage stage, String fxml, List<Object> params)
+    {
+        Parent root = preload(fxml, params);
         Scene scene = new Scene(root);
         stage.setScene(scene) ;
     }
@@ -48,8 +48,16 @@ public class SceneSwitcher {
 
     public void popup(String fxml, String title)
     {
-        Parent root = load(generateUrl(fxml)) ;
-        preparePopup(root, title) ;
+        try
+        {
+            Parent root = load(generateUrl(fxml)) ;
+            preparePopup(root, title) ;
+        }
+        catch (IOException e)
+        {
+            this.handleSwitcherException();
+        }
+
     }
 
     public void popup (String fxml, String title, List<Object> params)
@@ -84,6 +92,20 @@ public class SceneSwitcher {
         return root ;
     }
 
+    public Parent preload(String fxml)
+    {
+        Parent root = null ;
+        try {
+            FXMLLoader loader = new FXMLLoader(generateUrl(fxml)) ;
+            root = loader.load() ;
+        } catch (IOException e) {
+            this.handleSwitcherException();
+        }
+
+        assert root != null ;
+        return root ;
+    }
+
 
     public URL generateUrl(String fxmlToLoad)throws MalformedURLException {
         URL returnUrl = null;
@@ -98,9 +120,12 @@ public class SceneSwitcher {
             return returnUrl;
     }
 
-    public void switcher(MouseEvent mouseEvent, String fxml, List<Object> params) throws IOException {
-        Parent root = preload(fxml, params) ;
-        Stage stage= (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene) ;}
+
+    private void handleSwitcherException()
+    {
+        SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, fatalError, 800, 600) ;
+        alert.showAndWait() ;
+        ExitSystem exit = new ExitSystem() ;
+        exit.exitFromApplication();
+    }
 }

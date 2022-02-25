@@ -17,8 +17,8 @@ public class EventPageUCC {
 
             EventBean evento = new EventBean() ;
             evento.setName(eventinfos[i]);
-            evento.setStartbyString(eventinfos[i + 1]);
-            evento.setEndbyString(eventinfos[i + 2]);
+            evento.setStartByString(eventinfos[i + 1]);
+            evento.setEndByString(eventinfos[i + 2]);
             evento.setDescription(eventinfos[i + 3]);
             evento.setDate(LocalDate.parse(eventinfos[i+4]));
             evento.setType(eventinfos[i+5]) ;
