@@ -41,7 +41,9 @@ public class PlotPageGraphicalController implements Initializable
         try
         {
             activitiesPlot.getData().clear() ;
-            PlotSearchQueryBean queryBean = new PlotSearchQueryBean(activityTypeChoiceBox.getValue(), timePeriodChoiceBox.getValue()) ;
+            PlotSearchQueryBean queryBean = new PlotSearchQueryBean() ;
+            queryBean.setActivityType(activityTypeChoiceBox.getValue());
+            queryBean.setPeriodType(timePeriodChoiceBox.getValue());
             GeneratePlotsUseCaseController plotsController = new GeneratePlotsUseCaseController() ;
             ActivityPlotsBean plotsBean = plotsController.evaluateQuery(queryBean) ;
             activitiesPlot.getData().addAll(plotsBean.getActivityPlots()) ;

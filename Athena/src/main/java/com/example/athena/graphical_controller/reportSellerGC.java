@@ -7,12 +7,11 @@ import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class reportSellerGC implements PostInitialize {
 
-    private BookEntityBean book;
+    private BookBean book;
 
     public void onYesBtnClick() { //if you want to test the report log with user : 'test@test.it' pass : 'test'
         ReportSellerUCC controller = new ReportSellerUCC();
@@ -27,7 +26,7 @@ public class reportSellerGC implements PostInitialize {
 
     @Override
     public void postInitialize(ArrayList<Object> params) {
-        this.book = (BookEntityBean) params.get(0);
+        this.book = (BookBean) params.get(0);
     }
 
 

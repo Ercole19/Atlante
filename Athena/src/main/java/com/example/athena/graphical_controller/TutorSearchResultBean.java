@@ -3,18 +3,29 @@ package com.example.athena.graphical_controller;
 public class TutorSearchResultBean
 {
     private String id ;
-    private final String name ;
-    private final String surname ;
-    private final String taughtSubject ;
-    private final String starNumber ;
+    private String name ;
+    private String surname ;
+    private String taughtSubject ;
+    private String starNumber ;
 
-    public TutorSearchResultBean(String name, String surname, String taughtSubject, float starNumber, String id)
-    {
-        this.name = name ;
-        this.surname = surname ;
-        this.taughtSubject = taughtSubject ;
-        this.starNumber = String.format("%.2f*", starNumber) ;
-        this.id = id ;
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setTaughtSubject(String taughtSubject){
+        this.taughtSubject = taughtSubject;
+    }
+
+    public void setSurname(String surname){
+        this.surname = surname;
+    }
+
+    public void setStarNumber(float starNumber) {
+        this.starNumber = String.format("%.2f*", starNumber);
+    }
+
+    public void setId(String id){
+        this.id = id;
     }
 
     public String getName()

@@ -38,7 +38,7 @@ public class SearchResultFormatterScrollBar extends  SearchResultFormatterDecora
     }
 
     @Override
-    public AnchorPane buildRecentPurchaseResultScene(double containerWidth, double containerHeight, List<BookEntityBean> results) {
+    public AnchorPane buildRecentPurchaseResultScene(double containerWidth, double containerHeight, List<BookBean> results) {
         AnchorPane resultPane = super.buildRecentPurchaseResultScene(containerWidth -20, containerHeight, results) ;
         return applyVerticalScrollBar(resultPane, containerWidth, containerHeight, results.size()*100.0) ;
     }

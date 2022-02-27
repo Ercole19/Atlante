@@ -9,13 +9,6 @@ public class TutoringInformationBean
     private String tutoringSubject ;
     private String tutoringDaysHour ;
 
-    public TutoringInformationBean(String tutorsName, String tutoringSubject, LocalDate day, LocalTime startTime, LocalTime endTime)
-    {
-        setTutorsName(tutorsName) ;
-        setTutoringSubject(tutoringSubject) ;
-        setTutoringDaysHour(day, startTime, endTime) ;
-    }
-
     public void setTutorsName(String tutorsName)
     {
         this.tutorsName = tutorsName ;

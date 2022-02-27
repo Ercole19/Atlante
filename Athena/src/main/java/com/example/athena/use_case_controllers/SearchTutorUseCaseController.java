@@ -15,7 +15,11 @@ public class SearchTutorUseCaseController {
         ArrayList<TutorSearchResultBean> result = new ArrayList<>();
         while (tutorinfos[i] != null) {
 
-            TutorSearchResultBean kanye = new TutorSearchResultBean(tutorinfos[i], tutorinfos[i + 1], tutorinfos[i + 2], Float.parseFloat(tutorinfos[i + 3]), tutorinfos[i + 4]);
+            TutorSearchResultBean kanye = new TutorSearchResultBean();
+            kanye.setSurname(tutorinfos[i + 1]);
+            kanye.setTaughtSubject(tutorinfos[i + 2]);
+            kanye.setStarNumber(Float.parseFloat(tutorinfos[i + 3]));
+            kanye.setId(tutorinfos[i + 4]);
             result.add(kanye);
             i = i + 5;
         }

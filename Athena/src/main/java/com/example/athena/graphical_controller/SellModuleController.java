@@ -50,13 +50,14 @@ public class SellModuleController extends shiftImageController implements Initia
     @FXML
     private Button confirmButton ;
 
-    private int index ;
     private List<File> files;
+
+    private BookBean book;
 
     public void onConfirmButtonClick(ActionEvent event)  {
 
         try {
-            BookEntityBean book = new BookEntityBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , files, User.getUser().getEmail());
+            book = new BookBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , files, User.getUser().getEmail());
             SellBooksUseCaseController sellBooksUseCaseController = new SellBooksUseCaseController();
             sellBooksUseCaseController.putOnSale(book);
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
@@ -72,7 +73,7 @@ public class SellModuleController extends shiftImageController implements Initia
     public void onUpdateButtonClick(ActionEvent event)
     {
         try {
-            BookEntityBean book = new BookEntityBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , files, User.getUser().getEmail());
+            book = new BookBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , files, User.getUser().getEmail());
             SellBooksUseCaseController sellBooksUseCaseController = new SellBooksUseCaseController();
             sellBooksUseCaseController.updateProduct(book);
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
@@ -126,7 +127,7 @@ public class SellModuleController extends shiftImageController implements Initia
     @Override
     public void postInitialize(ArrayList<Object> params){
 
-        BookEntityBean bean = (BookEntityBean) params.get(0);
+        BookBean bean = (BookBean) params.get(0);
         bookTitle.setText(bean.getBookTitle());
         bookISBN.setText(bean.getIsbn());
         bookISBN.setDisable(true);

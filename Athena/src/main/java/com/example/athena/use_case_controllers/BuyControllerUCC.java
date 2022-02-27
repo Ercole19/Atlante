@@ -4,7 +4,7 @@ import com.example.athena.boundaries.PurchaseBoundary;
 import com.example.athena.entities.BookDao;
 import com.example.athena.entities.BookEntity;
 import com.example.athena.entities.User;
-import com.example.athena.graphical_controller.BookEntityBean;
+import com.example.athena.graphical_controller.BookBean;
 import com.example.athena.graphical_controller.BookSearchResultBean;
 
 import java.util.ArrayList;
@@ -20,7 +20,12 @@ public class BuyControllerUCC {
         ArrayList<BookSearchResultBean> result = new ArrayList<>();
         for (BookEntity entity : bookinfos) {
 
-            BookSearchResultBean book = new BookSearchResultBean(entity.getBookTitle(), entity.getIsbn(), entity.getPrice(), entity.getOwner(), entity.getFile());
+            BookSearchResultBean book = new BookSearchResultBean();
+            book.setTitle(entity.getBookTitle());
+            book.setIsbn(entity.getIsbn());
+            book.setPrice(entity.getPrice());
+            book.setOwner(entity.getOwner());
+            book.setFile(entity.getFile());
             result.add(book);
 
         }
@@ -28,7 +33,7 @@ public class BuyControllerUCC {
         return result;
     }
     
-    public void purchase(BookEntityBean book) {
+    public void purchase(BookBean book) {
         try {
            if(PurchaseBoundary.purchase())dao.finalizePurchase(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), User.getUser().getEmail(), book.getOwner());
            else System.out.println(1);

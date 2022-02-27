@@ -1,9 +1,7 @@
 package com.example.athena.graphical_controller;
 
-import com.example.athena.entities.User;
 import com.example.athena.use_case_controllers.BookPageUCC;
 import com.example.athena.use_case_controllers.BuyControllerUCC;
-import com.example.servers.FakePaymentSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -15,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +48,7 @@ public class BookPageController extends shiftImageController implements PostInit
     @FXML
     private ImageView RArrowImage;
 
-    private BookEntityBean book;
+    private BookBean book;
 
     private List<Image> bookImages;
 
@@ -81,7 +78,7 @@ public class BookPageController extends shiftImageController implements PostInit
         }
     }
 
-    public void populatePage(BookEntityBean book){
+    public void populatePage(BookBean book){
         BookPageUCC controller = new BookPageUCC() ;
         String[] vendorFullName = controller.getUserName(book.getOwner());
         nome.setText(vendorFullName[0]);

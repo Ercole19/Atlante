@@ -1,6 +1,7 @@
 package com.example.athena.graphical_controller;
 
 import com.example.athena.entities.User;
+import com.example.athena.exceptions.BookException;
 import com.example.athena.use_case_controllers.RecentPurchaseUCC;
 import com.example.athena.view.SearchResultFormatterView;
 import com.example.athena.view.scene_decorators.SearchResultFormatterComponent;
@@ -9,8 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.SubScene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -36,7 +37,14 @@ public class RecentPurchasesGC implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         RecentPurchaseUCC controller= new RecentPurchaseUCC();
-        List<BookEntityBean> bookList = controller.formatResults(User.getUser().getEmail());
+        List<BookBean> bookList = null;
+        try {
+            bookList = controller.formatResults(User.getUser().getEmail());
+        } catch (BookException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR) ;
+            alert.setContentText(e.getMessage()) ;
+            alert.showAndWait() ;
+        }
 
         SearchResultFormatterComponent resultView = new SearchResultFormatterView() ;
 
@@ -45,7 +53,7 @@ public class RecentPurchasesGC implements Initializable {
             resultView = new SearchResultFormatterScrollBar(resultView) ;
         }
 
-        AnchorPane subSceneElems = resultView.buildRecentPurchaseResultScene(subScene.getWidth(), subScene.getHeight(), (ArrayList<BookEntityBean>) bookList) ;
+        AnchorPane subSceneElems = resultView.buildRecentPurchaseResultScene(subScene.getWidth(), subScene.getHeight(), (ArrayList<BookBean>) bookList) ;
         subScene.setRoot(subSceneElems) ;
 
     }

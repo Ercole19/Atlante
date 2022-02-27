@@ -1,6 +1,6 @@
 package com.example.athena.view.scene_decorators;
 
-import com.example.athena.graphical_controller.BookEntityBean;
+import com.example.athena.graphical_controller.BookBean;
 import com.example.athena.graphical_controller.BookSearchResultBean;
 import com.example.athena.graphical_controller.EventBean;
 import com.example.athena.graphical_controller.TutorSearchResultBean;
@@ -32,7 +32,7 @@ public abstract class SearchResultFormatterDecorator extends SearchResultFormatt
     }
 
     @Override
-    public AnchorPane buildRecentPurchaseResultScene(double coontainerWidth, double containerHeight, List<BookEntityBean> results) {
+    public AnchorPane buildRecentPurchaseResultScene(double coontainerWidth, double containerHeight, List<BookBean> results) {
          return this.component.buildRecentPurchaseResultScene(coontainerWidth, containerHeight, results);
     }
 

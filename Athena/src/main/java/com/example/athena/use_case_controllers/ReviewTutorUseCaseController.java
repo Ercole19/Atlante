@@ -39,8 +39,12 @@ public class ReviewTutorUseCaseController
         String code = reviewCode.getReviewCode() ;
         ReviewEntity review = ReviewEntity.getFromDB(code) ;
 
-        return new TutoringInformationBean(review.getTutorUsername(), review.getSubject().toString(), review.getDay(),
-                review.getStartTime(), review.getEndTime()) ;
+        TutoringInformationBean tutoringInformationBean =  new TutoringInformationBean() ;
+
+        tutoringInformationBean.setTutorsName(review.getTutorUsername());
+        tutoringInformationBean.setTutoringSubject(review.getSubject().toString());
+        tutoringInformationBean.setTutoringDaysHour(review.getDay(), review.getStartTime(), review.getEndTime());
+        return tutoringInformationBean;
     }
 
     public void sendReview(SendReviewBean review) throws TutorReviewException

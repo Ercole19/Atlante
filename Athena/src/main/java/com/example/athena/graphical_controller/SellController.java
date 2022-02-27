@@ -30,22 +30,22 @@ public class SellController implements Initializable {
 
 
     @FXML
-    private TableView<BookEntityBean> bookTable ;
+    private TableView<BookBean> bookTable ;
 
     @FXML
-    private TableColumn<BookEntityBean, String> colName ;
+    private TableColumn<BookBean, String> colName ;
 
     @FXML
-    private TableColumn<BookEntityBean, String> colIsbn ;
+    private TableColumn<BookBean, String> colIsbn ;
 
     @FXML
-    private TableColumn<BookEntityBean, Float> colPrice ;
+    private TableColumn<BookBean, Float> colPrice ;
 
     @FXML
-    private TableColumn<BookEntityBean, Void> colManage ;
+    private TableColumn<BookBean, Void> colManage ;
 
 
-    private final ObservableList<BookEntityBean> bookList  = FXCollections.observableArrayList() ;
+    private final ObservableList<BookBean> bookList  = FXCollections.observableArrayList() ;
     private final SceneSwitcher switcher = new SceneSwitcher();
     private Stage stage;
 
@@ -82,10 +82,10 @@ public class SellController implements Initializable {
         colIsbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         colManage.setCellValueFactory(new PropertyValueFactory<>("Manage"));
-        javafx.util.Callback<TableColumn<BookEntityBean, Void>, TableCell<BookEntityBean, Void>> cellFactory = new javafx.util.Callback<>() {
+        javafx.util.Callback<TableColumn<BookBean, Void>, TableCell<BookBean, Void>> cellFactory = new javafx.util.Callback<>() {
 
             @Override
-            public TableCell<BookEntityBean, Void> call(TableColumn<BookEntityBean, Void> BookEntityBeanVoidTableColumn) {
+            public TableCell<BookBean, Void> call(TableColumn<BookBean, Void> BookEntityBeanVoidTableColumn) {
                         return new TableCell<>() {
 
 
@@ -111,7 +111,7 @@ public class SellController implements Initializable {
 
                                     editButton.setOnAction(event -> {
 
-                                        BookEntityBean book = bookTable.getSelectionModel().getSelectedItem();
+                                        BookBean book = bookTable.getSelectionModel().getSelectedItem();
 
                                         SceneSwitcher switcher = new SceneSwitcher();
                                         ArrayList<Object> params = new ArrayList<>();
@@ -129,7 +129,7 @@ public class SellController implements Initializable {
 
 
                                     goToBookPage.setOnAction(event -> {
-                                        BookEntityBean book = bookTable.getSelectionModel().getSelectedItem();
+                                        BookBean book = bookTable.getSelectionModel().getSelectedItem();
                                         List<Object> params = new ArrayList<>();
                                         book.setOwner(User.getUser().getEmail());
                                         params.add(book.getOwner());
@@ -146,7 +146,7 @@ public class SellController implements Initializable {
                                     cancella.setOnMouseClicked(event -> {
                                         try {
 
-                                            BookEntityBean book = bookTable.getSelectionModel().getSelectedItem();
+                                            BookBean book = bookTable.getSelectionModel().getSelectedItem();
                                             SellBooksUseCaseController controller = new SellBooksUseCaseController();
                                             controller.deleteProduct(book);
                                             refreshTable();

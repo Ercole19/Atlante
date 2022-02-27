@@ -45,7 +45,9 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
 
             String reviewCode = this.reviewCodeTextField.getText() ;
 
-            TutoringInformationBean reviewInfo = reviewController.reviewTutor(new ReviewCodeBean(reviewCode)) ;
+            ReviewCodeBean rc = new ReviewCodeBean();
+            rc.setReviewCode(reviewCode);
+            TutoringInformationBean reviewInfo = reviewController.reviewTutor(rc) ;
 
             SceneSwitcher switcher = new SceneSwitcher() ;
             root = switcher.preload( "tutorPersonalReview.fxml", new ArrayList<>(Collections.singleton(reviewCode)));

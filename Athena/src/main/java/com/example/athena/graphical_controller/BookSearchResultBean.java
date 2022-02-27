@@ -9,14 +9,25 @@ public class BookSearchResultBean {
     private String owner ;
     private File file;
 
-    public BookSearchResultBean(String title, String isbn, Float price, String owner, File image) {
-        this.title = title;
-        this.isbn = isbn;
-        this.price = price;
-        this.owner = owner ;
-        this.file = image;
+    public void setFile(File file) {
+        this.file = file;
     }
 
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public File getFile() {
         return file;
