@@ -15,29 +15,11 @@ public class EventBean {
     private String description ;
     private String type ;
 
-    private boolean isThereAReminder ;
     private LocalDateTime dateOfReminder ;
 
     public EventBean()
     {
 
-    }
-
-    public EventBean(LocalDate date, String name, LocalTime start, LocalTime end, String description, String type, EventReminderWrapperBean wrapperBean)
-    {
-        setDate(date) ;
-        setName(name) ;
-        setStart(start);
-        setEnd(end) ;
-        setDescription(description) ;
-        setType(type) ;
-        setIsThereAReminder(wrapperBean.getIsThereAReminder()) ;
-        if(isThereAReminder) setDateOfReminder(wrapperBean.getHoursBefore(), wrapperBean.getMinutesBefore()) ;
-    }
-
-    public void setIsThereAReminder(boolean value)
-    {
-        this.isThereAReminder = value ;
     }
 
     public void setDateOfReminder(int hoursBefore, int minutesBefore)
@@ -117,8 +99,12 @@ public class EventBean {
 
     public LocalDateTime getDateOfReminder()throws EventException
     {
+        if(!this.isThereAReminder()) throw new EventException("Reminder couldn't be fetched because it doesn't exist");
         return this.dateOfReminder ;
     }
     
-    
+    public boolean isThereAReminder()
+    {
+        return this.dateOfReminder != null ;
+    }
 }

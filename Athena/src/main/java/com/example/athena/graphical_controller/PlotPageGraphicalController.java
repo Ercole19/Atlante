@@ -57,9 +57,9 @@ public class PlotPageGraphicalController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        for(PlottingOptionsEnum e: PlottingOptionsEnum.values())
+        for(PlottingOptionsEnum elem: PlottingOptionsEnum.values())
         {
-            String entry = e.toString().replace("_", " ").toLowerCase() ;
+            String entry = elem.toString().replace("_", " ").toLowerCase() ;
             activityTypeChoiceBox.getItems().add(entry.substring(0,1).toUpperCase() + entry.substring(1)) ;
         }
 

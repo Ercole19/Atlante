@@ -44,9 +44,33 @@ public class AverageUCC  {
         return examsArithmeticAverageInfos;
     }
 
-    public ObservableList<XYChart.Data<String, Number>> retrieveExamsWeighted() {
-        ExamDao dao = new ExamDao() ;
-        ObservableList<XYChart.Data<String, Number>> data = dao.getSortedExamsWeighted() ;
-        return data ;
+    public ObservableList<ExamAverageInformation> getExamsWeightedAverageInformation() throws ExamException {
+
+        ObservableList<ExamEntityBean> exams = ExamsSubject.getInstance().getSortedExams() ;
+        ObservableList<ExamAverageInformation> examsWeightedAverageInfos = FXCollections.observableArrayList();
+        int  cfus = 0 ;
+        double average = 0.0;
+        double counterVoti = 0.0;
+        int voto ;
+        int cfu ;
+
+        for(ExamEntityBean exam : exams)
+        {
+            String data = exam.getDate();
+            voto = exam.getVotoEsame();
+            cfu = exam.getCfuEsame();
+            cfus = cfus + cfu ;
+            counterVoti = counterVoti + (voto * cfu );
+
+            average = (counterVoti) / cfus;
+
+            ExamAverageInformation info = new ExamAverageInformation();
+            info.setAverage(average);
+            info.setDate(data);
+
+            examsWeightedAverageInfos.add(info);
+        }
+
+        return examsWeightedAverageInfos;
     }
 }

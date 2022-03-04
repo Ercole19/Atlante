@@ -30,6 +30,8 @@ public class PlotEntity
         if(this.eventsToPlot.isEmpty())
         {
             this.series = new XYChart.Series<>() ;
+            String name = this.type.toString() ;
+            this.series.setName(name.charAt(0) + name.substring(1).toLowerCase().replace("_" , " "));
             return ;
         }
 
@@ -49,6 +51,8 @@ public class PlotEntity
         }
 
         XYChart.Series<String, Long> newSeries = new XYChart.Series<>() ;
+        String name = this.type.toString() ;
+        newSeries.setName(name.charAt(0) + name.substring(1).toLowerCase().replace("_" , " "));
         LocalDate today = LocalDate.now() ;
 
         while(startDay.isBefore(today))

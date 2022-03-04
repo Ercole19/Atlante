@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
-public class GraphicControllerEsamiHomepage implements Initializable {
+public class GraphicControllerEsamiHomepage implements AbstractObserver, Initializable {
 
 
     @FXML
@@ -138,5 +138,33 @@ public class GraphicControllerEsamiHomepage implements Initializable {
         colEDit.setCellFactory(cellFactory);
         ExamsSubject.getInstance().attachObserver(this);
 
+    }
+
+    public void update()
+    {
+        examList.clear() ;
+        ObservableList<ExamEntityBean> totalExams = null;
+        try {
+            totalExams = ExamsSubject.getInstance().getExams();
+        } catch (ExamException e) {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+        }
+        examTable.setItems(totalExams);
+
+        if (totalExams.isEmpty())
+        {
+            averageBtn.setDisable(true);
+            careerBtn.setDisable(true);
+            averageBtn.setVisible(false);
+            careerBtn.setVisible(false);
+        }
+        else
+        {
+            averageBtn.setVisible(true);
+            averageBtn.setDisable(false);
+            careerBtn.setDisable(false);
+            careerBtn.setVisible(true);
+        }
     }
 }

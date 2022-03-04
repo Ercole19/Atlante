@@ -46,4 +46,5 @@ public class EntityExam {
     public String getData() {
         return data;
     }
+    
 }

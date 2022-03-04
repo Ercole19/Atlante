@@ -18,7 +18,7 @@ public class GeneratePlotsUseCaseController
 
     public ActivityPlotsBean evaluateQuery(PlotSearchQueryBean searchQuery) throws PlottingException
     {
-        ArrayList<XYChart.Series<String, Long>> plotsList  = new ArrayList<>() ;
+        List<XYChart.Series<String, Long>> plotsList  = new ArrayList<>() ;
         String activityType = searchQuery.getActivityType().replace(" ", "_").toUpperCase() ;
         String period = searchQuery.getPeriodType().replace(" ", "_").toUpperCase() ;
         TimePeriodsEnum from = TimePeriodsEnum.valueOf(period) ;
@@ -44,7 +44,8 @@ public class GeneratePlotsUseCaseController
                 return resultBean ;
 
             default :
-                return new ActivityPlotsBean(plotsList) ;
+                resultBean.setActivityPlots(plotsList) ;
+                return resultBean ;
 
         }
     }

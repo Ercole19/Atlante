@@ -11,10 +11,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -82,8 +82,7 @@ public class CareerStatusController implements Initializable {
     {
         ArrayList<Object> params = new ArrayList<>();
 
-        params.add(true);
-        params.add(this);//true if i want to set cfu, else exams. I will use this in a postInitialize
+        params.add(ExamsOrCfusEnum.SET_MAX_CFUS) ;
         switcher.popup("SetMAxCfuOrExams.fxml", "Set max cfus", params);
 
     }

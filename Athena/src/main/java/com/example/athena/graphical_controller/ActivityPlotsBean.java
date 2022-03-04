@@ -7,19 +7,14 @@ import java.util.List;
 
 public class ActivityPlotsBean
 {
-    private ArrayList<XYChart.Series<String, Long>> activityPlots ;
+    private List<XYChart.Series<String, Long>> activityPlots ;
 
-    public ActivityPlotsBean(ArrayList<XYChart.Series<String, Long>> activityPlots)
-    {
-        this.setActivityPlots(activityPlots) ;
-    }
-
-    public void setActivityPlots(ArrayList<XYChart.Series<String, Long>> activityPlots)
+    public void setActivityPlots(List<XYChart.Series<String, Long>> activityPlots)
     {
         this.activityPlots = activityPlots ;
     }
 
-    public ArrayList<XYChart.Series<String, Long>> getActivityPlots()
+    public List<XYChart.Series<String, Long>> getActivityPlots()
     {
         return this.activityPlots ;
     }

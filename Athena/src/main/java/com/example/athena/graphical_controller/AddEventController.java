@@ -126,6 +126,19 @@ public class AddEventController implements Initializable , PostInitialize{
                 ManageEventUCC addEventUCC = new ManageEventUCC();
                 addEventUCC.addEvent(eventToRegister);
 
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.close();
+            }
+        } catch (EventException e)
+        {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
+            alert.showAndWait();
+        }
+        catch (SendEmailException ex)
+        {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Unable to set notification to server. Try resending again by editing the event and updating", 800, 600) ;
+            alert.showAndWait();
+
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
         }
@@ -241,7 +254,8 @@ public class AddEventController implements Initializable , PostInitialize{
         }
         catch(SendEmailException e)
         {
-            e.printStackTrace();
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Error in setting the reminder. Try reopening the event and send it again", 800, 600);
+            alert.showAndWait();
         }
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
