@@ -5,6 +5,7 @@ import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.graphical_controller.EventBean;
 
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,7 +20,15 @@ public class SetReminderEmailBoundary extends SocketBoundary
 
     public static void sendToServer(EventBean eventInfo, boolean update) throws SendEmailException
     {
-        LocalDateTime moment = eventInfo.getDateOfReminder() ;
+        LocalDateTime moment;
+        try {
+             moment = eventInfo.getDateOfReminder() ;
+        }
+        catch (EventException e)
+        {
+            throw new SendEmailException("Unable to access reminder's date.");
+        }
+
         String name = eventInfo.getName() ;
         LocalDate day = eventInfo.getDate() ;
         LocalTime start = eventInfo.getStart() ;

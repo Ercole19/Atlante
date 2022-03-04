@@ -3,6 +3,7 @@ package com.example.athena.graphical_controller;
 import com.example.athena.entities.ActivityTypesEnum;
 import com.example.athena.entities.ReminderTypesEnum;
 import com.example.athena.entities.StringHoursConverter;
+import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.ManageEventUCC;
@@ -67,8 +68,7 @@ public class AddEventController implements Initializable , PostInitialize{
     @FXML
     private Button confirm;
 
-    private String oldEventName;
-    private EventReminderWrapperBean wrapperBean;
+    private EventBean oldEventBean;
 
 
     private Stage stage;
@@ -218,13 +218,22 @@ public class AddEventController implements Initializable , PostInitialize{
         ManageEventUCC controller = new ManageEventUCC() ;
         LocalTime start = LocalTime.of(startHourSpinner.getValue(), startMinuteSpinner.getValue());
         LocalTime end = LocalTime.of(endHourSpinner.getValue(), endMinuteSpinner.getValue());
-        if (setReminderCheckBox.isSelected()){
-            wrapperBean = new EventReminderWrapperBean(true,reminderHour.getValue() , reminderMinute.getValue());
+        EventBean eventToUpdate = new EventBean();
+
+        try {
+
+            eventToUpdate.setDate(eventDate.getValue());
+            eventToUpdate.setName(eventName.getText());
+            eventToUpdate.setStart(start);
+            eventToUpdate.setEnd(end);
+            eventToUpdate.setDescription(eventDescription.getText());
+            eventToUpdate.setType(eventType.getValue().toUpperCase().replace(" ", "_"));
         }
-        else {
-            wrapperBean = new EventReminderWrapperBean(false);
+        catch(EventException e){
+            SizedAlert error = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
+            error.showAndWait();
+            return;
         }
-        EventBean eventToUpdate = new EventBean(eventDate.getValue(), eventName.getText(), start, end, eventDescription.getText(), eventType.getValue(), wrapperBean);
 
         try
         {
@@ -234,7 +243,6 @@ public class AddEventController implements Initializable , PostInitialize{
         {
             e.printStackTrace();
         }
-
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
@@ -260,10 +268,17 @@ public class AddEventController implements Initializable , PostInitialize{
 
         if(setReminderCheckBox.isSelected())
         {
-            reminderHour.getValueFactory().setValue(event.getDateOfReminder().getHour());
-            reminderMinute.getValueFactory().setValue(event.getDateOfReminder().getMinute());
+            try {
+                String custom = ReminderTypesEnum.CUSTOM.toString() ;
+                reminderType.setValue(custom.charAt(0) + custom.substring(1).toLowerCase().replace("_", " ")) ;
+                reminderHour.getValueFactory().setValue(this.oldEventBean.getDateOfReminder().getHour());
+                reminderMinute.getValueFactory().setValue(this.oldEventBean.getDateOfReminder().getMinute());
+            }
+            catch(EventException e){
+                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
+                alert.showAndWait();
+            }
         }
-
 
         confirm.setText("Update");
 

@@ -68,14 +68,12 @@ public class EventBean {
     }
 
     public void setStartByString(String start) {
-        LocalTime inizio = LocalTime.parse(start) ;
-        this.start = inizio ;
+        this.start = LocalTime.parse(start);
     }
 
 
     public void setEndByString(String end) {
-        LocalTime fine = LocalTime.parse(end) ;
-        this.end = fine ;
+        this.end = LocalTime.parse(end);
     }
 
 
@@ -117,7 +115,7 @@ public class EventBean {
     }
 
 
-    public LocalDateTime getDateOfReminder()
+    public LocalDateTime getDateOfReminder()throws EventException
     {
         return this.dateOfReminder ;
     }

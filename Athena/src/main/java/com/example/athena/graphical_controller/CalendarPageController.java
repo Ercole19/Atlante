@@ -16,10 +16,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.Year;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
@@ -113,8 +111,15 @@ public class CalendarPageController implements Initializable {
 
     public void loadEventsByDate(LocalDate day)
     {
-        List<EventBean> results =  calendarEntity.getEvents(day); //Another bean should be added
-        
+        List<EventBean> results = null; //Another bean should be added
+        try {
+            results = calendarEntity.getEvents(day);
+        } catch (EventException e) {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
+            alert.showAndWait();
+            return ;
+        }
+
         ArrayList<Object> params = new ArrayList<>() ;
         params.add(String.valueOf(day));
         params.add(results) ;

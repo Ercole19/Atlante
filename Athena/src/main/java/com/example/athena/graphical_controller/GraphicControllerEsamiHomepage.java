@@ -28,8 +28,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
-
-
 public class GraphicControllerEsamiHomepage implements Initializable {
 
 
@@ -56,7 +54,6 @@ public class GraphicControllerEsamiHomepage implements Initializable {
 
     private final ObservableList<ExamEntityBean> examList  = FXCollections.observableArrayList() ;
     private final SceneSwitcher switcher = new SceneSwitcher();
-    private Stage stage;
 
 
     public void initAggiungiEsame ()  {
@@ -76,8 +73,8 @@ public class GraphicControllerEsamiHomepage implements Initializable {
 
 
     public void onBackButtonClick(ActionEvent event) throws IOException {
-        refreshTable();
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        ExamsSubject.getInstance().detachObserver(this);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         switcher.switcher(stage, "MainPageStudents.fxml");
      }
 
@@ -113,75 +110,60 @@ public class GraphicControllerEsamiHomepage implements Initializable {
         colVote.setCellValueFactory(new PropertyValueFactory<ExamEntityBean, Integer>("votoEsame"));
         colCfu.setCellValueFactory(new PropertyValueFactory<ExamEntityBean, Integer>("cfuEsame"));
         colDate.setCellValueFactory(new PropertyValueFactory<ExamEntityBean, LocalDate>("date"));
-        javafx.util.Callback<TableColumn<ExamEntityBean, Void>, TableCell<ExamEntityBean, Void>> cellFactory = new javafx.util.Callback<TableColumn<ExamEntityBean, Void> , TableCell<ExamEntityBean, Void>>() {
-
+        javafx.util.Callback<TableColumn<ExamEntityBean, Void>, TableCell<ExamEntityBean, Void>> cellFactory = new javafx.util.Callback<TableColumn<ExamEntityBean, Void>, TableCell<ExamEntityBean, Void>>() {
 
             @Override
             public TableCell<ExamEntityBean, Void> call(TableColumn<ExamEntityBean, Void> examEntityBeanVoidTableColumn) {
                 return new TableCell<ExamEntityBean, Void>() {
 
 
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
 
-            @Override
-            public void updateItem (Void item , boolean empty ) {
-                super.updateItem(item , empty);
-                if (empty ) {
-                    setGraphic(null);
-                }
-                else {
-                    cancella = new Text("-") ;
-                    cancella.setFont(Font.font("Arial Rounded MT Bold" , 40)  );
-                    cancella.setFill(Color.RED);
+                            cancella = new Text("-");
+                            cancella.setFont(Font.font("Arial Rounded MT Bold", 40));
+                            cancella.setFill(Color.RED);
 
-                    editButton = new Button("Edit ") ;
+                            editButton = new Button("Edit ");
 
-                    editButton.setOnAction(event -> {
-                        ExamEntityBean exam = examTable.getSelectionModel().getSelectedItem();
-                        SceneSwitcher switcher = new SceneSwitcher() ;
-                        ArrayList<Object> params = new ArrayList<>() ;
-                        params.add(exam) ;
-                        switcher.popup("Aggiungi_Esame_view.fxml", "Edit your exam", params);
-                        refreshTable();
-                        disableIfEmpty();
-                    });
+                            editButton.setOnAction(event -> {
+                                ExamEntityBean exam = examTable.getSelectionModel().getSelectedItem();
+                                SceneSwitcher switcher = new SceneSwitcher();
+                                ArrayList<Object> params = new ArrayList<>();
+                                params.add(exam);
+                                switcher.popup("Aggiungi_Esame_view.fxml", "Edit your exam", params);
+                                update();
+                            });
 
-                    cancella.setOnMouseClicked( event -> {
-                        try {
-                            ExamEntityBean exam = examTable.getSelectionModel().getSelectedItem();
-                            ExamDao esameD = new ExamDao() ;
+                            cancella.setOnMouseClicked(event -> {
+                                try {
+                                    ManageExamsUCC controller = new ManageExamsUCC();
+                                    controller.deleteExams(examTable.getSelectionModel().getSelectedItem());
+                                } catch (Exception exc) {
+                                    exc.getCause();
+                                }
+                            });
 
+                            managebtn = new HBox(editButton, cancella);
+                            managebtn.setStyle("-fx-alignment : center");
+                            HBox.setMargin(editButton, new Insets(2, 2, 0, 3));
+                            HBox.setMargin(cancella, new Insets(2, 3, 0, 2));
+                            setGraphic(managebtn);
 
-
-                            esameD.deleteExam(exam.getExamName());
-                            refreshTable();
-                            disableIfEmpty();
-                        }catch (Exception exc) {
-                            exc.getCause() ;
                         }
-                    });
-
-                    managebtn = new HBox(editButton , cancella) ;
-                    managebtn.setStyle("-fx-alignment : center");
-                    HBox.setMargin(editButton, new Insets(2,2,0,3)) ;
-                    HBox.setMargin(cancella , new Insets(2,3,0,2));
-                    setGraphic(managebtn) ;
-
-                }
-            }
+                    }
 
 
-                } ;
+                };
 
             }
         };
         colEDit.setCellFactory(cellFactory);
         ExamsSubject.getInstance().attachObserver(this);
-
-
-
-
-
-
 
     }
 }

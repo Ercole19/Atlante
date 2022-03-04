@@ -7,9 +7,12 @@ import com.example.athena.graphical_controller.ExamEntityBean;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
-public class AddExamUseCaseController {
-
-
+public class ManageExamsUCC {
+    
+    public void deleteExams(ExamEntityBean bean) {
+        EntityExam exam = new EntityExam(bean.getExamName(), bean.getVotoEsame(), bean.getCfuEsame(), bean.getDate());
+        ExamsSubject.getInstance().deleteExam(exam, bean.getExamIndex());
+    }
 
     public void addExam (ExamEntityBean bean) {
 

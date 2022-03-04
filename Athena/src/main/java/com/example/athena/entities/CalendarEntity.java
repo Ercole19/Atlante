@@ -30,7 +30,7 @@ public class CalendarEntity {
         }
     }
 
-    public List<EventBean> getEvents(LocalDate day)
+    public List<EventBean> getEvents(LocalDate day) throws EventException
     {
         List<EventBean> events = new ArrayList<>();
         for(EventEntity event : this.map.getOrDefault(day, new ArrayList<>())) {
