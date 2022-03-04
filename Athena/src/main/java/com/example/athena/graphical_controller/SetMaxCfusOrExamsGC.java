@@ -2,6 +2,8 @@ package com.example.athena.graphical_controller;
 
 import com.example.athena.entities.ExamsOrCfusEnum;
 import com.example.athena.entities.UserDao;
+import com.example.athena.exceptions.CareerStatusException;
+import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.SetMaxCfusOrExamsUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,7 +38,7 @@ public class SetMaxCfusOrExamsGC implements PostInitialize {
         switch(examsOrCfus)
         {
             case SET_MAX_CFUS:
-                textSetting.setText("Set  max cfus");
+                textSetting.setText("Set max cfus");
                 break;
 
             case SET_MAX_EXAMS:
@@ -60,6 +62,9 @@ public class SetMaxCfusOrExamsGC implements PostInitialize {
         }
         catch (NumberFormatException exc){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Insert a number!", ButtonType.CLOSE);
+            alert.showAndWait();
+        } catch (CareerStatusException e) {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
             alert.showAndWait();
         }
     }

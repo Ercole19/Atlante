@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class CareerStatusController implements Initializable {
+
     @FXML
     private PieChart examsPieChart;
     @FXML

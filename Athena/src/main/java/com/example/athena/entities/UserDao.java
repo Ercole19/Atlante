@@ -1,5 +1,6 @@
 package com.example.athena.entities;
 
+import com.example.athena.exceptions.CareerStatusException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -261,7 +262,7 @@ public class UserDao extends AbstractDAO {
         }
     }
 
-    public void setCfusOrExams(int data, ExamsOrCfusEnum cfuOrExams) {
+    public void setCfusOrExams(int data, ExamsOrCfusEnum cfuOrExams) throws CareerStatusException {
 
         switch (cfuOrExams)
         {
@@ -273,7 +274,6 @@ public class UserDao extends AbstractDAO {
                 break;
         }
 
-
         try (PreparedStatement statement = this.getConnection().prepareStatement(setQuery)) {
 
             statement.setInt(1, data);
@@ -283,7 +283,7 @@ public class UserDao extends AbstractDAO {
 
 
         } catch (SQLException exc) {
-            exc.printStackTrace();
+            throw new CareerStatusException("Unable to update career status. Details follow: " + exc.getMessage());
         }
     }
 
