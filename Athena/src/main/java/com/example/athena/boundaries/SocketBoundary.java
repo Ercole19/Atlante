@@ -10,6 +10,11 @@ public abstract class SocketBoundary
 {
     protected static final byte[] buff = new byte[128] ;
 
+    protected SocketBoundary()
+    {
+        
+    }
+
     protected static void bZero()
     {
         for(int i = 0; i < 128; i++)
@@ -32,39 +37,39 @@ public abstract class SocketBoundary
 
     protected static String sendMessageGetResponse(String query, int port) throws IOException
     {
-        bZero() ;
-        if(!writeQuery(query)) return "Error, the message is too long" ;
-        Socket socket = new Socket("localhost", port) ;
-        OutputStream out = socket.getOutputStream();
-        out.write(buff) ;
+        try(Socket socket = new Socket("localhost", port) ; OutputStream out = socket.getOutputStream() ; InputStream in = socket.getInputStream())
+        {
+            bZero() ;
+            if(!writeQuery(query)) return "Error, the message is too long" ;
 
-        bZero() ;
-        InputStream in = socket.getInputStream();
-        int readChars = in.read(buff, 0, 2) ;
-        if(readChars != 2) return "Unknown response from server" ;
 
-        if(buff[0] == 'F') return "Server error..." ;
+            out.write(buff) ;
 
-        in.close() ;
-        out.close() ;
-        socket.close() ;
+            bZero() ;
 
-        return "OK" ;
+            int readChars = in.read(buff, 0, 2) ;
+            if(readChars != 2) return "Unknown response from server" ;
+
+            if(buff[0] == 'F') return "Server error..." ;
+
+            return "OK" ;
+        }
     }
 
     protected static String getResponse(int port) throws IOException
     {
-        Socket socket = new Socket("localhost", port) ;
-        bZero() ;
-        InputStream in = socket.getInputStream();
-        int readChars = in.read(buff, 0, 2) ;
-        if(readChars != 2) return "Unknown response from server" ;
+        try(Socket socket = new Socket("localhost", port) ; InputStream in = socket.getInputStream())
+        {
+            bZero() ;
+            int readChars = in.read(buff, 0, 2) ;
+            if(readChars != 2) return "Unknown response from server" ;
 
-        if(buff[0] == 'F') return "Payment failed" ;
+            if(buff[0] == 'F') return "Payment failed" ;
 
-        in.close() ;
-        socket.close() ;
+            in.close() ;
+            socket.close() ;
 
-        return "OK" ;
+            return "OK" ;
+        }
     }
 }

@@ -32,7 +32,7 @@ public class CalendarEntity {
 
     public List<EventBean> getEvents(LocalDate day) throws EventException
     {
-        List<EventBean> events = new ArrayList<>();
+        List<EventBean> dailyEvents = new ArrayList<>();
         for(EventEntity event : this.map.getOrDefault(day, new ArrayList<>())) {
 
             EventBean eventBean = new EventBean();
@@ -43,11 +43,11 @@ public class CalendarEntity {
             eventBean.setDescription(event.getDescription());
             eventBean.setType(event.getType().toString()) ;
 
-            events.add(eventBean);
+            dailyEvents.add(eventBean);
 
 
         }
-        return events;
+        return dailyEvents;
     }
 
     public PresenceOfEventsBean isThereAnEventOnThatDay(LocalDate day)

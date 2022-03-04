@@ -143,7 +143,7 @@ public class GraphicControllerEsamiHomepage implements AbstractObserver, Initial
     public void update()
     {
         examList.clear() ;
-        ObservableList<ExamEntityBean> totalExams = null;
+        ObservableList<ExamEntityBean> totalExams = FXCollections.observableArrayList() ;
         try {
             totalExams = ExamsSubject.getInstance().getExams();
         } catch (ExamException e) {

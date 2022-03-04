@@ -17,14 +17,14 @@ public class SearchResultFormatterScrollBar extends  SearchResultFormatterDecora
     }
 
     @Override
-    public AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, ArrayList<TutorSearchResultBean> results)
+    public AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, List<TutorSearchResultBean> results)
     {
         AnchorPane resultPane = super.buildTutorSearchResultsScene(containerWidth -20, containerHeight, results) ;
         return applyVerticalScrollBar(resultPane, containerWidth, containerHeight, results.size()*100.0) ;
     }
 
     @Override
-    public AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, ArrayList<EventBean> results)
+    public AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, List<EventBean> results)
     {
         AnchorPane resultPane = super.buildEventSearchResultsScene(containerWidth -20, containerHeight, results) ;
         return applyVerticalScrollBar(resultPane, containerWidth, containerHeight, results.size()*100.0) ;

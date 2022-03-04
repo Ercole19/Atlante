@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookPageController extends shiftImageController implements PostInitialize{
+public class BookPageController extends ShiftImageController implements PostInitialize{
 
 
     @FXML
@@ -40,13 +40,13 @@ public class BookPageController extends shiftImageController implements PostInit
     @FXML
     private ImageView image;
     @FXML
-    private Button LArrow;
+    private Button lArrow;
     @FXML
-    private Button RArrow;
+    private Button rArrow;
     @FXML
-    private ImageView LArrowImage;
+    private ImageView lArrowImage;
     @FXML
-    private ImageView RArrowImage;
+    private ImageView rArrowImage;
 
     private BookBean book;
 
@@ -64,10 +64,10 @@ public class BookPageController extends shiftImageController implements PostInit
 
         super.bookImage = this.image;
         super.images = bookImages;
-        super.leftArrow = LArrow;
-        super.rightArrow = RArrow ;
-        super.leftArrowImage = LArrowImage ;
-        super.rightArrowImage = RArrowImage ;
+        super.leftArrow = lArrow;
+        super.rightArrow = rArrow;
+        super.leftArrowImage = lArrowImage;
+        super.rightArrowImage = rArrowImage;
 
         populatePage(book);
 

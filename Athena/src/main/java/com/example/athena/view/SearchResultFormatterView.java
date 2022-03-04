@@ -141,7 +141,7 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
 
 
     @Override
-    public AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, ArrayList<TutorSearchResultBean> results)
+    public AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, List<TutorSearchResultBean> results)
     {
 
         double sceneHeight = (results.size())*100.0f ;
@@ -214,7 +214,7 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
 
 
     @Override
-    public AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, ArrayList<EventBean> results)
+    public AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, List<EventBean> results)
     {
 
         double sceneHeight = (results.size())*100.0f ;

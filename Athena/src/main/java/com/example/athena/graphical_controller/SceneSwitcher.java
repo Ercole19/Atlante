@@ -2,16 +2,12 @@ package com.example.athena.graphical_controller;
 
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.ExitSystem;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -23,7 +19,7 @@ import static javafx.fxml.FXMLLoader.load;
 
 public class SceneSwitcher {
 
-    private final String fatalError = "FATAL ERROR: The application is unable to change pages. If the problem persists after restarting, try reinstalling the application.";
+    private static final String FATAL_ERROR = "FATAL ERROR: The application is unable to change pages. If the problem persists after restarting, try reinstalling the application.";
 
     public void switcher(Stage stage, String fxml) {
         try
@@ -123,7 +119,7 @@ public class SceneSwitcher {
 
     private void handleSwitcherException()
     {
-        SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, fatalError, 800, 600) ;
+        SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, FATAL_ERROR, 800, 600) ;
         alert.showAndWait() ;
         ExitSystem exit = new ExitSystem() ;
         exit.exitFromApplication();

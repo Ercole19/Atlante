@@ -47,11 +47,10 @@ public class SellController implements Initializable {
 
     private final ObservableList<BookBean> bookList  = FXCollections.observableArrayList() ;
     private final SceneSwitcher switcher = new SceneSwitcher();
-    private Stage stage;
 
     @FXML
     protected void onBackButtonClick(ActionEvent event) throws IOException {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         switcher.switcher(stage, "bookshop-choose-view.fxml");
     }
 
@@ -85,7 +84,7 @@ public class SellController implements Initializable {
         javafx.util.Callback<TableColumn<BookBean, Void>, TableCell<BookBean, Void>> cellFactory = new javafx.util.Callback<>() {
 
             @Override
-            public TableCell<BookBean, Void> call(TableColumn<BookBean, Void> BookEntityBeanVoidTableColumn) {
+            public TableCell<BookBean, Void> call(TableColumn<BookBean, Void> bookEntityBeanVoidTableColumn) {
                         return new TableCell<>() {
 
 
@@ -137,7 +136,7 @@ public class SellController implements Initializable {
                                         params.add(true); //I use this in bookpagecontroller postinitialize, if is true then owner is going to his book page and i disable report and buy butttons
                                         SceneSwitcher switcher = new SceneSwitcher();
 
-                                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+                                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
                                         switcher.switcher(stage, "Book-Page2.fxml", params);
 
                                     });

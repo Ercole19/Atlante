@@ -16,6 +16,11 @@ public class BookBean {
     private List<File> image;
     private String owner;
 
+    public BookBean()
+    {
+
+    }
+
     public BookBean(String title , String isbn, String price, Boolean isNegotiable, List<File> image, String owner)throws BookException{
         setTitle(title);
         setIsbn(isbn);
@@ -84,7 +89,7 @@ public class BookBean {
 
     public void syntacticCheckIsbn(String isbn) throws BookException
     {
-        if (!((isbn.matches("[0-9]{10}") || isbn.matches("[0-9]{13}")))){
+        if (!(isbn.matches("[0-9]{10}") || isbn.matches("[0-9]{13}"))){
             throw new BookException("Error in ISBN format") ;
         }
     }

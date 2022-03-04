@@ -17,7 +17,7 @@ public class RecentPurchaseUCC {
         List<BookEntity> list = dao.getBookResults(email);
 
         for (BookEntity book : list) {
-            BookBean bookBean = null;
+            BookBean bookBean = new BookBean() ;
             bookBean.setOwner(book.getOwner());
             bookBean.setTitle(book.getBookTitle());
             bookBean.setIsbn(book.getIsbn());

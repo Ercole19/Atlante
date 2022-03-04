@@ -4,6 +4,12 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 public class SwitcherExceptionsHandler {
+
+    private SwitcherExceptionsHandler()
+    {
+
+    }
+
     public static void handleSwitcherException(Stage stage, String message)
     {
         SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, message, 800, 600) ;

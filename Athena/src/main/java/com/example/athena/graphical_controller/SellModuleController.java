@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
 
 
 
-public class SellModuleController extends shiftImageController implements Initializable , PostInitialize {
+public class SellModuleController extends ShiftImageController implements Initializable , PostInitialize {
 
     @FXML
     private TextField bookTitle ;

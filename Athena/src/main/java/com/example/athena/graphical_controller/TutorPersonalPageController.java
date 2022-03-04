@@ -136,11 +136,13 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
         List<String> tutorInfos = controller.getTutorInfos(bean);
         List<String> tutorCourses = controller.getTutorCourses(bean);
 
+        String noData = "No data" ;
+
         if (tutorInfos.isEmpty()) {
-            aboutme.setText("No data");
-            sessioninfos.setText("No data");
-            contactnumbers.setText("No data");
-            reviewAverage.setText("No data");
+            aboutme.setText(noData);
+            sessioninfos.setText(noData);
+            contactnumbers.setText(noData);
+            reviewAverage.setText(noData);
         }
         else {
             aboutme.setText(tutorInfos.get(0));

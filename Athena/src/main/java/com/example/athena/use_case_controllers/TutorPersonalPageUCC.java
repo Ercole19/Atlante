@@ -13,26 +13,22 @@ public class TutorPersonalPageUCC {
 
     public String[] getTutorName(UserBean bean) {
         UserDao dao = new UserDao() ;
-        String[] infos = dao.getName(bean.getEmail()) ;
-        return infos;
+        return dao.getName(bean.getEmail());
     }
 
     public List<String> getTutorInfos(UserBean bean) {
         UserDao dao = new UserDao() ;
-        List<String> infos = dao.filltutorinfos(bean.getEmail());
-        return infos ;
+        return dao.filltutorinfos(bean.getEmail());
     }
 
     public Float getTutorReviewsAvg(UserBean bean) {
         UserDao dao = new UserDao() ;
-        Float avg = dao.getAvg(bean.getEmail());
-        return avg;
+        return dao.getAvg(bean.getEmail());
     }
 
     public List<String> getTutorCourses(UserBean bean) {
         CourseDao dao = new CourseDao() ;
-        List<String> courses = dao.fillCourses(bean.getEmail());
-        return courses;
+        return dao.fillCourses(bean.getEmail());
 
     }
 

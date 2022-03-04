@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.List;
 
-public abstract class shiftImageController {
+public abstract class ShiftImageController {
 
     protected ImageView bookImage;
     protected int index;

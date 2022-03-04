@@ -258,7 +258,7 @@ public class AddEventController implements Initializable , PostInitialize{
             alert.showAndWait();
         }
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
 

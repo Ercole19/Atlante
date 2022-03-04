@@ -24,11 +24,7 @@ public class SignUpUCC {
         }
 
         UserDao dao = new UserDao();
-        if ( dao.registerUser(bean.getEmail(), bean.getPassword(), bean.getRole(), bean.getName(), bean.getSurname()) ) {
-            return true ;
-        }
-        return false ;
-
+        return dao.registerUser(bean.getEmail(), bean.getPassword(), bean.getRole(), bean.getName(), bean.getSurname());
 
     }
 

@@ -20,7 +20,7 @@ public class AverageUCC  {
         ObservableList<ExamEntityBean> exams = ExamsSubject.getInstance().getSortedExams();
         ObservableList<ExamAverageInformation> examsArithmeticAverageInfos = FXCollections.observableArrayList();
         Integer count = 1;
-        double average = 0.0;
+        double average ;
         double  counterVoti = 0.0 ;
         String data ;
         int voto ;
@@ -49,7 +49,7 @@ public class AverageUCC  {
         ObservableList<ExamEntityBean> exams = ExamsSubject.getInstance().getSortedExams() ;
         ObservableList<ExamAverageInformation> examsWeightedAverageInfos = FXCollections.observableArrayList();
         int  cfus = 0 ;
-        double average = 0.0;
+        double average ;
         double counterVoti = 0.0;
         int voto ;
         int cfu ;

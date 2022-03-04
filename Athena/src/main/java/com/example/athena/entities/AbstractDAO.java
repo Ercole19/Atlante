@@ -19,7 +19,6 @@ public abstract class AbstractDAO
     private static  String pass ;
     private static  String dbUrl ;
     private static  String dbAddress ;
-    private static  int assigned_port ;
     private static  String username ;
     private static  String password ;
 
@@ -40,8 +39,8 @@ public abstract class AbstractDAO
             forwardingConnection.setPassword(password) ;
             forwardingConnection.connect() ;
 
-            assigned_port = forwardingConnection.setPortForwardingL(lPort, rHost, rPort) ;
-            dbUrl = dbUrl.substring(0, dbUrl.indexOf(';')) + ":" + assigned_port + dbUrl.substring(dbUrl.indexOf(';') +1) ;
+            int assignedPort = forwardingConnection.setPortForwardingL(lPort, rHost, rPort);
+            dbUrl = dbUrl.substring(0, dbUrl.indexOf(';')) + ":" + assignedPort + dbUrl.substring(dbUrl.indexOf(';') +1) ;
         }
 
 

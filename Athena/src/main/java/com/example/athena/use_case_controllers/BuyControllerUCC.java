@@ -12,7 +12,7 @@ import java.util.List;
 
 public class BuyControllerUCC {
 
-    static final private BookDao dao = new BookDao();
+    private static final BookDao dao = new BookDao();
 
     public List<BookSearchResultBean> formatSearchResults(String query) {
 

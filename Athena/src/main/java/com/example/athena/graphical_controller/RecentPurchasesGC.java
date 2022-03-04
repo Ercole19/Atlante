@@ -37,7 +37,7 @@ public class RecentPurchasesGC implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         RecentPurchaseUCC controller= new RecentPurchaseUCC();
-        List<BookBean> bookList = null;
+        List<BookBean> bookList = new ArrayList<>() ;
         try {
             bookList = controller.formatResults(User.getUser().getEmail());
         } catch (BookException e) {
@@ -53,7 +53,7 @@ public class RecentPurchasesGC implements Initializable {
             resultView = new SearchResultFormatterScrollBar(resultView) ;
         }
 
-        AnchorPane subSceneElems = resultView.buildRecentPurchaseResultScene(subScene.getWidth(), subScene.getHeight(), (ArrayList<BookBean>) bookList) ;
+        AnchorPane subSceneElems = resultView.buildRecentPurchaseResultScene(subScene.getWidth(), subScene.getHeight(), bookList) ;
         subScene.setRoot(subSceneElems) ;
 
     }

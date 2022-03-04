@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class reportSellerGC implements PostInitialize {
+public class ReportSellerGC implements PostInitialize {
 
     private BookBean book;
 

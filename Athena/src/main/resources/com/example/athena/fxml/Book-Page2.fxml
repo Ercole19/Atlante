@@ -82,22 +82,22 @@
          <Font size="30.0" />
       </font>
    </Text>
-   <ImageView fx:id="LArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="711.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="lArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="711.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../../../../assets/backBtn.png" />
       </image>
    </ImageView>
-   <Button fx:id="LArrow" layoutX="711.0" layoutY="348.0" mnemonicParsing="false" onAction="#onLeftArrowClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+   <Button fx:id="lArrow" layoutX="711.0" layoutY="348.0" mnemonicParsing="false" onAction="#onLeftArrowClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor>
    </Button>
-   <ImageView fx:id="RArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="1105.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true" rotate="178.3">
+   <ImageView fx:id="rArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="1105.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true" rotate="178.3">
       <image>
          <Image url="@../../../../assets/backBtn.png" />
       </image>
    </ImageView>
-   <Button fx:id="RArrow" layoutX="1105.0" layoutY="348.0" mnemonicParsing="false" onAction="#onRightArrowClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+   <Button fx:id="rArrow" layoutX="1105.0" layoutY="348.0" mnemonicParsing="false" onAction="#onRightArrowClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor>

@@ -14,8 +14,7 @@ public class PurchaseBoundary extends SocketBoundary
         try
         {
             String retVal = getResponse(6351) ;
-            if(retVal.equals("OK")) return true ;
-            return false ;
+            return retVal.equals("OK") ;
         }
         catch (IOException e)
         {

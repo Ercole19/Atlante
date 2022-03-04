@@ -26,8 +26,7 @@ public class BookPageUCC {
 
     public  String[] getUserName(String email) {
         UserDao dao = new UserDao();
-        String[] userCompleteName = dao.getName(email);
-        return userCompleteName;
+        return dao.getName(email);
     }
 
 }

@@ -60,8 +60,7 @@ public class ExamsSubject extends AbstractSubject {
 
    public ObservableList<ExamEntityBean> getSortedExams()  throws ExamException{
        ExamsComparator comparator = new ExamsComparator();
-       ObservableList<ExamEntityBean> result = this.getExams().sorted(comparator);
-       return result;
+       return this.getExams().sorted(comparator);
    }
 
 }
