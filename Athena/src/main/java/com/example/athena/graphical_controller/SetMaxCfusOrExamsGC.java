@@ -49,8 +49,11 @@ public class SetMaxCfusOrExamsGC implements PostInitialize {
         SetMaxCfusOrExamsUCC controllerCfusExams = new SetMaxCfusOrExamsUCC();
         try {
             int max = Integer.parseInt(textFieldMax.getText());
-            controllerCfusExams.setInfos(max, examsOrCfus);
+            SetMaxCfusOrExamsBean infos = new SetMaxCfusOrExamsBean() ;
+            infos.setNewMax(max) ;
+            infos.setType(this.examsOrCfus) ;
 
+            controllerCfusExams.setInfos(infos);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();

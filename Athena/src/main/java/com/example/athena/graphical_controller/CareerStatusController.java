@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CareerStatusController implements Initializable {
@@ -78,9 +79,8 @@ public class CareerStatusController implements Initializable {
         stage.close();
     }
 
-    public void onSetCfuBtn()
-    {
-        ArrayList<Object> params = new ArrayList<>();
+    public void onSetCfuBtn() {
+        List<Object> params = new ArrayList<>();
 
         params.add(ExamsOrCfusEnum.SET_MAX_CFUS) ;
         switcher.popup("SetMAxCfuOrExams.fxml", "Set max cfus", params);
@@ -88,7 +88,7 @@ public class CareerStatusController implements Initializable {
     }
 
     public void onSetExamsBtn() {
-        ArrayList<Object> params = new ArrayList<>();
+        List<Object> params = new ArrayList<>();
 
         params.add(ExamsOrCfusEnum.SET_MAX_EXAMS);
         switcher.popup("SetMAxCfuOrExams.fxml", "Set max cfus", params);

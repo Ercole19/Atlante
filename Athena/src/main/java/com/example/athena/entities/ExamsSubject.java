@@ -11,11 +11,19 @@ import java.util.List;
 public class ExamsSubject extends AbstractSubject {
    private List<EntityExam> totalExams ;
    private static ExamsSubject instance = null;
+
+   private int examsNumber ;
+   private int cfusNumber ;
    
    private ExamsSubject()
    {
-       ExamDao dao = new ExamDao();
-       this.totalExams = dao.getExamlist();
+       ExamDao eDao = new ExamDao();
+       this.totalExams = eDao.getExamlist();
+
+       UserDao uDao = new UserDao() ;
+       this.examsNumber = uDao.getAllExams();
+       this.cfusNumber = uDao.getAllCfus() ;
+
    }
    
    public static synchronized ExamsSubject getInstance() 
@@ -61,6 +69,16 @@ public class ExamsSubject extends AbstractSubject {
    public ObservableList<ExamEntityBean> getSortedExams()  throws ExamException{
        ExamsComparator comparator = new ExamsComparator();
        return this.getExams().sorted(comparator);
+   }
+
+   public int getExamsNumber()
+   {
+       return this.examsNumber ;
+   }
+
+   public int getCfusNumber()
+   {
+       return this.cfusNumber ;
    }
 
 }
