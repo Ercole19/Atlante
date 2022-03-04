@@ -1,6 +1,10 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.entities.ExamsOrCfusEnum;
+import com.example.athena.exceptions.ExamException;
+import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.CareerStatusUCC;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,12 +24,6 @@ public class CareerStatusController implements Initializable {
     private PieChart examsPieChart;
     @FXML
     private PieChart examsPieChartcfu ;
-
-    private int esamiTotali;
-    private int cfuTotali;
-
-
-
     @FXML
     private Label totalExams ;
     @FXML
@@ -36,32 +34,43 @@ public class CareerStatusController implements Initializable {
     private Label totalCfus ;
 
     private final SceneSwitcher switcher =  new SceneSwitcher();
-    private Stage stage;
 
     @FXML
     public void initialize(URL url , ResourceBundle rb) {
 
-        CareerStatusUCC controller = new CareerStatusUCC() ;
-        ObservableList<PieChart.Data> examsPieChartData  = controller.retrieveExamPieChart() ;
-        ObservableList<PieChart.Data> examsPieChartDatacfus  = controller.retrieveExamPieChartCfus() ;
+        try {
 
-        int esamiDAti = controller.retrieveTotalTakenExams();
-        esamiTotali = controller.retrieveTotalExams();
-        cfuTotali = controller.retrieveTotalCfus();
-        int cfuDati = controller.retrieveTotalTakenCfus() ;
+            CareerStatusUCC controller = new CareerStatusUCC();
+            CareerInformationBean infos = controller.getAllInfos();
 
-        examsPieChartData.add(new PieChart.Data("Esami mancanti" , esamiTotali-esamiDAti)) ;
-        examsPieChartDatacfus.add(new PieChart.Data("cfu mancanti " , cfuTotali - cfuDati)) ;
+            int infosTakenExams = infos.getTakenExams();
+            int infosTotalExams = infos.getTotalExams();
+            int infosGainedCfus = infos.getGainedCfus();
+            int infosTotalCfus = infos.getTotalCfus();
 
-        takenExams.setText(String.valueOf(esamiDAti));
-        gainedCfus.setText(String.valueOf(cfuDati));
+            ObservableList<PieChart.Data> examsData = FXCollections.observableArrayList();
+            ObservableList<PieChart.Data> cfusData = FXCollections.observableArrayList();
 
-        totalCfus.setText(String.valueOf(cfuTotali));
-        totalExams.setText(String.valueOf(esamiTotali));
+            examsData.add(new PieChart.Data("Taken Exams", infosTakenExams ));
+            cfusData.add(new PieChart.Data("Gained Cfus", infosGainedCfus));
 
-        examsPieChart.setData(examsPieChartData);
-        examsPieChartcfu.setData(examsPieChartDatacfus) ;
-        examsPieChart.setStartAngle(90);
+            examsData.add(new PieChart.Data("Remaining exams", infosTotalExams - infosTakenExams));
+            cfusData.add(new PieChart.Data("Remaining cfus", infosTotalCfus - infosGainedCfus));
+
+            takenExams.setText(String.valueOf(infosTakenExams));
+            gainedCfus.setText(String.valueOf(infosGainedCfus));
+
+            totalCfus.setText(String.valueOf(infosTotalCfus));
+            totalExams.setText(String.valueOf(infosTotalExams));
+
+            examsPieChart.setData(examsData);
+            examsPieChartcfu.setData(cfusData);
+            examsPieChart.setStartAngle(90);
+        }
+        catch (ExamException exc) {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage(), 800, 600) ;
+            alert.showAndWait() ;
+        }
 
     }
     public void indietro(ActionEvent event){
@@ -82,9 +91,9 @@ public class CareerStatusController implements Initializable {
     public void onSetExamsBtn() {
         ArrayList<Object> params = new ArrayList<>();
 
-        params.add(false);
-        params.add(this);
+        params.add(ExamsOrCfusEnum.SET_MAX_EXAMS);
         switcher.popup("SetMAxCfuOrExams.fxml", "Set max cfus", params);
+
 
     }
 

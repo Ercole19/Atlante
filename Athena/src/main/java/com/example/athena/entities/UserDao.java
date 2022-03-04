@@ -13,7 +13,7 @@ import java.util.List;
 public class UserDao extends AbstractDAO {
 
 
-    private String queryFind = " SELECT * FROM utenti WHERE  email = ? and password = ? ";
+    private String queryFind = " SELECT * FROM utenti_test WHERE  email = ? and password = ? ";
     private String queryRegister;
     private String getType = "SELECT type FROM utenti WHERE email = ?";
     private String filltutor = "SELECT  aboutme ,  sessioninfos  , contactnumbers  FROM athena.tutordescription WHERE emailuser = ? ";
@@ -261,13 +261,18 @@ public class UserDao extends AbstractDAO {
         }
     }
 
-    public void setCfusOrExams(int data, boolean cfuOrExams) {
+    public void setCfusOrExams(int data, ExamsOrCfusEnum cfuOrExams) {
 
-        if (cfuOrExams) {
-            setQuery = "Update athena.student_infos set max_cfus = ? where email = ?";
-        } else {
-            setQuery = "Update athena.student_infos set max_exams = ? where email = ?";
+        switch (cfuOrExams)
+        {
+            case SET_MAX_EXAMS:
+                setQuery = "Update athena.student_infos set max_exams = ? where email = ?";
+                break;
+            case SET_MAX_CFUS:
+                setQuery = "Update athena.student_infos set max_cfus = ? where email = ?";
+                break;
         }
+
 
         try (PreparedStatement statement = this.getConnection().prepareStatement(setQuery)) {
 

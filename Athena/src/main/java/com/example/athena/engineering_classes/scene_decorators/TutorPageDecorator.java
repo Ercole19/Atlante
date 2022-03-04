@@ -1,4 +1,4 @@
-package com.example.athena.view.scene_decorators;
+package com.example.athena.engineering_classes.scene_decorators;
 
 import javafx.scene.Parent;
 

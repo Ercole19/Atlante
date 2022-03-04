@@ -2,6 +2,7 @@ package com.example.athena.graphical_controller;
 
 
 
+import com.example.athena.exceptions.ExamException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -10,34 +11,30 @@ public class ExamEntityBean {
     private int votoEsame;
     private int cfuEsame;
     private String  date;
+    private int examIndex;
 
 
-    public void setCfuEsame(String  cfuString)  {
-            try {
-                cfuEsame = Integer.parseInt(cfuString) ;
-            } catch (NumberFormatException e )  {
-                Alert alert = new Alert(Alert.AlertType.ERROR, " Exam fields are not valid, check if you fill them correctly  ", ButtonType.CLOSE);
-                alert.showAndWait();
-
-
-            }
+    public void setCfuEsame(int cfus)  {
+         this.cfuEsame = cfus;
     }
 
-    public void setExamName(String examName) {
-        this.examName = examName;
+    public void setExamName(String examName) throws ExamException {
+        if(!(examName.equals("")))
+        {
+            this.examName = examName;
+        }
+        else
+        {
+            throw new ExamException("Exam's name must be not blank");
+        }
     }
 
     public void setDate(String data ) {
         this.date = data ;
     }
 
-    public void setVotoEsame(String votoString) {
-        try {
-            votoEsame = Integer.parseInt(votoString) ;
-        }catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, " Exam fields are not valid, check if you fill them correctly  ", ButtonType.CLOSE);
-            alert.showAndWait();
-        }
+    public void setVotoEsame(int examGrade) {
+       this.votoEsame = examGrade;
     }
 
     public int getCfuEsame() {

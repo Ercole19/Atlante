@@ -6,6 +6,7 @@ public class EntityExam {
     protected int voto;
     protected int cfu;
     protected String data;
+    
 
     public EntityExam(String nome, int voto, int cfu, String  data) {
         this.nome = nome;

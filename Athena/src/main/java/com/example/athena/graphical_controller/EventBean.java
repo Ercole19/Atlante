@@ -1,5 +1,7 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.exceptions.EventException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -38,7 +40,7 @@ public class EventBean {
         this.isThereAReminder = value ;
     }
 
-    private void setDateOfReminder(int hoursBefore, int minutesBefore)
+    public void setDateOfReminder(int hoursBefore, int minutesBefore)
     {
         this.dateOfReminder = LocalDateTime.of(this.getDate(), this.getStart()).minusHours(hoursBefore).minusMinutes(minutesBefore) ;
     }
@@ -47,13 +49,18 @@ public class EventBean {
         this.date = date;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String name) throws EventException {
+        if (name.equals(""))
+        {
+          throw new EventException("Add a name to the event");
+        }
+        else{ this.name = name;}
+
     }
 
     public void setType(String type)
     {
-        this.type = type.toUpperCase().replace(" ", "_") ;
+        this.type = type ;
     }
 
     public void setStart(LocalTime start) {
@@ -76,8 +83,12 @@ public class EventBean {
         this.end = end ;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String description)throws EventException {
+        if(description.length() > 50)
+        {
+           throw new EventException("Description is too long.");
+        }
+        else{ this.description = description;}
     }
 
     public LocalDate getDate() {
@@ -105,10 +116,6 @@ public class EventBean {
         return this.type ;
     }
 
-    public boolean getIsThereAReminder()
-    {
-        return this.isThereAReminder ;
-    }
 
     public LocalDateTime getDateOfReminder()
     {

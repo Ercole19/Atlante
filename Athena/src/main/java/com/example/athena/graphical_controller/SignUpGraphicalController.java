@@ -1,6 +1,7 @@
 package com.example.athena.graphical_controller;
 
 
+import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.SignUpUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,14 +30,16 @@ public class SignUpGraphicalController {
     private final SceneSwitcher switcher = new SceneSwitcher();
     private Stage stage;
 
+
     public void onBackButtonClick(ActionEvent event) throws IOException {
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         switcher.switcher(stage, "LoginPage.fxml");
     }
 
-    public void onConfirmButtonClick (ActionEvent event) throws IOException {
+    public void onConfirmButtonClick (ActionEvent event) {
 
+        String userType;
         String email = emailField.getText() ;
         String password = passField.getText() ;
         String nome = nameField.getText() ;
@@ -44,7 +47,7 @@ public class SignUpGraphicalController {
         String passConfirm = confirmPassField.getText() ;
 
         if (password.equals(passConfirm)) {
-            String userType;
+
             if (studentRadiobutton.isSelected()) {
                 userType = "student" ;
 
@@ -65,6 +68,10 @@ public class SignUpGraphicalController {
             if (controller.register(bean)) {
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
                 switcher.switcher(stage, "LoginPage.fxml");
+            }
+            else {
+                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Something went wrong please retry or restart application");
+                alert.showAndWait();
             }
         }
         else {

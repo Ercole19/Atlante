@@ -1,6 +1,7 @@
 package com.example.athena.boundaries;
 
 import com.example.athena.entities.User;
+import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.graphical_controller.EventBean;
 

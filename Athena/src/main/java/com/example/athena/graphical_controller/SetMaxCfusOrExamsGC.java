@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.entities.ExamsOrCfusEnum;
 import com.example.athena.entities.UserDao;
 import com.example.athena.use_case_controllers.SetMaxCfusOrExamsUCC;
 import javafx.event.ActionEvent;
@@ -21,20 +22,26 @@ public class SetMaxCfusOrExamsGC implements PostInitialize {
     @FXML
     private Text textSetting;
     private CareerStatusController controller;
-    private boolean cfusOrExams;
+
     @FXML
     private TextField textFieldMax;
+    private ExamsOrCfusEnum examsOrCfus;
 
 
     @Override
     public void postInitialize(ArrayList<Object> params) {
 
-        cfusOrExams = (boolean) params.get(0);
+        examsOrCfus = (ExamsOrCfusEnum) params.get(0);
         controller = (CareerStatusController) params.get(1);
-        if (cfusOrExams) {
-            textSetting.setText("Set max cfus");
-        } else {
-            textSetting.setText("Set max exams");
+        switch(examsOrCfus)
+        {
+            case SET_MAX_CFUS:
+                textSetting.setText("Set  max cfus");
+                break;
+
+            case SET_MAX_EXAMS:
+                textSetting.setText("Set max exams");
+                break;
         }
     }
 
@@ -42,15 +49,9 @@ public class SetMaxCfusOrExamsGC implements PostInitialize {
         SetMaxCfusOrExamsUCC controllerCfusExams = new SetMaxCfusOrExamsUCC();
         try {
             int max = Integer.parseInt(textFieldMax.getText());
-            controllerCfusExams.setInfos(max, cfusOrExams);
+            controllerCfusExams.setInfos(max, examsOrCfus);
 
-            if(cfusOrExams ){
-               controller.setTotalCfus(max);
-            }
-            else
-            {
-                controller.setTotalExams(max);
-            }
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
         }

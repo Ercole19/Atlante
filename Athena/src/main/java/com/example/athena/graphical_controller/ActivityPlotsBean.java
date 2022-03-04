@@ -3,6 +3,7 @@ package com.example.athena.graphical_controller;
 import javafx.scene.chart.XYChart;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityPlotsBean
 {

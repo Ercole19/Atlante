@@ -14,34 +14,34 @@ public class BookShopController {
     private Stage stage;
 
     @FXML
-    protected void onHomeButtonClick(ActionEvent event) throws IOException {
+    protected void onHomeButtonClick(ActionEvent event) {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         switcher.switcher(stage, "MainPageStudents.fxml");
     }
 
     @FXML
-    protected void onBackButtonClick(ActionEvent event) throws IOException {
+    protected void onBackButtonClick(ActionEvent event) {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         switcher.switcher(stage, "MainPageStudents.fxml");
     }
 
     @FXML
-    protected void onBookBtnClick(ActionEvent event) throws IOException{
+    protected void onBookBtnClick(ActionEvent event){
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         switcher.switcher(stage, "BuyBookPage.fxml");
     }
 
-    public void onBuyButtonClick(ActionEvent event) throws IOException {
+    public void onBuyButtonClick(ActionEvent event){
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         switcher.switcher(stage, "buy-view.fxml");
     }
 
-    public void onSellButtonClick(ActionEvent event) throws IOException {
+    public void onSellButtonClick(ActionEvent event){
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         switcher.switcher(stage, "sell-view.fxml");
     }
 
-    public void onRecentPurchasesBtnClick(ActionEvent event)throws IOException{
+    public void onRecentPurchasesBtnClick(ActionEvent event){
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         switcher.switcher(stage, "recentPurchasesScreen.fxml");
     }

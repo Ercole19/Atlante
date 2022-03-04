@@ -1,6 +1,10 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.entities.ExamsSubject;
+import com.example.athena.exceptions.ExamException;
+import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.AverageUCC;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,13 +33,27 @@ public class AverageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        AverageUCC controller = new AverageUCC() ;
+        try {
+            AverageUCC controller = new AverageUCC();
 
-        ObservableList<XYChart.Data<String, Number>> sortedExams = controller.retrieveExams();
-        ObservableList<XYChart.Data<String, Number>> weightedSortedExams = controller.retrieveExamsWeighted() ;
+            ObservableList<ExamAverageInformation> arithmeticAverageInformations = controller.getExamsArithmeticAverageInformation() ;
+            ObservableList<ExamAverageInformation> weightedAverageInformations = controller.getExamsWeightedAverageInformation();
 
-        XYChart.Series<String, Number> series = new XYChart.Series<>("Artithmetic average ", sortedExams);
-        XYChart.Series<String, Number> series2 = new XYChart.Series<>("Weighted average ", weightedSortedExams);
+            ObservableList<XYChart.Data<String, Number>> arithmeticAverages = FXCollections.observableArrayList();
+            ObservableList<XYChart.Data<String, Number>> weightedAverages = FXCollections.observableArrayList();
+
+            for (ExamAverageInformation arithmeticInfo : arithmeticAverageInformations)
+            {
+                arithmeticAverages.add(new XYChart.Data<>(arithmeticInfo.getDate(), arithmeticInfo.getAverage()));
+            }
+
+            for (ExamAverageInformation weightedInfo : weightedAverageInformations)
+            {
+                weightedAverages.add(new XYChart.Data<>(weightedInfo.getDate(), weightedInfo.getAverage()));
+            }
+
+            XYChart.Series<String, Number> series = new XYChart.Series<>("Artithmetic average ", arithmeticAverages);
+            XYChart.Series<String, Number> series2 = new XYChart.Series<>("Weighted average ", weightedAverages);
 
         averageGraph.getData().addAll(series, series2) ;
 

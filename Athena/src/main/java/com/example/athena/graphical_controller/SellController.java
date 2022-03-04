@@ -55,7 +55,7 @@ public class SellController implements Initializable {
         switcher.switcher(stage, "bookshop-choose-view.fxml");
     }
 
-    public void onSellBtnClick() throws IOException, BookException {
+    public void onSellBtnClick() throws  BookException {
         SellBooksUseCaseController controller = new SellBooksUseCaseController();
         if(controller.getTotalReport() > 50){
             Alert alert = new Alert(Alert.AlertType.WARNING, "You can't sell books anymore, you received too many reports", ButtonType.CLOSE);

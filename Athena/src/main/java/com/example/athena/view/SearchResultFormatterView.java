@@ -2,7 +2,7 @@ package com.example.athena.view;
 
 import com.example.athena.entities.EventDao;
 import com.example.athena.graphical_controller.*;
-import com.example.athena.view.scene_decorators.SearchResultFormatterComponent;
+import com.example.athena.engineering_classes.scene_decorators.SearchResultFormatterComponent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;

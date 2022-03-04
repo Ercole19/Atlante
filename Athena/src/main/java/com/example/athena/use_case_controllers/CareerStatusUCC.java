@@ -1,40 +1,41 @@
 package com.example.athena.use_case_controllers;
 
 import com.example.athena.entities.ExamDao;
+import com.example.athena.entities.ExamsSubject;
 import com.example.athena.entities.UserDao;
+import com.example.athena.exceptions.ExamException;
+import com.example.athena.graphical_controller.CareerInformationBean;
+import com.example.athena.graphical_controller.ExamEntityBean;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 
 public class CareerStatusUCC {
-    public ObservableList<PieChart.Data> retrieveExamPieChart() {
-        ExamDao dao = new ExamDao();
-        ObservableList<PieChart.Data> examsPieChartData = dao.loadData();
-        return examsPieChartData;
+
+    public CareerInformationBean getAllInfos() throws ExamException {
+        CareerInformationBean careerInfos = new CareerInformationBean();
+        ObservableList<ExamEntityBean> exams = ExamsSubject.getInstance().getExams();
+        int totalCfus = 0;
+
+        careerInfos.setTotalExams(this.retrieveTotalExams()) ;
+        careerInfos.setTotalCfus(this.retrieveTotalCfus());
+        careerInfos.setTakenExams(exams.size()) ;
+
+        for(ExamEntityBean bean : exams)
+        {
+            totalCfus = totalCfus + bean.getCfuEsame() ;
+        }
+
+        careerInfos.setGainedCfus(totalCfus) ;
+        return careerInfos;
     }
 
-    public ObservableList<PieChart.Data> retrieveExamPieChartCfus() {
-        ExamDao dao = new ExamDao();
-        ObservableList<PieChart.Data> examsPieChartDataCfus = dao.loadData2();
-        return examsPieChartDataCfus;
-    }
 
-    public int retrieveTotalTakenExams() {
-        ExamDao dao = new ExamDao() ;
-        int totalExams = (int) dao.getTotalExams() ;
-        return totalExams ;
-    }
-    public int retrieveTotalTakenCfus() {
-        ExamDao dao = new ExamDao() ;
-        int totalCfus = (int) dao.getTotalCfus() ;
-        return totalCfus ;
-    }
-
-    public int retrieveTotalExams() {
+    private int retrieveTotalExams() {
         UserDao dao = new UserDao();
         return dao.getAllExams();
     }
 
-    public int retrieveTotalCfus() {
+    private int retrieveTotalCfus() {
         UserDao dao = new UserDao();
         return dao.getAllCfus();
     }

@@ -5,7 +5,7 @@ import com.example.athena.entities.ReminderTypesEnum;
 import com.example.athena.entities.StringHoursConverter;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.use_case_controllers.AddEventUCC;
+import com.example.athena.use_case_controllers.ManageEventUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -74,47 +75,56 @@ public class AddEventController implements Initializable , PostInitialize{
 
     public void clickOnAddEvent(ActionEvent event){
 
-        if (setReminderCheckBox.isSelected()) {
-            switch (ReminderTypesEnum.valueOf(reminderType.getValue().toUpperCase().replace(" ", "_"))) {
-                case AN_HOUR_BEFORE:
-                    wrapperBean = new EventReminderWrapperBean(true, 1, 0);
-                    break;
-                case HALF_AND_AN_HOUR_BEFORE:
-                    wrapperBean = new EventReminderWrapperBean(true, 1, 30);
-                    break;
-                case TWO_HOURS_BEFORE:
-                    wrapperBean = new EventReminderWrapperBean(true, 2, 0);
-                    break;
-                case ONE_DAY_BEFORE:
-                    wrapperBean = new EventReminderWrapperBean(true, 24, 0);
-                    break;
-                case CUSTOM:
-                    wrapperBean = new EventReminderWrapperBean(true, reminderHour.getValue(), reminderMinute.getValue());
-                    break;
-                default:
-                    wrapperBean = new EventReminderWrapperBean(false);
-                    break;
-            }
-        } else {
-            wrapperBean = new EventReminderWrapperBean(false);
-        }
+        EventBean eventToRegister = new EventBean() ;
+
 
         LocalTime start = LocalTime.of(startHourSpinner.getValue(), startMinuteSpinner.getValue());
         LocalTime end = LocalTime.of(endHourSpinner.getValue(), endMinuteSpinner.getValue());
-        EventBean eventToRegister = new EventBean(eventDate.getValue(), eventName.getText(), start, end, eventDescription.getText(), eventType.getValue(), wrapperBean);
+        try {
+            eventToRegister.setDate(eventDate.getValue());
+            eventToRegister.setName(eventName.getText());
+            eventToRegister.setStart(start);
+            eventToRegister.setEnd(end);
+            eventToRegister.setDescription(eventDescription.getText());
+            eventToRegister.setType(eventType.getValue().toUpperCase().replace(" ", "_"));
 
-        if (eventToRegister.getDescription().length() > 50 | eventToRegister.getStart().isAfter(eventToRegister.getEnd()) | eventToRegister.getName().equals("")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Data not valid", ButtonType.CLOSE);
-            alert.showAndWait();
-
-        } else {
-            AddEventUCC addEventUCC = new AddEventUCC();
-            try {
-                addEventUCC.addEvent(eventToRegister);
-            } catch (SendEmailException e) {
-                SizedAlert error = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600, ButtonType.CLOSE);
-                error.showAndWait();
+            if (setReminderCheckBox.isSelected()) {
+                switch (ReminderTypesEnum.valueOf(reminderType.getValue().toUpperCase().replace(" ", "_"))) {
+                    case HALF_AN_HOUR_BEFORE:
+                        eventToRegister.setDateOfReminder(0, 30) ;
+                        break ;
+                    case AN_HOUR_BEFORE:
+                        eventToRegister.setDateOfReminder(1, 0);
+                        break;
+                    case HALF_AND_AN_HOUR_BEFORE:
+                        eventToRegister.setDateOfReminder(1,30);
+                        break;
+                    case TWO_HOURS_BEFORE:
+                        eventToRegister.setDateOfReminder(2,0);
+                        break;
+                    case ONE_DAY_BEFORE:
+                        eventToRegister.setDateOfReminder(24,0);
+                        break;
+                    case CUSTOM:
+                        eventToRegister.setDateOfReminder(reminderHour.getValue(), reminderMinute.getValue());
+                        break;
+                    default:
+                        break;
+                }
             }
+
+            if ((eventToRegister.getStart().isAfter(eventToRegister.getEnd()))) {
+                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Event's start time must be before event's end");
+                alert.showAndWait();
+
+            }
+            else if (setReminderCheckBox.isSelected() && (eventToRegister.getDateOfReminder().isBefore(LocalDateTime.now()))) {
+                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Reminder's start time must be after actual time");
+                alert.showAndWait();
+            }
+            else {
+                ManageEventUCC addEventUCC = new ManageEventUCC();
+                addEventUCC.addEvent(eventToRegister);
 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
@@ -205,7 +215,7 @@ public class AddEventController implements Initializable , PostInitialize{
     }
 
     public void updateEvent (ActionEvent event) {
-        AddEventUCC controller = new AddEventUCC() ;
+        ManageEventUCC controller = new ManageEventUCC() ;
         LocalTime start = LocalTime.of(startHourSpinner.getValue(), startMinuteSpinner.getValue());
         LocalTime end = LocalTime.of(endHourSpinner.getValue(), endMinuteSpinner.getValue());
         if (setReminderCheckBox.isSelected()){
@@ -218,8 +228,9 @@ public class AddEventController implements Initializable , PostInitialize{
 
         try
         {
-            controller.update(eventToUpdate, oldEventName);
-        }catch(SendEmailException e)
+            controller.update(eventToUpdate, this.oldEventBean);
+        }
+        catch(SendEmailException e)
         {
             e.printStackTrace();
         }
@@ -232,18 +243,20 @@ public class AddEventController implements Initializable , PostInitialize{
     @Override
     public void postInitialize(ArrayList<Object> params) {
 
-        EventBean event = (EventBean) params.get(0);
-        oldEventName = event.getName();
 
-        eventName.setText(event.getName());
-        eventDate.setValue(event.getDate());
-        startHourSpinner.getValueFactory().setValue(event.getStart().getHour());
-        startMinuteSpinner.getValueFactory().setValue(event.getStart().getMinute());
-        endHourSpinner.getValueFactory().setValue(event.getEnd().getHour());
-        endMinuteSpinner.getValueFactory().setValue(event.getEnd().getMinute());
-        eventDescription.setText(event.getDescription());
-        eventType.setValue(event.getType());
-        setReminderCheckBox.setSelected(event.getIsThereAReminder());
+        this.oldEventBean = (EventBean) params.get(0);
+
+        eventName.setText(this.oldEventBean.getName());
+        eventDate.setValue(this.oldEventBean.getDate());
+        startHourSpinner.getValueFactory().setValue(this.oldEventBean.getStart().getHour());
+        startMinuteSpinner.getValueFactory().setValue(this.oldEventBean.getStart().getMinute());
+        endHourSpinner.getValueFactory().setValue(this.oldEventBean.getEnd().getHour());
+        endMinuteSpinner.getValueFactory().setValue(this.oldEventBean.getEnd().getMinute());
+        eventDescription.setText(this.oldEventBean.getDescription());
+        eventType.setValue(this.oldEventBean.getType());
+        setReminderCheckBox.setSelected(this.oldEventBean.isThereAReminder());
+
+        disable(eventDate);
 
         if(setReminderCheckBox.isSelected())
         {

@@ -10,9 +10,12 @@ import com.example.athena.graphical_controller.PlotSearchQueryBean;
 import javafx.scene.chart.XYChart;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GeneratePlotsUseCaseController
 {
+    private final ActivityPlotsBean resultBean = new ActivityPlotsBean() ;
+
     public ActivityPlotsBean evaluateQuery(PlotSearchQueryBean searchQuery) throws PlottingException
     {
         ArrayList<XYChart.Series<String, Long>> plotsList  = new ArrayList<>() ;
@@ -27,7 +30,9 @@ public class GeneratePlotsUseCaseController
                 {
                     plotsList.add(retrieveSeries(type, from)) ;
                 }
-                return new ActivityPlotsBean(plotsList) ;
+
+                resultBean.setActivityPlots(plotsList) ;
+                return resultBean ;
 
             case LECTURE_TIME:
             case STUDY_SESSION :
@@ -35,7 +40,8 @@ public class GeneratePlotsUseCaseController
 
                 ActivityTypesEnum type = ActivityTypesEnum.valueOf(activityType) ;
                 plotsList.add(retrieveSeries(type, from)) ;
-                return new ActivityPlotsBean(plotsList) ;
+                resultBean.setActivityPlots(plotsList) ;
+                return resultBean ;
 
             default :
                 return new ActivityPlotsBean(plotsList) ;

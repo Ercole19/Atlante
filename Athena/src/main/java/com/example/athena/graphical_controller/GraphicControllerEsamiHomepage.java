@@ -1,8 +1,11 @@
 package com.example.athena.graphical_controller;
 
 
-import com.example.athena.entities.ExamDao;
-import com.example.athena.use_case_controllers.ExamPageUCC;
+import com.example.athena.entities.ExamsSubject;
+import com.example.athena.exceptions.ExamException;
+import com.example.athena.exceptions.SizedAlert;
+import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
+import com.example.athena.use_case_controllers.ManageExamsUCC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,10 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -175,12 +175,7 @@ public class GraphicControllerEsamiHomepage implements Initializable {
             }
         };
         colEDit.setCellFactory(cellFactory);
-
-        ExamPageUCC controller = new ExamPageUCC() ;
-
-
-        examTable.setItems(controller.getList());
-        disableIfEmpty();
+        ExamsSubject.getInstance().attachObserver(this);
 
 
 

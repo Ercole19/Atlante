@@ -1,4 +1,4 @@
-package com.example.athena.view.scene_decorators;
+package com.example.athena.engineering_classes.scene_decorators;
 
 import com.example.athena.graphical_controller.*;
 import javafx.geometry.Orientation;
