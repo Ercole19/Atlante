@@ -6,7 +6,7 @@ import com.example.athena.exceptions.ExamException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
-public class ExamEntityBean {
+public class ExamEntityBean  {
     private String examName;
     private int votoEsame;
     private int cfuEsame;
@@ -51,5 +51,13 @@ public class ExamEntityBean {
 
     public String getExamName() {
         return examName;
+    }
+
+    public int getExamIndex() {
+        return examIndex;
+    }
+
+    public void setExamIndex(int examIndex) {
+        this.examIndex = examIndex;
     }
 }

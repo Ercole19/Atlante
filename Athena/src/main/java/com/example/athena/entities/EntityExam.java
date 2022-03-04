@@ -14,8 +14,7 @@ public class EntityExam {
         this.cfu = cfu;
         this.data = data;
     }
-
-
+    
     public void setNome(String nome) {
         this.nome = nome;
     }

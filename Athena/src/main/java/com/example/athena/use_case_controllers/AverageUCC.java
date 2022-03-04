@@ -49,15 +49,4 @@ public class AverageUCC  {
         ObservableList<XYChart.Data<String, Number>> data = dao.getSortedExamsWeighted() ;
         return data ;
     }
-    public Number retrieveAverage() {
-        ExamDao dao = new ExamDao();
-        Number average = dao.getAverage();
-        return average;
-    }
-
-    public Number retrieveWeightedAverage() {
-        ExamDao dao = new ExamDao() ;
-        Number weightedAverage = dao.getAverageWeighted();
-        return weightedAverage ;
-    }
 }

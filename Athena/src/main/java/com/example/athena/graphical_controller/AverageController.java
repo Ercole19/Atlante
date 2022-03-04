@@ -28,9 +28,6 @@ public class AverageController implements Initializable {
     private Label labelAverageWei ;
 
 
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -55,13 +52,19 @@ public class AverageController implements Initializable {
             XYChart.Series<String, Number> series = new XYChart.Series<>("Artithmetic average ", arithmeticAverages);
             XYChart.Series<String, Number> series2 = new XYChart.Series<>("Weighted average ", weightedAverages);
 
-        averageGraph.getData().addAll(series, series2) ;
+            averageGraph.getData().addAll(series, series2) ;
 
-        Number average = controller.retrieveAverage() ;
-        Number weightedAverage = controller.retrieveWeightedAverage() ;
+            double currentArithmeticAverage = arithmeticAverageInformations.get(arithmeticAverageInformations.size() - 1).getAverage();
+            double currentWeightedAverage = weightedAverageInformations.get(weightedAverageInformations.size() - 1).getAverage();
 
-        labelAverageArit.setText(String.valueOf(String.format("%.2f", average)));
-        labelAverageWei.setText(String.valueOf(String.format("%.2f" , weightedAverage)));
+            labelAverageArit.setText(String.valueOf(String.format("%.2f", currentArithmeticAverage)));
+            labelAverageWei.setText(String.valueOf(String.format("%.2f" , currentWeightedAverage)));
+
+        } catch (ExamException e) {
+
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600) ;
+            alert.showAndWait() ;
+        }
     }
 
     public void indietro(ActionEvent event){

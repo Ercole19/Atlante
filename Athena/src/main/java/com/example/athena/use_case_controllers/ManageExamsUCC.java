@@ -21,11 +21,12 @@ public class ManageExamsUCC {
 
     }
 
-    public void updateExamFromDB(ExamEntityBean exam, String oldname) {
+    public void updateExamFromDB(ExamEntityBean newExam, ExamEntityBean oldExam) {
 
-        ExamDao dao = new ExamDao() ;
-        dao.updateExam(exam, oldname);
-
+        EntityExam entityOldExam = new EntityExam(oldExam.getExamName(), oldExam.getVotoEsame(), oldExam.getCfuEsame() , oldExam.getDate());
+        EntityExam entityNewExam = new EntityExam(newExam.getExamName(), newExam.getVotoEsame(), newExam.getCfuEsame(), newExam.getDate());
+        ExamsSubject.getInstance().deleteExam(entityOldExam, oldExam.getExamIndex());
+        ExamsSubject.getInstance().addExam(entityNewExam);
     }
 }
 

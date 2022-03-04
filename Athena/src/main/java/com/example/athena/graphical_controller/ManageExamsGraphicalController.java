@@ -1,7 +1,9 @@
 package com.example.athena.graphical_controller;
 
 
-import com.example.athena.use_case_controllers.AddExamUseCaseController;
+import com.example.athena.exceptions.ExamException;
+import com.example.athena.exceptions.SizedAlert;
+import com.example.athena.use_case_controllers.ManageExamsUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -19,17 +21,19 @@ import java.util.ArrayList;
 public class ManageExamsGraphicalController implements PostInitialize {
 
     @FXML
-    private TextField nomeEsame;
+    private TextField examName;
     @FXML
-    private TextField votoEsame;
+    private TextField examGrade;
     @FXML
     private TextField examCFU;
     @FXML
     private DatePicker examDate;
     @FXML
     private Button confirm;
-    private String oldName ;
 
+    private  String name ;
+    private  String date;
+    private ExamEntityBean oldExam;
 
     public void onConfirmButtonClick(ActionEvent event) {
 
@@ -55,14 +59,25 @@ public class ManageExamsGraphicalController implements PostInitialize {
                 alert.showAndWait();
             }
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+
+        } catch (ExamException e) {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+        } catch (NumberFormatException e)
+        {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Grades or cfus are not numbers", 800, 600) ;
+            alert.showAndWait() ;
+        }
     }
 
 
     public void updateExam(ActionEvent event) {
 
-        ExamEntityBean bean = new ExamEntityBean() ;
+        ExamEntityBean newExam = new ExamEntityBean();
+        int grade = Integer.parseInt(examGrade.getText());
+        int cfu = Integer.parseInt(examCFU.getText());
+        name = examName.getText();
+        date = examDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         try {
             if(!((grade < 18 || grade > 30) || (cfu < 2 || cfu > 18))){
@@ -92,9 +107,7 @@ public class ManageExamsGraphicalController implements PostInitialize {
     @Override
     public void postInitialize(ArrayList<Object> params) {
 
-
-        ExamEntityBean exam = (ExamEntityBean) params.get(0);
-        oldName = exam.getExamName() ;
+        oldExam = (ExamEntityBean) params.get(0);
 
 
         examName.setText(oldExam.getExamName());

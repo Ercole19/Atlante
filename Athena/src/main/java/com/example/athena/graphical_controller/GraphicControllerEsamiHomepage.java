@@ -1,6 +1,5 @@
 package com.example.athena.graphical_controller;
 
-
 import com.example.athena.entities.ExamsSubject;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.SizedAlert;
@@ -57,9 +56,7 @@ public class GraphicControllerEsamiHomepage implements Initializable {
 
 
     public void initAggiungiEsame ()  {
-        switcher.popup("Aggiungi_Esame_View.fxml" , "Add exam") ;
-        refreshTable();
-        disableIfEmpty();
+        switcher.popup("Aggiungi_Esame_view.fxml" , "Add exam") ;
     }
 
     public void initMostraMedia () {
@@ -77,31 +74,6 @@ public class GraphicControllerEsamiHomepage implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         switcher.switcher(stage, "MainPageStudents.fxml");
      }
-
-
-    public void refreshTable() {
-        examList.clear() ;
-        ExamPageUCC controller = new ExamPageUCC() ;
-        examTable.setItems(controller.getList()) ;
-    }
-
-    public void disableIfEmpty() {
-        ExamPageUCC controller = new ExamPageUCC();
-        if (controller.getList().isEmpty())
-        {
-            averageBtn.setDisable(true);
-            careerBtn.setDisable(true);
-            averageBtn.setVisible(false);
-            careerBtn.setVisible(false);
-        }
-        else
-        {
-            averageBtn.setVisible(true);
-            averageBtn.setDisable(false);
-            careerBtn.setDisable(false);
-            careerBtn.setVisible(true);
-        }
-    }
 
 
     @Override
@@ -162,6 +134,7 @@ public class GraphicControllerEsamiHomepage implements Initializable {
 
             }
         };
+
         colEDit.setCellFactory(cellFactory);
         ExamsSubject.getInstance().attachObserver(this);
 
