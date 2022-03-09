@@ -3,6 +3,7 @@ package com.example.athena.graphical_controller;
 import com.example.athena.entities.User;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
+import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.SellBooksUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,18 +53,21 @@ public class SellModuleController extends ShiftImageController implements Initia
 
     private List<File> files;
 
-    private BookBean book;
+    private final BookBean book = new BookBean();
+
+    private BookBean oldBook;
 
     public void onConfirmButtonClick(ActionEvent event)  {
 
+
         try {
-            book = new BookBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , files, User.getUser().getEmail());
+            setBeanValues();
             SellBooksUseCaseController sellBooksUseCaseController = new SellBooksUseCaseController();
             sellBooksUseCaseController.putOnSale(book);
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
             stage.close();
         }
-        catch (ISBNException | BookException e){
+        catch (ISBNException e ){
             Alert alert = new Alert(Alert.AlertType.ERROR) ;
             alert.setContentText(e.getMessage()) ;
             alert.showAndWait() ;
@@ -72,19 +76,39 @@ public class SellModuleController extends ShiftImageController implements Initia
 
     public void onUpdateButtonClick(ActionEvent event)
     {
+
         try {
-            book = new BookBean(bookTitle.getText(), bookISBN.getText(), bookPrice.getText(), bookNegotiability.isSelected() , files, User.getUser().getEmail());
+            setBeanValues();
             SellBooksUseCaseController sellBooksUseCaseController = new SellBooksUseCaseController();
-            sellBooksUseCaseController.updateProduct(book);
+            sellBooksUseCaseController.updateProduct(oldBook, book);
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
             stage.close();
         }
-        catch (ISBNException | BookException e){
+        catch (ISBNException e){
             Alert alert = new Alert(Alert.AlertType.ERROR) ;
             alert.setContentText(e.getMessage()) ;
             alert.showAndWait() ;
         }
     }
+
+    private void setBeanValues()
+    {
+        try {
+            this.book.setTitle(bookTitle.getText());
+            this.book.setIsbn(bookISBN.getText());
+            this.book.setPrice(bookPrice.getText());
+            this.book.setNegotiable(bookNegotiability.isSelected());
+            this.book.setImage(files);
+            this.book.setOwner(User.getUser().getEmail());
+        }
+        catch (BookException e)
+        {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+
 
     @FXML
     public void onBackButtonClick(ActionEvent event) throws IOException {
@@ -96,8 +120,7 @@ public class SellModuleController extends ShiftImageController implements Initia
     public void onUploadBtnClick() {
 
         JFileChooser fc = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "JPG & PNG Images", "jpg", "png");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
         fc.setFileFilter(filter);
         int returnVal = fc.showOpenDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -127,17 +150,17 @@ public class SellModuleController extends ShiftImageController implements Initia
     @Override
     public void postInitialize(ArrayList<Object> params){
 
-        BookBean bean = (BookBean) params.get(0);
-        bookTitle.setText(bean.getBookTitle());
-        bookISBN.setText(bean.getIsbn());
+        oldBook = (BookBean) params.get(0);
+        bookTitle.setText(oldBook.getBookTitle());
+        bookISBN.setText(oldBook.getIsbn());
         bookISBN.setDisable(true);
-        bookPrice.setText(bean.getPrice());
-        bookNegotiability.setSelected(bean.getNegotiable());
+        bookPrice.setText(oldBook.getPrice());
+        bookNegotiability.setSelected(oldBook.getNegotiable());
 
         confirmButton.setText("Update");
         confirmButton.setOnAction(this::onUpdateButtonClick);
 
-        for (File file : bean.getImage()) {
+        for (File file : oldBook.getImage()) {
             super.images.add(new Image(String.valueOf(file.toURI())));
             files.add(file);
         }

@@ -31,7 +31,7 @@ public class SearchResultFormatterScrollBar extends  SearchResultFormatterDecora
     }
 
     @Override
-    public AnchorPane buildBookSearchResultsScene(double containerWidth, double containerHeight, List<BookSearchResultBean> results)
+    public AnchorPane buildBookSearchResultsScene(double containerWidth, double containerHeight, List<BookBean> results)
     {
         AnchorPane resultPane = super.buildBookSearchResultsScene(containerWidth, containerHeight -20, results) ;
         return applyHorizontalScrollBar(resultPane, containerWidth, containerHeight, results.size()*250.0) ;

@@ -15,20 +15,9 @@ public class BookBean {
     private Boolean isNegotiable ;
     private List<File> image;
     private String owner;
+    private int index;
 
-    public BookBean()
-    {
 
-    }
-
-    public BookBean(String title , String isbn, String price, Boolean isNegotiable, List<File> image, String owner)throws BookException{
-        setTitle(title);
-        setIsbn(isbn);
-        setPrice(price);
-        setIsNegotiable(isNegotiable);
-        setImage(image);
-        setOwner(owner);
-    }
 
     public List<Image> getImageList(){
         List<Image> imageList = new ArrayList<>();
@@ -98,5 +87,21 @@ public class BookBean {
         if (!(price.matches("[0-9]+[,.][0-9]*"))){
             throw new BookException("Error in price format");
         }
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setNegotiable(Boolean negotiable) {
+        isNegotiable = negotiable;
+    }
+
+    public String getTitle() {
+        return title;
     }
 }

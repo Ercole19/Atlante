@@ -40,7 +40,7 @@ public class BuyController {
         BuyControllerUCC controller = new BuyControllerUCC();
 
 
-        List<BookSearchResultBean> resultBeans =  controller.formatSearchResults(query);
+        List<BookBean> resultBeans =  controller.formatSearchResults(query);
         if(resultBeans.isEmpty())
         {
             Parent error = new ErrorSceneView().createErrorScreen("No book has been found.", resultPanel.getWidth(), resultPanel.getHeight()) ;

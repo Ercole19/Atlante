@@ -25,17 +25,18 @@ public class BookDao extends AbstractDAO {
     private final String getBookList = "SELECT title_book, isbn_book, price, negotiable from athena.books where email_user = ?";
     private final String getBookImage = "SELECT image from athena.book_images where email = ? and isbn  = ? order by count_image" ;
     private final String bookInfosQuery = "SELECT title_book, price, negotiable from athena.books where email_user = ? and isbn_book = ? ";
-    private final String findBooks = "SELECT title_book, isbn_book, price, email_user, image " +
+    private final String findBooks = "SELECT title_book, isbn_book, price, email_user, image, negotiable " +
                                             "from athena.books join athena.book_images on books.email_user = book_images.email and books.isbn_book = book_images.isbn " +
                                                    "where (title_book = ? or isbn_book = ?) and count_image = 1 and email_user != ?";
     private final String finalizeQuery = "CALL finalizePurchase(?,?,?,?,?)" ;
     private String getResultsPurchase = "SELECT vendorEmail, bookTitle, bookIsbn, bookPrice from athena.recent_purchases where purchaserEmail = ?";
     private String reportuery = "call athena.reportSeller(?,?)";
     private final String email = User.getUser().getEmail();
-    private int i = 0 ;
+    private int i = 1 ;
 
 
-    public void insertBook(String title , String isbn , Float price , boolean negotiability, List<File> images, int i) {
+    public void insertBook(String title , String isbn , Float price , boolean negotiability, List<File> images)
+    {
         String insertQuery = "insert into athena.books values (?,?,?,?,?)";
 
         try (PreparedStatement statement = this.getConnection().prepareStatement(insertQuery) ; PreparedStatement statement2 = this.getConnection().prepareStatement(insertImagesQuery)) {
@@ -272,6 +273,7 @@ public void insertImage(String isbn, File file, int i) {
 public List<BookEntity> findBooks(String book) {
 
         List<BookEntity> books = new ArrayList<>() ;
+        List<File> booksFiles = new ArrayList<>();
         int i = 0;
 
         try (PreparedStatement statement = this.getConnection().prepareStatement(findBooks)){
@@ -286,8 +288,9 @@ public List<BookEntity> findBooks(String book) {
                 File file = new File("image.png");
                 OutputStream writeStream = new FileOutputStream(file);
                 writeStream.write(image, 0, image.length);
+                booksFiles.add(file);
                 writeStream.close();
-                BookEntity bookEntity = new BookEntity(set.getString(1), set.getString(2), set.getFloat(3), set.getString(4), file);
+                BookEntity bookEntity = new BookEntity(set.getString(1), set.getString(2), set.getFloat(3), set.getString(4), set.getBoolean(6), booksFiles);
                 books.add(bookEntity);
             }
 

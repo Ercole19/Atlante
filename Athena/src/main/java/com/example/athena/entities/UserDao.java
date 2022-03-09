@@ -14,7 +14,7 @@ import java.util.List;
 public class UserDao extends AbstractDAO {
 
 
-    private String queryFind = " SELECT * FROM utenti_test WHERE  email = ? and password = ? ";
+    private String queryFind = " SELECT * FROM utenti WHERE  email = ? and password = ? ";
     private String queryRegister;
     private String getType = "SELECT type FROM utenti WHERE email = ?";
     private String filltutor = "SELECT  aboutme ,  sessioninfos  , contactnumbers  FROM athena.tutordescription WHERE emailuser = ? ";
@@ -150,15 +150,18 @@ public class UserDao extends AbstractDAO {
     }
 
 
-    public String[] findTutor(String query, boolean byname, boolean byBestReviews) {
-        String prepStatement;
+    public String[] findTutor(String query, ByCourseOrNameEnum searchEnum, boolean byBestReviews) {
+        String prepStatement = null;
 
-        if (byname) {
-            prepStatement = searchByName;
-        } else {
-            prepStatement = searchTutor;
+        switch (searchEnum)
+        {
+            case BY_COURSE:
+                prepStatement = searchTutor;
+                break;
+            case BY_NAME:
+                prepStatement = searchByName;
+                break;
         }
-
         if (byBestReviews) {
             prepStatement = prepStatement + "order by tutordescription.average DESC";
         }

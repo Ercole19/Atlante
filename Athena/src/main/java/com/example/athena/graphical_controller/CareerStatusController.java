@@ -1,6 +1,8 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
 import com.example.athena.entities.ExamsOrCfusEnum;
+import com.example.athena.entities.ExamsSubject;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.CareerStatusUCC;
@@ -20,25 +22,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class CareerStatusController implements Initializable {
+public class CareerStatusController implements Initializable, AbstractObserver {
 
     @FXML
     private PieChart examsPieChart;
     @FXML
-    private PieChart examsPieChartcfu ;
+    private PieChart examsPieChartcfu;
     @FXML
-    private Label totalExams ;
+    private Label totalExams;
     @FXML
-    private Label takenExams ;
+    private Label takenExams;
     @FXML
-    private Label gainedCfus ;
+    private Label gainedCfus;
     @FXML
-    private Label totalCfus ;
+    private Label totalCfus;
 
-    private final SceneSwitcher switcher =  new SceneSwitcher();
+    private final SceneSwitcher switcher = new SceneSwitcher();
 
     @FXML
-    public void initialize(URL url , ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) {
 
         try {
 
@@ -53,7 +55,7 @@ public class CareerStatusController implements Initializable {
             ObservableList<PieChart.Data> examsData = FXCollections.observableArrayList();
             ObservableList<PieChart.Data> cfusData = FXCollections.observableArrayList();
 
-            examsData.add(new PieChart.Data("Taken Exams", infosTakenExams ));
+            examsData.add(new PieChart.Data("Taken Exams", infosTakenExams));
             cfusData.add(new PieChart.Data("Gained Cfus", infosGainedCfus));
 
             examsData.add(new PieChart.Data("Remaining exams", infosTotalExams - infosTakenExams));
@@ -68,42 +70,38 @@ public class CareerStatusController implements Initializable {
             examsPieChart.setData(examsData);
             examsPieChartcfu.setData(cfusData);
             examsPieChart.setStartAngle(90);
-        }
-        catch (ExamException exc) {
-            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage(), 800, 600) ;
-            alert.showAndWait() ;
+        } catch (ExamException exc) {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage(), 800, 600);
+            alert.showAndWait();
         }
 
     }
-    public void indietro(ActionEvent event){
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+    public void indietro(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
-    public void onSetCfuBtn() {
+    public void onSetCfuBtn(ActionEvent event) {
         List<Object> params = new ArrayList<>();
 
-        params.add(ExamsOrCfusEnum.SET_MAX_CFUS) ;
+        params.add(ExamsOrCfusEnum.SET_MAX_CFUS);
         switcher.popup("SetMAxCfuOrExams.fxml", "Set max cfus", params);
+        update();
 
     }
 
-    public void onSetExamsBtn() {
+    public void onSetExamsBtn(ActionEvent event) {
         List<Object> params = new ArrayList<>();
-
         params.add(ExamsOrCfusEnum.SET_MAX_EXAMS);
         switcher.popup("SetMAxCfuOrExams.fxml", "Set max cfus", params);
-
-
+        update();
     }
 
-    public void setTotalExams(int exmasTotal){
-        totalExams.setText(String.valueOf(exmasTotal));
+    @Override
+    public void update()
+    {
+        totalExams.setText(String.valueOf(ExamsSubject.getInstance().getExamsNumber()));
+        totalCfus.setText(String.valueOf(ExamsSubject.getInstance().getCfusNumber()));
     }
-
-    public void setTotalCfus(int cfusTotal){
-        totalCfus.setText(String.valueOf(cfusTotal));
-    }
-
-
 }

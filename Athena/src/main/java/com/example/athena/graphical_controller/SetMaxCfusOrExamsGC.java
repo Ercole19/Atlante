@@ -23,7 +23,7 @@ public class SetMaxCfusOrExamsGC implements PostInitialize {
 
     @FXML
     private Text textSetting;
-    private CareerStatusController controller;
+
 
     @FXML
     private TextField textFieldMax;
@@ -34,7 +34,7 @@ public class SetMaxCfusOrExamsGC implements PostInitialize {
     public void postInitialize(ArrayList<Object> params) {
 
         examsOrCfus = (ExamsOrCfusEnum) params.get(0);
-        controller = (CareerStatusController) params.get(1);
+
         switch(examsOrCfus)
         {
             case SET_MAX_CFUS:
@@ -59,6 +59,7 @@ public class SetMaxCfusOrExamsGC implements PostInitialize {
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
+
         }
         catch (NumberFormatException exc){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Insert a number!", ButtonType.CLOSE);

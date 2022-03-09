@@ -1,5 +1,7 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.entities.BooksSubject;
+import com.example.athena.entities.SellerOrBuyerEnum;
 import com.example.athena.use_case_controllers.BookPageUCC;
 import com.example.athena.use_case_controllers.BuyControllerUCC;
 import javafx.event.ActionEvent;
@@ -49,8 +51,9 @@ public class BookPageController extends ShiftImageController implements PostInit
     private ImageView rArrowImage;
 
     private BookBean book;
-
     private List<Image> bookImages;
+    private String sellerName;
+    private String sellerSurname;
 
     private final SceneSwitcher switcher = new SceneSwitcher();
     private Stage stage;
@@ -58,8 +61,25 @@ public class BookPageController extends ShiftImageController implements PostInit
     @Override
     public void postInitialize(ArrayList<Object> params) {
 
-        BookPageUCC controller = new BookPageUCC() ;
-        this.book = controller.getBookInfos((String) params.get(0), (String) params.get(1));
+        this.book = (BookBean) params.get(1);
+
+        switch ((SellerOrBuyerEnum)params.get(0))
+        {
+            case SELLER:
+                this.sellerName = (BooksSubject.getInstance().getSellerName());
+                this.sellerSurname = (BooksSubject.getInstance().getSellerSurname());
+                break;
+            case BUYER:
+                BookPageUCC controller = new BookPageUCC() ;
+                String[] vendorFullName = controller.getUserName(book.getOwner());
+                this.sellerName = vendorFullName[0];
+                this.sellerSurname = vendorFullName[1];
+                buyButton.setVisible(true);
+                buyButton.setDisable(false);
+                backBtn.setOnAction(this::onBackBtnClick);
+                break;
+        }
+
         this.bookImages = book.getImageList();
 
         super.bookImage = this.image;
@@ -71,18 +91,13 @@ public class BookPageController extends ShiftImageController implements PostInit
 
         populatePage(book);
 
-        if(!((boolean) params.get(2))) {
-            buyButton.setVisible(true);
-            buyButton.setDisable(false);
-            backBtn.setOnAction(this::onBackBtnClick);
-        }
     }
 
     public void populatePage(BookBean book){
-        BookPageUCC controller = new BookPageUCC() ;
-        String[] vendorFullName = controller.getUserName(book.getOwner());
-        nome.setText(vendorFullName[0]);
-        cognome.setText(vendorFullName[1]);
+
+
+        nome.setText(sellerName);
+        cognome.setText(sellerSurname);
 
         title.setText(book.getBookTitle());
         isbn.setText(book.getIsbn());

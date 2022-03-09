@@ -1,8 +1,12 @@
 package com.example.athena.graphical_controller;
 
 
+import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
+import com.example.athena.entities.BooksSubject;
+import com.example.athena.entities.SellerOrBuyerEnum;
 import com.example.athena.entities.User;
 import com.example.athena.exceptions.BookException;
+import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.SellBooksUseCaseController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class SellController implements Initializable {
+public class SellController implements Initializable, AbstractObserver {
 
 
 
@@ -50,6 +54,7 @@ public class SellController implements Initializable {
 
     @FXML
     protected void onBackButtonClick(ActionEvent event) throws IOException {
+        BooksSubject.getInstance().detachObserver(this);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         switcher.switcher(stage, "bookshop-choose-view.fxml");
     }
@@ -62,17 +67,8 @@ public class SellController implements Initializable {
         }
         else {
             switcher.popup("sellBookModule.fxml", "Sell a book");
-            refreshTable();
+            update();
         }
-    }
-
-
-    public void refreshTable() throws BookException {
-        bookList.clear() ;
-
-        SellBooksUseCaseController controller = new SellBooksUseCaseController() ;
-
-        bookTable.setItems(controller.getBookList()) ;
     }
 
     @Override
@@ -117,23 +113,14 @@ public class SellController implements Initializable {
                                         params.add(book);
 
                                         switcher.popup("sellBookModule.fxml", "Edit your book", params);
-                                        try {
-                                            refreshTable();
-                                        } catch (BookException e) {
-                                            e.printStackTrace();
-                                        }
-
-
+                                        update();
                                     });
-
 
                                     goToBookPage.setOnAction(event -> {
                                         BookBean book = bookTable.getSelectionModel().getSelectedItem();
                                         List<Object> params = new ArrayList<>();
-                                        book.setOwner(User.getUser().getEmail());
-                                        params.add(book.getOwner());
-                                        params.add(book.getIsbn());
-                                        params.add(true); //I use this in bookpagecontroller postinitialize, if is true then owner is going to his book page and i disable report and buy butttons
+                                        params.add(SellerOrBuyerEnum.SELLER);
+                                        params.add(book);
                                         SceneSwitcher switcher = new SceneSwitcher();
 
                                         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
@@ -141,45 +128,47 @@ public class SellController implements Initializable {
 
                                     });
 
-
                                     cancella.setOnMouseClicked(event -> {
                                         try {
 
                                             BookBean book = bookTable.getSelectionModel().getSelectedItem();
                                             SellBooksUseCaseController controller = new SellBooksUseCaseController();
                                             controller.deleteProduct(book);
-                                            refreshTable();
+                                            update();
 
                                         } catch (Exception exc) {
                                             exc.getCause();
                                         }
                                     });
 
-
                                     managebtn = new HBox(editButton, cancella, goToBookPage);
                                     managebtn.setStyle("-fx-alignment : center");
                                     HBox.setMargin(editButton, new Insets(2, 2, 0, 3));
                                     HBox.setMargin(cancella, new Insets(2, 3, 0, 2));
                                     setGraphic(managebtn);
-
                                 }
-
-
                             }
 
                         };
         }};
         colManage.setCellFactory(cellFactory) ;
 
-        SellBooksUseCaseController controller = new SellBooksUseCaseController() ;
+        BooksSubject.getInstance().attachObserver(this);
+    }
 
-
+    @Override
+    public void update()
+    {
         try {
-            bookTable.setItems( controller.getBookList()) ;
-        } catch (BookException e) {
-            e.printStackTrace();
+            bookList.clear();
+            ObservableList<BookBean> totalBooks;
+            totalBooks = BooksSubject.getInstance().getBooksBeansList();
+            bookTable.setItems(totalBooks);
         }
-
-
+        catch (BookException exc)
+        {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
+            alert.showAndWait();
+        }
     }
 }

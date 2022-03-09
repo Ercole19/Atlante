@@ -13,7 +13,7 @@ public abstract class SearchResultFormatterComponent
 {
     public abstract AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, List<EventBean> results) ;
     public abstract AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, List<TutorSearchResultBean> results);
-    public abstract AnchorPane buildBookSearchResultsScene(double containerWidth, double containerHeight, List<BookSearchResultBean> results);
+    public abstract AnchorPane buildBookSearchResultsScene(double containerWidth, double containerHeight, List<BookBean> results);
     public abstract AnchorPane buildRecentPurchaseResultScene(double containerWidth, double containerHeight, List<BookBean> results);
 }
 

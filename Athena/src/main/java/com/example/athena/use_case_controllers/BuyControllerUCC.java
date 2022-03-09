@@ -4,6 +4,7 @@ import com.example.athena.boundaries.PurchaseBoundary;
 import com.example.athena.entities.BookDao;
 import com.example.athena.entities.BookEntity;
 import com.example.athena.entities.User;
+import com.example.athena.exceptions.BookException;
 import com.example.athena.graphical_controller.BookBean;
 import com.example.athena.graphical_controller.BookSearchResultBean;
 
@@ -14,23 +15,31 @@ public class BuyControllerUCC {
 
     private static final BookDao dao = new BookDao();
 
-    public List<BookSearchResultBean> formatSearchResults(String query) {
+    public List<BookBean> formatSearchResults(String query) {
 
-        List<BookEntity> bookinfos = dao.findBooks(query);
-        ArrayList<BookSearchResultBean> result = new ArrayList<>();
-        for (BookEntity entity : bookinfos) {
 
-            BookSearchResultBean book = new BookSearchResultBean();
-            book.setTitle(entity.getBookTitle());
-            book.setIsbn(entity.getIsbn());
-            book.setPrice(entity.getPrice());
-            book.setOwner(entity.getOwner());
-            book.setFile(entity.getFile());
-            result.add(book);
+        ArrayList<BookBean> result = new ArrayList<>();
+        try {
+           List<BookEntity> bookinfos = dao.findBooks(query);
+           for (BookEntity entity : bookinfos)
+           {
 
-        }
+               BookBean book = new BookBean();
+               book.setTitle(entity.getBookTitle());
+               book.setIsbn(entity.getIsbn());
+               book.setPrice(String.valueOf(entity.getPrice()));
+               book.setNegotiable(entity.getNegotiable());
+               book.setOwner(entity.getOwner());
+               book.setImage(entity.getImage());
+               result.add(book);
 
-        return result;
+          }
+
+       }
+       catch (BookException exc)
+       {
+
+       }return result;
     }
     
     public void purchase(BookBean book) {

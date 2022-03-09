@@ -27,7 +27,7 @@ public abstract class SearchResultFormatterDecorator extends SearchResultFormatt
     }
 
     @Override
-    public AnchorPane buildBookSearchResultsScene(double containerWidth, double containerHeight, List<BookSearchResultBean> results) {
+    public AnchorPane buildBookSearchResultsScene(double containerWidth, double containerHeight, List<BookBean> results) {
         return this.component.buildBookSearchResultsScene(containerWidth, containerHeight, results);
     }
 

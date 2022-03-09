@@ -1,6 +1,7 @@
 package com.example.athena.view;
 
 import com.example.athena.entities.EventDao;
+import com.example.athena.entities.SellerOrBuyerEnum;
 import com.example.athena.graphical_controller.*;
 import com.example.athena.engineering_classes.scene_decorators.SearchResultFormatterComponent;
 import javafx.fxml.FXMLLoader;
@@ -21,11 +22,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class SearchResultFormatterView extends SearchResultFormatterComponent {
+public class  SearchResultFormatterView extends SearchResultFormatterComponent {
     private static final String FONT = "System";
 
     @Override
-    public AnchorPane buildBookSearchResultsScene(double containerWidth, double containerHeight, List<BookSearchResultBean> results)
+    public AnchorPane buildBookSearchResultsScene(double containerWidth, double containerHeight, List<BookBean> results)
     {
         double sceneWidth = (results.size())*100.0f ;
 
@@ -33,7 +34,7 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
         graphicalList.setPrefSize(sceneWidth, containerHeight) ;
         graphicalList.setId("resultsList");
 
-        for(BookSearchResultBean result : results)
+        for(BookBean result : results)
         {
             GridPane entryBox = new GridPane() ;
             entryBox.setPrefSize(250, containerHeight) ;
@@ -46,7 +47,7 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
             setRowConstraint(20, entryBox) ;
             setRowConstraint(20, entryBox) ;
 
-            ImageView image = new ImageView(result.getFile().toURI().toString()) ;
+            ImageView image = new ImageView(result.getImage().get(0).toURI().toString()) ;
             image.setFitHeight(150);
             image.setFitWidth(150);
             image.setPreserveRatio(true);
@@ -68,10 +69,9 @@ public class SearchResultFormatterView extends SearchResultFormatterComponent {
                 SceneSwitcher switcher = new SceneSwitcher();
                 
                 List<Object> params = new ArrayList<>() ;
-                params.add(result.getOwner());
-                params.add(result.getIsbn());
-                params.add(false); //I use this in bookpagecontroller postinitialize, if it is false then an external user is going to a book page so i display report and buy buttons
-                Stage    stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow() ;
+                params.add(SellerOrBuyerEnum.BUYER);
+                params.add(result);
+                Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow() ;
                 switcher.switcher(stage, "Book-Page2.fxml", params) ;
                
             });

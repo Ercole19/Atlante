@@ -1,15 +1,13 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.entities.BookDao;
-import com.example.athena.entities.BookEntity;
-import com.example.athena.entities.User;
-import com.example.athena.entities.UserDao;
+import com.example.athena.entities.*;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
 import com.example.athena.graphical_controller.BookBean;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.awt.print.Book;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,36 +20,24 @@ public class SellBooksUseCaseController {
     public void putOnSale(BookBean book) throws ISBNException {
         isbnCheck(book.getIsbn()) ;
         BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable() , book.getImage(), User.getUser().getEmail()) ;
-        bookE.toDB() ;
+        BooksSubject.getInstance().addBook(bookE);
     }
 
-    public void updateProduct(BookBean book) throws ISBNException
+    public void updateProduct(BookBean oldBook, BookBean newBook) throws ISBNException
     {
-        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable() , book.getImage(), User.getUser().getEmail()) ;
-        bookE.updateInDB() ;
+        BookEntity oldBookEntity = new BookEntity(oldBook.getBookTitle(), oldBook.getIsbn(), Float.parseFloat(oldBook.getPrice()), oldBook.getNegotiable() , oldBook.getImage(), User.getUser().getEmail()) ;
+        BookEntity newBookEntity = new BookEntity(newBook.getTitle(), newBook.getIsbn(), Float.parseFloat(newBook.getPrice()), newBook.getNegotiable(), newBook.getImage(), User.getUser().getEmail());
+        BooksSubject.getInstance().deleteBook(oldBookEntity, oldBook.getIndex());
+        BooksSubject.getInstance().addBook(newBookEntity);
     }
 
     public void deleteProduct(BookBean book)
     {
         BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable() , book.getImage(), User.getUser().getEmail()) ;
-        bookE.removeFromDB() ;
+        BooksSubject.getInstance().deleteBook(bookE, book.getIndex());
     }
 
-    public ObservableList<BookBean> getBookList() throws BookException {
-        ObservableList<BookBean> bookBeanList = FXCollections.observableArrayList();
-        List<BookEntity> bookList  ;
-        BookDao bookDao = new BookDao();
-        bookList = bookDao.getList();
-        for (BookEntity entity : bookList) {
 
-            BookBean bean = new BookBean(entity.getBookTitle(), entity.getIsbn(), String.valueOf(entity.getPrice()), entity.getNegotiable(), entity.getImage(), User.getUser().getEmail());
-            bookBeanList.add(bean);
-
-        }
-
-        return  bookBeanList;
-
-    }
 
 
     public void deleteImage(BookBean bean, File image) throws IOException {

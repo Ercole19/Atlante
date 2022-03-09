@@ -1,6 +1,7 @@
 package com.example.athena.entities;
 
 import com.example.athena.engineering_classes.ExamsComparator;
+import com.example.athena.exceptions.CareerStatusException;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.graphical_controller.ExamEntityBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
@@ -48,6 +49,21 @@ public class  ExamsSubject extends AbstractSubject {
        ExamDao examDao = new ExamDao();
        examDao.deleteExam(exam.getNome());
        super.notifyObserver();
+   }
+
+   public void setNewMax(int max, ExamsOrCfusEnum type) throws CareerStatusException {
+       UserDao dao = new UserDao();
+       dao.setCfusOrExams(max, type);
+       switch (type)
+       {
+           case SET_MAX_CFUS:
+               this.cfusNumber = max;
+               break;
+           case SET_MAX_EXAMS:
+               this.examsNumber = max;
+               break;
+
+       }
    }
    
    public ObservableList<ExamEntityBean> getExams() throws ExamException {

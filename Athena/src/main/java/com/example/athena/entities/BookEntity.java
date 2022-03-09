@@ -1,6 +1,7 @@
 package com.example.athena.entities;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookEntity {
@@ -9,7 +10,7 @@ public class BookEntity {
     private final String isbn  ;
     private final float price   ;
     private final  Boolean isNegotiable;
-    private final List<File> image  ;
+    private List<File> image ;
     private final File file  ;
     private final String owner ;
 
@@ -27,14 +28,14 @@ public class BookEntity {
         this.owner = owner ;
     }
 
-    public BookEntity(String title, String isbn, float price, String email, File image) {
+    public BookEntity(String title, String isbn, float price, String email,  boolean isNegotiable, List<File> image) {
         this.title = title ;
         this.isbn = isbn ;
         this.price = price ;
         this.owner = email ;
-        this.file = image ;
-        this.image = null ;
-        this.isNegotiable = null ;
+        this.file = null ;
+        this.image = image ;
+        this.isNegotiable = isNegotiable ;
 
     }
 
@@ -48,11 +49,6 @@ public class BookEntity {
         this.file = null;
 
     }
-
-
-
-
-
     public String getBookTitle() {
         return this.title;
     }
@@ -79,22 +75,8 @@ public class BookEntity {
         return this.file;
     }
 
-    public void toDB()
-    {
-        BookDao dao = new BookDao() ;
-        int i = 1;
-       dao.insertBook(this.getBookTitle(), this.getIsbn(), this.getPrice(), this.getNegotiable(), this.getImage(), i) ;
-    }
 
-    public void updateInDB()
-    {
-        BookDao dao = new BookDao() ;
-        dao.updateBookInfos(this.getBookTitle(), this.getIsbn(), this.getPrice(), this.getNegotiable() , this.getImage());
-    }
 
-    public void removeFromDB()
-    {
-        BookDao dao = new BookDao() ;
-        dao.deleteBook(this.getIsbn()) ;
-    }
+
+
 }
