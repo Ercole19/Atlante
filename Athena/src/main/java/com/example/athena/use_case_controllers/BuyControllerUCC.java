@@ -3,10 +3,11 @@ package com.example.athena.use_case_controllers;
 import com.example.athena.boundaries.PurchaseBoundary;
 import com.example.athena.entities.BookDao;
 import com.example.athena.entities.BookEntity;
-import com.example.athena.entities.User;
+import com.example.athena.entities.Student;
 import com.example.athena.exceptions.BookException;
+import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.graphical_controller.BookBean;
-import com.example.athena.graphical_controller.BookSearchResultBean;
+import javafx.scene.control.Alert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,20 +33,20 @@ public class BuyControllerUCC {
                book.setOwner(entity.getOwner());
                book.setImage(entity.getImage());
                result.add(book);
-
           }
 
        }
        catch (BookException exc)
        {
-
-       }return result;
+           SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage(), 800, 600);
+           alert.showAndWait();
+       }
+        return result;
     }
     
     public void purchase(BookBean book) {
         try {
-           if(PurchaseBoundary.purchase())dao.finalizePurchase(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), User.getUser().getEmail(), book.getOwner());
-           else System.out.println(1);
+           if(PurchaseBoundary.purchase())dao.finalizePurchase(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), Student.getInstance().getEmail(), book.getOwner());
         }
         catch (Exception e){
             e.printStackTrace();

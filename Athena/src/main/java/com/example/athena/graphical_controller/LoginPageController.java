@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
-import java.io.IOException;
 
 
 public class LoginPageController{
@@ -96,19 +95,15 @@ public class LoginPageController{
     }
 
 
-    public void switchToSignUpPage(ActionEvent event ) throws IOException {
+    public void switchToSignUpPage(ActionEvent event ) {
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         switcher.switcher(stage, "signUpView.fxml");
 
     }
 
-    public void switchFast(ActionEvent event) throws IOException {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "MainPageStudents.fxml");
-    }
 
-    public void fillFast(ActionEvent event) {
+    public void fillFast() {
         emailField.setText("alba@student.it");
         passField.setText("tramonto");
     }

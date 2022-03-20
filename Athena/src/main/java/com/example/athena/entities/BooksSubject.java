@@ -18,7 +18,7 @@ public class BooksSubject extends AbstractSubject {
         BookDao bookDao = new BookDao();
         this.totalBooksOnSell = bookDao.getList();
         UserDao dao = new UserDao();
-        this.sellerNameAndSurname = dao.getName(User.getUser().getEmail());
+        this.sellerNameAndSurname = dao.getName(Student.getInstance().getEmail());
     }
 
     public static synchronized BooksSubject getInstance()
@@ -69,7 +69,7 @@ public class BooksSubject extends AbstractSubject {
             bean.setPrice(String.valueOf(entity.getPrice()));
             bean.setNegotiable(entity.getNegotiable());
             bean.setImage(entity.getImage());
-            bean.setOwner(User.getUser().getEmail());
+            bean.setOwner(Student.getInstance().getEmail());
             bean.setIndex(i);
             bookBeanList.add(bean);
             i++;

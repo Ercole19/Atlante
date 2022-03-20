@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.entities.Student;
 import com.example.athena.entities.User;
 import com.example.athena.use_case_controllers.ReportSellerUCC;
 
@@ -15,7 +16,7 @@ public class ReportSellerGC implements PostInitialize {
 
     public void onYesBtnClick() { //if you want to test the report log with user : 'test@test.it' pass : 'test'
         ReportSellerUCC controller = new ReportSellerUCC();
-        controller.reportSeller(this.book, User.getUser().getEmail());
+        controller.reportSeller(this.book, Student.getInstance().getEmail());
     }
 
     public void onNoBtnClick(ActionEvent event)  {

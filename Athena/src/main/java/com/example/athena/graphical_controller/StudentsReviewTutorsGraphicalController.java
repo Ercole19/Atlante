@@ -84,11 +84,11 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
         String selectedButtonID = (String) button.getToggleGroup().getSelectedToggle().getProperties().get("fx:id") ;
         if(selectedButtonID.equals("#oneStarButton"))
         {
-            reviewStars = 1 ;
+            reviewStars = 5 ;
         }
         else if((((RadioButton) root.lookup("#fourStarButton")).isSelected()))
         {
-            reviewStars = 2 ;
+            reviewStars = 4 ;
         }
         else if(((RadioButton) root.lookup("#threeStarButton")).isSelected())
         {
@@ -96,11 +96,11 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
         }
         else if(((RadioButton) root.lookup("#twoStarButton")).isSelected())
         {
-            reviewStars = 4 ;
+            reviewStars = 2 ;
         }
-        else if(selectedButtonID.equals("#fiveStarButton"))
+        else if(((RadioButton) root.lookup("#oneStarButton")).isSelected())
         {
-            reviewStars = 5 ;
+            reviewStars = 1 ;
         }
         else
         {

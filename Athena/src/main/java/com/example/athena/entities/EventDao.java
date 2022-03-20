@@ -77,7 +77,7 @@ public class EventDao extends AbstractDAO {
             ArrayList<EventEntity> events = new ArrayList<>() ;
             Date start = Date.valueOf(timeSpan) ;
 
-            statement.setString(1, User.getUser().getEmail()) ;
+            statement.setString(1, Student.getInstance().getEmail()) ;
             statement.setString(2, type.toString()) ;
             statement.setDate(3, start) ;
 
@@ -106,7 +106,7 @@ public class EventDao extends AbstractDAO {
         try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT * from athena.eventi where DATE_FORMAT(dataEvento, '%Y-%m') = ? and utente = ?")){
 
             statement.setString(1, String.valueOf(yearMonth));
-            statement.setString(2, User.getUser().getEmail());
+            statement.setString(2, Student.getInstance().getEmail());
             ResultSet set = statement.executeQuery();
 
             while (set.next()) {

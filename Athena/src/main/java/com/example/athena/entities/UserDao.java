@@ -1,6 +1,8 @@
 package com.example.athena.entities;
 
 import com.example.athena.exceptions.CareerStatusException;
+import com.example.athena.exceptions.SizedAlert;
+import com.example.athena.exceptions.UserRegistrationException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -221,12 +223,13 @@ public class UserDao extends AbstractDAO {
     public void inserisciCV(File cv) {
         try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(insertCV)) {
             preparedStatement.setBlob(1, new BufferedInputStream(new FileInputStream(cv)));
-            preparedStatement.setString(2, com.example.athena.entities.User.getUser().getEmail());
+            preparedStatement.setString(2, Tutor.getInstance().getEmail());
             preparedStatement.execute();
 
 
         } catch (SQLException | FileNotFoundException exc) {
-            System.out.println(exc.getMessage());
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR , exc.getMessage(), 800, 600);
+            alert.showAndWait();
         }
     }
 

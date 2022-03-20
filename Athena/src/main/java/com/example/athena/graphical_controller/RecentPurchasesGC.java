@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.entities.Student;
 import com.example.athena.entities.User;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.use_case_controllers.RecentPurchaseUCC;
@@ -39,7 +40,7 @@ public class RecentPurchasesGC implements Initializable {
         RecentPurchaseUCC controller= new RecentPurchaseUCC();
         List<BookBean> bookList = new ArrayList<>() ;
         try {
-            bookList = controller.formatResults(User.getUser().getEmail());
+            bookList = controller.formatResults(Student.getInstance().getEmail());
         } catch (BookException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR) ;
             alert.setContentText(e.getMessage()) ;

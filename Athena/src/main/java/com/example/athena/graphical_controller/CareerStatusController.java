@@ -83,7 +83,7 @@ public class CareerStatusController implements Initializable, AbstractObserver {
         stage.close();
     }
 
-    public void onSetCfuBtn(ActionEvent event) {
+    public void onSetCfuBtn() {
         List<Object> params = new ArrayList<>();
 
         params.add(ExamsOrCfusEnum.SET_MAX_CFUS);
@@ -91,7 +91,7 @@ public class CareerStatusController implements Initializable, AbstractObserver {
 
     }
 
-    public void onSetExamsBtn(ActionEvent event) {
+    public void onSetExamsBtn() {
         List<Object> params = new ArrayList<>();
         params.add(ExamsOrCfusEnum.SET_MAX_EXAMS);
         switcher.popup("SetMAxCfuOrExams.fxml", "Set max cfus", params);

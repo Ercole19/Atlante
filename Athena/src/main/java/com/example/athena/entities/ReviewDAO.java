@@ -53,7 +53,7 @@ public class ReviewDAO extends AbstractDAO
                 Time startTime = resultTutoring.getTime(6) ;
                 Time endTime = resultTutoring.getTime(7) ;
 
-                return new ReviewEntity(reviewCode, reviewedTutor, User.getUser().getEmail(), SubjectLabels.valueOf(reviewSubject),
+                return new ReviewEntity(reviewCode, reviewedTutor, Student.getInstance().getEmail(), SubjectLabels.valueOf(reviewSubject),
                         reviewDay.toLocalDate(), startTime.toLocalTime(), endTime.toLocalTime()) ;
             }
             else throw new TutorReviewException("No information found") ;
