@@ -1,5 +1,6 @@
 package com.example.athena.boundaries;
 
+import com.example.athena.entities.Student;
 import com.example.athena.entities.User;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
@@ -35,7 +36,7 @@ public class SetReminderEmailBoundary extends SocketBoundary
         LocalTime end = eventInfo.getEnd() ;
         String description = eventInfo.getDescription() ;
 
-        String query = String.format("N%s;%s;%s;%s;%s;%s;%s;", moment.toString(), User.getUser().getEmail(), name, day, start, end, description) ;
+        String query = String.format("N%s;%s;%s;%s;%s;%s;%s;", moment.toString(), Student.getInstance().getEmail(), name, day, start, end, description) ;
 
         if(update)
         {

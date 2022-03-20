@@ -115,13 +115,8 @@ public class BookDao extends AbstractDAO {
             while(set.next())
             {
                 byte[] image = set.getBlob(1).getBytes(1,(int) set.getBlob(1).length()) ;
-
-                File file = new File("src/main/resources/book_images/tempImage" + i + ".png");
-                OutputStream writeStream = new FileOutputStream(file);
-                writeStream.write(image, 0, image.length);
-                writeStream.close();
-
-                list.add(file);
+                String pathname = "src/main/resources/book_images/tempImage" + i + ".png" ;
+                list.add(writeImage(image, pathname));
                 i = i + 1 ;
             }
         }

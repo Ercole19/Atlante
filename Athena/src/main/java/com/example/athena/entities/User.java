@@ -1,26 +1,15 @@
 package com.example.athena.entities;
 
-public class User {
+public abstract class User {
 
-    private static User instance = null;
-    private String email  ;
+    protected static User instance = null ;
+    protected static TutorStudentLogged who = TutorStudentLogged.USER ;
+    protected String email ;
 
-
-    private User() {}
-
-    public static User getUser() {
-
-        if (instance == null) {
-            instance = new User();
-        }
-        return instance;
+    public static void logout()
+    {
+        User.instance = null ;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
+    public abstract String getEmail() ;
 }

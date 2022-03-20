@@ -31,9 +31,9 @@ public class BooksSubject extends AbstractSubject {
 
     public void addBook(BookEntity book)
     {
-        this.totalBooksOnSell.add(book);
         BookDao dao = new BookDao() ;
         dao.insertBook(book.getBookTitle(), book.getIsbn(), book.getPrice(), book.getNegotiable(), book.getImage());
+        this.totalBooksOnSell.add(book);
         super.notifyObserver();
     }
 

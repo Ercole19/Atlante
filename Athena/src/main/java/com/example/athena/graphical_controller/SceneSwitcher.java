@@ -120,7 +120,6 @@ public class SceneSwitcher {
     {
         SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, FATAL_ERROR, 800, 600) ;
         alert.showAndWait() ;
-        ExitSystem exit = new ExitSystem() ;
-        exit.exitFromApplication();
+        System.exit(1) ;
     }
 }

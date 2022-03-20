@@ -135,7 +135,7 @@ public class UserDao extends AbstractDAO {
             statement.setString(1, about);
             statement.setString(2, sesinf);
             statement.setString(3, contnum);
-            statement.setString(4, User.getUser().getEmail());
+            statement.setString(4, Tutor.getInstance().getEmail());
 
             statement.executeUpdate();
         } catch (SQLException exc) {
@@ -242,10 +242,8 @@ public class UserDao extends AbstractDAO {
 
             while (set.next()) {
                 byte[] cvBytes = set.getBlob(1).getBytes(1, (int) set.getBlob(1).length());
-                File file = new File("src/main/resources/tutor_cv/tempCV.html");
-                OutputStream writeStream = new FileOutputStream(file);
-                writeStream.write(cvBytes, 0, cvBytes.length);
-                writeStream.close();
+                String pathname = "src/main/resources/tutor_cv/tempCV.html" ;
+                writeCv(cvBytes, pathname);
             }
 
         } catch (SQLException | IOException exc) {

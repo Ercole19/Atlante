@@ -67,7 +67,6 @@ public class SellController implements Initializable, AbstractObserver {
         }
         else {
             switcher.popup("sellBookModule.fxml", "Sell a book");
-            update();
         }
     }
 

@@ -9,9 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -80,9 +78,7 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
         root = reviewSubscene.getRoot() ;
 
         int reviewStars ;
-        RadioButton button = (RadioButton) root.lookup("#oneStarButton") ;
-        String selectedButtonID = (String) button.getToggleGroup().getSelectedToggle().getProperties().get("fx:id") ;
-        if(selectedButtonID.equals("#oneStarButton"))
+        if(((RadioButton) root.lookup("#fiveStarButton")).isSelected())
         {
             reviewStars = 5 ;
         }
