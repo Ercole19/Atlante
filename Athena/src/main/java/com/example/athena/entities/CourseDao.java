@@ -10,16 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDao extends AbstractDAO {
-    private final String emailcurrent =  User.getUser().getEmail() ;
-    private String add = "INSERT INTO corsi (nomecorso , emailtutor) VALUES (?,?)" ;
-    private String delete = "DELETE FROM corsi WHERE nomecorso = ? and emailtutor = ?" ;
-    private String getCourses = "SELECT nomecorso FROM corsi WHERE emailtutor = ?" ;
-    private String checkQuery  = "SELECT * from corsi where nomecorso = ? and emailtutor= ?";
-
+    private final String emailcurrent =  Tutor.getInstance().getEmail() ;
 
 
     public  void addCourse (String course) {
-        try ( PreparedStatement statement =this.getConnection().prepareStatement(add)) {
+        try ( PreparedStatement statement =this.getConnection().prepareStatement("INSERT INTO corsi (nomecorso , emailtutor) VALUES (?,?)")) {
             statement.setString(1, course);
             statement.setString(2, emailcurrent);
             statement.executeUpdate() ;
@@ -30,7 +25,7 @@ public class CourseDao extends AbstractDAO {
 
     }
     public  void deleteCourse (String course) {
-        try ( PreparedStatement statement =this.getConnection().prepareStatement(delete)) {
+        try ( PreparedStatement statement =this.getConnection().prepareStatement("DELETE FROM corsi WHERE nomecorso = ? and emailtutor = ?")) {
             statement.setString(1 , course);
             statement.setString(2 , emailcurrent);
             statement.executeUpdate() ;
@@ -41,24 +36,24 @@ public class CourseDao extends AbstractDAO {
 
     }
     public List<String> fillCourses (String email) {
-        List<String> corsi = new ArrayList<>() ;
-        try ( PreparedStatement statement = this.getConnection().prepareStatement(getCourses)) {
+        List<String> courses = new ArrayList<>() ;
+        try ( PreparedStatement statement = this.getConnection().prepareStatement("SELECT nomecorso FROM corsi WHERE emailtutor = ?")) {
             statement.setString(1, email);
             ResultSet set = statement.executeQuery() ;
             while (set.next()){
-                corsi.add(set.getString(1)) ;
+                courses.add(set.getString(1)) ;
 
 
             }
         } catch (SQLException e) {
             e.getMessage() ;
         }
-        return corsi ;
+        return courses ;
 
     }
 
     public boolean checkCourseExist(String name) {
-        try (PreparedStatement statement = this.getConnection().prepareStatement(checkQuery)){
+        try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT * from corsi where nomecorso = ? and emailtutor= ?")){
             statement.setString(1, name);
             statement.setString(2, emailcurrent);
 

@@ -4,6 +4,7 @@ package com.example.athena.graphical_controller;
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
 import com.example.athena.entities.BooksSubject;
 import com.example.athena.entities.SellerOrBuyerEnum;
+import com.example.athena.entities.Student;
 import com.example.athena.entities.User;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.SizedAlert;
@@ -59,9 +60,8 @@ public class SellController implements Initializable, AbstractObserver {
         switcher.switcher(stage, "bookshop-choose-view.fxml");
     }
 
-    public void onSellBtnClick() throws  BookException {
-        SellBooksUseCaseController controller = new SellBooksUseCaseController();
-        if(controller.getTotalReport() > 50){
+    public void onSellBtnClick() {
+        if(Student.getInstance().getRepNum() > 50){
             Alert alert = new Alert(Alert.AlertType.WARNING, "You can't sell books anymore, you received too many reports", ButtonType.CLOSE);
             alert.showAndWait();
         }
@@ -76,7 +76,6 @@ public class SellController implements Initializable, AbstractObserver {
         colName.setCellValueFactory(new PropertyValueFactory<>("title"));
         colIsbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        colManage.setCellValueFactory(new PropertyValueFactory<>("Manage"));
         javafx.util.Callback<TableColumn<BookBean, Void>, TableCell<BookBean, Void>> cellFactory = new javafx.util.Callback<>() {
 
             @Override
@@ -108,12 +107,10 @@ public class SellController implements Initializable, AbstractObserver {
 
                                         BookBean book = bookTable.getSelectionModel().getSelectedItem();
 
-                                        SceneSwitcher switcher = new SceneSwitcher();
                                         ArrayList<Object> params = new ArrayList<>();
                                         params.add(book);
 
                                         switcher.popup("sellBookModule.fxml", "Edit your book", params);
-                                        update();
                                     });
 
                                     goToBookPage.setOnAction(event -> {
@@ -121,7 +118,6 @@ public class SellController implements Initializable, AbstractObserver {
                                         List<Object> params = new ArrayList<>();
                                         params.add(SellerOrBuyerEnum.SELLER);
                                         params.add(book);
-                                        SceneSwitcher switcher = new SceneSwitcher();
 
                                         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
                                         switcher.switcher(stage, "Book-Page2.fxml", params);
@@ -134,7 +130,6 @@ public class SellController implements Initializable, AbstractObserver {
                                             BookBean book = bookTable.getSelectionModel().getSelectedItem();
                                             SellBooksUseCaseController controller = new SellBooksUseCaseController();
                                             controller.deleteProduct(book);
-                                            update();
 
                                         } catch (Exception exc) {
                                             exc.getCause();

@@ -111,7 +111,7 @@ public class CalendarPageController implements Initializable {
 
     public void loadEventsByDate(LocalDate day)
     {
-        List<EventBean> results = null; //Another bean should be added
+        List<EventBean> results;
         try {
             results = calendarEntity.getEvents(day);
         } catch (EventException e) {

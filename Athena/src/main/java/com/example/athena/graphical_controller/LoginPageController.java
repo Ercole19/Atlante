@@ -1,7 +1,10 @@
 package com.example.athena.graphical_controller;
 
-import com.example.athena.entities.User;
-import com.example.athena.use_case_controllers.LoginUseCaseControlller;
+import com.example.athena.entities.AbstractDAO;
+import com.example.athena.exceptions.LoggedUserException;
+import com.example.athena.exceptions.SizedAlert;
+import com.example.athena.exceptions.UserNotFoundException;
+import com.example.athena.use_case_controllers.LoginUseCaseController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +19,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class LoginPageController {
+public class LoginPageController{
 
     private int totalAttempts = 0 ;
     private int waitTimeMultiplier = 1;
@@ -32,7 +35,7 @@ public class LoginPageController {
     @FXML
     private TextField passField;
 
-    public void switchToMainPage(ActionEvent event) throws IOException {
+    public void switchToMainPage(ActionEvent event){
         String email = emailField.getText() ;
         String password = passField.getText() ;
 
@@ -40,60 +43,58 @@ public class LoginPageController {
         bean.setEmail(email);
         bean.setPassword(password);
 
-        LoginUseCaseControlller controlller = new LoginUseCaseControlller() ;
-        bean = controlller.findUser(bean);
+        LoginUseCaseController controller = new LoginUseCaseController() ;
 
-        if (bean.isUserFound()) {
 
-            if (bean.getRole().equals("student")) {
-                Alert alert = new Alert(Alert.AlertType.NONE, "Access granted !", ButtonType.CLOSE);
-                alert.showAndWait();
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-                switcher.switcher(stage, "MainPageStudents.fxml");
-                User.getUser().setEmail(email);
+        try{
+                bean = controller.findUser(bean);
 
-            } else {
-                Alert alert = new Alert(Alert.AlertType.NONE, "Access granted !", ButtonType.CLOSE);
-                alert.showAndWait();
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-                switcher.switcher(stage, "MainPageTutor.fxml");
-                User.getUser().setEmail(email);
-            }
+                if (bean.getRole().equals("STUDENT")) {
+                    Alert alert = new Alert(Alert.AlertType.NONE, "Access granted !", ButtonType.CLOSE);
+                    alert.showAndWait();
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+                    switcher.switcher(stage, "MainPageStudents.fxml");
+
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.NONE, "Access granted !", ButtonType.CLOSE);
+                    alert.showAndWait();
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+                    switcher.switcher(stage, "MainPageTutor.fxml");
+                }
+
         }
-
-        else {
+        catch (LoggedUserException exc)
+        {
+                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
+                alert.showAndWait();
+        }
+        catch (UserNotFoundException exe)
+        {
             if(totalAttempts < 5)
             {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Access failed !", ButtonType.CLOSE);
+                Alert alert = new Alert(Alert.AlertType.ERROR, exe.getMessage() , ButtonType.CLOSE);
                 alert.showAndWait();
                 totalAttempts++;
             }
             else
             {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "Too many failed attempts, wait " + 10*waitTimeMultiplier + " seconds!", ButtonType.CLOSE);
+                Alert alert = new Alert(Alert.AlertType.WARNING,  "Too many failed attempts, wait " + 10*waitTimeMultiplier + " seconds!", ButtonType.CLOSE);
                 alert.showAndWait();
                 new Thread(() -> {
-                    Platform.runLater(new Runnable() {
-                        public void run() {
-                            loginButton.setDisable(true);
-                        }
-                    });
+                    Platform.runLater(() -> loginButton.setDisable(true));
                     try {
                         Thread.sleep(10000L * waitTimeMultiplier);
                     }
                     catch(InterruptedException ex) {
+                        Thread.currentThread().interrupt();
                     }
-                    Platform.runLater(new Runnable() {
-                        public void run() {
-                            loginButton.setDisable(false);
-                        }
-
-                    });
+                    Platform.runLater(() -> loginButton.setDisable(false));
                 }).start();
                 waitTimeMultiplier++;
             }
         }
     }
+
 
     public void switchToSignUpPage(ActionEvent event ) throws IOException {
 

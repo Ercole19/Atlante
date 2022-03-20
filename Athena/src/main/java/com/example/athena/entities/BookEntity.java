@@ -1,7 +1,6 @@
 package com.example.athena.entities;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BookEntity {
@@ -74,9 +73,4 @@ public class BookEntity {
     public File getFile() {
         return this.file;
     }
-
-
-
-
-
 }

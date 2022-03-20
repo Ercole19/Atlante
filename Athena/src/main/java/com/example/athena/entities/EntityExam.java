@@ -2,49 +2,49 @@ package com.example.athena.entities;
 
 
 public class EntityExam {
-    protected String nome;
-    protected int voto;
+    protected String name;
+    protected int grade;
     protected int cfu;
-    protected String data;
+    protected String date;
     
 
-    public EntityExam(String nome, int voto, int cfu, String  data) {
-        this.nome = nome;
-        this.voto = voto;
+    public EntityExam(String name, int grade, int cfu, String  date) {
+        this.name = name;
+        this.grade = grade;
         this.cfu = cfu;
-        this.data = data;
+        this.date = date;
     }
     
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setVoto(int voto) {
-        this.voto = voto;
+    public void setGrade(int grade) {
+        this.grade = grade;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public void setCfu(int cfu) {
         this.cfu = cfu;
     }
 
-    public int getVoto() {
-        return voto;
+    public int getGrade() {
+        return grade;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
     public int getCfu() {
         return cfu;
     }
 
-    public String getData() {
-        return data;
+    public String getDate() {
+        return date;
     }
     
 }

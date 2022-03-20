@@ -3,19 +3,17 @@ package com.example.athena.graphical_controller;
 
 
 import com.example.athena.exceptions.ExamException;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 
 public class ExamEntityBean  {
     private String examName;
-    private int votoEsame;
-    private int cfuEsame;
-    private String  date;
+    private int examGrade;
+    private int examCfu;
+    private String examDate;
     private int examIndex;
 
 
-    public void setCfuEsame(int cfus)  {
-         this.cfuEsame = cfus;
+    public void setExamCfu(int cfus)  {
+         this.examCfu = cfus;
     }
 
     public void setExamName(String examName) throws ExamException {
@@ -29,24 +27,24 @@ public class ExamEntityBean  {
         }
     }
 
-    public void setDate(String data ) {
-        this.date = data ;
+    public void setExamDate(String data ) {
+        this.examDate = data ;
     }
 
-    public void setVotoEsame(int examGrade) {
-       this.votoEsame = examGrade;
+    public void setExamGrade(int examGrade) {
+       this.examGrade = examGrade;
     }
 
-    public int getCfuEsame() {
-        return cfuEsame;
+    public int getExamCfu() {
+        return examCfu;
     }
 
-    public int getVotoEsame() {
-        return votoEsame;
+    public int getExamGrade() {
+        return examGrade;
     }
 
-    public String getDate() {
-        return date;
+    public String getExamDate() {
+        return examDate;
     }
 
     public String getExamName() {

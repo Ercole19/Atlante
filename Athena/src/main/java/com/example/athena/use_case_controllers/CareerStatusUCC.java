@@ -1,13 +1,11 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.entities.ExamDao;
 import com.example.athena.entities.ExamsSubject;
 import com.example.athena.entities.UserDao;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.graphical_controller.CareerInformationBean;
 import com.example.athena.graphical_controller.ExamEntityBean;
 import javafx.collections.ObservableList;
-import javafx.scene.chart.PieChart;
 
 public class CareerStatusUCC {
 
@@ -22,7 +20,7 @@ public class CareerStatusUCC {
 
         for(ExamEntityBean bean : exams)
         {
-            totalCfus = totalCfus + bean.getCfuEsame() ;
+            totalCfus = totalCfus + bean.getExamCfu() ;
         }
 
         careerInfos.setGainedCfus(totalCfus) ;

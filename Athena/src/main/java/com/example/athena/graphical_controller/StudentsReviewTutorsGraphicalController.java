@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.TutorReviewException;
 import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
 import javafx.event.ActionEvent;
@@ -72,7 +73,7 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
         }
     }
 
-    public void clickOnSubmitReviewButton(ActionEvent event) throws IOException
+    public void clickOnSubmitReviewButton(ActionEvent event)
     {
         scene = ((Node) event.getSource()).getScene() ;
         SubScene reviewSubscene = (SubScene) scene.lookup(REVIEW_SECTION_PROMPT) ;
@@ -85,15 +86,15 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
         {
             reviewStars = 1 ;
         }
-        else if(selectedButtonID.equals("#twoStarButton"))
+        else if((((RadioButton) root.lookup("#fourStarButton")).isSelected()))
         {
             reviewStars = 2 ;
         }
-        else if(selectedButtonID.equals("#threeStarButton"))
+        else if(((RadioButton) root.lookup("#threeStarButton")).isSelected())
         {
             reviewStars = 3 ;
         }
-        else if(selectedButtonID.equals("#fourStarButton"))
+        else if(((RadioButton) root.lookup("#twoStarButton")).isSelected())
         {
             reviewStars = 4 ;
         }
@@ -103,6 +104,8 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
         }
         else
         {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "You must pick a review!");
+            alert.showAndWait();
             return ;
         }
 

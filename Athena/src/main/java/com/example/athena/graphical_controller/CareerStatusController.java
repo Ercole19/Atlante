@@ -43,7 +43,7 @@ public class CareerStatusController implements Initializable, AbstractObserver {
     public void initialize(URL url, ResourceBundle rb) {
 
         try {
-
+            ExamsSubject.getInstance().attachObserver(this);
             CareerStatusUCC controller = new CareerStatusUCC();
             CareerInformationBean infos = controller.getAllInfos();
 
@@ -78,6 +78,7 @@ public class CareerStatusController implements Initializable, AbstractObserver {
     }
 
     public void indietro(ActionEvent event) {
+        ExamsSubject.getInstance().detachObserver(this);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
@@ -87,7 +88,6 @@ public class CareerStatusController implements Initializable, AbstractObserver {
 
         params.add(ExamsOrCfusEnum.SET_MAX_CFUS);
         switcher.popup("SetMAxCfuOrExams.fxml", "Set max cfus", params);
-        update();
 
     }
 
@@ -95,7 +95,6 @@ public class CareerStatusController implements Initializable, AbstractObserver {
         List<Object> params = new ArrayList<>();
         params.add(ExamsOrCfusEnum.SET_MAX_EXAMS);
         switcher.popup("SetMAxCfuOrExams.fxml", "Set max cfus", params);
-        update();
     }
 
     @Override

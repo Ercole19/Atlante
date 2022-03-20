@@ -241,6 +241,10 @@ public class AddEventController implements Initializable , PostInitialize{
             eventToUpdate.setEnd(end);
             eventToUpdate.setDescription(eventDescription.getText());
             eventToUpdate.setType(eventType.getValue().toUpperCase().replace(" ", "_"));
+            controller.update(eventToUpdate, this.oldEventBean);
+
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
         }
         catch(EventException e){
             SizedAlert error = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
@@ -248,18 +252,12 @@ public class AddEventController implements Initializable , PostInitialize{
             return;
         }
 
-        try
-        {
-            controller.update(eventToUpdate, this.oldEventBean);
-        }
         catch(SendEmailException e)
         {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Error in setting the reminder. Try reopening the event and send it again", 800, 600);
             alert.showAndWait();
+            return;
         }
-
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
     }
 
     @Override

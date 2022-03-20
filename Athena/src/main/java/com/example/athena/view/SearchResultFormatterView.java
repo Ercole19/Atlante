@@ -2,12 +2,15 @@ package com.example.athena.view;
 
 import com.example.athena.entities.EventDao;
 import com.example.athena.entities.SellerOrBuyerEnum;
+import com.example.athena.exceptions.EventException;
+import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.graphical_controller.*;
 import com.example.athena.engineering_classes.scene_decorators.SearchResultFormatterComponent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -283,10 +286,17 @@ public class  SearchResultFormatterView extends SearchResultFormatterComponent {
 
             Button delete = new Button("delete") ;
             delete.setOnAction(event -> {
-                EventDao eventDao = new EventDao() ;
-                eventDao.delete(result.getName() , result.getDate()) ;
-                entryBox.setStyle("-fx-border-color: #ffffff") ;
-                deleteRow(entryBox, entryBox.getRowIndex(delete));
+                try {
+                    EventDao eventDao = new EventDao();
+                    eventDao.delete(result.getName(), result.getDate());
+                    entryBox.setStyle("-fx-border-color: #ffffff");
+                    deleteRow(entryBox, entryBox.getRowIndex(delete));
+                }
+                catch (EventException exc){
+                    SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
+                    alert.showAndWait();
+                    return;
+                }
             });
             entryBox.add(delete, 5, 0) ;
 

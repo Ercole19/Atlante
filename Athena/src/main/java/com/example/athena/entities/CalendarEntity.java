@@ -54,4 +54,11 @@ public class CalendarEntity {
     {
         return new PresenceOfEventsBean(this.map.containsKey(day)) ;
     }
+
+    public void addEvent(EventEntity eventEntity) throws EventException {
+        this.events.add(eventEntity);
+        this.map.get(eventEntity.getDay()).add(eventEntity) ;
+
+
+    }
 }

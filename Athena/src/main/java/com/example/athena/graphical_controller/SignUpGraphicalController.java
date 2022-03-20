@@ -2,6 +2,7 @@ package com.example.athena.graphical_controller;
 
 
 import com.example.athena.exceptions.SizedAlert;
+import com.example.athena.exceptions.UserRegistrationException;
 import com.example.athena.use_case_controllers.SignUpUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,15 +47,12 @@ public class SignUpGraphicalController {
         String cognome = surnameField.getText() ;
         String passConfirm = confirmPassField.getText() ;
 
+
+
         if (password.equals(passConfirm)) {
 
-            if (studentRadiobutton.isSelected()) {
-                userType = "student" ;
-
-            }
-            else {
-                userType = "tutor" ;
-            }
+            if (studentRadiobutton.isSelected()) {userType = "STUDENT";}
+            else {userType = "TUTOR";}
 
             UserBean bean = new UserBean();
             bean.setEmail(email);
@@ -64,27 +62,21 @@ public class SignUpGraphicalController {
             bean.setSurname(cognome);
 
             SignUpUCC controller = new SignUpUCC();
-
-            if (controller.register(bean)) {
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+            try
+            {
+                controller.register(bean);
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 switcher.switcher(stage, "LoginPage.fxml");
             }
-            else {
-                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Something went wrong please retry or restart application");
+            catch (UserRegistrationException exc)
+            {
+                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
                 alert.showAndWait();
             }
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.ERROR , "Data not valid") ;
+            Alert alert = new Alert(Alert.AlertType.ERROR , "You inserted two different passwords!") ;
             alert.showAndWait() ;
         }
-
-
-
         }
-
-
-
     }
-
-

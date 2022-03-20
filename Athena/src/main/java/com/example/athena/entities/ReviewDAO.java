@@ -46,7 +46,7 @@ public class ReviewDAO extends AbstractDAO
             if(resultTutoring.next())
             {
                 String studentUsername = resultTutoring.getString(3) ;
-                if(!studentUsername.equals(User.getUser().getEmail())) throw new TutorReviewException("No information found") ;
+                if(!studentUsername.equals(Student.getInstance().getEmail())) throw new TutorReviewException("No information found") ;
                 String reviewedTutor = resultTutoring.getString(2) ;
                 Date reviewDay = resultTutoring.getDate(4) ;
                 String reviewSubject = resultTutoring.getString(5) ;
@@ -84,8 +84,5 @@ public class ReviewDAO extends AbstractDAO
         } catch (SQLException exc) {
             throw new TutorReviewException("Failed to connect to DB") ;
         }
-
-
-
     }
 }

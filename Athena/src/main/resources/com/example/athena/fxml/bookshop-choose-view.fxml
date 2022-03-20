@@ -31,7 +31,7 @@
    <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="55.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="556.0647392272949" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="1143.0" AnchorPane.topAnchor="183.0">
       <Image url="@../../../../assets/backBtn.png" />
    </ImageView>
-   <Button layoutX="55.0" layoutY="183.0" mnemonicParsing="false" onAction="#onBackButtonClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn" AnchorPane.bottomAnchor="556.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="1143.0" AnchorPane.topAnchor="183.0">
+   <Button layoutX="63.0" layoutY="183.0" mnemonicParsing="false" onAction="#onBackButtonClick" opacity="0.0" prefHeight="51.0" prefWidth="63.0" text="backBtn" AnchorPane.bottomAnchor="531.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="1154.0" AnchorPane.topAnchor="183.0">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor>

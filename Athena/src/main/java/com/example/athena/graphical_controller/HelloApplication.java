@@ -1,8 +1,6 @@
 package com.example.athena.graphical_controller;
 
-import com.example.athena.use_case_controllers.ExitSystem;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -24,15 +22,10 @@ public class HelloApplication extends Application {
         stage.getIcons().add(icon);
         stage.show();
 
-
-        stage.setOnCloseRequest(event->
-        {
-            ExitSystem exitSystem = new ExitSystem();
-            exitSystem.exitFromApplication();
-        });
     }
 
     public static void main(String[] args) {
         launch();
+        System.exit(0);
     }
 }

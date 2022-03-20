@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.entities.Student;
 import com.example.athena.entities.User;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
@@ -99,7 +100,7 @@ public class SellModuleController extends ShiftImageController implements Initia
             this.book.setPrice(bookPrice.getText());
             this.book.setNegotiable(bookNegotiability.isSelected());
             this.book.setImage(files);
-            this.book.setOwner(User.getUser().getEmail());
+            this.book.setOwner(Student.getInstance().getEmail());
         }
         catch (BookException e)
         {

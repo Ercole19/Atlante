@@ -15,7 +15,6 @@ public class UserDao extends AbstractDAO {
 
 
     private String queryFind = " SELECT * FROM utenti WHERE  email = ? and password = ? ";
-    private String queryRegister;
     private String getType = "SELECT type FROM utenti WHERE email = ?";
     private String filltutor = "SELECT  aboutme ,  sessioninfos  , contactnumbers  FROM athena.tutordescription WHERE emailuser = ? ";
     private String setTutor = "INSERT INTO `athena`.`tutordescription` (aboutme, sessioninfos, contactnumbers, emailuser) VALUES (? ,? ,?,?)";
@@ -23,7 +22,7 @@ public class UserDao extends AbstractDAO {
     private String updatetutor = "UPDATE athena.tutordescription SET aboutme = ?,  sessioninfos=?, contactnumbers=?  WHERE emailuser= ?";
     private String searchByName = "SELECT  utenti.nome ,  utenti.surname , corsi.nomecorso , tutordescription.Average ,  utenti.email FROM athena.utenti join athena.tutordescription on utenti.email = tutordescription.emailuser join athena.corsi on utenti.email = corsi.emailtutor WHERE CONCAT( nome,  ' ', surname ) LIKE  concat ('%' , ? , '%')";
     private String insertCV = "update athena.tutordescription  set CV = ?    where emailuser = ?";
-    private String setQuery;
+
 
 
     public boolean findStudent(String emailUtente, String pass) {
@@ -46,14 +45,14 @@ public class UserDao extends AbstractDAO {
         return false;
     }
 
-    public Boolean registerUser(String email, String password, String type, String name, String surname) {
+    public Boolean registerUser(String email, String password, String type, String name, String surname) throws UserRegistrationException {
 
-        if (type.equals("student")) {
+        String queryRegister;
+        if (type.equals("STUDENT")) {
             queryRegister = "call athena.register_user(?, ?, ?, ?, ?)";
         } else {
             queryRegister = "call athena.register_tutor(?,?,?,?,?)";
         }
-
 
         try (PreparedStatement stmt = this.getConnection().prepareStatement(queryRegister)) {
             stmt.setString(1, email);
@@ -67,14 +66,8 @@ public class UserDao extends AbstractDAO {
             return true;
 
         } catch (SQLException exception) {
-            if (exception.getMessage().equals("Email not correct type another one")) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Email not valid");
-                alert.showAndWait();
-            } else {
-                exception.getMessage();
-            }
+            throw new UserRegistrationException(exception.getMessage());
         }
-        return false;
     }
 
 
@@ -151,20 +144,12 @@ public class UserDao extends AbstractDAO {
 
 
     public String[] findTutor(String query, ByCourseOrNameEnum searchEnum, boolean byBestReviews) {
-        String prepStatement = null;
+        String prepStatement;
 
-        switch (searchEnum)
-        {
-            case BY_COURSE:
-                prepStatement = searchTutor;
-                break;
-            case BY_NAME:
-                prepStatement = searchByName;
-                break;
-        }
-        if (byBestReviews) {
-            prepStatement = prepStatement + "order by tutordescription.average DESC";
-        }
+        if (searchEnum.toString().equals("BY_COURSE")) {prepStatement = searchTutor;}
+        else { prepStatement = searchByName;}
+
+        if (byBestReviews) {prepStatement = prepStatement + "order by tutordescription.average DESC";}
 
         String[] tutorInfos = new String[500];
         int i = 0;
@@ -265,22 +250,26 @@ public class UserDao extends AbstractDAO {
         }
     }
 
-    public void setCfusOrExams(int data, ExamsOrCfusEnum cfuOrExams) throws CareerStatusException {
-
-        switch (cfuOrExams)
+    private void writeCv(byte[] cv, String pathname) throws IOException
+    {
+        File file = new File(pathname);
+        file.deleteOnExit();
+        try(OutputStream writeStream = new FileOutputStream(file))
         {
-            case SET_MAX_EXAMS:
-                setQuery = "Update athena.student_infos set max_exams = ? where email = ?";
-                break;
-            case SET_MAX_CFUS:
-                setQuery = "Update athena.student_infos set max_cfus = ? where email = ?";
-                break;
+            writeStream.write(cv, 0, cv.length);
         }
+    }
+
+    public void setCfusOrExams(int data, ExamsOrCfusEnum cfuOrExams) throws CareerStatusException {
+        String setQuery;
+
+        if (cfuOrExams.toString().equals("SET_MAX_EXAMS")) { setQuery = "Update athena.student_infos set max_exams = ? where email = ?";}
+        else {setQuery = "Update athena.student_infos set max_cfus = ? where email = ?";}
 
         try (PreparedStatement statement = this.getConnection().prepareStatement(setQuery)) {
 
             statement.setInt(1, data);
-            statement.setString(2, User.getUser().getEmail());
+            statement.setString(2, Student.getInstance().getEmail());
 
             statement.execute();
 
@@ -296,7 +285,7 @@ public class UserDao extends AbstractDAO {
         int total = 0;
         try (PreparedStatement statement = this.getConnection().prepareStatement("Select max_exams from athena.student_infos where email =? ")) {
 
-            statement.setString(1, User.getUser().getEmail());
+            statement.setString(1, Student.getInstance().getEmail());
             ResultSet set = statement.executeQuery();
 
             set.next();
@@ -316,7 +305,7 @@ public class UserDao extends AbstractDAO {
         try (PreparedStatement statement = this.getConnection().prepareStatement("Select max_cfus from athena.student_infos where email =? ")) {
 
 
-            statement.setString(1, User.getUser().getEmail());
+            statement.setString(1, Student.getInstance().getEmail());
             ResultSet set = statement.executeQuery();
 
             set.next();
@@ -335,7 +324,7 @@ public class UserDao extends AbstractDAO {
         int totalReports = 0;
         try(PreparedStatement statement = this.getConnection().prepareStatement("Select report_number from athena.student_infos where email = ?")){
 
-            statement.setString(1, User.getUser().getEmail());
+            statement.setString(1, Student.getInstance().getEmail());
 
             ResultSet set = statement.executeQuery();
 

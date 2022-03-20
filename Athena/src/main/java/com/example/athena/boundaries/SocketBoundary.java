@@ -63,12 +63,7 @@ public abstract class SocketBoundary
             bZero() ;
             int readChars = in.read(buff, 0, 2) ;
             if(readChars != 2) return "Unknown response from server" ;
-
             if(buff[0] == 'F') return "Payment failed" ;
-
-            in.close() ;
-            socket.close() ;
-
             return "OK" ;
         }
     }

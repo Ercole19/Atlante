@@ -64,7 +64,6 @@ public class ControllerSearchTutor {
                 resultsBox.setRoot(error) ;
                 return ;
             }
-
             SearchResultFormatterComponent resultView = new SearchResultFormatterView();
             if (resultsBox.getHeight() < results.size() * 100.0) {
                 resultView = new SearchResultFormatterScrollBar(resultView);

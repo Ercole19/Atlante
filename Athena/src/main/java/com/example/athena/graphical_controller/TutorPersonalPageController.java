@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.entities.Tutor;
 import com.example.athena.entities.User;
 import com.example.athena.use_case_controllers.TutorPersonalPageUCC;
 import com.example.athena.use_case_controllers.ViewTutorPageUseCaseController;
@@ -54,7 +55,7 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
 
     private File file ;
 
-    private String email  = User.getUser().getEmail();
+    private String email  = Tutor.getInstance().getEmail();
 
 
     public void clickOnBackButtonTutor(ActionEvent event) throws IOException
@@ -71,7 +72,6 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
 
     public void onCVButtonClick()
     {
-        SceneSwitcher switcher = new SceneSwitcher() ;
         ViewTutorPageUseCaseController tutorPage = new ViewTutorPageUseCaseController();
         tutorPage.getCV(this.email);
         String name = "tempCV.html" ;
@@ -89,7 +89,7 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
         infos.setContactNumbers(contactnumbers.getText());
         infos.setSessionInfos(sessioninfos.getText());
 
-        bean.setEmail(com.example.athena.entities.User.getUser().getEmail());
+        bean.setEmail(com.example.athena.entities.Tutor.getInstance().getEmail());
         List<String> tutorInfos = controller.getTutorInfos(bean);
 
         if (tutorInfos.isEmpty()) {

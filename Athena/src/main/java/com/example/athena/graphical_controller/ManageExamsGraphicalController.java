@@ -45,9 +45,9 @@ public class ManageExamsGraphicalController implements PostInitialize {
         try {
             if (!((grade < 18 || grade > 30) || (cfu < 2 || cfu > 18))){
                 examBean.setExamName(name);
-                examBean.setVotoEsame(grade);
-                examBean.setCfuEsame(cfu);
-                examBean.setDate(date);
+                examBean.setExamGrade(grade);
+                examBean.setExamCfu(cfu);
+                examBean.setExamDate(date);
 
                 ManageExamsUCC useCaseController = new ManageExamsUCC();
                 useCaseController.addExam(examBean);
@@ -82,9 +82,9 @@ public class ManageExamsGraphicalController implements PostInitialize {
         try {
             if(!((grade < 18 || grade > 30) || (cfu < 2 || cfu > 18))){
                 newExam.setExamName(name);
-                newExam.setVotoEsame(grade);
-                newExam.setCfuEsame(cfu);
-                newExam.setDate(date);
+                newExam.setExamGrade(grade);
+                newExam.setExamCfu(cfu);
+                newExam.setExamDate(date);
             }
 
             ManageExamsUCC controller = new ManageExamsUCC();
@@ -99,28 +99,23 @@ public class ManageExamsGraphicalController implements PostInitialize {
     }
 
 
-    public void indietro(ActionEvent event) {
+    public void onBackButtonClick(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
     @Override
     public void postInitialize(ArrayList<Object> params) {
-
         oldExam = (ExamEntityBean) params.get(0);
 
-
         examName.setText(oldExam.getExamName());
-        examGrade.setText(String.valueOf(oldExam.getVotoEsame()));
-        examCFU.setText(String.valueOf(oldExam.getCfuEsame()));
-        examDate.setValue(LocalDate.parse(oldExam.getDate()));
-
+        examGrade.setText(String.valueOf(oldExam.getExamGrade()));
+        examCFU.setText(String.valueOf(oldExam.getExamCfu()));
+        examDate.setValue(LocalDate.parse(oldExam.getExamDate()));
 
         confirm.setText("Update");
         confirm.setOnAction(this::updateExam) ;
     }
-
-
 }
 
 

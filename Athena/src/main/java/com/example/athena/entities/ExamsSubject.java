@@ -3,10 +3,13 @@ package com.example.athena.entities;
 import com.example.athena.engineering_classes.ExamsComparator;
 import com.example.athena.exceptions.CareerStatusException;
 import com.example.athena.exceptions.ExamException;
+import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.graphical_controller.ExamEntityBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+
 import java.util.List;
 
 public class  ExamsSubject extends AbstractSubject {
@@ -18,12 +21,19 @@ public class  ExamsSubject extends AbstractSubject {
    
    private ExamsSubject()
    {
-       ExamDao eDao = new ExamDao();
-       this.totalExams = eDao.getExamlist();
+       try {
+           ExamDao eDao = new ExamDao();
+           this.totalExams = eDao.getExamlist();
 
-       UserDao uDao = new UserDao() ;
-       this.examsNumber = uDao.getAllExams();
-       this.cfusNumber = uDao.getAllCfus() ;
+           UserDao uDao = new UserDao();
+           this.examsNumber = uDao.getAllExams();
+           this.cfusNumber = uDao.getAllCfus();
+       }
+       catch (ExamException exc) {
+           SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
+           alert.showAndWait();
+           return;
+       }
 
    }
    
@@ -35,7 +45,7 @@ public class  ExamsSubject extends AbstractSubject {
        return instance;
    }
    
-   public void addExam(EntityExam exam)
+   public void addExam(EntityExam exam) throws ExamException
    {
        this.totalExams.add(exam);
        ExamDao examDao = new ExamDao();
@@ -43,27 +53,22 @@ public class  ExamsSubject extends AbstractSubject {
        super.notifyObserver() ;
    }
    
-   public void deleteExam(EntityExam exam, int index)
+   public void deleteExam(EntityExam exam, int index) throws ExamException
    {
        this.totalExams.remove(index);
        ExamDao examDao = new ExamDao();
-       examDao.deleteExam(exam.getNome());
+       examDao.deleteExam(exam.getName());
        super.notifyObserver();
    }
 
    public void setNewMax(int max, ExamsOrCfusEnum type) throws CareerStatusException {
        UserDao dao = new UserDao();
        dao.setCfusOrExams(max, type);
-       switch (type)
-       {
-           case SET_MAX_CFUS:
-               this.cfusNumber = max;
-               break;
-           case SET_MAX_EXAMS:
-               this.examsNumber = max;
-               break;
 
-       }
+       if (type.toString().equals(("SET_MAX_CFUS"))) {this.cfusNumber = max;}
+       else {this.examsNumber = max;}
+
+       super.notifyObserver();
    }
    
    public ObservableList<ExamEntityBean> getExams() throws ExamException {
@@ -71,10 +76,10 @@ public class  ExamsSubject extends AbstractSubject {
        int i = 0;
        for (EntityExam exam : totalExams){
            ExamEntityBean examEntityBean = new ExamEntityBean();
-           examEntityBean.setDate(exam.getData());
-           examEntityBean.setExamName(exam.getNome());
-           examEntityBean.setCfuEsame(exam.getCfu());
-           examEntityBean.setVotoEsame(exam.getVoto());
+           examEntityBean.setExamDate(exam.getDate());
+           examEntityBean.setExamName(exam.getName());
+           examEntityBean.setExamCfu(exam.getCfu());
+           examEntityBean.setExamGrade(exam.getGrade());
            examEntityBean.setExamIndex(i);
            i++;
            observableList.add(examEntityBean);

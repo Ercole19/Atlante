@@ -17,10 +17,7 @@ public class EventBean {
 
     private LocalDateTime dateOfReminder ;
 
-    public EventBean()
-    {
 
-    }
 
     public void setDateOfReminder(int hoursBefore, int minutesBefore)
     {
@@ -47,15 +44,6 @@ public class EventBean {
 
     public void setStart(LocalTime start) {
         this.start = start ;
-    }
-
-    public void setStartByString(String start) {
-        this.start = LocalTime.parse(start);
-    }
-
-
-    public void setEndByString(String end) {
-        this.end = LocalTime.parse(end);
     }
 
 

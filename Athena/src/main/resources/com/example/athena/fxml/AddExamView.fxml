@@ -17,7 +17,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="388.0" layoutY="450.0" mnemonicParsing="false" onAction="#indietro" prefHeight="65.0" prefWidth="110.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Back" textFill="WHITE">
+      <Button layoutX="388.0" layoutY="450.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="65.0" prefWidth="110.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Back" textFill="WHITE">
          <font>
             <Font name="Bookman Old Style" size="20.0" />
          </font>

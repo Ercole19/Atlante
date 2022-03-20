@@ -1,5 +1,6 @@
 package com.example.athena.engineering_classes.scene_decorators;
 
+import com.example.athena.engineering_classes.abstract_factory.FormatBundle;
 import com.example.athena.graphical_controller.BookBean;
 import com.example.athena.graphical_controller.BookSearchResultBean;
 import com.example.athena.graphical_controller.EventBean;
@@ -17,24 +18,8 @@ public abstract class SearchResultFormatterDecorator extends SearchResultFormatt
     }
 
     @Override
-    public AnchorPane buildTutorSearchResultsScene(double containerWidth, double containerHeight, List<TutorSearchResultBean> results) {
-        return this.component.buildTutorSearchResultsScene(containerWidth, containerHeight, results);
+    public AnchorPane buildScene(FormatBundle formatBundle) {
+        return this.component.buildScene(formatBundle);
     }
-
-    @Override
-    public AnchorPane buildEventSearchResultsScene(double containerWidth, double containerHeight, List<EventBean> results) {
-        return this.component.buildEventSearchResultsScene(containerWidth, containerHeight, results);
-    }
-
-    @Override
-    public AnchorPane buildBookSearchResultsScene(double containerWidth, double containerHeight, List<BookBean> results) {
-        return this.component.buildBookSearchResultsScene(containerWidth, containerHeight, results);
-    }
-
-    @Override
-    public AnchorPane buildRecentPurchaseResultScene(double coontainerWidth, double containerHeight, List<BookBean> results) {
-         return this.component.buildRecentPurchaseResultScene(coontainerWidth, containerHeight, results);
-    }
-
 
 }

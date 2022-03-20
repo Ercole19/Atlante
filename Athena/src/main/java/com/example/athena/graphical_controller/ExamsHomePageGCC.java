@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
-public class GraphicControllerEsamiHomepage implements AbstractObserver, Initializable {
+public class ExamsHomePageGCC implements AbstractObserver, Initializable {
 
 
     @FXML
@@ -47,27 +47,25 @@ public class GraphicControllerEsamiHomepage implements AbstractObserver, Initial
     @FXML
     private Button careerBtn;
 
-    private Text cancella = null ;
+    private Text delete = null ;
     private Button editButton = null ;
-    private HBox managebtn = null ;
+    private HBox manageBtn = null ;
 
     private final ObservableList<ExamEntityBean> examList  = FXCollections.observableArrayList() ;
     private final SceneSwitcher switcher = new SceneSwitcher();
 
 
-    public void initAggiungiEsame ()  {
-        switcher.popup("Aggiungi_Esame_view.fxml" , "Add exam") ;
+    public void onAddExamBtnClick()  {
+        switcher.popup("AddExamView.fxml" , "Add exam") ;
     }
 
-    public void initMostraMedia () {
-        switcher.popup("Mostra_Media_View.fxml" , "Average") ;
+    public void onAverageBtnClick() {
+        switcher.popup("AveragePageView.fxml" , "Average") ;
     }
 
-    public void initCareerStatus ()  {
-
-        switcher.popup("carrerStatusView.fxml" , "Career") ;
+    public void onCareerBtnClick()  {
+        switcher.popup("careerStatusView.fxml" , "Career") ;
     }
-
 
     public void onBackButtonClick(ActionEvent event) throws IOException {
         ExamsSubject.getInstance().detachObserver(this);
@@ -75,19 +73,17 @@ public class GraphicControllerEsamiHomepage implements AbstractObserver, Initial
         switcher.switcher(stage, "MainPageStudents.fxml");
      }
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colName.setCellValueFactory(new PropertyValueFactory<ExamEntityBean, String>("examName"));
-        colVote.setCellValueFactory(new PropertyValueFactory<ExamEntityBean, Integer>("votoEsame"));
-        colCfu.setCellValueFactory(new PropertyValueFactory<ExamEntityBean, Integer>("cfuEsame"));
-        colDate.setCellValueFactory(new PropertyValueFactory<ExamEntityBean, LocalDate>("date"));
-        javafx.util.Callback<TableColumn<ExamEntityBean, Void>, TableCell<ExamEntityBean, Void>> cellFactory = new javafx.util.Callback<TableColumn<ExamEntityBean, Void>, TableCell<ExamEntityBean, Void>>() {
+        colName.setCellValueFactory(new PropertyValueFactory<>("examName"));
+        colVote.setCellValueFactory(new PropertyValueFactory<>("examGrade"));
+        colCfu.setCellValueFactory(new PropertyValueFactory<>("examCfu"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("examDate"));
+        javafx.util.Callback<TableColumn<ExamEntityBean, Void>, TableCell<ExamEntityBean, Void>> cellFactory = new javafx.util.Callback<>() {
 
             @Override
             public TableCell<ExamEntityBean, Void> call(TableColumn<ExamEntityBean, Void> examEntityBeanVoidTableColumn) {
-                return new TableCell<ExamEntityBean, Void>() {
-
+                return new TableCell<>() {
 
                     @Override
                     public void updateItem(Void item, boolean empty) {
@@ -96,48 +92,44 @@ public class GraphicControllerEsamiHomepage implements AbstractObserver, Initial
                             setGraphic(null);
                         } else {
 
-                            cancella = new Text("-");
-                            cancella.setFont(Font.font("Arial Rounded MT Bold", 40));
-                            cancella.setFill(Color.RED);
+                            delete = new Text("-");
+                            delete.setFont(Font.font("Arial Rounded MT Bold", 40));
+                            delete.setFill(Color.RED);
 
                             editButton = new Button("Edit ");
 
                             editButton.setOnAction(event -> {
                                 ExamEntityBean exam = examTable.getSelectionModel().getSelectedItem();
-                                SceneSwitcher switcher = new SceneSwitcher();
                                 ArrayList<Object> params = new ArrayList<>();
                                 params.add(exam);
-                                switcher.popup("Aggiungi_Esame_view.fxml", "Edit your exam", params);
+                                switcher.popup("AddExamView.fxml", "Edit your exam", params);
                                 update();
                             });
 
-                            cancella.setOnMouseClicked(event -> {
+                            delete.setOnMouseClicked(event -> {
                                 try {
                                     ManageExamsUCC controller = new ManageExamsUCC();
                                     controller.deleteExams(examTable.getSelectionModel().getSelectedItem());
-                                } catch (Exception exc) {
-                                    exc.getCause();
+                                }
+                                catch (ExamException exc){
+                                    SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
+                                    alert.showAndWait();
+                                    return;
                                 }
                             });
 
-                            managebtn = new HBox(editButton, cancella);
-                            managebtn.setStyle("-fx-alignment : center");
+                            manageBtn = new HBox(editButton, delete);
+                            manageBtn.setStyle("-fx-alignment : center");
                             HBox.setMargin(editButton, new Insets(2, 2, 0, 3));
-                            HBox.setMargin(cancella, new Insets(2, 3, 0, 2));
-                            setGraphic(managebtn);
-
+                            HBox.setMargin(delete, new Insets(2, 3, 0, 2));
+                            setGraphic(manageBtn);
                         }
                     }
-
-
                 };
-
             }
         };
-
         colEDit.setCellFactory(cellFactory);
         ExamsSubject.getInstance().attachObserver(this);
-
     }
 
     public void update()

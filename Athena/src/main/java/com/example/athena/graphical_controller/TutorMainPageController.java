@@ -15,7 +15,7 @@ public class TutorMainPageController {
 
     public void onPersonalPageButtonClick(ActionEvent event)  {
         TutorPageComponent component = new TutorPageButtonAdder(new TutorPageView()) ;
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(component.build());
         stage.setScene(scene);
     }

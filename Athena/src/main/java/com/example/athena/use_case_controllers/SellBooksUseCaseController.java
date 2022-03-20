@@ -33,24 +33,7 @@ public class SellBooksUseCaseController {
 
     public void deleteProduct(BookBean book)
     {
-        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable() , book.getImage(), User.getUser().getEmail()) ;
+        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getNegotiable() , book.getImage(), Student.getInstance().getEmail()) ;
         BooksSubject.getInstance().deleteBook(bookE, book.getIndex());
     }
-
-
-
-
-    public void deleteImage(BookBean bean, File image) throws IOException {
-
-        BookDao dao = new BookDao() ;
-        byte[] fileContent = Files.readAllBytes(image.toPath());
-        dao.deleteImage(bean.getIsbn(), fileContent);
-
-    }
-
-    public int getTotalReport(){
-        UserDao dao = new UserDao();
-        return  dao.getTotalReport();
-    }
-
 }

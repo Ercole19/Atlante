@@ -1,7 +1,6 @@
 package com.example.athena.graphical_controller;
 
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.use_case_controllers.ExitSystem;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

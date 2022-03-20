@@ -1,17 +1,11 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.entities.ExamDao;
 import com.example.athena.entities.ExamsSubject;
 import com.example.athena.exceptions.ExamException;
-import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.graphical_controller.ExamAverageInformation;
 import com.example.athena.graphical_controller.ExamEntityBean;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.Alert;
-
-import java.util.List;
 
 public class AverageUCC  {
 
@@ -19,22 +13,22 @@ public class AverageUCC  {
 
         ObservableList<ExamEntityBean> exams = ExamsSubject.getInstance().getSortedExams();
         ObservableList<ExamAverageInformation> examsArithmeticAverageInfos = FXCollections.observableArrayList();
-        Integer count = 1;
+        int count = 1;
         double average ;
-        double  counterVoti = 0.0 ;
-        String data ;
-        int voto ;
+        double  gradesCounter = 0.0 ;
+        String date ;
+        int grade ;
 
         for(ExamEntityBean exam : exams)
         {
-            data = exam.getDate();
-            voto = exam.getVotoEsame();
-            counterVoti = counterVoti + voto;
-            average = (counterVoti) / count;
+            date = exam.getExamDate();
+            grade = exam.getExamGrade();
+            gradesCounter = gradesCounter + grade;
+            average = (gradesCounter) / count;
 
             ExamAverageInformation info = new ExamAverageInformation();
             info.setAverage(average);
-            info.setDate(data);
+            info.setDate(date);
 
             examsArithmeticAverageInfos.add(info);
             count++;
@@ -50,23 +44,23 @@ public class AverageUCC  {
         ObservableList<ExamAverageInformation> examsWeightedAverageInfos = FXCollections.observableArrayList();
         int  cfus = 0 ;
         double average ;
-        double counterVoti = 0.0;
-        int voto ;
+        double gradesCounter = 0.0;
+        int grade ;
         int cfu ;
 
         for(ExamEntityBean exam : exams)
         {
-            String data = exam.getDate();
-            voto = exam.getVotoEsame();
-            cfu = exam.getCfuEsame();
+            String date = exam.getExamDate();
+            grade = exam.getExamGrade();
+            cfu = exam.getExamCfu();
             cfus = cfus + cfu ;
-            counterVoti = counterVoti + (voto * cfu );
+            gradesCounter = gradesCounter + (grade * cfu );
 
-            average = (counterVoti) / cfus;
+            average = (gradesCounter) / cfus;
 
             ExamAverageInformation info = new ExamAverageInformation();
             info.setAverage(average);
-            info.setDate(data);
+            info.setDate(date);
 
             examsWeightedAverageInfos.add(info);
         }

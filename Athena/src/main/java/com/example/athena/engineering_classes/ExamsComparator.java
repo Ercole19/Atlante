@@ -7,6 +7,6 @@ import java.util.Comparator;
 public class ExamsComparator implements Comparator<ExamEntityBean> {
     @Override
     public int compare(ExamEntityBean firstExam, ExamEntityBean secondExam) {
-        return firstExam.getDate().compareTo(secondExam.getDate());
+        return firstExam.getExamDate().compareTo(secondExam.getExamDate());
     }
 }

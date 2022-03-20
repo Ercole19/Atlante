@@ -10,23 +10,13 @@ import java.time.LocalDate;
 
 
 public class EventDao extends AbstractDAO {
+    private final String email = Student.getInstance().getEmail();
 
-    private String email = User.getUser().getEmail();
-    private String addQuery = "INSERT INTO athena.eventi (`dataEvento`, `eventName`, `eventStart`, `eventEnd`, `eventDesc`, `utente`, `type`) values (?,?,?,?,?,?,?)" ;
-    private String getEventInfo = "select eventName , eventStart , eventEnd , eventDesc , dataEvento, type from athena.eventi where dataEvento = ? and utente = ? " ;
+    public void addEvent(LocalDate date , String name , LocalTime start ,LocalTime end , String description , String type) throws EventException {
 
-    private String getEventsByTypeSpan = "SELECT eventName, eventStart, eventEnd, eventDesc, dataEvento " +
-                                         "FROM athena.eventi " +
-                                         "WHERE utente = ? AND type = ? AND dataEvento >= ? " +
-                                         "ORDER BY dataEvento" ;
-    private String getDatesOfEvents = "SELECT * from athena.eventi where DATE_FORMAT(dataEvento, '%Y-%m') = ? and utente = ?" ;
+        try (PreparedStatement statement = this.getConnection().prepareStatement("INSERT INTO athena.eventi (`dataEvento`, `eventName`, `eventStart`, `eventEnd`, `eventDesc`, `utente`, `type`) values (?,?,?,?,?,?,?)")) {
 
-
-    public void addEvent(LocalDate data , String name , LocalTime start ,LocalTime end , String description , String type) {
-
-        try (PreparedStatement statement = this.getConnection().prepareStatement(addQuery)) {
-
-            statement.setDate(1, Date.valueOf(data));
+            statement.setDate(1, Date.valueOf(date));
             statement.setString(2,name);
             statement.setTime(3, Time.valueOf(start));
             statement.setTime(4, Time.valueOf(end));
@@ -38,40 +28,14 @@ public class EventDao extends AbstractDAO {
 
 
         } catch (SQLException exc) {
-            exc.getMessage() ;
+            throw new EventException("Error in adding new event, details follow: " + exc.getMessage());
         }
 
     }
 
-    public String[] findeventinfo(String data) {
-        String[] eventinfos = new String[500];
-        int i = 0;
-        try (PreparedStatement statement = this.getConnection().prepareStatement(getEventInfo)) {
-            statement.setString(1, data);
-            statement.setString(2, email);
-            //declare with size
-            ResultSet set = statement.executeQuery();
-            while (set.next()) {
-                eventinfos[i] = set.getString(1);
-                eventinfos[i + 1] = String.valueOf(set.getTime(2));
-                eventinfos[i + 2] = String.valueOf(set.getTime(3));
-                eventinfos[i + 3] = set.getString(4) ;
-                eventinfos[i+4] = String.valueOf(set.getDate(5));
-                eventinfos[i+5] = set.getString(6) ;
-                i = i + 6 ;
 
 
-            }
-
-        } catch (SQLException exc) {
-            exc.getMessage();
-        }
-
-        return eventinfos ;
-
-    }
-
-    public void delete(String nome , LocalDate date) {
+    public void delete(String nome , LocalDate date) throws EventException {
         try (PreparedStatement statement = this.getConnection().prepareStatement("call athena.delete_event(?,? ,?)" )) {
 
             statement.setString(1,nome);
@@ -82,12 +46,13 @@ public class EventDao extends AbstractDAO {
 
 
         }catch (SQLException exc) {
-            exc.getMessage();
+            throw new EventException("Error in deleting event, details follow: " + exc.getMessage());
         }
     }
 
-    public void updateEvento(LocalDate data , String name , LocalTime start ,LocalTime end , String description , String oldname, String type) {
-        try (PreparedStatement statement = this.getConnection().prepareStatement("update athena.eventi set dataEvento = ? , eventName = ? , eventStart = ? , eventEnd = ? , eventDesc = ? , type = ? where utente = ? and dataEvento = ? and eventName = ?")){
+    public void updateEvent(LocalDate data , String name , LocalTime start , LocalTime end , String description , String oldname, String type) throws EventException {
+        try (PreparedStatement statement = this.getConnection().prepareStatement("update athena.eventi set dataEvento = ? , eventName = ? , eventStart = ? , eventEnd = ? , eventDesc = ? , type = ? where utente = ? and dataEvento = ? and eventName = ?"))
+        {
             statement.setDate(1, Date.valueOf(data));
             statement.setString(2,name);
             statement.setTime(3, Time.valueOf(start));
@@ -99,14 +64,15 @@ public class EventDao extends AbstractDAO {
             statement.setString(9,oldname) ;
 
             statement.execute();
-        }catch (SQLException exc ){
-            exc.getMessage();
+        }catch (SQLException exc)
+        {
+            throw new EventException("Error in updating event, details follow: " + exc.getMessage()) ;
         }
     }
 
     public List<EventEntity> getEntitiesByTypeSpan(ActivityTypesEnum type, LocalDate timeSpan) throws EventException
     {
-        try(PreparedStatement statement = this.getConnection().prepareStatement(getEventsByTypeSpan))
+        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT eventName, eventStart, eventEnd, eventDesc, dataEvento FROM athena.eventi WHERE utente = ? AND type = ? AND dataEvento >= ? ORDER BY dataEvento" ))
         {
             ArrayList<EventEntity> events = new ArrayList<>() ;
             Date start = Date.valueOf(timeSpan) ;
@@ -137,7 +103,7 @@ public class EventDao extends AbstractDAO {
 
     public List<EventEntity> getEventsByYearMonth(YearMonth yearMonth) throws EventException{
         List<EventEntity> events = new ArrayList<>();
-        try(PreparedStatement statement = this.getConnection().prepareStatement(getDatesOfEvents)){
+        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT * from athena.eventi where DATE_FORMAT(dataEvento, '%Y-%m') = ? and utente = ?")){
 
             statement.setString(1, String.valueOf(yearMonth));
             statement.setString(2, User.getUser().getEmail());

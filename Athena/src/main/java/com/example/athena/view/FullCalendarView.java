@@ -1,18 +1,13 @@
 package com.example.athena.view;
 
 import com.example.athena.graphical_controller.CalendarPageController;
-import com.example.athena.graphical_controller.EventBean;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-
-import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class FullCalendarView {
@@ -44,7 +39,7 @@ public class FullCalendarView {
             new Text("Saturday") };
         GridPane dayLabels = new GridPane();
         dayLabels.setPrefWidth(600);
-        Integer col = 0;
+        int col = 0;
         for (Text txt : dayNames) {
             AnchorPaneNode ap = new AnchorPaneNode(this.graphController);
             ap.setPrefSize(200, 10);
