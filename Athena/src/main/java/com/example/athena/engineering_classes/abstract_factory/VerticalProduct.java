@@ -19,7 +19,7 @@ public class VerticalProduct implements SearchResultProduct{
 
     @Override
     public void setEntry(int entryNum, int position, Node element) throws Exception {
-        GridPane entry = (GridPane) this.root.lookup(String.format("entity%d", entryNum));
+        GridPane entry = (GridPane) this.root.lookup(String.format("#entry%d", entryNum));
         entry.add(element, position, 0);
     }
 }

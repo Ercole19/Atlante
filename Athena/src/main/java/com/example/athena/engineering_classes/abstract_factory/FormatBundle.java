@@ -21,7 +21,7 @@ public class FormatBundle {
         int sum = 0;
         for (int i : percent){
             this.entryPercents.add(i);
-            sum  = sum + this.entryPercents.get(i);
+            sum  = sum + i;
         }
         if (sum != 100 )
         {

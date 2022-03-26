@@ -14,11 +14,12 @@ public class EventPageGC implements PostInitialize{
     private Label label1 ;
     @FXML
     private SubScene results ;
-    private EventsView eventsView = new EventsView(results.getWidth(), results.getHeight());
+    private EventsView eventsView ;
 
 
     @Override
     public void postInitialize(ArrayList<Object> params) {
+        this.eventsView = new EventsView(results.getWidth(), results.getHeight()) ;
         label1.setText(String.valueOf(params.get(0))) ;
         this.results.setRoot(eventsView.getRoot((LocalDate)params.get(0)));
     }
