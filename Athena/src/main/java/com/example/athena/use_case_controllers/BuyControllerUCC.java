@@ -5,6 +5,8 @@ import com.example.athena.entities.BookDao;
 import com.example.athena.entities.BookEntity;
 import com.example.athena.entities.Student;
 import com.example.athena.exceptions.BookException;
+import com.example.athena.exceptions.FindBookException;
+import com.example.athena.exceptions.FindException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.graphical_controller.BookBean;
 import javafx.scene.control.Alert;
@@ -16,15 +18,13 @@ public class BuyControllerUCC {
 
     private static final BookDao dao = new BookDao();
 
-    public List<BookBean> formatSearchResults(String query) {
-
+    public List<BookBean> formatSearchResults(String query) throws FindBookException, BookException {
 
         ArrayList<BookBean> result = new ArrayList<>();
         try {
            List<BookEntity> bookinfos = dao.findBooks(query);
            for (BookEntity entity : bookinfos)
            {
-
                BookBean book = new BookBean();
                book.setTitle(entity.getBookTitle());
                book.setIsbn(entity.getIsbn());
@@ -36,11 +36,9 @@ public class BuyControllerUCC {
           }
 
        }
-       catch (BookException exc)
-       {
-           SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage(), 800, 600);
-           alert.showAndWait();
-       }
+        catch (FindException e) {
+            throw new FindBookException(e.getMessage());
+        }
         return result;
     }
     

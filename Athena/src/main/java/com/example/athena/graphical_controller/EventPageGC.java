@@ -1,8 +1,6 @@
 package com.example.athena.graphical_controller;
 
-import com.example.athena.view.SearchResultFormatterView;
-import com.example.athena.engineering_classes.scene_decorators.SearchResultFormatterComponent;
-import com.example.athena.engineering_classes.scene_decorators.SearchResultFormatterScrollBar;
+import com.example.athena.view.EventsView;
 import javafx.fxml.FXML;
 import javafx.scene.SubScene;
 import javafx.scene.control.Label;
@@ -17,6 +15,7 @@ public class EventPageGC implements PostInitialize{
     private Label label1 ;
     @FXML
     private SubScene results ;
+    private EventsView eventsView = new EventsView(results.getWidth(), results.getHeight());
 
 
     @Override

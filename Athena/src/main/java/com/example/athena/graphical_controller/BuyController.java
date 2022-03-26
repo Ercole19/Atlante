@@ -1,21 +1,14 @@
 package com.example.athena.graphical_controller;
 
-import com.example.athena.use_case_controllers.BuyControllerUCC;
-import com.example.athena.view.ErrorSceneView;
-import com.example.athena.view.SearchResultFormatterView;
-import com.example.athena.engineering_classes.scene_decorators.SearchResultFormatterComponent;
-import com.example.athena.engineering_classes.scene_decorators.SearchResultFormatterScrollBar;
+import com.example.athena.view.FindBooksView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.SubScene;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 public class BuyController {
 
@@ -27,6 +20,8 @@ public class BuyController {
     private SubScene resultPanel ;
     private final SceneSwitcher switcher = new SceneSwitcher();
     private Stage stage;
+    private FindBooksView findBooksView = new FindBooksView(resultPanel.getWidth(), resultPanel.getHeight());
+
 
     @FXML
     protected void onHomeButtonClick(ActionEvent event)  {

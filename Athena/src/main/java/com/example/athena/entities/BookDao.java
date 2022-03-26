@@ -1,6 +1,7 @@
 package com.example.athena.entities;
 
 
+import com.example.athena.exceptions.FindException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -138,7 +139,7 @@ public class BookDao extends AbstractDAO {
         return file ;
     }
 
-    public List<BookEntity> findBooks(String book) {
+    public List<BookEntity> findBooks(String book) throws FindException {
 
         List<BookEntity> books = new ArrayList<>() ;
         List<File> booksFiles = new ArrayList<>();
@@ -158,7 +159,7 @@ public class BookDao extends AbstractDAO {
             }
 
         } catch (SQLException | IOException exc) {
-            exc.printStackTrace();
+           throw new FindException(exc.getMessage());
         }
         return books;
     }

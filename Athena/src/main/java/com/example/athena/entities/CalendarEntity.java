@@ -58,7 +58,9 @@ public class CalendarEntity {
     public void addEvent(EventEntity eventEntity) throws EventException {
         this.events.add(eventEntity);
         this.map.get(eventEntity.getDay()).add(eventEntity) ;
+    }
 
+    public void deleteEvent(LocalDate date){
 
     }
 }

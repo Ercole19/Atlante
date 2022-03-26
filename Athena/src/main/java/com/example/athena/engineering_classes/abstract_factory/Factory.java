@@ -3,7 +3,6 @@ package com.example.athena.engineering_classes.abstract_factory;
 
 import com.example.athena.engineering_classes.scene_decorators.HorizontalScrollBarDecorator;
 import com.example.athena.engineering_classes.scene_decorators.SearchResultFormatterComponent;
-import com.example.athena.engineering_classes.scene_decorators.SearchResultFormatterScrollBar;
 import com.example.athena.engineering_classes.scene_decorators.VerticalScrollBarDecorator;
 
 public class Factory {

@@ -1,6 +1,7 @@
 package com.example.athena.entities;
 
 import com.example.athena.exceptions.CareerStatusException;
+import com.example.athena.exceptions.FindException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.UserRegistrationException;
 import javafx.scene.control.Alert;
@@ -145,7 +146,7 @@ public class UserDao extends AbstractDAO {
     }
 
 
-    public String[] findTutor(String query, ByCourseOrNameEnum searchEnum, boolean byBestReviews) {
+    public String[] findTutor(String query, ByCourseOrNameEnum searchEnum, boolean byBestReviews) throws FindException {
         String prepStatement;
 
         if (searchEnum.toString().equals("BY_COURSE")) {prepStatement = searchTutor;}
@@ -159,7 +160,7 @@ public class UserDao extends AbstractDAO {
 
             statement.setString(1, query);
 
-            //declare with size
+
             ResultSet set = statement.executeQuery();
             while (set.next()) {
                 tutorInfos[i] = set.getString(1);
@@ -171,7 +172,7 @@ public class UserDao extends AbstractDAO {
             }
 
         } catch (SQLException exc) {
-            exc.getMessage();
+            throw new FindException(exc.getMessage());
         }
 
         return tutorInfos;

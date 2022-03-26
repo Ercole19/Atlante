@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class CalendarSubject extends AbstractSubject {
 
-    private CalendarSubject instance = null ;
+    private static CalendarSubject instance = null ;
     private HashMap<YearMonth, CalendarEntity> calendarMap;
 
     private CalendarSubject()
@@ -16,14 +16,14 @@ public class CalendarSubject extends AbstractSubject {
 
     }
 
-    public synchronized CalendarSubject getInstance()
+    public static synchronized CalendarSubject getInstance()
     {
-        if(this.instance == null)
+        if(CalendarSubject.instance == null)
         {
             this.instance = new CalendarSubject() ;
         }
 
-        return this.instance ;
+        return CalendarSubject.instance ;
     }
 
     public CalendarEntity getEntity(YearMonth yearMonth) throws EventException {

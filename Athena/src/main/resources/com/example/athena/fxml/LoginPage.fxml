@@ -46,7 +46,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="114.0" layoutY="345.0" mnemonicParsing="false" onAction="#switchFast" text="Test without login" />
       <Button layoutX="265.0" layoutY="236.0" mnemonicParsing="false" onAction="#fillFast" text="fill fast" />
    </children>
 </AnchorPane>

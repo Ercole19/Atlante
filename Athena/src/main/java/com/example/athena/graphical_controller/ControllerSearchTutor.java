@@ -1,11 +1,7 @@
 package com.example.athena.graphical_controller;
 
 import com.example.athena.entities.ByCourseOrNameEnum;
-import com.example.athena.use_case_controllers.SearchTutorUseCaseController;
-import com.example.athena.view.ErrorSceneView;
-import com.example.athena.view.SearchResultFormatterView;
-import com.example.athena.engineering_classes.scene_decorators.SearchResultFormatterComponent;
-import com.example.athena.engineering_classes.scene_decorators.SearchResultFormatterScrollBar;
+import com.example.athena.view.SearchTutorView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -37,6 +33,7 @@ public class ControllerSearchTutor {
 
     private final SceneSwitcher switcher = new SceneSwitcher();
     private Stage stage;
+    private SearchTutorView searchTutorView = new SearchTutorView(resultsBox.getWidth(), resultsBox.getHeight());
 
 
     public void clickOnSearchByCourse()
