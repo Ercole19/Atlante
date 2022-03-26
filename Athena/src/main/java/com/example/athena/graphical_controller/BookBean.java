@@ -7,15 +7,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookBean {
+public class
+BookBean {
 
     private String title ;
-    private String isbn;
+    private String isbn ;
     private String price ;
     private Boolean isNegotiable ;
-    private List<File> image;
-    private String owner;
-    private int index;
+    private List<File> image ;
+    private String owner ;
+    private int index ;
 
 
 

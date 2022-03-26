@@ -32,23 +32,7 @@ public class BuyController {
     @FXML
     protected void onSearchButtonClick(){
         String query = searchInput.getText() ;
-        BuyControllerUCC controller = new BuyControllerUCC();
-
-
-        List<BookBean> resultBeans =  controller.formatSearchResults(query);
-        if(resultBeans.isEmpty())
-        {
-            Parent error = new ErrorSceneView().createErrorScreen("No book has been found.", resultPanel.getWidth(), resultPanel.getHeight()) ;
-            resultPanel.setRoot(error) ;
-            return ;
-        }
-
-        SearchResultFormatterComponent resultView = new SearchResultFormatterView();
-        if (resultPanel.getWidth() < resultBeans.size() * 250.0) {
-            resultView = new SearchResultFormatterScrollBar(resultView);
-        }
-        AnchorPane subSceneElems = resultView.buildBookSearchResultsScene(resultPanel.getWidth(), resultPanel.getHeight(), resultBeans);
-        resultPanel.setRoot(subSceneElems);
+        this.resultPanel.setRoot(findBooksView.getRoot(query));
     }
 
     @FXML

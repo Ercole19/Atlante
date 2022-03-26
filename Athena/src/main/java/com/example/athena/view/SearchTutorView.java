@@ -5,6 +5,8 @@ import com.example.athena.engineering_classes.abstract_factory.FormatBundle;
 import com.example.athena.engineering_classes.abstract_factory.ProductTypeEnum;
 import com.example.athena.engineering_classes.abstract_factory.SearchResultProduct;
 import com.example.athena.entities.ByCourseOrNameEnum;
+import com.example.athena.exceptions.FindException;
+import com.example.athena.exceptions.FindTutorException;
 import com.example.athena.exceptions.PercentFormatException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.graphical_controller.SearchTutorViewGC;
@@ -41,6 +43,11 @@ public class SearchTutorView {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, FATAL_ERROR, 800, 600) ;
             alert.showAndWait() ;
             System.exit(1) ;
+        }
+        catch (FindTutorException exception){
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exception.getMessage(), 800, 600) ;
+            alert.showAndWait() ;
+            return new ErrorSceneView().createErrorScreen("No tutor has been found.", containerWidth, containerHeight) ;
         }
         return result.getRoot();
     }

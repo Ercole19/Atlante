@@ -2,6 +2,8 @@ package com.example.athena.graphical_controller;
 
 import com.example.athena.engineering_classes.abstract_factory.SearchResultProduct;
 import com.example.athena.entities.ByCourseOrNameEnum;
+import com.example.athena.exceptions.FindException;
+import com.example.athena.exceptions.FindTutorException;
 import com.example.athena.use_case_controllers.SearchTutorUseCaseController;
 import com.example.athena.view.SearchTutorView;
 import javafx.scene.Node;
@@ -24,7 +26,7 @@ public class SearchTutorViewGC {
         this.view = view ;
     }
 
-    public int getResultSize(String query, ByCourseOrNameEnum byCourseOrNameEnum, boolean sortByBestReviews)
+    public int getResultSize(String query, ByCourseOrNameEnum byCourseOrNameEnum, boolean sortByBestReviews) throws FindTutorException
     {
         SearchTutorUseCaseController controller = new SearchTutorUseCaseController();
         searchResults = controller.formatSearchResults(query, byCourseOrNameEnum, sortByBestReviews ) ;

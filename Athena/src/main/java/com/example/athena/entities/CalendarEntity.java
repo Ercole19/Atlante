@@ -3,7 +3,6 @@ package com.example.athena.entities;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.graphical_controller.EventBean;
 import com.example.athena.graphical_controller.PresenceOfEventsBean;
-
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
@@ -26,7 +25,6 @@ public class CalendarEntity {
             List<EventEntity> dailyEvents = map.getOrDefault(day, new ArrayList<>()) ;
             dailyEvents.add(event) ;
             map.put(day, dailyEvents) ;
-
         }
     }
 

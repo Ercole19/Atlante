@@ -121,8 +121,7 @@ public class CalendarPageController implements Initializable {
         }
 
         ArrayList<Object> params = new ArrayList<>() ;
-        params.add(String.valueOf(day));
-        params.add(results) ;
+        params.add(day);
         switcher.popup("eventPage.fxml", "Event infos", params) ;
     }
 

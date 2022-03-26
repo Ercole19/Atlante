@@ -4,10 +4,9 @@ import com.example.athena.view.EventsView;
 import javafx.fxml.FXML;
 import javafx.scene.SubScene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class EventPageGC implements PostInitialize{

@@ -34,7 +34,6 @@ public class BuyControllerUCC {
                book.setImage(entity.getImage());
                result.add(book);
           }
-
        }
         catch (FindException e) {
             throw new FindBookException(e.getMessage());
