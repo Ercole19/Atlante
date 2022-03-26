@@ -111,15 +111,6 @@ public class CalendarPageController implements Initializable {
 
     public void loadEventsByDate(LocalDate day)
     {
-        List<EventBean> results;
-        try {
-            results = calendarEntity.getEvents(day);
-        } catch (EventException e) {
-            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
-            alert.showAndWait();
-            return ;
-        }
-
         ArrayList<Object> params = new ArrayList<>() ;
         params.add(day);
         switcher.popup("eventPage.fxml", "Event infos", params) ;

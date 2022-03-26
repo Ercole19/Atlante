@@ -49,19 +49,7 @@ public class ControllerSearchTutor {
             alert.showAndWait();
         }
         else {
-            SearchTutorUseCaseController controller = new SearchTutorUseCaseController();
-            List<TutorSearchResultBean> results = controller.formatSearchResults(searchBar.getText(), searchEnum, sortByBestReviews.isSelected()); //Another bean should be added
-            if (results.isEmpty()) {
-                Parent error = new ErrorSceneView().createErrorScreen("No book has been found.", resultsBox.getWidth(), resultsBox.getHeight()) ;
-                resultsBox.setRoot(error) ;
-                return ;
-            }
-            SearchResultFormatterComponent resultView = new SearchResultFormatterView();
-            if (resultsBox.getHeight() < results.size() * 100.0) {
-                resultView = new SearchResultFormatterScrollBar(resultView);
-            }
-            AnchorPane subSceneElems = resultView.buildTutorSearchResultsScene(resultsBox.getWidth(), resultsBox.getHeight(), (ArrayList<TutorSearchResultBean>) results);
-            resultsBox.setRoot(subSceneElems);
+            this.resultsBox.setRoot(searchTutorView.getRoot(searchBar.getText(), searchEnum, sortByBestReviews.isSelected())) ;
         }
     }
     public void clickOnBackButton(ActionEvent event)

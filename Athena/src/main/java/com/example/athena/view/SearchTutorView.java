@@ -14,15 +14,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 
 public class SearchTutorView {
-    private SearchTutorViewGC controller ;
-    private double containerWidth ;
-    private double containerHeight ;
+    private final SearchTutorViewGC controller ;
+    private final double containerWidth ;
+    private final double containerHeight ;
     private SearchResultProduct result ;
     private static final String FATAL_ERROR = "FATAL ERROR: The application is unable to load content. If the problem persists after restarting, try reinstalling the application.";
 
 
-    public SearchTutorView()
+    public SearchTutorView(double containerWidth, double containerHeight)
     {
+        this.containerWidth = containerWidth ;
+        this.containerHeight = containerHeight ;
         this.controller = new SearchTutorViewGC(this) ;
     }
 
@@ -30,6 +32,7 @@ public class SearchTutorView {
         try
         {
             int size = this.controller.getResultSize(query, type, ordered);
+
             FormatBundle formatBundle = new FormatBundle();
             formatBundle.setContainerWidth(containerWidth);
             formatBundle.setContainerHeight(containerHeight);

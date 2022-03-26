@@ -1,12 +1,11 @@
 package com.example.athena.view;
 
-import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 public class ErrorSceneView
 {
-    public Parent createErrorScreen(String message, double width, double height)
+    public AnchorPane createErrorScreen(String message, double width, double height)
     {
         AnchorPane error = new AnchorPane() ;
         error.setPrefWidth(width) ;

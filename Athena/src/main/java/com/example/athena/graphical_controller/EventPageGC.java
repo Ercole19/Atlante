@@ -18,20 +18,8 @@ public class EventPageGC implements PostInitialize{
 
 
     @Override
-    public void postInitialize(ArrayList<Object> params)
-    {
-        label1.setText((String) params.get(0)) ;
-
-        List<EventBean> entries = (List<EventBean>)params.get(1) ;
-
-        SearchResultFormatterComponent resultView = new SearchResultFormatterView() ;
-
-        if(results.getHeight() < entries.size()*100.0)
-        {
-            resultView = new SearchResultFormatterScrollBar(resultView) ;
-        }
-
-        AnchorPane subSceneElems = resultView.buildEventSearchResultsScene(results.getWidth(), results.getHeight(), (ArrayList<EventBean>) entries) ;
-        results.setRoot(subSceneElems) ;
+    public void postInitialize(ArrayList<Object> params) {
+        label1.setText(String.valueOf(params.get(0))) ;
+        this.results.setRoot(eventsView.getRoot((LocalDate)params.get(0)));
     }
 }
