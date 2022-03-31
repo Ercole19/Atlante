@@ -8,7 +8,6 @@ import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.PercentFormatException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.graphical_controller.EventsViewGC;
-import com.example.athena.graphical_controller.FindBooksViewGC;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 
@@ -35,7 +34,7 @@ public class EventsView {
             formatBundle.setContainerHeight(containerHeight);
             formatBundle.setEntryNumber(size);
             formatBundle.setEntryPercents(20, 15, 15, 20, 10, 10, 10);
-            this.result = Factory.createProduct(ProductTypeEnum.HORIZONTAL_ENTRY, formatBundle);
+            this.result = Factory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
             this.controller.setValues(this.result);
         }
         catch (PercentFormatException | EventException exc) {
