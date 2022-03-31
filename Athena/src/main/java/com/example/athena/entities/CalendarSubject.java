@@ -14,7 +14,11 @@ public class CalendarSubject extends AbstractSubject {
 
     private static CalendarSubject instance = null ;
     private HashMap<YearMonth, CalendarEntity> calendarMap;
-    private CalendarEntity calendarEntity;
+
+    private CalendarSubject()
+    {
+        this.calendarMap = new HashMap<>() ;
+    }
 
     public static synchronized CalendarSubject getInstance()
     {

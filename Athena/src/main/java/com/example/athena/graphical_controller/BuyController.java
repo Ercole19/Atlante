@@ -23,7 +23,7 @@ public class BuyController implements Initializable {
     private SubScene resultPanel ;
     private final SceneSwitcher switcher = new SceneSwitcher();
     private Stage stage;
-    private FindBooksView findBooksView = new FindBooksView(resultPanel.getWidth(), resultPanel.getHeight());
+    private FindBooksView findBooksView ;
 
 
     @FXML

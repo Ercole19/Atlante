@@ -21,7 +21,7 @@ public class HorizontalSceneResult extends SearchResultFormatterComponent {
         for (int i = 0; i < formatBundle.getEntryNumber(); i++) {
             GridPane entryBox = new GridPane();
             entryBox.setId(String.format("entry%d", i)) ;
-            entryBox.setPrefSize(formatBundle.getContainerHeight(), 100);
+            entryBox.setPrefSize(100, formatBundle.getContainerHeight());
             entryBox.setStyle("-fx-background-color: #faeeae");
             entryBox.setStyle("-fx-border-color: #000000");
 
