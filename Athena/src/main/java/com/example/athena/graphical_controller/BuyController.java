@@ -3,14 +3,17 @@ package com.example.athena.graphical_controller;
 import com.example.athena.view.FindBooksView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.SubScene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class BuyController {
+public class BuyController implements Initializable {
 
 
     @FXML
@@ -41,4 +44,9 @@ public class BuyController {
         switcher.switcher(stage, "bookshop-choose-view.fxml");
     }
 
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.findBooksView = new FindBooksView(resultPanel.getWidth(), resultPanel.getHeight()) ;
+    }
 }
