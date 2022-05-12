@@ -1,6 +1,8 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
 import com.example.athena.entities.CalendarEntity;
+import com.example.athena.entities.CalendarSubject;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.view.AnchorPaneNode;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class CalendarPageController implements Initializable {
+public class CalendarPageController implements Initializable, AbstractObserver {
 
 
     @FXML
@@ -39,6 +41,7 @@ public class CalendarPageController implements Initializable {
     {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         switcher.switcher(stage, "MainPageStudents.fxml");
+        CalendarSubject.getInstance().detachObserver(this);
     }
 
     public void clickOnAddEvent()
@@ -121,6 +124,11 @@ public class CalendarPageController implements Initializable {
         this.currentYearMonth = YearMonth.now() ;
         this.view = new FullCalendarView(this) ;
         this.populateCalendar(this.currentYearMonth);
-        calendario.setRoot(this.view.getView());
+        CalendarSubject.getInstance().attachObserver(this);
+    }
+
+    @Override
+    public void update() {
+        populateCalendar(currentYearMonth);
     }
 }

@@ -5,9 +5,7 @@ import com.example.athena.graphical_controller.EventBean;
 import com.example.athena.graphical_controller.PresenceOfEventsBean;
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class CalendarEntity {
 

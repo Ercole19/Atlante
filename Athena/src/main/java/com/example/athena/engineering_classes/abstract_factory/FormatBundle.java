@@ -50,6 +50,13 @@ public class FormatBundle {
         this.containerHeight = containerHeight;
     }
 
+    public void setEntrySize(double entrySize) {
+        this.entrySize = entrySize;
+    }
+
+    public double getEntrySize() {
+        return this.entrySize;
+    }
     public void setContainerWidth(double containerWidth) {
         this.containerWidth = containerWidth;
     }

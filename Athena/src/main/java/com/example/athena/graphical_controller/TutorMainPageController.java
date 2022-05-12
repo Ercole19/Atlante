@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.entities.User;
 import com.example.athena.view.TutorPageView;
 import com.example.athena.engineering_classes.scene_decorators.TutorPageButtonAdder;
 import com.example.athena.engineering_classes.scene_decorators.TutorPageComponent;
@@ -21,6 +22,7 @@ public class TutorMainPageController {
     }
 
     public void onLogoutButtonClick(ActionEvent event)  {
+        User.logout();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         switcher.switcher(stage, "LoginPage.fxml");
     }

@@ -38,7 +38,10 @@ public class CalendarSubject extends AbstractSubject {
 
     public void addEvent(EventEntity event) throws EventException
     {
+        EventDao eventDao = new EventDao() ;
+        eventDao.addEvent(event.getDay(), event.getName(), event.getStart(), event.getEnd(), event.getDescription(), String.valueOf(event.getType()));
         this.getEntity(YearMonth.of(event.getDay().getYear(), event.getDay().getMonth())).addEvent(event) ;
+        super.notifyObserver();
     }
 
     public void deleteRow(GridPane grid, final int row) {

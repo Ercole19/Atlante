@@ -1,7 +1,5 @@
 package com.example.athena.graphical_controller;
 
-import com.example.athena.entities.Tutor;
-import com.example.athena.entities.User;
 import com.example.athena.use_case_controllers.TutorPersonalPageUCC;
 import com.example.athena.use_case_controllers.ViewTutorPageUseCaseController;
 import javafx.event.ActionEvent;
@@ -31,27 +29,22 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     @FXML
     private AnchorPane rootPane ;
     @FXML
-    private TextArea aboutme;
+    private TextArea aboutMe;
     @FXML
     private TextArea coursesArea ;
     @FXML
-    private TextArea sessioninfos ;
+    private TextArea sessionInfos;
     @FXML
-    private TextArea contactnumbers ;
+    private TextArea contactNumbers;
     @FXML
-    private TextArea reviewsArea;
+    private Label tutorName;
     @FXML
-    private Label nometutor;
-    @FXML
-    private Label cognometutor;
+    private Label tutorSurname;
     @FXML
     private Text reviewAverage;
 
     private final SceneSwitcher switcher = new SceneSwitcher();
     private Stage stage;
-
-
-
 
     private File file ;
 
@@ -85,9 +78,9 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
 
         UserBean bean = new UserBean() ;
         TutorInfosBean infos = new TutorInfosBean();
-        infos.setAboutMe(aboutme.getText());
-        infos.setContactNumbers(contactnumbers.getText());
-        infos.setSessionInfos(sessioninfos.getText());
+        infos.setAboutMe(aboutMe.getText());
+        infos.setContactNumbers(contactNumbers.getText());
+        infos.setSessionInfos(sessionInfos.getText());
 
         bean.setEmail(com.example.athena.entities.Tutor.getInstance().getEmail());
         List<String> tutorInfos = controller.getTutorInfos(bean);
@@ -103,7 +96,7 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
         switcher.switcher(stage, "MainPageTutor.fxml");
     }
 
-    public void onCVButtonClicktutor() throws IOException
+    public void onCVButtonClickTutor() throws IOException
     {
         TutorPersonalPageUCC controller = new TutorPersonalPageUCC();
 
@@ -120,11 +113,9 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     }
 
 
-    public void onaddcoursebuttoclick() throws IOException{
+    public void onAddCourseButtonClick() throws IOException{
         switcher.popup("addcourse.fxml" , "Add course") ;
     }
-
-
 
 
     public void populatePage(UserBean bean) {
@@ -136,38 +127,23 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
         List<String> tutorInfos = controller.getTutorInfos(bean);
         List<String> tutorCourses = controller.getTutorCourses(bean);
 
-        String noData = "No data" ;
-
-        if (tutorInfos.isEmpty()) {
-            aboutme.setText(noData);
-            sessioninfos.setText(noData);
-            contactnumbers.setText(noData);
-            reviewAverage.setText(noData);
+        aboutMe.setText(tutorInfos.get(0));
+        sessionInfos.setText(tutorInfos.get(1));
+        contactNumbers.setText(tutorInfos.get(2));
+        if (tutorAvgReviews==0.0){
+            reviewAverage.setText("No reviews");
         }
         else {
-            aboutme.setText(tutorInfos.get(0));
-            sessioninfos.setText(tutorInfos.get(1));
-            contactnumbers.setText(tutorInfos.get(2));
-            if (tutorAvgReviews==0.0){
-                reviewAverage.setText("No reviews");
-            }
-            else {
-                reviewAverage.setText(String.valueOf(tutorAvgReviews));
-            }
-
+            reviewAverage.setText(String.valueOf(tutorAvgReviews));
         }
 
         for (String course : tutorCourses) {
             coursesArea.appendText(course + "\n" );
         }
 
-        nometutor.setText(tutorName[0]);
-        cognometutor.setText(tutorName[1]);
-
+        this.tutorName.setText(tutorName[0]);
+        tutorSurname.setText(tutorName[1]);
     }
-
-
-
 
 
     @Override
@@ -180,9 +156,9 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
 
         if((boolean)params.get(1))
         {
-            aboutme.setEditable(false) ;
-            sessioninfos.setEditable(false) ;
-            contactnumbers.setEditable(false) ;
+            aboutMe.setEditable(false) ;
+            sessionInfos.setEditable(false) ;
+            contactNumbers.setEditable(false) ;
         }
     }
 

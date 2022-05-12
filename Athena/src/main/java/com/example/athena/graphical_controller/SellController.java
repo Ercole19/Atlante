@@ -5,7 +5,6 @@ import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
 import com.example.athena.entities.BooksSubject;
 import com.example.athena.entities.SellerOrBuyerEnum;
 import com.example.athena.entities.Student;
-import com.example.athena.entities.User;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.SellBooksUseCaseController;
@@ -86,17 +85,17 @@ public class SellController implements Initializable, AbstractObserver {
                             public void updateItem(Void item, boolean empty) {
                                 super.updateItem(item, empty);
 
-                                Text cancella;
+                                Text delete;
                                 Button editButton;
                                 Button goToBookPage;
 
-                                HBox managebtn;
+                                HBox manageBtn;
                                 if (empty) {
                                     setGraphic(null);
                                 } else {
-                                    cancella = new Text("-");
-                                    cancella.setFont(Font.font("Arial Rounded MT Bold", 40));
-                                    cancella.setFill(Color.RED);
+                                    delete = new Text("-");
+                                    delete.setFont(Font.font("Arial Rounded MT Bold", 40));
+                                    delete.setFill(Color.RED);
 
 
                                     editButton = new Button("Edit ");
@@ -123,7 +122,7 @@ public class SellController implements Initializable, AbstractObserver {
 
                                     });
 
-                                    cancella.setOnMouseClicked(event -> {
+                                    delete.setOnMouseClicked(event -> {
                                         try {
 
                                             BookBean book = bookTable.getSelectionModel().getSelectedItem();
@@ -135,11 +134,11 @@ public class SellController implements Initializable, AbstractObserver {
                                         }
                                     });
 
-                                    managebtn = new HBox(editButton, cancella, goToBookPage);
-                                    managebtn.setStyle("-fx-alignment : center");
+                                    manageBtn = new HBox(editButton, delete, goToBookPage);
+                                    manageBtn.setStyle("-fx-alignment : center");
                                     HBox.setMargin(editButton, new Insets(2, 2, 0, 3));
-                                    HBox.setMargin(cancella, new Insets(2, 3, 0, 2));
-                                    setGraphic(managebtn);
+                                    HBox.setMargin(delete, new Insets(2, 3, 0, 2));
+                                    setGraphic(manageBtn);
                                 }
                             }
 

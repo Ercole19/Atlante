@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDao extends AbstractDAO {
-    private final String emailcurrent =  Tutor.getInstance().getEmail() ;
-
 
     public  void addCourse (String course) {
         try ( PreparedStatement statement =this.getConnection().prepareStatement("INSERT INTO corsi (nomecorso , emailtutor) VALUES (?,?)")) {
@@ -27,7 +25,7 @@ public class CourseDao extends AbstractDAO {
     public  void deleteCourse (String course) {
         try ( PreparedStatement statement =this.getConnection().prepareStatement("DELETE FROM corsi WHERE nomecorso = ? and emailtutor = ?")) {
             statement.setString(1 , course);
-            statement.setString(2 , emailcurrent);
+            statement.setString(2 , Tutor.getInstance().getEmail());
             statement.executeUpdate() ;
         }catch (SQLException e ) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error in deleting course", ButtonType.CLOSE) ;

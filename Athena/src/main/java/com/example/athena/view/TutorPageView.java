@@ -4,11 +4,10 @@ import com.example.athena.boundaries.IsbnCheckBoundary;
 import com.example.athena.graphical_controller.SceneSwitcher;
 import com.example.athena.engineering_classes.scene_decorators.TutorPageComponent;
 import javafx.scene.Parent;
-import org.apache.log4j.Logger;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import static javafx.fxml.FXMLLoader.load;
 
 public class TutorPageView extends TutorPageComponent
 {

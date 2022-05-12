@@ -30,7 +30,7 @@ public class Factory {
     public static SearchResultProduct createVertical(FormatBundle formatBundle)
     {
         SearchResultFormatterComponent component = new VerticalSceneResult() ;
-        if(formatBundle.getContainerWidth() < formatBundle.getEntryNumber() * 100.0)
+        if(formatBundle.getContainerWidth() < formatBundle.getEntryNumber() * formatBundle.getEntrySize())
         {
             component = new VerticalScrollBarDecorator(component) ;
         }

@@ -33,7 +33,7 @@ public class FindBooksViewGC {
         return this.searchResults.size();
     }
 
-    public void setValues(SearchResultProduct product)
+    public void setValues(SearchResultProduct product, double entrySize)
     {
         try
         {
@@ -41,8 +41,8 @@ public class FindBooksViewGC {
             for(BookBean bookBean: this.searchResults)
             {
                 ImageView image = new ImageView(bookBean.getImage().get(0).toURI().toString()) ;
-                image.setFitHeight(150);
-                image.setFitWidth(150);
+                image.setFitHeight(entrySize);
+                image.setFitWidth(entrySize);
                 image.setPreserveRatio(true);
                 product.setEntry(i, 0, image);
 
