@@ -14,15 +14,10 @@ public class TutorPageView extends TutorPageComponent
     @Override
     public Parent build()
     {
-        try
-        {
-            return load((new SceneSwitcher()).generateUrl("tutorPersonalPage.fxml")) ;
-        }
-        catch(IOException e)
-        {
-            Logger logger = Logger.getLogger(IsbnCheckBoundary.class);
-            logger.error("error!", e);
-        }
-        return null;
+        SceneSwitcher switcher = new SceneSwitcher();
+        List<Object> params = new ArrayList<>() ;
+        params.add(Tutor.getInstance().getEmail()) ;
+        params.add(false) ;
+        return switcher.preload("tutorPersonalPage.fxml", params) ;
     }
 }

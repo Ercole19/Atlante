@@ -14,7 +14,7 @@ public class CourseDao extends AbstractDAO {
     public  void addCourse (String course) {
         try ( PreparedStatement statement =this.getConnection().prepareStatement("INSERT INTO corsi (nomecorso , emailtutor) VALUES (?,?)")) {
             statement.setString(1, course);
-            statement.setString(2, emailcurrent);
+            statement.setString(2, Tutor.getInstance().getEmail());
             statement.executeUpdate() ;
         }catch (SQLException e ) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error in adding course", ButtonType.CLOSE) ;
@@ -53,7 +53,7 @@ public class CourseDao extends AbstractDAO {
     public boolean checkCourseExist(String name) {
         try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT * from corsi where nomecorso = ? and emailtutor= ?")){
             statement.setString(1, name);
-            statement.setString(2, emailcurrent);
+            statement.setString(2, Tutor.getInstance().getEmail());
 
             ResultSet set = statement.executeQuery();
             if (set.next()){
