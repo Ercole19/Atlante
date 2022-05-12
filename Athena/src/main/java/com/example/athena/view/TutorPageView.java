@@ -1,6 +1,6 @@
 package com.example.athena.view;
 
-import com.example.athena.boundaries.IsbnCheckBoundary;
+import com.example.athena.entities.Tutor;
 import com.example.athena.graphical_controller.SceneSwitcher;
 import com.example.athena.engineering_classes.scene_decorators.TutorPageComponent;
 import javafx.scene.Parent;

@@ -14,7 +14,7 @@ public class VerticalScrollBarDecorator extends SearchResultFormatterDecorator{
     public AnchorPane buildScene(FormatBundle formatBundle){
         formatBundle.setContainerWidth(formatBundle.getContainerWidth() -20);
         AnchorPane resultPane = super.buildScene(formatBundle) ;
-        return applyVerticalScrollBar(resultPane, formatBundle.getContainerWidth() + 20, formatBundle.getContainerHeight(), formatBundle.getEntryNumber() * 100.0) ;
+        return applyVerticalScrollBar(resultPane, formatBundle.getContainerWidth() + 20, formatBundle.getContainerHeight(), formatBundle.getEntryNumber() * formatBundle.getEntrySize()) ;
     }
 
     public VerticalScrollBarDecorator(SearchResultFormatterComponent component) {

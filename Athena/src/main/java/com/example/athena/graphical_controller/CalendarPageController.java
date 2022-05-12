@@ -24,6 +24,7 @@ import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class CalendarPageController implements Initializable, AbstractObserver {
 
@@ -33,7 +34,7 @@ public class CalendarPageController implements Initializable, AbstractObserver {
 
     private YearMonth currentYearMonth ;
     private FullCalendarView view ;
-    private CalendarEntity calendarEntity ;
+    private Set<LocalDate> eventsPresence ;
     private final SceneSwitcher switcher = new SceneSwitcher();
     private Stage stage ;
 
@@ -64,7 +65,7 @@ public class CalendarPageController implements Initializable, AbstractObserver {
         }
         try
         {
-            this.calendarEntity = new CalendarEntity(this.currentYearMonth) ;
+            this.eventsPresence = CalendarSubject.getInstance().getEventPresencesByYearMonth(this.currentYearMonth).getEventSet() ;
         }
         catch (EventException e)
         {
@@ -79,7 +80,7 @@ public class CalendarPageController implements Initializable, AbstractObserver {
             }
             Text txt = new Text(String.valueOf(calendarDate.getDayOfMonth()));
 
-            if(this.calendarEntity.isThereAnEventOnThatDay(calendarDate).getThereAnEvent())
+            if(this.eventsPresence.contains(calendarDate))
             {
                 Circle bookMark = new Circle() ;
                 bookMark.setRadius(5) ;
@@ -97,7 +98,8 @@ public class CalendarPageController implements Initializable, AbstractObserver {
 
 
 
-       this.view.getCalendarTitle().setText(yearMonth.getMonth().toString() + " " + yearMonth.getYear());
+        this.view.getCalendarTitle().setText(yearMonth.getMonth().toString() + " " + yearMonth.getYear());
+        this.calendario.setRoot(this.view.getView());
     }
 
 

@@ -20,7 +20,7 @@ public class Factory {
 
     public static SearchResultProduct createHorizontal(FormatBundle formatBundle){
         SearchResultFormatterComponent component = new HorizontalSceneResult() ;
-        if(formatBundle.getContainerHeight() < formatBundle.getEntryNumber() * 100.0)
+        if(formatBundle.getContainerHeight() < formatBundle.getEntryNumber() * formatBundle.getEntrySize())
         {
             component = new HorizontalScrollBarDecorator(component) ;
         }

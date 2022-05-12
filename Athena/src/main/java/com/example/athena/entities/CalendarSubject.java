@@ -2,6 +2,7 @@ package com.example.athena.entities;
 
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
 import com.example.athena.exceptions.EventException;
+import com.example.athena.graphical_controller.PresenceOfEventsBean;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
@@ -42,6 +43,11 @@ public class CalendarSubject extends AbstractSubject {
         eventDao.addEvent(event.getDay(), event.getName(), event.getStart(), event.getEnd(), event.getDescription(), String.valueOf(event.getType()));
         this.getEntity(YearMonth.of(event.getDay().getYear(), event.getDay().getMonth())).addEvent(event) ;
         super.notifyObserver();
+    }
+
+    public PresenceOfEventsBean getEventPresencesByYearMonth(YearMonth yearMonth) throws EventException
+    {
+        return this.getEntity(yearMonth).getEventsPresences() ;
     }
 
     public void deleteRow(GridPane grid, final int row) {

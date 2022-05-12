@@ -34,6 +34,7 @@ public class EventsView {
             formatBundle.setContainerHeight(containerHeight);
             formatBundle.setEntryNumber(size);
             formatBundle.setEntryPercents(20, 15, 15, 20, 10, 10, 10);
+            formatBundle.setEntrySize(100);
             this.result = Factory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
             this.controller.setValues(this.result);
         }

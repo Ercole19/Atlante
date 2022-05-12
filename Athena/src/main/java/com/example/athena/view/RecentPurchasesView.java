@@ -40,6 +40,7 @@ public class RecentPurchasesView {
             formatBundle.setContainerHeight(containerHeight);
             formatBundle.setEntryNumber(size);
             formatBundle.setEntryPercents(30, 15, 30, 15, 10);
+            formatBundle.setEntrySize(100);
             this.result = Factory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
             this.controller.setValues(this.result);
 

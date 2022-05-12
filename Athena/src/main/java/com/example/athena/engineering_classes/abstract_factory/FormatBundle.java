@@ -9,6 +9,7 @@ public class FormatBundle {
     private double containerWidth ;
     private double containerHeight ;
     private int entryNumber ;
+    private double entrySize ;
     private List<Integer> entryPercents = new ArrayList<>() ;
 
 

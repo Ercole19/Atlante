@@ -1,17 +1,21 @@
 package com.example.athena.graphical_controller;
 
+import java.time.LocalDate;
+import java.util.Set;
+
 public class PresenceOfEventsBean {
-    private boolean isThereAnEvent;
+    private Set<LocalDate> eventSet ;
 
-    public PresenceOfEventsBean(boolean condition) {
-        setThereAnEvent(condition) ;
+
+    public PresenceOfEventsBean() {
+
     }
 
-    public Boolean getThereAnEvent() {
-        return isThereAnEvent;
+    public Set<LocalDate> getEventSet() {
+        return eventSet;
     }
 
-    public void setThereAnEvent(boolean thereAnEvent) {
-        isThereAnEvent = thereAnEvent;
+    public void setEventSet(Set<LocalDate> eventSet) {
+        this.eventSet = eventSet;
     }
 }

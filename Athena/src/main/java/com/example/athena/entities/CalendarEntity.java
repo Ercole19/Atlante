@@ -46,14 +46,18 @@ public class CalendarEntity {
         return dailyEvents;
     }
 
-    public PresenceOfEventsBean isThereAnEventOnThatDay(LocalDate day)
+    public PresenceOfEventsBean getEventsPresences()
     {
-        return new PresenceOfEventsBean(this.map.containsKey(day)) ;
+        PresenceOfEventsBean resultBean = new PresenceOfEventsBean() ;
+        resultBean.setEventSet(this.map.keySet());
+        return resultBean;
     }
 
     public void addEvent(EventEntity eventEntity) throws EventException {
         this.events.add(eventEntity);
-        this.map.get(eventEntity.getDay()).add(eventEntity) ;
+        List<EventEntity> list = this.map.getOrDefault(eventEntity.getDay(), new ArrayList<>()) ;
+        list.add(eventEntity) ;
+        this.map.put(eventEntity.getDay(), list) ;
     }
 
     public void deleteEvent(LocalDate date){

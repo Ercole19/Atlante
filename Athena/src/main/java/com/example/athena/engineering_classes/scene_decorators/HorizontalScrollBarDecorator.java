@@ -13,7 +13,7 @@ public class HorizontalScrollBarDecorator extends SearchResultFormatterDecorator
     public AnchorPane buildScene(FormatBundle formatBundle){
         formatBundle.setContainerHeight(formatBundle.getContainerHeight() -20);
         AnchorPane resultPane = super.buildScene(formatBundle) ;
-        return applyHorizontalScrollBar(resultPane, formatBundle.getContainerWidth(), formatBundle.getContainerHeight() + 20, formatBundle.getEntryNumber() * 100.0) ;
+        return applyHorizontalScrollBar(resultPane, formatBundle.getContainerWidth(), formatBundle.getContainerHeight() + 20, formatBundle.getEntryNumber() * formatBundle.getEntrySize()) ;
     }
 
     public HorizontalScrollBarDecorator(SearchResultFormatterComponent component) {

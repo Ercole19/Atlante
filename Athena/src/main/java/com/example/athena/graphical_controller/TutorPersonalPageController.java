@@ -48,7 +48,7 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
 
     private File file ;
 
-    private String email  = Tutor.getInstance().getEmail();
+    private String email ;
 
 
     public void clickOnBackButtonTutor(ActionEvent event) throws IOException
@@ -167,8 +167,5 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         rootPane.getProperties().put("foo", this) ;
-        UserBean bean = new UserBean() ;
-        bean.setEmail(this.email);
-        populatePage(bean);
     }
 }

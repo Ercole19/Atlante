@@ -9,7 +9,7 @@ import java.util.List;
 public class VerticalSceneResult extends SearchResultFormatterComponent {
 
     public AnchorPane buildScene(FormatBundle formatBundle) {
-        double sceneHeight = (formatBundle.getEntryNumber()) * 100.0f;
+        double sceneHeight = (formatBundle.getEntryNumber()) * formatBundle.getEntrySize();
 
         VBox graphicalList = new VBox();
         graphicalList.setPrefSize(formatBundle.getContainerWidth(), sceneHeight);
@@ -24,7 +24,7 @@ public class VerticalSceneResult extends SearchResultFormatterComponent {
             entryBox.setStyle("-fx-background-color: #faeeae");
             entryBox.setStyle("-fx-border-color: #000000");
 
-            entryBox.getRowConstraints().add(new RowConstraints(100));
+            entryBox.getRowConstraints().add(new RowConstraints(formatBundle.getEntrySize()));
             for (int j = 0; j < percents.size(); j++) {
                 setColumnConstraint(percents.get(j), entryBox);
             }
