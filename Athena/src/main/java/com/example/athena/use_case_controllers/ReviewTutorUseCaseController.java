@@ -29,7 +29,7 @@ public class ReviewTutorUseCaseController
         review.toDB() ;
 
         ReviewViaMailBean mailInformation = new ReviewViaMailBean(usernameBean.getUsername(), reviewCode) ;
-        SendReviewCodeEmailBoundary.sendEmail(mailInformation) ;
+        SendReviewCodeEmailBoundary.sendReviewCode(mailInformation) ;
 
         return reviewCode ;
     }

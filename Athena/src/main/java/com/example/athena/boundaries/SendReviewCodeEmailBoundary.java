@@ -9,69 +9,29 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-public class SendReviewCodeEmailBoundary
+public class SendReviewCodeEmailBoundary extends SocketBoundary
 {
-    private static Socket socket ;
-
-    private static OutputStream out ;
-    private static InputStream in ;
-
-    private static final byte[] buff = new byte[128] ;
-
-
     private SendReviewCodeEmailBoundary(){
 
     }
 
-
-    private static void createConnection() throws IOException
+    public static void sendReviewCode(ReviewViaMailBean review) throws SendEmailException
     {
-        InetAddress address = InetAddress.getByName("localhost");
-        socket = new Socket(address, 4545) ;
-        out = new BufferedOutputStream(socket.getOutputStream()) ;
-        in = new BufferedInputStream(socket.getInputStream()) ;
-    }
+        String email = review.getRecipient() ;
+        String code = review.getCode() ;
 
-    private static String sendMessage(String content) throws IOException
-    {
-        out.write(content.getBytes(), 0, content.length()) ;
-        return new String(buff, 0, in.read(buff)) ;
-    }
+        String query = String.format("T%s;%s;", email, code) ;
 
-    private static void closeConnection()
-    {
         try
         {
-            in.close() ;
-            out.close() ;
-            socket.close() ;
-        }
-        catch(IOException e)
+            String retMessage = sendMessageGetResponse(query, 4545) ;
+            if(!retMessage.equals("OK"))
+            {
+                throw new SendEmailException(retMessage) ;
+            }
+        }catch (IOException e)
         {
-            Logger logger = Logger.getLogger(IsbnCheckBoundary.class);
-            logger.error("error!", e);
-        }
-    }
-
-    public static void sendEmail(ReviewViaMailBean mailInformation) throws SendEmailException
-    {
-        String recipient = mailInformation.getRecipient() ;
-        String code = mailInformation.getCode() ;
-        try
-        {
-            createConnection() ;
-            String packetContent = String.format("%s;%s", recipient, code) ;
-            if(sendMessage(packetContent).equals("F")) throw new SendEmailException("Unable to send request") ;
-            closeConnection() ;
-
-        }
-        catch(SocketException | UnknownHostException e)
-        {
-            throw new SendEmailException("Unable to create a new Socket or resolve address") ;
-        }
-        catch(IOException e)
-        {
-            throw new SendEmailException("Unable to send request") ;
+            throw new SendEmailException("Error in connection to server: " + e.getMessage()) ;
         }
     }
 }
