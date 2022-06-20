@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.CourseGraphicController">
+   <children>
+      <TextField fx:id="courseField" layoutX="40.0" layoutY="108.0" prefHeight="43.0" prefWidth="520.0" promptText="Course name" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="59.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter a course">
+         <font>
+            <Font name="Bookman Old Style" size="20.0" />
+         </font>
+      </Text>
+      <Button layoutX="406.0" layoutY="252.0" mnemonicParsing="false" onAction="#onDeleteClick" prefHeight="106.0" prefWidth="180.0" style="-fx-background-radius: 20; -fx-background-color: #f0ff2e;" text="Delete">
+         <font>
+            <Font size="36.0" />
+         </font></Button>
+      <Button layoutX="214.0" layoutY="252.0" mnemonicParsing="false" onAction="#onAddClick" prefHeight="106.0" prefWidth="192.0" style="-fx-background-radius: 20; -fx-background-color: #f0ff2e;" text="Add">
+         <font>
+            <Font size="36.0" />
+         </font></Button>
+      <Button layoutX="22.0" layoutY="252.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="106.0" prefWidth="192.0" style="-fx-background-radius: 20; -fx-background-color: #f0ff2e;" text="Back">
+         <font>
+            <Font size="36.0" />
+         </font></Button>
+   </children>
+</AnchorPane>

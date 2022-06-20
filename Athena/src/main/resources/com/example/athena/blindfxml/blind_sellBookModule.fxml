@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.SellModuleController">
+   <children>
+      <TextField fx:id="bookTitle" layoutX="26.0" layoutY="110.0" minHeight="-Infinity" prefHeight="45.0" prefWidth="550.0" promptText="Title..." style="-fx-background-radius: 20;">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="bookISBN" layoutX="26.0" layoutY="200.0" minHeight="-Infinity" prefHeight="45.0" prefWidth="550.0" promptText="ISBN (10 or 13)" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="bookPrice" layoutX="26.0" layoutY="292.0" minHeight="-Infinity" prefHeight="45.0" prefWidth="307.0" promptText="Price..." style="-fx-background-radius: 20;">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="340.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="€">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="bookImage" fitHeight="244.0" fitWidth="188.0" layoutX="197.0" layoutY="441.0" onMouseClicked="#onUploadBtnClick" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../assets/upload2.jpg" />
+         </image></ImageView>
+      <CheckBox fx:id="bookNegotiability" layoutX="31.0" layoutY="370.0" mnemonicParsing="false" text="Negotiable" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </CheckBox>
+      <ImageView fx:id="leftArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="90.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../assets/backBtn.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="rightArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="410.0" layoutY="533.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../assets/forwardBtn.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="leftArrow" layoutX="90.0" layoutY="544.0" mnemonicParsing="false" onAction="#onLeftArrowClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="rightArrow" layoutX="410.0" layoutY="530.0" mnemonicParsing="false" onAction="#onRightArrowClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Text fill="#fffc75" layoutX="215.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD BOOK" textOrigin="CENTER">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fill="#fffc75" layoutX="34.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" textOrigin="CENTER">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Text fill="#fffc75" layoutX="31.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN" textOrigin="CENTER">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Text fill="#fffc75" layoutX="31.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textOrigin="CENTER">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Button fx:id="confirmButton" layoutX="140.0" layoutY="727.0" mnemonicParsing="false" onAction="#onConfirmButtonClick" prefHeight="46.0" prefWidth="323.0" style="-fx-background-color: #fffc75; -fx-background-radius: 20;" text="Confirm">
+         <font>
+            <Font name="Bookman Old Style" size="32.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="deleteButton" layoutX="139.0" layoutY="663.0" mnemonicParsing="false" onAction="#deleteImageOnScreen" prefHeight="46.0" prefWidth="323.0" style="-fx-background-color: #fffc75; -fx-background-radius: 20;" text="Delete image">
+         <font>
+            <Font name="Bookman Old Style" size="32.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

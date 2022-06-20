@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.SignUpGraphicalController">
+   <Text fill="#fffc75" layoutX="150.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up" textOrigin="CENTER">
+      <font>
+         <Font size="60.0" />
+      </font>
+   </Text>
+   <TextField fx:id="nameField" layoutX="196.0" layoutY="158.0" prefHeight="51.0" prefWidth="432.0" promptText="Name" style="-fx-background-radius: 20;">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </TextField>
+   <Button alignment="CENTER" contentDisplay="CENTER" layoutX="441.0" layoutY="587.0" mnemonicParsing="false" onAction="#onConfirmButtonClick" prefHeight="100.0" prefWidth="399.0" style="-fx-background-radius: 20; -fx-background-color: #fffc75;" text="Confirm" textAlignment="CENTER">
+      <font>
+         <Font size="53.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </Button>
+   <AnchorPane opacity="0.79" prefHeight="50.0" prefWidth="1280.0" style="-fx-background-color: #000000;">
+      <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="1170.0" layoutY="-1.0">
+         <Image url="@../../../../assets/guff.png" />
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="984.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../../../assets/title.png" />
+      </ImageView>
+   </AnchorPane>
+   <TextField fx:id="emailField" layoutX="196.0" layoutY="235.0" prefHeight="51.0" prefWidth="919.0" promptText="Email" style="-fx-background-radius: 20;">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </TextField>
+   <Group layoutX="263.0" layoutY="522.0">
+      <children>
+         <RadioButton fx:id="studentRadiobutton" mnemonicParsing="false" text="Student" textFill="WHITE">
+            <font>
+               <Font size="25.0" />
+            </font>
+            <toggleGroup>
+               <ToggleGroup fx:id="ToggleGroup" />
+            </toggleGroup>
+         </RadioButton>
+         <RadioButton layoutX="169.0" mnemonicParsing="false" text="Tutor" textFill="WHITE" toggleGroup="$ToggleGroup">
+            <font>
+               <Font size="25.0" />
+            </font>
+         </RadioButton>
+      </children>
+   </Group>
+   <Text fill="#fffc75" layoutX="223.0" layoutY="474.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose what type of user you are" textOrigin="CENTER">
+      <font>
+         <Font size="40.0" />
+      </font>
+   </Text>
+   <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="25.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../../../assets/backBtn.png" />
+   </ImageView>
+   <Button layoutX="28.0" layoutY="88.0" mnemonicParsing="false" onAction="#onBackButtonClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </Button>
+   <PasswordField fx:id="passField" layoutX="196.0" layoutY="312.0" prefHeight="51.0" prefWidth="919.0" promptText="Password" style="-fx-background-radius: 20;">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </PasswordField>
+   <PasswordField fx:id="confirmPassField" layoutX="196.0" layoutY="389.0" prefHeight="51.0" prefWidth="919.0" promptText="Confirm Password" style="-fx-background-radius: 20;">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </PasswordField>
+   <TextField fx:id="surnameField" layoutX="673.0" layoutY="158.0" prefHeight="51.0" prefWidth="432.0" promptText="Surname" style="-fx-background-radius: 20;">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </TextField>
+</AnchorPane>
