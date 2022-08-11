@@ -15,8 +15,11 @@ public class ManageEventUCC {
     
     public void addEvent(EventBean event) throws SendEmailException, EventException {
         EventEntity eventEntity = new EventEntity(event.getName(), event.getDate(), event.getStart(), event.getEnd(), event.getDescription(), ActivityTypesEnum.valueOf(event.getType()));
+        eventEntity.addEntity();
         CalendarSubject.getInstance().addEvent(eventEntity);
-        SetReminderEmailBoundary.sendToServer(event, false) ;
+        if(event.isThereAReminder()) {
+            SetReminderEmailBoundary.sendToServer(event, false) ;
+        }
     }
 
     public void update(EventBean event, EventBean oldEvent) throws SendEmailException, EventException {

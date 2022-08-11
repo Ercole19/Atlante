@@ -2,6 +2,7 @@ package com.example.athena.entities;
 
 import com.example.athena.exceptions.EventException;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.YearMonth;
