@@ -118,4 +118,37 @@ public class EventEntity
     }
 
     public ActivityTypesEnum getType() {return type;}
+
+
+    public void deleteEntity() throws EventException {
+        EventDao dao = new EventDao() ;
+        dao.delete(this.name, this.day);
+    }
+
+    public void addEntity() throws EventException {
+        EventDao dao = new EventDao() ;
+        dao.addEvent(this.day, this.name, this.start, this.end, this.description, String.valueOf(this.type));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        EventEntity eventToCompare ;
+        try
+        {
+            eventToCompare = (EventEntity) o ;
+        }catch (ClassCastException e) {
+            return false ;
+        }
+
+        if(this.name.equals(eventToCompare.name) &&
+            this.day.equals(eventToCompare.day)) {
+            return true ;
+        } else {
+            return false ;
+        }
+    }
 }
+
+
+
+

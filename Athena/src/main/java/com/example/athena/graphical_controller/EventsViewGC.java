@@ -5,13 +5,16 @@ import com.example.athena.entities.CalendarSubject;
 import com.example.athena.entities.EventDao;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SizedAlert;
+import com.example.athena.use_case_controllers.ManageEventUCC;
 import com.example.athena.view.EventsView;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -20,7 +23,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static javafx.scene.layout.GridPane.getRowIndex;
 
@@ -62,17 +67,21 @@ public class EventsViewGC {
                 Button description = new Button("Description");
                 description.setOnAction(event -> {
                     SceneSwitcher switcher = new SceneSwitcher();
-                    switcher.popup("EventDescription.fxml", "Event description");
+                    ArrayList<Object> params = new ArrayList<>() ;
+                    params.add(eventBean.getDescription());
+                    switcher.popup("EventDescription.fxml", "Event description", params);
                 });
 
                 searchResultProduct.setEntry(i, 4, description);
 
                 Button delete = new Button("Delete");
+                int finalI = i;
                 delete.setOnAction(event -> {
                     try {
-                        EventDao eventDao = new EventDao();
-                        eventDao.delete(eventBean.getName(), eventBean.getDate());
-                        CalendarSubject.getInstance().getEntity(YearMonth.of(eventBean.getDate().getYear(), eventBean.getDate().getMonth())).deleteEvent(eventBean.getDate());
+                        ManageEventUCC manageEventUCC = new ManageEventUCC();
+                        manageEventUCC.deleteEvent(eventBean);
+                        //searchResultProduct.deleteEntry(finalI) ;
+                        this.view.refresh();
                     } catch (EventException exc) {
                         SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
                         alert.showAndWait();
@@ -87,6 +96,8 @@ public class EventsViewGC {
                     ArrayList<Object> params = new ArrayList<>();
                     params.add(eventBean);
                     switcher.popup("AddEventScreen.fxml", "Edit your event", params);
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.close();
                 });
                 searchResultProduct.setEntry(i, 6, edit);
                 i++ ;
@@ -96,4 +107,7 @@ public class EventsViewGC {
 
     }
 }
+
+
+
 }

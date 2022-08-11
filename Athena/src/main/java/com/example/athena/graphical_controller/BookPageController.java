@@ -104,13 +104,9 @@ public class BookPageController extends ShiftImageController implements PostInit
         price.setText(book.getPrice());
         email.setText(book.getOwner());
         negotiable.setSelected(book.getNegotiable());
-        if(this.bookImages.isEmpty()){
-            image.setImage(null);
-        }
-        else {
+        if(!(this.bookImages.isEmpty())){
             image.setImage(this.bookImages.get(0));
         }
-
         super.shiftIndex(0);
 
     }

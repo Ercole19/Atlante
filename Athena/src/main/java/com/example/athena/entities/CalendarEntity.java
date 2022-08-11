@@ -53,14 +53,16 @@ public class CalendarEntity {
         return resultBean;
     }
 
-    public void addEvent(EventEntity eventEntity) throws EventException {
+    public void addEvent(EventEntity eventEntity){
         this.events.add(eventEntity);
         List<EventEntity> list = this.map.getOrDefault(eventEntity.getDay(), new ArrayList<>()) ;
         list.add(eventEntity) ;
         this.map.put(eventEntity.getDay(), list) ;
     }
 
-    public void deleteEvent(LocalDate date){
-
+    public void deleteEventEntity(EventEntity event){
+        this.events.remove(event);
+        List<EventEntity> list = this.map.getOrDefault(event.getDay(), new ArrayList<>()) ;
+        list.remove(event);
     }
 }

@@ -243,8 +243,6 @@ public class    AddEventController implements Initializable , PostInitialize{
             eventToUpdate.setType(eventType.getValue().toUpperCase().replace(" ", "_"));
             controller.update(eventToUpdate, this.oldEventBean);
 
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
         }
         catch(EventException e){
             SizedAlert error = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
