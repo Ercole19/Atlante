@@ -25,35 +25,4 @@ public class VerticalProduct implements SearchResultProduct{
         GridPane entry = (GridPane) this.root.lookup(String.format("#entry%d", entryNum));
         entry.add(element, position, 0);
     }
-
-    @Override
-    public void deleteEntry(int entryNum) {
-        GridPane entry = (GridPane) this.root.lookup(String.format("#entry%d", entryNum));
-        /*entry.getChildren().removeAll() ;
-        this.root.getChildren().removeAll(entry) ;*/
-        deleteRow(entry, entryNum);
-    }
-
-
-    public void deleteRow(GridPane grid, final int row) {
-        Set<Node> deleteNodes = new HashSet<>();
-        for (Node child : grid.getChildren()) {
-            // get index from child
-            Integer rowIndex = GridPane.getRowIndex(child);
-
-            // handle null values for index=0
-            int r = rowIndex == null ? 0 : rowIndex;
-
-            if (r > row) {
-                // decrement rows for rows after the deleted row
-                GridPane.setRowIndex(child, r-1);
-            } else if (r == row) {
-                // collect matching rows for deletion
-                deleteNodes.add(child);
-            }
-        }
-
-        // remove nodes from row
-        grid.getChildren().removeAll(deleteNodes);
-    }
 }

@@ -33,7 +33,7 @@ public class EventsViewGC {
 
     private EventsView view;
     private List<EventBean> searchResults;
-    private final String FONT = "System";
+    private static final String FONT = "System";
 
     public EventsViewGC(EventsView view) {
         this.view = view;
@@ -75,17 +75,18 @@ public class EventsViewGC {
                 searchResultProduct.setEntry(i, 4, description);
 
                 Button delete = new Button("Delete");
-                int finalI = i;
                 delete.setOnAction(event -> {
                     try {
                         ManageEventUCC manageEventUCC = new ManageEventUCC();
                         manageEventUCC.deleteEvent(eventBean);
-                        //searchResultProduct.deleteEntry(finalI) ;
-                        this.view.refresh();
+                        SceneSwitcher switcher = new SceneSwitcher() ;
+                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+                        ArrayList<Object> params = new ArrayList<>() ;
+                        params.add(eventBean.getDate());
+                        switcher.switcher(stage, "eventPage.fxml", params);
                     } catch (EventException exc) {
                         SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
                         alert.showAndWait();
-                        return;
                     }
                 });
                 searchResultProduct.setEntry(i, 5, delete);
@@ -107,7 +108,4 @@ public class EventsViewGC {
 
     }
 }
-
-
-
 }

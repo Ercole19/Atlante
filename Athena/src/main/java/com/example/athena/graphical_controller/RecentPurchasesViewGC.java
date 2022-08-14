@@ -17,7 +17,7 @@ public class RecentPurchasesViewGC {
 
     private RecentPurchasesView view ;
     private List<BookBean> searchResults ;
-    private final String FONT = "System";
+    private static final String FONT = "System";
 
     public RecentPurchasesViewGC(RecentPurchasesView view)
     {

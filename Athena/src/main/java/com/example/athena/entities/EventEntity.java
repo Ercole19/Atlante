@@ -2,7 +2,6 @@ package com.example.athena.entities;
 
 import com.example.athena.exceptions.EventException;
 
-import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.YearMonth;
@@ -133,20 +132,21 @@ public class EventEntity
 
     @Override
     public boolean equals(Object o) {
-        EventEntity eventToCompare ;
-        try
-        {
-            eventToCompare = (EventEntity) o ;
-        }catch (ClassCastException e) {
-            return false ;
-        }
+        if (o == null)
+            return false;
 
-        if(this.name.equals(eventToCompare.name) &&
-            this.day.equals(eventToCompare.day)) {
-            return true ;
-        } else {
-            return false ;
-        }
+        if (this.getClass() != o.getClass())
+            return false;
+
+        EventEntity eventToCompare = (EventEntity) o ;
+
+        return this.name.equals(eventToCompare.name) &&
+                this.day.equals(eventToCompare.day);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.name.hashCode() + this.day.hashCode();
     }
 }
 

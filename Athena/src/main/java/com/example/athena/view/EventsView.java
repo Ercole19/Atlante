@@ -20,13 +20,11 @@ public class EventsView {
     private final double containerHeight ;
     private SearchResultProduct result ;
     private static final String FATAL_ERROR = "FATAL ERROR: The application is unable to load content. If the problem persists after restarting, try reinstalling the application.";
-    private final EventPageGC macroController ;
 
-    public EventsView (double containerWidth, double containerHeight, EventPageGC macroController) {
+    public EventsView (double containerWidth, double containerHeight) {
         this.containerHeight = containerHeight;
         this.containerWidth = containerWidth;
         this.controller = new EventsViewGC(this);
-        this.macroController = macroController ;
     }
 
     public AnchorPane getRoot (LocalDate date){
@@ -50,9 +48,4 @@ public class EventsView {
         return result.getRoot();
 
     }
-
-    public void refresh() {
-        macroController.refresh();
-    }
-
 }

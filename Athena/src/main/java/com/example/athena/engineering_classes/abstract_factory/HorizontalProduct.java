@@ -22,11 +22,4 @@ public class HorizontalProduct implements SearchResultProduct{
         GridPane entry = (GridPane) this.root.lookup(String.format("#entry%d", entryNum)) ;
         entry.add(element, 0, position) ;
     }
-
-    @Override
-    public void deleteEntry(int entryNum) {
-        GridPane entry = (GridPane) this.root.lookup(String.format("#entry%d", entryNum));
-        entry.getChildren().removeAll() ;
-        this.root.getChildren().removeAll(entry) ;
-    }
 }

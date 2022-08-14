@@ -19,7 +19,7 @@ public class SearchTutorViewGC {
 
     private SearchTutorView view ;
     private List<TutorSearchResultBean> searchResults ;
-    private final String FONT = "System";
+    private static final String FONT = "System";
 
     public SearchTutorViewGC(SearchTutorView view)
     {

@@ -7,5 +7,4 @@ public interface SearchResultProduct {
     AnchorPane getRoot();
     
     void setEntry(int entryNum, int position, Node element) throws Exception ;
-    void deleteEntry(int entryNum) ;
 }

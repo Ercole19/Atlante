@@ -19,6 +19,7 @@ public abstract class AbstractDAO
     private static  String pass ;
     private static  String dbUrl ;
     private static  String dbAddress ;
+    private static  int sshPort ;
     private static  String username ;
     private static  String password ;
 
@@ -31,7 +32,7 @@ public abstract class AbstractDAO
         if(forwardingConnection == null)
         {
             JSch jsch = new JSch() ;
-            forwardingConnection = jsch.getSession(username, dbAddress, 3400) ;
+            forwardingConnection = jsch.getSession(username, dbAddress, sshPort) ;
             int lPort = 3336 ;
             int rPort = 3306 ;
             String rHost = "localhost" ;
@@ -70,6 +71,7 @@ public abstract class AbstractDAO
         pass = reader.readLine().substring(9);
         dbUrl = reader.readLine().substring(7);
         dbAddress = reader.readLine().substring(10) ;
+        sshPort = Integer.parseInt(reader.readLine().substring(10)) ;
         username = reader.readLine().substring(11) ;
         password = reader.readLine().substring(11) ;
 
