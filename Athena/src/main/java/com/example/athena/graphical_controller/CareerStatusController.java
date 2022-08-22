@@ -87,14 +87,14 @@ public class CareerStatusController implements Initializable, AbstractObserver {
         List<Object> params = new ArrayList<>();
 
         params.add(ExamsOrCfusEnum.SET_MAX_CFUS);
-        switcher.popup("SetMAxCfuOrExams.fxml", "Set max cfus", params);
+        switcher.popup("SetMaxCfuOrExams.fxml", "Set max cfus", params);
 
     }
 
     public void onSetExamsBtn() {
         List<Object> params = new ArrayList<>();
         params.add(ExamsOrCfusEnum.SET_MAX_EXAMS);
-        switcher.popup("SetMAxCfuOrExams.fxml", "Set max cfus", params);
+        switcher.popup("SetMaxCfuOrExams.fxml", "Set max cfus", params);
     }
 
     @Override

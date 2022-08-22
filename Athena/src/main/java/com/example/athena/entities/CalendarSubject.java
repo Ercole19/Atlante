@@ -3,13 +3,9 @@ package com.example.athena.entities;
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.graphical_controller.PresenceOfEventsBean;
-import javafx.scene.Node;
-import javafx.scene.layout.GridPane;
 
 import java.time.YearMonth;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 public class CalendarSubject extends AbstractSubject {
 
@@ -33,8 +29,12 @@ public class CalendarSubject extends AbstractSubject {
 
     public CalendarEntity getEntity(YearMonth yearMonth) throws EventException {
 
-        this.calendarMap.putIfAbsent(yearMonth, new CalendarEntity(yearMonth)) ;
-        return this.calendarMap.get(yearMonth) ;
+        CalendarEntity retVal = this.calendarMap.get(yearMonth) ;
+        if (retVal == null) {
+            this.calendarMap.put(yearMonth,new CalendarEntity(yearMonth)) ;
+            retVal = this.calendarMap.get(yearMonth) ;
+        }
+        return retVal ;
     }
 
     public void addEvent(EventEntity event) throws EventException
@@ -53,25 +53,7 @@ public class CalendarSubject extends AbstractSubject {
         return this.getEntity(yearMonth).getEventsPresences() ;
     }
 
-    public void deleteRow(GridPane grid, final int row) {
-        Set<Node> deleteNodes = new HashSet<>();
-        for (Node child : grid.getChildren()) {
-            // get index from child
-            Integer rowIndex = GridPane.getRowIndex(child);
-
-            // handle null values for index=0
-            int r = rowIndex == null ? 0 : rowIndex;
-
-            if (r > row) {
-                // decrement rows for rows after the deleted row
-                GridPane.setRowIndex(child, r-1);
-            } else if (r == row) {
-                // collect matching rows for deletion
-                deleteNodes.add(child);
-            }
-        }
-
-        // remove nodes from row
-        grid.getChildren().removeAll(deleteNodes);
+    public void refreshOnLogOut() {
+        this.calendarMap.clear() ;
     }
 }

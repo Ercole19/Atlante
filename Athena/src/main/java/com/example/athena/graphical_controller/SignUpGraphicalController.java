@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class SignUpGraphicalController {
@@ -64,9 +65,11 @@ public class SignUpGraphicalController {
             SignUpUCC controller = new SignUpUCC();
             try
             {
-                controller.register(bean);
+                controller.preRegister(bean);
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                switcher.switcher(stage, "LoginPage.fxml");
+                ArrayList<Object> params = new ArrayList<>() ;
+                params.add(emailField.getText()) ;
+                switcher.switcher(stage, "validate_signup.fxml", params);
             }
             catch (UserRegistrationException exc)
             {
@@ -78,5 +81,10 @@ public class SignUpGraphicalController {
             Alert alert = new Alert(Alert.AlertType.ERROR , "You inserted two different passwords!") ;
             alert.showAndWait() ;
         }
-        }
     }
+
+    public void onValidateCodeClick(ActionEvent event) {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        switcher.switcher(stage, "validate_signup.fxml");
+    }
+}

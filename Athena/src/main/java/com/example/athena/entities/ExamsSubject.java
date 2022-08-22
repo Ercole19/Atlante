@@ -10,10 +10,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class  ExamsSubject extends AbstractSubject {
-   private List<EntityExam> totalExams ;
+   private List<EntityExam> totalExams = new ArrayList<>() ;
    private static ExamsSubject instance = null;
 
    private int examsNumber ;
@@ -21,9 +22,13 @@ public class  ExamsSubject extends AbstractSubject {
    
    private ExamsSubject()
    {
+   }
+
+   private void getCacheExams()
+   {
        try {
            ExamDao eDao = new ExamDao();
-           this.totalExams = eDao.getExamlist();
+           this.totalExams.addAll(eDao.getExamlist()) ;
 
            UserDao uDao = new UserDao();
            this.examsNumber = uDao.getAllExams();
@@ -32,9 +37,7 @@ public class  ExamsSubject extends AbstractSubject {
        catch (ExamException exc) {
            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
            alert.showAndWait();
-           return;
        }
-
    }
    
    public static synchronized ExamsSubject getInstance() 
@@ -74,6 +77,9 @@ public class  ExamsSubject extends AbstractSubject {
    public ObservableList<ExamEntityBean> getExams() throws ExamException {
        ObservableList<ExamEntityBean> observableList = FXCollections.observableArrayList() ;
        int i = 0;
+       if(totalExams.isEmpty()) {
+           getCacheExams();
+       }
        for (EntityExam exam : totalExams){
            ExamEntityBean examEntityBean = new ExamEntityBean();
            examEntityBean.setExamDate(exam.getDate());
@@ -94,12 +100,25 @@ public class  ExamsSubject extends AbstractSubject {
 
    public int getExamsNumber()
    {
+       if(this.examsNumber == -1) {
+           getCacheExams();
+       }
        return this.examsNumber ;
    }
 
    public int getCfusNumber()
    {
+       if(this.examsNumber == -1) {
+           getCacheExams();
+       }
        return this.cfusNumber ;
+   }
+
+   public void logOut()
+   {
+       this.totalExams.clear() ;
+       this.examsNumber = -1 ;
+       this.cfusNumber = -1 ;
    }
 
 }

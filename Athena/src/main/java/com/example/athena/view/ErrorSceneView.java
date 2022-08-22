@@ -11,9 +11,9 @@ public class ErrorSceneView
         error.setPrefWidth(width) ;
         error.setPrefHeight(height) ;
         Text display = new Text(message) ;
+        display.setLayoutX(width/100*45) ;
+        display.setLayoutY(height/100*45) ;
         error.getChildren().add(display) ;
-        display.setLayoutX(error.getWidth()/100*45) ;
-        display.setLayoutY(error.getHeight()/100*45) ;
 
         return error ;
     }

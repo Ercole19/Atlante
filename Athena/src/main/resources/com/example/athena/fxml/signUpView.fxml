@@ -85,4 +85,12 @@
          <Font size="24.0" />
       </font>
    </TextField>
+   <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1012.0" layoutY="88.0" mnemonicParsing="false" onAction="#onValidateCodeClick" prefHeight="49.0" prefWidth="254.0" style="-fx-background-radius: 20; -fx-background-color: #2d8bba;" text="Validate a code" textAlignment="CENTER" textFill="WHITE">
+      <font>
+         <Font size="26.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </Button>
 </AnchorPane>

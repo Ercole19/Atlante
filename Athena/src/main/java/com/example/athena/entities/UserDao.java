@@ -48,23 +48,15 @@ public class UserDao extends AbstractDAO {
         return false;
     }
 
-    public Boolean registerUser(String email, String password, String type, String name, String surname) throws UserRegistrationException {
+    public Boolean registerUser(String email, String code) throws UserRegistrationException {
 
-        String queryRegister;
-        if (type.equals("STUDENT")) {
-            queryRegister = "call athena.register_user(?, ?, ?, ?, ?)";
-        } else {
-            queryRegister = "call athena.register_tutor(?,?,?,?,?)";
-        }
+        String queryRegister = "CALL athena.register_choose(?,?)" ;
 
         try (PreparedStatement stmt = this.getConnection().prepareStatement(queryRegister)) {
             stmt.setString(1, email);
-            stmt.setString(2, password);
-            stmt.setString(3, type);
-            stmt.setString(4, name);
-            stmt.setString(5, surname);
+            stmt.setString(2, code);
             stmt.executeUpdate();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Registration successfull", ButtonType.CLOSE);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Registration successful", ButtonType.CLOSE);
             alert.showAndWait();
             return true;
 
@@ -338,6 +330,24 @@ public class UserDao extends AbstractDAO {
             exc.printStackTrace();
         }
         return totalReports;
+    }
+
+    public void preRegistration(String email, String password, String type, String name, String surname, String code) throws UserRegistrationException {
+        String queryRegister = "INSERT INTO `athena`.`pending_users`(email,password,type,nome,surname,registration_code) VALUES (?,?,?,?,?,?)" ;
+        try (PreparedStatement stmt = this.getConnection().prepareStatement(queryRegister)) {
+            stmt.setString(1, email);
+            stmt.setString(2, password);
+            stmt.setString(3, type);
+            stmt.setString(4, name);
+            stmt.setString(5, surname);
+            stmt.setString(6, code);
+            stmt.executeUpdate();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Registration successfull", ButtonType.CLOSE);
+            alert.showAndWait();
+
+        } catch (SQLException exception) {
+            throw new UserRegistrationException(exception.getMessage());
+        }
     }
 }
 

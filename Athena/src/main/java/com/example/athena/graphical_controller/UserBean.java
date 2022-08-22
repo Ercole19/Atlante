@@ -8,6 +8,7 @@ public class UserBean {
     private String name ;
     private String surname ;
     private boolean userFound;
+    private String code ;
 
 
 
@@ -57,5 +58,13 @@ public class UserBean {
 
     public boolean isUserFound() {
         return userFound;
+    }
+
+    public void setCode(String code) {
+        this.code = code ;
+    }
+
+    public String getCode() {
+        return this.code ;
     }
 }

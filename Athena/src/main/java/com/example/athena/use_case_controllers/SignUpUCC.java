@@ -6,6 +6,7 @@ import com.example.athena.entities.TutorReviewCodesGenerator;
 import com.example.athena.entities.UserDao;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.UserRegistrationException;
+import com.example.athena.graphical_controller.RegistrationBean;
 import com.example.athena.graphical_controller.UserBean;
 
 import java.security.NoSuchAlgorithmException;
@@ -14,9 +15,11 @@ public class SignUpUCC {
 
     private final UserDao dao = new UserDao();
 
-    public boolean register(UserBean bean) throws UserRegistrationException {
+    public void preRegister(UserBean bean) throws UserRegistrationException {
+        String code = null;
         try {
-            SendRegistrationBean params = new SendRegistrationBean(bean.getEmail(), TutorReviewCodesGenerator.generateReviewCode(5));
+            code = TutorReviewCodesGenerator.generateReviewCode(5) ;
+            SendRegistrationBean params = new SendRegistrationBean(bean.getEmail(), code);
             SendRegistrationCodeBoundary.sendCode(params) ;
         } catch (NoSuchAlgorithmException e){
             e.printStackTrace();
@@ -24,6 +27,12 @@ public class SignUpUCC {
         {
             e.printStackTrace();
         }
-        return dao.registerUser(bean.getEmail(), bean.getPassword(), bean.getRole(), bean.getName(), bean.getSurname());
+
+        dao.preRegistration(bean.getEmail(), bean.getPassword(), bean.getRole(), bean.getName(), bean.getSurname(), code);
+    }
+
+    public boolean register(RegistrationBean bean) throws UserRegistrationException {
+
+        return dao.registerUser(bean.getEmail(), bean.getCode());
     }
 }

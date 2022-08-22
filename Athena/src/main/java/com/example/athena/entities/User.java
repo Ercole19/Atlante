@@ -9,6 +9,9 @@ public abstract class User {
     public static void logout()
     {
         User.instance = null ;
+        CalendarSubject.getInstance().refreshOnLogOut() ;
+        ExamsSubject.getInstance().logOut();
+        BooksSubject.getInstance().logOut();
     }
 
     public abstract String getEmail() ;

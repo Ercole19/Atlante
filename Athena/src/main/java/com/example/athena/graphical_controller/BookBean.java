@@ -7,8 +7,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class
-BookBean {
+public class BookBean {
 
     private String title ;
     private String isbn ;
@@ -85,7 +84,7 @@ BookBean {
     }
 
     public void syntacticCheckPrice(String price)throws BookException{
-        if (!(price.matches("[0-9]+[,.][0-9]*"))){
+        if (!(price.matches("[0-9]+[.][0-9]*"))){
             throw new BookException("Error in price format");
         }
     }
