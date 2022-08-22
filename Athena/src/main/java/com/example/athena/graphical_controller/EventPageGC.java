@@ -32,11 +32,6 @@ public class EventPageGC implements PostInitialize{
         this.results.setRoot(eventsView.getRoot(this.dayToLoad));
     }
 
-    public void refresh() {
-        this.results.setRoot(eventsView.getRoot(dayToLoad));
-    }
-
-
     public void close(javafx.event.ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();

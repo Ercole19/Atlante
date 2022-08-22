@@ -79,11 +79,8 @@ public class EventsViewGC {
                     try {
                         ManageEventUCC manageEventUCC = new ManageEventUCC();
                         manageEventUCC.deleteEvent(eventBean);
-                        SceneSwitcher switcher = new SceneSwitcher() ;
                         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-                        ArrayList<Object> params = new ArrayList<>() ;
-                        params.add(eventBean.getDate());
-                        switcher.switcher(stage, "eventPage.fxml", params);
+                        refreshScreen(eventBean.getDate(), stage);
                     } catch (EventException exc) {
                         SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
                         alert.showAndWait();
@@ -106,6 +103,13 @@ public class EventsViewGC {
         }
         catch (Exception exc) {
 
+        }
     }
-}
+
+    private void refreshScreen(LocalDate date, Stage stage) {
+        SceneSwitcher switcher = new SceneSwitcher() ;
+        ArrayList<Object> params = new ArrayList<>() ;
+        params.add(date);
+        switcher.switcher(stage, "eventPage.fxml", params);
+    }
 }

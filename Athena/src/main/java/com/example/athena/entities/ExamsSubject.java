@@ -26,11 +26,10 @@ public class  ExamsSubject extends AbstractSubject {
    {
    }
 
-   private void getCacheExams()
+   private void getCacheExams() throws ExamException
    {
-       try {
-           ExamDao eDao = new ExamDao();
-           this.totalExams.addAll(eDao.getExamlist()) ;
+       ExamDao eDao = new ExamDao();
+       this.totalExams.addAll(eDao.getExamlist()) ;
 
        UserDao uDao = new UserDao();
        this.totalExamsNumber = uDao.getAllExams();
@@ -50,6 +49,8 @@ public class  ExamsSubject extends AbstractSubject {
    public void addExam(EntityExam exam) throws ExamException
    {
        this.totalExams.add(exam);
+       this.takenExamsNumber++ ;
+       this.gainedCfusNumber += exam.getCfu() ;
        ExamDao examDao = new ExamDao();
        examDao.addExam(exam);
        super.notifyObserver() ;
@@ -107,7 +108,7 @@ public class  ExamsSubject extends AbstractSubject {
        return this.totalExamsNumber;
    }
 
-   public int getCfusNumber()
+   public int getTotalCfusNumber() throws ExamException
    {
        if(this.totalCfus == -1) {
            getCacheExams();

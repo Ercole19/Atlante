@@ -247,14 +247,14 @@ public class    AddEventController implements Initializable , PostInitialize{
         catch(EventException e){
             SizedAlert error = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
             error.showAndWait();
-            return;
         }
-
         catch(SendEmailException e)
         {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Error in setting the reminder. Try reopening the event and send it again", 800, 600);
             alert.showAndWait();
-            return;
+        }finally {
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
         }
     }
 

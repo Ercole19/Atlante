@@ -143,7 +143,6 @@ public class BookDao extends AbstractDAO {
     public List<BookEntity> findBooksWImages(String book) throws FindException {
 
         List<BookEntity> books = new ArrayList<>() ;
-        List<File> booksFiles = new ArrayList<>();
 
         try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT title_book, isbn_book, price, email_user, image, negotiable from athena.books  left join athena.book_images on books.email_user = book_images.email and books.isbn_book = book_images.isbn where (title_book = ? or isbn_book = ?)  and email_user != ? and (count_image = 1 or count_image is null)")){
             statement.setString(1, book);
