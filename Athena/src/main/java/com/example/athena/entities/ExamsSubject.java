@@ -17,8 +17,10 @@ public class  ExamsSubject extends AbstractSubject {
    private List<EntityExam> totalExams = new ArrayList<>() ;
    private static ExamsSubject instance = null;
 
-   private int examsNumber ;
-   private int cfusNumber ;
+   private int totalExamsNumber;
+   private int totalCfus;
+   private int takenExamsNumber ;
+   private int gainedCfusNumber;
    
    private ExamsSubject()
    {
@@ -30,14 +32,11 @@ public class  ExamsSubject extends AbstractSubject {
            ExamDao eDao = new ExamDao();
            this.totalExams.addAll(eDao.getExamlist()) ;
 
-           UserDao uDao = new UserDao();
-           this.examsNumber = uDao.getAllExams();
-           this.cfusNumber = uDao.getAllCfus();
-       }
-       catch (ExamException exc) {
-           SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
-           alert.showAndWait();
-       }
+       UserDao uDao = new UserDao();
+       this.totalExamsNumber = uDao.getAllExams();
+       this.totalCfus = uDao.getAllCfus();
+       this.takenExamsNumber = eDao.getTakenExamsNumber(User.instance.getEmail());
+       this.gainedCfusNumber = eDao.getTakenCfus(User.instance.getEmail());
    }
    
    public static synchronized ExamsSubject getInstance() 
@@ -59,6 +58,8 @@ public class  ExamsSubject extends AbstractSubject {
    public void deleteExam(EntityExam exam, int index) throws ExamException
    {
        this.totalExams.remove(index);
+       this.takenExamsNumber--;
+       this.gainedCfusNumber -= exam.getCfu();
        ExamDao examDao = new ExamDao();
        examDao.deleteExam(exam.getName());
        super.notifyObserver();
@@ -68,8 +69,8 @@ public class  ExamsSubject extends AbstractSubject {
        UserDao dao = new UserDao();
        dao.setCfusOrExams(max, type);
 
-       if (type.toString().equals(("SET_MAX_CFUS"))) {this.cfusNumber = max;}
-       else {this.examsNumber = max;}
+       if (type.toString().equals(("SET_MAX_CFUS"))) {this.totalCfus = max;}
+       else {this.totalExamsNumber = max;}
 
        super.notifyObserver();
    }
@@ -98,27 +99,44 @@ public class  ExamsSubject extends AbstractSubject {
        return this.getExams().sorted(comparator);
    }
 
-   public int getExamsNumber()
+   public int getTotalExamsNumber() throws ExamException
    {
-       if(this.examsNumber == -1) {
+       if(this.totalExamsNumber == -1) {
            getCacheExams();
        }
-       return this.examsNumber ;
+       return this.totalExamsNumber;
    }
 
    public int getCfusNumber()
    {
-       if(this.examsNumber == -1) {
+       if(this.totalCfus == -1) {
            getCacheExams();
        }
-       return this.cfusNumber ;
+       return this.totalCfus;
+   }
+
+   public int getTakenExamsNumber() throws ExamException
+   {
+       if (this.takenExamsNumber == -1) {
+           getCacheExams();
+       }
+       return this.takenExamsNumber ;
+   }
+
+   public int getGainedCfusNumber () throws ExamException {
+       if (this.gainedCfusNumber == -1) {
+           getCacheExams();
+       }
+       return this.gainedCfusNumber;
    }
 
    public void logOut()
    {
        this.totalExams.clear() ;
-       this.examsNumber = -1 ;
-       this.cfusNumber = -1 ;
+       this.totalExamsNumber = -1 ;
+       this.totalCfus = -1 ;
+       this.takenExamsNumber = -1 ;
+       this.gainedCfusNumber = -1 ;
    }
 
 }

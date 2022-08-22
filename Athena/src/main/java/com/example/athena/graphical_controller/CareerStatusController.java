@@ -44,37 +44,37 @@ public class CareerStatusController implements Initializable, AbstractObserver {
 
         try {
             ExamsSubject.getInstance().attachObserver(this);
-            CareerStatusUCC controller = new CareerStatusUCC();
-            CareerInformationBean infos = controller.getAllInfos();
 
-            int infosTakenExams = infos.getTakenExams();
-            int infosTotalExams = infos.getTotalExams();
-            int infosGainedCfus = infos.getGainedCfus();
-            int infosTotalCfus = infos.getTotalCfus();
+            setGraphs();
+            takenExams.setText(String.valueOf(ExamsSubject.getInstance().getTakenExamsNumber()));
+            gainedCfus.setText(String.valueOf(ExamsSubject.getInstance().getGainedCfusNumber()));
+            totalCfus.setText(String.valueOf(ExamsSubject.getInstance().getTotalCfusNumber()));
+            totalExams.setText(String.valueOf(ExamsSubject.getInstance().getTotalExamsNumber()));
 
-            ObservableList<PieChart.Data> examsData = FXCollections.observableArrayList();
-            ObservableList<PieChart.Data> cfusData = FXCollections.observableArrayList();
-
-            examsData.add(new PieChart.Data("Taken Exams", infosTakenExams));
-            cfusData.add(new PieChart.Data("Gained Cfus", infosGainedCfus));
-
-            examsData.add(new PieChart.Data("Remaining exams", infosTotalExams - infosTakenExams));
-            cfusData.add(new PieChart.Data("Remaining cfus", infosTotalCfus - infosGainedCfus));
-
-            takenExams.setText(String.valueOf(infosTakenExams));
-            gainedCfus.setText(String.valueOf(infosGainedCfus));
-
-            totalCfus.setText(String.valueOf(infosTotalCfus));
-            totalExams.setText(String.valueOf(infosTotalExams));
-
-            examsPieChart.setData(examsData);
-            examsPieChartcfu.setData(cfusData);
-            examsPieChart.setStartAngle(90);
         } catch (ExamException exc) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage(), 800, 600);
             alert.showAndWait();
         }
 
+    }
+
+    private void setGraphs() {
+        ObservableList<PieChart.Data> examsData = FXCollections.observableArrayList();
+        ObservableList<PieChart.Data> cfusData = FXCollections.observableArrayList();
+        try {
+            examsData.add(new PieChart.Data("Taken Exams", ExamsSubject.getInstance().getTakenExamsNumber()));
+            cfusData.add(new PieChart.Data("Gained Cfus", ExamsSubject.getInstance().getGainedCfusNumber()));
+
+            examsData.add(new PieChart.Data("Remaining exams", ExamsSubject.getInstance().getTotalExamsNumber() - ExamsSubject.getInstance().getTakenExamsNumber()));
+            cfusData.add(new PieChart.Data("Remaining cfus", ExamsSubject.getInstance().getTotalCfusNumber() - ExamsSubject.getInstance().getGainedCfusNumber()));
+        } catch (ExamException exc) {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage(), 800, 600);
+            alert.showAndWait();
+        }
+
+        examsPieChart.setData(examsData);
+        examsPieChartcfu.setData(cfusData);
+        examsPieChart.setStartAngle(90);
     }
 
     public void indietro(ActionEvent event) {
@@ -98,9 +98,15 @@ public class CareerStatusController implements Initializable, AbstractObserver {
     }
 
     @Override
-    public void update()
-    {
-        totalExams.setText(String.valueOf(ExamsSubject.getInstance().getExamsNumber()));
-        totalCfus.setText(String.valueOf(ExamsSubject.getInstance().getCfusNumber()));
+    public void update() {
+        try {
+            totalExams.setText(String.valueOf(ExamsSubject.getInstance().getTotalExamsNumber()));
+            totalCfus.setText(String.valueOf(ExamsSubject.getInstance().getTotalCfusNumber()));
+            setGraphs();
+        }
+        catch (ExamException exc) {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage(), 800, 600);
+            alert.showAndWait();
+        }
     }
 }

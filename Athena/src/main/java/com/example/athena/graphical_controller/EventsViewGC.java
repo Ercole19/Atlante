@@ -97,8 +97,8 @@ public class EventsViewGC {
                     ArrayList<Object> params = new ArrayList<>();
                     params.add(eventBean);
                     switcher.popup("AddEventScreen.fxml", "Edit your event", params);
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    stage.close();
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+                    refreshScreen(eventBean.getDate(), stage) ;
                 });
                 searchResultProduct.setEntry(i, 6, edit);
                 i++ ;

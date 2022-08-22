@@ -7,9 +7,7 @@ import com.example.athena.entities.Student;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.FindBookException;
 import com.example.athena.exceptions.FindException;
-import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.graphical_controller.BookBean;
-import javafx.scene.control.Alert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +20,7 @@ public class BuyControllerUCC {
 
         ArrayList<BookBean> result = new ArrayList<>();
         try {
-           List<BookEntity> bookinfos = dao.findBooks(query);
+           List<BookEntity> bookinfos = dao.findBooksWImages(query);
            for (BookEntity entity : bookinfos)
            {
                BookBean book = new BookBean();

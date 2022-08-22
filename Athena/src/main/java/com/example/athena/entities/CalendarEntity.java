@@ -64,5 +64,6 @@ public class CalendarEntity {
         this.events.remove(event);
         List<EventEntity> list = this.map.getOrDefault(event.getDay(), new ArrayList<>()) ;
         list.remove(event);
+        this.map.put(event.getDay(), list);
     }
 }

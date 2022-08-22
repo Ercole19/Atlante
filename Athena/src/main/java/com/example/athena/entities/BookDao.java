@@ -17,6 +17,7 @@ import java.util.List;
 public class BookDao extends AbstractDAO {
     private final String email = Student.getInstance().getEmail();
     private int i = 1 ;
+    private static int imageCount = 0;
 
     public void insertBook(String title , String isbn , Float price , boolean negotiability, List<File> images)
     {
@@ -34,8 +35,8 @@ public class BookDao extends AbstractDAO {
 
             for (File file : images) {
                 statement2.setBlob(3, new BufferedInputStream(new FileInputStream(file)));
-                statement2.setString(4,file.getName());
-                statement2.setInt(5,i);
+                statement2.setString(4, file.getName());
+                statement2.setInt(5, i);
                 statement2.execute();
                 i++;
             }
@@ -139,21 +140,25 @@ public class BookDao extends AbstractDAO {
         return file ;
     }
 
-    public List<BookEntity> findBooks(String book) throws FindException {
+    public List<BookEntity> findBooksWImages(String book) throws FindException {
 
         List<BookEntity> books = new ArrayList<>() ;
         List<File> booksFiles = new ArrayList<>();
 
-        try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT title_book, isbn_book, price, email_user, image, negotiable from athena.books join athena.book_images on books.email_user = book_images.email and books.isbn_book = book_images.isbn where (title_book = ? or isbn_book = ?) and count_image = 1 and email_user != ?")){
+        try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT title_book, isbn_book, price, email_user, image, negotiable from athena.books  left join athena.book_images on books.email_user = book_images.email and books.isbn_book = book_images.isbn where (title_book = ? or isbn_book = ?)  and email_user != ? and (count_image = 1 or count_image is null)")){
             statement.setString(1, book);
             statement.setString(2, book);
             statement.setString(3, email);
 
             ResultSet set = statement.executeQuery();
             while (set.next()) {
-                byte[] image = set.getBlob(5).getBytes(1,(int) set.getBlob(5).length()) ;
-                String pathname = "image.png";
-                booksFiles.add(writeImage(image, pathname));
+                List<File> booksFiles = new ArrayList<>();
+                if (set.getBlob(5) != null && set.getBlob(5).length() != 0) {
+                    byte[] image = set.getBlob(5).getBytes(1,(int) set.getBlob(5).length()) ;
+                    String pathname = "image" + imageCount + ".png" ;
+                    booksFiles.add(writeImage(image, pathname));
+                    imageCount++;
+                }
                 BookEntity bookEntity = new BookEntity(set.getString(1), set.getString(2), set.getFloat(3), set.getString(4), set.getBoolean(6), booksFiles);
                 books.add(bookEntity);
             }

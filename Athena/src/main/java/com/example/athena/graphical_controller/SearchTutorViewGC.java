@@ -17,7 +17,7 @@ import java.util.List;
 
 public class SearchTutorViewGC {
 
-    private SearchTutorView view ;
+    private final SearchTutorView view ;
     private List<TutorSearchResultBean> searchResults ;
     private static final String FONT = "System";
 

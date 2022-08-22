@@ -8,10 +8,12 @@ import com.example.athena.use_case_controllers.BuyControllerUCC;
 import com.example.athena.view.FindBooksView;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +42,14 @@ public class FindBooksViewGC {
             int i = 0 ;
             for(BookBean bookBean: this.searchResults)
             {
-                ImageView image = new ImageView(bookBean.getImage().get(0).toURI().toString()) ;
+                ImageView image ;
+                if (!bookBean.getImage().isEmpty()) {
+                    image = new ImageView(bookBean.getImage().get(0).toURI().toString());
+                }
+                else {
+                    image = new ImageView(new Image(new File("src/main/resources/assets/NoImage.png").toURI().toString())) ;
+                }
+
                 image.setFitHeight(entrySize);
                 image.setFitWidth(entrySize);
                 image.setPreserveRatio(true);

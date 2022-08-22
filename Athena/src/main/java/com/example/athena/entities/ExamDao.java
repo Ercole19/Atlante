@@ -63,4 +63,26 @@ public class ExamDao extends AbstractDAO {
             throw new ExamException("Error in deleting exam, details follow: " + exc.getMessage());
         }
     }
+
+    public int getTakenExamsNumber(String email) throws ExamException {
+        try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT COUNT(*) FROM esami where email_utente = ?")) {
+            statement.setString(1, email);
+            ResultSet set = statement.executeQuery();
+            set.next() ;
+            return set.getInt(1);
+        }catch (SQLException exc) {
+            throw new ExamException("Error in finding taken exams number, details follow: " + exc.getMessage());
+        }
+    }
+
+    public int getTakenCfus(String email) throws ExamException {
+        try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT SUM(CFU) FROM esami where email_utente = ?")) {
+            statement.setString(1, email);
+            ResultSet set = statement.executeQuery();
+            set.next() ;
+            return set.getInt(1);
+        }catch (SQLException exc) {
+            throw new ExamException("Error in finding gained cfus number, details follow: " + exc.getMessage());
+        }
+    }
 }
