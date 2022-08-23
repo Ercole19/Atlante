@@ -14,7 +14,7 @@ import java.util.List;
 
 public class BuyControllerUCC {
 
-    private static final BookDao dao = new BookDao();
+    private final BookDao dao = new BookDao();
 
     public List<BookBean> formatSearchResults(String query) throws FindBookException, BookException {
 

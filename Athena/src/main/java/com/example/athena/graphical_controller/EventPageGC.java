@@ -20,16 +20,12 @@ public class EventPageGC implements PostInitialize{
     @FXML
     private SubScene results ;
 
-    private EventsView eventsView ;
-    private LocalDate dayToLoad ;
-
-
     @Override
     public void postInitialize(ArrayList<Object> params) {
-        this.eventsView = new EventsView(results.getWidth(), results.getHeight()) ;
+        EventsView eventsView = new EventsView(results.getWidth(), results.getHeight());
         label1.setText(String.valueOf(params.get(0))) ;
-        this.dayToLoad = (LocalDate)params.get(0) ;
-        this.results.setRoot(eventsView.getRoot(this.dayToLoad));
+        LocalDate dayToLoad = (LocalDate) params.get(0);
+        this.results.setRoot(eventsView.getRoot(dayToLoad));
     }
 
     public void close(javafx.event.ActionEvent event) {

@@ -122,7 +122,7 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
 
         TutorPersonalPageUCC controller = new TutorPersonalPageUCC() ;
 
-        String[] tutorName = controller.getTutorName(bean);
+        String[] tutorNameToSet = controller.getTutorName(bean);
         Float tutorAvgReviews = controller.getTutorReviewsAvg(bean);
         List<String> tutorInfos = controller.getTutorInfos(bean);
         List<String> tutorCourses = controller.getTutorCourses(bean);
@@ -141,8 +141,8 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
             coursesArea.appendText(course + "\n" );
         }
 
-        this.tutorName.setText(tutorName[0]);
-        tutorSurname.setText(tutorName[1]);
+        this.tutorName.setText(tutorNameToSet[0]);
+        tutorSurname.setText(tutorNameToSet[1]);
     }
 
 

@@ -63,21 +63,17 @@ public class BookPageController extends ShiftImageController implements PostInit
 
         this.book = (BookBean) params.get(1);
 
-        switch ((SellerOrBuyerEnum)params.get(0))
-        {
-            case SELLER:
-                this.sellerName = (BooksSubject.getInstance().getSellerName());
-                this.sellerSurname = (BooksSubject.getInstance().getSellerSurname());
-                break;
-            case BUYER:
-                BookPageUCC controller = new BookPageUCC() ;
-                String[] vendorFullName = controller.getUserName(book.getOwner());
-                this.sellerName = vendorFullName[0];
-                this.sellerSurname = vendorFullName[1];
-                buyButton.setVisible(true);
-                buyButton.setDisable(false);
-                backBtn.setOnAction(this::onBackBtnClick);
-                break;
+        if (params.get(0) == SellerOrBuyerEnum.SELLER) {
+            this.sellerName = (BooksSubject.getInstance().getSellerName());
+            this.sellerSurname = (BooksSubject.getInstance().getSellerSurname());
+        } else {
+            BookPageUCC controller = new BookPageUCC() ;
+            String[] vendorFullName = controller.getUserName(book.getOwner());
+            this.sellerName = vendorFullName[0];
+            this.sellerSurname = vendorFullName[1];
+            buyButton.setVisible(true);
+            buyButton.setDisable(false);
+            backBtn.setOnAction(this::onBackBtnClick);
         }
 
         this.bookImages = book.getImageList();

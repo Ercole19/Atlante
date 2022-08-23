@@ -34,7 +34,6 @@ public class CalendarPageController implements Initializable, AbstractObserver {
 
     private YearMonth currentYearMonth ;
     private FullCalendarView view ;
-    private Set<LocalDate> eventsPresence ;
     private final SceneSwitcher switcher = new SceneSwitcher();
     private Stage stage ;
 
@@ -63,9 +62,10 @@ public class CalendarPageController implements Initializable, AbstractObserver {
         while (!calendarDate.getDayOfWeek().toString().equals("SUNDAY") ) {
             calendarDate = calendarDate.minusDays(1);
         }
+        Set<LocalDate> eventsPresence;
         try
         {
-            this.eventsPresence = CalendarSubject.getInstance().getEventPresencesByYearMonth(this.currentYearMonth).getEventSet() ;
+            eventsPresence = CalendarSubject.getInstance().getEventPresencesByYearMonth(this.currentYearMonth).getEventSet() ;
         }
         catch (EventException e)
         {
@@ -80,7 +80,7 @@ public class CalendarPageController implements Initializable, AbstractObserver {
             }
             Text txt = new Text(String.valueOf(calendarDate.getDayOfMonth()));
 
-            if(this.eventsPresence.contains(calendarDate))
+            if(eventsPresence.contains(calendarDate))
             {
                 Circle bookMark = new Circle() ;
                 bookMark.setRadius(5) ;

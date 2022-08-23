@@ -6,11 +6,6 @@ import java.util.Set;
 public class PresenceOfEventsBean {
     private Set<LocalDate> eventSet ;
 
-
-    public PresenceOfEventsBean() {
-
-    }
-
     public Set<LocalDate> getEventSet() {
         return eventSet;
     }

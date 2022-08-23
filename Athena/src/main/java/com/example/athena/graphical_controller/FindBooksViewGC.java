@@ -21,7 +21,7 @@ public class FindBooksViewGC {
 
     private FindBooksView view ;
     private List<BookBean> searchResults ;
-    private final String FONT = "System";
+    private static final String FONT = "System";
 
     public FindBooksViewGC(FindBooksView view)
     {

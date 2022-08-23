@@ -35,15 +35,10 @@ public class SetMaxCfusOrExamsGC implements PostInitialize {
 
         examsOrCfus = (ExamsOrCfusEnum) params.get(0);
 
-        switch(examsOrCfus)
-        {
-            case SET_MAX_CFUS:
-                textSetting.setText("Set max cfus");
-                break;
-
-            case SET_MAX_EXAMS:
-                textSetting.setText("Set max exams");
-                break;
+        if(examsOrCfus == ExamsOrCfusEnum.SET_MAX_CFUS) {
+            textSetting.setText("Set max cfus");
+        } else {
+            textSetting.setText("Set max exams");
         }
     }
 

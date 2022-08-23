@@ -36,7 +36,7 @@ public class ValidateSignUpGC implements PostInitialize {
         bean.setCode(registrationCodeField.getText());
         try {
             signUpUCC.register(bean) ;
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             switcher.switcher(stage, "LoginPage.fxml");
         } catch (UserRegistrationException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;

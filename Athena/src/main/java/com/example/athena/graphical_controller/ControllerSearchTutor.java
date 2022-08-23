@@ -28,7 +28,6 @@ public class ControllerSearchTutor {
 
     private final SceneSwitcher switcher = new SceneSwitcher();
     private Stage stage;
-    private SearchTutorView searchTutorView ;
 
 
     public void clickOnSearchByCourse()
@@ -49,7 +48,7 @@ public class ControllerSearchTutor {
             alert.showAndWait();
         }
         else {
-            this.searchTutorView = new SearchTutorView(resultsBox.getWidth(), resultsBox.getHeight()) ;
+            SearchTutorView searchTutorView = new SearchTutorView(resultsBox.getWidth(), resultsBox.getHeight());
             this.resultsBox.setRoot(searchTutorView.getRoot(searchBar.getText(), searchEnum, sortByBestReviews.isSelected())) ;
         }
     }

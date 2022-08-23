@@ -78,13 +78,13 @@ public class BookBean {
 
     public void syntacticCheckIsbn(String isbn) throws BookException
     {
-        if (!(isbn.matches("[0-9]{10}") || isbn.matches("[0-9]{13}"))){
+        if (!(isbn.matches("\\d{9}[\\dX]") || isbn.matches("\\d{13}"))){
             throw new BookException("Error in ISBN format") ;
         }
     }
 
     public void syntacticCheckPrice(String price)throws BookException{
-        if (!(price.matches("[0-9]+[.][0-9]*"))){
+        if (!(price.matches("\\d+\\.*\\d*"))){
             throw new BookException("Error in price format");
         }
     }

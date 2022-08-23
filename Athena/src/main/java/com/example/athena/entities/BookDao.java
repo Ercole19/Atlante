@@ -19,6 +19,10 @@ public class BookDao extends AbstractDAO {
     private int i = 1 ;
     private static int imageCount = 0;
 
+    private static synchronized void incrementImageCounter() {
+        imageCount++ ;
+    }
+
     public void insertBook(String title , String isbn , Float price , boolean negotiability, List<File> images)
     {
         try (PreparedStatement statement = this.getConnection().prepareStatement("insert into athena.books values (?,?,?,?,?)") ; PreparedStatement statement2 = this.getConnection().prepareStatement("INSERT INTO `athena`.`book_images` (email, isbn, image,image_name, count_image) VALUES (?,?,?,?,?)")) {
@@ -156,7 +160,7 @@ public class BookDao extends AbstractDAO {
                     byte[] image = set.getBlob(5).getBytes(1,(int) set.getBlob(5).length()) ;
                     String pathname = "image" + imageCount + ".png" ;
                     booksFiles.add(writeImage(image, pathname));
-                    imageCount++;
+                    BookDao.incrementImageCounter();
                 }
                 BookEntity bookEntity = new BookEntity(set.getString(1), set.getString(2), set.getFloat(3), set.getString(4), set.getBoolean(6), booksFiles);
                 books.add(bookEntity);

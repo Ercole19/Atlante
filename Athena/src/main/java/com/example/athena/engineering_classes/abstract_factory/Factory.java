@@ -7,6 +7,8 @@ import com.example.athena.engineering_classes.scene_decorators.VerticalScrollBar
 
 public class Factory {
 
+    private Factory() {}
+
     public static SearchResultProduct createProduct(ProductTypeEnum productTypeEnum, FormatBundle formatBundle){
         switch (productTypeEnum){
             case HORIZONTAL_ENTRY:
