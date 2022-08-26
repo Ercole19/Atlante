@@ -2,6 +2,7 @@ package com.example.athena.engineering_classes.abstract_factory;
 
 
 import com.example.athena.engineering_classes.scene_decorators.HorizontalScrollBarDecorator;
+import com.example.athena.engineering_classes.scene_decorators.LegendDecorator;
 import com.example.athena.engineering_classes.scene_decorators.SearchResultFormatterComponent;
 import com.example.athena.engineering_classes.scene_decorators.VerticalScrollBarDecorator;
 
@@ -22,7 +23,7 @@ public class Factory {
 
     public static SearchResultProduct createHorizontal(FormatBundle formatBundle){
         SearchResultFormatterComponent component = new HorizontalSceneResult() ;
-        if(formatBundle.getContainerHeight() < formatBundle.getEntryNumber() * formatBundle.getEntrySize())
+        if(formatBundle.getContainerWidth() < formatBundle.getEntryNumber() * formatBundle.getEntrySize())
         {
             component = new HorizontalScrollBarDecorator(component) ;
         }
@@ -32,10 +33,12 @@ public class Factory {
     public static SearchResultProduct createVertical(FormatBundle formatBundle)
     {
         SearchResultFormatterComponent component = new VerticalSceneResult() ;
-        if(formatBundle.getContainerWidth() < formatBundle.getEntryNumber() * formatBundle.getEntrySize())
+        if(formatBundle.getContainerHeight() - 40 < formatBundle.getEntryNumber() * formatBundle.getEntrySize())
         {
             component = new VerticalScrollBarDecorator(component) ;
         }
+        component = new LegendDecorator(component) ;
+
         return new VerticalProduct(component.buildScene(formatBundle)) ;
     }
 }

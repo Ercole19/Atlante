@@ -33,10 +33,4 @@ public class VerticalSceneResult extends SearchResultFormatterComponent {
 
         return new AnchorPane(graphicalList);
     }
-
-    private void setColumnConstraint(double percent, GridPane pane) {
-        ColumnConstraints columnConstraint = new ColumnConstraints();
-        columnConstraint.setPercentWidth(percent);
-        pane.getColumnConstraints().add(columnConstraint);
-    }
 }

@@ -22,4 +22,13 @@ public class HorizontalProduct implements SearchResultProduct{
         GridPane entry = (GridPane) this.root.lookup(String.format("#entry%d", entryNum)) ;
         entry.add(element, 0, position) ;
     }
+
+    @Override
+    public void setLegend(int position, Node element) {
+        GridPane legend = (GridPane) this.root.lookup("#legend") ;
+
+        if(legend != null) {
+            legend.add(element, 0, position) ;
+        }
+    }
 }

@@ -13,7 +13,6 @@ import java.util.List;
 public class RecentPurchasesViewGC {
 
     private List<BookBean> searchResults ;
-    private static final String FONT = "System";
 
     public RecentPurchasesViewGC(){
     }
