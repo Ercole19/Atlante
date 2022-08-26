@@ -313,23 +313,23 @@ public class UserDao extends AbstractDAO {
     }
 
 
-    public int getTotalReport(){
+    public int getTotalReport(String email){
 
-        int totalReports = 0;
+        int repNum = 0;
         try(PreparedStatement statement = this.getConnection().prepareStatement("Select report_number from athena.student_infos where email = ?")){
 
-            statement.setString(1, Student.getInstance().getEmail());
+            statement.setString(1, email);
 
             ResultSet set = statement.executeQuery();
 
             set.next();
-            totalReports = set.getInt(1);
+            repNum = set.getInt(1);
 
 
         }catch (SQLException exc){
             exc.printStackTrace();
         }
-        return totalReports;
+        return repNum;
     }
 
     public void preRegistration(String email, String password, String type, String name, String surname, String code) throws UserRegistrationException {

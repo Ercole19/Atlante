@@ -189,23 +189,41 @@ public class BookDao extends AbstractDAO {
         }
     }
 
-    public List<BookEntity> getBookResults(String email) {
-        List<BookEntity> books = new ArrayList<>();
+    public List<BookEntity> getRecentPurchasesResults(String email) {
+        List<BookEntity> booksList = new ArrayList<>();
         try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT vendorEmail, bookTitle, bookIsbn, bookPrice from athena.recent_purchases where purchaserEmail = ?")) {
 
             statement.setString(1, email);
-
             ResultSet set = statement.executeQuery();
 
             while (set.next()) {
                 BookEntity book = new BookEntity(set.getString(1), set.getString(2), set.getString(3), set.getFloat(4));
-                books.add(book);
+                booksList.add(book);
             }
 
         }catch (SQLException exc) {
             exc.printStackTrace();
         }
-        return books;
+        return booksList;
+    }
+
+
+    public List<BookEntity> getRecentSoldItemsFromDB(String vendorEmail) {
+        List<BookEntity> booksEntityList = new ArrayList<>();
+        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT purchaserEmail, bookTitle, bookIsbn, bookPrice from athena.recent_purchases where vendorEmail = ?")) {
+
+            statement.setString(1, vendorEmail);
+            ResultSet set = statement.executeQuery();
+
+            while (set.next()) {
+                BookEntity book = new BookEntity(set.getString(2), set.getString(3), set.getFloat(4), set.getString(1));
+                booksEntityList.add(book);
+            }
+
+        }catch (SQLException exc) {
+            exc.printStackTrace();
+        }
+        return booksEntityList;
     }
 
 

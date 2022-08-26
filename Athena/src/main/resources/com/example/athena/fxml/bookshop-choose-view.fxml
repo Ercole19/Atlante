@@ -52,12 +52,12 @@
    </AnchorPane>
    <AnchorPane layoutX="867.0" layoutY="365.0" prefHeight="167.0" prefWidth="324.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;">
       <children>
-         <Text fill="#ffd775" layoutX="57.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recent Purchases" wrappingWidth="238.13671875">
+         <Text fill="#ffd775" layoutX="57.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recent Activities" wrappingWidth="238.13671875">
             <font>
                <Font size="40.0" />
             </font>
          </Text>
-         <Button mnemonicParsing="false" onAction="#onRecentPurchasesBtnClick" opacity="0.0" prefHeight="169.0" prefWidth="327.0" style="-fx-background-color: #2d8bba;" text="sellBtn" />
+         <Button mnemonicParsing="false" onAction="#onRecentActivitiesBtnClick" opacity="0.0" prefHeight="169.0" prefWidth="327.0" style="-fx-background-color: #2d8bba;" text="sellBtn" />
       </children>
    </AnchorPane>
 </AnchorPane>

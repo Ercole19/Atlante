@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller;
 
-import com.example.athena.view.RecentPurchasesView;
+import com.example.athena.view.RecentSoldItemsView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,10 +12,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RecentPurchasesGC implements Initializable {
+public class RecentSoldItemsGC implements Initializable {
 
     @FXML
     private SubScene subScene;
+    private RecentSoldItemsView recentSoldItemsView;
 
     @FXML
     protected void onBackButtonClick(ActionEvent event) throws IOException {
@@ -27,7 +28,8 @@ public class RecentPurchasesGC implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        RecentPurchasesView recentPurchasesView = new RecentPurchasesView(subScene.getWidth(), subScene.getHeight());
-        this.subScene.setRoot(recentPurchasesView.getRoot());
+        recentSoldItemsView = new RecentSoldItemsView(subScene.getWidth(), subScene.getHeight());
+        this.subScene.setRoot(recentSoldItemsView.getRoot());
     }
+
 }

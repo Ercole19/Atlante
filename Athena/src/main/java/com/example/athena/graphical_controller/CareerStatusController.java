@@ -5,7 +5,6 @@ import com.example.athena.entities.ExamsOrCfusEnum;
 import com.example.athena.entities.ExamsSubject;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.use_case_controllers.CareerStatusUCC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -77,7 +76,7 @@ public class CareerStatusController implements Initializable, AbstractObserver {
         examsPieChart.setStartAngle(90);
     }
 
-    public void indietro(ActionEvent event) {
+    public void goBack(ActionEvent event) {
         ExamsSubject.getInstance().detachObserver(this);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();

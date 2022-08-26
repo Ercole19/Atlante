@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.SubScene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.RecentSoldItemsGC">
+   <children>
+      <SubScene fx:id="subScene" height="458.0" layoutX="74.0" layoutY="223.0" width="1133.0">
+        <root>
+          <Region />
+        </root>
+      </SubScene>
+      <Text fill="#ffd775" layoutX="209.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your recent sold books">
+         <font>
+            <Font size="50.0" />
+         </font>
+      </Text>
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" opacity="0.79" prefHeight="50.0" prefWidth="1280.0" style="-fx-background-color: #2d8bba;">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="82.0" layoutX="1199.0">
+               <image>
+                  <Image url="@../../../../assets/guff.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="192.0" layoutX="995.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../assets/title.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="41.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../assets/backBtn.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="backBtn" layoutX="41.0" layoutY="130.0" mnemonicParsing="false" onAction="#onBackButtonClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

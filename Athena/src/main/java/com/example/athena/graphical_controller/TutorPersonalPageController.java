@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.entities.Tutor;
 import com.example.athena.use_case_controllers.TutorPersonalPageUCC;
 import com.example.athena.use_case_controllers.ViewTutorPageUseCaseController;
 import javafx.event.ActionEvent;
@@ -82,7 +83,7 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
         infos.setContactNumbers(contactNumbers.getText());
         infos.setSessionInfos(sessionInfos.getText());
 
-        bean.setEmail(com.example.athena.entities.Tutor.getInstance().getEmail());
+        bean.setEmail(Tutor.getInstance().getEmail());
         List<String> tutorInfos = controller.getTutorInfos(bean);
 
         if (tutorInfos.isEmpty()) {
@@ -115,6 +116,8 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
 
     public void onAddCourseButtonClick() throws IOException{
         switcher.popup("addcourse.fxml" , "Add course") ;
+        coursesArea.clear();
+        updateCourses();
     }
 
 
@@ -125,7 +128,7 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
         String[] tutorNameToSet = controller.getTutorName(bean);
         Float tutorAvgReviews = controller.getTutorReviewsAvg(bean);
         List<String> tutorInfos = controller.getTutorInfos(bean);
-        List<String> tutorCourses = controller.getTutorCourses(bean);
+        List<String> tutorCourses = controller.getTutorCourses(bean.getEmail());
 
         aboutMe.setText(tutorInfos.get(0));
         sessionInfos.setText(tutorInfos.get(1));
@@ -161,6 +164,14 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
             contactNumbers.setEditable(false) ;
         }
 
+    }
+
+    private void updateCourses() {
+        TutorPersonalPageUCC controller = new TutorPersonalPageUCC() ;
+        List<String> tutorCourses = controller.getTutorCourses(this.email);
+        for (String course : tutorCourses) {
+            coursesArea.appendText(course + "\n" );
+        }
     }
 
     @Override

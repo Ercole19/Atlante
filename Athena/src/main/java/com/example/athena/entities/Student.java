@@ -42,7 +42,7 @@ public class Student extends User
     {
        this.email = emailStudent;
        UserDao userDao = new UserDao();
-       this.repNum = userDao.getTotalReport();
+       this.repNum = userDao.getTotalReport(emailStudent);
     }
 
 }

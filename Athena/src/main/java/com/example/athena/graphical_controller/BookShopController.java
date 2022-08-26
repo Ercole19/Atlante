@@ -41,8 +41,8 @@ public class BookShopController {
         switcher.switcher(stage, "sell-view.fxml");
     }
 
-    public void onRecentPurchasesBtnClick(ActionEvent event){
+    public void onRecentActivitiesBtnClick(ActionEvent event){
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "recentPurchasesScreen.fxml");
+        switcher.switcher(stage, "recentActivities.fxml");
     }
 }

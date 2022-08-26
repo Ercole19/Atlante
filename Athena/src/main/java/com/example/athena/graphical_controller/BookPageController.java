@@ -2,6 +2,7 @@ package com.example.athena.graphical_controller;
 
 import com.example.athena.entities.BooksSubject;
 import com.example.athena.entities.SellerOrBuyerEnum;
+import com.example.athena.entities.Student;
 import com.example.athena.use_case_controllers.BookPageUCC;
 import com.example.athena.use_case_controllers.BuyControllerUCC;
 import javafx.event.ActionEvent;
@@ -32,6 +33,8 @@ public class BookPageController extends ShiftImageController implements PostInit
     @FXML
     private Text email;
     @FXML
+    private Text scamNumber;
+    @FXML
     private CheckBox negotiable;
     @FXML
     private Label nome;
@@ -54,9 +57,11 @@ public class BookPageController extends ShiftImageController implements PostInit
     private List<Image> bookImages;
     private String sellerName;
     private String sellerSurname;
+    private int reportNumber;
 
     private final SceneSwitcher switcher = new SceneSwitcher();
     private Stage stage;
+    private final BookPageUCC controller = new BookPageUCC() ;
 
     @Override
     public void postInitialize(ArrayList<Object> params) {
@@ -66,11 +71,14 @@ public class BookPageController extends ShiftImageController implements PostInit
         if (params.get(0) == SellerOrBuyerEnum.SELLER) {
             this.sellerName = (BooksSubject.getInstance().getSellerName());
             this.sellerSurname = (BooksSubject.getInstance().getSellerSurname());
+            this.reportNumber = controller.getReportNumber(Student.getInstance().getEmail());
+
         } else {
             BookPageUCC controller = new BookPageUCC() ;
             String[] vendorFullName = controller.getUserName(book.getOwner());
             this.sellerName = vendorFullName[0];
             this.sellerSurname = vendorFullName[1];
+            this.reportNumber = controller.getReportNumber(book.getOwner());
             buyButton.setVisible(true);
             buyButton.setDisable(false);
             backBtn.setOnAction(this::onBackBtnClick);
@@ -100,6 +108,7 @@ public class BookPageController extends ShiftImageController implements PostInit
         price.setText(book.getPrice());
         email.setText(book.getOwner());
         negotiable.setSelected(book.getNegotiable());
+        scamNumber.setText(String.valueOf(reportNumber));
         if(!(this.bookImages.isEmpty())){
             image.setImage(this.bookImages.get(0));
         }

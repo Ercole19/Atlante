@@ -26,9 +26,9 @@ public class TutorPersonalPageUCC {
         return dao.getAvg(bean.getEmail());
     }
 
-    public List<String> getTutorCourses(UserBean bean) {
+    public List<String> getTutorCourses(String email) {
         CourseDao dao = new CourseDao() ;
-        return dao.fillCourses(bean.getEmail());
+        return dao.fillCourses(email);
 
     }
 

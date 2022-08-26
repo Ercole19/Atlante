@@ -12,6 +12,7 @@ public class BookEntity {
     private List<File> image ;
     private final File file  ;
     private final String owner ;
+    private final String purchaser;
 
 
 
@@ -25,6 +26,7 @@ public class BookEntity {
         this.image = image;
         this.file = null ;
         this.owner = owner ;
+        this.purchaser = null;
     }
 
     public BookEntity(String title, String isbn, float price, String email,  boolean isNegotiable, List<File> image) {
@@ -46,8 +48,22 @@ public class BookEntity {
         this.isNegotiable = null;
         this.image = null;
         this.file = null;
+        this.purchaser = null;
 
     }
+
+    public BookEntity (String title, String isbn, Float price, String purchaser) {
+        this.owner = null;
+        this.title  = title;
+        this.isbn = isbn ;
+        this.price = price;
+        this.isNegotiable = null;
+        this.image = null;
+        this.file = null;
+        this.purchaser = purchaser;
+
+    }
+
     public String getBookTitle() {
         return this.title;
     }
@@ -73,4 +89,7 @@ public class BookEntity {
     public File getFile() {
         return this.file;
     }
+
+    public String getPurchaser() {return this.purchaser;}
+
 }

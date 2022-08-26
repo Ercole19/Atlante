@@ -16,6 +16,7 @@ public class BookBean {
     private List<File> image ;
     private String owner ;
     private int index ;
+    private String purchaser;
 
 
 
@@ -103,5 +104,13 @@ public class BookBean {
 
     public String getTitle() {
         return title;
+    }
+
+    public void setPurchaser(String purchaser) {
+        this.purchaser = purchaser;
+    }
+
+    public String getPurchaser() {
+        return purchaser;
     }
 }

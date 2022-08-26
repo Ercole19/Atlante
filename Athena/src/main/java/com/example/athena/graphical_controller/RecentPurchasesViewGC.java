@@ -1,33 +1,27 @@
 package com.example.athena.graphical_controller;
 
 import com.example.athena.engineering_classes.abstract_factory.SearchResultProduct;
-import com.example.athena.entities.ByCourseOrNameEnum;
 import com.example.athena.exceptions.BookException;
-import com.example.athena.use_case_controllers.RecentPurchaseUCC;
-import com.example.athena.view.RecentPurchasesView;
+import com.example.athena.use_case_controllers.RecentActivitiesUCC;
+import com.example.athena.view.LabelBuilder;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecentPurchasesViewGC {
 
-    private RecentPurchasesView view ;
     private List<BookBean> searchResults ;
     private static final String FONT = "System";
 
-    public RecentPurchasesViewGC(RecentPurchasesView view)
-    {
-        this.view = view ;
+    public RecentPurchasesViewGC(){
     }
 
     public int getResultSize(String userEmail) throws BookException
     {
-        RecentPurchaseUCC controller = new RecentPurchaseUCC();
-        this.searchResults = controller.formatResults(userEmail);
+        RecentActivitiesUCC controller = new RecentActivitiesUCC();
+        this.searchResults = controller.formatPurchasesResults(userEmail);
         return searchResults.size();
     }
 
@@ -35,6 +29,11 @@ public class RecentPurchasesViewGC {
     {
         try{
             int i = 0 ;
+
+            searchResultProduct.setLegend(0, LabelBuilder.buildLabel("Vendor"));
+            searchResultProduct.setLegend(1, LabelBuilder.buildLabel("Title"));
+            searchResultProduct.setLegend(2, LabelBuilder.buildLabel("ISBN"));
+            searchResultProduct.setLegend(3, LabelBuilder.buildLabel("Price"));
             for(BookBean bookBean : searchResults){
                 Label ownerLabel = new Label(bookBean.getOwner());
                 ownerLabel.setFont(new Font(FONT, 26));

@@ -24,7 +24,7 @@ public class RecentPurchasesView {
     public RecentPurchasesView(double containerWidth, double containerHeight) {
         this.containerWidth = containerWidth;
         this.containerHeight = containerHeight;
-        this.controller = new RecentPurchasesViewGC(this);
+        this.controller = new RecentPurchasesViewGC();
     }
 
     public AnchorPane getRoot() {

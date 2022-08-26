@@ -38,17 +38,11 @@ public class SearchTutorViewGC {
         try{
             int i = 0 ;
             for(TutorSearchResultBean result : searchResults){
-                Label nameLabel = new Label(result.getName() + "" + result.getSurname()) ;
-                nameLabel.setFont(new Font(FONT, 26)) ;
-                searchResultProduct.setEntry(i, 0, nameLabel) ;
+                searchResultProduct.setEntry(i, 0, LabelBuilder.buildLabel(result.getName() + " " + result.getSurname())) ;
 
-                Label subjectLabel = new Label(result.getTaughtSubject()) ;
-                subjectLabel.setFont(new Font(FONT, 26)) ;
-                searchResultProduct.setEntry(i, 1, subjectLabel);
+                searchResultProduct.setEntry(i, 1, LabelBuilder.buildLabel(result.getTaughtSubject())) ;
 
-                Label starsLabel = new Label(result.getStarNumber());
-                starsLabel.setFont(new Font(FONT, 26)) ;
-                searchResultProduct.setEntry(i, 2, starsLabel);
+                searchResultProduct.setEntry(i, 2, LabelBuilder.buildLabel(result.getStarNumber())) ;
 
                 Button visitPage = new Button("Visit page") ;
                 searchResultProduct.setEntry(i, 3, visitPage);
