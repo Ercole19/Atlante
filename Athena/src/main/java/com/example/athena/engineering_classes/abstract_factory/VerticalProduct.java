@@ -4,11 +4,8 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class VerticalProduct implements SearchResultProduct{
-    private AnchorPane root;
+    private final AnchorPane root;
 
     public VerticalProduct(AnchorPane root)
     {

@@ -9,12 +9,10 @@ public class BookEntity {
     private final String isbn  ;
     private final float price   ;
     private final  Boolean isNegotiable;
-    private List<File> image ;
+    private final List<File> image ;
     private final File file  ;
     private final String owner ;
     private final String purchaser;
-
-
 
 
 
@@ -37,7 +35,7 @@ public class BookEntity {
         this.file = null ;
         this.image = image ;
         this.isNegotiable = isNegotiable ;
-
+        this.purchaser = null;
     }
 
     public BookEntity (String owner, String title, String isbn, Float price) {

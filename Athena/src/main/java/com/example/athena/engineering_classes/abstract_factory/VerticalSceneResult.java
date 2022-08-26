@@ -1,7 +1,7 @@
 package com.example.athena.engineering_classes.abstract_factory;
 
 import com.example.athena.engineering_classes.scene_decorators.SearchResultFormatterComponent;
-import javafx.scene.Node;
+import com.example.athena.view.LabelBuilder;
 import javafx.scene.layout.*;
 
 import java.util.List;
@@ -25,8 +25,8 @@ public class VerticalSceneResult extends SearchResultFormatterComponent {
             entryBox.setStyle("-fx-border-color: #000000");
 
             entryBox.getRowConstraints().add(new RowConstraints(formatBundle.getEntrySize()));
-            for (int j = 0; j < percents.size(); j++) {
-                setColumnConstraint(percents.get(j), entryBox);
+            for (Integer percent : percents) {
+                entryBox.getColumnConstraints().add(LabelBuilder.buildConstraint(percent)) ;
             }
             graphicalList.getChildren().add(entryBox);
         }

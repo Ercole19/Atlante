@@ -35,21 +35,14 @@ public class RecentPurchasesViewGC {
             searchResultProduct.setLegend(2, LabelBuilder.buildLabel("ISBN"));
             searchResultProduct.setLegend(3, LabelBuilder.buildLabel("Price"));
             for(BookBean bookBean : searchResults){
-                Label ownerLabel = new Label(bookBean.getOwner());
-                ownerLabel.setFont(new Font(FONT, 26));
-                searchResultProduct.setEntry(i, 0, ownerLabel);
 
-                Label titleLabel = new Label(bookBean.getBookTitle());
-                titleLabel.setFont(new Font(FONT, 26));
-                searchResultProduct.setEntry(i, 1, titleLabel);
+                searchResultProduct.setEntry(i, 0, LabelBuilder.buildLabel(bookBean.getOwner()));
 
-                Label isbnLabel = new Label(bookBean.getIsbn());
-                isbnLabel.setFont(new Font(FONT, 26));
-                searchResultProduct.setEntry(i, 2, isbnLabel);
+                searchResultProduct.setEntry(i, 1,  LabelBuilder.buildLabel(bookBean.getTitle()));
 
-                Label priceLabel = new Label(bookBean.getPrice());
-                priceLabel.setFont(new Font(FONT, 26));
-                searchResultProduct.setEntry(i, 3, priceLabel);
+                searchResultProduct.setEntry(i, 2,  LabelBuilder.buildLabel(bookBean.getIsbn()));
+
+                searchResultProduct.setEntry(i, 3,  LabelBuilder.buildLabel(bookBean.getPrice()));
 
                 Button visitPage = new Button("Report");
                 searchResultProduct.setEntry(i, 4, visitPage);
