@@ -28,7 +28,6 @@ import java.util.ResourceBundle;
 public class TutorPersonalPageController implements  PostInitialize , Initializable, AbstractObserver
 {
 
-
     @FXML
     private AnchorPane rootPane ;
     @FXML

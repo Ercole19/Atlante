@@ -7,7 +7,9 @@ import com.example.athena.entities.Student;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.FindBookException;
 import com.example.athena.exceptions.FindException;
+import com.example.athena.exceptions.PurchaseException;
 import com.example.athena.graphical_controller.BookBean;
+import com.example.athena.graphical_controller.PurchaseResultBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,13 +41,10 @@ public class BuyControllerUCC {
         return result;
     }
     
-    public void purchase(BookBean book) {
-        try {
-           if(PurchaseBoundary.purchase())dao.finalizePurchase(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), Student.getInstance().getEmail(), book.getOwner());
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+    public PurchaseResultBean purchase(BookBean book) throws PurchaseException {
+        PurchaseResultBean bean = PurchaseBoundary.purchase() ;
+        if(bean.getPurchaseResult()) dao.finalizePurchase(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), Student.getInstance().getEmail(), book.getOwner());
+        return bean ;
     }
 
 }

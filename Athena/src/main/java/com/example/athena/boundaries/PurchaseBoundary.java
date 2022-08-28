@@ -17,11 +17,13 @@ public class PurchaseBoundary extends SocketBoundary
         try
         {
             String retVal = getResponse(6351) ;
-            return retVal.equals("OK") ;
+            PurchaseResultBean bean = new PurchaseResultBean() ;
+            bean.setPurchaseResult(retVal.equals("OK")) ;
+            return bean ;
         }
         catch (IOException e)
         {
-            throw new Exception("To be implemented") ;
+            throw new PurchaseException("Connection to payment system failed") ;
         }
     }
 }
