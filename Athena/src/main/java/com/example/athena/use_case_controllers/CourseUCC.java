@@ -1,23 +1,15 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.entities.CourseDao;
+import com.example.athena.entities.TutorPersonalPageSubject;
+import com.example.athena.exceptions.CourseException;
 
 public class CourseUCC {
 
-    public void addNewCourse(String name) {
-        CourseDao dao = new CourseDao() ;
-        dao.addCourse(name);
+    public void addNewCourse(String name) throws CourseException {
+        TutorPersonalPageSubject.getInstance().addCourse(name);
     }
 
-    public boolean deleteCourse(String name) {
-        CourseDao dao = new CourseDao();
-        if (dao.checkCourseExist(name)){
-            dao.deleteCourse(name);
-            return true;
-        }
-        else {
-            return false;
-        }
-
+    public void deleteCourse(String name) throws CourseException {
+        TutorPersonalPageSubject.getInstance().deleteCourse(name);
     }
 }

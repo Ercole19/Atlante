@@ -1,6 +1,8 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
 import com.example.athena.entities.Tutor;
+import com.example.athena.entities.TutorPersonalPageSubject;
 import com.example.athena.use_case_controllers.TutorPersonalPageUCC;
 import com.example.athena.use_case_controllers.ViewTutorPageUseCaseController;
 import javafx.event.ActionEvent;
@@ -23,7 +25,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class TutorPersonalPageController implements  PostInitialize , Initializable
+public class TutorPersonalPageController implements  PostInitialize , Initializable, AbstractObserver
 {
 
 
@@ -56,12 +58,16 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         switcher.switcher(stage, "MainPageTutor.fxml") ;
+        TutorPersonalPageSubject.getInstance().detachObserver(this);
     }
 
     public void clickOnBackButton(ActionEvent event) throws IOException
     {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         switcher.switcher(stage, "tutorSearchPage.fxml") ;
+        TutorPersonalPageSubject.getInstance().resetEntity();
+        TutorPersonalPageSubject.getInstance().detachObserver(this);
+
     }
 
     public void onCVButtonClick()
@@ -74,7 +80,7 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
         switcher.popup("tutorCVView.fxml " , "CV", params) ;
     }
 
-    public void onConfirmButtonClick(ActionEvent event) throws IOException {
+    public void onConfirmButtonClick() throws IOException {
         TutorPersonalPageUCC controller = new TutorPersonalPageUCC() ;
 
         UserBean bean = new UserBean() ;
@@ -84,17 +90,17 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
         infos.setSessionInfos(sessionInfos.getText());
 
         bean.setEmail(Tutor.getInstance().getEmail());
-        List<String> tutorInfos = controller.getTutorInfos(bean);
-
+        //List<String> tutorInfos = controller.getTutorInfos(bean);
+        controller.setTutorInformation(infos);
+        /*
         if (tutorInfos.isEmpty()) {
             controller.setTutorInformation(infos);
         }
         else {
             controller.updateTutorInformation(infos);
         }
+        */
 
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "MainPageTutor.fxml");
     }
 
     public void onCVButtonClickTutor() throws IOException
@@ -114,48 +120,14 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     }
 
 
-    public void onAddCourseButtonClick() throws IOException{
-        switcher.popup("addcourse.fxml" , "Add course") ;
-        coursesArea.clear();
-        updateCourses();
+    public void onManageCoursesBtnClick() throws IOException {
+        switcher.popup("addcourse.fxml" , "Manage courses") ;
     }
-
-
-    public void populatePage(UserBean bean) {
-
-        TutorPersonalPageUCC controller = new TutorPersonalPageUCC() ;
-
-        String[] tutorNameToSet = controller.getTutorName(bean);
-        Float tutorAvgReviews = controller.getTutorReviewsAvg(bean);
-        List<String> tutorInfos = controller.getTutorInfos(bean);
-        List<String> tutorCourses = controller.getTutorCourses(bean.getEmail());
-
-        aboutMe.setText(tutorInfos.get(0));
-        sessionInfos.setText(tutorInfos.get(1));
-        contactNumbers.setText(tutorInfos.get(2));
-        if (tutorAvgReviews==0.0){
-            reviewAverage.setText("No reviews");
-        }
-        else {
-            reviewAverage.setText(String.valueOf(tutorAvgReviews));
-        }
-
-        for (String course : tutorCourses) {
-            coursesArea.appendText(course + "\n" );
-        }
-
-        this.tutorName.setText(tutorNameToSet[0]);
-        tutorSurname.setText(tutorNameToSet[1]);
-    }
-
 
     @Override
     public void postInitialize(ArrayList<Object> params)
     {
-        UserBean bean = new UserBean();
         this.email = (String) params.get(0);
-        bean.setEmail((String) params.get(0));
-        populatePage(bean);
 
         if((boolean)params.get(1))
         {
@@ -163,20 +135,39 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
             sessionInfos.setEditable(false) ;
             contactNumbers.setEditable(false) ;
         }
+        TutorPersonalPageSubject.getInstance().attachObserver(this);
 
-    }
 
-    private void updateCourses() {
-        TutorPersonalPageUCC controller = new TutorPersonalPageUCC() ;
-        List<String> tutorCourses = controller.getTutorCourses(this.email);
-        for (String course : tutorCourses) {
-            coursesArea.appendText(course + "\n" );
-        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         rootPane.getProperties().put("foo", this) ;
+    }
+
+    @Override
+    public void update() {
+        UserBean bean = new UserBean();
+        bean.setEmail(this.email);
+        TutorInfosBean tutorInfosBean = TutorPersonalPageSubject.getInstance().getTutorInfos(bean);
+
+        aboutMe.setText(tutorInfosBean.getAboutMe());
+        sessionInfos.setText(tutorInfosBean.getSessionInfos());
+        contactNumbers.setText(tutorInfosBean.getContactNumbers());
+        if (tutorInfosBean.getAvgReview() == 0.0){
+            reviewAverage.setText("No reviews");
+        }
+        else {
+            reviewAverage.setText(String.valueOf(tutorInfosBean.getAvgReview()));
+        }
+
+        coursesArea.clear();
+        for (String course : tutorInfosBean.getTutorCourses()) {
+            coursesArea.appendText(course + "\n" );
+        }
+
+        this.tutorName.setText(tutorInfosBean.getName());
+        tutorSurname.setText(tutorInfosBean.getSurname());
     }
 }

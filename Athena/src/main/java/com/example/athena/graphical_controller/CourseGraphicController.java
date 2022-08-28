@@ -1,5 +1,7 @@
 package com.example.athena.graphical_controller;
 
+import com.example.athena.exceptions.CourseException;
+import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.CourseUCC;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -13,22 +15,39 @@ public class CourseGraphicController {
 
     public void onAddClick ( ) {
         CourseUCC controller = new CourseUCC() ;
-        controller.addNewCourse(courseField.getText());
-        Stage stage = (Stage) courseField.getScene().getWindow();
-        stage.close();
+        if (courseField.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Must insert a course name", ButtonType.CLOSE);
+            alert.showAndWait();
+        }
+        else {
+            try {
+                controller.addNewCourse(courseField.getText());
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Course added!", ButtonType.CLOSE);
+                alert.showAndWait();
+            }
+            catch (CourseException e) {
+                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Error in adding course, details follow: " + e.getMessage(), 200, 200, ButtonType.CLOSE);
+                alert.showAndWait();
+            }
+        }
     }
 
     public void onDeleteClick () {
         CourseUCC controller = new CourseUCC() ;
-        if (controller.deleteCourse(courseField.getText())){
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Course deleted!", ButtonType.CLOSE);
+        if (courseField.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Must insert a course name", ButtonType.CLOSE);
             alert.showAndWait();
-            Stage stage = (Stage) courseField.getScene().getWindow();
-            stage.close();
         }
-        else{
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Course not found", ButtonType.CLOSE);
-            alert.showAndWait();
+        else {
+           try {
+               controller.deleteCourse(courseField.getText());
+               Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Course deleted!", ButtonType.CLOSE);
+               alert.showAndWait();
+           }
+           catch (CourseException e) {
+               SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Error in deleting course, details follow: " + e.getMessage(), 200, 200, ButtonType.CLOSE);
+               alert.showAndWait();
+           }
         }
     }
     public void onBackButtonClick(){

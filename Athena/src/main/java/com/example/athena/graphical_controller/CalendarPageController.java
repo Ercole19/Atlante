@@ -125,7 +125,6 @@ public class CalendarPageController implements Initializable, AbstractObserver {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.currentYearMonth = YearMonth.now() ;
         this.view = new FullCalendarView(this) ;
-        this.populateCalendar(this.currentYearMonth);
         CalendarSubject.getInstance().attachObserver(this);
     }
 

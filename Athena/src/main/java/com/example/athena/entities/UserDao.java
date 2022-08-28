@@ -213,7 +213,7 @@ public class UserDao extends AbstractDAO {
     }
 
 
-    public void inserisciCV(File cv) {
+    public void insertCv(File cv) {
         try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(insertCV)) {
             preparedStatement.setBlob(1, new BufferedInputStream(new FileInputStream(cv)));
             preparedStatement.setString(2, Tutor.getInstance().getEmail());

@@ -1,5 +1,8 @@
 package com.example.athena.boundaries;
 
+import com.example.athena.exceptions.PurchaseException;
+import com.example.athena.graphical_controller.PurchaseResultBean;
+
 import java.io.IOException;
 
 public class PurchaseBoundary extends SocketBoundary
@@ -9,7 +12,7 @@ public class PurchaseBoundary extends SocketBoundary
 
     }
 
-    public static boolean purchase() throws Exception
+    public static PurchaseResultBean purchase() throws PurchaseException
     {
         try
         {

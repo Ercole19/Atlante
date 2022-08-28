@@ -33,7 +33,7 @@ public class BookShopController {
 
     public void onBuyButtonClick(ActionEvent event){
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "buy-view.fxml");
+        switcher.switcher(stage, "buy-view2.fxml");
     }
 
     public void onSellButtonClick(ActionEvent event){

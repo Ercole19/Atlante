@@ -128,8 +128,9 @@ public class BookPageController extends ShiftImageController implements PostInit
     }
 
     public void onBuyBookButtonClick(){
-        BuyControllerUCC controller = new BuyControllerUCC();
-        controller.purchase(this.book);
+        List<Object> params = new ArrayList<>();
+        params.add(this.book);
+        switcher.popup("purchaseConfirm.fxml", "Confirm purchase", params);
     }
 
 }
