@@ -58,6 +58,7 @@ public class BookPageController extends ShiftImageController implements PostInit
     private String sellerName;
     private String sellerSurname;
     private int reportNumber;
+    private String searchQuery ;
 
     private final SceneSwitcher switcher = new SceneSwitcher();
     private Stage stage;
@@ -67,6 +68,7 @@ public class BookPageController extends ShiftImageController implements PostInit
     public void postInitialize(ArrayList<Object> params) {
 
         this.book = (BookBean) params.get(1);
+        this.searchQuery = (String) params.get(2) ;
 
         if (params.get(0) == SellerOrBuyerEnum.SELLER) {
             this.sellerName = (BooksSubject.getInstance().getSellerName());
@@ -116,8 +118,9 @@ public class BookPageController extends ShiftImageController implements PostInit
     }
     public void onBackBtnClick(ActionEvent event)  {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "buy-view.fxml");
-
+        List<Object> params = new ArrayList();
+        params.add(this.searchQuery);
+        switcher.switcher(stage, "buy-view2.fxml", params);
     }
 
     public void onBackBtnClickSeller(ActionEvent event)

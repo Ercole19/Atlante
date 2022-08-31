@@ -96,4 +96,6 @@ public class BookEntity {
 
     public String getPurchaser() {return this.purchaser;}
 
+    public String getSaleTimestamp() {return this.saleTimestamp ;}
+
 }

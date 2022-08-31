@@ -24,7 +24,7 @@ public class SceneSwitcher {
         try
         {
             Parent root = load(generateUrl(fxml)) ;
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root) ;
             stage.setScene(scene);
         }catch (IOException e)
         {

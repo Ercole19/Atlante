@@ -35,7 +35,7 @@ public class FindBooksViewGC {
         return this.searchResults.size();
     }
 
-    public void setValues(SearchResultProduct product, double entrySize)
+    public void setValues(SearchResultProduct product, double entrySize, String query)
     {
         try
         {
@@ -73,6 +73,7 @@ public class FindBooksViewGC {
                     List<Object> params = new ArrayList<>() ;
                     params.add(SellerOrBuyerEnum.BUYER);
                     params.add(bookBean);
+                    params.add(query) ;
                     Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow() ;
                     switcher.switcher(stage, "Book-Page2.fxml", params) ;
 

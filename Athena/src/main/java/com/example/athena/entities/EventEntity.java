@@ -143,7 +143,12 @@ public class EventEntity
 
     public void addEntity() throws EventException {
         EventDao dao = new EventDao() ;
-        dao.addEvent(this.day, this.name, this.start, this.end, this.description, String.valueOf(this.type), this.dateOfReminder.toLocalDateTime());
+        LocalDateTime dateOfReminderParam = null ;
+        if(this.dateOfReminder != null) {
+            dateOfReminderParam = this.dateOfReminder.toLocalDateTime() ;
+        }
+
+        dao.addEvent(this.day, this.name, this.start, this.end, this.description, String.valueOf(this.type), dateOfReminderParam);
     }
 
     @Override

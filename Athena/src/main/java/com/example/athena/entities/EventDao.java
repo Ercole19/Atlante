@@ -23,7 +23,11 @@ public class EventDao extends AbstractDAO {
             statement.setString(5, description);
             statement.setString(6 , email);
             statement.setString(7, type);
-            statement.setTimestamp(8, Timestamp.valueOf(dateOfReminder));
+            Timestamp timestamp = null ;
+            if(dateOfReminder != null) {
+                timestamp = Timestamp.valueOf(dateOfReminder) ;
+            }
+            statement.setTimestamp(8, timestamp);
 
             statement.executeUpdate() ;
 

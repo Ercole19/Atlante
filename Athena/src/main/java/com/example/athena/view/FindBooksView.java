@@ -38,7 +38,7 @@ public class FindBooksView {
             formatBundle.setEntrySize(150);
             formatBundle.setEntryPercents(40, 20, 20, 20);
             this.result = Factory.createProduct(ProductTypeEnum.HORIZONTAL_ENTRY, formatBundle);
-            this.controller.setValues(this.result, formatBundle.getEntrySize());
+            this.controller.setValues(this.result, formatBundle.getEntrySize(), query);
         }
         catch (PercentFormatException | BookException exc)
         {

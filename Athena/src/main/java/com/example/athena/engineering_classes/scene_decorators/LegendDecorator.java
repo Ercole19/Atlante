@@ -2,11 +2,10 @@ package com.example.athena.engineering_classes.scene_decorators;
 
 import com.example.athena.engineering_classes.abstract_factory.FormatBundle;
 import com.example.athena.view.LabelBuilder;
+import javafx.geometry.Insets;
 import javafx.scene.SubScene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 
 public class LegendDecorator extends SearchResultFormatterDecorator {
 
@@ -25,7 +24,7 @@ public class LegendDecorator extends SearchResultFormatterDecorator {
     private GridPane getLegend(FormatBundle formatBundle) {
         GridPane legend = new GridPane() ;
         legend.setPrefSize(formatBundle.getContainerWidth(), 40) ;
-        legend.setStyle("-fx-background-color: #faeeae");
+        legend.setBackground(new Background(new BackgroundFill(Paint.valueOf("#FFFFFF"), CornerRadii.EMPTY, Insets.EMPTY))) ;
         legend.setStyle("-fx-border-color: #000000");
         legend.setId("legend");
 
@@ -40,12 +39,9 @@ public class LegendDecorator extends SearchResultFormatterDecorator {
     private AnchorPane applyLegend(AnchorPane anchorPane, FormatBundle formatBundle) {
         AnchorPane resultPane = new AnchorPane() ;
         resultPane.setPrefSize(formatBundle.getContainerWidth(), formatBundle.getContainerHeight()) ;
-
-        SubScene paneSubScene = new SubScene(anchorPane, formatBundle.getContainerWidth(), formatBundle.getContainerHeight() -40);
-        paneSubScene.setId("subScene");
         GridPane legend = getLegend(formatBundle);
-        paneSubScene.setLayoutY(40);
-        resultPane.getChildren().add(paneSubScene) ;
+        anchorPane.setLayoutY(40);
+        resultPane.getChildren().add(anchorPane) ;
         resultPane.getChildren().add(legend) ;
 
         return resultPane ;

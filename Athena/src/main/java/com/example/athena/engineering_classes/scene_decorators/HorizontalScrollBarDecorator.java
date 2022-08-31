@@ -27,7 +27,7 @@ public class HorizontalScrollBarDecorator extends SearchResultFormatterDecorator
         scrollBar.setLayoutY(containerHeight -20) ;
         scrollBar.setPrefSize(containerWidth, 20);
         scrollBar.setMin(0) ;
-        scrollBar.setMax(listSize - containerHeight + 25.0) ;
+        scrollBar.setMax(listSize - containerWidth + 25.0) ;
         return scrollBar ;
     }
 

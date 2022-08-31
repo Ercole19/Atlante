@@ -32,6 +32,7 @@ public class BuyControllerUCC {
                book.setNegotiable(entity.getNegotiable());
                book.setOwner(entity.getOwner());
                book.setImage(entity.getImage());
+               book.setTimeStamp(entity.getSaleTimestamp());
                result.add(book);
           }
        }
@@ -43,7 +44,7 @@ public class BuyControllerUCC {
     
     public PurchaseResultBean purchase(BookBean book) throws PurchaseException {
         PurchaseResultBean bean = PurchaseBoundary.purchase() ;
-        if(bean.getPurchaseResult()) dao.finalizePurchase(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), Student.getInstance().getEmail(), book.getOwner());
+        if(bean.getPurchaseResult()) dao.finalizePurchase(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), Student.getInstance().getEmail(), book.getOwner(), book.getTimeStamp());
         return bean ;
     }
 

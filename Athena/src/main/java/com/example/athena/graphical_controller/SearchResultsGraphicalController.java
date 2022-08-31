@@ -12,6 +12,6 @@ public class SearchResultsGraphicalController
 
     public void scrollResultsHorizontal(HBox resultList, Number newVal)
     {
-        resultList.setLayoutY(-newVal.doubleValue()) ;
+        resultList.setLayoutX(-newVal.doubleValue()); ;
     }
 }

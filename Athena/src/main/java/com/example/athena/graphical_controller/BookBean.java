@@ -17,7 +17,7 @@ public class BookBean {
     private String owner ;
     private int index ;
     private String purchaser;
-
+    private String timeStamp ;
 
 
     public List<Image> getImageList(){
@@ -112,5 +112,13 @@ public class BookBean {
 
     public String getPurchaser() {
         return purchaser;
+    }
+
+    public String getTimeStamp() {
+        return this.timeStamp ;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp ;
     }
 }
