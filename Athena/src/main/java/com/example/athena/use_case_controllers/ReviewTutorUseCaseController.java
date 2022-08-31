@@ -1,6 +1,6 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.boundaries.ReviewViaMailBean;
+import com.example.athena.boundaries.SendCodeMailBean;
 import com.example.athena.boundaries.SendReviewCodeEmailBoundary;
 import com.example.athena.entities.ReviewEntity;
 import com.example.athena.entities.TutorReviewCodesGenerator;
@@ -28,8 +28,8 @@ public class ReviewTutorUseCaseController
         ReviewEntity review = new ReviewEntity(usernameBean, reviewCode) ;
         review.toDB() ;
 
-        ReviewViaMailBean mailInformation = new ReviewViaMailBean(usernameBean.getUsername(), reviewCode) ;
-        SendReviewCodeEmailBoundary.sendReviewCode(mailInformation) ;
+        SendCodeMailBean mailInformation = new SendCodeMailBean(usernameBean.getUsername(), reviewCode) ;
+        SendReviewCodeEmailBoundary.getInstance().sendCode(mailInformation) ;
 
         return reviewCode ;
     }

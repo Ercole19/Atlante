@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 
 public abstract class SocketBoundary
 {
-    protected static final byte[] buff = new byte[128] ;
+    protected static final byte[] buff = new byte[1024] ;
 
     protected SocketBoundary()
     {
@@ -24,7 +24,7 @@ public abstract class SocketBoundary
     }
 
     protected static boolean writeQuery(String query){
-        if (query.length() > 128) return false ;
+        if (query.length() > buff.length) return false ;
 
         int i = 0;
         for (byte b : query.getBytes(StandardCharsets.UTF_8)) {
@@ -48,7 +48,7 @@ public abstract class SocketBoundary
             bZero() ;
 
             int readChars = in.read(buff, 0, 2) ;
-            if(readChars != 2) return "Unknown response from server" ;
+            if(readChars != 1) return "Unknown response from server" ;
 
             if(buff[0] == 'F') return "Server error..." ;
 

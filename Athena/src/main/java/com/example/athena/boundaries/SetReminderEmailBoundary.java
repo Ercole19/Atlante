@@ -37,7 +37,7 @@ public class SetReminderEmailBoundary extends SocketBoundary
         LocalTime end = eventInfo.getEnd() ;
         String description = eventInfo.getDescription() ;
 
-        String query = String.format("N%s;%s;%s;%s;%s;%s;%s;", moment.toString(), Student.getInstance().getEmail(), name, day, start, end, description) ;
+        String query = prepareQueryForServer(moment.toString(), Student.getInstance().getEmail(), name, day, start, end, description) ;
 
         if(update)
         {
@@ -56,5 +56,14 @@ public class SetReminderEmailBoundary extends SocketBoundary
         {
             throw new SendEmailException("Error in connection to server: " + e.getMessage()) ;
         }
+    }
+
+    private static String prepareQueryForServer(String day, String email, String eventName, LocalDate eventDay, LocalTime eventStart, LocalTime eventEnd, String eventDescription) {
+
+        return String.format("Nathena.services;%s;%s;Reminder of your event;" +
+                "This email is a reminder for your event: \n" +
+                "%s\n" +
+                "on %s from %s to %s .\n" +
+                "Details: %s",day, email,  eventName, eventDay, eventStart, eventEnd, eventDescription) ;
     }
 }

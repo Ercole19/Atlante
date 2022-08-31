@@ -1,6 +1,6 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.boundaries.SendRegistrationBean;
+import com.example.athena.boundaries.SendCodeMailBean;
 import com.example.athena.boundaries.SendRegistrationCodeBoundary;
 import com.example.athena.entities.TutorReviewCodesGenerator;
 import com.example.athena.entities.UserDao;
@@ -19,8 +19,8 @@ public class SignUpUCC {
         String code = null;
         try {
             code = TutorReviewCodesGenerator.generateReviewCode(5) ;
-            SendRegistrationBean params = new SendRegistrationBean(bean.getEmail(), code);
-            SendRegistrationCodeBoundary.sendCode(params) ;
+            SendCodeMailBean params = new SendCodeMailBean(bean.getEmail(), code);
+            SendRegistrationCodeBoundary.getInstance().sendCode(params) ;
         } catch (NoSuchAlgorithmException e){
             e.printStackTrace();
         } catch (SendEmailException e) //Separated because they will have different implementations

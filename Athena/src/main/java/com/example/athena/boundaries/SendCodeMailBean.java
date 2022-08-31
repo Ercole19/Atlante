@@ -1,11 +1,11 @@
 package com.example.athena.boundaries;
 
-public class ReviewViaMailBean
+public class SendCodeMailBean
 {
     private String recipient ;
     private String code ;
 
-    public ReviewViaMailBean(String recipient, String code)
+    public SendCodeMailBean(String recipient, String code)
     {
         setRecipient(recipient) ;
         setCode(code) ;

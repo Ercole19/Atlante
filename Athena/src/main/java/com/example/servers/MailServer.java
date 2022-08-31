@@ -9,10 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
@@ -21,26 +18,23 @@ import java.util.logging.SimpleFormatter;
 import java.util.logging.StreamHandler;
 
 public class MailServer implements Runnable {
-    private static ServerSocket socket;
+    private ServerSocket socket;
 
-    private static Session session;
-
-    private static final byte[] buff = new byte[128];
-
-    private static InternetAddress sender;
+    private final byte[] buff = new byte[1024];
 
     private static final Logger LOGGER = Logger.getLogger(MailServer.class.getName());
 
-    private static final LinkedBlockingQueue<CommandSocketWrapper> REGISTRATIONQUEUE = new LinkedBlockingQueue<>() ;
+    private static final LinkedBlockingQueue<CommandSocketWrapper> DIRECTMAILQUEUE = new LinkedBlockingQueue<>() ;
 
     private static final ConcurrentHashMap<LocalDateTime, List<String>> REMINDERSMAP = new ConcurrentHashMap<>() ;
 
-    private static final LinkedBlockingQueue<CommandSocketWrapper> REVIEWSQUEUE = new LinkedBlockingQueue<>() ;
-
     private static boolean quit = false;
 
-    public static void main(String[] args) {
+    private final Map<String, SessionInfo> sessionMap = new HashMap<>();
 
+    private static MailServer instance = null ;
+
+    private MailServer() {
         try {
             socket = new ServerSocket(4545);
             StreamHandler myHandler = new StreamHandler(new BufferedOutputStream(new FileOutputStream("src/main/resources/mailServerLog")),
@@ -51,39 +45,83 @@ public class MailServer implements Runnable {
         }
 
         try {
-            Properties properties = new Properties();
+            BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/mailServerAUTHS")) ;
+            String readLine = reader.readLine();
+            ParsingStates state = ParsingStates.INIT ;
+            MailAuth mailAuth = null;
 
-            properties.put("mail.smtp.host", "smtp.libero.it");
-            properties.put("mail.smtp.port", "465");
-            properties.put("mail.smtp.auth", "true");
-            properties.put("mail.smtp.socketFactory.port", "465");
-            properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-            properties.put("mail.smtp.ssl.checkserveridentity", true);
-
-            LOGGER.log(Level.INFO, "Insert the smtp username: ");
-            String username = new String(buff, 0, System.in.read(buff) - 1);
-            LOGGER.log(Level.INFO, "Insert the smtp password: ");
-            String password = new String(buff, 0, System.in.read(buff) - 1);
-
-            session = Session.getDefaultInstance(properties, new Authenticator() {
-                @Override
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
+            while (readLine != null) {
+                String[] tokens = readLine.split(" : ");
+                if (tokens.length != 2) {
+                    if(!(tokens.length == 1 && Objects.equals(tokens[0],"END AUTH"))) crash("Error in mail auth entry format");
                 }
-            });
+                if (state == ParsingStates.INIT) {
+                    if (Objects.equals(tokens[0], "NEW AUTH")) {
+                        mailAuth = new MailAuth();
+                        mailAuth.setAuthName(tokens[1]);
+                        state = ParsingStates.AUTH_COMPILING;
+                    } else {
+                        crash("Error in parsing mail auths");
+                    }
+                } else {
+                    if (Objects.equals(tokens[0], "NEW AUTH")) {
+                        crash("Error in parsing mail auths");
+                    } else if (Objects.equals(tokens[0], "END AUTH")) {
+                        Properties properties = mailAuth.getProperties();
+                        String username = mailAuth.getUsername();
+                        String password = mailAuth.getPassword();
+                        String authName = mailAuth.getAuthName();
+                        Session session = Session.getDefaultInstance(properties, new Authenticator() {
+                            @Override
+                            protected PasswordAuthentication getPasswordAuthentication() {
+                                return new PasswordAuthentication(username, password);
+                            }
+                        });
+                        session.setDebug(true);
+                        this.sessionMap.put(authName, new SessionInfo(session, username));
+                        state = ParsingStates.INIT;
+                    } else {
+                        if(Objects.equals(tokens[0], "SMTP_USER")) mailAuth.setUsername(tokens[1]);
+                        else if(Objects.equals(tokens[0], "SMTP_PASS")) mailAuth.setPassword(tokens[1]);
+                        else mailAuth.setProperty(tokens[0], tokens[1]);
+                    }
+                }
+                readLine = reader.readLine() ;
+            }
 
-            sender = new InternetAddress(username);
+            if(state == ParsingStates.AUTH_COMPILING) crash("Error in auth parsing") ;
+        } catch (FileNotFoundException e) {
+            crash("No auths file found");
+            System.exit(1) ;
+        } catch (IOException e) {
+            crash("IO error occurred");
+        } catch (NullPointerException e) {
+            crash("Error in auth parsing") ;
+        } catch (AddressException e) {
+            crash("Could not find username's inet address");
+        }
+    }
 
-            session.setDebug(true);
+    public static synchronized MailServer getInstance() {
+        if(instance == null) {
+            instance = new MailServer() ;
+        }
+        return instance ;
+    }
 
-            Thread registerThread = new Thread(new RegisterService(), "registrations");
+    private void crash(String message) {
+        LOGGER.log(Level.SEVERE, message) ;
+        System.exit(1);
+    }
+
+    public void start() {
+        try {
+            Thread registerThread = new Thread(new DirectMailService(), "registrations");
             Thread notifierThread = new Thread(new NotificationService(), "notifications");
-            Thread reviewThread = new Thread(new ReviewService(), "reviews") ;
-            Thread quitThread = new Thread(new MailServer(), "quitting") ;
+            Thread quitThread = new Thread(MailServer.getInstance(), "quitting") ;
 
             registerThread.start() ;
             notifierThread.start() ;
-            reviewThread.start() ;
             quitThread.start() ;
 
             Socket clientSocket;
@@ -95,24 +133,23 @@ public class MailServer implements Runnable {
 
                 Character setting = receivedMessage.charAt(0);
 
-                if (setting.equals('R')) {
+                if (setting.equals('M')) {
                     CommandSocketWrapper wrapper = new CommandSocketWrapper(clientSocket, receivedMessage.substring(1));
-                    REGISTRATIONQUEUE.add(wrapper);
-                }
-                else if(setting.equals('T'))
-                {
-                    CommandSocketWrapper wrapper = new CommandSocketWrapper(clientSocket, receivedMessage.substring(1)) ;
-                    REVIEWSQUEUE.add(wrapper) ;
+                    DIRECTMAILQUEUE.add(wrapper);
                 }
                 else if (setting.equals('N')) {
-                    String dateToParse = receivedMessage.substring(1, receivedMessage.indexOf(";"));
-                    List<String> elements = REMINDERSMAP.getOrDefault(LocalDateTime.parse(dateToParse).truncatedTo(ChronoUnit.MINUTES), new ArrayList<>());
-                    elements.add(receivedMessage.substring(receivedMessage.indexOf(";") +1));
-                    REMINDERSMAP.put(LocalDateTime.parse(dateToParse), elements);
-
                     OutputStream out = clientSocket.getOutputStream() ;
 
-                    out.write("T".getBytes());
+                    String mailAuthName = receivedMessage.substring(1, receivedMessage.indexOf(";")) ;
+                    if(!this.sessionMap.containsKey(mailAuthName)) out.write("F".getBytes());
+                    else {
+                        String dateToParse = receivedMessage.substring(mailAuthName.length()+1).substring(1, receivedMessage.indexOf(";")+1);
+                        List<String> elements = REMINDERSMAP.getOrDefault(LocalDateTime.parse(dateToParse).truncatedTo(ChronoUnit.MINUTES), new ArrayList<>());
+                        elements.add(receivedMessage.substring(1));
+                        REMINDERSMAP.put(LocalDateTime.parse(dateToParse), elements);
+
+                        out.write("T".getBytes());
+                    }
                 }
             }
         }
@@ -121,23 +158,34 @@ public class MailServer implements Runnable {
             LOGGER.log(Level.SEVERE, "Error in reading/writing to socket. Details: {0}", e.getMessage());
             System.exit(1);
         }
-        catch (AddressException e)
-        {
-            LOGGER.log(Level.SEVERE, "Unable to resolve username's host. Details: {0}", e.getMessage());
-            System.exit(1);
-        }
     }
 
-    private static class RegisterService implements Runnable {
+    public static void main(String[] args) {
+
+        MailServer.getInstance().start() ;
+
+    }
+
+    private void sendMail(SessionInfo info, String recipient, String subject, String text) throws MessagingException {
+        MimeMessage message = new MimeMessage(info.getSession());
+        message.setFrom(info.getSender());
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+        message.setSubject(subject);
+        message.setText(text) ;
+
+        Transport.send(message);
+    }
+
+    private static class DirectMailService implements Runnable {
         @Override
         public void run() {
-            registrations();
+            mailSender();
         }
 
-        public static void registrations() {
+        public void mailSender() {
             while (!quit) {
                 try {
-                    sendMessageRegistrationReview('R');
+                    MailServer.getInstance().sendMailDirectly();
                 } catch (IOException e) {
                     LOGGER.log(Level.SEVERE, "Error in writing response. Details follow: {0}", e.getMessage());
                 }
@@ -152,7 +200,7 @@ public class MailServer implements Runnable {
             notifications();
         }
 
-        private static void notifications() {
+        private void notifications() {
             LocalDateTime lastSent = null;
             LocalDateTime actual;
             String[] tokens = null;
@@ -169,16 +217,8 @@ public class MailServer implements Runnable {
                         for (String remainder : reminders) {
                             tokens = remainder.split(";");
 
-                            MimeMessage message = new MimeMessage(session);
-                            message.setFrom(sender);
-                            message.addRecipient(Message.RecipientType.TO, new InternetAddress(tokens[0]));
-                            message.setSubject("Remainder of your event");
-                            message.setText("This email is a reminder for your event: \n" +
-                                    tokens[1] + "\n" +
-                                    "on " + tokens[2] + " from " + tokens[3] + " to " + tokens[4] + ".\n" +
-                                    "Details: " + tokens[5]) ;
-
-                            Transport.send(message);
+                            SessionInfo info = MailServer.getInstance().sessionMap.get(tokens[0]) ;
+                            MailServer.getInstance().sendMail(info, tokens[2], tokens[3], tokens[4]);
                         }
 
                         REMINDERSMAP.remove(actual) ;
@@ -189,26 +229,6 @@ public class MailServer implements Runnable {
             }
         }
 
-    }
-
-    private static class ReviewService implements Runnable
-    {
-
-        @Override
-        public void run() {
-            reviewsSending() ;
-        }
-
-        private static void reviewsSending()
-        {
-            while (!quit) {
-                try {
-                    sendMessageRegistrationReview('T') ;
-                } catch (IOException e) {
-                    LOGGER.log(Level.SEVERE, "Error in writing response. Details follow: {0}", e.getMessage());
-                }
-            }
-        }
     }
 
     @Override
@@ -231,25 +251,20 @@ public class MailServer implements Runnable {
         }
     }
 
-    public static synchronized void updateQuit(boolean value)
+    public synchronized void updateQuit(boolean value)
     {
         quit = value ;
     }
 
-    private static void sendMessageRegistrationReview(char kind) throws IOException
+    private void sendMailDirectly() throws IOException
     {
         String[] tokens = null ;
         Socket clientSocket = null;
         CommandSocketWrapper wrapper ;
         try {
-            if(kind == 'T')
-            {
-                wrapper = REVIEWSQUEUE.take();
-            }
-            else
-            {
-                wrapper = REGISTRATIONQUEUE.take() ;
-            }
+
+            wrapper = DIRECTMAILQUEUE.take() ;
+
             tokens = wrapper.getCommand().split(";");
             clientSocket = wrapper.getClientSocket() ;
         }catch (InterruptedException e)
@@ -263,25 +278,8 @@ public class MailServer implements Runnable {
 
             assert clientSocket != null;
             out = clientSocket.getOutputStream() ;
-
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(sender);
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(tokens[0]));
-            if(kind == 'T')
-            {
-                message.setSubject("A review code form a Tutor") ;
-                message.setText("A tutor has sent you a review code for a tutoring you had with him.\n" +
-                        "The code is" + tokens[1] + "\n" +
-                        "If you didn't request this code, please ignore the message.");
-            }
-            else
-            {
-                message.setSubject("Confirm your registration") ;
-                message.setText("Your confirmation code is: " + tokens[1] + "\n" +
-                        "If you didn't request this code, please ignore the message.");
-            }
-
-            Transport.send(message);
+            SessionInfo info = this.sessionMap.get(tokens[0]) ;
+            sendMail(info, tokens[1], tokens[2], tokens[3]);
 
             out.write("T".getBytes());
 

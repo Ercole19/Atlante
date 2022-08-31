@@ -9,29 +9,27 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-public class SendReviewCodeEmailBoundary extends SocketBoundary
+public final class SendReviewCodeEmailBoundary extends CodeEmailBoundary
 {
+    private static SendReviewCodeEmailBoundary instance = null ;
     private SendReviewCodeEmailBoundary(){
 
     }
 
-    public static void sendReviewCode(ReviewViaMailBean review) throws SendEmailException
-    {
-        String email = review.getRecipient() ;
-        String code = review.getCode() ;
-
-        String query = String.format("T%s;%s;", email, code) ;
-
-        try
-        {
-            String retMessage = sendMessageGetResponse(query, 4545) ;
-            if(!retMessage.equals("OK"))
-            {
-                throw new SendEmailException(retMessage) ;
-            }
-        }catch (IOException e)
-        {
-            throw new SendEmailException("Error in connection to server: " + e.getMessage()) ;
+    public static synchronized SendReviewCodeEmailBoundary getInstance() {
+        if(instance == null) {
+            instance = new SendReviewCodeEmailBoundary() ;
         }
+
+        return instance ;
+    }
+
+    @Override
+    protected String prepareQueryForServer(String email, String code) {
+
+        return String.format("Mathena.services;%s;A review code form a Tutor;" +
+                "A tutor has sent you a review code for a tutoring you had with him.\n" +
+                "The code is %s.\n" +
+                "If you didn't request this code, please ignore the message.",email, code) ;
     }
 }
