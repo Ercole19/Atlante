@@ -14,7 +14,9 @@ public class ManageEventUCC {
 
     
     public void addEvent(EventBean event) throws SendEmailException, EventException {
-        EventEntity eventEntity = new EventEntity(event.getName(), event.getDate(), event.getStart(), event.getEnd(), event.getDescription(), ActivityTypesEnum.valueOf(event.getType()), event.getDateOfReminder());
+        EventEntity eventEntity;
+        if (event.isThereAReminder())  eventEntity = new EventEntity(event.getName(), event.getDate(), event.getStart(), event.getEnd(), event.getDescription(), ActivityTypesEnum.valueOf(event.getType()), event.getDateOfReminder());
+        else eventEntity = new EventEntity(event.getName(), event.getDate(), event.getStart(), event.getEnd(), event.getDescription(), ActivityTypesEnum.valueOf(event.getType()));
         eventEntity.addEntity();
         CalendarSubject.getInstance().addEvent(eventEntity);
         if(event.isThereAReminder()) {

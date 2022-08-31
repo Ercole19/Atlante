@@ -11,6 +11,7 @@ import java.io.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class BookDao extends AbstractDAO {
 
     public void insertBook(String title , String isbn , Float price , boolean negotiability, List<File> images)
     {
-        try (PreparedStatement statement = this.getConnection().prepareStatement("insert into athena.books values (?,?,?,?,?)") ; PreparedStatement statement2 = this.getConnection().prepareStatement("INSERT INTO `athena`.`book_images` (email, isbn, image,image_name, count_image) VALUES (?,?,?,?,?)")) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement("insert into athena.books values (?,?,?,?,?, current_timestamp())") ; PreparedStatement statement2 = this.getConnection().prepareStatement("INSERT INTO `athena`.`book_images` (email, isbn, image,image_name, count_image ) VALUES (?,?,?,?,?)")) {
 
             statement.setString(1, title);
             statement.setString(2, isbn);
@@ -148,7 +149,7 @@ public class BookDao extends AbstractDAO {
 
         List<BookEntity> books = new ArrayList<>() ;
 
-        try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT title_book, isbn_book, price, email_user, image, negotiable from athena.books  left join athena.book_images on books.email_user = book_images.email and books.isbn_book = book_images.isbn where (title_book = ? or isbn_book = ?)  and email_user != ? and (count_image = 1 or count_image is null)")){
+        try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT title_book, isbn_book, price, email_user, image, negotiable, saleTimestamp from athena.books  left join athena.book_images on books.email_user = book_images.email and books.isbn_book = book_images.isbn where (title_book = ? or isbn_book = ?)  and email_user != ? and (count_image = 1 or count_image is null)")){
             statement.setString(1, book);
             statement.setString(2, book);
             statement.setString(3, email);
@@ -162,7 +163,7 @@ public class BookDao extends AbstractDAO {
                     booksFiles.add(writeImage(image, pathname));
                     BookDao.incrementImageCounter();
                 }
-                BookEntity bookEntity = new BookEntity(set.getString(1), set.getString(2), set.getFloat(3), set.getString(4), set.getBoolean(6), booksFiles);
+                BookEntity bookEntity = new BookEntity(set.getString(1), set.getString(2), set.getFloat(3), set.getString(4), set.getBoolean(6), booksFiles, String.valueOf(set.getTimestamp(7)));
                 books.add(bookEntity);
             }
 
@@ -172,15 +173,16 @@ public class BookDao extends AbstractDAO {
         return books;
     }
 
-    public void finalizePurchase(String title, String isbn, Float price, String emailBuyer, String emailVendor)
+    public void finalizePurchase(String title, String isbn, Float price, String emailBuyer, String emailVendor, String timestamp)
     {
-        try(PreparedStatement statement = this.getConnection().prepareStatement("CALL finalizePurchase(?,?,?,?,?)")) {
+        try(PreparedStatement statement = this.getConnection().prepareStatement("CALL finalizePurchase(?,?,?,?,?,?)")) {
 
             statement.setString(1, title);
             statement.setString(2, isbn);
             statement.setFloat(3, price);
             statement.setString(4, emailBuyer);
             statement.setString(5, emailVendor);
+            statement.setTimestamp(6, Timestamp.valueOf(timestamp));
 
             statement.execute();
 

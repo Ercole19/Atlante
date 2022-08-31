@@ -27,6 +27,17 @@ public class EventEntity
         this.dateOfReminder = reminderDate;
     }
 
+    public EventEntity(String name, LocalDate day, LocalTime start, LocalTime end, String description, ActivityTypesEnum type)
+    {
+        this.setName(name) ;
+        this.setDay(day) ;
+        this.setStart(start) ;
+        this.setEnd(end) ;
+        this.setDescription(description);
+        this.setType(type) ;
+        this.dateOfReminder = null;
+    }
+
 
 
 

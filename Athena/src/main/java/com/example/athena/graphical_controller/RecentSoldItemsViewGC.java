@@ -15,9 +15,6 @@ public class RecentSoldItemsViewGC {
 
     private List<BookBean> searchResults ;
 
-    public RecentSoldItemsViewGC()
-    {
-    }
 
     public int getResultSize(String email) throws BookException {
         RecentActivitiesUCC controller = new RecentActivitiesUCC();

@@ -74,7 +74,6 @@ public class BookPageController extends ShiftImageController implements PostInit
             this.reportNumber = controller.getReportNumber(Student.getInstance().getEmail());
 
         } else {
-            BookPageUCC controller = new BookPageUCC() ;
             String[] vendorFullName = controller.getUserName(book.getOwner());
             this.sellerName = vendorFullName[0];
             this.sellerSurname = vendorFullName[1];
@@ -127,10 +126,14 @@ public class BookPageController extends ShiftImageController implements PostInit
         switcher.switcher(stage , "sell-view.fxml");
     }
 
-    public void onBuyBookButtonClick(){
+    public void onBuyBookButtonClick(ActionEvent event){
         List<Object> params = new ArrayList<>();
         params.add(this.book);
         switcher.popup("purchaseConfirm.fxml", "Confirm purchase", params);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+        List<Object> goBackParams = new ArrayList<>() ;
+        goBackParams.add(this.searchQuery) ;
+        switcher.switcher(stage, "buy-view2.fxml", goBackParams) ;
     }
 
 }

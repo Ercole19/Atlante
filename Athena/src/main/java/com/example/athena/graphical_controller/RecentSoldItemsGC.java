@@ -16,7 +16,6 @@ public class RecentSoldItemsGC implements Initializable {
 
     @FXML
     private SubScene subScene;
-    private RecentSoldItemsView recentSoldItemsView;
 
     @FXML
     protected void onBackButtonClick(ActionEvent event) throws IOException {
@@ -28,7 +27,7 @@ public class RecentSoldItemsGC implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        recentSoldItemsView = new RecentSoldItemsView(subScene.getWidth(), subScene.getHeight());
+        RecentSoldItemsView recentSoldItemsView = new RecentSoldItemsView(subScene.getWidth(), subScene.getHeight());
         this.subScene.setRoot(recentSoldItemsView.getRoot());
     }
 

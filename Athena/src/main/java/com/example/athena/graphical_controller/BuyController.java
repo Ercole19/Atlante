@@ -11,9 +11,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class BuyController implements Initializable {
+public class BuyController implements Initializable, PostInitialize {
 
 
     @FXML
@@ -48,5 +49,12 @@ public class BuyController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.findBooksView = new FindBooksView(resultPanel.getWidth(), resultPanel.getHeight()) ;
+    }
+
+    @Override
+    public void postInitialize(ArrayList<Object> params) {
+        String nameOrIsbn = (String) params.get(0);
+        searchInput.setText(nameOrIsbn);
+        onSearchButtonClick() ;
     }
 }

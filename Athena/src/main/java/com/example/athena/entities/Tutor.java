@@ -4,8 +4,6 @@ import com.example.athena.exceptions.LoggedUserException;
 
 public class Tutor extends User
 {
-    private float starValutation ;
-
     private Tutor()
     {
 

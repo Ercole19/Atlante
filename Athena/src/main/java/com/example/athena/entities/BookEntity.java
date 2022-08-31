@@ -1,6 +1,7 @@
 package com.example.athena.entities;
 
 import java.io.File;
+import java.security.Timestamp;
 import java.util.List;
 
 public class BookEntity {
@@ -13,6 +14,7 @@ public class BookEntity {
     private final File file  ;
     private final String owner ;
     private final String purchaser;
+    private final String saleTimestamp;
 
 
 
@@ -25,9 +27,10 @@ public class BookEntity {
         this.file = null ;
         this.owner = owner ;
         this.purchaser = null;
+        this.saleTimestamp = null;
     }
 
-    public BookEntity(String title, String isbn, float price, String email,  boolean isNegotiable, List<File> image) {
+    public BookEntity(String title, String isbn, float price, String email,  boolean isNegotiable, List<File> image, String saleTimestamp) {
         this.title = title ;
         this.isbn = isbn ;
         this.price = price ;
@@ -36,6 +39,7 @@ public class BookEntity {
         this.image = image ;
         this.isNegotiable = isNegotiable ;
         this.purchaser = null;
+        this.saleTimestamp = saleTimestamp;
     }
 
     public BookEntity (String owner, String title, String isbn, Float price) {
@@ -47,6 +51,7 @@ public class BookEntity {
         this.image = null;
         this.file = null;
         this.purchaser = null;
+        this.saleTimestamp = null;
 
     }
 
@@ -59,6 +64,7 @@ public class BookEntity {
         this.image = null;
         this.file = null;
         this.purchaser = purchaser;
+        this.saleTimestamp = null;
 
     }
 

@@ -20,9 +20,9 @@ public class ConfirmPurchaseGC implements PostInitialize {
         SceneSwitcher switcher = new SceneSwitcher();
         BuyControllerUCC controller = new BuyControllerUCC();
         try {
-            PurchaseResultBean bean = controller.purchase(this.bean) ;
+            PurchaseResultBean purchaseResultBean = controller.purchase(this.bean) ;
             SizedAlert sizedAlert;
-            if(bean.getPurchaseResult())
+            if(purchaseResultBean.getPurchaseResult())
             {
                 sizedAlert = new SizedAlert(Alert.AlertType.CONFIRMATION, "Your purchase has been made! You can see it in recent purchase window.", ButtonType.CLOSE);
             }else {
@@ -37,7 +37,7 @@ public class ConfirmPurchaseGC implements PostInitialize {
         }
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "buy-view.fxml");
+        stage.close();
     }
 
     public void onNoBtnClick(ActionEvent event) {
