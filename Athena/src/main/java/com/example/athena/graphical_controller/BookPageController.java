@@ -118,7 +118,7 @@ public class BookPageController extends ShiftImageController implements PostInit
     }
     public void onBackBtnClick(ActionEvent event)  {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        List<Object> params = new ArrayList();
+        List<Object> params = new ArrayList<>();
         params.add(this.searchQuery);
         switcher.switcher(stage, "buy-view2.fxml", params);
     }

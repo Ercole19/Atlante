@@ -34,56 +34,33 @@ public class MailServer implements Runnable {
 
     private static MailServer instance = null ;
 
-    private MailServer() {
-        try {
-            socket = new ServerSocket(4545);
-            StreamHandler myHandler = new StreamHandler(new BufferedOutputStream(new FileOutputStream("src/main/resources/mailServerLog")),
-                    new SimpleFormatter());
-            LOGGER.addHandler(myHandler);
-        } catch (IOException e) {
-            System.exit(1);
-        }
+    private MailAuth mailAuth ;
+    private ParsingStates state ;
 
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/mailServerAUTHS")) ;
+    private MailServer() {
+
+        socketLoggerInstantiation() ;
+
+        try(BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/mailServerAUTHS"))) {
+
             String readLine = reader.readLine();
-            ParsingStates state = ParsingStates.INIT ;
-            MailAuth mailAuth = null;
+            state = ParsingStates.INIT ;
+            mailAuth = null;
 
             while (readLine != null) {
                 String[] tokens = readLine.split(" : ");
-                if (tokens.length != 2) {
-                    if(!(tokens.length == 1 && Objects.equals(tokens[0],"END AUTH"))) crash("Error in mail auth entry format");
-                }
+
+                checkTokens(tokens);
+
                 if (state == ParsingStates.INIT) {
-                    if (Objects.equals(tokens[0], "NEW AUTH")) {
-                        mailAuth = new MailAuth();
-                        mailAuth.setAuthName(tokens[1]);
-                        state = ParsingStates.AUTH_COMPILING;
-                    } else {
-                        crash("Error in parsing mail auths");
-                    }
+                    initBehavior(tokens[0], tokens[1]);
                 } else {
                     if (Objects.equals(tokens[0], "NEW AUTH")) {
                         crash("Error in parsing mail auths");
                     } else if (Objects.equals(tokens[0], "END AUTH")) {
-                        Properties properties = mailAuth.getProperties();
-                        String username = mailAuth.getUsername();
-                        String password = mailAuth.getPassword();
-                        String authName = mailAuth.getAuthName();
-                        Session session = Session.getDefaultInstance(properties, new Authenticator() {
-                            @Override
-                            protected PasswordAuthentication getPasswordAuthentication() {
-                                return new PasswordAuthentication(username, password);
-                            }
-                        });
-                        session.setDebug(true);
-                        this.sessionMap.put(authName, new SessionInfo(session, username));
-                        state = ParsingStates.INIT;
+                        terminateAuthCompilation();
                     } else {
-                        if(Objects.equals(tokens[0], "SMTP_USER")) mailAuth.setUsername(tokens[1]);
-                        else if(Objects.equals(tokens[0], "SMTP_PASS")) mailAuth.setPassword(tokens[1]);
-                        else mailAuth.setProperty(tokens[0], tokens[1]);
+                        setAuthProperty(tokens[0], tokens[1]) ;
                     }
                 }
                 readLine = reader.readLine() ;
@@ -97,9 +74,59 @@ public class MailServer implements Runnable {
             crash("IO error occurred");
         } catch (NullPointerException e) {
             crash("Error in auth parsing") ;
+        }
+    }
+
+    private void socketLoggerInstantiation() {
+        try {
+            socket = new ServerSocket(4545);
+            StreamHandler myHandler = new StreamHandler(new BufferedOutputStream(new FileOutputStream("src/main/resources/mailServerLog")),
+                    new SimpleFormatter());
+            LOGGER.addHandler(myHandler);
+        } catch (IOException e) {
+            System.exit(1);
+        }
+    }
+
+    private void initBehavior(String firstToken, String secondToken) {
+        if (Objects.equals(firstToken, "NEW AUTH")) {
+            mailAuth = new MailAuth();
+            mailAuth.setAuthName(secondToken);
+            state = ParsingStates.AUTH_COMPILING;
+        } else {
+            crash("Error in parsing mail auths");
+        }
+    }
+
+    private void terminateAuthCompilation() {
+        try {
+            Properties properties = mailAuth.getProperties();
+            String username = mailAuth.getUsername();
+            String password = mailAuth.getPassword();
+            String authName = mailAuth.getAuthName();
+            Session session = Session.getDefaultInstance(properties, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
+                }
+            });
+            session.setDebug(true);
+            this.sessionMap.put(authName, new SessionInfo(session, username));
+            state = ParsingStates.INIT;
         } catch (AddressException e) {
             crash("Could not find username's inet address");
         }
+
+    }
+
+    private void checkTokens(String[] tokens) {
+        if(tokens.length != 2 && !(tokens.length == 1 && Objects.equals(tokens[0],"END AUTH")) ) crash("Error in mail auth entry format");
+    }
+
+    private void setAuthProperty(String firstToken, String secondToken) {
+        if(Objects.equals(firstToken, "SMTP_USER")) mailAuth.setUsername(secondToken);
+        else if(Objects.equals(firstToken, "SMTP_PASS")) mailAuth.setPassword(secondToken);
+        else mailAuth.setProperty(firstToken, secondToken) ;
     }
 
     public static synchronized MailServer getInstance() {
@@ -150,6 +177,18 @@ public class MailServer implements Runnable {
 
                         out.write("T".getBytes());
                     }
+                } else if (setting.equals('R')) {
+                    OutputStream out = clientSocket.getOutputStream() ;
+
+                    String mailAuthName = receivedMessage.substring(1, receivedMessage.indexOf(";")) ;
+
+                    String dateToParse = receivedMessage.substring(mailAuthName.length()+1).substring(1, receivedMessage.indexOf(";")+1);
+                    List<String> elements = REMINDERSMAP.getOrDefault(LocalDateTime.parse(dateToParse).truncatedTo(ChronoUnit.MINUTES), new ArrayList<>());
+                    elements.remove(receivedMessage.substring(1));
+                    REMINDERSMAP.put(LocalDateTime.parse(dateToParse), elements);
+
+                    out.write("T".getBytes());
+
                 }
             }
         }

@@ -85,7 +85,7 @@ public class BookBean {
     }
 
     public void syntacticCheckPrice(String price)throws BookException{
-        if (!(price.matches("\\d+\\.*\\d*"))){
+        if (!(price.matches("\\d{1,3}\\.\\d{2}"))){
             throw new BookException("Error in price format");
         }
     }

@@ -4,6 +4,7 @@ import com.example.athena.engineering_classes.abstract_factory.SearchResultProdu
 import com.example.athena.entities.CalendarSubject;
 import com.example.athena.entities.EventDao;
 import com.example.athena.exceptions.EventException;
+import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.ManageEventUCC;
 import com.example.athena.view.EventsView;
@@ -76,7 +77,7 @@ public class EventsViewGC {
                         manageEventUCC.deleteEvent(eventBean);
                         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
                         refreshScreen(eventBean.getDate(), stage);
-                    } catch (EventException exc) {
+                    } catch (EventException | SendEmailException exc) {
                         SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
                         alert.showAndWait();
                     }

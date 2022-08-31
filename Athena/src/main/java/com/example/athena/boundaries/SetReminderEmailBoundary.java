@@ -20,7 +20,7 @@ public class SetReminderEmailBoundary extends SocketBoundary
 
     }
 
-    public static void sendToServer(EventBean eventInfo, boolean update) throws SendEmailException
+    public static void sendToServer(EventBean eventInfo, boolean remove) throws SendEmailException
     {
         Timestamp moment;
         try {
@@ -39,9 +39,9 @@ public class SetReminderEmailBoundary extends SocketBoundary
 
         String query = prepareQueryForServer(moment.toString(), Student.getInstance().getEmail(), name, day, start, end, description) ;
 
-        if(update)
+        if(remove)
         {
-            query = "U" + query.substring(1) ;
+            query = "R" + query.substring(1) ;
         }
 
         try

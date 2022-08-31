@@ -1,7 +1,6 @@
 package com.example.athena.entities;
 
 import java.io.File;
-import java.security.Timestamp;
 import java.util.List;
 
 public class BookEntity {

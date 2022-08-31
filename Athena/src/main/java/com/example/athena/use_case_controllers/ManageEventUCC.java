@@ -27,14 +27,12 @@ public class ManageEventUCC {
     public void update(EventBean event, EventBean oldEvent) throws SendEmailException, EventException {
         deleteEvent(oldEvent);
         addEvent(event);
-        if(event.isThereAReminder()) {
-            SetReminderEmailBoundary.sendToServer(event, true) ;
-        }
     }
 
-    public void deleteEvent (EventBean event) throws EventException {
+    public void deleteEvent (EventBean event) throws SendEmailException, EventException {
         EventEntity eventEntity = new EventEntity(event.getName(), event.getDate(), event.getStart(), event.getEnd(), event.getDescription(), ActivityTypesEnum.valueOf(event.getType()), event.getDateOfReminder());
         eventEntity.deleteEntity();
         CalendarSubject.getInstance().deleteEvent(eventEntity);
+        if(event.isThereAReminder()) SetReminderEmailBoundary.sendToServer(event, true) ;
     }
 }

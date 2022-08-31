@@ -17,7 +17,6 @@ public class ConfirmPurchaseGC implements PostInitialize {
     private Stage stage;
 
     public void onYesBtnClick(ActionEvent event) {
-        SceneSwitcher switcher = new SceneSwitcher();
         BuyControllerUCC controller = new BuyControllerUCC();
         try {
             PurchaseResultBean purchaseResultBean = controller.purchase(this.bean) ;
