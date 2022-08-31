@@ -2,10 +2,8 @@ package com.example.athena.entities;
 
 import com.example.athena.exceptions.EventException;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.YearMonth;
-import java.time.ZoneOffset;
+import java.sql.Timestamp;
+import java.time.*;
 import java.util.List;
 
 public class EventEntity
@@ -16,8 +14,9 @@ public class EventEntity
     private LocalTime end ;
     private String description ;
     private ActivityTypesEnum type ;
+    private Timestamp dateOfReminder;
 
-    public EventEntity(String name, LocalDate day, LocalTime start, LocalTime end, String description, ActivityTypesEnum type)
+    public EventEntity(String name, LocalDate day, LocalTime start, LocalTime end, String description, ActivityTypesEnum type, Timestamp reminderDate)
     {
         this.setName(name) ;
         this.setDay(day) ;
@@ -25,7 +24,12 @@ public class EventEntity
         this.setEnd(end) ;
         this.setDescription(description);
         this.setType(type) ;
+        this.dateOfReminder = reminderDate;
     }
+
+
+
+
 
     public static List<EventEntity> getEventsByTypeSpan(ActivityTypesEnum type, TimePeriodsEnum timeSpan) throws EventException
     {
@@ -119,6 +123,7 @@ public class EventEntity
 
     public ActivityTypesEnum getType() {return type;}
 
+    public Timestamp getDateOfReminder() {return dateOfReminder;}
 
     public void deleteEntity() throws EventException {
         EventDao dao = new EventDao() ;
@@ -127,7 +132,7 @@ public class EventEntity
 
     public void addEntity() throws EventException {
         EventDao dao = new EventDao() ;
-        dao.addEvent(this.day, this.name, this.start, this.end, this.description, String.valueOf(this.type));
+        dao.addEvent(this.day, this.name, this.start, this.end, this.description, String.valueOf(this.type), this.dateOfReminder.toLocalDateTime());
     }
 
     @Override

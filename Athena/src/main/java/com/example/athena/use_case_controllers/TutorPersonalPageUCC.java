@@ -12,14 +12,8 @@ import java.io.File;
 import java.util.List;
 
 public class TutorPersonalPageUCC {
-
-    public void setTutorInformation(TutorInfosBean bean) {
-        TutorInfoEntity entity = new TutorInfoEntity(bean.getAboutMe(), bean.getContactNumbers(), bean.getSessionInfos());
-        TutorPersonalPageSubject.getInstance().setTutorInfos(entity);
-
-    }
     public void updateTutorInformation(TutorInfosBean bean)  {
-        TutorInfoEntity entity = new TutorInfoEntity(bean.getAboutMe(), bean.getSessionInfos(), bean.getContactNumbers());
+        TutorInfoEntity entity = new TutorInfoEntity(bean.getAboutMe(), bean.getContactNumbers(), bean.getSessionInfos());
         TutorPersonalPageSubject.getInstance().updateTutorInfos(entity);
 
     }

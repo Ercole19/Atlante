@@ -15,7 +15,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="629.0" prefWidth="1028.0" style="-fx-background-color: #102730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.AverageController">
    <children>
-      <Button layoutX="28.0" layoutY="369.0" mnemonicParsing="false" onAction="#indietro" prefHeight="230.0" prefWidth="212.0" style="-fx-background-color: #f7ff75; -fx-background-radius: 20;" text="Back">
+      <Button layoutX="28.0" layoutY="369.0" mnemonicParsing="false" onAction="#onBackBtnClick" prefHeight="230.0" prefWidth="212.0" style="-fx-background-color: #f7ff75; -fx-background-radius: 20;" text="Back">
          <font>
             <Font name="Bookman Old Style" size="36.0" />
          </font>

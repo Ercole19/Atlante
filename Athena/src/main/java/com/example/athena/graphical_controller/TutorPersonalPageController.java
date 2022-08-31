@@ -3,12 +3,16 @@ package com.example.athena.graphical_controller;
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
 import com.example.athena.entities.Tutor;
 import com.example.athena.entities.TutorPersonalPageSubject;
+import com.example.athena.exceptions.CourseException;
+import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.TutorPersonalPageUCC;
 import com.example.athena.use_case_controllers.ViewTutorPageUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
@@ -89,16 +93,7 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
         infos.setSessionInfos(sessionInfos.getText());
 
         bean.setEmail(Tutor.getInstance().getEmail());
-        //List<String> tutorInfos = controller.getTutorInfos(bean);
-        controller.setTutorInformation(infos);
-        /*
-        if (tutorInfos.isEmpty()) {
-            controller.setTutorInformation(infos);
-        }
-        else {
-            controller.updateTutorInformation(infos);
-        }
-        */
+        controller.updateTutorInformation(infos);
 
     }
 
@@ -149,24 +144,29 @@ public class TutorPersonalPageController implements  PostInitialize , Initializa
     public void update() {
         UserBean bean = new UserBean();
         bean.setEmail(this.email);
-        TutorInfosBean tutorInfosBean = TutorPersonalPageSubject.getInstance().getTutorInfos(bean);
+        try {
+            TutorInfosBean tutorInfosBean = TutorPersonalPageSubject.getInstance().getTutorInfos(bean);
+            aboutMe.setText(tutorInfosBean.getAboutMe());
+            sessionInfos.setText(tutorInfosBean.getSessionInfos());
+            contactNumbers.setText(tutorInfosBean.getContactNumbers());
+            if (tutorInfosBean.getAvgReview() == 0.0){
+                reviewAverage.setText("No reviews");
+            }
+            else {
+                reviewAverage.setText(String.valueOf(tutorInfosBean.getAvgReview()));
+            }
 
-        aboutMe.setText(tutorInfosBean.getAboutMe());
-        sessionInfos.setText(tutorInfosBean.getSessionInfos());
-        contactNumbers.setText(tutorInfosBean.getContactNumbers());
-        if (tutorInfosBean.getAvgReview() == 0.0){
-            reviewAverage.setText("No reviews");
-        }
-        else {
-            reviewAverage.setText(String.valueOf(tutorInfosBean.getAvgReview()));
-        }
+            coursesArea.clear();
+            for (String course : tutorInfosBean.getTutorCourses()) {
+                coursesArea.appendText(course + "\n" );
+            }
 
-        coursesArea.clear();
-        for (String course : tutorInfosBean.getTutorCourses()) {
-            coursesArea.appendText(course + "\n" );
+            this.tutorName.setText(tutorInfosBean.getName());
+            tutorSurname.setText(tutorInfosBean.getSurname());
         }
-
-        this.tutorName.setText(tutorInfosBean.getName());
-        tutorSurname.setText(tutorInfosBean.getSurname());
+        catch (CourseException e) {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Error in loading page, try restart the application", 300, 300, ButtonType.CLOSE);
+            alert.showAndWait();
+        }
     }
 }

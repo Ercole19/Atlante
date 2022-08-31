@@ -16,24 +16,12 @@ import java.util.List;
 
 public class UserDao extends AbstractDAO {
 
-
-    private String queryFind = " SELECT * FROM utenti WHERE  email = ? and password = ? ";
-    private String getType = "SELECT type FROM utenti WHERE email = ?";
-    private String filltutor = "SELECT  aboutme ,  sessioninfos  , contactnumbers  FROM athena.tutordescription WHERE emailuser = ? ";
-    private String setTutor = "INSERT INTO `athena`.`tutordescription` (aboutme, sessioninfos, contactnumbers, emailuser) VALUES (? ,? ,?,?)";
-    private String searchTutor = "select utenti.nome , utenti.surname , corsi.nomecorso , tutordescription.Average , utenti.email from athena.tutordescription join athena.corsi on tutordescription.emailuser = corsi.emailtutor join athena.utenti on tutordescription.emailuser = utenti.email where  nomecorso like concat('%' , ? , '%') ";
-    private String updatetutor = "UPDATE athena.tutordescription SET aboutme = ?,  sessioninfos=?, contactnumbers=?  WHERE emailuser= ?";
-    private String searchByName = "SELECT  utenti.nome ,  utenti.surname , corsi.nomecorso , tutordescription.Average ,  utenti.email FROM athena.utenti join athena.tutordescription on utenti.email = tutordescription.emailuser join athena.corsi on utenti.email = corsi.emailtutor WHERE CONCAT( nome,  ' ', surname ) LIKE  concat ('%' , ? , '%')";
-    private String insertCV = "update athena.tutordescription  set CV = ?    where emailuser = ?";
+    public boolean findStudent(String studentEmail, String pass) {
 
 
+        try (PreparedStatement stmt = this.getConnection().prepareStatement(" SELECT * FROM utenti WHERE  email = ? and password = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
 
-    public boolean findStudent(String emailUtente, String pass) {
-
-
-        try (PreparedStatement stmt = this.getConnection().prepareStatement(queryFind, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
-
-            stmt.setString(1, emailUtente);
+            stmt.setString(1, studentEmail);
             stmt.setString(2, pass);
             ResultSet rs = stmt.executeQuery();
 
@@ -66,15 +54,14 @@ public class UserDao extends AbstractDAO {
     }
 
 
-    public Object getuserType(String email) {
+    public Object getUserType(String email) {
 
-        try (PreparedStatement statement = this.getConnection().prepareStatement(getType)) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT type FROM utenti WHERE email = ?")) {
 
             statement.setString(1, email);
             ResultSet set = statement.executeQuery();
-            while (set.next()) {
-                return set.getString(1);
-            }
+            set.next();
+            return set.getString(1);
 
 
         } catch (SQLException exc) {
@@ -86,15 +73,11 @@ public class UserDao extends AbstractDAO {
 
     }
 
-    public List<String> filltutorinfos(String email) {
+    public List<String> fillTutorInfosProcedure(String email) {
         List<String> infos = new ArrayList<>();
-        try (PreparedStatement statement = this.getConnection().prepareStatement(filltutor)) {
-
+        try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT  aboutme ,  sessioninfos  , contactnumbers  FROM athena.tutordescription WHERE emailuser = ? ")) {
 
             statement.setString(1, email);
-
-
-            //declare with size
             ResultSet set = statement.executeQuery();
             while (set.next()) {
                 infos.add(set.getString(1));
@@ -110,24 +93,11 @@ public class UserDao extends AbstractDAO {
     }
 
 
-    public void settutorinfos(String about, String sesinf, String contnum) {
-        try (PreparedStatement statement = this.getConnection().prepareStatement(setTutor, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
+    public void updateTutorInfos(String about, String sessionInfos, String contactNumbers) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement("UPDATE athena.tutordescription SET aboutme = ?,  sessioninfos=?, contactnumbers=?  WHERE emailuser= ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
             statement.setString(1, about);
-            statement.setString(2, sesinf);
-            statement.setString(3, contnum);
-
-
-            statement.executeUpdate();
-        } catch (SQLException exc) {
-            exc.getMessage();
-        }
-    }
-
-    public void updatetutorinfos(String about, String sesinf, String contnum) {
-        try (PreparedStatement statement = this.getConnection().prepareStatement(updatetutor, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
-            statement.setString(1, about);
-            statement.setString(2, sesinf);
-            statement.setString(3, contnum);
+            statement.setString(2, sessionInfos);
+            statement.setString(3, contactNumbers);
             statement.setString(4, Tutor.getInstance().getEmail());
 
             statement.executeUpdate();
@@ -141,8 +111,8 @@ public class UserDao extends AbstractDAO {
     public String[] findTutor(String query, ByCourseOrNameEnum searchEnum, boolean byBestReviews) throws FindException {
         String prepStatement;
 
-        if (searchEnum.toString().equals("BY_COURSE")) {prepStatement = searchTutor;}
-        else { prepStatement = searchByName;}
+        if (searchEnum.toString().equals("BY_COURSE")) {prepStatement = "select utenti.nome , utenti.surname , corsi.nomecorso , tutordescription.Average , utenti.email from athena.tutordescription join athena.corsi on tutordescription.emailuser = corsi.emailtutor join athena.utenti on tutordescription.emailuser = utenti.email where  nomecorso like concat('%' , ? , '%') ";}
+        else { prepStatement = "SELECT  utenti.nome ,  utenti.surname , corsi.nomecorso , tutordescription.Average ,  utenti.email FROM athena.utenti join athena.tutordescription on utenti.email = tutordescription.emailuser join athena.corsi on utenti.email = corsi.emailtutor WHERE CONCAT( nome,  ' ', surname ) LIKE  concat ('%' , ? , '%')";}
 
         if (byBestReviews) {prepStatement = prepStatement + "order by tutordescription.average DESC";}
 
@@ -214,7 +184,7 @@ public class UserDao extends AbstractDAO {
 
 
     public void insertCv(File cv) {
-        try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(insertCV)) {
+        try (PreparedStatement preparedStatement = this.getConnection().prepareStatement("update athena.tutordescription  set CV = ?    where emailuser = ?")) {
             preparedStatement.setBlob(1, new BufferedInputStream(new FileInputStream(cv)));
             preparedStatement.setString(2, Tutor.getInstance().getEmail());
             preparedStatement.execute();
@@ -342,7 +312,7 @@ public class UserDao extends AbstractDAO {
             stmt.setString(5, surname);
             stmt.setString(6, code);
             stmt.executeUpdate();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Registration successfull", ButtonType.CLOSE);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Registration successful", ButtonType.CLOSE);
             alert.showAndWait();
 
         } catch (SQLException exception) {

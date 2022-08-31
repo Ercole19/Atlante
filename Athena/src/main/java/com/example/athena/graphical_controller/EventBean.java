@@ -2,6 +2,8 @@ package com.example.athena.graphical_controller;
 
 import com.example.athena.exceptions.EventException;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -15,13 +17,13 @@ public class EventBean {
     private String description ;
     private String type ;
 
-    private LocalDateTime dateOfReminder ;
+    private Timestamp dateOfReminder ;
 
 
 
     public void setDateOfReminder(int hoursBefore, int minutesBefore)
     {
-        this.dateOfReminder = LocalDateTime.of(this.getDate(), this.getStart()).minusHours(hoursBefore).minusMinutes(minutesBefore) ;
+        this.dateOfReminder = Timestamp.valueOf(LocalDateTime.of(this.getDate(), this.getStart()).minusHours(hoursBefore).minusMinutes(minutesBefore));
     }
 
     public void setDate(LocalDate date) {
@@ -85,7 +87,7 @@ public class EventBean {
     }
 
 
-    public LocalDateTime getDateOfReminder()throws EventException
+    public Timestamp getDateOfReminder()throws EventException
     {
         if(!this.isThereAReminder()) throw new EventException("Reminder couldn't be fetched because it doesn't exist");
         return this.dateOfReminder ;

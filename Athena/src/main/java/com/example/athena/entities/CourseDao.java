@@ -24,7 +24,7 @@ public class CourseDao extends AbstractDAO {
     }
 
     public void deleteCourse(String course) throws CourseException {
-        try (PreparedStatement statement = this.getConnection().prepareStatement("DELETE FROM corsi WHERE nomecorso = ? and emailtutor = ?")) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement("call athena.deleteCourse(?,?)")) {
             statement.setString(1, course);
             statement.setString(2, Tutor.getInstance().getEmail());
             statement.executeUpdate();
@@ -34,7 +34,7 @@ public class CourseDao extends AbstractDAO {
 
     }
 
-    public List<String> fillCourses(String email)  {
+    public List<String> fillCourses(String email) throws CourseException {
         List<String> courses = new ArrayList<>();
         try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT nomecorso FROM corsi WHERE emailtutor = ?")) {
             statement.setString(1, email);
@@ -43,7 +43,7 @@ public class CourseDao extends AbstractDAO {
                 courses.add(set.getString(1));
             }
         } catch (SQLException e) {
-            //throw new CourseException(e.getMessage());
+            throw new CourseException(e.getMessage());
         }
         return courses;
     }

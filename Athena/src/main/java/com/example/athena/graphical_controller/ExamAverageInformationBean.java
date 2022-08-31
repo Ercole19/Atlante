@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller;
 
-public class ExamAverageInformation {
+public class ExamAverageInformationBean {
 
     private double average;
     private String date;

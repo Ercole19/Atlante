@@ -29,11 +29,11 @@ public class TutorPersonalPageSubject extends AbstractSubject {
         return instance ;
     }
 
-    private void getAllInfos(String email) {
+    private void getAllInfos(String email) throws CourseException {
         UserDao userDao = new UserDao() ;
         CourseDao courseDao = new CourseDao() ;
 
-        List<String> tutorInfos = userDao.filltutorinfos(email);
+        List<String> tutorInfos = userDao.fillTutorInfosProcedure(email);
         String[] tutorName = userDao.getName(email);
         float tutorAvgReviews = userDao.getAvg(email);
         List<String> tutorCourses = courseDao.fillCourses(email);
@@ -41,7 +41,7 @@ public class TutorPersonalPageSubject extends AbstractSubject {
 
     }
 
-    public TutorInfosBean getTutorInfos(UserBean bean) {
+    public TutorInfosBean getTutorInfos(UserBean bean) throws CourseException {
         if(this.entity == null) { getAllInfos(bean.getEmail()); }
         TutorInfosBean returnBean = new TutorInfosBean() ;
         returnBean.setName(this.entity.getName());
@@ -70,16 +70,10 @@ public class TutorPersonalPageSubject extends AbstractSubject {
         super.notifyObserver();
     }
 
-    public void setTutorInfos(TutorInfoEntity entity) {
-        UserDao dao = new UserDao();
-        dao.settutorinfos(entity.getAboutMe(), entity.getSessionInfos(), entity.getContactNumbers());
-        this.entity.setTutorInfos(entity.getAboutMe(), entity.getSessionInfos(), entity.getContactNumbers());
-        super.notifyObserver();
-    }
 
     public void updateTutorInfos(TutorInfoEntity entity) {
         UserDao dao = new UserDao();
-        dao.updatetutorinfos(entity.getAboutMe(), entity.getSessionInfos(), entity.getContactNumbers());
+        dao.updateTutorInfos(entity.getAboutMe(), entity.getSessionInfos(), entity.getContactNumbers());
         this.entity.setTutorInfos(entity.getAboutMe(), entity.getSessionInfos(), entity.getContactNumbers());
         super.notifyObserver();
     }

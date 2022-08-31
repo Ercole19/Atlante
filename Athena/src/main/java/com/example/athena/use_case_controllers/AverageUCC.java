@@ -2,17 +2,17 @@ package com.example.athena.use_case_controllers;
 
 import com.example.athena.entities.ExamsSubject;
 import com.example.athena.exceptions.ExamException;
-import com.example.athena.graphical_controller.ExamAverageInformation;
+import com.example.athena.graphical_controller.ExamAverageInformationBean;
 import com.example.athena.graphical_controller.ExamEntityBean;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class AverageUCC  {
 
-    public ObservableList<ExamAverageInformation> getExamsArithmeticAverageInformation() throws ExamException{
+    public ObservableList<ExamAverageInformationBean> getExamsArithmeticAverageInformation() throws ExamException{
 
         ObservableList<ExamEntityBean> exams = ExamsSubject.getInstance().getSortedExams();
-        ObservableList<ExamAverageInformation> examsArithmeticAverageInfos = FXCollections.observableArrayList();
+        ObservableList<ExamAverageInformationBean> examsArithmeticAverageInfos = FXCollections.observableArrayList();
         int count = 1;
         double average ;
         double  gradesCounter = 0.0 ;
@@ -26,7 +26,7 @@ public class AverageUCC  {
             gradesCounter = gradesCounter + grade;
             average = (gradesCounter) / count;
 
-            ExamAverageInformation info = new ExamAverageInformation();
+            ExamAverageInformationBean info = new ExamAverageInformationBean();
             info.setAverage(average);
             info.setDate(date);
 
@@ -38,10 +38,10 @@ public class AverageUCC  {
         return examsArithmeticAverageInfos;
     }
 
-    public ObservableList<ExamAverageInformation> getExamsWeightedAverageInformation() throws ExamException {
+    public ObservableList<ExamAverageInformationBean> getExamsWeightedAverageInformation() throws ExamException {
 
         ObservableList<ExamEntityBean> exams = ExamsSubject.getInstance().getSortedExams() ;
-        ObservableList<ExamAverageInformation> examsWeightedAverageInfos = FXCollections.observableArrayList();
+        ObservableList<ExamAverageInformationBean> examsWeightedAverageInfos = FXCollections.observableArrayList();
         int  cfus = 0 ;
         double average ;
         double gradesCounter = 0.0;
@@ -58,7 +58,7 @@ public class AverageUCC  {
 
             average = (gradesCounter) / cfus;
 
-            ExamAverageInformation info = new ExamAverageInformation();
+            ExamAverageInformationBean info = new ExamAverageInformationBean();
             info.setAverage(average);
             info.setDate(date);
 

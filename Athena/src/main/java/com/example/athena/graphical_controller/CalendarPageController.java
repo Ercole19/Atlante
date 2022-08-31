@@ -1,7 +1,6 @@
 package com.example.athena.graphical_controller;
 
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
-import com.example.athena.entities.CalendarEntity;
 import com.example.athena.entities.CalendarSubject;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SizedAlert;
@@ -22,7 +21,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -30,7 +28,7 @@ public class CalendarPageController implements Initializable, AbstractObserver {
 
 
     @FXML
-    private SubScene calendario ;
+    private SubScene calendar;
 
     private YearMonth currentYearMonth ;
     private FullCalendarView view ;
@@ -99,7 +97,7 @@ public class CalendarPageController implements Initializable, AbstractObserver {
 
 
         this.view.getCalendarTitle().setText(yearMonth.getMonth().toString() + " " + yearMonth.getYear());
-        this.calendario.setRoot(this.view.getView());
+        this.calendar.setRoot(this.view.getView());
     }
 
 

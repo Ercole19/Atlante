@@ -34,18 +34,18 @@ public class AverageController implements Initializable {
         try {
             AverageUCC controller = new AverageUCC();
 
-            ObservableList<ExamAverageInformation> arithmeticAverageInformations = controller.getExamsArithmeticAverageInformation() ;
-            ObservableList<ExamAverageInformation> weightedAverageInformations = controller.getExamsWeightedAverageInformation();
+            ObservableList<ExamAverageInformationBean> arithmeticAverageInformations = controller.getExamsArithmeticAverageInformation() ;
+            ObservableList<ExamAverageInformationBean> weightedAverageInformations = controller.getExamsWeightedAverageInformation();
 
             ObservableList<XYChart.Data<String, Number>> arithmeticAverages = FXCollections.observableArrayList();
             ObservableList<XYChart.Data<String, Number>> weightedAverages = FXCollections.observableArrayList();
 
-            for (ExamAverageInformation arithmeticInfo : arithmeticAverageInformations)
+            for (ExamAverageInformationBean arithmeticInfo : arithmeticAverageInformations)
             {
                 arithmeticAverages.add(new XYChart.Data<>(arithmeticInfo.getDate(), arithmeticInfo.getAverage()));
             }
 
-            for (ExamAverageInformation weightedInfo : weightedAverageInformations)
+            for (ExamAverageInformationBean weightedInfo : weightedAverageInformations)
             {
                 weightedAverages.add(new XYChart.Data<>(weightedInfo.getDate(), weightedInfo.getAverage()));
             }
@@ -67,7 +67,7 @@ public class AverageController implements Initializable {
         }
     }
 
-    public void indietro(ActionEvent event){
+    public void onBackBtnClick(ActionEvent event){
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
     }

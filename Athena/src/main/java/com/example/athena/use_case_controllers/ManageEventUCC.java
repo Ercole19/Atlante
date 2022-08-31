@@ -14,7 +14,7 @@ public class ManageEventUCC {
 
     
     public void addEvent(EventBean event) throws SendEmailException, EventException {
-        EventEntity eventEntity = new EventEntity(event.getName(), event.getDate(), event.getStart(), event.getEnd(), event.getDescription(), ActivityTypesEnum.valueOf(event.getType()));
+        EventEntity eventEntity = new EventEntity(event.getName(), event.getDate(), event.getStart(), event.getEnd(), event.getDescription(), ActivityTypesEnum.valueOf(event.getType()), event.getDateOfReminder());
         eventEntity.addEntity();
         CalendarSubject.getInstance().addEvent(eventEntity);
         if(event.isThereAReminder()) {
@@ -31,7 +31,7 @@ public class ManageEventUCC {
     }
 
     public void deleteEvent (EventBean event) throws EventException {
-        EventEntity eventEntity = new EventEntity(event.getName(), event.getDate(), event.getStart(), event.getEnd(), event.getDescription(), ActivityTypesEnum.valueOf(event.getType()));
+        EventEntity eventEntity = new EventEntity(event.getName(), event.getDate(), event.getStart(), event.getEnd(), event.getDescription(), ActivityTypesEnum.valueOf(event.getType()), event.getDateOfReminder());
         eventEntity.deleteEntity();
         CalendarSubject.getInstance().deleteEvent(eventEntity);
     }

@@ -24,6 +24,8 @@ public class CourseGraphicController {
                 controller.addNewCourse(courseField.getText());
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Course added!", ButtonType.CLOSE);
                 alert.showAndWait();
+                Stage stage = (Stage) courseField.getScene().getWindow();
+                stage.close();
             }
             catch (CourseException e) {
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Error in adding course, details follow: " + e.getMessage(), 200, 200, ButtonType.CLOSE);
@@ -43,6 +45,8 @@ public class CourseGraphicController {
                controller.deleteCourse(courseField.getText());
                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Course deleted!", ButtonType.CLOSE);
                alert.showAndWait();
+               Stage stage = (Stage) courseField.getScene().getWindow();
+               stage.close();
            }
            catch (CourseException e) {
                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Error in deleting course, details follow: " + e.getMessage(), 200, 200, ButtonType.CLOSE);

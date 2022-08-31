@@ -38,10 +38,8 @@ public class CalendarEntity {
             eventBean.setEnd(event.getEnd());
             eventBean.setDescription(event.getDescription());
             eventBean.setType(event.getType().toString()) ;
-
+            if (event.getDateOfReminder() != null) eventBean.setDateOfReminder(event.getDateOfReminder().toLocalDateTime().getHour(), event.getDateOfReminder().toLocalDateTime().getMinute());
             dailyEvents.add(eventBean);
-
-
         }
         return dailyEvents;
     }

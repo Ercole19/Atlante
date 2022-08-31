@@ -8,6 +8,7 @@ import com.example.athena.graphical_controller.EventBean;
 
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -21,7 +22,7 @@ public class SetReminderEmailBoundary extends SocketBoundary
 
     public static void sendToServer(EventBean eventInfo, boolean update) throws SendEmailException
     {
-        LocalDateTime moment;
+        Timestamp moment;
         try {
              moment = eventInfo.getDateOfReminder() ;
         }

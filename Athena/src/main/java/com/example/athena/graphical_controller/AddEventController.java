@@ -118,7 +118,7 @@ public class    AddEventController implements Initializable , PostInitialize{
                 alert.showAndWait();
 
             }
-            else if (setReminderCheckBox.isSelected() && (eventToRegister.getDateOfReminder().isBefore(LocalDateTime.now()))) {
+            else if (setReminderCheckBox.isSelected() && (eventToRegister.getDateOfReminder().toLocalDateTime().isBefore(LocalDateTime.now()))) {
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Reminder's start time must be after actual time");
                 alert.showAndWait();
             }
@@ -261,7 +261,6 @@ public class    AddEventController implements Initializable , PostInitialize{
     @Override
     public void postInitialize(ArrayList<Object> params) {
 
-
         this.oldEventBean = (EventBean) params.get(0);
 
         eventName.setText(this.oldEventBean.getName());
@@ -281,8 +280,8 @@ public class    AddEventController implements Initializable , PostInitialize{
             try {
                 String custom = ReminderTypesEnum.CUSTOM.toString() ;
                 reminderType.setValue(custom.charAt(0) + custom.substring(1).toLowerCase().replace("_", " ")) ;
-                reminderHour.getValueFactory().setValue(this.oldEventBean.getDateOfReminder().getHour());
-                reminderMinute.getValueFactory().setValue(this.oldEventBean.getDateOfReminder().getMinute());
+                reminderHour.getValueFactory().setValue(this.oldEventBean.getDateOfReminder().toLocalDateTime().getHour());
+                reminderMinute.getValueFactory().setValue(this.oldEventBean.getDateOfReminder().toLocalDateTime().getMinute());
             }
             catch(EventException e){
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);

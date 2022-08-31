@@ -7,6 +7,7 @@ import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.ManageEventUCC;
 import com.example.athena.view.EventsView;
+import com.example.athena.view.LabelBuilder;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -33,7 +34,6 @@ public class EventsViewGC {
 
     private EventsView view;
     private List<EventBean> searchResults;
-    private static final String FONT = "System";
 
     public EventsViewGC(EventsView view) {
         this.view = view;
@@ -46,23 +46,18 @@ public class EventsViewGC {
 
     public void setValues(SearchResultProduct searchResultProduct) {
         int i = 0;
+        searchResultProduct.setLegend(0, LabelBuilder.buildLabel("Event name"));
+        searchResultProduct.setLegend(1, LabelBuilder.buildLabel("Start"));
+        searchResultProduct.setLegend(2, LabelBuilder.buildLabel("End"));
+        searchResultProduct.setLegend(3, LabelBuilder.buildLabel("Event type"));
+
         try {
             for (EventBean eventBean : searchResults) {
-                Label nameLabel = new Label(eventBean.getName());
-                nameLabel.setFont(new Font(FONT, 26));
-                searchResultProduct.setEntry(i, 0, nameLabel);
 
-                Label startTimeLabel = new Label(eventBean.getStart().toString());
-                startTimeLabel.setFont(new Font(FONT, 26));
-                searchResultProduct.setEntry(i, 1, startTimeLabel);
-
-                Label endTimeLabel = new Label(eventBean.getEnd().toString());
-                endTimeLabel.setFont(new Font(FONT, 26));
-                searchResultProduct.setEntry(i, 2 , endTimeLabel);
-
-                Label eventTypeLabel = new Label(eventBean.getType().charAt(0) + eventBean.getType().substring(1).toLowerCase().replace("_", " "));
-                eventTypeLabel.setFont(new Font(FONT, 26));
-                searchResultProduct.setEntry(i, 3, eventTypeLabel);
+                searchResultProduct.setEntry(i, 0, LabelBuilder.buildLabel(eventBean.getName()));
+                searchResultProduct.setEntry(i, 1, LabelBuilder.buildLabel(eventBean.getStart().toString()));
+                searchResultProduct.setEntry(i, 2, LabelBuilder.buildLabel(eventBean.getEnd().toString()));
+                searchResultProduct.setEntry(i, 3, LabelBuilder.buildLabel(eventBean.getType().charAt(0) + eventBean.getType().substring(1).toLowerCase().replace("_", " ")));
 
                 Button description = new Button("Description");
                 description.setOnAction(event -> {

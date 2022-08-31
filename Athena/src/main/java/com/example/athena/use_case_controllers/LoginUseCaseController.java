@@ -4,7 +4,6 @@ import com.example.athena.entities.Student;
 import com.example.athena.entities.Tutor;
 import com.example.athena.entities.TutorStudentLogged;
 import com.example.athena.entities.UserDao;
-import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.exceptions.UserNotFoundException;
 import com.example.athena.graphical_controller.UserBean;
 
@@ -17,8 +16,8 @@ public class LoginUseCaseController {
         if (dao.findStudent(bean.getEmail(), bean.getPassword())){
 
             bean.setUserFound(true);
-            String role =  (String) dao.getuserType(bean.getEmail()) ;
-            TutorStudentLogged roleEnum = TutorStudentLogged.valueOf((String) dao.getuserType(bean.getEmail()));
+            String role =  (String) dao.getUserType(bean.getEmail()) ;
+            TutorStudentLogged roleEnum = TutorStudentLogged.valueOf((String) dao.getUserType(bean.getEmail()));
             if(roleEnum == TutorStudentLogged.STUDENT)
             {
                 Student.getInstance().initStudent(bean.getEmail());
