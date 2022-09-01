@@ -68,7 +68,6 @@ public class BookPageController extends ShiftImageController implements PostInit
     public void postInitialize(ArrayList<Object> params) {
 
         this.book = (BookBean) params.get(1);
-        this.searchQuery = (String) params.get(2) ;
 
         if (params.get(0) == SellerOrBuyerEnum.SELLER) {
             this.sellerName = (BooksSubject.getInstance().getSellerName());
@@ -76,6 +75,7 @@ public class BookPageController extends ShiftImageController implements PostInit
             this.reportNumber = controller.getReportNumber(Student.getInstance().getEmail());
 
         } else {
+            this.searchQuery = (String) params.get(2) ;
             String[] vendorFullName = controller.getUserName(book.getOwner());
             this.sellerName = vendorFullName[0];
             this.sellerSurname = vendorFullName[1];

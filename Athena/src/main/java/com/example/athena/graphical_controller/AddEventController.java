@@ -67,65 +67,26 @@ public class    AddEventController implements Initializable , PostInitialize{
     private Text minutesText;
     @FXML
     private Button confirm;
-
     private EventBean oldEventBean;
-
-
     private Stage stage;
+    private final ManageEventUCC controller = new ManageEventUCC();
 
     public void clickOnAddEvent(ActionEvent event){
 
         EventBean eventToRegister = new EventBean() ;
 
-
-        LocalTime start = LocalTime.of(startHourSpinner.getValue(), startMinuteSpinner.getValue());
-        LocalTime end = LocalTime.of(endHourSpinner.getValue(), endMinuteSpinner.getValue());
         try {
-            eventToRegister.setDate(eventDate.getValue());
-            eventToRegister.setName(eventName.getText());
-            eventToRegister.setStart(start);
-            eventToRegister.setEnd(end);
-            eventToRegister.setDescription(eventDescription.getText());
-            eventToRegister.setType(eventType.getValue().toUpperCase().replace(" ", "_"));
-
-            if (setReminderCheckBox.isSelected()) {
-                switch (ReminderTypesEnum.valueOf(reminderType.getValue().toUpperCase().replace(" ", "_"))) {
-                    case HALF_AN_HOUR_BEFORE:
-                        eventToRegister.setDateOfReminder(0, 30) ;
-                        break ;
-                    case AN_HOUR_BEFORE:
-                        eventToRegister.setDateOfReminder(1, 0);
-                        break;
-                    case HALF_AND_AN_HOUR_BEFORE:
-                        eventToRegister.setDateOfReminder(1,30);
-                        break;
-                    case TWO_HOURS_BEFORE:
-                        eventToRegister.setDateOfReminder(2,0);
-                        break;
-                    case ONE_DAY_BEFORE:
-                        eventToRegister.setDateOfReminder(24,0);
-                        break;
-                    case CUSTOM:
-                        eventToRegister.setDateOfReminder(reminderHour.getValue(), reminderMinute.getValue());
-                        break;
-                    default:
-                        break;
-                }
-            }
-
+            setBean(eventToRegister);
             if ((eventToRegister.getStart().isAfter(eventToRegister.getEnd()))) {
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Event's start time must be before event's end");
                 alert.showAndWait();
-
             }
             else if (setReminderCheckBox.isSelected() && (eventToRegister.getDateOfReminder().toLocalDateTime().isBefore(LocalDateTime.now()))) {
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Reminder's start time must be after actual time");
                 alert.showAndWait();
             }
             else {
-                ManageEventUCC addEventUCC = new ManageEventUCC();
-                addEventUCC.addEvent(eventToRegister);
-
+                controller.addEvent(eventToRegister);
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.close();
             }
@@ -228,21 +189,10 @@ public class    AddEventController implements Initializable , PostInitialize{
     }
 
     public void updateEvent (ActionEvent event) {
-        ManageEventUCC controller = new ManageEventUCC() ;
-        LocalTime start = LocalTime.of(startHourSpinner.getValue(), startMinuteSpinner.getValue());
-        LocalTime end = LocalTime.of(endHourSpinner.getValue(), endMinuteSpinner.getValue());
         EventBean eventToUpdate = new EventBean();
-
         try {
-
-            eventToUpdate.setDate(eventDate.getValue());
-            eventToUpdate.setName(eventName.getText());
-            eventToUpdate.setStart(start);
-            eventToUpdate.setEnd(end);
-            eventToUpdate.setDescription(eventDescription.getText());
-            eventToUpdate.setType(eventType.getValue().toUpperCase().replace(" ", "_"));
+            setBean(eventToUpdate);
             controller.update(eventToUpdate, this.oldEventBean);
-
         }
         catch(EventException e){
             SizedAlert error = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
@@ -255,6 +205,44 @@ public class    AddEventController implements Initializable , PostInitialize{
         }finally {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
+        }
+    }
+
+    private void setBean(EventBean bean) throws EventException {
+
+        LocalTime start = LocalTime.of(startHourSpinner.getValue(), startMinuteSpinner.getValue());
+        LocalTime end = LocalTime.of(endHourSpinner.getValue(), endMinuteSpinner.getValue());
+
+        bean.setDate(eventDate.getValue());
+        bean.setName(eventName.getText());
+        bean.setStart(start);
+        bean.setEnd(end);
+        bean.setDescription(eventDescription.getText());
+        bean.setType(eventType.getValue().toUpperCase().replace(" ", "_"));
+
+        if (setReminderCheckBox.isSelected()) {
+            switch (ReminderTypesEnum.valueOf(reminderType.getValue().toUpperCase().replace(" ", "_"))) {
+                case HALF_AN_HOUR_BEFORE:
+                    bean.setDateOfReminder(0, 30) ;
+                    break ;
+                case AN_HOUR_BEFORE:
+                    bean.setDateOfReminder(1, 0);
+                    break;
+                case HALF_AND_AN_HOUR_BEFORE:
+                    bean.setDateOfReminder(1,30);
+                    break;
+                case TWO_HOURS_BEFORE:
+                    bean.setDateOfReminder(2,0);
+                    break;
+                case ONE_DAY_BEFORE:
+                    bean.setDateOfReminder(24,0);
+                    break;
+                case CUSTOM:
+                    bean.setDateOfReminder(reminderHour.getValue(), reminderMinute.getValue());
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -293,5 +281,6 @@ public class    AddEventController implements Initializable , PostInitialize{
 
         confirm.setOnAction(this::updateEvent);
     }
+
 }
 

@@ -11,10 +11,9 @@ import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.graphical_controller.EventBean;
 
 public class ManageEventUCC {
-
+    private EventEntity eventEntity;
     
     public void addEvent(EventBean event) throws SendEmailException, EventException {
-        EventEntity eventEntity;
         if (event.isThereAReminder())  eventEntity = new EventEntity(event.getName(), event.getDate(), event.getStart(), event.getEnd(), event.getDescription(), ActivityTypesEnum.valueOf(event.getType()), event.getDateOfReminder());
         else eventEntity = new EventEntity(event.getName(), event.getDate(), event.getStart(), event.getEnd(), event.getDescription(), ActivityTypesEnum.valueOf(event.getType()));
         eventEntity.addEntity();
@@ -30,7 +29,8 @@ public class ManageEventUCC {
     }
 
     public void deleteEvent (EventBean event) throws SendEmailException, EventException {
-        EventEntity eventEntity = new EventEntity(event.getName(), event.getDate(), event.getStart(), event.getEnd(), event.getDescription(), ActivityTypesEnum.valueOf(event.getType()), event.getDateOfReminder());
+        if (event.isThereAReminder())  eventEntity = new EventEntity(event.getName(), event.getDate(), event.getStart(), event.getEnd(), event.getDescription(), ActivityTypesEnum.valueOf(event.getType()), event.getDateOfReminder());
+        else eventEntity = new EventEntity(event.getName(), event.getDate(), event.getStart(), event.getEnd(), event.getDescription(), ActivityTypesEnum.valueOf(event.getType()));
         eventEntity.deleteEntity();
         CalendarSubject.getInstance().deleteEvent(eventEntity);
         if(event.isThereAReminder()) SetReminderEmailBoundary.sendToServer(event, true) ;

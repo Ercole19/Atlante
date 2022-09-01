@@ -41,7 +41,7 @@ public class EventDao extends AbstractDAO {
 
 
     public void delete(String nome , LocalDate date) throws EventException {
-        try (PreparedStatement statement = this.getConnection().prepareStatement("call athena.delete_event(?,? ,?)" )) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement("call athena.delete_event(?,?,?)" )) {
 
             statement.setString(1,nome);
             statement.setString(2,email);

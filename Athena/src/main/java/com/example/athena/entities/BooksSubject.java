@@ -40,7 +40,7 @@ public class BooksSubject extends AbstractSubject {
     {
         this.totalBooksOnSell.remove(index);
         BookDao dao = new BookDao() ;
-        dao.deleteBook(book.getIsbn());
+        dao.deleteBook(book.getIsbn(), book.getSaleTimestamp());
         super.notifyObserver();
     }
 

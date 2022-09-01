@@ -30,7 +30,7 @@ public class RecentActivitiesUCC {
             else bookBean.setPurchaser(book.getPurchaser());
             bookBean.setTitle(book.getBookTitle());
             bookBean.setIsbn(book.getIsbn());
-            bookBean.setPrice(Float.toString(book.getPrice()));
+            bookBean.setPrice(book.getPrice());
             bookList.add(bookBean);
 
         }

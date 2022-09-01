@@ -8,12 +8,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 import java.io.*;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class BookDao extends AbstractDAO {
     private final String email = Student.getInstance().getEmail();
@@ -24,13 +26,13 @@ public class BookDao extends AbstractDAO {
         imageCount++ ;
     }
 
-    public void insertBook(String title , String isbn , Float price , boolean negotiability, List<File> images)
+    public void insertBook(String title , String isbn , String price , boolean negotiability, List<File> images)
     {
-        try (PreparedStatement statement = this.getConnection().prepareStatement("insert into athena.books values (?,?,?,?,?, current_timestamp())") ; PreparedStatement statement2 = this.getConnection().prepareStatement("INSERT INTO `athena`.`book_images` (email, isbn, image,image_name, count_image ) VALUES (?,?,?,?,?)")) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement("insert into athena.books values (?,?,?,?,?, current_timestamp())") ; PreparedStatement statement2 = this.getConnection().prepareStatement("INSERT INTO `athena`.`book_images` (email, isbn, image,image_name, count_image, bookSaleTimestamp ) VALUES (?,?,?,?,?, current_timestamp())")) {
 
             statement.setString(1, title);
             statement.setString(2, isbn);
-            statement.setFloat(3, price);
+            statement.setString(3, price);
             statement.setBoolean(4, negotiability);
             statement.setString(5 ,email);
             statement.execute() ;
@@ -67,14 +69,15 @@ public class BookDao extends AbstractDAO {
         }
     }
 
-    public void deleteBook(String isbn)
+    public void deleteBook(String isbn, String timestamp)
     {
-        try(PreparedStatement statement = this.getConnection().prepareStatement("delete from athena.books where isbn_book = ? and email_user = ?"))
+        try(PreparedStatement statement = this.getConnection().prepareStatement("delete from athena.books where isbn_book = ? and email_user = ? and saleTimestamp = ?"))
         {
             deleteBookImages(isbn);
 
             statement.setString(1, isbn) ;
             statement.setString(2, email) ;
+            statement.setTimestamp(3, Timestamp.valueOf(timestamp));
             statement.execute() ;
         }
         catch(SQLException e)
@@ -85,19 +88,19 @@ public class BookDao extends AbstractDAO {
 
     public ObservableList<BookEntity>  getList () {
         ObservableList<BookEntity> list = FXCollections.observableArrayList() ;
-
-        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT title_book, isbn_book, price, negotiable from athena.books where email_user = ?"))
+        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT title_book, isbn_book, price, negotiable, saleTimestamp from athena.books where email_user = ?"))
         {
             statement.setString(1, email) ;
             ResultSet set = statement.executeQuery();
             while (set.next()) {
                 String title = set.getString(1) ;
                 String isbn = set.getString(2) ;
-                Float price = set.getFloat(3) ;
+                String price = set.getString(3);
                 boolean negotiable = set.getBoolean(4) ;
-                List<File> images = getBookImages(isbn, email);
+                String timestamp = set.getTimestamp(5).toString();
+                List<File> images = getBookImages(isbn, email, timestamp);
 
-                BookEntity book = new BookEntity(title, isbn, price, negotiable, images, email) ;
+                BookEntity book = new BookEntity(title, isbn, price, negotiable, images, email, timestamp);
 
                 list.add(book);
             }
@@ -109,16 +112,15 @@ public class BookDao extends AbstractDAO {
         return list ;
     }
 
-    private List<File> getBookImages(String isbn, String email)
+    private List<File> getBookImages(String isbn, String email, String timestamp)
     {
         List<File> list = new ArrayList<>();
-        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT image from athena.book_images where email = ? and isbn  = ? order by count_image"))
+        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT image from athena.book_images where email = ? and isbn  = ? and bookSaleTimestamp = ?  order by count_image"))
         {
             statement.setString(1,email) ;
             statement.setString(2, isbn) ;
-
+            statement.setTimestamp(3, Timestamp.valueOf(timestamp));
             ResultSet set = statement.executeQuery() ;
-
             while(set.next())
             {
                 byte[] image = set.getBlob(1).getBytes(1,(int) set.getBlob(1).length()) ;
@@ -163,7 +165,7 @@ public class BookDao extends AbstractDAO {
                     booksFiles.add(writeImage(image, pathname));
                     BookDao.incrementImageCounter();
                 }
-                BookEntity bookEntity = new BookEntity(set.getString(1), set.getString(2), set.getFloat(3), set.getString(4), set.getBoolean(6), booksFiles, String.valueOf(set.getTimestamp(7)));
+                BookEntity bookEntity = new BookEntity(set.getString(1), set.getString(2), set.getString(3), set.getString(4), set.getBoolean(6), booksFiles, String.valueOf(set.getTimestamp(7)));
                 books.add(bookEntity);
             }
 
@@ -199,7 +201,7 @@ public class BookDao extends AbstractDAO {
             ResultSet set = statement.executeQuery();
 
             while (set.next()) {
-                BookEntity book = new BookEntity(set.getString(1), set.getString(2), set.getString(3), set.getFloat(4));
+                BookEntity book = new BookEntity(set.getString(2), set.getString(3), set.getString(4), set.getString(1), 1 );
                 booksList.add(book);
             }
 
@@ -218,7 +220,7 @@ public class BookDao extends AbstractDAO {
             ResultSet set = statement.executeQuery();
 
             while (set.next()) {
-                BookEntity book = new BookEntity(set.getString(2), set.getString(3), set.getFloat(4), set.getString(1));
+                BookEntity book = new BookEntity(set.getString(2), set.getString(3), set.getString(4), set.getString(1), 0);
                 booksEntityList.add(book);
             }
 
