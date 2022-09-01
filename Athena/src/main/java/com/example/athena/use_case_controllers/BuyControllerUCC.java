@@ -26,7 +26,7 @@ public class BuyControllerUCC {
            for (BookEntity entity : bookinfos)
            {
                BookBean book = new BookBean();
-               book.setTitle(entity.getTitle());
+               book.setBookTitle(entity.getTitle());
                book.setIsbn(entity.getIsbn());
                book.setPrice(String.valueOf(entity.getPrice()));
                book.setIsNegotiable(entity.getNegotiable());

@@ -76,7 +76,7 @@ public class BooksSubject extends AbstractSubject {
         for (BookEntity entity : this.totalBooksOnSell) {
 
             BookBean bean = new BookBean();
-            bean.setTitle(entity.getTitle());
+            bean.setBookTitle(entity.getTitle());
             bean.setIsbn(entity.getIsbn());
             bean.setPrice(String.valueOf(entity.getPrice()));
             bean.setIsNegotiable(entity.getNegotiable());

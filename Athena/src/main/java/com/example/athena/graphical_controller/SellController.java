@@ -71,7 +71,7 @@ public class SellController implements Initializable, AbstractObserver {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colName.setCellValueFactory(new PropertyValueFactory<>("title"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("bookTitle"));
         colIsbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         javafx.util.Callback<TableColumn<BookBean, Void>, TableCell<BookBean, Void>> cellFactory = new javafx.util.Callback<>() {

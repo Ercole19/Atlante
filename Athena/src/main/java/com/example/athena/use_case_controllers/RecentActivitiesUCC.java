@@ -28,7 +28,7 @@ public class RecentActivitiesUCC {
             BookBean bookBean = new BookBean() ;
             if (book.getPurchaser() == null) bookBean.setOwner(book.getOwner());
             else bookBean.setPurchaser(book.getPurchaser());
-            bookBean.setTitle(book.getTitle());
+            bookBean.setBookTitle(book.getTitle());
             bookBean.setIsbn(book.getIsbn());
             bookBean.setPrice(book.getPrice());
             bookList.add(bookBean);

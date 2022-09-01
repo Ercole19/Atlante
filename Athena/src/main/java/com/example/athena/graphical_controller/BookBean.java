@@ -9,7 +9,7 @@ import java.util.List;
 
 public class BookBean {
 
-    private String title ;
+    private String bookTitle;
     private String isbn ;
     private String price ;
     private Boolean isNegotiable ;
@@ -30,7 +30,7 @@ public class BookBean {
 
 
     public String getBookTitle() {
-        return this.title;
+        return this.bookTitle;
     }
 
     public String getIsbn(){
@@ -47,8 +47,8 @@ public class BookBean {
 
     public List<File> getImage() {return this.image; }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
     }
 
     public void setIsbn(String isbn)throws BookException {
