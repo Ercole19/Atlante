@@ -1,7 +1,7 @@
 package com.example.athena.graphical_controller;
 
-import com.example.athena.entities.StringHoursConverter;
-import com.example.athena.entities.SubjectLabels;
+import com.example.athena.entities.*;
+import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.TutorReviewException;
 import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
@@ -59,11 +59,18 @@ public class TutorReviewPageGraphicalController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        starsNumber.setText("5*") ;
-
-        for(SubjectLabels subject : SubjectLabels.values())
-        {
-            subjectChoiceBox.getItems().add(subject.toString()) ;
+        UserBean bean = new UserBean();
+        bean.setEmail(Tutor.getInstance().getEmail());
+        try {
+            TutorInfosBean tutorInfosBean = TutorPersonalPageSubject.getInstance().getTutorInfos(bean);
+            starsNumber.setText(String.valueOf(tutorInfosBean.getAvgReview())) ;
+            for(String subject : tutorInfosBean.getTutorCourses())
+            {
+                subjectChoiceBox.getItems().add(subject) ;
+            }
+        } catch (CourseException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error in retrieving infos from db, infos follow: " + e.getMessage(), ButtonType.CLOSE);
+            alert.showAndWait();
         }
 
         prepareFactory(startHourSpinner, 0, 23) ;
@@ -74,8 +81,7 @@ public class TutorReviewPageGraphicalController implements Initializable
 
     private void prepareFactory(Spinner<Integer> spinner, int rangeStart, int rangeEnd)
     {
-        SpinnerValueFactory<Integer> minutesValueFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(rangeStart, rangeEnd) ;
+        SpinnerValueFactory<Integer> minutesValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(rangeStart, rangeEnd) ;
         minutesValueFactory.setWrapAround(true) ;
         minutesValueFactory.setConverter(new StringHoursConverter(rangeStart, rangeEnd)) ;
         minutesValueFactory.setValue(0) ;

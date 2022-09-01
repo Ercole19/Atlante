@@ -26,19 +26,21 @@ public class BookDao extends AbstractDAO {
         imageCount++ ;
     }
 
-    public void insertBook(String title , String isbn , String price , boolean negotiability, List<File> images)
+    public void insertBook(String title , String isbn , String price , boolean negotiability, List<File> images, Timestamp timestamp)
     {
-        try (PreparedStatement statement = this.getConnection().prepareStatement("insert into athena.books values (?,?,?,?,?, current_timestamp())") ; PreparedStatement statement2 = this.getConnection().prepareStatement("INSERT INTO `athena`.`book_images` (email, isbn, image,image_name, count_image, bookSaleTimestamp ) VALUES (?,?,?,?,?, current_timestamp())")) {
+        try (PreparedStatement statement = this.getConnection().prepareStatement("insert into athena.books values (?,?,?,?,?,?)") ; PreparedStatement statement2 = this.getConnection().prepareStatement("INSERT INTO `athena`.`book_images` (email, isbn, image,image_name, count_image, bookSaleTimestamp ) VALUES (?,?,?,?,?,?)")) {
 
             statement.setString(1, title);
             statement.setString(2, isbn);
             statement.setString(3, price);
             statement.setBoolean(4, negotiability);
             statement.setString(5 ,email);
+            statement.setTimestamp(6, timestamp);
             statement.execute() ;
 
             statement2.setString(1,email);
             statement2.setString(2,isbn);
+            statement2.setTimestamp(6, timestamp);
 
             for (File file : images) {
                 statement2.setBlob(3, new BufferedInputStream(new FileInputStream(file)));

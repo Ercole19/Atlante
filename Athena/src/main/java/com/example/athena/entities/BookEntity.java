@@ -13,7 +13,7 @@ public class BookEntity {
     private final File file  ;
     private String owner ;
     private String purchaser;
-    private final String saleTimestamp;
+    private String saleTimestamp;
     boolean type;
 
 
@@ -104,5 +104,9 @@ public class BookEntity {
     public String getPurchaser() {return this.purchaser;}
 
     public String getSaleTimestamp() {return this.saleTimestamp ;}
+
+    public void setSaleTimestamp(String timestamp) {
+        this.saleTimestamp = timestamp;
+    }
 
 }

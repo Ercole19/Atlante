@@ -6,6 +6,9 @@ import com.example.athena.graphical_controller.BookBean;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +33,9 @@ public class BooksSubject extends AbstractSubject {
     public void addBook(BookEntity book)
     {
         BookDao dao = new BookDao() ;
-        dao.insertBook(book.getTitle(), book.getIsbn(), book.getPrice(), book.getNegotiable(), book.getImage());
+        Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        dao.insertBook(book.getTitle(), book.getIsbn(), book.getPrice(), book.getNegotiable(), book.getImage(), timestamp);
+        book.setSaleTimestamp(String.valueOf(timestamp));
         this.totalBooksOnSell.add(book);
         super.notifyObserver();
     }
@@ -83,6 +88,7 @@ public class BooksSubject extends AbstractSubject {
             bean.setImage(entity.getImage());
             bean.setOwner(Student.getInstance().getEmail());
             bean.setIndex(i);
+            bean.setTimeStamp(entity.getSaleTimestamp());
             bookBeanList.add(bean);
             i++;
 
