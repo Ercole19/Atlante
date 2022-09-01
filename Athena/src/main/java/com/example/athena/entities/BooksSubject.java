@@ -30,7 +30,7 @@ public class BooksSubject extends AbstractSubject {
     public void addBook(BookEntity book)
     {
         BookDao dao = new BookDao() ;
-        dao.insertBook(book.getBookTitle(), book.getIsbn(), book.getPrice(), book.getNegotiable(), book.getImage());
+        dao.insertBook(book.getTitle(), book.getIsbn(), book.getPrice(), book.getNegotiable(), book.getImage());
         this.totalBooksOnSell.add(book);
         super.notifyObserver();
     }
@@ -76,10 +76,10 @@ public class BooksSubject extends AbstractSubject {
         for (BookEntity entity : this.totalBooksOnSell) {
 
             BookBean bean = new BookBean();
-            bean.setTitle(entity.getBookTitle());
+            bean.setTitle(entity.getTitle());
             bean.setIsbn(entity.getIsbn());
             bean.setPrice(String.valueOf(entity.getPrice()));
-            bean.setNegotiable(entity.getNegotiable());
+            bean.setIsNegotiable(entity.getNegotiable());
             bean.setImage(entity.getImage());
             bean.setOwner(Student.getInstance().getEmail());
             bean.setIndex(i);

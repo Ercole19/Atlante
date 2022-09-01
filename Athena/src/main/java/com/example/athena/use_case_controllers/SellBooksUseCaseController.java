@@ -17,7 +17,7 @@ public class SellBooksUseCaseController {
     public void updateProduct(BookBean oldBook, BookBean newBook) throws ISBNException
     {
         BookEntity oldBookEntity = new BookEntity(oldBook.getBookTitle(), oldBook.getIsbn(), oldBook.getPrice(), oldBook.getNegotiable() , oldBook.getImage(), Student.getInstance().getEmail()) ;
-        BookEntity newBookEntity = new BookEntity(newBook.getTitle(), newBook.getIsbn(), newBook.getPrice(), newBook.getNegotiable(), newBook.getImage(), Student.getInstance().getEmail());
+        BookEntity newBookEntity = new BookEntity(newBook.getBookTitle(), newBook.getIsbn(), newBook.getPrice(), newBook.getNegotiable(), newBook.getImage(), Student.getInstance().getEmail());
         BooksSubject.getInstance().deleteBook(oldBookEntity, oldBook.getIndex());
         BooksSubject.getInstance().addBook(newBookEntity);
     }

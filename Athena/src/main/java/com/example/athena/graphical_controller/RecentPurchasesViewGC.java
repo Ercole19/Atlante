@@ -34,7 +34,7 @@ public class RecentPurchasesViewGC {
 
                 searchResultProduct.setEntry(i, 0, LabelBuilder.buildLabel(bookBean.getOwner()));
 
-                searchResultProduct.setEntry(i, 1,  LabelBuilder.buildLabel(bookBean.getTitle()));
+                searchResultProduct.setEntry(i, 1,  LabelBuilder.buildLabel(bookBean.getBookTitle()));
 
                 searchResultProduct.setEntry(i, 2,  LabelBuilder.buildLabel(bookBean.getIsbn()));
 

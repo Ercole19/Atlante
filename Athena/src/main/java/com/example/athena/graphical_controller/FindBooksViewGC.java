@@ -55,7 +55,7 @@ public class FindBooksViewGC {
                 image.setPreserveRatio(true);
                 product.setEntry(i, 0, image);
 
-                Label titleLabel = new Label(bookBean.getTitle()) ;
+                Label titleLabel = new Label(bookBean.getBookTitle()) ;
                 titleLabel.setFont(new Font(FONT, 26)) ;
                 product.setEntry(i, 1, titleLabel) ;
 

@@ -98,13 +98,6 @@ public class BookBean {
         return index;
     }
 
-    public void setNegotiable(Boolean negotiable) {
-        isNegotiable = negotiable;
-    }
-
-    public String getTitle() {
-        return title;
-    }
 
     public void setPurchaser(String purchaser) {
         this.purchaser = purchaser;

@@ -75,7 +75,7 @@ public class BookEntity {
 
 
 
-    public String getBookTitle() {
+    public String getTitle() {
         return this.title;
     }
 

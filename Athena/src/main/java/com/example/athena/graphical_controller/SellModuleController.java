@@ -98,7 +98,7 @@ public class SellModuleController extends ShiftImageController implements Initia
             this.book.setTitle(bookTitle.getText());
             this.book.setIsbn(bookISBN.getText());
             this.book.setPrice(bookPrice.getText());
-            this.book.setNegotiable(bookNegotiability.isSelected());
+            this.book.setIsNegotiable(bookNegotiability.isSelected());
             this.book.setImage(files);
             this.book.setOwner(Student.getInstance().getEmail());
         }

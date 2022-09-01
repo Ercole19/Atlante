@@ -19,16 +19,8 @@ public class EntityExam {
         this.name = name;
     }
 
-    public void setGrade(int grade) {
-        this.grade = grade;
-    }
-
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public void setCfu(int cfu) {
-        this.cfu = cfu;
     }
 
     public int getGrade() {
