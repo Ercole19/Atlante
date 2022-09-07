@@ -4,8 +4,10 @@ import com.example.athena.entities.Student;
 import com.example.athena.entities.Tutor;
 import com.example.athena.entities.TutorStudentLogged;
 import com.example.athena.entities.UserDao;
+import com.example.athena.exceptions.FindException;
+import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.exceptions.UserNotFoundException;
-import com.example.athena.graphical_controller.UserBean;
+import com.example.athena.beans.UserBean;
 
 
 public class LoginUseCaseController {

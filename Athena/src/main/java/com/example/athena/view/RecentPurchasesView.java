@@ -8,10 +8,9 @@ import com.example.athena.entities.Student;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.PercentFormatException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.graphical_controller.RecentPurchasesViewGC;
+import com.example.athena.graphical_controller.normal_interface.RecentPurchasesViewGC;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.converter.PercentageStringConverter;
 
 public class RecentPurchasesView {
 

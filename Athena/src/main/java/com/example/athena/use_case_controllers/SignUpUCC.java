@@ -6,8 +6,8 @@ import com.example.athena.entities.TutorReviewCodesGenerator;
 import com.example.athena.entities.UserDao;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.UserRegistrationException;
-import com.example.athena.graphical_controller.RegistrationBean;
-import com.example.athena.graphical_controller.UserBean;
+import com.example.athena.beans.RegistrationBean;
+import com.example.athena.beans.UserBean;
 
 import java.security.NoSuchAlgorithmException;
 

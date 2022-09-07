@@ -4,6 +4,7 @@ import com.example.athena.exceptions.CourseException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +18,7 @@ public class CourseDao extends AbstractDAO {
             statement.setString(1, course);
             statement.setString(2, Tutor.getInstance().getEmail());
             statement.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             throw new CourseException(e.getMessage());
         }
 
@@ -28,7 +29,7 @@ public class CourseDao extends AbstractDAO {
             statement.setString(1, course);
             statement.setString(2, Tutor.getInstance().getEmail());
             statement.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             throw new CourseException(e.getMessage());
         }
 
@@ -42,7 +43,7 @@ public class CourseDao extends AbstractDAO {
             while (set.next()) {
                 courses.add(set.getString(1));
             }
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             throw new CourseException(e.getMessage());
         }
         return courses;

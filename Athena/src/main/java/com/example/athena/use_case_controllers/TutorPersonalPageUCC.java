@@ -1,24 +1,21 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.entities.CourseDao;
 import com.example.athena.entities.TutorInfoEntity;
 import com.example.athena.entities.TutorPersonalPageSubject;
 import com.example.athena.entities.UserDao;
-import com.example.athena.exceptions.CourseException;
-import com.example.athena.graphical_controller.TutorInfosBean;
-import com.example.athena.graphical_controller.UserBean;
+import com.example.athena.beans.TutorInfosBean;
+import com.example.athena.exceptions.UserInfoException;
 
 import java.io.File;
-import java.util.List;
 
 public class TutorPersonalPageUCC {
-    public void updateTutorInformation(TutorInfosBean bean)  {
+    public void updateTutorInformation(TutorInfosBean bean) throws UserInfoException {
         TutorInfoEntity entity = new TutorInfoEntity(bean.getAboutMe(), bean.getContactNumbers(), bean.getSessionInfos());
         TutorPersonalPageSubject.getInstance().updateTutorInfos(entity);
 
     }
 
-    public void uploadCV(File cv) {
+    public void uploadCV(File cv) throws UserInfoException{
         UserDao dao = new UserDao();
         dao.insertCv(cv);
     }

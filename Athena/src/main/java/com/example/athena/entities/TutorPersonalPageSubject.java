@@ -2,8 +2,9 @@ package com.example.athena.entities;
 
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
 import com.example.athena.exceptions.CourseException;
-import com.example.athena.graphical_controller.TutorInfosBean;
-import com.example.athena.graphical_controller.UserBean;
+import com.example.athena.beans.TutorInfosBean;
+import com.example.athena.beans.UserBean;
+import com.example.athena.exceptions.UserInfoException;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class TutorPersonalPageSubject extends AbstractSubject {
         return instance ;
     }
 
-    private void getAllInfos(String email) throws CourseException {
+    private void getAllInfos(String email) throws CourseException, UserInfoException {
         UserDao userDao = new UserDao() ;
         CourseDao courseDao = new CourseDao() ;
 
@@ -41,7 +42,7 @@ public class TutorPersonalPageSubject extends AbstractSubject {
 
     }
 
-    public TutorInfosBean getTutorInfos(UserBean bean) throws CourseException {
+    public TutorInfosBean getTutorInfos(UserBean bean) throws CourseException, UserInfoException {
         if(this.entity == null) { getAllInfos(bean.getEmail()); }
         TutorInfosBean returnBean = new TutorInfosBean() ;
         returnBean.setName(this.entity.getName());
@@ -71,7 +72,7 @@ public class TutorPersonalPageSubject extends AbstractSubject {
     }
 
 
-    public void updateTutorInfos(TutorInfoEntity entity) {
+    public void updateTutorInfos(TutorInfoEntity entity) throws UserInfoException {
         UserDao dao = new UserDao();
         dao.updateTutorInfos(entity.getAboutMe(), entity.getSessionInfos(), entity.getContactNumbers());
         this.entity.setTutorInfos(entity.getAboutMe(), entity.getSessionInfos(), entity.getContactNumbers());

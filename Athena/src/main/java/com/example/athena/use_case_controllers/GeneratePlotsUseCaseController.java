@@ -5,8 +5,8 @@ import com.example.athena.entities.PlotEntity;
 import com.example.athena.entities.PlottingOptionsEnum;
 import com.example.athena.entities.TimePeriodsEnum;
 import com.example.athena.exceptions.PlottingException;
-import com.example.athena.graphical_controller.ActivityPlotsBean;
-import com.example.athena.graphical_controller.PlotSearchQueryBean;
+import com.example.athena.beans.ActivityPlotsBean;
+import com.example.athena.beans.PlotSearchQueryBean;
 import javafx.scene.chart.XYChart;
 
 import java.util.ArrayList;

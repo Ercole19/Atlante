@@ -2,7 +2,7 @@ package com.example.athena.engineering_classes.scene_decorators;
 
 import javafx.scene.Parent;
 
-public abstract class TutorPageDecorator extends TutorPageComponent {
+public abstract class TutorPageDecorator implements TutorPageComponent {
 
     private TutorPageComponent component ;
 

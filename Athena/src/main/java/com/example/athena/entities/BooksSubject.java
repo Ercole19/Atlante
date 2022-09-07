@@ -2,7 +2,8 @@ package com.example.athena.entities;
 
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
 import com.example.athena.exceptions.BookException;
-import com.example.athena.graphical_controller.BookBean;
+import com.example.athena.beans.BookBean;
+import com.example.athena.exceptions.UserInfoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

@@ -2,6 +2,7 @@ package com.example.athena.entities;
 
 import com.example.athena.exceptions.TutorReviewException;
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -30,7 +31,7 @@ public class ReviewDAO extends AbstractDAO
             Time sqlEndTime = Time.valueOf(endTime) ;
             statement.setString(7, sqlEndTime.toString()) ;
             statement.executeUpdate() ;
-        }catch (SQLException e)
+        }catch (SQLException | IOException e)
         {
             throw new TutorReviewException("Error in loading the information") ;
         }
@@ -57,7 +58,7 @@ public class ReviewDAO extends AbstractDAO
                         reviewDay.toLocalDate(), startTime.toLocalTime(), endTime.toLocalTime()) ;
             }
             else throw new TutorReviewException("No information found") ;
-        }catch (SQLException e)
+        }catch (SQLException | IOException e)
         {
             throw new TutorReviewException("Failed to retrieve from DB") ;
         }
@@ -69,7 +70,7 @@ public class ReviewDAO extends AbstractDAO
         {
             statement.setString(1, reviewCode) ;
             statement.executeUpdate() ;
-        }catch (SQLException e)
+        }catch (SQLException | IOException e)
         {
             throw new TutorReviewException("Failed to remove from DB") ;
         }
@@ -81,7 +82,7 @@ public class ReviewDAO extends AbstractDAO
             statement.setInt(2 , reviewStars);
             statement.executeQuery() ;
 
-        } catch (SQLException exc) {
+        } catch (SQLException | IOException exc) {
             throw new TutorReviewException("Failed to connect to DB") ;
         }
     }

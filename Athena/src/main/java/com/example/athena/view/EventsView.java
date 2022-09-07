@@ -7,8 +7,7 @@ import com.example.athena.engineering_classes.abstract_factory.SearchResultProdu
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.PercentFormatException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.graphical_controller.EventPageGC;
-import com.example.athena.graphical_controller.EventsViewGC;
+import com.example.athena.graphical_controller.normal_interface.EventsViewGC;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 

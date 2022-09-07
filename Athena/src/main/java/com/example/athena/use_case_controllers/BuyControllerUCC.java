@@ -8,8 +8,8 @@ import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.FindBookException;
 import com.example.athena.exceptions.FindException;
 import com.example.athena.exceptions.PurchaseException;
-import com.example.athena.graphical_controller.BookBean;
-import com.example.athena.graphical_controller.PurchaseResultBean;
+import com.example.athena.beans.BookBean;
+import com.example.athena.beans.PurchaseResultBean;
 
 import java.util.ArrayList;
 import java.util.List;

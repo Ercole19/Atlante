@@ -3,12 +3,11 @@ package com.example.athena.entities;
 import com.example.athena.engineering_classes.ExamsComparator;
 import com.example.athena.exceptions.CareerStatusException;
 import com.example.athena.exceptions.ExamException;
-import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.graphical_controller.ExamEntityBean;
+import com.example.athena.beans.ExamEntityBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
+import com.example.athena.exceptions.UserInfoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,7 @@ public class  ExamsSubject extends AbstractSubject {
    {
    }
 
-   private void getCacheExams() throws ExamException
+   private void getCacheExams() throws ExamException, UserInfoException
    {
        ExamDao eDao = new ExamDao();
        this.totalExams.addAll(eDao.getExamlist()) ;
@@ -100,7 +99,7 @@ public class  ExamsSubject extends AbstractSubject {
        return this.getExams().sorted(comparator);
    }
 
-   public int getTotalExamsNumber() throws ExamException
+   public int getTotalExamsNumber() throws ExamException, UserInfoException
    {
        if(this.totalExamsNumber == -1) {
            getCacheExams();
@@ -108,7 +107,7 @@ public class  ExamsSubject extends AbstractSubject {
        return this.totalExamsNumber;
    }
 
-   public int getTotalCfusNumber() throws ExamException
+   public int getTotalCfusNumber() throws ExamException, UserInfoException
    {
        if(this.totalCfus == -1) {
            getCacheExams();
@@ -116,7 +115,7 @@ public class  ExamsSubject extends AbstractSubject {
        return this.totalCfus;
    }
 
-   public int getTakenExamsNumber() throws ExamException
+   public int getTakenExamsNumber() throws ExamException, UserInfoException
    {
        if (this.takenExamsNumber == -1) {
            getCacheExams();
@@ -124,7 +123,7 @@ public class  ExamsSubject extends AbstractSubject {
        return this.takenExamsNumber ;
    }
 
-   public int getGainedCfusNumber () throws ExamException {
+   public int getGainedCfusNumber () throws ExamException, UserInfoException {
        if (this.gainedCfusNumber == -1) {
            getCacheExams();
        }

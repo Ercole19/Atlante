@@ -4,6 +4,7 @@ import com.example.athena.exceptions.ExamException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,7 +31,7 @@ public class ExamDao extends AbstractDAO {
                 examlist.add(exam);
 
             }
-        } catch (SQLException  exc) {
+        } catch (SQLException | IOException exc) {
             throw new ExamException("Error in retrieving exams from server, details follow: " + exc.getMessage());
         }
         return examlist;
@@ -47,7 +48,7 @@ public class ExamDao extends AbstractDAO {
             stm.setString(5, emailcurrent);
             stm.executeUpdate();
 
-        } catch (Exception exc) {
+        } catch (SQLException | IOException exc) {
             throw new ExamException("Error in adding exam, details follow: " + exc.getMessage());
         }
 
@@ -59,7 +60,7 @@ public class ExamDao extends AbstractDAO {
             stm.setString(1, name);
             stm.setString(2,emailcurrent);
             stm.execute();
-        }catch (SQLException exc) {
+        }catch (SQLException | IOException exc) {
             throw new ExamException("Error in deleting exam, details follow: " + exc.getMessage());
         }
     }
@@ -70,7 +71,7 @@ public class ExamDao extends AbstractDAO {
             ResultSet set = statement.executeQuery();
             set.next() ;
             return set.getInt(1);
-        }catch (SQLException exc) {
+        }catch (SQLException | IOException exc) {
             throw new ExamException("Error in finding taken exams number, details follow: " + exc.getMessage());
         }
     }
@@ -81,7 +82,7 @@ public class ExamDao extends AbstractDAO {
             ResultSet set = statement.executeQuery();
             set.next() ;
             return set.getInt(1);
-        }catch (SQLException exc) {
+        }catch (SQLException | IOException exc) {
             throw new ExamException("Error in finding gained cfus number, details follow: " + exc.getMessage());
         }
     }

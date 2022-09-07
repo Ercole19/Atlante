@@ -1,7 +1,7 @@
 package com.example.athena.view;
 
 import com.example.athena.entities.Tutor;
-import com.example.athena.graphical_controller.SceneSwitcher;
+import com.example.athena.graphical_controller.normal_interface.SceneSwitcher;
 import com.example.athena.engineering_classes.scene_decorators.TutorPageComponent;
 import javafx.scene.Parent;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TutorPageView extends TutorPageComponent
+public class TutorPageView implements TutorPageComponent
 {
     @Override
     public Parent build()

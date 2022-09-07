@@ -1,16 +1,14 @@
 package com.example.athena.boundaries;
 
 import com.example.athena.entities.Student;
-import com.example.athena.entities.User;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
-import com.example.athena.graphical_controller.EventBean;
+import com.example.athena.beans.EventBean;
 
 
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class SetReminderEmailBoundary extends SocketBoundary

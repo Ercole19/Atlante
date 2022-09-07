@@ -1,6 +1,6 @@
 package com.example.athena.view;
 
-import com.example.athena.graphical_controller.CalendarPageController;
+import com.example.athena.graphical_controller.normal_interface.CalendarPageController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;

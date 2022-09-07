@@ -1,0 +1,42 @@
+package com.example.athena.beans;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public class TutoringInformationBean
+{
+    private String tutorsName ;
+    private String tutoringSubject ;
+    private String tutoringDaysHour ;
+
+    public void setTutorsName(String tutorsName)
+    {
+        this.tutorsName = tutorsName ;
+    }
+
+    public String getTutorsName()
+    {
+        return this.tutorsName ;
+    }
+
+    public void setTutoringSubject(String tutoringSubject)
+    {
+        this.tutoringSubject = tutoringSubject ;
+    }
+
+    public String getTutoringSubject()
+    {
+        return this.tutoringSubject ;
+    }
+
+    public void setTutoringDaysHour(LocalDate day, LocalTime startTime, LocalTime endTime)
+    {
+        this.tutoringDaysHour = day.toString() + " " + startTime.getHour() + ":" + startTime.getMinute() + "-"
+                + endTime.getHour() + ":" + endTime.getMinute() ;
+    }
+
+    public String getTutoringDaysHour()
+    {
+        return this.tutoringDaysHour ;
+    }
+}

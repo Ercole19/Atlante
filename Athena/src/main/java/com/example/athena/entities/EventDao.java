@@ -2,6 +2,7 @@ package com.example.athena.entities;
 
 import com.example.athena.exceptions.EventException;
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.*;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class EventDao extends AbstractDAO {
             statement.executeUpdate() ;
 
 
-        } catch (SQLException exc) {
+        } catch (SQLException | IOException exc) {
             throw new EventException("Error in adding new event, details follow: " + exc.getMessage());
         }
 
@@ -50,7 +51,7 @@ public class EventDao extends AbstractDAO {
             statement.execute();
 
 
-        }catch (SQLException exc) {
+        }catch (SQLException | IOException exc) {
             throw new EventException("Error in deleting event, details follow: " + exc.getMessage());
         }
     }
@@ -81,7 +82,7 @@ public class EventDao extends AbstractDAO {
             }
 
             return events ;
-        }catch(SQLException e)
+        }catch(SQLException | IOException e)
         {
             throw new EventException("Error in retrieving entities, details follow: " + e.getMessage()) ;
         }
@@ -108,7 +109,7 @@ public class EventDao extends AbstractDAO {
             }
 
         }
-        catch(SQLException e)
+        catch(SQLException | IOException e)
         {
             throw new EventException("Error in retrieving events, details follow: " + e.getMessage()) ;
         }

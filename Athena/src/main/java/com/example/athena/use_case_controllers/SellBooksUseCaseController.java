@@ -1,11 +1,9 @@
 package com.example.athena.use_case_controllers;
 
 import com.example.athena.entities.*;
+import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
-import com.example.athena.graphical_controller.BookBean;
-
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import com.example.athena.beans.BookBean;
 
 import static com.example.athena.boundaries.IsbnCheckBoundary.isbnCheck;
 

@@ -58,17 +58,10 @@ public class BookDao extends AbstractDAO {
 
     private void deleteBookImages(String isbn)
     {
-        try(PreparedStatement statement = this.getConnection().prepareStatement("delete from athena.book_images where isbn = ? and email = ? "))
-        {
-            statement.setString(1, isbn) ;
-            statement.setString(2, email) ;
-
-            statement.execute() ;
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace() ;
-        }
+        PreparedStatement statement = this.getConnection().prepareStatement("delete from athena.book_images where isbn = ? and email = ? ") ;
+        statement.setString(1, isbn) ;
+        statement.setString(2, email) ;
+        statement.execute() ;
     }
 
     public void deleteBook(String isbn, String timestamp)
@@ -240,11 +233,8 @@ public class BookDao extends AbstractDAO {
             statement.setString(2, seller);
 
             statement.execute();
-        } catch (SQLException exc) {
-            if (exc.getMessage().equals("Duplicate entry " + "'" +  seller + "-" + buyer + "'" +   " for key 'book_report.PRIMARY'")) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "You already reported this seller!", ButtonType.CLOSE);
-                alert.showAndWait();
-            }
+        } catch (SQLException | IOException exc) {
+            throw new BookException(exc.getMessage());
         }
     }
 }

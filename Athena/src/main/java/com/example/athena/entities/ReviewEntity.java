@@ -1,7 +1,7 @@
 package com.example.athena.entities;
 
 import com.example.athena.exceptions.TutorReviewException;
-import com.example.athena.graphical_controller.ReviewTutorSendUsernameBean;
+import com.example.athena.beans.ReviewTutorSendUsernameBean;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

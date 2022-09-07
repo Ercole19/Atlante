@@ -16,9 +16,7 @@ import java.util.List;
 
 public class UserDao extends AbstractDAO {
 
-    public boolean findStudent(String studentEmail, String pass) {
-
-
+    public boolean findStudent(String studentEmail, String pass) throws FindException{
         try (PreparedStatement stmt = this.getConnection().prepareStatement(" SELECT * FROM utenti WHERE  email = ? and password = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
 
             stmt.setString(1, studentEmail);
@@ -31,9 +29,6 @@ public class UserDao extends AbstractDAO {
         } catch (SQLException e) {
             e.getMessage();
         }
-
-
-        return false;
     }
 
     public Boolean registerUser(String email, String code) throws UserRegistrationException {
@@ -48,13 +43,13 @@ public class UserDao extends AbstractDAO {
             alert.showAndWait();
             return true;
 
-        } catch (SQLException exception) {
+        } catch (SQLException | IOException exception) {
             throw new UserRegistrationException(exception.getMessage());
         }
     }
 
 
-    public Object getUserType(String email) {
+    public Object getUserType(String email) throws UserInfoException {
 
         try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT type FROM utenti WHERE email = ?")) {
 
@@ -64,16 +59,12 @@ public class UserDao extends AbstractDAO {
             return set.getString(1);
 
 
-        } catch (SQLException exc) {
-            exc.getMessage();
+        } catch (SQLException | IOException exc) {
+            throw new UserInfoException(exc.getMessage());
         }
-
-        return null;
-
-
     }
 
-    public List<String> fillTutorInfosProcedure(String email) {
+    public List<String> fillTutorInfosProcedure(String email) throws UserInfoException {
         List<String> infos = new ArrayList<>();
         try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT  aboutme ,  sessioninfos  , contactnumbers  FROM athena.tutordescription WHERE emailuser = ? ")) {
 
@@ -84,8 +75,8 @@ public class UserDao extends AbstractDAO {
                 infos.add(set.getString(2));
                 infos.add(set.getString(3));
             }
-        } catch (SQLException exc) {
-            exc.getMessage();
+        } catch (SQLException | IOException exc) {
+            throw new UserInfoException(exc.getMessage());
         }
 
         return infos;
@@ -93,7 +84,7 @@ public class UserDao extends AbstractDAO {
     }
 
 
-    public void updateTutorInfos(String about, String sessionInfos, String contactNumbers) {
+    public void updateTutorInfos(String about, String sessionInfos, String contactNumbers) throws UserInfoException{
         try (PreparedStatement statement = this.getConnection().prepareStatement("UPDATE athena.tutordescription SET aboutme = ?,  sessioninfos=?, contactnumbers=?  WHERE emailuser= ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
             statement.setString(1, about);
             statement.setString(2, sessionInfos);
@@ -101,8 +92,8 @@ public class UserDao extends AbstractDAO {
             statement.setString(4, Tutor.getInstance().getEmail());
 
             statement.executeUpdate();
-        } catch (SQLException exc) {
-            exc.getMessage();
+        } catch (SQLException | IOException exc) {
+            throw new UserInfoException(exc.getMessage());
         }
 
     }
@@ -133,7 +124,7 @@ public class UserDao extends AbstractDAO {
                 i = i + 5;
             }
 
-        } catch (SQLException exc) {
+        } catch (SQLException | IOException exc) {
             throw new FindException(exc.getMessage());
         }
 
@@ -183,21 +174,20 @@ public class UserDao extends AbstractDAO {
     }
 
 
-    public void insertCv(File cv) {
+    public void insertCv(File cv)  throws UserInfoException {
         try (PreparedStatement preparedStatement = this.getConnection().prepareStatement("update athena.tutordescription  set CV = ?    where emailuser = ?")) {
             preparedStatement.setBlob(1, new BufferedInputStream(new FileInputStream(cv)));
             preparedStatement.setString(2, Tutor.getInstance().getEmail());
             preparedStatement.execute();
 
 
-        } catch (SQLException | FileNotFoundException exc) {
-            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR , exc.getMessage(), 800, 600);
-            alert.showAndWait();
+        } catch (SQLException | IOException exc) {
+            throw new UserInfoException(exc.getMessage());
         }
     }
 
 
-    public void getCV(String email) {
+    public void getCV(String email) throws UserInfoException {
         try (PreparedStatement statement = this.getConnection().prepareStatement("Select CV from athena.tutordescription where emailuser = ? ")) {
 
             statement.setString(1, email);
@@ -244,7 +234,7 @@ public class UserDao extends AbstractDAO {
     }
 
 
-    public int getAllExams() {
+    public int getAllExams() throws UserInfoException {
 
         int total = 0;
         try (PreparedStatement statement = this.getConnection().prepareStatement("Select max_exams from athena.student_infos where email =? ")) {
@@ -256,8 +246,8 @@ public class UserDao extends AbstractDAO {
             total = set.getInt(1);
 
 
-        } catch (SQLException exc) {
-            exc.printStackTrace();
+        } catch (SQLException | IOException exc) {
+            throw new UserInfoException(exc.getMessage());
         }
         return total;
     }

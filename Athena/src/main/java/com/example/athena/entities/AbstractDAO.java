@@ -47,7 +47,7 @@ public abstract class AbstractDAO
 
     }
 
-    protected synchronized Connection getConnection() throws SQLException
+    protected synchronized Connection getConnection() throws SQLException, IOException
     {
         if(dbConnection == null)
         {
@@ -64,19 +64,14 @@ public abstract class AbstractDAO
         return dbConnection ;
     }
 
-    protected static void getCredentials() {
-        try(BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/dbConn")) ) {
-
-        user = reader.readLine().substring(9);
-        pass = reader.readLine().substring(9);
-        dbUrl = reader.readLine().substring(7);
-        dbAddress = reader.readLine().substring(10) ;
-        sshPort = Integer.parseInt(reader.readLine().substring(10)) ;
-        username = reader.readLine().substring(11) ;
-        password = reader.readLine().substring(11) ;
-
-    }catch ( IOException exc ) {
-            exc.getMessage() ;
-        }
+    protected static void getCredentials() throws IOException {
+         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/dbConn"))) {
+             user = reader.readLine().substring(9);
+             pass = reader.readLine().substring(9);
+             dbUrl = reader.readLine().substring(7);
+             dbAddress = reader.readLine().substring(10);
+             sshPort = Integer.parseInt(reader.readLine().substring(10));
+             username = reader.readLine().substring(11);
+         }
     }
 }

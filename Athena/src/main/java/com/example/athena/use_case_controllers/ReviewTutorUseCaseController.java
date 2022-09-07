@@ -6,10 +6,10 @@ import com.example.athena.entities.ReviewEntity;
 import com.example.athena.entities.TutorReviewCodesGenerator;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.TutorReviewException;
-import com.example.athena.graphical_controller.ReviewCodeBean;
-import com.example.athena.graphical_controller.ReviewTutorSendUsernameBean;
-import com.example.athena.graphical_controller.SendReviewBean;
-import com.example.athena.graphical_controller.TutoringInformationBean;
+import com.example.athena.beans.ReviewCodeBean;
+import com.example.athena.beans.ReviewTutorSendUsernameBean;
+import com.example.athena.beans.SendReviewBean;
+import com.example.athena.beans.TutoringInformationBean;
 
 import java.security.NoSuchAlgorithmException;
 

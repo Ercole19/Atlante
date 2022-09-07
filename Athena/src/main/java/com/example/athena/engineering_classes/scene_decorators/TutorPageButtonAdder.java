@@ -1,6 +1,6 @@
 package com.example.athena.engineering_classes.scene_decorators;
 
-import com.example.athena.graphical_controller.TutorPersonalPageController;
+import com.example.athena.graphical_controller.normal_interface.TutorPersonalPageController;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -57,37 +57,15 @@ public class TutorPageButtonAdder extends TutorPageDecorator{
             }
         });
 
-        button1.setOnAction(event -> {
-            try {
-                graphController.onManageCoursesBtnClick();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        buttonCV.setOnAction(event -> {
-            try {
-            graphController.onCVButtonClickTutor();
-        } catch (IOException e ){
-            e.printStackTrace();
-        }
-        });
+        button1.setOnAction(event -> graphController.onManageCoursesBtnClick());
+        buttonCV.setOnAction(event -> graphController.onCVButtonClickTutor());
 
         return buttons;
     }
 
     private void setBackButton(AnchorPane originalScene, Object controller)
     {
-        ((Button) originalScene.lookup("#backBtn")).setOnAction( event -> {
-
-
-            try {
-                ((TutorPersonalPageController)controller).clickOnBackButtonTutor(event);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-        });
+        ((Button) originalScene.lookup("#backBtn")).setOnAction(((TutorPersonalPageController) controller)::clickOnBackButtonTutor);
     }
 
     private void setButtonStyle(Button button) {
