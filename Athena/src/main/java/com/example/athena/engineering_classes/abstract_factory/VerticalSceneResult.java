@@ -6,7 +6,7 @@ import javafx.scene.layout.*;
 
 import java.util.List;
 
-public class VerticalSceneResult extends SearchResultFormatterComponent {
+public class VerticalSceneResult implements SearchResultFormatterComponent {
 
     public AnchorPane buildScene(FormatBundle formatBundle) {
         double sceneHeight = (formatBundle.getEntryNumber()) * formatBundle.getEntrySize();

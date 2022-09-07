@@ -22,9 +22,7 @@ public class VerticalProduct implements SearchResultProduct{
     public void setEntry(int entryNum, int position, Node element) throws IndexOutOfBoundsException {
 
         GridPane entry  = (GridPane) this.root.lookup(String.format("#entry%d", entryNum));
-        if(entry == null) {
-            entry = (GridPane) ((SubScene) this.root.lookup("#subScene")).getRoot().lookup(String.format("#entry%d", entryNum)) ;
-        }
+        if (entry == null) throw new IndexOutOfBoundsException(String.format("Entry no.%d does not exist", entryNum)) ;
         entry.add(element, position, 0);
     }
 

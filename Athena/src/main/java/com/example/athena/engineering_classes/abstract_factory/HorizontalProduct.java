@@ -20,6 +20,7 @@ public class HorizontalProduct implements SearchResultProduct{
     @Override
     public void setEntry(int entryNum, int position, Node element) throws IndexOutOfBoundsException {
         GridPane entry = (GridPane) this.root.lookup(String.format("#entry%d", entryNum)) ;
+        if(entry == null) throw new IndexOutOfBoundsException(String.format("Entry no.%d does not exist", entryNum));
         entry.add(element, 0, position) ;
     }
 

@@ -57,7 +57,7 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
     private String email ;
 
 
-    public void clickOnBackButtonTutor(ActionEvent event) throws IOException
+    public void clickOnBackButtonTutor(ActionEvent event)
     {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         switcher.switcher(stage, "MainPageTutor.fxml") ;
@@ -88,7 +88,7 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
         switcher.popup("tutorCVView.fxml " , "CV", params) ;
     }
 
-    public void onConfirmButtonClick() throws IOException {
+    public void onConfirmButtonClick() {
         TutorPersonalPageUCC controller = new TutorPersonalPageUCC() ;
 
         UserBean bean = new UserBean() ;
@@ -128,7 +128,7 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
     }
 
 
-    public void onManageCoursesBtnClick() throws IOException {
+    public void onManageCoursesBtnClick() {
         switcher.popup("addcourse.fxml" , "Manage courses") ;
     }
 

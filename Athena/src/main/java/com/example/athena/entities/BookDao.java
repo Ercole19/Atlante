@@ -1,7 +1,11 @@
 package com.example.athena.entities;
 
 
+import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.FindException;
+import com.example.athena.exceptions.PurchaseException;
+import com.example.athena.exceptions.UserInfoException;
+import com.jcraft.jsch.IO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -24,7 +28,7 @@ public class BookDao extends AbstractDAO {
         imageCount++ ;
     }
 
-    public void insertBook(String title , String isbn , String price , boolean negotiability, List<File> images, Timestamp timestamp)
+    public void insertBook(String title , String isbn , String price , boolean negotiability, List<File> images, Timestamp timestamp) throws BookException
     {
         try (PreparedStatement statement = this.getConnection().prepareStatement("insert into athena.books values (?,?,?,?,?,?)") ; PreparedStatement statement2 = this.getConnection().prepareStatement("INSERT INTO `athena`.`book_images` (email, isbn, image,image_name, count_image, bookSaleTimestamp ) VALUES (?,?,?,?,?,?)")) {
 
@@ -48,13 +52,13 @@ public class BookDao extends AbstractDAO {
                 i++;
             }
         }
-         catch (SQLException | FileNotFoundException exc) {
-                exc.getMessage() ;
+         catch (SQLException | IOException exc) {
+            throw new BookException(exc.getMessage()) ;
          }
 
     }
 
-    private void deleteBookImages(String isbn)
+    private void deleteBookImages(String isbn) throws SQLException, IOException
     {
         PreparedStatement statement = this.getConnection().prepareStatement("delete from athena.book_images where isbn = ? and email = ? ") ;
         statement.setString(1, isbn) ;
@@ -62,7 +66,7 @@ public class BookDao extends AbstractDAO {
         statement.execute() ;
     }
 
-    public void deleteBook(String isbn, String timestamp)
+    public void deleteBook(String isbn, String timestamp) throws BookException
     {
         try(PreparedStatement statement = this.getConnection().prepareStatement("delete from athena.books where isbn_book = ? and email_user = ? and saleTimestamp = ?"))
         {
@@ -78,7 +82,7 @@ public class BookDao extends AbstractDAO {
         }
     }
 
-    public ObservableList<BookEntity>  getList () {
+    public ObservableList<BookEntity> getList() throws BookException {
         ObservableList<BookEntity> list = FXCollections.observableArrayList() ;
         try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT title_book, isbn_book, price, negotiable, saleTimestamp from athena.books where email_user = ?"))
         {
@@ -99,31 +103,25 @@ public class BookDao extends AbstractDAO {
         }
         catch (SQLException | IOException | UserInfoException e)
         {
-            e.printStackTrace();
+            throw new BookException(e.getMessage()) ;
         }
         return list ;
     }
 
-    private List<File> getBookImages(String isbn, String email, String timestamp)
+    private List<File> getBookImages(String isbn, String email, String timestamp) throws SQLException, IOException, UserInfoException
     {
         List<File> list = new ArrayList<>();
-        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT image from athena.book_images where email = ? and isbn  = ? and bookSaleTimestamp = ?  order by count_image"))
+        PreparedStatement statement = this.getConnection().prepareStatement("SELECT image from athena.book_images where email = ? and isbn  = ? and bookSaleTimestamp = ?  order by count_image") ;
+        statement.setString(1,email) ;
+        statement.setString(2, isbn) ;
+        statement.setTimestamp(3, Timestamp.valueOf(timestamp));
+        ResultSet set = statement.executeQuery() ;
+        while(set.next())
         {
-            statement.setString(1,email) ;
-            statement.setString(2, isbn) ;
-            statement.setTimestamp(3, Timestamp.valueOf(timestamp));
-            ResultSet set = statement.executeQuery() ;
-            while(set.next())
-            {
-                byte[] image = set.getBlob(1).getBytes(1,(int) set.getBlob(1).length()) ;
-                String pathname = "src/main/resources/book_images/tempImage" + i + ".png" ;
-                list.add(writeImage(image, pathname));
-                i = i + 1 ;
-            }
-        }
-        catch(SQLException | IOException e)
-        {
-            e.printStackTrace() ;
+            byte[] image = set.getBlob(1).getBytes(1,(int) set.getBlob(1).length()) ;
+            String pathname = "src/main/resources/book_images/tempImage" + i + ".png" ;
+            list.add(writeImage(image, pathname));
+            i = i + 1 ;
         }
         return list ;
     }
@@ -167,7 +165,7 @@ public class BookDao extends AbstractDAO {
         return books;
     }
 
-    public void finalizePurchase(String title, String isbn, Float price, String emailBuyer, String emailVendor, String timestamp)
+    public void finalizePurchase(String title, String isbn, Float price, String emailBuyer, String emailVendor, String timestamp) throws PurchaseException
     {
         try(PreparedStatement statement = this.getConnection().prepareStatement("CALL finalizePurchase(?,?,?,?,?,?)")) {
 
@@ -185,7 +183,7 @@ public class BookDao extends AbstractDAO {
         }
     }
 
-    public List<BookEntity> getRecentPurchasesResults(String email) {
+    public List<BookEntity> getRecentPurchasesResults(String email) throws BookException {
         List<BookEntity> booksList = new ArrayList<>();
         try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT vendorEmail, bookTitle, bookIsbn, bookPrice from athena.recent_purchases where purchaserEmail = ?")) {
 
@@ -197,14 +195,14 @@ public class BookDao extends AbstractDAO {
                 booksList.add(book);
             }
 
-        }catch (SQLException exc) {
-            exc.printStackTrace();
+        }catch (SQLException | IOException exc) {
+            throw new BookException(exc.getMessage()) ;
         }
         return booksList;
     }
 
 
-    public List<BookEntity> getRecentSoldItemsFromDB(String vendorEmail) {
+    public List<BookEntity> getRecentSoldItemsFromDB(String vendorEmail) throws BookException{
         List<BookEntity> booksEntityList = new ArrayList<>();
         try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT purchaserEmail, bookTitle, bookIsbn, bookPrice from athena.recent_purchases where vendorEmail = ?")) {
 
@@ -216,14 +214,14 @@ public class BookDao extends AbstractDAO {
                 booksEntityList.add(book);
             }
 
-        }catch (SQLException exc) {
-            exc.printStackTrace();
+        }catch (SQLException | IOException exc) {
+            throw new BookException(exc.getMessage()) ;
         }
         return booksEntityList;
     }
 
 
-    public void daoReportSeller(String buyer, String seller) {
+    public void daoReportSeller(String buyer, String seller) throws BookException {
         try(PreparedStatement statement = this.getConnection().prepareStatement("call athena.reportSeller(?,?)")) {
 
             statement.setString(1, buyer);

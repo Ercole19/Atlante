@@ -7,7 +7,7 @@ import javafx.scene.layout.*;
 
 import java.util.List;
 
-public class HorizontalSceneResult extends SearchResultFormatterComponent {
+public class HorizontalSceneResult implements SearchResultFormatterComponent {
 
     public AnchorPane buildScene(FormatBundle formatBundle) {
         double sceneWidth = (formatBundle.getEntryNumber()) * formatBundle.getEntrySize();

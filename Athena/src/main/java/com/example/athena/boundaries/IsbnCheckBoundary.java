@@ -27,9 +27,5 @@ public class IsbnCheckBoundary {
         catch (FileNotFoundException | MalformedURLException e)  {
             throw new ISBNException("Submitted ISBN does not exist");
         }
-        catch (IOException e) {
-            Logger logger = Logger.getLogger(IsbnCheckBoundary.class);
-            logger.error("error!", e);
-        }
     }
 }

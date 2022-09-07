@@ -26,11 +26,11 @@ public class LoginPageController{
     protected Stage stage;
 
     @FXML
-    private Button loginButton;
+    protected Button loginButton;
     @FXML
-    private TextField emailField ;
+    protected TextField emailField ;
     @FXML
-    private TextField passField;
+    protected TextField passField;
 
     public void switchToMainPage(ActionEvent event){
         String email = emailField.getText() ;

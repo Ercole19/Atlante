@@ -48,13 +48,7 @@ public class TutorPageButtonAdder extends TutorPageDecorator{
         buttons.add(button1);
 
 
-        button.setOnAction(event -> {
-            try {
-                graphController.onConfirmButtonClick();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        button.setOnAction(event -> graphController.onConfirmButtonClick());
 
         button1.setOnAction(event -> graphController.onManageCoursesBtnClick());
         buttonCV.setOnAction(event -> graphController.onCVButtonClickTutor());
