@@ -73,6 +73,7 @@ public abstract class AbstractDAO
              dbAddress = reader.readLine().substring(10);
              sshPort = Integer.parseInt(reader.readLine().substring(10));
              username = reader.readLine().substring(11);
+             password = reader.readLine().substring(11) ;
          }
     }
 }
