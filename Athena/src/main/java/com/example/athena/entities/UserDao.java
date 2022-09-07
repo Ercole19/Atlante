@@ -1,9 +1,7 @@
 package com.example.athena.entities;
 
-import com.example.athena.exceptions.CareerStatusException;
-import com.example.athena.exceptions.FindException;
-import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.exceptions.UserRegistrationException;
+import com.example.athena.exceptions.*;
+import com.jcraft.jsch.IO;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -25,9 +23,8 @@ public class UserDao extends AbstractDAO {
 
             return rs.first();
 
-
-        } catch (SQLException e) {
-            e.getMessage();
+        } catch (SQLException | IOException e) {
+            throw  new FindException(e.getMessage());
         }
     }
 
@@ -134,7 +131,7 @@ public class UserDao extends AbstractDAO {
     }
 
 
-    public String[] getName(String email) {
+    public String[] getName(String email) throws UserInfoException{
 
         String[] infos = new String[2];
         try (PreparedStatement statement = this.getConnection().prepareStatement("select nome,surname from athena.utenti where email = ? ")) {
@@ -146,14 +143,14 @@ public class UserDao extends AbstractDAO {
                 infos[1] = set.getString(2);
             }
 
-        } catch (SQLException e) {
-            e.getMessage();
+        } catch (SQLException | IOException e) {
+           throw new UserInfoException(e.getMessage());
         }
         return infos;
     }
 
 
-    public float getAvg(String email) {
+    public float getAvg(String email) throws UserInfoException {
         float avg = 0;
 
         try (PreparedStatement statement = this.getConnection().prepareStatement("select average from athena.tutordescription where emailuser =?")) {
@@ -166,8 +163,8 @@ public class UserDao extends AbstractDAO {
             }
 
 
-        } catch (SQLException e) {
-            e.getMessage();
+        } catch (SQLException | IOException e) {
+            throw new UserInfoException(e.getMessage());
         }
         return avg;
 
@@ -200,7 +197,7 @@ public class UserDao extends AbstractDAO {
             }
 
         } catch (SQLException | IOException exc) {
-            exc.getMessage();
+            throw new UserInfoException (exc.getMessage());
         }
     }
 
@@ -228,7 +225,7 @@ public class UserDao extends AbstractDAO {
             statement.execute();
 
 
-        } catch (SQLException exc) {
+        } catch (SQLException | IOException exc) {
             throw new CareerStatusException("Unable to update career status. Details follow: " + exc.getMessage());
         }
     }
@@ -253,7 +250,7 @@ public class UserDao extends AbstractDAO {
     }
 
 
-    public int getAllCfus() {
+    public int getAllCfus() throws UserInfoException {
         int total = 0;
 
         try (PreparedStatement statement = this.getConnection().prepareStatement("Select max_cfus from athena.student_infos where email =? ")) {
@@ -266,14 +263,14 @@ public class UserDao extends AbstractDAO {
             total = set.getInt(1);
 
 
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException | IOException exception) {
+            throw new UserInfoException(exception.getMessage());
         }
         return total;
     }
 
 
-    public int getTotalReport(String email){
+    public int getTotalReport(String email) throws UserInfoException {
 
         int repNum = 0;
         try(PreparedStatement statement = this.getConnection().prepareStatement("Select report_number from athena.student_infos where email = ?")){
@@ -286,8 +283,8 @@ public class UserDao extends AbstractDAO {
             repNum = set.getInt(1);
 
 
-        }catch (SQLException exc){
-            exc.printStackTrace();
+        }catch (SQLException | IOException exc){
+            throw new UserInfoException(exc.getMessage());
         }
         return repNum;
     }
@@ -305,7 +302,7 @@ public class UserDao extends AbstractDAO {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Registration successful", ButtonType.CLOSE);
             alert.showAndWait();
 
-        } catch (SQLException exception) {
+        } catch (SQLException | IOException exception) {
             throw new UserRegistrationException(exception.getMessage());
         }
     }

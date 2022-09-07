@@ -5,17 +5,20 @@ import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
 import com.example.athena.beans.BookBean;
 
+import java.awt.print.Book;
+import java.io.IOException;
+
 import static com.example.athena.boundaries.IsbnCheckBoundary.isbnCheck;
 
 public class SellBooksUseCaseController {
 
-    public void putOnSale(BookBean book) throws ISBNException {
+    public void putOnSale(BookBean book) throws ISBNException, BookException, IOException {
         isbnCheck(book.getIsbn()) ;
         BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), book.getPrice(), book.getNegotiable() , book.getImage(), Student.getInstance().getEmail());
         BooksSubject.getInstance().addBook(bookE);
     }
 
-    public void updateProduct(BookBean oldBook, BookBean newBook) throws ISBNException
+    public void updateProduct(BookBean oldBook, BookBean newBook) throws ISBNException, BookException
     {
         BookEntity oldBookEntity = new BookEntity(oldBook.getBookTitle(), oldBook.getIsbn(), oldBook.getPrice(), oldBook.getNegotiable() , oldBook.getImage(), Student.getInstance().getEmail(), oldBook.getTimeStamp() ) ;
         BookEntity newBookEntity = new BookEntity(newBook.getBookTitle(), newBook.getIsbn(), newBook.getPrice(), newBook.getNegotiable(), newBook.getImage(), Student.getInstance().getEmail());
@@ -23,7 +26,7 @@ public class SellBooksUseCaseController {
         BooksSubject.getInstance().addBook(newBookEntity);
     }
 
-    public void deleteProduct(BookBean book)
+    public void deleteProduct(BookBean book) throws BookException
     {
         BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), book.getPrice(), book.getNegotiable() , book.getImage(), Student.getInstance().getEmail(), book.getTimeStamp()) ;
         BooksSubject.getInstance().deleteBook(bookE, book.getIndex());

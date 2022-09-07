@@ -63,7 +63,7 @@ public class AverageController implements Initializable {
             labelAverageArit.setText(String.valueOf(String.format("%.2f", currentArithmeticAverage)));
             labelAverageWei.setText(String.valueOf(String.format("%.2f" , currentWeightedAverage)));
 
-        } catch (ExamException e) {
+        } catch (ExamException | UserInfoException e) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600) ;
             alert.showAndWait() ;
         }

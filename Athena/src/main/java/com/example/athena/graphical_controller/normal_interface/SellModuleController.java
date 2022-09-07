@@ -68,7 +68,7 @@ public class SellModuleController extends ShiftImageController implements Initia
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
             stage.close();
         }
-        catch (ISBNException e ){
+        catch (ISBNException | BookException | IOException e ){
             Alert alert = new Alert(Alert.AlertType.ERROR) ;
             alert.setContentText(e.getMessage()) ;
             alert.showAndWait() ;
@@ -85,7 +85,7 @@ public class SellModuleController extends ShiftImageController implements Initia
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
             stage.close();
         }
-        catch (ISBNException e){
+        catch (ISBNException | BookException e){
             Alert alert = new Alert(Alert.AlertType.ERROR) ;
             alert.setContentText(e.getMessage()) ;
             alert.showAndWait() ;

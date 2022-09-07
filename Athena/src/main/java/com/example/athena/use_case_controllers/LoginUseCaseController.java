@@ -12,7 +12,7 @@ import com.example.athena.beans.UserBean;
 
 public class LoginUseCaseController {
 
-    public UserBean findUser(UserBean bean) throws UserNotFoundException {
+    public UserBean findUser(UserBean bean) throws UserNotFoundException, UserInfoException, FindException {
 
         UserDao dao = new UserDao() ;
         if (dao.findStudent(bean.getEmail(), bean.getPassword())){

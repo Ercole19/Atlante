@@ -75,7 +75,7 @@ public class  ExamsSubject extends AbstractSubject {
        super.notifyObserver();
    }
    
-   public ObservableList<ExamEntityBean> getExams() throws ExamException {
+   public ObservableList<ExamEntityBean> getExams() throws ExamException, UserInfoException {
        ObservableList<ExamEntityBean> observableList = FXCollections.observableArrayList() ;
        int i = 0;
        if(totalExams.isEmpty()) {
@@ -94,7 +94,7 @@ public class  ExamsSubject extends AbstractSubject {
        return observableList;
    }
 
-   public ObservableList<ExamEntityBean> getSortedExams()  throws ExamException{
+   public ObservableList<ExamEntityBean> getSortedExams()  throws ExamException, UserInfoException {
        ExamsComparator comparator = new ExamsComparator();
        return this.getExams().sorted(comparator);
    }

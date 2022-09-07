@@ -7,6 +7,7 @@ import com.example.athena.exceptions.UserInfoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.awt.print.Book;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -31,7 +32,7 @@ public class BooksSubject extends AbstractSubject {
         return instance;
     }
 
-    public void addBook(BookEntity book)
+    public void addBook(BookEntity book) throws BookException
     {
         BookDao dao = new BookDao() ;
         Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
@@ -42,7 +43,7 @@ public class BooksSubject extends AbstractSubject {
     }
 
 
-    public void deleteBook(BookEntity book, int index)
+    public void deleteBook(BookEntity book, int index) throws BookException
     {
         this.totalBooksOnSell.remove(index);
         BookDao dao = new BookDao() ;
@@ -50,7 +51,7 @@ public class BooksSubject extends AbstractSubject {
         super.notifyObserver();
     }
 
-    public String getSellerName()
+    public String getSellerName() throws BookException, UserInfoException
     {
         if(this.sellerNameAndSurname == null) {
             getBooks();
@@ -58,7 +59,7 @@ public class BooksSubject extends AbstractSubject {
         return this.sellerNameAndSurname[0];
     }
 
-    public String getSellerSurname()
+    public String getSellerSurname() throws BookException, UserInfoException
     {
         if(this.sellerNameAndSurname == null) {
             getBooks();
@@ -66,14 +67,14 @@ public class BooksSubject extends AbstractSubject {
         return this.sellerNameAndSurname[1];
     }
 
-    private void getBooks() {
+    private void getBooks() throws BookException, UserInfoException {
         BookDao bookDao = new BookDao();
         this.totalBooksOnSell.addAll(bookDao.getList());
         UserDao dao = new UserDao();
         this.sellerNameAndSurname = dao.getName(Student.getInstance().getEmail());
     }
 
-    public ObservableList<BookBean> getBooksBeansList() throws BookException {
+    public ObservableList<BookBean> getBooksBeansList() throws BookException, UserInfoException{
         ObservableList<BookBean> bookBeanList = FXCollections.observableArrayList();
         int i = 0 ;
         if(this.totalBooksOnSell.isEmpty()) {

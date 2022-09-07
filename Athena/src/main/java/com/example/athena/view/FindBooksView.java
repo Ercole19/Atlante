@@ -24,7 +24,7 @@ public class FindBooksView {
     {
         this.containerHeight = containerHeight ;
         this.containerWidth = containerWidth ;
-        this.controller = new FindBooksViewGC(this) ;
+        this.controller = new FindBooksViewGC() ;
     }
 
     public AnchorPane getRoot(String query) {

@@ -38,7 +38,7 @@ public class EventsView {
             this.result = Factory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
             this.controller.setValues(this.result);
         }
-        catch (PercentFormatException | EventException exc) {
+        catch (PercentFormatException exc) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, FATAL_ERROR, 800, 600) ;
             alert.showAndWait() ;
             System.exit(1) ;

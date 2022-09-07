@@ -15,6 +15,7 @@ public class HelloApplication extends Application {
   
 
     @Override
+
     public void start(Stage stage) throws IOException {
         SceneSwitcher switcher = new SceneSwitcher();
         switcher.switcher(stage, "blind_LoginPage.fxml") ;

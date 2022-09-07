@@ -131,8 +131,9 @@ public class SellController implements Initializable, AbstractObserver {
                                             SellBooksUseCaseController controller = new SellBooksUseCaseController();
                                             controller.deleteProduct(book);
 
-                                        } catch (Exception exc) {
-                                            exc.getCause();
+                                        } catch (BookException exc) {
+                                            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
+                                            alert.showAndWait();
                                         }
                                     });
 

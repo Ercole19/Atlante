@@ -60,7 +60,7 @@ public class LoginPageController{
                 }
 
         }
-        catch (LoggedUserException exc)
+        catch (LoggedUserException | UserInfoException | FindException exc)
         {
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
                 alert.showAndWait();

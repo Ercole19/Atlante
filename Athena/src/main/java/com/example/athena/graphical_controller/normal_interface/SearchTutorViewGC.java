@@ -59,8 +59,9 @@ public class SearchTutorViewGC {
                 i++;
             }
         }
-        catch (Exception e){
-            e.printStackTrace();
+        catch (IndexOutOfBoundsException e){
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Error!", 800, 600);
+            alert.showAndWait();
         }
     }
 }

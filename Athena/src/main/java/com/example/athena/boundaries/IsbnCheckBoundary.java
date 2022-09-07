@@ -19,7 +19,7 @@ public class IsbnCheckBoundary {
 
     }
 
-    public static void isbnCheck(String isbn) throws ISBNException {
+    public static void isbnCheck(String isbn) throws ISBNException, IOException {
         String url = "https://openlibrary.org/isbn/"+ isbn + ".json" ;
         try(InputStream stream = new URL (url).openStream()){
             new Scanner( stream , StandardCharsets.UTF_8).useDelimiter("\\A").next();

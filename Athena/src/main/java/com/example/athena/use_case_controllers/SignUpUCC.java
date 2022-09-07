@@ -15,18 +15,11 @@ public class SignUpUCC {
 
     private final UserDao dao = new UserDao();
 
-    public void preRegister(UserBean bean) throws UserRegistrationException {
-        String code = null;
-        try {
-            code = TutorReviewCodesGenerator.generateReviewCode(5) ;
-            SendCodeMailBean params = new SendCodeMailBean(bean.getEmail(), code);
-            SendRegistrationCodeBoundary.getInstance().sendCode(params) ;
-        } catch (NoSuchAlgorithmException e){
-            e.printStackTrace();
-        } catch (SendEmailException e) //Separated because they will have different implementations
-        {
-            e.printStackTrace();
-        }
+    public void preRegister(UserBean bean) throws UserRegistrationException , SendEmailException, NoSuchAlgorithmException{
+        String code;
+        code = TutorReviewCodesGenerator.generateReviewCode(5);
+        SendCodeMailBean params = new SendCodeMailBean(bean.getEmail(), code);
+        SendRegistrationCodeBoundary.getInstance().sendCode(params);
 
         dao.preRegistration(bean.getEmail(), bean.getPassword(), bean.getRole(), bean.getName(), bean.getSurname(), code);
     }

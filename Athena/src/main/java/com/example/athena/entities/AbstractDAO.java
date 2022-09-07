@@ -1,5 +1,6 @@
 package com.example.athena.entities;
 
+import com.example.athena.exceptions.UserInfoException;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;

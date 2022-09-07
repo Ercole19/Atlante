@@ -4,8 +4,6 @@ package com.example.athena.entities;
 import com.example.athena.exceptions.FindException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 
 import java.io.*;
 
@@ -69,15 +67,14 @@ public class BookDao extends AbstractDAO {
         try(PreparedStatement statement = this.getConnection().prepareStatement("delete from athena.books where isbn_book = ? and email_user = ? and saleTimestamp = ?"))
         {
             deleteBookImages(isbn);
-
             statement.setString(1, isbn) ;
             statement.setString(2, email) ;
             statement.setTimestamp(3, Timestamp.valueOf(timestamp));
             statement.execute() ;
         }
-        catch(SQLException e)
+        catch(SQLException | IOException e)
         {
-            e.printStackTrace() ;
+             throw new BookException(e.getMessage()) ;
         }
     }
 
@@ -100,7 +97,7 @@ public class BookDao extends AbstractDAO {
                 list.add(book);
             }
         }
-        catch (SQLException e)
+        catch (SQLException | IOException | UserInfoException e)
         {
             e.printStackTrace();
         }
@@ -142,7 +139,7 @@ public class BookDao extends AbstractDAO {
         return file ;
     }
 
-    public List<BookEntity> findBooksWImages(String book) throws FindException {
+    public List<BookEntity> findBooksWImages(String book) throws FindException{
 
         List<BookEntity> books = new ArrayList<>() ;
 
@@ -183,8 +180,8 @@ public class BookDao extends AbstractDAO {
 
             statement.execute();
 
-        }catch (SQLException exc) {
-            exc.printStackTrace();
+        }catch (SQLException | IOException exc) {
+            throw new PurchaseException(exc.getMessage());
         }
     }
 

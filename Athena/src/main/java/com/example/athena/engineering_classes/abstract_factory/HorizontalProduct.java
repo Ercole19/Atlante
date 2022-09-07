@@ -6,7 +6,7 @@ import javafx.scene.layout.GridPane;
 
 public class HorizontalProduct implements SearchResultProduct{
 
-    private AnchorPane root ;
+    private final AnchorPane root ;
     public HorizontalProduct(AnchorPane root)
     {
         this.root = root ;
@@ -18,7 +18,7 @@ public class HorizontalProduct implements SearchResultProduct{
     }
 
     @Override
-    public void setEntry(int entryNum, int position, Node element) throws Exception {
+    public void setEntry(int entryNum, int position, Node element) throws IndexOutOfBoundsException {
         GridPane entry = (GridPane) this.root.lookup(String.format("#entry%d", entryNum)) ;
         entry.add(element, 0, position) ;
     }

@@ -1,6 +1,7 @@
 package com.example.athena.entities;
 
 import com.example.athena.exceptions.LoggedUserException;
+import com.example.athena.exceptions.UserInfoException;
 
 public class Student extends User
 {
@@ -38,7 +39,7 @@ public class Student extends User
         return this.email;
     }
     
-    public void initStudent(String emailStudent)
+    public void initStudent(String emailStudent) throws UserInfoException
     {
        this.email = emailStudent;
        UserDao userDao = new UserDao();

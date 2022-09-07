@@ -6,6 +6,7 @@ import com.example.athena.beans.BookBean;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.RecentActivitiesUCC;
 import com.example.athena.view.LabelBuilder;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 
@@ -56,8 +57,9 @@ public class RecentPurchasesViewGC {
                 i++;
             }
         }
-        catch (Exception e){
-            e.printStackTrace();
+        catch (IndexOutOfBoundsException e){
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Error!", 800, 600);
+            alert.showAndWait();
         }
     }
 }

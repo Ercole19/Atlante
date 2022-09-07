@@ -28,8 +28,13 @@ public class EventsViewGC {
         this.view = view;
     }
 
-    public int getResultSize(LocalDate date) throws EventException {
-        this.searchResults = CalendarSubject.getInstance().getEntity(YearMonth.of(date.getYear(), date.getMonth())).getEvents(date) ;
+    public int getResultSize(LocalDate date) {
+        try {
+            this.searchResults = CalendarSubject.getInstance().getEntity(YearMonth.of(date.getYear(), date.getMonth())).getEvents(date) ;
+        } catch (EventException e) {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+        }
         return this.searchResults.size() ;
     }
 
@@ -85,8 +90,9 @@ public class EventsViewGC {
                 i++ ;
             }
         }
-        catch (Exception exc) {
-
+        catch (IndexOutOfBoundsException exc) {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
+            alert.showAndWait();
         }
     }
 

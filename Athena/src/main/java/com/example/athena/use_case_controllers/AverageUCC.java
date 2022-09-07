@@ -10,7 +10,7 @@ import javafx.collections.ObservableList;
 
 public class AverageUCC  {
 
-    public ObservableList<ExamAverageInformationBean> getExamsArithmeticAverageInformation() throws ExamException{
+    public ObservableList<ExamAverageInformationBean> getExamsArithmeticAverageInformation() throws ExamException, UserInfoException {
 
         ObservableList<ExamEntityBean> exams = ExamsSubject.getInstance().getSortedExams();
         ObservableList<ExamAverageInformationBean> examsArithmeticAverageInfos = FXCollections.observableArrayList();
@@ -39,7 +39,7 @@ public class AverageUCC  {
         return examsArithmeticAverageInfos;
     }
 
-    public ObservableList<ExamAverageInformationBean> getExamsWeightedAverageInformation() throws ExamException {
+    public ObservableList<ExamAverageInformationBean> getExamsWeightedAverageInformation() throws ExamException, UserInfoException {
 
         ObservableList<ExamEntityBean> exams = ExamsSubject.getInstance().getSortedExams() ;
         ObservableList<ExamAverageInformationBean> examsWeightedAverageInfos = FXCollections.observableArrayList();

@@ -11,6 +11,7 @@ import com.example.athena.use_case_controllers.BookPageUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -73,16 +74,33 @@ public class BookPageController extends ShiftImageController implements PostInit
         this.book = (BookBean) params.get(1);
 
         if (params.get(0) == SellerOrBuyerEnum.SELLER) {
-            this.sellerName = (BooksSubject.getInstance().getSellerName());
-            this.sellerSurname = (BooksSubject.getInstance().getSellerSurname());
-            this.reportNumber = controller.getReportNumber(Student.getInstance().getEmail());
+            try {
+                this.sellerName = (BooksSubject.getInstance().getSellerName());
+                this.sellerSurname = (BooksSubject.getInstance().getSellerSurname());
+                this.reportNumber = controller.getReportNumber(Student.getInstance().getEmail());
+            } catch (BookException | UserInfoException e) {
+                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            }
+
 
         } else {
             this.searchQuery = (String) params.get(2) ;
-            String[] vendorFullName = controller.getUserName(book.getOwner());
+            String[] vendorFullName = new String[0];
+            try {
+                vendorFullName = controller.getUserName(book.getOwner());
+            } catch (UserInfoException e) {
+                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            }
             this.sellerName = vendorFullName[0];
             this.sellerSurname = vendorFullName[1];
-            this.reportNumber = controller.getReportNumber(book.getOwner());
+            try {
+                this.reportNumber = controller.getReportNumber(book.getOwner());
+            } catch (UserInfoException e) {
+                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
+                alert.showAndWait() ;
+            }
             buyButton.setVisible(true);
             buyButton.setDisable(false);
             backBtn.setOnAction(this::onBackBtnClick);
