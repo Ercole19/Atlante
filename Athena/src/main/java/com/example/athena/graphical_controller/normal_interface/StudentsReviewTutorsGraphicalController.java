@@ -31,15 +31,14 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
 
     @FXML
     private TextField reviewCodeTextField ;
+    private SceneSwitcher switcher = SceneSwitcher.getInstance();
 
-    public void clickOnBackButton(ActionEvent event) throws IOException
+    public void clickOnBackButton() throws IOException
     {
-        SceneSwitcher switcher = new SceneSwitcher();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "tutorSearchPage.fxml");
+        switcher.switcher("tutorSearchPage.fxml");
     }
 
-    public void clickOnSubmitButton(ActionEvent event) throws IOException
+    public void clickOnSubmitButton() throws IOException
     {
         try
         {
@@ -51,7 +50,6 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
             rc.setReviewCode(reviewCode);
             TutoringInformationBean reviewInfo = reviewController.reviewTutor(rc) ;
 
-            SceneSwitcher switcher = new SceneSwitcher() ;
             root = switcher.preload( "tutorPersonalReview.fxml", new ArrayList<>(Collections.singleton(reviewCode)));
 
             Label tutorName = (Label) root.lookup("#tutorName") ;
@@ -62,13 +60,13 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
             tutoringSubject.setText(reviewInfo.getTutoringSubject()) ;
             tutoringDay.setText(reviewInfo.getTutoringDaysHour()) ;
 
-            scene = ((Node) event.getSource()).getScene() ;
+            scene = switcher.getTopStage().getScene();
             SubScene reviewSubscene = (SubScene) scene.lookup(REVIEW_SECTION_PROMPT) ;
             reviewSubscene.setRoot(root) ;
         }catch(TutorReviewException exception)
         {
-            root = new SceneSwitcher().preload("ErrorInReviewView.fxml") ;
-            scene = ((Node) event.getSource()).getScene() ;
+            root = switcher.preload("ErrorInReviewView.fxml") ;
+            scene = switcher.getTopStage().getScene();
             SubScene reviewSubscene = (SubScene) scene.lookup(REVIEW_SECTION_PROMPT) ;
             reviewSubscene.setRoot(root) ;
         }
@@ -117,7 +115,7 @@ public class StudentsReviewTutorsGraphicalController implements PostInitialize
             reviewSubscene.setRoot(new AnchorPane()) ;
         }catch (TutorReviewException e)
         {
-            root = new SceneSwitcher().preload("ErrorInReviewView.fxml") ;
+            root = switcher.preload("ErrorInReviewView.fxml") ;
             reviewSubscene.setRoot(root) ;
         }
     }

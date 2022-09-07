@@ -32,7 +32,7 @@ public class LoginPageController{
     @FXML
     protected TextField passField;
 
-    public void switchToMainPage(ActionEvent event){
+    public void switchToMainPage(){
         String email = emailField.getText() ;
         String password = passField.getText() ;
 
@@ -49,14 +49,12 @@ public class LoginPageController{
                 if (bean.getRole().equals("STUDENT")) {
                     Alert alert = new Alert(Alert.AlertType.NONE, "Access granted !", ButtonType.CLOSE);
                     alert.showAndWait();
-                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-                    switcher.switcher(stage, "MainPageStudents.fxml");
+                    switcher.switcher("MainPageStudents.fxml");
 
                 } else {
                     Alert alert = new Alert(Alert.AlertType.NONE, "Access granted !", ButtonType.CLOSE);
                     alert.showAndWait();
-                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-                    switcher.switcher(stage, "MainPageTutor.fxml");
+                    switcher.switcher("MainPageTutor.fxml");
                 }
 
         }
@@ -93,11 +91,8 @@ public class LoginPageController{
     }
 
 
-    public void switchToSignUpPage(ActionEvent event ) {
-
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "signUpView.fxml");
-
+    public void switchToSignUpPage() {
+        switcher.switcher("signUpView.fxml");
     }
 
 

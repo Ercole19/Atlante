@@ -49,12 +49,11 @@ public class SearchTutorViewGC {
                 searchResultProduct.setEntry(i, 3, visitPage);
 
                 visitPage.setOnAction(actionEvent -> {
-                    SceneSwitcher switcher = new SceneSwitcher() ;
+                    SceneSwitcher switcher = SceneSwitcher.getInstance();
                     ArrayList<Object> params = new ArrayList<>() ;
                     params.add(result.getId()) ;
                     params.add(true) ;
-                    Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow() ;
-                    switcher.switcher(stage, "tutorPersonalPage.fxml", params) ;
+                    switcher.switcher("tutorPersonalPage.fxml", params) ;
                 });
                 i++;
             }

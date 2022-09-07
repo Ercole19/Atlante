@@ -9,35 +9,29 @@ import javafx.stage.Stage;
 
 public class MainPageController {
 
-    private final SceneSwitcher switcher = new SceneSwitcher();
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance();
     private Stage stage;
 
-    public void onExamsButtonClick(ActionEvent event) {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "ExamHomepageView.fxml");
-
+    public void onExamsButtonClick() {
+        switcher.switcher( "ExamHomepageView.fxml");
     }
 
-    public void onCalendarButtonClick(ActionEvent event)  {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "CalendarPage.fxml");
+    public void onCalendarButtonClick()  {
+        switcher.switcher("CalendarPage.fxml");
     }
 
 
-    public void onShopButtonClick(ActionEvent event)  {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "bookshop-choose-view.fxml");
+    public void onShopButtonClick()  {
+        switcher.switcher("bookshop-choose-view.fxml");
     }
 
 
-    public void onTutorButtonClick(ActionEvent event)  {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "tutorSearchPage.fxml");
+    public void onTutorButtonClick()  {
+        switcher.switcher("tutorSearchPage.fxml");
     }
 
-    public void onLogoutButtonClick(ActionEvent event) {
+    public void onLogoutButtonClick() {
         User.logout();
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "LoginPage.fxml");
+        switcher.switcher("LoginPage.fxml");
     }
 }

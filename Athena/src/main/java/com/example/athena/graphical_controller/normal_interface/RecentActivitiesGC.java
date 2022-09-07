@@ -7,18 +7,15 @@ import javafx.stage.Stage;
 
 public class RecentActivitiesGC {
 
-    private final SceneSwitcher switcher = new SceneSwitcher();
-    private Stage stage;
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 
-    public void onRecentPurchasesBtnClick(ActionEvent event){
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "recentPurchasesScreen.fxml");
+    public void onRecentPurchasesBtnClick(){
+        switcher.switcher("recentPurchasesScreen.fxml");
     }
 
     @FXML
-    protected void onHomeButtonClick(ActionEvent event) {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "MainPageStudents.fxml");
+    protected void onHomeButtonClick() {
+        switcher.switcher("MainPageStudents.fxml");
     }
 
     @FXML
@@ -27,9 +24,8 @@ public class RecentActivitiesGC {
         switcher.switcher(stage, "bookshop-choose-view.fxml");
     }
 
-    public void onRecentSoldItemsBtnClick(ActionEvent event) {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "recentSoldItems.fxml");
+    public void onRecentSoldItemsBtnClick() {
+        switcher.switcher("recentSoldItems.fxml");
     }
 
 

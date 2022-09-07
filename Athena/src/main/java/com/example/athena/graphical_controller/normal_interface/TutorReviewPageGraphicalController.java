@@ -53,11 +53,10 @@ public class TutorReviewPageGraphicalController implements Initializable
     @FXML
     private DatePicker dayDatePicker ;
 
-    public void clickOnBackButton(ActionEvent event) throws IOException
+    public void clickOnBackButton() throws IOException
     {
-        SceneSwitcher switcher = new SceneSwitcher();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        switcher.switcher(stage, "MainPageTutor.fxml");
+        SceneSwitcher switcher = SceneSwitcher.getInstance();
+        switcher.switcher("MainPageTutor.fxml");
     }
 
     @Override

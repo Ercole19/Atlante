@@ -23,6 +23,7 @@ public class EventsViewGC {
 
     private EventsView view;
     private List<EventBean> searchResults;
+    private SceneSwitcher switcher = SceneSwitcher.getInstance();
 
     public EventsViewGC(EventsView view) {
         this.view = view;
@@ -55,7 +56,6 @@ public class EventsViewGC {
 
                 Button description = new Button("Description");
                 description.setOnAction(event -> {
-                    SceneSwitcher switcher = new SceneSwitcher();
                     ArrayList<Object> params = new ArrayList<>() ;
                     params.add(eventBean.getDescription());
                     switcher.popup("EventDescription.fxml", "Event description", params);
@@ -79,12 +79,10 @@ public class EventsViewGC {
 
                 Button edit = new Button("edit");
                 edit.setOnAction(event -> {
-                    SceneSwitcher switcher = new SceneSwitcher();
                     ArrayList<Object> params = new ArrayList<>();
                     params.add(eventBean);
                     switcher.popup("AddEventScreen.fxml", "Edit your event", params);
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-                    refreshScreen(eventBean.getDate(), stage) ;
+                    refreshScreen(eventBean.getDate()) ;
                 });
                 searchResultProduct.setEntry(i, 6, edit);
                 i++ ;
@@ -96,10 +94,9 @@ public class EventsViewGC {
         }
     }
 
-    private void refreshScreen(LocalDate date, Stage stage) {
-        SceneSwitcher switcher = new SceneSwitcher() ;
+    private void refreshScreen(LocalDate date) {
         ArrayList<Object> params = new ArrayList<>() ;
         params.add(date);
-        switcher.switcher(stage, "eventPage.fxml", params);
+        switcher.switcher("eventPage.fxml", params);
     }
 }

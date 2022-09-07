@@ -64,14 +64,12 @@ public class FindBooksViewGC {
                 product.setEntry(i, 3, priceLabel);
 
                 image.setOnMouseClicked(mouseEvent -> {
-                    SceneSwitcher switcher = new SceneSwitcher();
-
+                    SceneSwitcher switcher = SceneSwitcher.getInstance();
                     List<Object> params = new ArrayList<>() ;
                     params.add(SellerOrBuyerEnum.BUYER);
                     params.add(bookBean);
                     params.add(query) ;
-                    Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow() ;
-                    switcher.switcher(stage, "Book-Page2.fxml", params) ;
+                    switcher.switcher("Book-Page2.fxml", params) ;
 
                 });
                 i++ ;

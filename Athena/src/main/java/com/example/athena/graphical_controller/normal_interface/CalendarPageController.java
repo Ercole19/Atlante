@@ -32,13 +32,12 @@ public class CalendarPageController implements Initializable, AbstractObserver {
 
     private YearMonth currentYearMonth ;
     private FullCalendarView view ;
-    private final SceneSwitcher switcher = new SceneSwitcher();
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance();
     private Stage stage ;
 
-    public void clickOnBackButton(ActionEvent event)
+    public void clickOnBackButton()
     {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "MainPageStudents.fxml");
+        switcher.switcher("MainPageStudents.fxml");
         CalendarSubject.getInstance().detachObserver(this);
     }
 
@@ -47,10 +46,9 @@ public class CalendarPageController implements Initializable, AbstractObserver {
         switcher.popup("AddEventScreen.fxml", "Add a new event") ;
     }
 
-    public void clickOnPlots(ActionEvent event)
+    public void clickOnPlots()
     {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "PlotPage.fxml");
+        switcher.switcher("PlotPage.fxml");
     }
 
     public void populateCalendar(YearMonth yearMonth)  {

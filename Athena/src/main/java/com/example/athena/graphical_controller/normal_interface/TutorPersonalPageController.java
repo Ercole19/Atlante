@@ -25,7 +25,6 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -66,8 +65,7 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
 
     public void clickOnBackButton(ActionEvent event)
     {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "tutorSearchPage.fxml") ;
+        switcher.switcher("tutorSearchPage.fxml") ;
         TutorPersonalPageSubject.getInstance().resetEntity();
         TutorPersonalPageSubject.getInstance().detachObserver(this);
 

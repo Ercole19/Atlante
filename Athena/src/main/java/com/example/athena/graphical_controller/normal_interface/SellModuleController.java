@@ -112,10 +112,9 @@ public class SellModuleController extends ShiftImageController implements Initia
 
 
     @FXML
-    public void onBackButtonClick(ActionEvent event) throws IOException {
-        SceneSwitcher switcher = new SceneSwitcher();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "bookshop-choose-view.fxml");
+    public void onBackButtonClick() throws IOException {
+        SceneSwitcher switcher = SceneSwitcher.getInstance();
+        switcher.switcher("bookshop-choose-view.fxml");
     }
 
     public void onUploadBtnClick() {

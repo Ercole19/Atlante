@@ -37,7 +37,7 @@ public class CareerStatusController implements Initializable, AbstractObserver {
     @FXML
     private Label totalCfus;
 
-    private final SceneSwitcher switcher = new SceneSwitcher();
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 
     @FXML
     public void initialize(URL url, ResourceBundle rb) {

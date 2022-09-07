@@ -21,24 +21,21 @@ public class ValidateSignUpGC implements PostInitialize {
     @FXML
     private TextField registrationCodeField ;
 
-    private final SceneSwitcher switcher = new SceneSwitcher();
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance();
     private Stage stage;
 
-    public void onBackButtonClick(ActionEvent event) throws IOException {
-
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "LoginPage.fxml");
+    public void onBackButtonClick() throws IOException {
+        switcher.switcher("LoginPage.fxml");
     }
 
-    public void onConfirmClick(ActionEvent event) {
+    public void onConfirmClick() {
         SignUpUCC signUpUCC = new SignUpUCC() ;
         RegistrationBean bean = new RegistrationBean() ;
         bean.setEmail(emailField.getText());
         bean.setCode(registrationCodeField.getText());
         try {
             signUpUCC.register(bean) ;
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            switcher.switcher(stage, "LoginPage.fxml");
+            switcher.switcher("LoginPage.fxml");
         } catch (UserRegistrationException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;
             alert.showAndWait() ;

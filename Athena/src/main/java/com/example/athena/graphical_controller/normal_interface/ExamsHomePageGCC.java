@@ -54,7 +54,7 @@ public class ExamsHomePageGCC implements AbstractObserver, Initializable {
     private HBox manageBtn = null ;
 
     private final ObservableList<ExamEntityBean> examList  = FXCollections.observableArrayList() ;
-    private final SceneSwitcher switcher = new SceneSwitcher();
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 
 
     public void onAddExamBtnClick()  {
@@ -69,10 +69,9 @@ public class ExamsHomePageGCC implements AbstractObserver, Initializable {
         switcher.popup("careerStatusView.fxml" , "Career") ;
     }
 
-    public void onBackButtonClick(ActionEvent event) throws IOException {
+    public void onBackButtonClick() throws IOException {
         ExamsSubject.getInstance().detachObserver(this);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        switcher.switcher(stage, "MainPageStudents.fxml");
+        switcher.switcher("MainPageStudents.fxml");
      }
 
     @Override

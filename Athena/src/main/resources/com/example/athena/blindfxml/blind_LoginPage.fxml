@@ -38,7 +38,7 @@
             <Font size="65.0" />
          </font>
       </Text>
-      <Button focusTraversable="false" layoutX="953.0" layoutY="296.0" mnemonicParsing="false" onAction="#switchToSignUpPage" onKeyTyped="#handlerKeyEvent" prefHeight="128.0" prefWidth="208.0" style="-fx-background-radius: 20; -fx-background-color: #fff875;" text="Sign Up">
+      <Button fx:id="signUpButton" focusTraversable="false" layoutX="953.0" layoutY="296.0" mnemonicParsing="false" onAction="#switchToSignUpPage" onKeyTyped="#handlerKeyEvent" prefHeight="128.0" prefWidth="208.0" style="-fx-background-radius: 20; -fx-background-color: #fff875;" text="Sign Up">
          <font>
             <Font size="41.0" />
          </font>

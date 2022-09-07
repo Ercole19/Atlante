@@ -26,8 +26,7 @@ public class ControllerSearchTutor {
 
 
 
-    private final SceneSwitcher switcher = new SceneSwitcher();
-    private Stage stage;
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 
 
     public void clickOnSearchByCourse()
@@ -52,16 +51,13 @@ public class ControllerSearchTutor {
             this.resultsBox.setRoot(searchTutorView.getRoot(searchBar.getText(), searchEnum, sortByBestReviews.isSelected())) ;
         }
     }
-    public void clickOnBackButton(ActionEvent event)
+    public void clickOnBackButton()
     {
-
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "MainPageStudents.fxml");
+        switcher.switcher("MainPageStudents.fxml");
     }
 
-    public void clickOnReviewTutorButton(ActionEvent event)
+    public void clickOnReviewTutorButton()
     {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "StudentsReviewTutorsView.fxml");
+        switcher.switcher("StudentsReviewTutorsView.fxml");
     }
 }
