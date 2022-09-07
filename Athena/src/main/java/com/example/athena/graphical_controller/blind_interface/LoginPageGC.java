@@ -1,5 +1,7 @@
 package com.example.athena.graphical_controller.blind_interface;
 
+import com.example.athena.graphical_controller.blind_interface.login_states.LoginPageState;
+import com.example.athena.graphical_controller.blind_interface.login_states.StateWelcome;
 import com.example.athena.graphical_controller.normal_interface.KeyEventHandler;
 import com.example.athena.graphical_controller.normal_interface.LoginPageController;
 import com.example.athena.view.TextToSpeech;
@@ -11,9 +13,15 @@ import javafx.stage.Stage;
 
 import javax.speech.AudioException;
 import javax.speech.EngineException;
-
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginPageGC extends LoginPageController implements KeyEventHandler {
+
+    private Map<String, Runnable> focusMap = new HashMap<>();
+
+    @FXML
+    Button signUpButton;
 
     private LoginPageState state = new StateWelcome();
 
@@ -35,13 +43,25 @@ public class LoginPageGC extends LoginPageController implements KeyEventHandler 
     @Override
     @FXML
     public void handlerKeyEvent(KeyEvent event) {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         String character = event.getCharacter();
-        if (character.equals("\t")) {
-            try {
-                TextToSpeech.getInstance().speak("enter email");
-            } catch (AudioException | EngineException exc) {
-                exc.printStackTrace();
-            }
+        stateGoNext(character) ;
+    }
+
+    public void stateGoNext(String key) {
+        state.goNext(this, key) ;
+    }
+
+    public void stateChangeFocus(String key) {
+        Runnable action = this.focusMap.get(key) ;
+        action.run() ;
+    }
+
+    public void speak(String text) {
+        try {
+            TextToSpeech.getInstance().speak(text);
+        } catch (EngineException | AudioException e) {
+            System.exit(1) ;
         }
     }
 }

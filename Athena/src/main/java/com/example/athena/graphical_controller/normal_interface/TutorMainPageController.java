@@ -11,26 +11,23 @@ import javafx.stage.Stage;
 
 public class TutorMainPageController {
 
-    private final SceneSwitcher switcher = new SceneSwitcher();
-    private Stage stage;
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance() ;
 
     public void onPersonalPageButtonClick(ActionEvent event)  {
         TutorPageComponent component = new TutorPageButtonAdder(new TutorPageView()) ;
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = switcher.getTopStage() ;
         Scene scene = new Scene(component.build());
         stage.setScene(scene);
     }
 
     public void onLogoutButtonClick(ActionEvent event)  {
         User.logout();
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        switcher.switcher(stage, "LoginPage.fxml");
+        switcher.switcher("LoginPage.fxml");
     }
 
     public void onReviewsClick(ActionEvent event)
     {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "TutorReviewPageView.fxml");
+        switcher.switcher("TutorReviewPageView.fxml");
     }
 
 

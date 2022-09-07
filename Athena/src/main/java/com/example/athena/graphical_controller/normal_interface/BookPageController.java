@@ -64,8 +64,7 @@ public class BookPageController extends ShiftImageController implements PostInit
     private int reportNumber;
     private String searchQuery ;
 
-    private final SceneSwitcher switcher = new SceneSwitcher();
-    private Stage stage;
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance() ;
     private final BookPageUCC controller = new BookPageUCC() ;
 
     @Override
@@ -137,27 +136,25 @@ public class BookPageController extends ShiftImageController implements PostInit
         super.shiftIndex(0);
 
     }
+    
     public void onBackBtnClick(ActionEvent event)  {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         List<Object> params = new ArrayList<>();
         params.add(this.searchQuery);
-        switcher.switcher(stage, "buy-view2.fxml", params);
+        switcher.switcher("buy-view2.fxml", params);
     }
 
-    public void onBackBtnClickSeller(ActionEvent event)
+    public void onBackBtnClickSeller()
     {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage , "sell-view.fxml");
+        switcher.switcher("sell-view.fxml");
     }
 
     public void onBuyBookButtonClick(ActionEvent event){
         List<Object> params = new ArrayList<>();
         params.add(this.book);
         switcher.popup("purchaseConfirm.fxml", "Confirm purchase", params);
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         List<Object> goBackParams = new ArrayList<>() ;
         goBackParams.add(this.searchQuery) ;
-        switcher.switcher(stage, "buy-view2.fxml", goBackParams) ;
+        switcher.switcher("buy-view2.fxml", goBackParams) ;
     }
 
 }

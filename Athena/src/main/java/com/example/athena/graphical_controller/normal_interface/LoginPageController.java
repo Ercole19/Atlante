@@ -5,7 +5,6 @@ import com.example.athena.beans.UserBean;
 import com.example.athena.use_case_controllers.LoginUseCaseController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -20,7 +19,7 @@ public class LoginPageController{
     private int totalAttempts = 0 ;
     private int waitTimeMultiplier = 1;
 
-    private final SceneSwitcher switcher = new SceneSwitcher();
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance() ;
 
     protected Stage stage;
 

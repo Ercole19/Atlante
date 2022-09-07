@@ -18,10 +18,9 @@ public class RecentPurchasesGC implements Initializable {
     private SubScene subScene;
 
     @FXML
-    protected void onBackButtonClick(ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        SceneSwitcher switcher = new SceneSwitcher() ;
-        switcher.switcher(stage, "recentActivities.fxml");
+    protected void onBackButtonClick() throws IOException {
+        SceneSwitcher switcher = SceneSwitcher.getInstance() ;
+        switcher.switcher("recentActivities.fxml");
     }
 
 

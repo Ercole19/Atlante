@@ -52,13 +52,13 @@ public class SellController implements Initializable, AbstractObserver {
 
 
     private final ObservableList<BookBean> bookList  = FXCollections.observableArrayList() ;
-    private final SceneSwitcher switcher = new SceneSwitcher();
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 
     @FXML
     protected void onBackButtonClick(ActionEvent event) throws IOException {
         BooksSubject.getInstance().detachObserver(this);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "bookshop-choose-view.fxml");
+        switcher.switcher("bookshop-choose-view.fxml");
     }
 
     public void onSellBtnClick() {
@@ -120,7 +120,7 @@ public class SellController implements Initializable, AbstractObserver {
                                         params.add(book);
 
                                         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-                                        switcher.switcher(stage, "Book-Page2.fxml", params);
+                                        switcher.switcher("Book-Page2.fxml", params);
 
                                     });
 

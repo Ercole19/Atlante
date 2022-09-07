@@ -16,8 +16,10 @@ public class HelloApplication extends Application {
     @Override
 
     public void start(Stage stage) throws IOException {
-        SceneSwitcher switcher = new SceneSwitcher();
-        switcher.switcher(stage, "blind_LoginPage.fxml") ;
+        System.setProperty("fxmlType", "fxml");
+        SceneSwitcher switcher = SceneSwitcher.getInstance() ;
+        switcher.pushStage(stage) ;
+        switcher.switcher("loginPage.fxml") ;
         stage.setTitle("Athena");
         Image icon = new Image(new File("src/main/resources/assets/icon.png").toURI().toString());
         stage.getIcons().add(icon);
