@@ -7,17 +7,15 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 
-public class HelloApplication extends Application {
-
-  
+public class BlindApplication extends Application {
 
     @Override
 
     public void start(Stage stage) throws IOException {
-        System.setProperty("fxmlType", "fxml");
-        SceneSwitcher switcher = SceneSwitcher.getInstance() ;
-        switcher.pushStage(stage) ;
-        switcher.switcher("loginPage.fxml") ;
+        System.setProperty("fxmlType", "blindfxml");
+        SceneSwitcher switcher = SceneSwitcher.getInstance();
+        switcher.pushStage(stage);
+        switcher.switcher("blind_LoginPage.fxml");
         stage.setTitle("Athena");
         Image icon = new Image(new File("src/main/resources/assets/icon.png").toURI().toString());
         stage.getIcons().add(icon);

@@ -35,5 +35,4 @@ public class TextToSpeech {
     public void speak(String text) {
         this.synthesizer.speakPlainText(text, null) ;
     }
-
 }
