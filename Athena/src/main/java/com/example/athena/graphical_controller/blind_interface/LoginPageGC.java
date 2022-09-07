@@ -18,7 +18,7 @@ public class LoginPageGC extends LoginPageController implements KeyEventHandler 
         String character = event.getCharacter();
         if (character.equals("\t")) {
             try {
-                TextToSpeech.getInstance().speakPlainText("enter email", null);
+                TextToSpeech.getInstance().speak("enter email");
             } catch (AudioException | EngineException exc) {
                 exc.printStackTrace();
             }
