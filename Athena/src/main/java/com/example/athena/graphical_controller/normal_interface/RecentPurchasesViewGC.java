@@ -47,7 +47,7 @@ public class RecentPurchasesViewGC {
                 searchResultProduct.setEntry(i, 4, visitPage);
 
                 visitPage.setOnAction(actionEvent -> {
-                    SceneSwitcher switcher = new SceneSwitcher();
+                    SceneSwitcher switcher = SceneSwitcher.getInstance();
 
                     ArrayList<Object> params = new ArrayList<>();
                     params.add(bookBean);

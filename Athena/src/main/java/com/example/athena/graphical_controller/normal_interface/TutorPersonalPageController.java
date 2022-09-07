@@ -13,14 +13,12 @@ import com.example.athena.use_case_controllers.ViewTutorPageUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -50,16 +48,14 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
     @FXML
     private Text reviewAverage;
 
-    private final SceneSwitcher switcher = new SceneSwitcher();
-    private Stage stage;
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 
     private String email ;
 
 
     public void clickOnBackButtonTutor(ActionEvent event)
     {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "MainPageTutor.fxml") ;
+        switcher.switcher("MainPageTutor.fxml") ;
         TutorPersonalPageSubject.getInstance().detachObserver(this);
     }
 

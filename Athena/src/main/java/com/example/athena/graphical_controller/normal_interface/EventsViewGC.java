@@ -32,8 +32,8 @@ public class EventsViewGC {
     public int getResultSize(LocalDate date) {
         try {
             this.searchResults = CalendarSubject.getInstance().getEntity(YearMonth.of(date.getYear(), date.getMonth())).getEvents(date) ;
-        } catch (EventException e) {
-            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
+        } catch (EventException e ) {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(),800, 600);
             alert.showAndWait();
         }
         return this.searchResults.size() ;
@@ -68,8 +68,7 @@ public class EventsViewGC {
                     try {
                         ManageEventUCC manageEventUCC = new ManageEventUCC();
                         manageEventUCC.deleteEvent(eventBean);
-                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-                        refreshScreen(eventBean.getDate(), stage);
+                        refreshScreen(eventBean.getDate());
                     } catch (EventException | SendEmailException exc) {
                         SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
                         alert.showAndWait();
@@ -89,7 +88,7 @@ public class EventsViewGC {
             }
         }
         catch (IndexOutOfBoundsException exc) {
-            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage(),800, 600);
             alert.showAndWait();
         }
     }

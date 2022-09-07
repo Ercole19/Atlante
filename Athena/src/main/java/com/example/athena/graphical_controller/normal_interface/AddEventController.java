@@ -22,7 +22,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class    AddEventController implements Initializable , PostInitialize {
+public class AddEventController implements Initializable , PostInitialize {
 
 
     @FXML

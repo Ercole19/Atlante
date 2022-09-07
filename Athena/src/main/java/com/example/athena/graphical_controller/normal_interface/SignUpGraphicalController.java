@@ -12,7 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -32,26 +31,20 @@ public class SignUpGraphicalController {
     private TextField confirmPassField ;
     @FXML
     private RadioButton studentRadiobutton ;
-    private final SceneSwitcher switcher = new SceneSwitcher();
-    private Stage stage;
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 
 
-    public void onBackButtonClick(ActionEvent event) throws IOException {
-
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "LoginPage.fxml");
+    public void onBackButtonClick() throws IOException {
+        switcher.switcher("LoginPage.fxml");
     }
 
-    public void onConfirmButtonClick (ActionEvent event) {
-
+    public void onConfirmButtonClick () {
         String userType;
         String email = emailField.getText() ;
         String password = passField.getText() ;
         String nome = nameField.getText() ;
         String cognome = surnameField.getText() ;
         String passConfirm = confirmPassField.getText() ;
-
-
 
         if (password.equals(passConfirm)) {
 
@@ -69,10 +62,9 @@ public class SignUpGraphicalController {
             try
             {
                 controller.preRegister(bean);
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 ArrayList<Object> params = new ArrayList<>() ;
                 params.add(emailField.getText()) ;
-                switcher.switcher(stage, "validate_signup.fxml", params);
+                switcher.switcher("validate_signup.fxml", params);
             }
             catch (UserRegistrationException | SendEmailException | NoSuchAlgorithmException exc)
             {
@@ -86,8 +78,7 @@ public class SignUpGraphicalController {
         }
     }
 
-    public void onValidateCodeClick(ActionEvent event) {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        switcher.switcher(stage, "validate_signup.fxml");
+    public void onValidateCodeClick() {
+        switcher.switcher("validate_signup.fxml");
     }
 }

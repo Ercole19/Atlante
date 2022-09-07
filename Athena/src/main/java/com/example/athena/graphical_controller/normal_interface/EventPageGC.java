@@ -5,8 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.SubScene;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -25,8 +23,7 @@ public class EventPageGC implements PostInitialize {
         this.results.setRoot(eventsView.getRoot(dayToLoad));
     }
 
-    public void close(javafx.event.ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+    public void close() {
+        SceneSwitcher.getInstance().getTopStage().close();
     }
 }

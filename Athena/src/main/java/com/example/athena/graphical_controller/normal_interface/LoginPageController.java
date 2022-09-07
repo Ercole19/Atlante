@@ -4,7 +4,6 @@ import com.example.athena.exceptions.*;
 import com.example.athena.beans.UserBean;
 import com.example.athena.use_case_controllers.LoginUseCaseController;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;

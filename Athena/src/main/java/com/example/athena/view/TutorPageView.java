@@ -14,7 +14,7 @@ public class TutorPageView implements TutorPageComponent
     @Override
     public Parent build()
     {
-        SceneSwitcher switcher = new SceneSwitcher();
+        SceneSwitcher switcher = SceneSwitcher.getInstance();
         List<Object> params = new ArrayList<>() ;
         params.add(Tutor.getInstance().getEmail()) ;
         params.add(false) ;

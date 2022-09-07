@@ -8,39 +8,32 @@ import javafx.stage.Stage;
 
 public class BookShopController {
 
-    private final SceneSwitcher switcher = new SceneSwitcher();
-    private Stage stage;
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 
     @FXML
-    protected void onHomeButtonClick(ActionEvent event) {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "MainPageStudents.fxml");
+    protected void onHomeButtonClick() {
+        switcher.switcher("MainPageStudents.fxml");
     }
 
     @FXML
-    protected void onBackButtonClick(ActionEvent event) {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "MainPageStudents.fxml");
+    protected void onBackButtonClick() {
+        switcher.switcher("MainPageStudents.fxml");
     }
 
     @FXML
-    protected void onBookBtnClick(ActionEvent event){
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "BuyBookPage.fxml");
+    protected void onBookBtnClick(){
+        switcher.switcher("BuyBookPage.fxml");
     }
 
-    public void onBuyButtonClick(ActionEvent event){
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "buy-view2.fxml");
+    public void onBuyButtonClick(){
+        switcher.switcher("buy-view2.fxml");
     }
 
-    public void onSellButtonClick(ActionEvent event){
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "sell-view.fxml");
+    public void onSellButtonClick(){
+        switcher.switcher("sell-view.fxml");
     }
 
-    public void onRecentActivitiesBtnClick(ActionEvent event){
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "recentActivities.fxml");
+    public void onRecentActivitiesBtnClick(){
+        switcher.switcher("recentActivities.fxml");
     }
 }

@@ -2,7 +2,6 @@ package com.example.athena.graphical_controller.normal_interface;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.stage.Stage;
 
 public class RecentActivitiesGC {
@@ -19,9 +18,8 @@ public class RecentActivitiesGC {
     }
 
     @FXML
-    protected void onBackButtonClick(ActionEvent event) {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-        switcher.switcher(stage, "bookshop-choose-view.fxml");
+    protected void onBackButtonClick() {
+        switcher.switcher("bookshop-choose-view.fxml");
     }
 
     public void onRecentSoldItemsBtnClick() {
