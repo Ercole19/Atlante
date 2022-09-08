@@ -44,6 +44,8 @@ public class ShowParser {
                 personalPageParser.parseMyInfos();
                 break;
             case "my_CV" :
+                ShowMyCVParser myCVParser = new ShowMyCVParser();
+                myCVParser.parseInfos();
                 break;
             default:
                 //throw exeption
