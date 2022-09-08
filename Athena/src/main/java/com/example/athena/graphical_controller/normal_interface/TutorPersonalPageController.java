@@ -71,7 +71,9 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
     {
         ViewTutorPageUseCaseController tutorPage = new ViewTutorPageUseCaseController();
         try {
-            tutorPage.getCV(this.email);
+            UserBean bean = new UserBean() ;
+            bean.setEmail(this.email);
+            tutorPage.getCV(bean);
         } catch (UserInfoException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error in retrieving cv from db, try restarting application", ButtonType.CLOSE);
             alert.showAndWait();

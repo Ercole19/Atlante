@@ -25,12 +25,6 @@ public class ShowMyInfosGC implements Initializable {
     TextArea contactNumbers;
     private final LabelView view = new LabelView();
 
-    public ShowMyInfosGC() {
-        MyInfosView view = new MyInfosView();
-        ParentSubject.getInstance().setCurrentParent(view.prepareView());
-    }
-
-
     public void onConfirmButtonClick() {
         TutorInfosBean bean = new TutorInfosBean();
         bean.setAboutMe(description.getText());

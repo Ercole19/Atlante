@@ -36,6 +36,8 @@ public class ShowParser {
             case "purchased_books" :
                 break;
             case "my_courses" :
+                ShowMyCoursesParser coursesParser = new ShowMyCoursesParser() ;
+                coursesParser.parseMyCourses();
                 break;
             case "my_infos" :
                 ShowMyInfosParser personalPageParser = new ShowMyInfosParser();
