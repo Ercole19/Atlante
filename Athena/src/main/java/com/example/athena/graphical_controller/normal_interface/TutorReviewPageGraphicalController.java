@@ -10,12 +10,9 @@ import com.example.athena.beans.normal.TutorInfosBean;
 import com.example.athena.beans.normal.UserBean;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;

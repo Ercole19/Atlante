@@ -1,8 +1,8 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.beans.ReviewCodeBean;
-import com.example.athena.beans.SendReviewBean;
-import com.example.athena.beans.TutoringInformationBean;
+import com.example.athena.beans.normal.ReviewCodeBean;
+import com.example.athena.beans.normal.SendReviewBean;
+import com.example.athena.beans.normal.TutoringInformationBean;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.TutorReviewException;
 import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
@@ -14,13 +14,11 @@ import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static javafx.fxml.FXMLLoader.load;
 
 public class StudentsReviewTutorsGraphicalController implements PostInitialize
 {

@@ -104,8 +104,6 @@ public class AddEventController implements Initializable , PostInitialize {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
         }
-
-
     }
 
     public void clickOnX(ActionEvent event){

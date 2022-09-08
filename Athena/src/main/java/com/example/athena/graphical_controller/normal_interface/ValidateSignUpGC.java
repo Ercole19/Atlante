@@ -19,7 +19,6 @@ public class ValidateSignUpGC implements PostInitialize {
     private TextField registrationCodeField ;
 
     private final SceneSwitcher switcher = SceneSwitcher.getInstance();
-    private Stage stage;
 
     public void onBackButtonClick() throws IOException {
         switcher.switcher("LoginPage.fxml");

@@ -4,8 +4,6 @@ import com.example.athena.use_case_controllers.LoginUseCaseController;
 import com.example.athena.view.TutorPageView;
 import com.example.athena.engineering_classes.scene_decorators.TutorPageButtonAdder;
 import com.example.athena.engineering_classes.scene_decorators.TutorPageComponent;
-import javafx.event.ActionEvent;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -25,7 +23,7 @@ public class TutorMainPageController {
         switcher.switcher("LoginPage.fxml");
     }
 
-    public void onReviewsClick(ActionEvent event)
+    public void onReviewsClick()
     {
         switcher.switcher("TutorReviewPageView.fxml");
     }

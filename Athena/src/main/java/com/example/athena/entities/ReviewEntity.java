@@ -24,8 +24,8 @@ public class ReviewEntity
         setTutorUsername(Tutor.getInstance().getEmail()) ;
         setSubject(usernameBean.getSubject()) ;
         setDay(usernameBean.getDay()) ;
-        setStartTime(usernameBean.getStartHour(), usernameBean.getStartMinute()) ;
-        setEndTime(usernameBean.getEndHour(), usernameBean.getEndMinute()) ;
+        setStartTime(usernameBean.getStartTime()) ;
+        setEndTime(usernameBean.getEndTime()) ;
     }
 
     public ReviewEntity(String reviewCode, String tutorUsername, String studentUsername, String subject, LocalDate day,
