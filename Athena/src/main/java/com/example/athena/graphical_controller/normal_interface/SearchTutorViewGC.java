@@ -3,15 +3,13 @@ package com.example.athena.graphical_controller.normal_interface;
 import com.example.athena.engineering_classes.abstract_factory.SearchResultProduct;
 import com.example.athena.entities.ByCourseOrNameEnum;
 import com.example.athena.exceptions.FindTutorException;
-import com.example.athena.beans.TutorSearchResultBean;
+import com.example.athena.beans.normal.TutorSearchResultBean;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.SearchTutorUseCaseController;
 import com.example.athena.view.LabelBuilder;
 import com.example.athena.view.SearchTutorView;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;

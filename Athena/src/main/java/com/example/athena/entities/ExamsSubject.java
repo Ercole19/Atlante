@@ -3,7 +3,7 @@ package com.example.athena.entities;
 import com.example.athena.engineering_classes.ExamsComparator;
 import com.example.athena.exceptions.CareerStatusException;
 import com.example.athena.exceptions.ExamException;
-import com.example.athena.beans.ExamEntityBean;
+import com.example.athena.beans.normal.ExamEntityBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
 import com.example.athena.exceptions.UserInfoException;
 import javafx.collections.FXCollections;

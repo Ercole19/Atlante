@@ -4,16 +4,14 @@ import com.example.athena.engineering_classes.abstract_factory.SearchResultProdu
 import com.example.athena.entities.SellerOrBuyerEnum;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.FindBookException;
-import com.example.athena.beans.BookBean;
+import com.example.athena.beans.normal.BookBean;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.BuyControllerUCC;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;

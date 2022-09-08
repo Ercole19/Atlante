@@ -3,9 +3,8 @@ package com.example.athena.use_case_controllers;
 import com.example.athena.entities.*;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
-import com.example.athena.beans.BookBean;
+import com.example.athena.beans.normal.BookBean;
 
-import java.awt.print.Book;
 import java.io.IOException;
 
 import static com.example.athena.boundaries.IsbnCheckBoundary.isbnCheck;

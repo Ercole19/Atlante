@@ -1,6 +1,6 @@
 package com.example.athena.engineering_classes;
 
-import com.example.athena.beans.ExamEntityBean;
+import com.example.athena.beans.normal.ExamEntityBean;
 
 import java.util.Comparator;
 

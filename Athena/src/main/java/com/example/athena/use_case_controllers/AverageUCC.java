@@ -2,8 +2,8 @@ package com.example.athena.use_case_controllers;
 
 import com.example.athena.entities.ExamsSubject;
 import com.example.athena.exceptions.ExamException;
-import com.example.athena.beans.ExamAverageInformationBean;
-import com.example.athena.beans.ExamEntityBean;
+import com.example.athena.beans.normal.ExamAverageInformationBean;
+import com.example.athena.beans.normal.ExamEntityBean;
 import com.example.athena.exceptions.UserInfoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

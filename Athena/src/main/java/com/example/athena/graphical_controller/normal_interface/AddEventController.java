@@ -6,7 +6,7 @@ import com.example.athena.entities.StringHoursConverter;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.beans.EventBean;
+import com.example.athena.beans.normal.EventBean;
 import com.example.athena.use_case_controllers.ManageEventUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

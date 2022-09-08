@@ -2,12 +2,11 @@ package com.example.athena.entities;
 
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
 import com.example.athena.exceptions.BookException;
-import com.example.athena.beans.BookBean;
+import com.example.athena.beans.normal.BookBean;
 import com.example.athena.exceptions.UserInfoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.awt.print.Book;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;

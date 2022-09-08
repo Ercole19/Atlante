@@ -1,8 +1,8 @@
 package com.example.athena.entities;
 
 import com.example.athena.exceptions.EventException;
-import com.example.athena.beans.EventBean;
-import com.example.athena.beans.PresenceOfEventsBean;
+import com.example.athena.beans.normal.EventBean;
+import com.example.athena.beans.normal.PresenceOfEventsBean;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.*;

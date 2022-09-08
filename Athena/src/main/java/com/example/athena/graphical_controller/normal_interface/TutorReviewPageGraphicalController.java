@@ -1,12 +1,13 @@
 package com.example.athena.graphical_controller.normal_interface;
 
+import com.example.athena.beans.normal.NormalReviewTutorSendUsernameBean;
 import com.example.athena.entities.*;
 import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.TutorReviewException;
 import com.example.athena.beans.ReviewTutorSendUsernameBean;
-import com.example.athena.beans.TutorInfosBean;
-import com.example.athena.beans.UserBean;
+import com.example.athena.beans.normal.TutorInfosBean;
+import com.example.athena.beans.normal.UserBean;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
 import javafx.event.ActionEvent;
@@ -95,10 +96,10 @@ public class TutorReviewPageGraphicalController implements Initializable
     public void generateReviewCode()
     {
         String username = studentUsername.getText() ;
-        SubjectLabels subject ;
+        String subject ;
         try
         {
-            subject = SubjectLabels.valueOf(subjectChoiceBox.getValue()) ;
+            subject = subjectChoiceBox.getValue() ;
         }
         catch (IllegalArgumentException | NullPointerException e)
         {
@@ -113,7 +114,7 @@ public class TutorReviewPageGraphicalController implements Initializable
         int endHour = endHourSpinner.getValue() ;
         int endMinute = endMinuteSpinner.getValue() ;
 
-        ReviewTutorSendUsernameBean dataBean = new ReviewTutorSendUsernameBean(
+        NormalReviewTutorSendUsernameBean dataBean = new NormalReviewTutorSendUsernameBean(
                 username, subject, day, startHour, startMinute, endHour, endMinute) ;
 
         ReviewTutorUseCaseController controller = new ReviewTutorUseCaseController() ;

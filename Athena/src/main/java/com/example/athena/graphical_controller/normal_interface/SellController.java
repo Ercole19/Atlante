@@ -7,7 +7,7 @@ import com.example.athena.entities.SellerOrBuyerEnum;
 import com.example.athena.entities.Student;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.beans.BookBean;
+import com.example.athena.beans.normal.BookBean;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.SellBooksUseCaseController;
 import javafx.collections.FXCollections;

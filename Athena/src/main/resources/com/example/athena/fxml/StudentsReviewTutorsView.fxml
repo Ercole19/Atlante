@@ -22,7 +22,7 @@
             <Font size="26.0" />
          </font>
       </TextField>
-        <SubScene fx:id="reviewSectionPrompt" fill="#2b0b0b" height="350.0" layoutX="94.0" layoutY="335.0" style="-fx-background-color: #d11010;" width="1100.0">
+        <SubScene fx:id="reviewSubscene" fill="#2b0b0b" height="350.0" layoutX="94.0" layoutY="335.0" style="-fx-background-color: #d11010;" width="1100.0">
             <root>
                 <Region />
             </root>

@@ -15,7 +15,7 @@ public class ReviewDAO extends AbstractDAO
     private String deleteReview = "DELETE FROM reviews WHERE reviewCode = ?" ;
     private String finalizeReview ="CALL athena.finalize(? , ?)" ;
 
-    public void addReview(String reviewCode, String tutorUsername, String studentUsername, LocalDate tutoringDay, SubjectLabels tutoringSubject,
+    public void addReview(String reviewCode, String tutorUsername, String studentUsername, LocalDate tutoringDay, String tutoringSubject,
                           LocalTime startTime, LocalTime endTime) throws TutorReviewException
     {
         try (PreparedStatement statement = this.getConnection().prepareStatement(addReview))
@@ -25,7 +25,7 @@ public class ReviewDAO extends AbstractDAO
             statement.setString(3, studentUsername) ;
             Date date = Date.valueOf(tutoringDay);
             statement.setString(4, date.toString()) ;
-            statement.setString(5, tutoringSubject.toString()) ;
+            statement.setString(5, tutoringSubject) ;
             Time sqlStartTime = Time.valueOf(startTime) ;
             statement.setString(6, sqlStartTime.toString()) ;
             Time sqlEndTime = Time.valueOf(endTime) ;
@@ -54,7 +54,7 @@ public class ReviewDAO extends AbstractDAO
                 Time startTime = resultTutoring.getTime(6) ;
                 Time endTime = resultTutoring.getTime(7) ;
 
-                return new ReviewEntity(reviewCode, reviewedTutor, Student.getInstance().getEmail(), SubjectLabels.valueOf(reviewSubject),
+                return new ReviewEntity(reviewCode, reviewedTutor, Student.getInstance().getEmail(), reviewSubject,
                         reviewDay.toLocalDate(), startTime.toLocalTime(), endTime.toLocalTime()) ;
             }
             else throw new TutorReviewException("No information found") ;

@@ -5,14 +5,12 @@ import com.example.athena.entities.CalendarSubject;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.beans.EventBean;
+import com.example.athena.beans.normal.EventBean;
 import com.example.athena.use_case_controllers.ManageEventUCC;
 import com.example.athena.view.EventsView;
 import com.example.athena.view.LabelBuilder;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.time.YearMonth;

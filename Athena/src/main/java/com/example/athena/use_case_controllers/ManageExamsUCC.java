@@ -3,7 +3,7 @@ package com.example.athena.use_case_controllers;
 import com.example.athena.entities.EntityExam;
 import com.example.athena.entities.ExamsSubject;
 import com.example.athena.exceptions.ExamException;
-import com.example.athena.beans.ExamEntityBean;
+import com.example.athena.beans.normal.ExamEntityBean;
 
 public class ManageExamsUCC {
     

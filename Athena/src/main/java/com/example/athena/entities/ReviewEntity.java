@@ -11,7 +11,7 @@ public class ReviewEntity
     private String reviewCode ;
     private String studentUsername ;
     private String tutorUsername ;
-    private SubjectLabels subject ;
+    private String subject ;
     private LocalDate day ;
     private LocalTime startTime ;
     private LocalTime endTime ;
@@ -28,7 +28,7 @@ public class ReviewEntity
         setEndTime(usernameBean.getEndHour(), usernameBean.getEndMinute()) ;
     }
 
-    public ReviewEntity(String reviewCode, String tutorUsername, String studentUsername, SubjectLabels subject, LocalDate day,
+    public ReviewEntity(String reviewCode, String tutorUsername, String studentUsername, String subject, LocalDate day,
                         LocalTime startTime, LocalTime endTime)
     {
         setReviewCode(reviewCode);
@@ -94,12 +94,12 @@ public class ReviewEntity
         return this.tutorUsername ;
     }
 
-    public void setSubject(SubjectLabels subject)
+    public void setSubject(String subject)
     {
         this.subject = subject ;
     }
 
-    public SubjectLabels getSubject()
+    public String getSubject()
     {
         return this.subject ;
     }

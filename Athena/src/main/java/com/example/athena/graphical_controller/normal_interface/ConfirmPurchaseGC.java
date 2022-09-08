@@ -2,8 +2,8 @@ package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.exceptions.PurchaseException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.beans.BookBean;
-import com.example.athena.beans.PurchaseResultBean;
+import com.example.athena.beans.normal.BookBean;
+import com.example.athena.beans.normal.PurchaseResultBean;
 import com.example.athena.use_case_controllers.BuyControllerUCC;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;

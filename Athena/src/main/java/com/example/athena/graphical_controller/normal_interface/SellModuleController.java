@@ -4,7 +4,7 @@ import com.example.athena.entities.Student;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.beans.BookBean;
+import com.example.athena.beans.normal.BookBean;
 import com.example.athena.use_case_controllers.SellBooksUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

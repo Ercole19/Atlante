@@ -1,14 +1,11 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.exceptions.UserRegistrationException;
-import com.example.athena.beans.RegistrationBean;
+import com.example.athena.beans.normal.RegistrationBean;
 import com.example.athena.use_case_controllers.SignUpUCC;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
