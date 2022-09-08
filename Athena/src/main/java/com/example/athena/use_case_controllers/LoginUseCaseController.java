@@ -1,9 +1,6 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.entities.Student;
-import com.example.athena.entities.Tutor;
-import com.example.athena.entities.TutorStudentLogged;
-import com.example.athena.entities.UserDao;
+import com.example.athena.entities.*;
 import com.example.athena.exceptions.FindException;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.exceptions.UserNotFoundException;
@@ -34,5 +31,9 @@ public class LoginUseCaseController {
 
         bean.setUserFound(false);
         throw new UserNotFoundException("User not found");
+    }
+
+    public void logout() {
+        User.logout() ;
     }
 }

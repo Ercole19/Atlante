@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.entities.User;
+import com.example.athena.use_case_controllers.LoginUseCaseController;
 
 public class MainPageController {
 
@@ -25,7 +25,7 @@ public class MainPageController {
     }
 
     public void onLogoutButtonClick() {
-        User.logout();
+        new LoginUseCaseController().logout() ;
         switcher.switcher("LoginPage.fxml");
     }
 }

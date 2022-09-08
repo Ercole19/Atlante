@@ -85,13 +85,11 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
     public void onConfirmButtonClick() {
         TutorPersonalPageUCC controller = new TutorPersonalPageUCC() ;
 
-        UserBean bean = new UserBean() ;
         TutorInfosBean infos = new TutorInfosBean();
         infos.setAboutMe(aboutMe.getText());
         infos.setContactNumbers(contactNumbers.getText());
         infos.setSessionInfos(sessionInfos.getText());
 
-        bean.setEmail(Tutor.getInstance().getEmail());
         try {
             controller.updateTutorInformation(infos);
         } catch (UserInfoException e) {

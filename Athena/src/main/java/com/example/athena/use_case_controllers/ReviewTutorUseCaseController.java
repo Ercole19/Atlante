@@ -42,7 +42,7 @@ public class ReviewTutorUseCaseController
         TutoringInformationBean tutoringInformationBean =  new TutoringInformationBean() ;
 
         tutoringInformationBean.setTutorsName(review.getTutorUsername());
-        tutoringInformationBean.setTutoringSubject(review.getSubject().toString());
+        tutoringInformationBean.setTutoringSubject(review.getSubject());
         tutoringInformationBean.setTutoringDaysHour(review.getDay(), review.getStartTime(), review.getEndTime());
         return tutoringInformationBean;
     }
