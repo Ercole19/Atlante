@@ -10,7 +10,7 @@ public class StateSignUp implements LoginPageState {
             stateMachine.speak("insert email") ;
             stateMachine.setState(new StateEmail());
         } else if(symbol.equals("\n")) {
-        //stateMachine.switchToMainPage(); TODO
-    }
+            stateMachine.switchToMainPage();
+        }
     }
 }

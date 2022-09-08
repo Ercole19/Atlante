@@ -17,7 +17,7 @@ public class HelloApplication extends Application {
         System.setProperty("fxmlType", "fxml");
         SceneSwitcher switcher = SceneSwitcher.getInstance() ;
         switcher.pushStage(stage) ;
-        switcher.switcher("loginPage.fxml") ;
+        switcher.switcher("LoginPage.fxml") ;
         stage.setTitle("Athena");
         Image icon = new Image(new File("src/main/resources/assets/icon.png").toURI().toString());
         stage.getIcons().add(icon);

@@ -139,7 +139,7 @@ public class SceneSwitcher {
         }
         else if(System.getProperty("os.name").contains("Linux"))
         {
-            returnUrl = new URL("file://" + System.getProperty("user.dir") + "/src/main/resources/com/example/athena/" + System.getProperty("fxmlType") + "/" + fxmlToLoad);
+            returnUrl = new URL("file://" + System.getProperty("user.dir") + "/src/main/resources/com/example/athena/" + System.getProperty("fxmlType") + fxmlToLoad);
         }
         return returnUrl;
     }
