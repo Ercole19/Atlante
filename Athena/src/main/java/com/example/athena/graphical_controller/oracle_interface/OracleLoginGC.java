@@ -9,6 +9,7 @@ import com.example.athena.use_case_controllers.LoginUseCaseController;
 import com.example.athena.view.oracle_view.LabelView;
 
 public class OracleLoginGC {
+    
 
     public void createParent(String email, String pass) throws ExceededLoginsException {
         UserBean bean = new UserBean();
@@ -21,7 +22,8 @@ public class OracleLoginGC {
             controller.findUser(bean);
             ParentSubject.getInstance().setCurrentParent(view.prepareParent("Access granted, you can now use all the commands allowed for your category"));
         } catch (UserNotFoundException e) {
-            ParentSubject.getInstance().setCurrentParent(view.prepareParent("User not found"));
+                ParentSubject.getInstance().setCurrentParent(view.prepareParent("User not found"));
+                throw new ExceededLoginsException("Too many logins") ;
         } catch (UserInfoException | FindException e) {
             ParentSubject.getInstance().setCurrentParent(view.prepareParent("Error in login, details follow: " + e.getMessage()));
         }

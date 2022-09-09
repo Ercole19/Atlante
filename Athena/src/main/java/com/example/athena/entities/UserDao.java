@@ -184,7 +184,7 @@ public class UserDao extends AbstractDAO {
     }
 
 
-    public void getCV(String email) throws UserInfoException {
+    public void getCV(String email) throws UserInfoException, NoCvException {
         try (PreparedStatement statement = this.getConnection().prepareStatement("Select CV from athena.tutordescription where emailuser = ? ")) {
 
             statement.setString(1, email);
@@ -198,6 +198,8 @@ public class UserDao extends AbstractDAO {
 
         } catch (SQLException | IOException exc) {
             throw new UserInfoException (exc.getMessage());
+        } catch (NullPointerException e) {
+            throw new NoCvException("No CV found") ;
         }
     }
 

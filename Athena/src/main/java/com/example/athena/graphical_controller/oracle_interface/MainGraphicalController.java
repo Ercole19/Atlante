@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class MainGraphicalController implements AbstractObserver, Initializable {
+public class MainGraphicalController implements AbstractObserver, Initializable{
 
     @FXML
     TextField commandField;
@@ -30,9 +30,31 @@ public class MainGraphicalController implements AbstractObserver, Initializable 
     private final CommandParser parser = new CommandParser();
 
     public void parseCommand() {
-        String command = commandField.getText();
-        parser.parseCommand(command);
+        try {
+            String command = commandField.getText();
+            parser.parseCommand(command);
+        } catch (ExceededLoginsException e) {
+            if(totalAttempts < 5) {
+                totalAttempts++ ;
+            } else {
+                new Thread(() -> {
+                    Platform.runLater(() -> enterButton.setDisable(true));
+                    try {
+                        Thread.sleep(10000L * waitTimeMultiplier);
+                    }
+                    catch(InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
+                    Platform.runLater(() -> enterButton.setDisable(false));
+                }).start();
+                waitTimeMultiplier++;
+                totalAttempts = 0;
+            }
+
+        }
     }
+
+
 
     @Override
     public void update() {
@@ -44,4 +66,5 @@ public class MainGraphicalController implements AbstractObserver, Initializable 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ParentSubject.getInstance().attachObserver(this);
     }
+
 }

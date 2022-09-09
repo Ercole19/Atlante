@@ -38,5 +38,18 @@ public class EntityExam {
     public String getDate() {
         return date;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == null) return false ;
+        if(o.getClass() != EntityExam.class) return false ;
+        EntityExam exam = (EntityExam) o ;
+        return (this.name.equals(exam.name) || this.date.equals(exam.date)) ;
+    }
+
+    @Override
+    public int hashCode(){
+        return this.date.hashCode() + this.name.hashCode() ;
+    }
     
 }

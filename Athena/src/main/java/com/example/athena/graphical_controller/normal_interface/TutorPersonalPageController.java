@@ -5,6 +5,7 @@ import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
 import com.example.athena.entities.Tutor;
 import com.example.athena.entities.TutorPersonalPageSubject;
 import com.example.athena.exceptions.CourseException;
+import com.example.athena.exceptions.NoCvException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.beans.normal.TutorInfosBean;
 import com.example.athena.beans.normal.UserBean;
@@ -78,6 +79,11 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
         } catch (UserInfoException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error in retrieving cv from db, try restarting application", ButtonType.CLOSE);
             alert.showAndWait();
+        }
+        catch (NoCvException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.CLOSE);
+            alert.showAndWait();
+            return;
         }
         String name = "tempCV.html" ;
         ArrayList<Object> params = new ArrayList<>() ;

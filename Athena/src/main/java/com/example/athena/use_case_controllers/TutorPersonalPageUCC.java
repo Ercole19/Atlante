@@ -1,5 +1,6 @@
 package com.example.athena.use_case_controllers;
 
+import com.example.athena.beans.TutorCvInfoBean;
 import com.example.athena.entities.TutorInfoEntity;
 import com.example.athena.entities.TutorPersonalPageSubject;
 import com.example.athena.entities.UserDao;

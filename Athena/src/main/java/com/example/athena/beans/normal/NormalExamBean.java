@@ -2,6 +2,7 @@ package com.example.athena.beans.normal;
 
 
 
+import com.example.athena.beans.ExamBean;
 import com.example.athena.exceptions.ExamException;
 
 import java.time.DateTimeException;
@@ -50,26 +51,31 @@ public class NormalExamBean implements ExamBean {
        }
     }
 
+    @Override
     public int getExamCfu() {
         return examCfu;
     }
 
+    @Override
     public int getExamGrade() {
         return examGrade;
     }
 
+    @Override
     public String getExamDate() {
         return examDate;
     }
 
+    @Override
     public String getExamName() {
         return examName;
     }
 
+    @Override
     public int getExamIndex() {
         return examIndex;
     }
-
+    
     public void setExamIndex(int examIndex) {
         this.examIndex = examIndex;
     }

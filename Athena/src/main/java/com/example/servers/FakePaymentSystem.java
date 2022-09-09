@@ -15,18 +15,18 @@ import java.util.logging.SimpleFormatter;
 import java.util.logging.StreamHandler;
 
 
-public class FakePaymentSystem implements Runnable
+public class FakePaymentSystem extends QuitterServer
 {
     private ServerSocket serverSocket ;
+    private static final Logger logger = Logger.getLogger("FakePaymentSystem") ;
     private final SecureRandom random ;
-    private byte[] buffer = new byte[5] ;
-    private Logger logger;
+
+
 
     private FakePaymentSystem()
     {
         try {
             serverSocket = new ServerSocket(6351) ;
-            logger = Logger.getLogger(this.getClass().getName()) ;
             logger.addHandler(new StreamHandler(new BufferedOutputStream(new FileOutputStream("src/main/resources/fakePaymentSystemLog")),
                     new SimpleFormatter())) ;
         }
@@ -79,25 +79,10 @@ public class FakePaymentSystem implements Runnable
         (new Thread(paymentSystem)).start() ;
         do
         {
+           logger.log(Level.INFO, "Type 'quit' to quit") ;
             paymentSystem.clientAcceptance() ;
         }while(!Arrays.equals(paymentSystem.buffer, "quit".getBytes())) ;
     }
 
-    @Override
-    public void run()
-    {
-        try
-        {
-            int readChars ;
-            do
-            {
-                logger.log(Level.INFO, "Type 'quit' to quit") ;
-                readChars = System.in.read(buffer, 0, 5) ;
-            }while(readChars != 5 || Arrays.equals(buffer, "quit".getBytes())) ;
-        }catch (IOException e)
-        {
-            buffer = "quit".getBytes() ;
-            System.exit(1) ;
-        }
-    }
+
 }

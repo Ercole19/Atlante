@@ -1,5 +1,6 @@
 package com.example.athena.use_case_controllers;
 
+import com.example.athena.beans.normal.SearchTutorQueryBean;
 import com.example.athena.entities.ByCourseOrNameEnum;
 import com.example.athena.entities.UserDao;
 import com.example.athena.exceptions.FindException;
@@ -12,12 +13,13 @@ import java.util.List;
 public class SearchTutorUseCaseController {
     UserDao user = new UserDao();
 
-    public List<TutorSearchResultBean> formatSearchResults(String query, ByCourseOrNameEnum searchEnum, boolean byBestReviews) throws FindTutorException {
+    public List<TutorSearchResultBean> formatSearchResults(SearchTutorQueryBean bean) throws FindTutorException {
         int i = 0;
         String[] tutorinfos;
         try {
-            tutorinfos = user.findTutor(query, searchEnum, byBestReviews);
-        } catch (FindException e) {
+            ByCourseOrNameEnum searchEnum = ByCourseOrNameEnum.valueOf(bean.getSearchType()) ;
+            tutorinfos = user.findTutor(bean.getQuery(), searchEnum, bean.isBybestreviews());
+        } catch (FindException | IllegalArgumentException e) {
             throw new FindTutorException(e.getMessage());
         }
         ArrayList<TutorSearchResultBean> result = new ArrayList<>();

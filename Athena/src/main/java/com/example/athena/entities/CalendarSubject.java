@@ -29,14 +29,16 @@ public class CalendarSubject extends AbstractSubject {
         return CalendarSubject.instance ;
     }
 
-    public CalendarEntity getEntity(YearMonth yearMonth) throws EventException {
+    public CalendarEntity getEntity(YearMonth yearMonth) throws EventException{
 
-        CalendarEntity retVal = this.calendarMap.get(yearMonth) ;
-        if (retVal == null) {
-            this.calendarMap.put(yearMonth,new CalendarEntity(yearMonth)) ;
-            retVal = this.calendarMap.get(yearMonth) ;
-        }
-        return retVal ;
+        return this.calendarMap.computeIfAbsent(yearMonth, k -> {CalendarEntity calendar = null;
+            try{calendar = new CalendarEntity(k);}
+            catch (EventException e){
+                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
+                alert.showAndWait();
+            }
+            return calendar;}) ;
+        
     }
 
     public void addEvent(EventEntity event) throws EventException

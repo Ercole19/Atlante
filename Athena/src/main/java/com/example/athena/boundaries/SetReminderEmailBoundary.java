@@ -9,6 +9,7 @@ import com.example.athena.beans.normal.EventBean;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class SetReminderEmailBoundary extends SocketBoundary
@@ -34,8 +35,9 @@ public class SetReminderEmailBoundary extends SocketBoundary
         LocalTime start = eventInfo.getStart() ;
         LocalTime end = eventInfo.getEnd() ;
         String description = eventInfo.getDescription() ;
+        LocalDateTime momentForServer = moment.toLocalDateTime() ;
 
-        String query = prepareQueryForServer(moment.toString(), Student.getInstance().getEmail(), name, day, start, end, description) ;
+        String query = prepareQueryForServer(momentForServer.toString(), Student.getInstance().getEmail(), name, day, start, end, description) ;
 
         if(remove)
         {
