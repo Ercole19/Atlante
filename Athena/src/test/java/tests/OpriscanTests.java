@@ -2,10 +2,7 @@ package tests;
 
 import com.example.athena.beans.ReviewTutorSendUsernameBean;
 import com.example.athena.beans.normal.*;
-import com.example.athena.entities.ByCourseOrNameEnum;
-import com.example.athena.entities.ReviewEntity;
-import com.example.athena.entities.TutorReviewCodesGenerator;
-import com.example.athena.entities.User;
+import com.example.athena.entities.*;
 import com.example.athena.exceptions.*;
 
 import com.example.athena.use_case_controllers.LoginUseCaseController;
@@ -15,6 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,12 +21,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals ;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail ;
 
-
-public class OverallTest1 {
+/**Sebastian Roberto Opriscan**/
+public class OpriscanTests {
 
 
     @Test
-    public void test1() {
+    public void testSearchFiltersWorkProperly() {
 
         login("alba@student.it", "tramonto");
 
@@ -37,7 +36,7 @@ public class OverallTest1 {
     }
 
     @Test
-    public void test2() {
+    public void testTutorReviewSystem() {
         login("tutor@tutor.it", "rotut") ;
 
         ReviewTutorSendUsernameBean bean = new NormalReviewTutorSendUsernameBean(
@@ -63,6 +62,36 @@ public class OverallTest1 {
 
         assertTrue(true);
 
+    }
+
+    @Test
+    public void testCalendarSubjectRefreshOnLogout() {
+        login("alba@student.it", "tramonto") ;
+
+        EventEntity event = new EventEntity("AABBAA", LocalDate.of(2021, 12, 12), LocalTime.of(10, 30), LocalTime.of(11, 30),"Desc", ActivityTypesEnum.OTHER) ;
+
+        try {
+            CalendarSubject.getInstance().addEvent(event);
+        } catch (EventException e) {
+            fail() ;
+        }
+
+        User.logout() ;
+
+        login("student@student.it", "student") ;
+
+
+
+        try {
+            CalendarEntity entity = CalendarSubject.getInstance().getEntity(YearMonth.of(2021, 12)) ;
+            List<EventBean> list = entity.getEvents(LocalDate.of(2021, 12, 12)) ;
+            
+            for(EventBean eventBean : list) {
+                if (eventBean.getName().equals("AABBAA")) fail() ;
+            }
+        } catch (EventException e) {
+            fail() ;
+        }
     }
 
     private String pushCodeToDB(ReviewTutorSendUsernameBean usernameBean) {
