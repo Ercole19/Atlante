@@ -31,6 +31,7 @@ public class LoginPageController{
     private int waitTimeMultiplier = 1;
 
     public void switchToMainPage(){
+
         String email = emailField.getText() ;
         String password = passField.getText() ;
 
@@ -64,11 +65,11 @@ public class LoginPageController{
         }
         catch (UserNotFoundException exe)
         {
-            if(totalAttempts < 5)
+            if( totalAttempts < 5)
             {
                 Alert alert = new Alert(Alert.AlertType.ERROR, exe.getMessage() , ButtonType.CLOSE);
                 alert.showAndWait();
-                totalAttempts++;
+                incrementAttempts();
             }
             else
             {
@@ -84,7 +85,8 @@ public class LoginPageController{
                     }
                     Platform.runLater(() -> loginButton.setDisable(false));
                 }).start();
-                waitTimeMultiplier++;
+                incrementMultiplier();
+                this.totalAttempts = 0;
             }
         }
     }

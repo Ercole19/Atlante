@@ -19,7 +19,7 @@ public class OracleLoginGC {
         try {
             controller.logout() ;
             controller.findUser(bean);
-            ParentSubject.getInstance().setCurrentParent(view.prepareParent("Access granted"));
+            ParentSubject.getInstance().setCurrentParent(view.prepareParent("Access granted, you can now use all the commands allowed for your category"));
         } catch (UserNotFoundException e) {
             ParentSubject.getInstance().setCurrentParent(view.prepareParent("User not found"));
         } catch (UserInfoException | FindException e) {

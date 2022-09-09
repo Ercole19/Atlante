@@ -1,31 +1,29 @@
 package com.example.athena.boundaries;
 
+import com.example.athena.beans.normal.ISBNBean;
+import com.example.athena.beans.normal.ISBNCheckResultBean;
+import com.example.athena.beans.normal.PurchaseResultBean;
 import com.example.athena.exceptions.ISBNException;
-import org.apache.log4j.Logger;
-
-import java.io.FileNotFoundException;
+import com.example.athena.exceptions.PurchaseException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
 
 
-public class IsbnCheckBoundary {
+public class IsbnCheckBoundary extends SocketBoundary {
 
 
-    private IsbnCheckBoundary() {
-
-    }
-
-    public static void isbnCheck(String isbn) throws ISBNException, IOException {
-        String url = "https://openlibrary.org/isbn/"+ isbn + ".json" ;
-        try(InputStream stream = new URL (url).openStream()){
-            new Scanner( stream , StandardCharsets.UTF_8).useDelimiter("\\A").next();
+   public static ISBNCheckResultBean isbnCheck(ISBNBean inBean) throws ISBNException {
+            try
+            {
+                String retVal = sendMessageGetResponse(inBean.getISBN(), 9876) ;
+                ISBNCheckResultBean bean = new ISBNCheckResultBean();
+                bean.setResult(retVal.equals("OK")) ;
+                return bean ;
+            }
+            catch (IOException e)
+            {
+                throw new ISBNException("Connection to server failed") ;
+            }
         }
-        catch (FileNotFoundException | MalformedURLException e)  {
-            throw new ISBNException("Submitted ISBN does not exist");
-        }
-    }
+
+
 }

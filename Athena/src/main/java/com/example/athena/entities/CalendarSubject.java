@@ -3,6 +3,8 @@ package com.example.athena.entities;
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.beans.normal.PresenceOfEventsBean;
+import com.example.athena.exceptions.SizedAlert;
+import javafx.scene.control.Alert;
 
 import java.time.YearMonth;
 import java.util.HashMap;
@@ -10,7 +12,7 @@ import java.util.HashMap;
 public class CalendarSubject extends AbstractSubject {
 
     private static CalendarSubject instance = null ;
-    private HashMap<YearMonth, CalendarEntity> calendarMap;
+    private final HashMap<YearMonth, CalendarEntity> calendarMap;
 
     private CalendarSubject()
     {

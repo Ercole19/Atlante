@@ -12,18 +12,15 @@ import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.SellBooksUseCaseController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,8 +29,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class SellController implements Initializable, AbstractObserver {
-
-
 
     @FXML
     private TableView<BookBean> bookTable ;
@@ -55,9 +50,8 @@ public class SellController implements Initializable, AbstractObserver {
     private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 
     @FXML
-    protected void onBackButtonClick(ActionEvent event) throws IOException {
+    protected void onBackButtonClick() throws IOException {
         BooksSubject.getInstance().detachObserver(this);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
         switcher.switcher("bookshop-choose-view.fxml");
     }
 
@@ -122,8 +116,6 @@ public class SellController implements Initializable, AbstractObserver {
                                         List<Object> params = new ArrayList<>();
                                         params.add(SellerOrBuyerEnum.SELLER);
                                         params.add(book);
-
-                                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
                                         switcher.switcher("Book-Page2.fxml", params);
 
                                     });

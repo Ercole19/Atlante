@@ -23,6 +23,6 @@ public class ParentSubject extends AbstractSubject {
 
     public void setCurrentParent(Parent scene) {
         this.parent = scene;
-        super.notifyObserver();;
+        super.notifyObserver();
     }
 }

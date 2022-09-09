@@ -48,7 +48,7 @@ public class CourseGraphicController {
         }
         else {
            try {
-               controller.deleteCourse(courseField.getText());
+               controller.deleteCourse(bean);
                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Course deleted!", ButtonType.CLOSE);
                alert.showAndWait();
                Stage stage = (Stage) courseField.getScene().getWindow();

@@ -11,7 +11,7 @@ public class ActivityPlotsBean
 
     public void setActivityPlots(List<XYChart.Series<String, Long>> activityPlots)
     {
-        this.activityPlots = activityPlots ;
+        this.activityPlots = activityPlots;
     }
     public List<XYChart.Series<String, Long>> getActivityPlots()
     {

@@ -152,8 +152,15 @@ public class BookPageController extends ShiftImageController implements PostInit
         params.add(this.book);
         switcher.popup("purchaseConfirm.fxml", "Confirm purchase", params);
         List<Object> goBackParams = new ArrayList<>() ;
-        goBackParams.add(this.searchQuery) ;
-        switcher.switcher("buy-view2.fxml", goBackParams) ;
+        if (System.getProperty("oracle").equals("false")) {
+            goBackParams.add(this.searchQuery) ;
+            switcher.switcher("buy-view2.fxml", goBackParams);
+        }
+        else {
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow() ;
+            stage.close();
+            ParentSubject.getInstance().setCurrentParent(new AnchorPane());
+        }
     }
 
 }
