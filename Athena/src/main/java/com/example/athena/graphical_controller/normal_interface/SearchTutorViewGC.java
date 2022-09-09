@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller.normal_interface;
 
+import com.example.athena.beans.normal.SearchTutorQueryBean;
 import com.example.athena.engineering_classes.abstract_factory.SearchResultProduct;
 import com.example.athena.entities.ByCourseOrNameEnum;
 import com.example.athena.exceptions.FindTutorException;
@@ -25,7 +26,11 @@ public class SearchTutorViewGC {
 
     public int getResultSize(String query, ByCourseOrNameEnum byCourseOrNameEnum, boolean sortByBestReviews) throws FindTutorException {
         SearchTutorUseCaseController controller = new SearchTutorUseCaseController();
-        searchResults = controller.formatSearchResults(query, byCourseOrNameEnum, sortByBestReviews);
+        SearchTutorQueryBean bean = new SearchTutorQueryBean();
+        bean.setByBestReviews(sortByBestReviews);
+        bean.setQuery(query);
+        bean.setByCourseOrName(byCourseOrNameEnum.toString());
+        searchResults = controller.formatSearchResults(bean);
         return searchResults.size();
     }
 
@@ -51,7 +56,8 @@ public class SearchTutorViewGC {
                     ArrayList<Object> params = new ArrayList<>() ;
                     params.add(result.getId()) ;
                     params.add(true) ;
-                    switcher.switcher("tutorPersonalPage.fxml", params) ;
+                    if (System.getProperty("oracle").equals("false")) switcher.switcher("tutorPersonalPage.fxml", params) ;
+                    else switcher.popup("OracleTutorPersonalPage.fxml", "Tutor personal page", params);
                 });
                 i++;
             }

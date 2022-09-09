@@ -3,7 +3,7 @@ package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.beans.normal.ExamEntityBean;
+import com.example.athena.beans.normal.NormalExamBean;
 import com.example.athena.use_case_controllers.ManageExamsUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,22 +33,21 @@ public class ManageExamsGraphicalController implements PostInitialize {
     private Button confirm;
 
     private  String name ;
-    private  String date;
-    private ExamEntityBean oldExam;
+    private NormalExamBean oldExam;
 
     public void onConfirmButtonClick(ActionEvent event) {
 
-        ExamEntityBean examBean = new ExamEntityBean();
-        int grade = Integer.parseInt(examGrade.getText());
-        int cfu = Integer.parseInt(examCFU.getText());
-        name = examName.getText();
-        date = examDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        NormalExamBean examBean = new NormalExamBean();
         try {
+            int grade = Integer.parseInt(examGrade.getText());
+            int cfu = Integer.parseInt(examCFU.getText());
+            name = examName.getText();
+
             if (!((grade < 18 || grade > 30) || (cfu < 2 || cfu > 18))){
                 examBean.setExamName(name);
-                examBean.setExamGrade(grade);
-                examBean.setExamCfu(cfu);
-                examBean.setExamDate(date);
+                examBean.setExamGrade(examGrade.getText());
+                examBean.setExamCfu(examCFU.getText());
+                examBean.setExamDate(examDate.getValue());
 
                 ManageExamsUCC useCaseController = new ManageExamsUCC();
                 useCaseController.addExam(examBean);
@@ -59,8 +58,6 @@ public class ManageExamsGraphicalController implements PostInitialize {
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Inserted data are not valid!", 800, 600);
                 alert.showAndWait();
             }
-
-
         } catch (ExamException e) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
             alert.showAndWait();
@@ -74,18 +71,17 @@ public class ManageExamsGraphicalController implements PostInitialize {
 
     public void updateExam(ActionEvent event) {
 
-        ExamEntityBean newExam = new ExamEntityBean();
-        int grade = Integer.parseInt(examGrade.getText());
-        int cfu = Integer.parseInt(examCFU.getText());
-        name = examName.getText();
-        date = examDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
+        NormalExamBean newExam = new NormalExamBean();
         try {
+            int grade = Integer.parseInt(examGrade.getText());
+            int cfu = Integer.parseInt(examCFU.getText());
+            name = examName.getText();
+
             if(!((grade < 18 || grade > 30) || (cfu < 2 || cfu > 18))){
                 newExam.setExamName(name);
-                newExam.setExamGrade(grade);
-                newExam.setExamCfu(cfu);
-                newExam.setExamDate(date);
+                newExam.setExamGrade(examGrade.getText());
+                newExam.setExamCfu(examCFU.getText());
+                newExam.setExamDate(examDate.getValue());
             }
 
             ManageExamsUCC controller = new ManageExamsUCC();
@@ -97,6 +93,10 @@ public class ManageExamsGraphicalController implements PostInitialize {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
             alert.showAndWait();
         }
+        catch (NumberFormatException e) {
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Grades or cfus are not numbers", 800, 600) ;
+            alert.showAndWait() ;
+        }
     }
 
 
@@ -107,7 +107,7 @@ public class ManageExamsGraphicalController implements PostInitialize {
 
     @Override
     public void postInitialize(ArrayList<Object> params) {
-        oldExam = (ExamEntityBean) params.get(0);
+        oldExam = (NormalExamBean) params.get(0);
 
         examName.setText(oldExam.getExamName());
         examGrade.setText(String.valueOf(oldExam.getExamGrade()));

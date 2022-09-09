@@ -1,12 +1,14 @@
 package com.example.athena.engineering_classes;
 
-import com.example.athena.beans.normal.ExamEntityBean;
+import com.example.athena.beans.OutputExamBean;
+import com.example.athena.beans.normal.NormalExamBean;
 
 import java.util.Comparator;
 
-public class ExamsComparator implements Comparator<ExamEntityBean> {
+public class ExamsComparator implements Comparator<OutputExamBean> {
+
     @Override
-    public int compare(ExamEntityBean firstExam, ExamEntityBean secondExam) {
+    public int compare(OutputExamBean firstExam, OutputExamBean secondExam) {
         return firstExam.getExamDate().compareTo(secondExam.getExamDate());
     }
 }

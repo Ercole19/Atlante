@@ -45,20 +45,15 @@ public class SetMaxCfusOrExamsGC implements PostInitialize {
     public void onConfirmBtnClick(ActionEvent event) {
         SetMaxCfusOrExamsUCC controllerCfusExams = new SetMaxCfusOrExamsUCC();
         try {
-            int max = Integer.parseInt(textFieldMax.getText());
-            SetMaxCfusOrExamsBean infos = new SetMaxCfusOrExamsBean() ;
-            infos.setNewMax(max) ;
-            infos.setType(this.examsOrCfus) ;
+            SetMaxCfusOrExamsBean infos = new SetMaxCfusOrExamsBean();
+            infos.setNewMax(textFieldMax.getText());
+            infos.setType(this.examsOrCfus);
 
             controllerCfusExams.setInfos(infos);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
 
-        }
-        catch (NumberFormatException exc){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Insert a number!", ButtonType.CLOSE);
-            alert.showAndWait();
         } catch (CareerStatusException e) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
             alert.showAndWait();

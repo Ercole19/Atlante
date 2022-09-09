@@ -58,7 +58,7 @@ public class EventDao extends AbstractDAO {
 
     public List<EventEntity> getEntitiesByTypeSpan(ActivityTypesEnum type, LocalDate timeSpan) throws EventException
     {
-        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT eventName, eventStart, eventEnd, eventDesc, eventDate, eventDateOfReminder FROM athena.eventi WHERE utente = ? AND type = ? AND dataEvento >= ? ORDER BY dataEvento" ))
+        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT eventName, eventStart, eventEnd, eventDesc, eventDate, eventDateOfReminder FROM athena.eventi WHERE utente = ? AND type = ? AND eventDate >= ? ORDER BY eventDate" ))
         {
             ArrayList<EventEntity> events = new ArrayList<>() ;
             Date start = Date.valueOf(timeSpan) ;

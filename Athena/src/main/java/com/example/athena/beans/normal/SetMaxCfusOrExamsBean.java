@@ -1,6 +1,7 @@
 package com.example.athena.beans.normal;
 
 import com.example.athena.entities.ExamsOrCfusEnum;
+import com.example.athena.exceptions.CareerStatusException;
 
 public class SetMaxCfusOrExamsBean {
 
@@ -15,9 +16,14 @@ public class SetMaxCfusOrExamsBean {
         return this.type;
     }
 
-    public void setNewMax(int max)
+    public void setNewMax(String max) throws CareerStatusException
     {
-        this.newMax = max ;
+        try {
+            this.newMax = Integer.parseInt(max) ;
+        }
+        catch (NumberFormatException exc) {
+            throw new CareerStatusException(exc.getMessage());
+        }
     }
 
     public void setType(ExamsOrCfusEnum type)

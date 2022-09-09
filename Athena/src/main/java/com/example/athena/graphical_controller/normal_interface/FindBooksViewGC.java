@@ -67,7 +67,9 @@ public class FindBooksViewGC {
                     params.add(SellerOrBuyerEnum.BUYER);
                     params.add(bookBean);
                     params.add(query) ;
-                    switcher.switcher("Book-Page2.fxml", params) ;
+                    if (System.getProperty("oracle").equals("false")) switcher.switcher("Book-Page2.fxml", params) ;
+                    else switcher.popup("OracleBookPage.fxml", "Book Page", params);
+
 
                 });
                 i++ ;

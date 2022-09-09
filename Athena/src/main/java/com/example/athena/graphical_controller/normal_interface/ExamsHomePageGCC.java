@@ -1,10 +1,11 @@
 package com.example.athena.graphical_controller.normal_interface;
 
+import com.example.athena.beans.OutputExamBean;
 import com.example.athena.entities.ExamsSubject;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
-import com.example.athena.beans.normal.ExamEntityBean;
+import com.example.athena.beans.normal.NormalExamBean;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.ManageExamsUCC;
 import javafx.collections.FXCollections;
@@ -30,17 +31,17 @@ public class ExamsHomePageGCC implements AbstractObserver, Initializable {
 
 
     @FXML
-    private TableView<ExamEntityBean> examTable ;
+    private TableView<OutputExamBean> examTable ;
     @FXML
-    private TableColumn<ExamEntityBean, String> colName ;
+    private TableColumn<OutputExamBean, String> colName ;
     @FXML
-    private TableColumn<ExamEntityBean, Integer> colVote ;
+    private TableColumn<OutputExamBean, Integer> colVote ;
     @FXML
-    private TableColumn<ExamEntityBean, Integer> colCfu ;
+    private TableColumn<OutputExamBean, Integer> colCfu ;
     @FXML
-    private TableColumn<ExamEntityBean, LocalDate> colDate ;
+    private TableColumn<OutputExamBean, LocalDate> colDate ;
     @FXML
-    private TableColumn<ExamEntityBean, Void> colEDit ;
+    private TableColumn<OutputExamBean, Void> colEDit ;
     @FXML
     private Button averageBtn;
     @FXML
@@ -50,7 +51,7 @@ public class ExamsHomePageGCC implements AbstractObserver, Initializable {
     private Button editButton = null ;
     private HBox manageBtn = null ;
 
-    private final ObservableList<ExamEntityBean> examList  = FXCollections.observableArrayList() ;
+    private final ObservableList<NormalExamBean> examList  = FXCollections.observableArrayList() ;
     private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 
 
@@ -77,10 +78,10 @@ public class ExamsHomePageGCC implements AbstractObserver, Initializable {
         colVote.setCellValueFactory(new PropertyValueFactory<>("examGrade"));
         colCfu.setCellValueFactory(new PropertyValueFactory<>("examCfu"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("examDate"));
-        javafx.util.Callback<TableColumn<ExamEntityBean, Void>, TableCell<ExamEntityBean, Void>> cellFactory = new javafx.util.Callback<>() {
+        javafx.util.Callback<TableColumn<OutputExamBean, Void>, TableCell<OutputExamBean, Void>> cellFactory = new javafx.util.Callback<>() {
 
             @Override
-            public TableCell<ExamEntityBean, Void> call(TableColumn<ExamEntityBean, Void> examEntityBeanVoidTableColumn) {
+            public TableCell<OutputExamBean, Void> call(TableColumn<OutputExamBean, Void> examEntityBeanVoidTableColumn) {
                 return new TableCell<>() {
 
                     @Override
@@ -97,7 +98,7 @@ public class ExamsHomePageGCC implements AbstractObserver, Initializable {
                             editButton = new Button("Edit ");
 
                             editButton.setOnAction(event -> {
-                                ExamEntityBean exam = examTable.getSelectionModel().getSelectedItem();
+                                OutputExamBean exam = examTable.getSelectionModel().getSelectedItem();
                                 ArrayList<Object> params = new ArrayList<>();
                                 params.add(exam);
                                 switcher.popup("AddExamView.fxml", "Edit your exam", params);
@@ -133,7 +134,7 @@ public class ExamsHomePageGCC implements AbstractObserver, Initializable {
     public void update()
     {
         examList.clear() ;
-        ObservableList<ExamEntityBean> totalExams = FXCollections.observableArrayList() ;
+        ObservableList<OutputExamBean> totalExams = FXCollections.observableArrayList() ;
         try {
             totalExams = ExamsSubject.getInstance().getExams();
         } catch (ExamException | UserInfoException e) {

@@ -1,9 +1,14 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
+import com.example.athena.exceptions.ExceededLoginsException;
+import com.example.athena.graphical_controller.oracle_interface.parsers.CommandParser;
+import com.example.athena.view.oracle_view.LabelView;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.SubScene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -16,6 +21,11 @@ public class MainGraphicalController implements AbstractObserver, Initializable 
     TextField commandField;
     @FXML
     SubScene subscene;
+    @FXML
+    Button enterButton;
+
+    private int totalAttempts = 0 ;
+    private int waitTimeMultiplier = 1;
 
     private final CommandParser parser = new CommandParser();
 

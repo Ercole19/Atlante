@@ -1,6 +1,7 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
 import com.example.athena.beans.normal.UserBean;
+import com.example.athena.exceptions.ExceededLoginsException;
 import com.example.athena.exceptions.FindException;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.exceptions.UserNotFoundException;
@@ -9,7 +10,7 @@ import com.example.athena.view.oracle_view.LabelView;
 
 public class OracleLoginGC {
 
-    public void createParent(String email, String pass) {
+    public void createParent(String email, String pass) throws ExceededLoginsException {
         UserBean bean = new UserBean();
         LabelView view = new LabelView();
         bean.setEmail(email);

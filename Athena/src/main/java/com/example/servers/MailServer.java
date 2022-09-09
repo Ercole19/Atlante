@@ -183,7 +183,7 @@ public class MailServer implements Runnable {
                     String mailAuthName = receivedMessage.substring(1, receivedMessage.indexOf(";")) ;
 
                     String dateToParse = receivedMessage.substring(mailAuthName.length()+1).substring(1, receivedMessage.indexOf(";")+1);
-                    List<String> elements = REMINDERSMAP.getOrDefault(LocalDateTime.parse(dateToParse).truncatedTo(ChronoUnit.MINUTES), new ArrayList<>());
+                    List<String> elements = REMINDERSMAP.getOrDefault(LocalDateTime.parse(dateToParse).truncatedTo(ChronoUnit.SECONDS), new ArrayList<>());
                     elements.remove(receivedMessage.substring(1));
                     REMINDERSMAP.put(LocalDateTime.parse(dateToParse), elements);
 

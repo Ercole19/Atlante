@@ -33,7 +33,7 @@ public class ShowMyInfosGC implements Initializable {
         TutorPersonalPageUCC controller = new TutorPersonalPageUCC();
         try {
             controller.updateTutorInformation(bean);
-        } catch (UserInfoException e) {
+        } catch (UserInfoException | CourseException e) {
             ParentSubject.getInstance().setCurrentParent(view.prepareParent("Error in saving infos, details follow: " + e.getMessage()));
         }
     }

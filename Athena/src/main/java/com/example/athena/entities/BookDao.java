@@ -141,7 +141,7 @@ public class BookDao extends AbstractDAO {
 
         List<BookEntity> books = new ArrayList<>() ;
 
-        try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT title_book, isbn_book, price, email_user, image, negotiable, saleTimestamp from athena.books  left join athena.book_images on books.email_user = book_images.email and books.isbn_book = book_images.isbn where (title_book = ? or isbn_book = ?)  and email_user != ? and (count_image = 1 or count_image is null)")){
+        try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT title_book, isbn_book, price, email_user, image, negotiable, saleTimestamp from athena.books  left join athena.book_images on books.email_user = book_images.email and books.isbn_book = book_images.isbn  and books.saleTimestamp = bookSaleTimestamp where (title_book = ? or isbn_book = ?)  and email_user != ?   and (count_image = 1 or count_image is null)")){
             statement.setString(1, book);
             statement.setString(2, book);
             statement.setString(3, email);

@@ -6,6 +6,7 @@ import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.beans.normal.EventBean;
+import com.example.athena.graphical_controller.oracle_interface.parsers.ShowEventParser;
 import com.example.athena.use_case_controllers.ManageEventUCC;
 import com.example.athena.view.EventsView;
 import com.example.athena.view.LabelBuilder;
@@ -94,6 +95,12 @@ public class EventsViewGC {
     private void refreshScreen(LocalDate date) {
         ArrayList<Object> params = new ArrayList<>() ;
         params.add(date);
-        switcher.switcher("eventPage.fxml", params);
+        if (System.getProperty("oracle").equals("false")) {switcher.switcher("eventPage.fxml", params);}
+        else {
+            ShowEventParser parser = new ShowEventParser();
+            List<String> list = new ArrayList<>();
+            list.add(String.valueOf(date));
+            parser.showEventParse(list);
+        }
     }
 }

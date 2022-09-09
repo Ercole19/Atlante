@@ -14,7 +14,7 @@ public class HelloApplication extends Application {
     @Override
 
     public void start(Stage stage) throws IOException {
-        System.setProperty("fxmlType", "fxml");
+        System.setProperty("oracle", "false");
         SceneSwitcher switcher = SceneSwitcher.getInstance() ;
         switcher.pushStage(stage) ;
         switcher.switcher("LoginPage.fxml") ;

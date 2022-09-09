@@ -102,6 +102,10 @@ public class SellController implements Initializable, AbstractObserver {
 
                                     editButton = new Button("Edit ");
                                     goToBookPage = new Button("Book Page");
+                                    if (System.getProperty("oracle").equals("true")) {
+                                        goToBookPage.setDisable(true);
+                                        goToBookPage.setVisible(false);
+                                    }
 
                                     editButton.setOnAction(event -> {
 

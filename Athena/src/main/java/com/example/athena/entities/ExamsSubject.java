@@ -3,7 +3,7 @@ package com.example.athena.entities;
 import com.example.athena.engineering_classes.ExamsComparator;
 import com.example.athena.exceptions.CareerStatusException;
 import com.example.athena.exceptions.ExamException;
-import com.example.athena.beans.normal.ExamEntityBean;
+import com.example.athena.beans.normal.NormalExamBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
 import com.example.athena.exceptions.UserInfoException;
 import javafx.collections.FXCollections;
@@ -55,9 +55,13 @@ public class  ExamsSubject extends AbstractSubject {
        super.notifyObserver() ;
    }
    
-   public void deleteExam(EntityExam exam, int index) throws ExamException
+   public void deleteExam(EntityExam exam, Integer index) throws ExamException
    {
-       this.totalExams.remove(index);
+       if (index != null) this.totalExams.remove(index.intValue());
+       else {
+           this.totalExams.remove(this.totalExams.indexOf(exam));
+       }
+
        this.takenExamsNumber--;
        this.gainedCfusNumber -= exam.getCfu();
        ExamDao examDao = new ExamDao();
@@ -75,26 +79,23 @@ public class  ExamsSubject extends AbstractSubject {
        super.notifyObserver();
    }
    
-   public ObservableList<ExamEntityBean> getExams() throws ExamException, UserInfoException {
-       ObservableList<ExamEntityBean> observableList = FXCollections.observableArrayList() ;
-       int i = 0;
+   public ObservableList<OutputExamBean> getExams() throws ExamException, UserInfoException {
+       ObservableList<OutputExamBean> observableList = FXCollections.observableArrayList() ;
        if(totalExams.isEmpty()) {
            getCacheExams();
        }
        for (EntityExam exam : totalExams){
-           ExamEntityBean examEntityBean = new ExamEntityBean();
-           examEntityBean.setExamDate(exam.getDate());
-           examEntityBean.setExamName(exam.getName());
-           examEntityBean.setExamCfu(exam.getCfu());
-           examEntityBean.setExamGrade(exam.getGrade());
-           examEntityBean.setExamIndex(i);
-           i++;
+           OutputExamBean examEntityBean = new OutputExamBean();
+           examEntityBean.setDate(exam.getDate());
+           examEntityBean.setName(exam.getName());
+           examEntityBean.setCfu(exam.getCfu());
+           examEntityBean.setGrade(exam.getGrade());
            observableList.add(examEntityBean);
        }
        return observableList;
    }
 
-   public ObservableList<ExamEntityBean> getSortedExams()  throws ExamException, UserInfoException {
+   public ObservableList<OutputExamBean> getSortedExams()  throws ExamException, UserInfoException {
        ExamsComparator comparator = new ExamsComparator();
        return this.getExams().sorted(comparator);
    }

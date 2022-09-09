@@ -10,15 +10,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 import static javafx.fxml.FXMLLoader.load;
 
 public class SceneSwitcher {
 
-    private final Stack<Stage> stageStack = new Stack<>() ;
+    private final Deque<Stage> stageDeque = new ArrayDeque<>();
 
     private static final String FATAL_ERROR = "FATAL ERROR: The application is unable to change pages. If the problem persists after restarting, try reinstalling the application.";
 
@@ -34,15 +32,15 @@ public class SceneSwitcher {
     }
 
     public void pushStage(Stage stage) {
-        this.stageStack.push(stage) ;
+        this.stageDeque.push(stage) ;
     }
 
     public Stage popStage(){
-        return this.stageStack.pop();
+        return this.stageDeque.pop();
     }
 
     public Stage getTopStage() {
-        return this.stageStack.peek() ;
+        return this.stageDeque.peek() ;
     }
 
 

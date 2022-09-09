@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller.normal_interface;
 
+import com.example.athena.beans.normal.NormalTutorCvInfoBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
 import com.example.athena.entities.Tutor;
 import com.example.athena.entities.TutorPersonalPageSubject;
@@ -94,7 +95,7 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
 
         try {
             controller.updateTutorInformation(infos);
-        } catch (UserInfoException e) {
+        } catch (UserInfoException | CourseException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error in updating, try restarting application", ButtonType.CLOSE);
             alert.showAndWait();
         }
@@ -104,6 +105,7 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
     public void onCVButtonClickTutor()
     {
         TutorPersonalPageUCC controller = new TutorPersonalPageUCC();
+        NormalTutorCvInfoBean bean = new NormalTutorCvInfoBean();
 
         JFileChooser fc = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -112,8 +114,9 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
         int returnVal = fc.showOpenDialog(null);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
+            bean.setFile(file);
             try {
-                controller.uploadCV(file);
+                controller.uploadCV(bean);
             } catch (UserInfoException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error in uploading cv, try restarting application", ButtonType.CLOSE);
                 alert.showAndWait();

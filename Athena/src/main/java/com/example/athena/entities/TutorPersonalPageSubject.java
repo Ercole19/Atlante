@@ -57,24 +57,27 @@ public class TutorPersonalPageSubject extends AbstractSubject {
 
 
 
-    public void addCourse(String name) throws CourseException  {
+    public void addCourse(String name) throws CourseException, UserInfoException {
         CourseDao dao = new CourseDao() ;
         dao.addCourse(name);
+        if (this.entity == null) {getAllInfos(Tutor.getInstance().getEmail());}
         this.entity.getCourses().add(name) ;
         super.notifyObserver();
 
     }
-    public void deleteCourse(String name) throws CourseException  {
+    public void deleteCourse(String name) throws CourseException, UserInfoException {
         CourseDao dao = new CourseDao();
         dao.deleteCourse(name);
+        if (this.entity == null) {getAllInfos(Tutor.getInstance().getEmail());}
         this.entity.getCourses().remove(name);
         super.notifyObserver();
     }
 
 
-    public void updateTutorInfos(TutorInfoEntity entity) throws UserInfoException {
+    public void updateTutorInfos(TutorInfoEntity entity) throws UserInfoException, CourseException {
         UserDao dao = new UserDao();
         dao.updateTutorInfos(entity.getAboutMe(), entity.getSessionInfos(), entity.getContactNumbers());
+        if (this.entity == null) {getAllInfos(Tutor.getInstance().getEmail());}
         this.entity.setTutorInfos(entity.getAboutMe(), entity.getSessionInfos(), entity.getContactNumbers());
         super.notifyObserver();
     }

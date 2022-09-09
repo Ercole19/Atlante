@@ -16,8 +16,6 @@ import javafx.stage.Stage;
 
 public class LoginPageController{
 
-    private int totalAttempts = 0 ;
-    private int waitTimeMultiplier = 1;
 
     private final SceneSwitcher switcher = SceneSwitcher.getInstance() ;
 
@@ -29,10 +27,13 @@ public class LoginPageController{
     protected TextField emailField ;
     @FXML
     protected TextField passField;
+    private int totalAttempts = 0;
+    private int waitTimeMultiplier = 1;
 
     public void switchToMainPage(){
         String email = emailField.getText() ;
         String password = passField.getText() ;
+
 
         UserBean bean = new UserBean();
         bean.setEmail(email);
@@ -86,6 +87,14 @@ public class LoginPageController{
                 waitTimeMultiplier++;
             }
         }
+    }
+
+    private void incrementAttempts(){
+        this.totalAttempts++;
+    }
+
+    private void incrementMultiplier() {
+        this.waitTimeMultiplier++ ;
     }
 
 

@@ -13,7 +13,6 @@ public class ActivityPlotsBean
     {
         this.activityPlots = activityPlots ;
     }
-
     public List<XYChart.Series<String, Long>> getActivityPlots()
     {
         return this.activityPlots ;

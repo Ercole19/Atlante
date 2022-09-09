@@ -50,4 +50,5 @@ public class TutorInfosBean {
     public void setAvgReview(float avgReview) {this.avgReview = avgReview;}
 
     public void setTutorCourses(List<String> tutorCourses) {this.tutorCourses = tutorCourses;}
+    
 }
