@@ -4,6 +4,7 @@ import com.example.athena.beans.normal.BookBean;
 import com.example.athena.beans.normal.UserBean;
 import com.example.athena.boundaries.PurchaseBoundary;
 import com.example.athena.exceptions.*;
+import com.example.athena.graphical_controller.oracle_interface.OracleAverageGC;
 import com.example.athena.graphical_controller.oracle_interface.parsers.CommandParser;
 import com.example.athena.use_case_controllers.LoginUseCaseController;
 import org.junit.jupiter.api.Test;
@@ -55,7 +56,8 @@ public class BookTest {
         CommandParser commandParser = new CommandParser();
         try {
             commandParser.parseCommand("login#alba@students.it#tramonto");
-            commandParser.parseCommand("show#averages");
+            OracleAverageGC oracleAverageGC = new OracleAverageGC();
+
         } catch (ExceededLoginsException e) {
             fail();
         }
