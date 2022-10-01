@@ -33,11 +33,13 @@ public class OpriscanTests {
         boolean retVal = searchBy(ByCourseOrNameEnum.BY_COURSE, "Fondamenti") && searchBy(ByCourseOrNameEnum.BY_NAME, "Kanye") ;
         assertTrue(retVal) ;
 
+        User.logout();
+
     }
 
     @Test
     public void testTutorReviewSystem() {
-        login("tutor@tutor.it", "rotut") ;
+        login("Paolo-dentici22@gmail.com", "salmone") ;
 
         ReviewTutorSendUsernameBean bean = new NormalReviewTutorSendUsernameBean(
                 "alba@student.it",
@@ -59,6 +61,8 @@ public class OpriscanTests {
         } catch (TutorReviewException e) {
             fail() ;
         }
+
+        User.logout() ;
 
         assertTrue(true);
 
@@ -89,9 +93,16 @@ public class OpriscanTests {
             for(EventBean eventBean : list) {
                 if (eventBean.getName().equals("AABBAA")) fail() ;
             }
+
+            User.logout();
+            login("alba@student.it", "tramonto");
+            entity.deleteEventEntity(event);
+            User.logout();
         } catch (EventException e) {
             fail() ;
         }
+
+        assertTrue(true) ;
     }
 
     private String pushCodeToDB(ReviewTutorSendUsernameBean usernameBean) {

@@ -60,10 +60,12 @@ public class BookDao extends AbstractDAO {
 
     private void deleteBookImages(String isbn) throws SQLException, IOException
     {
-        PreparedStatement statement = this.getConnection().prepareStatement("delete from athena.book_images where isbn = ? and email = ? ") ;
-        statement.setString(1, isbn) ;
-        statement.setString(2, email) ;
-        statement.execute() ;
+        try(PreparedStatement statement = this.getConnection().prepareStatement("delete from athena.book_images where isbn = ? and email = ? ")) {
+            statement.setString(1, isbn) ;
+            statement.setString(2, email) ;
+            statement.execute() ;
+        }
+
     }
 
     public void deleteBook(String isbn, String timestamp) throws BookException
