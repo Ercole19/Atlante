@@ -32,7 +32,8 @@ public class CommandParser {
                 break;
             case "add_event" :
                 AddEventParser addEventParser = new AddEventParser();
-                addEventParser.parseAddEvent();
+                commandToken.remove(0);
+                addEventParser.parseAddEvent(commandToken);
                 break ;
             case "show" :
                 ShowParser showParser = new ShowParser();

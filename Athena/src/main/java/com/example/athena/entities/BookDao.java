@@ -101,29 +101,31 @@ public class BookDao extends AbstractDAO {
                 list.add(book);
             }
         }
-        catch (SQLException | IOException | UserInfoException e)
+        catch (SQLException | IOException  e)
         {
             throw new BookException(e.getMessage()) ;
         }
         return list ;
     }
 
-    private List<File> getBookImages(String isbn, String email, String timestamp) throws SQLException, IOException, UserInfoException
+    private List<File> getBookImages(String isbn, String email, String timestamp) throws SQLException, IOException
     {
         List<File> list = new ArrayList<>();
-        PreparedStatement statement = this.getConnection().prepareStatement("SELECT image from athena.book_images where email = ? and isbn  = ? and bookSaleTimestamp = ?  order by count_image") ;
-        statement.setString(1,email) ;
-        statement.setString(2, isbn) ;
-        statement.setTimestamp(3, Timestamp.valueOf(timestamp));
-        ResultSet set = statement.executeQuery() ;
-        while(set.next())
-        {
-            byte[] image = set.getBlob(1).getBytes(1,(int) set.getBlob(1).length()) ;
-            String pathname = "src/main/resources/book_images/tempImage" + i + ".png" ;
-            list.add(writeImage(image, pathname));
-            i = i + 1 ;
+        try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT image from athena.book_images where email = ? and isbn  = ? and bookSaleTimestamp = ?  order by count_image")) {
+
+            statement.setString(1,email) ;
+            statement.setString(2, isbn) ;
+            statement.setTimestamp(3, Timestamp.valueOf(timestamp));
+            ResultSet set = statement.executeQuery() ;
+            while(set.next())
+            {
+                byte[] image = set.getBlob(1).getBytes(1,(int) set.getBlob(1).length()) ;
+                String pathname = "src/main/resources/book_images/tempImage" + i + ".png" ;
+                list.add(writeImage(image, pathname));
+                i = i + 1 ;
+            }
+            return list ;
         }
-        return list ;
     }
 
     private File writeImage(byte[] image, String pathname) throws IOException

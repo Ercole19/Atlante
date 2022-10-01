@@ -16,7 +16,6 @@ public class SearchTutorView {
     private final SearchTutorViewGC controller ;
     private final double containerWidth ;
     private final double containerHeight ;
-    private SearchResultProduct result ;
     private static final String FATAL_ERROR = "FATAL ERROR: The application is unable to load content. If the problem persists after restarting, try reinstalling the application.";
 
 
@@ -28,6 +27,7 @@ public class SearchTutorView {
     }
 
     public AnchorPane getRoot(String query, ByCourseOrNameEnum type, boolean ordered) {
+        SearchResultProduct result = null;
         try
         {
             int size = this.controller.getResultSize(query, type, ordered);
@@ -38,8 +38,8 @@ public class SearchTutorView {
             formatBundle.setEntryNumber(size);
             formatBundle.setEntryPercents(30, 30, 30, 10);
             formatBundle.setEntrySize(100) ;
-            this.result = Factory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
-            this.controller.setValues(this.result);
+            result = Factory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
+            this.controller.setValues(result);
         }
         catch (PercentFormatException exc)
         {

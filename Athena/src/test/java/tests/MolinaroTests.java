@@ -1,20 +1,25 @@
 package tests;
 
 import com.example.athena.beans.normal.BookBean;
+import com.example.athena.beans.normal.ExamAverageInformationBean;
 import com.example.athena.beans.normal.UserBean;
 import com.example.athena.boundaries.PurchaseBoundary;
 import com.example.athena.exceptions.*;
 import com.example.athena.graphical_controller.oracle_interface.OracleAverageGC;
-import com.example.athena.graphical_controller.oracle_interface.parsers.CommandParser;
+import com.example.athena.use_case_controllers.AverageUCC;
 import com.example.athena.use_case_controllers.LoginUseCaseController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
+
+import java.text.DecimalFormat;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**Molinaro Luca**/
 
-public class BookTest {
+public class MolinaroTests {
 
     @Test
     public void boundaryTest(){
@@ -53,15 +58,34 @@ public class BookTest {
 
     @Test
     public void optimisticAverageTestSecondInterface(){
-        CommandParser commandParser = new CommandParser();
+        UserBean params = new UserBean();
+        params.setEmail("alba@student.it");
+        params.setPassword("tramonto");
+        LoginUseCaseController uController = new LoginUseCaseController();
         try {
-            commandParser.parseCommand("login#alba@students.it#tramonto");
-            OracleAverageGC oracleAverageGC = new OracleAverageGC();
-
-        } catch (ExceededLoginsException e) {
+            uController.findUser(params);
+        } catch (UserNotFoundException | UserInfoException | FindException e) {
             fail();
         }
-
+        DecimalFormat format = new DecimalFormat("+#.00;-#.00");
+        OracleAverageGC oracleAverageGC = new OracleAverageGC();
+        AverageUCC controller = new AverageUCC();
+        String toTest = oracleAverageGC.getAverageInfos();
+        ObservableList<ExamAverageInformationBean> examsArithmeticAverageInfos = FXCollections.observableArrayList();
+        try {
+            examsArithmeticAverageInfos = controller.getExamsArithmeticAverageInformation();
+        }
+        catch (ExamException | UserInfoException e){
+            fail();
+        }
+        for (ExamAverageInformationBean bean : examsArithmeticAverageInfos) {
+            if(toTest.contains(bean.getDate()) &&(toTest.contains(format.format(bean.getAverage())))){
+                //as it should be
+            }
+            else{
+                fail();
+            }
+        }
+        assertTrue(true);
     }
 }
-

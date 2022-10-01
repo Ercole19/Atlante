@@ -5,9 +5,11 @@ import com.example.athena.beans.normal.EventBean;
 import com.example.athena.beans.normal.NormalExamBean;
 import com.example.athena.beans.normal.UserBean;
 import com.example.athena.entities.CalendarSubject;
+import com.example.athena.entities.ExamsSubject;
 import com.example.athena.exceptions.*;
 import com.example.athena.use_case_controllers.LoginUseCaseController;
 import com.example.athena.use_case_controllers.ManageEventUCC;
+import com.example.athena.use_case_controllers.ManageExamsUCC;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -18,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 /**Ercole Simone**/
-public class CalendarTest {
+public class ErcoleTests {
 
     @Test
     public void firstTest() {
@@ -52,9 +54,8 @@ public class CalendarTest {
             eventBean.setName("Event");
             eventBean.setDescription("ciao");
             eventBean.setStart(LocalTime.parse("20:30"));
-            eventBean.setStart(LocalTime.parse("21:30"));
+            eventBean.setEnd(LocalTime.parse("21:30"));
             eventBean.setType("OTHER");
-            eventBean.setDateOfReminder(2,30);
             controller.addEvent(eventBean);
 
             after = CalendarSubject.getInstance().getEntity(YearMonth.of(2022, 9)).getEvents(LocalDate.parse("2022-09-19")).size();
@@ -76,7 +77,14 @@ public class CalendarTest {
             bean.setExamCfu("9");
             bean.setExamGrade("22");
             bean.setExamName("Exam");
-        }catch (ExamException e) {
+
+            prevCfus = ExamsSubject.getInstance().getGainedCfusNumber();
+            ManageExamsUCC controller = new ManageExamsUCC();
+            controller.addExam(bean);
+            afterCfus = ExamsSubject.getInstance().getGainedCfusNumber();
+            assertEquals(afterCfus, prevCfus + 9);
+
+        }catch (ExamException | UserInfoException e) {
             fail();
         }
     }
