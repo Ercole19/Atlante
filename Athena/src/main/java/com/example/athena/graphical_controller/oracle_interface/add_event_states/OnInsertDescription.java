@@ -4,7 +4,7 @@ import com.example.athena.graphical_controller.oracle_interface.OracleAddEventGC
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.view.oracle_view.InsertDescriptionView;
 
-public class OnInsertDescription extends AddEventAbstractState{
+public class OnInsertDescription implements AddEventAbstractState{
 
     public OnInsertDescription(OracleAddEventGC controller) {
         ParentSubject.getInstance().setCurrentParent(new InsertDescriptionView(controller).getRoot());

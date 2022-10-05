@@ -7,7 +7,7 @@ import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.view.oracle_view.LabelView;
 import com.example.athena.view.oracle_view.SetReminderView;
 
-public class OnFinalization extends AddEventAbstractState {
+public class OnFinalization implements AddEventAbstractState {
 
     public OnFinalization(OracleAddEventGC controller) {
         try {
@@ -24,6 +24,6 @@ public class OnFinalization extends AddEventAbstractState {
 
     @Override
     public void goNext(OracleAddEventGC contextStateMachine) {
-
+        throw new UnsupportedOperationException("The state is an ending state") ;
     }
 }

@@ -4,7 +4,7 @@ import com.example.athena.graphical_controller.oracle_interface.OracleAddEventGC
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.view.oracle_view.WantToView;
 
-public class OnWantDescription extends AddEventAbstractState{
+public class OnWantDescription implements AddEventAbstractState{
 
 
     public OnWantDescription(OracleAddEventGC controller) {

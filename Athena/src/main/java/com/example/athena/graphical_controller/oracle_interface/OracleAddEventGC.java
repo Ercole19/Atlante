@@ -52,7 +52,7 @@ public class OracleAddEventGC implements OnYesOrNoController{
         String reminder = view.getReminderString() ;
 
         try {
-            if (reminder.matches("\\d{0,4}:[0-5][0-9]")) {
+            if (reminder.matches("\\d{0,4}:[0-5]\\d")) {
                 String[] tokens = reminder.split(":") ;
                 hoursBefore = Integer.parseInt(tokens[0]) ;
                 minutesBefore = Integer.parseInt(tokens[1]) ;
@@ -77,6 +77,7 @@ public class OracleAddEventGC implements OnYesOrNoController{
                     case HALF_AND_AN_HOUR_BEFORE:
                         this.hoursBefore = 1 ;
                         this.minutesBefore = 30 ;
+                        break;
                     case CUSTOM:
                         throw new EventException("Wrong format") ;
 

@@ -24,11 +24,12 @@ import static org.junit.jupiter.api.Assertions.fail ;
 /**Sebastian Roberto Opriscan**/
 public class OpriscanTests {
 
-
+    private static final String TEST_USERNAME = "alba@student.it" ;
+    private static final String TEST_PARTICULAR_WORD_FOR_ACCESS = "tramonto" ;
     @Test
     public void testSearchFiltersWorkProperly() {
 
-        login("alba@student.it", "tramonto");
+        login(TEST_USERNAME, TEST_PARTICULAR_WORD_FOR_ACCESS);
 
         boolean retVal = searchBy(ByCourseOrNameEnum.BY_COURSE, "Fondamenti") && searchBy(ByCourseOrNameEnum.BY_NAME, "Kanye") ;
         assertTrue(retVal) ;
@@ -42,7 +43,7 @@ public class OpriscanTests {
         login("Paolo-dentici22@gmail.com", "salmone") ;
 
         ReviewTutorSendUsernameBean bean = new NormalReviewTutorSendUsernameBean(
-                "alba@student.it",
+                TEST_USERNAME,
                 "Fondamenti",
                 LocalDate.of(2021,12, 8),
                 13, 13,13,14
@@ -52,7 +53,7 @@ public class OpriscanTests {
 
         User.logout();
 
-        login("alba@student.it", "tramonto") ;
+        login(TEST_USERNAME, TEST_PARTICULAR_WORD_FOR_ACCESS) ;
 
         SendReviewBean review = new SendReviewBean(5, code) ;
 
@@ -70,7 +71,7 @@ public class OpriscanTests {
 
     @Test
     public void testCalendarSubjectRefreshOnLogout() {
-        login("alba@student.it", "tramonto") ;
+        login(TEST_USERNAME, TEST_PARTICULAR_WORD_FOR_ACCESS) ;
 
         EventEntity event = new EventEntity("AABBAA", LocalDate.of(2021, 12, 12), LocalTime.of(10, 30), LocalTime.of(11, 30),"Desc", ActivityTypesEnum.OTHER) ;
 
@@ -95,7 +96,7 @@ public class OpriscanTests {
             }
 
             User.logout();
-            login("alba@student.it", "tramonto");
+            login(TEST_USERNAME, TEST_PARTICULAR_WORD_FOR_ACCESS);
             entity.deleteEventEntity(event);
             User.logout();
         } catch (EventException e) {

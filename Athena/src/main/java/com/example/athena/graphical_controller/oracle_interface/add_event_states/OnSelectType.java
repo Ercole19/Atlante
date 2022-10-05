@@ -4,7 +4,7 @@ import com.example.athena.graphical_controller.oracle_interface.OracleAddEventGC
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.view.oracle_view.SelectTypeView;
 
-public class OnSelectType extends AddEventAbstractState {
+public class OnSelectType implements AddEventAbstractState {
 
 
     public OnSelectType(OracleAddEventGC controller) {
