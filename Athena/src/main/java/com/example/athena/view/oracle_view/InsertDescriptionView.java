@@ -20,6 +20,9 @@ public class InsertDescriptionView {
         Button button = new Button("Confirm") ;
 
         button.setOnAction(event -> controller.obtainDescription(this)) ;
+        box.getChildren().add(button) ;
+
+        this.root = box ;
 
     }
 
