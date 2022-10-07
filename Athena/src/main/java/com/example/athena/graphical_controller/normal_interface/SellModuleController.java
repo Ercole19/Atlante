@@ -161,20 +161,7 @@ public class SellModuleController extends UpdatedShiftImageController implements
     }
 
     public void deleteImageOnScreen (){
-        this.files.remove(super.index);
-        super.images.remove(super.index);
-        super.shiftIndex(--super.index);
-        if ((super.index == 0) && (super.images.size()>0) ){
-            this.bookImage.setImage(super.images.get(super.index)) ;
-        }
-        else if(super.index != 0 && super.images.size()>0 && super.index<super.images.size()){
-            this.bookImage.setImage(super.images.get(super.index));
-        }
-        else {
-            Image icon = new Image(new File("src/main/resources/assets/upload2.jpg").toURI().toString());
-            this.bookImage.setImage(icon);
-            checkIndex();
-        }
+        super.deleteImageOnScreen();
     }
 
 }

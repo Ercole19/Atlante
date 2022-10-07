@@ -5,7 +5,6 @@ import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.graphical_controller.oracle_interface.OracleAddEventGC;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.view.oracle_view.LabelView;
-import com.example.athena.view.oracle_view.SetReminderView;
 
 public class OnFinalization implements AddEventAbstractState {
 

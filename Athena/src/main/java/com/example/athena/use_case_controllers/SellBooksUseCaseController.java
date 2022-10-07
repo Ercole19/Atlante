@@ -12,7 +12,7 @@ import static com.example.athena.boundaries.IsbnCheckBoundary.isbnCheck;
 
 public class SellBooksUseCaseController {
 
-    public void putOnSale(BookBean book) throws ISBNException, BookException, IOException {
+    public void putOnSale(BookBean book) throws ISBNException, BookException {
         ISBNBean bean = new ISBNBean();
         bean.setISBN(book.getIsbn());
         if (!isbnCheck(bean).getResult()) throw new ISBNException("Check failed") ;
