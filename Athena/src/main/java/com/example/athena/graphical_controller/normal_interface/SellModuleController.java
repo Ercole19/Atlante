@@ -29,7 +29,7 @@ import java.util.ResourceBundle;
 
 
 
-public class SellModuleController extends ShiftImageController implements Initializable , PostInitialize {
+public class SellModuleController extends UpdatedShiftImageController implements Initializable , PostInitialize {
 
     @FXML
     private TextField bookTitle ;
@@ -52,8 +52,6 @@ public class SellModuleController extends ShiftImageController implements Initia
     @FXML
     private Button confirmButton ;
 
-    private List<File> files;
-
     private final BookBean book = new BookBean();
 
     private BookBean oldBook;
@@ -68,7 +66,7 @@ public class SellModuleController extends ShiftImageController implements Initia
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
             stage.close();
         }
-        catch (ISBNException | BookException | IOException e ){
+        catch (ISBNException | BookException e ){
             Alert alert = new Alert(Alert.AlertType.ERROR) ;
             alert.setContentText(e.getMessage()) ;
             alert.showAndWait() ;
@@ -99,7 +97,7 @@ public class SellModuleController extends ShiftImageController implements Initia
             this.book.setIsbn(bookISBN.getText());
             this.book.setPrice(bookPrice.getText());
             this.book.setIsNegotiable(bookNegotiability.isSelected());
-            this.book.setImage(files);
+            this.book.setImage(super.files);
             this.book.setOwner(Student.getInstance().getEmail());
         }
         catch (BookException e)
@@ -118,24 +116,13 @@ public class SellModuleController extends ShiftImageController implements Initia
     }
 
     public void onUploadBtnClick() {
-
-        JFileChooser fc = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
-        fc.setFileFilter(filter);
-        int returnVal = fc.showOpenDialog(null);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            super.images.add(new Image(String.valueOf(fc.getSelectedFile().toURI()))) ;
-            this.files.add(fc.getSelectedFile());
-            this.bookImage.setImage(super.images.get(images.size() - 1));
-            super.shiftIndex(images.size() - 1);
-        }
-
+        super.onUploadBtnClick();
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.files = new ArrayList<>() ;
+        super.files = new ArrayList<>() ;
         super.images = new ArrayList<>() ;
 
         super.bookImage = this.bookImage;
@@ -172,9 +159,6 @@ public class SellModuleController extends ShiftImageController implements Initia
             super.shiftIndex(0);
         }
     }
-
-
-
 
     public void deleteImageOnScreen (){
         this.files.remove(super.index);

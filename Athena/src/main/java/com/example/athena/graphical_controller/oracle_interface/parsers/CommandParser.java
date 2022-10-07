@@ -51,7 +51,8 @@ public class CommandParser {
                 break;
             case "sell_book" :
                 SellBookParser sellBookParser = new SellBookParser();
-                sellBookParser.parseSellBook();
+                commandToken.remove(0);
+                sellBookParser.parseSellBook(commandToken);
                 break;
             case "add_course" :
                 AddCoursesParser addCoursesParser = new AddCoursesParser();
