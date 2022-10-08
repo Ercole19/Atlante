@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
+import com.example.athena.beans.ReviewTutorSendUsernameBean;
 import com.example.athena.beans.normal.TutorInfosBean;
 import com.example.athena.beans.normal.UserBean;
 import com.example.athena.beans.oracle.OracleReviewTutorSendUsernameBean;
@@ -9,6 +10,9 @@ import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.TutorReviewException;
 import com.example.athena.exceptions.UserInfoException;
+import com.example.athena.graphical_controller.oracle_interface.generate_review_states.GenerateReviewAbstractState;
+import com.example.athena.graphical_controller.oracle_interface.generate_review_states.OnChooseSubjectState;
+import com.example.athena.graphical_controller.oracle_interface.sell_book_states.SellBookAbstractState;
 import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
 import com.example.athena.view.oracle_view.LabelView;
 import javafx.fxml.FXML;
@@ -17,55 +21,24 @@ import javafx.scene.control.*;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ResourceBundle;
 
-public class OracleGenerateReviewGC implements Initializable {
+public class OracleGenerateReviewGC {
+    private String student;
+    private String date;
+    private String startHour;
+    private String endHour;
+    private GenerateReviewAbstractState state;
+    private String subject;
 
-    @FXML
-    TextField studentUsername;
-    @FXML
-    TextField startTime;
-    @FXML
-    TextField endTime;
-    @FXML
-    ChoiceBox<String> subjectChoiceBox;
-    @FXML
-    DatePicker dayDatePicker;
-    private final LabelView view = new LabelView();
-
-
-    public void confirmGeneration() {
-        String username = studentUsername.getText() ;
-        String subject ;
-        try
-        {
-            subject = (subjectChoiceBox.getValue()) ;
-        }
-        catch (IllegalArgumentException | NullPointerException e) {
-            ParentSubject.getInstance().setCurrentParent(view.prepareParent("Enter a subject for the review!"));
-            return ;
-        }
-
-        LocalDate day = dayDatePicker.getValue() ;
-
-        String start = startTime.getText();
-        String end =   endTime.getText();
-        OracleReviewTutorSendUsernameBean dataBean = null;
-        ReviewTutorUseCaseController controller = new ReviewTutorUseCaseController() ;
-        try {
-            dataBean = new OracleReviewTutorSendUsernameBean(username, subject, day, start, end) ;
-            String generatedCode = controller.generateReview(dataBean) ;
-            ParentSubject.getInstance().setCurrentParent(view.prepareParent("This is your code" + generatedCode));
-        } catch (DateTimeParseException e) {
-            LabelView labelView = new LabelView();
-            ParentSubject.getInstance().setCurrentParent(labelView.prepareParent(e.getMessage()));
-        }
-        catch (TutorReviewException | SendEmailException e)
-        {
-            ParentSubject.getInstance().setCurrentParent(view.prepareParent("Error in generating code, details follow: " + e.getMessage()));
-
-        }
+    public void confirmGeneration(String student, String date, String startHour, String endHour) {
+        this.student = student;
+        this.date = date;
+        this.endHour = endHour;
+        this.startHour = startHour;
+        this.state = new OnChooseSubjectState(this);
     }
 
     @Override
@@ -81,5 +54,18 @@ public class OracleGenerateReviewGC implements Initializable {
         } catch (CourseException | UserInfoException e) {
             ParentSubject.getInstance().setCurrentParent(view.prepareParent("Error in retrieving infos"));
         }
+    }
+
+    public void receiveSubject(ChooseSubjectView view) {
+        this.subject = view.getChoiceBoxSelection() ;
+        this.goNext() ;
+    }
+
+    public void setState(GenerateReviewAbstractState nextState) {
+        this.state = nextState ;
+    }
+
+    public void goNext() {
+        this.state.goNext(this) ;
     }
 }

@@ -42,11 +42,7 @@ public class SellModuleController extends UpdatedShiftImageController implements
     @FXML
     private ImageView bookImage;
     @FXML
-    private Button leftArrow ;
-    @FXML
     private ImageView leftArrowImage ;
-    @FXML
-    private Button rightArrow;
     @FXML
     private ImageView rightArrowImage ;
     @FXML
@@ -124,13 +120,9 @@ public class SellModuleController extends UpdatedShiftImageController implements
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.files = new ArrayList<>() ;
         super.images = new ArrayList<>() ;
-
         super.bookImage = this.bookImage;
-        super.leftArrow = leftArrow;
-        super.rightArrow = rightArrow ;
         super.leftArrowImage = leftArrowImage ;
         super.rightArrowImage = rightArrowImage ;
-
         super.shiftIndex(-1);
     }
 
@@ -164,4 +156,13 @@ public class SellModuleController extends UpdatedShiftImageController implements
         super.deleteImageOnScreen();
     }
 
+    @Override
+    public void rightArrowClick() {
+        super.onRightArrowClick();
+    }
+
+    @Override
+    public void leftArrowClick() {
+        super.onLeftArrowClick();
+    }
 }

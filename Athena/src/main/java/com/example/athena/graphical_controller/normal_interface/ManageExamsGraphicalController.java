@@ -1,6 +1,8 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 
+import com.example.athena.beans.ExamBean;
+import com.example.athena.beans.OutputExamBean;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.beans.normal.NormalExamBean;
@@ -15,7 +17,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
@@ -33,7 +34,7 @@ public class ManageExamsGraphicalController implements PostInitialize {
     private Button confirm;
 
     private  String name ;
-    private NormalExamBean oldExam;
+    private ExamBean oldExam;
 
     public void onConfirmButtonClick(ActionEvent event) {
 

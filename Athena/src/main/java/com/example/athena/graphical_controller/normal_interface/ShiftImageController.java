@@ -14,8 +14,6 @@ public abstract class ShiftImageController {
     protected ImageView bookImage;
     protected int index;
     protected List<Image> images;
-    protected Button rightArrow ;
-    protected Button leftArrow ;
     protected ImageView leftArrowImage ;
     protected ImageView rightArrowImage ;
 
@@ -59,23 +57,19 @@ public abstract class ShiftImageController {
     {
         if(images.size() == 0 || this.index == images.size() -1)
         {
-            disable(rightArrow) ;
             disable(rightArrowImage) ;
         }
         else
         {
-            enable(rightArrow) ;
             enable(rightArrowImage) ;
         }
 
         if(this.index == 0 || this.index == -1)
         {
-            disable(leftArrow) ;
             disable(leftArrowImage) ;
         }
         else
         {
-            enable(leftArrow);
             enable(leftArrowImage);
         }
     }

@@ -51,10 +51,6 @@ public class BookPageController extends ShiftImageController implements PostInit
     @FXML
     private ImageView image;
     @FXML
-    private Button lArrow;
-    @FXML
-    private Button rArrow;
-    @FXML
     private ImageView lArrowImage;
     @FXML
     private ImageView rArrowImage;
@@ -111,8 +107,6 @@ public class BookPageController extends ShiftImageController implements PostInit
 
         super.bookImage = this.image;
         super.images = bookImages;
-        super.leftArrow = lArrow;
-        super.rightArrow = rArrow;
         super.leftArrowImage = lArrowImage;
         super.rightArrowImage = rArrowImage;
 
@@ -166,4 +160,13 @@ public class BookPageController extends ShiftImageController implements PostInit
         }
     }
 
+    @Override
+    public void rightArrowClick() {
+        super.onRightArrowClick();
+    }
+
+    @Override
+    public void leftArrowClick() {
+        super.onLeftArrowClick();
+    }
 }

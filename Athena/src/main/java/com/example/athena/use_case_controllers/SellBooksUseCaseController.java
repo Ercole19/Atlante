@@ -33,4 +33,5 @@ public class SellBooksUseCaseController {
         BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), book.getPrice(), book.getNegotiable() , book.getImage(), Student.getInstance().getEmail(), book.getTimeStamp()) ;
         BooksSubject.getInstance().deleteBook(bookE, book.getIndex());
     }
+
 }

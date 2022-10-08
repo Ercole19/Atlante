@@ -42,7 +42,8 @@ public class CommandParser {
                 break;
             case "generate_review" :
                 GenerateReviewParser generateReviewParser = new GenerateReviewParser();
-                generateReviewParser.parseGenerateReview();
+                commandToken.remove(0);
+                generateReviewParser.parseGenerateReview(commandToken);
                 break;
             case "review" :
                 ReviewParser reviewParser = new ReviewParser();
@@ -59,6 +60,11 @@ public class CommandParser {
                 commandToken.remove(0);
                 addCoursesParser.parseAddCourse(commandToken);
                 break ;
+            case "update_book":
+                UpdateBookParser updateBookParser = new UpdateBookParser() ;
+                commandToken.remove(0) ;
+                updateBookParser.parseUpdateBook(commandToken) ;
+
             case "add_cv":
                 AddCvParser addCvParser = new AddCvParser();
                 commandToken.remove(0);

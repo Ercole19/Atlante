@@ -4,6 +4,7 @@ import com.example.athena.beans.ReviewTutorSendUsernameBean;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class OracleReviewTutorSendUsernameBean implements ReviewTutorSendUsernameBean  {
@@ -14,7 +15,7 @@ public class OracleReviewTutorSendUsernameBean implements ReviewTutorSendUsernam
     private LocalTime endTime ;
 
 
-    public OracleReviewTutorSendUsernameBean(String username, String subject, LocalDate day, String startTime, String endTime)
+    public OracleReviewTutorSendUsernameBean(String username, String subject, String day, String startTime, String endTime)
     {
         setUsername(username) ;
         setSubject(subject) ;
@@ -27,8 +28,8 @@ public class OracleReviewTutorSendUsernameBean implements ReviewTutorSendUsernam
         this.subject = subject;
     }
 
-    private void setDay(LocalDate day) {
-        this.day = day;
+    private void setDay(String day) throws DateTimeParseException {
+        this.day = LocalDate.parse(day, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     private void setUsername(String username) {

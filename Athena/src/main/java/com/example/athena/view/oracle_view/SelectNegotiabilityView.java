@@ -37,5 +37,7 @@ public class SelectNegotiabilityView {
 
     public Parent getRoot() {return this.root;}
 
-    private void sendNegotiability() {this.controller.receiveNegotiability(this.checkBox.isSelected());}
+    public Boolean getCheckBoxResult(){return this.checkBox.isSelected();}
+
+    private void sendNegotiability() {this.controller.receiveNegotiability(this);}
 }

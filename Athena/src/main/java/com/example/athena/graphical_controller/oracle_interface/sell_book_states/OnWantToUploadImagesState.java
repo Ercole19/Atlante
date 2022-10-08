@@ -15,7 +15,7 @@ public class OnWantToUploadImagesState implements SellBookAbstractState {
         if(contextStateMachine.getDecision()) {
             contextStateMachine.setState(new OnUploadImagesState(contextStateMachine)) ;
         } else {
-           // contextStateMachine.setState(new OnSellFinalizationState()) ;
+            contextStateMachine.setState(new OnSellFinalizationState(contextStateMachine)) ;
         }
     }
 }

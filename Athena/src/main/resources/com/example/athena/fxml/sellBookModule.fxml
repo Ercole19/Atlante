@@ -41,26 +41,22 @@
             <Font size="24.0" />
          </font>
       </CheckBox>
-      <ImageView fx:id="leftArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="90.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leftArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="90.0" layoutY="534.0" onMouseClicked="#onLeftArrowClick" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../assets/backBtn.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <ImageView fx:id="rightArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="410.0" layoutY="533.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="rightArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="410.0" layoutY="533.0" onMouseClicked="#onRightArrowClick" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../assets/forwardBtn.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <Button fx:id="leftArrow" layoutX="90.0" layoutY="544.0" mnemonicParsing="false" onAction="#onLeftArrowClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="rightArrow" layoutX="410.0" layoutY="530.0" mnemonicParsing="false" onAction="#onRightArrowClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <Text fill="#ffd775" layoutX="215.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD BOOK" textOrigin="CENTER">
          <font>
             <Font size="30.0" />

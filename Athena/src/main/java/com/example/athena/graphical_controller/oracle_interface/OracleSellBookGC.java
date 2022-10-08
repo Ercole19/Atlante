@@ -7,7 +7,10 @@ import com.example.athena.graphical_controller.normal_interface.UpdatedShiftImag
 import com.example.athena.graphical_controller.oracle_interface.sell_book_states.OnSelectNegotiabilityState;
 import com.example.athena.graphical_controller.oracle_interface.sell_book_states.SellBookAbstractState;
 import com.example.athena.use_case_controllers.SellBooksUseCaseController;
+import com.example.athena.view.oracle_view.SelectNegotiabilityView;
 import com.example.athena.view.oracle_view.UploadImageView;
+
+import java.util.ArrayList;
 
 public class OracleSellBookGC extends UpdatedShiftImageController implements OnYesOrNoController {
 
@@ -28,21 +31,22 @@ public class OracleSellBookGC extends UpdatedShiftImageController implements OnY
         this.bookName = name;
         this.bookIsbn = isbn;
         this.bookPrice = price;
+        super.files = new ArrayList<>() ;
+        super.images = new ArrayList<>() ;
         this.current = new OnSelectNegotiabilityState(this);
 
     }
 
-    public void receiveNegotiability(boolean setting) {
-        this.negotiability = setting ;
+    public void receiveNegotiability( SelectNegotiabilityView view) {
+        this.negotiability = view.getCheckBoxResult();
         this.goNext() ;
     }
 
     public void getUploadControls(UploadImageView view) {
         super.bookImage = view.getBookImageView() ;
-        super.leftArrow = view.getLeftArrowButton() ;
         super.leftArrowImage = view.getLeftArrowImage() ;
-        super.rightArrow = view.getRightArrowButton() ;
-        super.leftArrowImage = view.getRightArrowImage() ;
+        super.rightArrowImage = view.getRightArrowImage() ;
+        super.shiftIndex(-1);
     }
 
     public void deleteImage() {super.deleteImageOnScreen();}
@@ -70,6 +74,9 @@ public class OracleSellBookGC extends UpdatedShiftImageController implements OnY
     public void goNext() {
         this.current.goNext(this) ;
     }
+
+    public void leftArrowClick() {super.onLeftArrowClick();}
+    public void rightArrowClick(){super.onRightArrowClick();}
 
     @Override
     public void onYes() {
