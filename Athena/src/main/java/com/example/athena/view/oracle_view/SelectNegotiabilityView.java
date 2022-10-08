@@ -1,12 +1,10 @@
 package com.example.athena.view.oracle_view;
 
-import com.example.athena.graphical_controller.oracle_interface.OracleAddEventGC;
 import com.example.athena.graphical_controller.oracle_interface.OracleSellBookGC;
 import com.example.athena.view.LabelBuilder;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -24,9 +22,7 @@ public class SelectNegotiabilityView {
         Button confirm = new Button("Confirm");
         Label choice = LabelBuilder.buildLabel("Do you want to set price negotiable ?");
 
-        confirm.setOnAction(event -> {
-            sendNegotiability();
-        });
+        confirm.setOnAction(event -> sendNegotiability());
 
         vbox.getChildren().add(checkBox);
         vbox.getChildren().add(choice);
