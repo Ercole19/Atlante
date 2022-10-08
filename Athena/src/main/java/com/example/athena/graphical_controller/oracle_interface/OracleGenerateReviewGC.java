@@ -14,6 +14,7 @@ import com.example.athena.graphical_controller.oracle_interface.generate_review_
 import com.example.athena.graphical_controller.oracle_interface.generate_review_states.OnChooseSubjectState;
 import com.example.athena.graphical_controller.oracle_interface.sell_book_states.SellBookAbstractState;
 import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
+import com.example.athena.view.oracle_view.ChooseSubjectView;
 import com.example.athena.view.oracle_view.LabelView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -41,18 +42,14 @@ public class OracleGenerateReviewGC {
         this.state = new OnChooseSubjectState(this);
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        UserBean bean = new UserBean();
-        bean.setEmail(Tutor.getInstance().getEmail());
+    public String generateReview() throws TutorReviewException {
+        ReviewTutorUseCaseController controller = new ReviewTutorUseCaseController();
+        OracleReviewTutorSendUsernameBean bean = new OracleReviewTutorSendUsernameBean(this.student, this.subject, this.date, this.startHour, this.endHour);
         try {
-            TutorInfosBean tutorInfosBean = TutorPersonalPageSubject.getInstance().getTutorInfos(bean);
-            for(String subject : tutorInfosBean.getTutorCourses())
-            {
-                subjectChoiceBox.getItems().add(subject) ;
-            }
-        } catch (CourseException | UserInfoException e) {
-            ParentSubject.getInstance().setCurrentParent(view.prepareParent("Error in retrieving infos"));
+            return controller.generateReview(bean);
+        }
+        catch (DateTimeParseException | TutorReviewException | SendEmailException e) {
+            throw new TutorReviewException("Error in generating code, details follow: " + e.getMessage());
         }
     }
 

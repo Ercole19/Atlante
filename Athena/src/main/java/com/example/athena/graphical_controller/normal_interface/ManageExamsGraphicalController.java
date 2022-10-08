@@ -108,7 +108,7 @@ public class ManageExamsGraphicalController implements PostInitialize {
 
     @Override
     public void postInitialize(ArrayList<Object> params) {
-        oldExam = (NormalExamBean) params.get(0);
+        oldExam = (ExamBean) params.get(0);
 
         examName.setText(oldExam.getExamName());
         examGrade.setText(String.valueOf(oldExam.getExamGrade()));

@@ -96,9 +96,9 @@ public class CommandParser {
                 deleteExamParser.parseDeleteExams(commandToken);
                 break;
             case "update_exam" :
-                UpdateExamParser parser = new UpdateExamParser();
+                UpdateExamParser updateExamParser = new UpdateExamParser();
                 commandToken.remove(0);
-                parser.parseUpdateExam(commandToken);
+                updateExamParser.parseUpdateExam(commandToken);
                 break;
             case "help" :
                 HelpParser helpParser = new HelpParser();

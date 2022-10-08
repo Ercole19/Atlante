@@ -1,10 +1,9 @@
 package com.example.athena.view.oracle_view;
 
 import com.example.athena.graphical_controller.oracle_interface.OracleSellBookGC;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class UploadImageView extends ShiftImageView<OracleSellBookGC>{
 
@@ -12,7 +11,8 @@ public class UploadImageView extends ShiftImageView<OracleSellBookGC>{
         super(controller) ;
     }
 
-    private void initializeGraphicalElements() {
+    @Override
+    protected void initializeGraphicalElements() {
         this.controller.getUploadControls(this) ;
     }
 

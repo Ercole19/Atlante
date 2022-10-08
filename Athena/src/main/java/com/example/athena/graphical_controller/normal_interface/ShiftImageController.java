@@ -74,5 +74,7 @@ public abstract class ShiftImageController {
         }
     }
 
+    public abstract void rightArrowClick() ;
+    public abstract void leftArrowClick() ;
 
 }

@@ -37,12 +37,12 @@ public class OracleReviewTutorSendUsernameBean implements ReviewTutorSendUsernam
     }
 
     private void setStartTime(String time) throws DateTimeParseException {
-        if(!time.matches("\\d{2}:\\d{2}")) throw  new DateTimeParseException("invalid time format", "", 0);
+        if(!time.matches("^(2[0-3]|[01]?\\d):([0-5]?\\d)")) throw  new DateTimeParseException("invalid time format", "", 0);
         this.startTime = LocalTime.parse(time) ;
     }
 
     public void setEndTime(String time) {
-        if(!time.matches("\\d{2}:\\d{2}")) throw  new DateTimeParseException("invalid time format", "", 0);
+        if(!time.matches("^(2[0-3]|[01]?\\d):([0-5]?\\d)")) throw  new DateTimeParseException("invalid time format", "", 0);
         this.endTime = LocalTime.parse(time);
     }
 

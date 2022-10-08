@@ -1,7 +1,5 @@
 package com.example.athena.beans;
 
-import java.util.Date;
-
 public class OutputExamBean implements ExamBean{
     private String date;
     private int grade;
