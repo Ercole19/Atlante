@@ -2,10 +2,11 @@ package com.example.athena.graphical_controller.oracle_interface.update_book_sta
 
 import com.example.athena.graphical_controller.oracle_interface.OracleUpdateBookGC;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
+import com.example.athena.view.oracle_view.SelectWhichBookView;
 
 public class OnSelectWhichBookState implements UpdateBookAbstractState {
     public OnSelectWhichBookState(OracleUpdateBookGC controller) {
-       // ParentSubject.getInstance().setCurrentParent(new SelectWhichBookView(controller).getRoot());
+        ParentSubject.getInstance().setCurrentParent(new SelectWhichBookView(controller).getRoot());
     }
 
 
