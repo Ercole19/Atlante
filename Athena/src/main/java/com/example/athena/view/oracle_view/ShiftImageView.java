@@ -15,7 +15,7 @@ public abstract class ShiftImageView<T extends UpdatedShiftImageController> {
     protected final ImageView rightArrowImage ;
     protected final ImageView bookImage ;
 
-    protected final Parent root ;
+    protected Parent root ;
 
     public ShiftImageView(T controller) {
 
