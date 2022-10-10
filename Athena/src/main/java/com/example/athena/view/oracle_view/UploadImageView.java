@@ -1,7 +1,6 @@
 package com.example.athena.view.oracle_view;
 
 import com.example.athena.graphical_controller.oracle_interface.OracleSellBookGC;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
 
