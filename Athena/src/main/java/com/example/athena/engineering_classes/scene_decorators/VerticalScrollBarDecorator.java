@@ -1,6 +1,6 @@
 package com.example.athena.engineering_classes.scene_decorators;
 
-import com.example.athena.engineering_classes.abstract_factory.FormatBundle;
+import com.example.athena.engineering_classes.search_result_factory.FormatBundle;
 import com.example.athena.graphical_controller.normal_interface.SearchResultsGraphicalController;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ScrollBar;

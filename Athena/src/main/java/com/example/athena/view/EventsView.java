@@ -1,10 +1,9 @@
 package com.example.athena.view;
 
-import com.example.athena.engineering_classes.abstract_factory.Factory;
-import com.example.athena.engineering_classes.abstract_factory.FormatBundle;
-import com.example.athena.engineering_classes.abstract_factory.ProductTypeEnum;
-import com.example.athena.engineering_classes.abstract_factory.SearchResultProduct;
-import com.example.athena.exceptions.EventException;
+import com.example.athena.engineering_classes.search_result_factory.SearchResultFactory;
+import com.example.athena.engineering_classes.search_result_factory.FormatBundle;
+import com.example.athena.engineering_classes.search_result_factory.ProductTypeEnum;
+import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.exceptions.PercentFormatException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.graphical_controller.normal_interface.EventsViewGC;
@@ -35,7 +34,7 @@ public class EventsView {
             formatBundle.setEntryNumber(size);
             formatBundle.setEntryPercents(20, 15, 15, 20, 10, 10, 10);
             formatBundle.setEntrySize(100);
-            this.result = Factory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
+            this.result = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
             this.controller.setValues(this.result);
         }
         catch (PercentFormatException exc) {

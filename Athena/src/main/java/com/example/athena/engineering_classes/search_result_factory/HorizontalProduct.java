@@ -1,4 +1,4 @@
-package com.example.athena.engineering_classes.abstract_factory;
+package com.example.athena.engineering_classes.search_result_factory;
 
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;

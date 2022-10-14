@@ -1,7 +1,7 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.beans.normal.SearchTutorQueryBean;
-import com.example.athena.engineering_classes.abstract_factory.SearchResultProduct;
+import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.entities.ByCourseOrNameEnum;
 import com.example.athena.exceptions.FindTutorException;
 import com.example.athena.beans.normal.TutorSearchResultBean;

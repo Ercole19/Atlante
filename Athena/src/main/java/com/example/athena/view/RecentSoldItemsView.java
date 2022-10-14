@@ -1,10 +1,10 @@
 package com.example.athena.view;
 
 
-import com.example.athena.engineering_classes.abstract_factory.Factory;
-import com.example.athena.engineering_classes.abstract_factory.FormatBundle;
-import com.example.athena.engineering_classes.abstract_factory.ProductTypeEnum;
-import com.example.athena.engineering_classes.abstract_factory.SearchResultProduct;
+import com.example.athena.engineering_classes.search_result_factory.SearchResultFactory;
+import com.example.athena.engineering_classes.search_result_factory.FormatBundle;
+import com.example.athena.engineering_classes.search_result_factory.ProductTypeEnum;
+import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.entities.Student;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.PercentFormatException;
@@ -40,7 +40,7 @@ public class RecentSoldItemsView {
             formatBundle.setEntryNumber(size) ;
             formatBundle.setEntryPercents(30, 25, 25, 20);
             formatBundle.setEntrySize(100) ;
-            this.result = Factory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle) ;
+            this.result = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle) ;
             this.controller.setValues(this.result) ;
         }
         catch (PercentFormatException| BookException e){

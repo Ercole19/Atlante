@@ -1,4 +1,4 @@
-package com.example.athena.engineering_classes.abstract_factory;
+package com.example.athena.engineering_classes.search_result_factory;
 
 
 import com.example.athena.engineering_classes.scene_decorators.HorizontalScrollBarDecorator;
@@ -6,9 +6,9 @@ import com.example.athena.engineering_classes.scene_decorators.LegendDecorator;
 import com.example.athena.engineering_classes.scene_decorators.SearchResultFormatterComponent;
 import com.example.athena.engineering_classes.scene_decorators.VerticalScrollBarDecorator;
 
-public class Factory {
+public class SearchResultFactory {
 
-    private Factory() {}
+    private SearchResultFactory() {}
 
     public static SearchResultProduct createProduct(ProductTypeEnum productTypeEnum, FormatBundle formatBundle){
         switch (productTypeEnum){

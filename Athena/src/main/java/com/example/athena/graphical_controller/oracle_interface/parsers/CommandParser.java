@@ -65,6 +65,11 @@ public class CommandParser {
                 commandToken.remove(0) ;
                 updateBookParser.parseUpdateBook(commandToken) ;
                 break;
+            case "delete_book":
+                DeleteBookParser deleteBookParser = new DeleteBookParser();
+                commandToken.remove(0);
+                deleteBookParser.parseDeleteBook(commandToken);
+                break;
             case "add_cv":
                 AddCvParser addCvParser = new AddCvParser();
                 commandToken.remove(0);

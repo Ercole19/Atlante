@@ -1,4 +1,4 @@
-package com.example.athena.engineering_classes.abstract_factory;
+package com.example.athena.engineering_classes.search_result_factory;
 
 import com.example.athena.engineering_classes.scene_decorators.SearchResultFormatterComponent;
 import com.example.athena.view.LabelBuilder;

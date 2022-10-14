@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.engineering_classes.abstract_factory.SearchResultProduct;
+import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.entities.SellerOrBuyerEnum;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.FindBookException;
