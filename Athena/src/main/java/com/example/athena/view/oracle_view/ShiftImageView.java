@@ -1,6 +1,7 @@
 package com.example.athena.view.oracle_view;
 
 import com.example.athena.graphical_controller.normal_interface.UpdatedShiftImageController;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -17,7 +18,7 @@ public abstract class ShiftImageView<T extends UpdatedShiftImageController> {
 
     protected Parent root ;
 
-    public ShiftImageView(T controller) {
+    protected ShiftImageView(T controller) {
 
         VBox mainBox = new VBox() ;
         HBox imageLayer = new HBox() ;
@@ -50,9 +51,7 @@ public abstract class ShiftImageView<T extends UpdatedShiftImageController> {
         this.bookImage.setFitHeight(241);
 
         Button confirm = new Button("Confirm");
-        confirm.setOnAction(event -> {
-            finalizeCollection();
-        });
+        confirm.setOnAction(event -> finalizeCollection());
         Button delete = new Button("Delete");
         delete.setOnAction(event -> this.controller.deleteImageOnScreen());
         initializeGraphicalElements();

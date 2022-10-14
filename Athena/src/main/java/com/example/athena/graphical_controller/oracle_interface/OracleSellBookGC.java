@@ -23,10 +23,6 @@ public class OracleSellBookGC extends UpdatedShiftImageController implements OnY
 
     private boolean decision ;
 
-    public OracleSellBookGC () {
-
-    }
-
     public void sellBook(String name, String isbn, String price)  {
         this.bookName = name;
         this.bookIsbn = isbn;

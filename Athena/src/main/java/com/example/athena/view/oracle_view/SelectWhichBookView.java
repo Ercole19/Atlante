@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import java.util.List;
 
 
-public class SelectWhichBookView {
+public abstract class SelectWhichBookView {
     private final Parent root;
     private VBox box;
 

@@ -11,6 +11,7 @@ import com.example.athena.graphical_controller.oracle_interface.update_book_stat
 import com.example.athena.graphical_controller.oracle_interface.update_book_states.OnSelectWhichBookState;
 import com.example.athena.graphical_controller.oracle_interface.update_book_states.UpdateBookAbstractState;
 import com.example.athena.use_case_controllers.SellBooksUseCaseController;
+import com.example.athena.view.LabelBuilder;
 import com.example.athena.view.oracle_view.LabelView;
 import com.example.athena.view.oracle_view.ModifyParametersView;
 import javafx.collections.ObservableList;
@@ -49,15 +50,13 @@ public class OracleUpdateBookGC extends UpdatedShiftImageController {
     }
 
     private int countBeans(String isbn) throws BookException, UserInfoException {
-        ObservableList<BookBean> list = BooksSubject.getInstance().getBooksBeansList();
-        int count = 0;
-        for (BookBean book : list) {
+        ObservableList<BookBean> beanList = BooksSubject.getInstance().getBooksBeansList();
+        for (BookBean book : beanList) {
             if (book.getIsbn().equals(isbn)) {
-                count++;
                 this.list.add(book);
             }
         }
-        return count;
+        return list.size() ;
     }
 
     public void setState(UpdateBookAbstractState state) {
@@ -69,6 +68,8 @@ public class OracleUpdateBookGC extends UpdatedShiftImageController {
         setSuperParam(this.selectedBean);
         setState(new OnModifyParametersState(this));
     }
+
+   
 
     private void setSuperParam(BookBean bean) {
         super.images = bean.getImageList();

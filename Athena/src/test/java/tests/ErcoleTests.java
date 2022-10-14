@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 /**Ercole Simone**/
 public class ErcoleTests {
+    String date = "2022-09-19";
 
     @Test
     public void firstTest() {
@@ -28,7 +29,7 @@ public class ErcoleTests {
         login();
         try {
             EventBean eventBean = new EventBean();
-            eventBean.setDate(LocalDate.parse("2022-09-19"));
+            eventBean.setDate(LocalDate.parse(date));
             eventBean.setName("Event");
             eventBean.setDescription(failDescription);
             eventBean.setStart(LocalTime.parse("20:30"));
@@ -48,9 +49,9 @@ public class ErcoleTests {
         int after;
         ManageEventUCC controller = new ManageEventUCC();
         try {
-            prev = CalendarSubject.getInstance().getEntity(YearMonth.of(2022, 9)).getEvents(LocalDate.parse("2022-09-19")).size();
+            prev = CalendarSubject.getInstance().getEntity(YearMonth.of(2022, 9)).getEvents(LocalDate.parse(date)).size();
             EventBean eventBean = new EventBean();
-            eventBean.setDate(LocalDate.parse("2022-09-19"));
+            eventBean.setDate(LocalDate.parse(date));
             eventBean.setName("Event");
             eventBean.setDescription("ciao");
             eventBean.setStart(LocalTime.parse("20:30"));
@@ -58,7 +59,7 @@ public class ErcoleTests {
             eventBean.setType("OTHER");
             controller.addEvent(eventBean);
 
-            after = CalendarSubject.getInstance().getEntity(YearMonth.of(2022, 9)).getEvents(LocalDate.parse("2022-09-19")).size();
+            after = CalendarSubject.getInstance().getEntity(YearMonth.of(2022, 9)).getEvents(LocalDate.parse(date)).size();
             assertEquals(after, prev + 1);
         }
         catch (EventException | SendEmailException e) {
