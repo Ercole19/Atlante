@@ -12,12 +12,12 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <Button layoutX="98.0" layoutY="309.0" mnemonicParsing="false" onAction="#onYesBtnClick" text="Yes">
+      <Button fx:id="yesButton" layoutX="98.0" layoutY="309.0" mnemonicParsing="false" onAction="#onYesBtnClick" text="Yes">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="393.0" layoutY="309.0" mnemonicParsing="false" onAction="#onNoBtnClick" text="No">
+      <Button fx:id="noButton" layoutX="393.0" layoutY="309.0" mnemonicParsing="false" onAction="#onNoBtnClick" text="No">
          <font>
             <Font size="20.0" />
          </font>

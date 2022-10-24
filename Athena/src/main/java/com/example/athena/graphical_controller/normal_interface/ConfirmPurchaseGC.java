@@ -5,12 +5,18 @@ import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.beans.normal.BookBean;
 import com.example.athena.beans.normal.PurchaseResultBean;
 import com.example.athena.use_case_controllers.BuyControllerUCC;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
+import javafx.stage.WindowEvent;
+
 import java.util.ArrayList;
 
 public class ConfirmPurchaseGC implements PostInitialize {
@@ -18,7 +24,19 @@ public class ConfirmPurchaseGC implements PostInitialize {
     private BookBean bean;
     private Stage stage;
 
+    @FXML
+    private Button yesButton ;
+
+    @FXML
+    private Button noButton ;
+
     public void onYesBtnClick(ActionEvent event) {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+
+        yesButton.setDisable(true) ;
+        noButton.setDisable(true) ;
+        stage.setOnCloseRequest(Event::consume);
+
         BuyControllerUCC controller = new BuyControllerUCC();
         try {
             PurchaseResultBean purchaseResultBean = controller.purchase(this.bean) ;
@@ -37,7 +55,7 @@ public class ConfirmPurchaseGC implements PostInitialize {
             sizedAlert.showAndWait();
         }
 
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
+
         stage.close();
     }
 
