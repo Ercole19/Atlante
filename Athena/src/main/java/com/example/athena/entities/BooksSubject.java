@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BooksSubject extends AbstractSubject {
-    private List<BookEntity> totalBooksOnSell = new ArrayList<>();
+    private final List<BookEntity> totalBooksOnSell = new ArrayList<>();
     private static BooksSubject instance;
     private String[] sellerNameAndSurname;
 

@@ -1,16 +1,10 @@
 package com.example.athena.entities;
 
 
-import com.example.athena.exceptions.BookException;
-import com.example.athena.exceptions.FindException;
-import com.example.athena.exceptions.PurchaseException;
-import com.example.athena.exceptions.UserInfoException;
-import com.jcraft.jsch.IO;
+import com.example.athena.exceptions.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.io.*;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
