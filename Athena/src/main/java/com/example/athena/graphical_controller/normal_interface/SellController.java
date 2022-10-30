@@ -84,6 +84,7 @@ public class SellController implements Initializable, AbstractObserver {
                                 Text delete;
                                 Button editButton;
                                 Button goToBookPage;
+                                Button manageOffers;
 
                                 HBox manageBtn;
                                 if (empty) {
@@ -96,6 +97,7 @@ public class SellController implements Initializable, AbstractObserver {
 
                                     editButton = new Button("Edit ");
                                     goToBookPage = new Button("Book Page");
+                                    manageOffers = new Button("Offers");
                                     if (System.getProperty("oracle").equals("true")) {
                                         goToBookPage.setDisable(true);
                                         goToBookPage.setVisible(false);
@@ -133,7 +135,14 @@ public class SellController implements Initializable, AbstractObserver {
                                         }
                                     });
 
-                                    manageBtn = new HBox(editButton, delete, goToBookPage);
+                                    manageOffers.setOnAction(event-> {
+                                        BookBean bean = bookTable.getSelectionModel().getSelectedItem();
+                                        List<Object> params = new ArrayList<>();
+                                        params.add(bean);
+                                        switcher.switcher("ManageOffersPage.fxml", params);
+                                    });
+
+                                    manageBtn = new HBox(editButton, delete, goToBookPage, manageOffers);
                                     manageBtn.setStyle("-fx-alignment : center");
                                     HBox.setMargin(editButton, new Insets(2, 2, 0, 3));
                                     HBox.setMargin(delete, new Insets(2, 3, 0, 2));

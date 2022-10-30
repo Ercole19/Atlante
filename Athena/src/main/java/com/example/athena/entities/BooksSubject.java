@@ -1,6 +1,7 @@
 package com.example.athena.entities;
 
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
+import com.example.athena.exceptions.BidException;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.beans.normal.BookBean;
 import com.example.athena.exceptions.UserInfoException;
@@ -48,6 +49,11 @@ public class BooksSubject extends AbstractSubject {
         BookDao dao = new BookDao() ;
         dao.deleteBook(book.getIsbn(), book.getSaleTimestamp());
         super.notifyObserver();
+    }
+
+    public void addBid(BidEntity bid) throws BidException {
+        BookDao dao = new BookDao();
+        dao.addBookBid(bid);
     }
 
     public String getSellerName() throws BookException, UserInfoException

@@ -144,6 +144,7 @@ public class BookPageController extends ShiftImageController implements PostInit
         switcher.switcher("sell-view.fxml");
     }
 
+
     public void onBuyBookButtonClick(ActionEvent event){
         List<Object> params = new ArrayList<>();
         params.add(this.book);
