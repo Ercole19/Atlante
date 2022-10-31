@@ -11,65 +11,50 @@ import java.util.List;
 public class PlotEntity
 {
     private ActivityTypesEnum type ;
-    private TimePeriodsEnum timeSpan ;
     private List<EventEntity> eventsToPlot ;
-    private XYChart.Series<String, Long> series ;
+    private PlotSeries series ;
+
+    private LocalDate startDay ;
 
     public PlotEntity(ActivityTypesEnum type, TimePeriodsEnum timeSpan)
     {
         setType(type) ;
-        setTimeSpan(timeSpan) ;
+
+        switch(timeSpan)
+        {
+            case LAST_WEEK:
+                startDay = LocalDate.now().minusWeeks(1) ;
+                break ;
+            case LAST_MONTH:
+                startDay = LocalDate.now().minusMonths(1) ;
+                break ;
+            case LAST_TWO_WEEKS:
+                startDay = LocalDate.now().minusWeeks(2) ;
+                break ;
+            case LAST_TWO_MONTHS:
+                startDay = LocalDate.now().minusMonths(2) ;
+        }
     }
 
     private void generateSeries() throws EventException
     {
-        HashMap<LocalDate, Long> map = new HashMap<>() ;
-
         getEventsToPlot() ;
 
-        if(this.eventsToPlot.isEmpty())
-        {
-            this.series = new XYChart.Series<>() ;
-            String name = this.type.toString() ;
-            this.series.setName(name.charAt(0) + name.substring(1).toLowerCase().replace("_" , " "));
-            return ;
-        }
-
-        LocalDate startDay = this.eventsToPlot.get(0).getDay();
+        String name = this.type.toString() ;
+        this.series = new PlotSeries(name.charAt(0) + name.substring(1).toLowerCase().replace("_" , " "), startDay) ;
 
         for(EventEntity event : this.eventsToPlot)
         {
-            if(!map.containsKey(event.getDay()))
-            {
-                map.put(event.getDay(), event.getSpanMinutes()) ;
-            }
-            else
-            {
-                Long lastSpan = map.get(event.getDay()) ;
-                map.replace(event.getDay(), event.getSpanMinutes() + lastSpan) ;
-            }
+            this.series.putEntry(event.getDay(), event.getSpanMinutes()) ;
         }
-
-        XYChart.Series<String, Long> newSeries = new XYChart.Series<>() ;
-        String name = this.type.toString() ;
-        newSeries.setName(name.charAt(0) + name.substring(1).toLowerCase().replace("_" , " "));
-        LocalDate today = LocalDate.now() ;
-
-        while(startDay.isBefore(today))
-        {
-            newSeries.getData().add(new XYChart.Data<>(startDay.toString(), map.getOrDefault(startDay, 0L))) ;
-            startDay = startDay.plusDays(1) ;
-        }
-
-        this.series = newSeries ;
     }
 
     private void getEventsToPlot() throws EventException
     {
-        this.eventsToPlot = EventEntity.getEventsByTypeSpan(this.type, this.timeSpan) ;
+        this.eventsToPlot = EventEntity.getEventsByTypeSpan(this.type, this.startDay) ;
     }
 
-    public XYChart.Series<String, Long> getSeries() throws PlottingException
+    public PlotSeries getSeries() throws PlottingException
     {
         try
         {
@@ -84,10 +69,5 @@ public class PlotEntity
     public void setType(ActivityTypesEnum type)
     {
         this.type = type ;
-    }
-
-    public void setTimeSpan(TimePeriodsEnum span)
-    {
-        this.timeSpan = span ;
     }
 }

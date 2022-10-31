@@ -1,20 +1,36 @@
 package com.example.athena.beans.normal;
 
-import javafx.scene.chart.XYChart;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.Map;
+import java.util.Set;
 
 public class ActivityPlotsBean
 {
-    private List<XYChart.Series<String, Long>> activityPlots ;
+    private String plotName ;
+    private LocalDate plotStartTime ;
+    private Map<LocalDate, Long> plotSeries ;
 
-    public void setActivityPlots(List<XYChart.Series<String, Long>> activityPlots)
-    {
-        this.activityPlots = activityPlots;
+    public void setPlotName(String plotName) {
+        this.plotName = plotName;
     }
-    public List<XYChart.Series<String, Long>> getActivityPlots()
-    {
-        return this.activityPlots ;
+
+    public void setPlotSeries(Map<LocalDate, Long> plotSeries) {
+        this.plotSeries = plotSeries;
+    }
+
+    public String getPlotName() {
+        return plotName;
+    }
+
+    public Map<LocalDate, Long> getPlotSeries() {
+        return this.plotSeries ;
+    }
+
+    public void setPlotStartTime(LocalDate plotStartTime) {
+        this.plotStartTime = plotStartTime;
+    }
+
+    public LocalDate getPlotStartTime() {
+        return plotStartTime;
     }
 }

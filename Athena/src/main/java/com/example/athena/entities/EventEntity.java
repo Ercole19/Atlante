@@ -42,26 +42,9 @@ public class EventEntity
 
 
 
-    public static List<EventEntity> getEventsByTypeSpan(ActivityTypesEnum type, TimePeriodsEnum timeSpan) throws EventException
+    public static List<EventEntity> getEventsByTypeSpan(ActivityTypesEnum type, LocalDate start) throws EventException
     {
         EventDao dao = new EventDao() ;
-
-        LocalDate start = LocalDate.of(1970, 01, 01) ;
-
-        switch(timeSpan)
-        {
-            case LAST_WEEK:
-                start = LocalDate.now().minusWeeks(1) ;
-                break ;
-            case LAST_MONTH:
-                start = LocalDate.now().minusMonths(1) ;
-                break ;
-            case LAST_TWO_WEEKS:
-                start = LocalDate.now().minusWeeks(2) ;
-                break ;
-            case FROM_BEGINNING:
-                break ;
-        }
 
         return dao.getEntitiesByTypeSpan(type, start) ;
     }

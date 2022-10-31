@@ -9,12 +9,14 @@ import com.example.athena.use_case_controllers.GeneratePlotsUseCaseController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.util.*;
 
 public class PlotPageGraphicalController implements Initializable
 {
@@ -43,8 +45,27 @@ public class PlotPageGraphicalController implements Initializable
             queryBean.setActivityType(activityTypeChoiceBox.getValue());
             queryBean.setPeriodType(timePeriodChoiceBox.getValue());
             GeneratePlotsUseCaseController plotsController = new GeneratePlotsUseCaseController() ;
-            ActivityPlotsBean plotsBean = plotsController.evaluateQuery(queryBean) ;
-            activitiesPlot.getData().addAll(plotsBean.getActivityPlots()) ;
+            List<ActivityPlotsBean> plotsBean = plotsController.evaluateQuery(queryBean) ;
+            List<XYChart.Series<String,Long>> series = new ArrayList<>() ;
+
+            for (ActivityPlotsBean bean : plotsBean) {
+                XYChart.Series<String, Long> newSeries = new XYChart.Series<>() ;
+                String name = bean.getPlotName();
+                newSeries.setName(name.charAt(0) + name.substring(1).toLowerCase().replace("_" , " "));
+                LocalDate today = LocalDate.now() ;
+                LocalDate startDay = bean.getPlotStartTime() ;
+                Map<LocalDate, Long> entrySet = bean.getPlotSeries() ;
+
+                while(startDay.isBefore(today))
+                {
+                    newSeries.getData().add(new XYChart.Data<>(startDay.toString(), entrySet.getOrDefault(startDay, 0L))) ;
+                    startDay = startDay.plusDays(1) ;
+                }
+                series.add(newSeries) ;
+            }
+
+            activitiesPlot.getData().addAll(series) ;
+
         }catch (PlottingException e)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred, here the details:\n" + e.getMessage()) ;
@@ -71,7 +92,7 @@ public class PlotPageGraphicalController implements Initializable
             timePeriodChoiceBox.getItems().add(entry.substring(0,1).toUpperCase() + entry.substring(1)) ;
         }
 
-        timePeriodChoiceBox.setValue("From beginning") ;
+        timePeriodChoiceBox.setValue("Last two months") ;
 
         timePeriodChoiceBox.setOnAction(event -> generatePlot());
 
