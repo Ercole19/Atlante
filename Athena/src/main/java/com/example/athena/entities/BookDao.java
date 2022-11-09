@@ -247,7 +247,7 @@ public class BookDao extends AbstractDAO {
     }
 
     public List<BidEntity> getBookBids(String seller, String isbn, String timeStamp) throws BidException{
-        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT * FROM athena.books_bids WHERE Seller = ? AND BookIsbn = ? AND BookTimestamp = ?")){
+        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT * FROM athena.books_bids WHERE Seller = ? AND BookIsbn = ? AND BookTimestamp = ? AND BidStatus != 'REJECTED'")){
 
             statement.setString(1, seller) ;
             statement.setString(2, isbn);
