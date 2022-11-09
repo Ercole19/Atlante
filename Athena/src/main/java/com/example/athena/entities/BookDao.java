@@ -260,6 +260,28 @@ public class BookDao extends AbstractDAO {
         }
     }
 
+    public BidEntity getAcceptedBid(String seller, String isbn, String timeStamp) throws BidException{
+        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT * FROM athena.books_bids WHERE Seller = ? AND BookIsbn = ? AND BookTimestamp = ? AND BidStatus = 'ACCEPTED'")){
+
+            statement.setString(1, seller) ;
+            statement.setString(2, isbn);
+            statement.setTimestamp(3, Timestamp.valueOf(timeStamp)) ;
+            ResultSet set = statement.executeQuery();
+            if (set.next()) {
+                BidEntity bid = new BidEntity(set.getString(1),
+                        set.getString(2),
+                        set.getString(3),
+                        set.getTimestamp(5).toString(),
+                        set.getString(4),
+                        BidStatusEnum.valueOf(set.getString(6))) ;
+                return bid ;
+            } else throw new BidException("No bid found") ;
+        }
+        catch (SQLException | IOException e){
+            throw new BidException(e.getMessage());
+        }
+    }
+
     public List<BidEntity> getBidderBids(String bidder) throws BidException{
         try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT * FROM athena.books_bids WHERE Bidder = ?")){
             statement.setString(1, bidder) ;
