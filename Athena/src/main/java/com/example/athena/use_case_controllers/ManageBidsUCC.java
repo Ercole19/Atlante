@@ -1,6 +1,8 @@
 package com.example.athena.use_case_controllers;
 
 import com.example.athena.beans.normal.BidBean;
+import com.example.athena.beans.normal.PurchaseResultBean;
+import com.example.athena.boundaries.PurchaseBoundary;
 import com.example.athena.entities.BidEntity;
 import com.example.athena.entities.BidStatusEnum;
 import com.example.athena.entities.BookDao;
