@@ -79,13 +79,11 @@ public class MolinaroTests {
             fail();
         }
         for (ExamAverageInformationBean bean : examsArithmeticAverageInfos) {
-            if(toTest.contains(bean.getDate()) &&(toTest.contains(format.format(bean.getAverage())))){
-                //as it should be
-            }
-            else{
+            if (toTest.contains(bean.getDate()) && (toTest.contains(format.format(bean.getAverage())))) {
+                assertTrue(true);
+            } else {
                 fail();
             }
         }
-        assertTrue(true);
     }
 }
