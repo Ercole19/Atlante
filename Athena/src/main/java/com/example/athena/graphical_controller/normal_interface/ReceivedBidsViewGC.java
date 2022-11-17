@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ReceivedBidsViewGC {
     private static final String FONT = "System";
-    List<BidBean> results;
+    private List<BidBean> results;
     private final ReceivedBidsView view;
     private final GetReceivedBidsUCC controller = new GetReceivedBidsUCC();
     private final ManageBidsUCC manageBidsUCC = new ManageBidsUCC();
@@ -65,7 +65,7 @@ public class ReceivedBidsViewGC {
             try {
                 acceptedBid.setStatus(BidStatusEnum.PENDING.toString());
                 this.manageBidsUCC.updateBid(acceptedBid);
-                refreshScreen(acceptedBid.getOwner(), acceptedBid.getBookIsbn(), acceptedBid.getBookTimestamp());
+                refreshScreen(acceptedBid);
             }
             catch (BidException e){
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
@@ -78,6 +78,7 @@ public class ReceivedBidsViewGC {
     public void setValues(SearchResultProduct product){
         product.setLegend(0, LabelBuilder.buildLabel("Bidder"));
         product.setLegend(1, LabelBuilder.buildLabel("Offer"));
+        product.setLegend(2, LabelBuilder.buildLabel("Status"));
 
         try
         {
@@ -89,11 +90,7 @@ public class ReceivedBidsViewGC {
 
                 product.setEntry(i, 1, LabelBuilder.buildLabel(bidBean.getNewPrice())) ;
 
-                if (acceptedBid != null) {
-                    product.setEntry(i, 2, LabelBuilder.buildLabel(bidBean.getStatus())) ;
-                    i++ ;
-                    continue;
-                }
+                product.setEntry(i, 2, LabelBuilder.buildLabel(bidBean.getStatus())) ;
 
                 Button accept = new Button("Accept");
                 accept.setFont(new Font(FONT,26));
@@ -102,7 +99,7 @@ public class ReceivedBidsViewGC {
                     try {
                         bidBean.setStatus(BidStatusEnum.ACCEPTED.toString());
                         this.manageBidsUCC.updateBid(bidBean);
-                        refreshScreen(bidBean.getOwner(), bidBean.getBookIsbn(), bidBean.getBookTimestamp());
+                        refreshScreen(bidBean);
                     }
                     catch(BidException e){
                         SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
@@ -117,13 +114,18 @@ public class ReceivedBidsViewGC {
                     try {
                         bidBean.setStatus(BidStatusEnum.REJECTED.toString());
                         this.manageBidsUCC.updateBid(bidBean);
-                        refreshScreen(bidBean.getOwner(), bidBean.getBookIsbn(), bidBean.getBookTimestamp());
+                        refreshScreen(bidBean);
                     }
                     catch(BidException e){
                         SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
                         alert.showAndWait();
                     }
                 });
+
+                if (isThereAnAcceptedBid(bidBean.getOwner(), bidBean.getBookIsbn(), bidBean.getBookTimestamp())) {
+                    accept.setDisable(true);
+                    refuse.setDisable(true);
+                }
 
                 i++ ;
             }
@@ -135,11 +137,9 @@ public class ReceivedBidsViewGC {
         }
     }
 
-    private void refreshScreen(String owner, String bookIsbn, String bookTimestamp) {
+    private void refreshScreen(BidBean book) {
         ArrayList<Object> params = new ArrayList<>() ;
-        params.add(owner) ;
-        params.add(bookIsbn) ;
-        params.add(bookTimestamp) ;
+        params.add(book);
         SceneSwitcher.getInstance().switcher("ManageBidsPage.fxml", params) ;
     }
 }

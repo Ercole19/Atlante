@@ -282,9 +282,9 @@ public class BookDao extends AbstractDAO {
         }
     }
 
-    public List<BidEntity> getBidderBids(String bidder) throws BidException{
+    public List<BidEntity> getBidderBids() throws BidException{
         try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT * FROM athena.books_bids WHERE Bidder = ?")){
-            statement.setString(1, bidder) ;
+            statement.setString(1, Student.getInstance().getEmail()) ;
             ResultSet set = statement.executeQuery() ;
             return extractBidsFromResultSet(set) ;
         }
@@ -338,7 +338,7 @@ public class BookDao extends AbstractDAO {
     }
 
     public void payAcceptedBid(BidEntity bid) throws BidException {
-        try(PreparedStatement statement = this.getConnection().prepareStatement("CALL finalizeBidPurchase(?,?,?,?)")){
+        try(PreparedStatement statement = this.getConnection().prepareStatement("CALL finalize_accept_bid(?,?,?,?)")){
             statement.setString(1, bid.getOwner());
             statement.setString(2, bid.getBidder());
             statement.setString(3, bid.getBookIsbn());

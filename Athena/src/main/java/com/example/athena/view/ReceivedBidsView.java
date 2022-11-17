@@ -36,7 +36,7 @@ public class ReceivedBidsView {
             formatBundle.setContainerWidth(width);
             formatBundle.setContainerHeight(height);
             formatBundle.setEntryNumber(size);
-            formatBundle.setEntryPercents(50, 30, 10, 10);
+            formatBundle.setEntryPercents(30, 15, 25, 15, 15);
             formatBundle.setEntrySize(100);
             this.bids = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
             this.controller.setValues(bids);
@@ -58,7 +58,7 @@ public class ReceivedBidsView {
                 formatBundle.setContainerWidth(acceptedWidth);
                 formatBundle.setContainerHeight(acceptedHeight);
                 formatBundle.setEntryNumber(1);
-                formatBundle.setEntryPercents(50, 30, 20);
+                formatBundle.setEntryPercents(40, 25, 35);
                 formatBundle.setEntrySize(acceptedHeight);
                 this.acceptedBid = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
                 this.controller.setAcceptedBidValues(acceptedBid) ;
@@ -70,6 +70,9 @@ public class ReceivedBidsView {
             alert.showAndWait() ;
             System.exit(1) ;
         }
-        return bids.getRoot();
+        if (this.acceptedBid == null) {
+            return new AnchorPane();
+        }
+        return this.acceptedBid.getRoot();
     }
 }
