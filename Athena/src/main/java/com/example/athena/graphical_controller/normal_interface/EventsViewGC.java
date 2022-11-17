@@ -12,7 +12,6 @@ import com.example.athena.view.EventsView;
 import com.example.athena.view.LabelBuilder;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
@@ -20,7 +19,8 @@ import java.util.List;
 
 public class EventsViewGC {
 
-    private EventsView view;
+
+    private final EventsView view;
     private List<EventBean> searchResults;
     private SceneSwitcher switcher = SceneSwitcher.getInstance();
 

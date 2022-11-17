@@ -51,7 +51,7 @@ public class PlaceBidGC implements PostInitialize{
             bidBean.setOwner(this.bookBean.getOwner());
             bidBean.setBookTimestamp(this.bookBean.getTimeStamp());
             bidBean.setBookIsbn(this.bookBean.getIsbn());
-            bidBean.setStatus(BidStatusEnum.PENDING);
+            bidBean.setStatus(BidStatusEnum.PENDING.toString());
 
             controller.placeBid(bidBean);
 

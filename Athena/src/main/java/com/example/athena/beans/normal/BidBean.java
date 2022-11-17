@@ -9,9 +9,9 @@ public class BidBean {
     private String newPrice;
     private String bookTimestamp;
     private String bookIsbn;
-    private BidStatusEnum status;
+    private String status;
 
-    public void syntacticCheckPrice(String price)throws BidException {
+    private void syntacticCheckPrice(String price)throws BidException {
         if (!(price.matches("\\d{1,3}\\.\\d{2}"))){
             throw new BidException("Error in price format");
         }
@@ -39,7 +39,7 @@ public class BidBean {
         this.newPrice = newPrice;
     }
 
-    public void setStatus(BidStatusEnum status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -63,7 +63,7 @@ public class BidBean {
         return bookTimestamp;
     }
 
-    public BidStatusEnum getStatus() {
+    public String getStatus() {
         return status;
     }
 }
