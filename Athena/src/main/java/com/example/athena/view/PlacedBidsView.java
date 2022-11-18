@@ -14,7 +14,7 @@ public class PlacedBidsView {
     private final PlacedBidsViewGC controller;
     private final double width;
     private final double height;
-    private SearchResultProduct bids ;
+    private SearchResultProduct placedBids ;
     private static final String FATAL_ERROR = "FATAL ERROR: The application is unable to load content. If the problem persists after restarting, try reinstalling the application.";
 
 
@@ -34,14 +34,14 @@ public class PlacedBidsView {
             formatBundle.setEntryNumber(size);
             formatBundle.setEntryPercents(30, 20, 30, 10, 10);
             formatBundle.setEntrySize(100);
-            this.bids = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
-            this.controller.setValues(bids);
+            this.placedBids = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
+            this.controller.setValues(this.placedBids);
         }
         catch (PercentFormatException e){
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, FATAL_ERROR, 800, 600) ;
             alert.showAndWait() ;
             System.exit(1) ;
         }
-        return bids.getRoot();
+        return this.placedBids.getRoot();
     }
 }

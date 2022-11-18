@@ -268,13 +268,12 @@ public class BookDao extends AbstractDAO {
             statement.setTimestamp(3, Timestamp.valueOf(timeStamp)) ;
             ResultSet set = statement.executeQuery();
             if (set.next()) {
-                BidEntity bid = new BidEntity(set.getString(1),
+                return new BidEntity(set.getString(1),
                         set.getString(2),
                         set.getString(3),
                         set.getTimestamp(5).toString(),
                         set.getString(4),
                         BidStatusEnum.valueOf(set.getString(6))) ;
-                return bid ;
             } else throw new BidException("No bid found") ;
         }
         catch (SQLException | IOException e){

@@ -16,7 +16,7 @@ public class ReceivedBidsView {
     private final double height;
     private final double acceptedWidth ;
     private final double acceptedHeight ;
-    private SearchResultProduct bids;
+    private SearchResultProduct receivedBids;
     private SearchResultProduct acceptedBid ;
     private static final String FATAL_ERROR = "FATAL ERROR: The application is unable to load content. If the problem persists after restarting, try reinstalling the application.";
 
@@ -38,15 +38,15 @@ public class ReceivedBidsView {
             formatBundle.setEntryNumber(size);
             formatBundle.setEntryPercents(30, 15, 25, 15, 15);
             formatBundle.setEntrySize(100);
-            this.bids = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
-            this.controller.setValues(bids);
+            this.receivedBids = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
+            this.controller.setValues(this.receivedBids);
         }
         catch (PercentFormatException e){
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, FATAL_ERROR, 800, 600) ;
             alert.showAndWait() ;
             System.exit(1) ;
         }
-        return bids.getRoot();
+        return this.receivedBids.getRoot();
     }
 
     public AnchorPane getAcceptedBidRoot(String seller, String isbn, String timestamp) {

@@ -41,7 +41,7 @@
             <Image url="@../../../../assets/backBtn.png" />
          </image>
       </ImageView>
-      <Button fx:id="backBtn" layoutX="41.0" layoutY="130.0" mnemonicParsing="false" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+      <Button fx:id="backBtn" layoutX="41.0" layoutY="130.0" mnemonicParsing="false" onAction="#onBackButtonClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

@@ -100,7 +100,7 @@ public class BookPageController extends ShiftImageController implements PostInit
             }
             buyButton.setVisible(true);
             buyButton.setDisable(false);
-            if(book.getNegotiable()) {
+            if(Boolean.TRUE.equals(book.getNegotiable())) {
                 buyButton.setText("Place bid");
                 buyButton.setOnAction(this::onNegotiateButtonClick);
             }

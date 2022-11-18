@@ -27,4 +27,10 @@ public class BidPageGC implements PostInitialize {
         subScene.setRoot(view.getRoot(seller, isbn, timestamp));
         acceptedSubScene.setRoot(view.getAcceptedBidRoot(seller, isbn, timestamp)) ;
     }
+
+    @FXML
+    protected void onBackButtonClick() {
+        SceneSwitcher switcher = SceneSwitcher.getInstance();
+        switcher.switcher("sell-view.fxml");
+    }
 }

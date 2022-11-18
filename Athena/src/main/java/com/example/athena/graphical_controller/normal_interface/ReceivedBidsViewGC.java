@@ -45,13 +45,12 @@ public class ReceivedBidsViewGC {
 
     public boolean isThereAnAcceptedBid(String seller, String isbn, String timestamp) {
         try {
-            this.acceptedBid = controller.getAcceptedBid(seller, isbn, timestamp) ;
-            return true ;
+            this.acceptedBid = controller.getAcceptedBid(seller, isbn, timestamp);
         } catch (BidException e) {
-            return false ;
+            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
+            alert.showAndWait();
         }
-
-
+        return this.acceptedBid != null;
     }
 
     public void setAcceptedBidValues(SearchResultProduct product){

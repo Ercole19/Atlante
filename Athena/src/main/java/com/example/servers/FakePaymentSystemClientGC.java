@@ -32,7 +32,7 @@ public class FakePaymentSystemClientGC implements PostInitialize {
             alert.showAndWait() ;
             return ;
         }
-        response.response = new FakePaymentSystemClientController().pay().response ;
+        response.setResponse(new FakePaymentSystemClientController().pay().getServerResponse());
         Stage stage = (Stage) ((Node) (event.getSource())).getScene().getWindow() ;
         stage.close();
     }

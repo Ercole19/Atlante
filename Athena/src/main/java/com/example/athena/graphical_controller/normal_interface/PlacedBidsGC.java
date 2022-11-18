@@ -19,4 +19,10 @@ public class PlacedBidsGC implements Initializable {
         subScene.setRoot(view.getRoot());
     }
 
+    @FXML
+    protected void onBackButtonClick() {
+        SceneSwitcher switcher = SceneSwitcher.getInstance();
+        switcher.switcher("recentActivities.fxml");
+    }
+
 }

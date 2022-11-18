@@ -13,7 +13,7 @@ public class FakePaymentSystemClientController {
         }
 
         Response retVal = new Response() ;
-        retVal.response = result ;
+        retVal.setResponse(result);
 
         return retVal ;
     }

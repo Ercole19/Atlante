@@ -83,6 +83,7 @@ public class ModifyParametersView extends ShiftImageView<OracleUpdateBookGC> {
         return this.price.getText();
     }
 
+    @Override
     public Parent getRoot () {return this.root; }
 
 }

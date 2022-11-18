@@ -17,7 +17,7 @@
           <Region />
         </root>
       </SubScene>
-      <Text fill="#ffd775" layoutX="209.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bids received">
+      <Text fill="#ffd775" layoutX="82.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bids received">
          <font>
             <Font size="50.0" />
          </font>
@@ -41,15 +41,20 @@
             <Image url="@../../../../assets/backBtn.png" />
          </image>
       </ImageView>
-      <Button fx:id="backBtn" layoutX="41.0" layoutY="130.0" mnemonicParsing="false" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+      <Button fx:id="backBtn" layoutX="41.0" layoutY="130.0" mnemonicParsing="false" onAction="#onBackButtonClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <SubScene fx:id="acceptedSubScene" height="67.0" layoutX="634.0" layoutY="157.0" width="511.0">
+      <SubScene fx:id="acceptedSubScene" height="144.0" layoutX="409.0" layoutY="157.0" width="824.0">
          <root>
             <Region />
          </root>
       </SubScene>
+      <Text fill="#ffd775" layoutX="409.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accepted bid">
+         <font>
+            <Font size="50.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

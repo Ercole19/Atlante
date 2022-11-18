@@ -7,6 +7,6 @@ public class FakePaymentSystemBoundary {
     public boolean submitPayment() throws Exception {
         FakePaymentSystemClientApp client = new FakePaymentSystemClientApp() ;
         client.start(new Stage());
-        return client.getResponse().response ;
+        return client.getResponse().getServerResponse();
     }
 }
