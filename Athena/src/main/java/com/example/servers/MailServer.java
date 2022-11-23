@@ -142,6 +142,26 @@ public class MailServer implements Runnable {
         System.exit(1);
     }
 
+    private MailServerBean getRequest(ObjectInputStream objectInputStream, ObjectOutputStream objectOutputStream) throws IOException {
+        MailServerBean receivedMessage ;
+        try {
+            receivedMessage = (MailServerBean) objectInputStream.readObject() ;
+
+        } catch (ClassNotFoundException e) {
+
+            MailServerResponseBean response = new MailServerResponseBean() ;
+            response.setCode(3);
+            response.setMessage("Bad request");
+            response.setDetails("Unable to recognize request format");
+
+            objectOutputStream.writeObject(response) ;
+
+            return null ;
+        }
+
+        return receivedMessage ;
+    }
+
     public void start() {
         try {
             Thread registerThread = new Thread(new DirectMailService(), "registrations");
@@ -157,8 +177,11 @@ public class MailServer implements Runnable {
                 clientSocket = socket.accept();
                 InputStream in = clientSocket.getInputStream();
                 ObjectInputStream objectInputStream = new ObjectInputStream(in) ;
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream()) ;
 
-                MailServerBean receivedMessage = (MailServerBean) objectInputStream.readObject() ;
+                MailServerBean receivedMessage = getRequest(objectInputStream, objectOutputStream);
+                if (receivedMessage == null) continue;
+
 
                 String setting = receivedMessage.getClassName() ;
 
@@ -206,15 +229,23 @@ public class MailServer implements Runnable {
 
                         break;
                     }
+                    default: {
+                        OutputStream out = clientSocket.getOutputStream();
+
+                        MailServerResponseBean response = new MailServerResponseBean() ;
+                        response.setCode(3);
+                        response.setMessage("Bad request");
+                        response.setDetails("Unable to detect message type");
+
+                        ObjectOutputStream outputStream = new ObjectOutputStream(out) ;
+                        outputStream.writeObject(response) ;
+                    }
                 }
             }
         }
-        catch (IOException e)
-        {
+        catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error in reading/writing to socket. Details: {0}", e.getMessage());
             System.exit(1);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -314,60 +345,54 @@ public class MailServer implements Runnable {
         quit = value ;
     }
 
-    private void sendMailDirectly() throws IOException
-    {
-        MailServerBean command = null ;
+    private void sendMailDirectly() throws IOException {
+        MailServerBean command = null;
         Socket clientSocket = null;
-        CommandSocketWrapper wrapper ;
+        CommandSocketWrapper wrapper;
         try {
 
-            wrapper = DIRECTMAILQUEUE.take() ;
+            wrapper = DIRECTMAILQUEUE.take();
 
             command = wrapper.getCommand();
-            clientSocket = wrapper.getClientSocket() ;
-        }catch (InterruptedException e)
-        {
+            clientSocket = wrapper.getClientSocket();
+        } catch (InterruptedException e) {
             LOGGER.log(Level.SEVERE, "Error in retrieving from queue. Details: {0}", e.getMessage());
-            Thread.currentThread().interrupt() ;
+            Thread.currentThread().interrupt();
         }
 
-        OutputStream out = null ;
-        try{
+        assert clientSocket != null;
+        assert command != null;
 
-            assert clientSocket != null;
-            assert command != null ;
-            out = clientSocket.getOutputStream() ;
-            SessionInfo info = this.sessionMap.get(command.getMailAccount()) ;
-            sendMail(info, command.getRecipient(), command.getMailObject(), command.getContent());
+        try (ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream())) {
 
-            MailServerResponseBean response = new MailServerResponseBean() ;
-            response.setCode(0);
-            response.setMessage("OK");
-            response.setDetails("Mail sent successfully");
+            try {
 
-            ObjectOutputStream outputStream = new ObjectOutputStream(out) ;
-            outputStream.writeObject(response) ;
+                SessionInfo info = this.sessionMap.get(command.getMailAccount());
+                sendMail(info, command.getRecipient(), command.getMailObject(), command.getContent());
 
-            LOGGER.log(Level.INFO, "Message sent to {0}", command.getRecipient());
+                MailServerResponseBean response = new MailServerResponseBean();
+                response.setCode(0);
+                response.setMessage("OK");
+                response.setDetails("Mail sent successfully");
 
-        }  catch (MessagingException e) {
-            out = clientSocket.getOutputStream() ;
-            LOGGER.log(Level.SEVERE, "Error in sending email. Error message following {0}", e.getMessage());
-            out.write("F".getBytes());
+                ObjectOutputStream outputStream = new ObjectOutputStream(out);
+                outputStream.writeObject(response);
 
-            MailServerResponseBean response = new MailServerResponseBean() ;
-            response.setCode(1);
-            response.setMessage("ERROR");
-            response.setDetails("Error in sending mail, details follow "+ e.getMessage());
+                LOGGER.log(Level.INFO, "Message sent to {0}", command.getRecipient());
 
-            ObjectOutputStream outputStream = new ObjectOutputStream(out) ;
-            outputStream.writeObject(response) ;
+            } catch (MessagingException e) {
+                LOGGER.log(Level.SEVERE, "Error in sending email. Error message following {0}", e.getMessage());
+                out.write("F".getBytes());
 
-            out.close() ;
-        } finally {
-            assert out != null ;
-            out.close() ;
-            clientSocket.close();
+                MailServerResponseBean response = new MailServerResponseBean();
+                response.setCode(1);
+                response.setMessage("ERROR");
+                response.setDetails("Error in sending mail, details follow " + e.getMessage());
+
+                ObjectOutputStream outputStream = new ObjectOutputStream(out);
+                outputStream.writeObject(response);
+
+            }
         }
     }
 }

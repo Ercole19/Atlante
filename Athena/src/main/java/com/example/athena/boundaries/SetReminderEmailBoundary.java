@@ -23,23 +23,7 @@ public class SetReminderEmailBoundary extends SocketBoundary
 
     public static void sendToServer(EventBean eventInfo, boolean remove) throws SendEmailException
     {
-        Timestamp moment;
-        try {
-             moment = eventInfo.getDateOfReminder() ;
-        }
-        catch (EventException e)
-        {
-            throw new SendEmailException("Unable to access reminder's date.");
-        }
-
-        String name = eventInfo.getName() ;
-        LocalDate day = eventInfo.getDate() ;
-        LocalTime start = eventInfo.getStart() ;
-        LocalTime end = eventInfo.getEnd() ;
-        String description = eventInfo.getDescription() ;
-        LocalDateTime momentForServer = moment.toLocalDateTime() ;
-
-        MailServerBean query = prepareQueryForServer(momentForServer.toString(), Student.getInstance().getEmail(), name, day, start, end, description, remove) ;
+        MailServerBean query = prepareQueryForServer(eventInfo, Student.getInstance().getEmail(), remove) ;
 
         try
         {
@@ -55,20 +39,35 @@ public class SetReminderEmailBoundary extends SocketBoundary
         }
     }
 
-    private static MailServerBean prepareQueryForServer(String day, String email, String eventName, LocalDate eventDay, LocalTime eventStart, LocalTime eventEnd, String eventDescription, boolean remove) {
+    private static MailServerBean prepareQueryForServer(EventBean eventInfo, String recipient, boolean remove) throws SendEmailException {
 
+        Timestamp moment;
+        try {
+            moment = eventInfo.getDateOfReminder() ;
+        }
+        catch (EventException e)
+        {
+            throw new SendEmailException("Unable to access reminder's date.");
+        }
+
+        String name = eventInfo.getName() ;
+        LocalDate day = eventInfo.getDate() ;
+        LocalTime start = eventInfo.getStart() ;
+        LocalTime end = eventInfo.getEnd() ;
+        String description = eventInfo.getDescription() ;
+        LocalDateTime momentForServer = moment.toLocalDateTime() ;
         MailServerBean bean = new MailServerBean() ;
         if (remove) bean.setClassName("R");
         else bean.setClassName("N");
 
         bean.setMailAccount("athena.services") ;
-        bean.setSendMoment(day);
-        bean.setRecipient(email);
+        bean.setSendMoment(momentForServer.toString());
+        bean.setRecipient(recipient);
         bean.setMailObject("Reminder of your event");
         bean.setContent(String.format("This email is a reminder for your event: \n" +
                 "%s\n" +
                 "on %s from %s to %s .\n" +
-                "Details: %s", eventName, eventDay, eventStart, eventEnd, eventDescription));
+                "Details: %s", name, day, start, end, description));
 
         return bean ;
     }
