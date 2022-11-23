@@ -1,5 +1,7 @@
 package com.example.athena.boundaries;
 
+import com.example.athena.beans.normal.MailServerBean;
+import com.example.athena.beans.normal.MailServerResponseBean;
 import com.example.athena.exceptions.SendEmailException;
 
 import java.io.IOException;
@@ -11,14 +13,14 @@ public abstract class CodeEmailBoundary extends SocketBoundary {
         String email = params.getRecipient() ;
         String code = params.getCode() ;
 
-        String query = prepareQueryForServer(email, code) ;
+        MailServerBean query = prepareQueryForServer(email, code) ;
 
         try
         {
-            String retMessage = sendMessageGetResponse(query, 4545) ;
-            if(!retMessage.equals("OK"))
+            MailServerResponseBean retMessage = sendMessageGetResponse(query, 4545) ;
+            if(!retMessage.getMessage().equals("OK"))
             {
-                throw new SendEmailException(retMessage) ;
+                throw new SendEmailException(retMessage.getMessage()) ;
             }
         }catch (IOException e)
         {
@@ -26,5 +28,5 @@ public abstract class CodeEmailBoundary extends SocketBoundary {
         }
     }
 
-    protected abstract String prepareQueryForServer(String email, String code) ;
+    protected abstract MailServerBean prepareQueryForServer(String email, String code) ;
 }

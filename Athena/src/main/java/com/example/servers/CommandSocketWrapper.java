@@ -1,13 +1,15 @@
 package com.example.servers;
 
+import com.example.athena.beans.normal.MailServerBean;
+
 import java.net.Socket;
 
 public class CommandSocketWrapper
 {
     private Socket clientSocket ;
-    private String command ;
+    private MailServerBean command ;
 
-    public CommandSocketWrapper(Socket clientSocket, String command)
+    public CommandSocketWrapper(Socket clientSocket, MailServerBean command)
     {
         setClientSocket(clientSocket) ;
         setCommand(command) ;
@@ -18,7 +20,7 @@ public class CommandSocketWrapper
         this.clientSocket = clientSocket ;
     }
 
-    public void setCommand(String command)
+    public void setCommand(MailServerBean command)
     {
         this.command = command ;
     }
@@ -28,7 +30,7 @@ public class CommandSocketWrapper
         return this.clientSocket ;
     }
 
-    public String getCommand()
+    public MailServerBean getCommand()
     {
         return this.command ;
     }

@@ -1,5 +1,6 @@
 package com.example.athena.boundaries;
 
+import com.example.athena.beans.normal.MailServerBean;
 import com.example.athena.exceptions.SendEmailException;
 import org.apache.log4j.Logger;
 
@@ -25,11 +26,19 @@ public final class SendReviewCodeEmailBoundary extends CodeEmailBoundary
     }
 
     @Override
-    protected String prepareQueryForServer(String email, String code) {
+    protected MailServerBean prepareQueryForServer(String email, String code) {
 
-        return String.format("Mathena.services;%s;A review code form a Tutor;" +
-                "A tutor has sent you a review code for a tutoring you had with him.\n" +
-                "The code is %s.\n" +
-                "If you didn't request this code, please ignore the message.",email, code) ;
+        MailServerBean bean = new MailServerBean() ;
+
+        bean.setClassName("M");
+        bean.setMailAccount("athena.services");
+        bean.setRecipient(email) ;
+        bean.setMailObject("A review code form a Tutor");
+        bean.setContent(String.format(
+            "A tutor has sent you a review code for a tutoring you had with him.\n" +
+            "The code is %s.\n" +
+            "If you didn't request this code, please ignore the message.", code));
+
+        return bean ;
     }
 }

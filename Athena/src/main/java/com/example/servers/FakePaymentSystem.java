@@ -1,10 +1,12 @@
 package com.example.servers;
 
+import com.example.athena.beans.normal.MailServerResponseBean;
 import com.example.athena.boundaries.IsbnCheckBoundary;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.SecureRandom;
@@ -49,20 +51,25 @@ public class FakePaymentSystem extends QuitterServer
         try
         {
             Socket clientSocket = this.serverSocket.accept();
-            byte[] buff = new byte[2] ;
+
+            MailServerResponseBean response = new MailServerResponseBean() ;
 
             if(this.executePayment())
             {
-                buff[0] = 't' ;
+                response.setCode(0);
+                response.setMessage("OK");
+                response.setDetails("Payment successful");
                 logger.log(Level.INFO, "Payment successful for {0}", clientSocket.getInetAddress()) ;
             }
             else
             {
-                buff[0] = 'f' ;
+                response.setCode(1);
+                response.setMessage("Payment failed");
+                response.setDetails("Payment failed");
                 logger.log(Level.INFO,"Payment failed for {0}", clientSocket.getInetAddress()) ;
             }
 
-            clientSocket.getOutputStream().write(buff, 0, buff.length) ;
+            new ObjectOutputStream(clientSocket.getOutputStream()).writeObject(response) ;
         }
         catch (IOException e)
         {

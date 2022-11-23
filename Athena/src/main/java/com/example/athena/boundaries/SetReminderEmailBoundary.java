@@ -1,5 +1,7 @@
 package com.example.athena.boundaries;
 
+import com.example.athena.beans.normal.MailServerBean;
+import com.example.athena.beans.normal.MailServerResponseBean;
 import com.example.athena.entities.Student;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
@@ -37,19 +39,14 @@ public class SetReminderEmailBoundary extends SocketBoundary
         String description = eventInfo.getDescription() ;
         LocalDateTime momentForServer = moment.toLocalDateTime() ;
 
-        String query = prepareQueryForServer(momentForServer.toString(), Student.getInstance().getEmail(), name, day, start, end, description) ;
-
-        if(remove)
-        {
-            query = "R" + query.substring(1) ;
-        }
+        MailServerBean query = prepareQueryForServer(momentForServer.toString(), Student.getInstance().getEmail(), name, day, start, end, description, remove) ;
 
         try
         {
-            String retVal = sendMessageGetResponse(query, 4545) ;
-            if(!retVal.equals("OK"))
+            MailServerResponseBean retVal = sendMessageGetResponse(query, 4545) ;
+            if(!retVal.getMessage().equals("OK"))
             {
-                throw new SendEmailException(retVal) ;
+                throw new SendEmailException(retVal.getMessage()) ;
             }
         }
         catch(IOException e)
@@ -58,12 +55,21 @@ public class SetReminderEmailBoundary extends SocketBoundary
         }
     }
 
-    private static String prepareQueryForServer(String day, String email, String eventName, LocalDate eventDay, LocalTime eventStart, LocalTime eventEnd, String eventDescription) {
+    private static MailServerBean prepareQueryForServer(String day, String email, String eventName, LocalDate eventDay, LocalTime eventStart, LocalTime eventEnd, String eventDescription, boolean remove) {
 
-        return String.format("Nathena.services;%s;%s;Reminder of your event;" +
-                "This email is a reminder for your event: \n" +
+        MailServerBean bean = new MailServerBean() ;
+        if (remove) bean.setClassName("R");
+        else bean.setClassName("N");
+
+        bean.setMailAccount("athena.services") ;
+        bean.setSendMoment(day);
+        bean.setRecipient(email);
+        bean.setMailObject("Reminder of your event");
+        bean.setContent(String.format("This email is a reminder for your event: \n" +
                 "%s\n" +
                 "on %s from %s to %s .\n" +
-                "Details: %s",day, email,  eventName, eventDay, eventStart, eventEnd, eventDescription) ;
+                "Details: %s", eventName, eventDay, eventStart, eventEnd, eventDescription));
+
+        return bean ;
     }
 }

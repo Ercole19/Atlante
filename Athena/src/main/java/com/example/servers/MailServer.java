@@ -1,5 +1,8 @@
 package com.example.servers ;
 
+import com.example.athena.beans.normal.MailServerBean;
+import com.example.athena.beans.normal.MailServerResponseBean;
+
 import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -20,13 +23,11 @@ import java.util.logging.StreamHandler;
 public class MailServer implements Runnable {
     private ServerSocket socket;
 
-    private final byte[] buff = new byte[1024];
-
     private static final Logger LOGGER = Logger.getLogger(MailServer.class.getName());
 
     private static final LinkedBlockingQueue<CommandSocketWrapper> DIRECTMAILQUEUE = new LinkedBlockingQueue<>() ;
 
-    private static final ConcurrentHashMap<LocalDateTime, List<String>> REMINDERSMAP = new ConcurrentHashMap<>() ;
+    private static final ConcurrentHashMap<LocalDateTime, List<MailServerBean>> REMINDERSMAP = new ConcurrentHashMap<>() ;
 
     private static boolean quit = false;
 
@@ -155,40 +156,56 @@ public class MailServer implements Runnable {
             while(!quit) {
                 clientSocket = socket.accept();
                 InputStream in = clientSocket.getInputStream();
+                ObjectInputStream objectInputStream = new ObjectInputStream(in) ;
 
-                String receivedMessage = new String(buff, 0, in.read(buff));
+                MailServerBean receivedMessage = (MailServerBean) objectInputStream.readObject() ;
 
-                Character setting = receivedMessage.charAt(0);
+                String setting = receivedMessage.getClassName() ;
 
-                if (setting.equals('M')) {
-                    CommandSocketWrapper wrapper = new CommandSocketWrapper(clientSocket, receivedMessage.substring(1));
-                    DIRECTMAILQUEUE.add(wrapper);
-                }
-                else if (setting.equals('N')) {
-                    OutputStream out = clientSocket.getOutputStream() ;
+                switch (setting) {
+                    case "M":
+                        CommandSocketWrapper wrapper = new CommandSocketWrapper(clientSocket, receivedMessage);
+                        DIRECTMAILQUEUE.add(wrapper);
+                        break;
+                    case "N": {
+                        OutputStream out = clientSocket.getOutputStream();
 
-                    String mailAuthName = receivedMessage.substring(1, receivedMessage.indexOf(";")) ;
-                    if(!this.sessionMap.containsKey(mailAuthName)) out.write("F".getBytes());
-                    else {
-                        String dateToParse = receivedMessage.substring(mailAuthName.length()+1).substring(1, receivedMessage.indexOf(";")+1);
-                        List<String> elements = REMINDERSMAP.getOrDefault(LocalDateTime.parse(dateToParse).truncatedTo(ChronoUnit.MINUTES), new ArrayList<>());
-                        elements.add(receivedMessage.substring(1));
+                        String mailAuthName = receivedMessage.getMailAccount();
+                        if (!this.sessionMap.containsKey(mailAuthName)) out.write("F".getBytes());
+                        else {
+                            String dateToParse = receivedMessage.getSendMoment();
+                            List<MailServerBean> elements = REMINDERSMAP.getOrDefault(LocalDateTime.parse(dateToParse).truncatedTo(ChronoUnit.MINUTES), new ArrayList<>());
+                            elements.add(receivedMessage);
+                            REMINDERSMAP.put(LocalDateTime.parse(dateToParse), elements);
+
+                            MailServerResponseBean response = new MailServerResponseBean() ;
+                            response.setCode(0);
+                            response.setMessage("OK");
+                            response.setDetails("Registration successful");
+
+                            ObjectOutputStream outputStream = new ObjectOutputStream(out) ;
+                            outputStream.writeObject(response) ;
+                        }
+                        break;
+                    }
+                    case "R": {
+                        OutputStream out = clientSocket.getOutputStream();
+
+                        String dateToParse = receivedMessage.getSendMoment();
+                        List<MailServerBean> elements = REMINDERSMAP.getOrDefault(LocalDateTime.parse(dateToParse).truncatedTo(ChronoUnit.SECONDS), new ArrayList<>());
+                        elements.remove(receivedMessage);
                         REMINDERSMAP.put(LocalDateTime.parse(dateToParse), elements);
 
-                        out.write("T".getBytes());
+                        MailServerResponseBean response = new MailServerResponseBean() ;
+                        response.setCode(0);
+                        response.setMessage("OK");
+                        response.setDetails("Elimination from queue successful");
+
+                        ObjectOutputStream outputStream = new ObjectOutputStream(out) ;
+                        outputStream.writeObject(response) ;
+
+                        break;
                     }
-                } else if (setting.equals('R')) {
-                    OutputStream out = clientSocket.getOutputStream() ;
-
-                    String mailAuthName = receivedMessage.substring(1, receivedMessage.indexOf(";")) ;
-
-                    String dateToParse = receivedMessage.substring(mailAuthName.length()+1).substring(1, receivedMessage.indexOf(";")+1);
-                    List<String> elements = REMINDERSMAP.getOrDefault(LocalDateTime.parse(dateToParse).truncatedTo(ChronoUnit.SECONDS), new ArrayList<>());
-                    elements.remove(receivedMessage.substring(1));
-                    REMINDERSMAP.put(LocalDateTime.parse(dateToParse), elements);
-
-                    out.write("T".getBytes());
-
                 }
             }
         }
@@ -196,6 +213,8 @@ public class MailServer implements Runnable {
         {
             LOGGER.log(Level.SEVERE, "Error in reading/writing to socket. Details: {0}", e.getMessage());
             System.exit(1);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -242,28 +261,28 @@ public class MailServer implements Runnable {
         private void notifications() {
             LocalDateTime lastSent = null;
             LocalDateTime actual;
-            String[] tokens = null;
 
             while (!quit) {
-                try {
-                    actual = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES) ;
 
-                    if (!actual.equals(lastSent)) {
-                        lastSent = actual;
-                        List<String> reminders = REMINDERSMAP.get(actual);
-                        if (reminders == null) continue;
+                actual = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES) ;
 
-                        for (String remainder : reminders) {
-                            tokens = remainder.split(";");
+                if (!actual.equals(lastSent)) {
+                    lastSent = actual;
+                    List<MailServerBean> reminders = REMINDERSMAP.get(actual);
+                    if (reminders == null) continue;
 
-                            SessionInfo info = MailServer.getInstance().sessionMap.get(tokens[0]) ;
-                            MailServer.getInstance().sendMail(info, tokens[2], tokens[3], tokens[4]);
+                    for (MailServerBean remainder : reminders) {
+
+                        SessionInfo info = MailServer.getInstance().sessionMap.get(remainder.getMailAccount()) ;
+                        try {
+                            MailServer.getInstance().sendMail(info, remainder.getRecipient(), remainder.getMailObject(), remainder.getContent());
+                        } catch (MessagingException e) {
+                            LOGGER.log(Level.SEVERE, "Unable to send remainder message to {0}", remainder.getRecipient());
                         }
 
-                        REMINDERSMAP.remove(actual) ;
                     }
-                } catch (MessagingException e) {
-                    LOGGER.log(Level.SEVERE, "Unable to send remainder message to {0}", tokens[0]);
+
+                    REMINDERSMAP.remove(actual) ;
                 }
             }
         }
@@ -297,14 +316,14 @@ public class MailServer implements Runnable {
 
     private void sendMailDirectly() throws IOException
     {
-        String[] tokens = null ;
+        MailServerBean command = null ;
         Socket clientSocket = null;
         CommandSocketWrapper wrapper ;
         try {
 
             wrapper = DIRECTMAILQUEUE.take() ;
 
-            tokens = wrapper.getCommand().split(";");
+            command = wrapper.getCommand();
             clientSocket = wrapper.getClientSocket() ;
         }catch (InterruptedException e)
         {
@@ -316,18 +335,34 @@ public class MailServer implements Runnable {
         try{
 
             assert clientSocket != null;
+            assert command != null ;
             out = clientSocket.getOutputStream() ;
-            SessionInfo info = this.sessionMap.get(tokens[0]) ;
-            sendMail(info, tokens[1], tokens[2], tokens[3]);
+            SessionInfo info = this.sessionMap.get(command.getMailAccount()) ;
+            sendMail(info, command.getRecipient(), command.getMailObject(), command.getContent());
 
-            out.write("T".getBytes());
+            MailServerResponseBean response = new MailServerResponseBean() ;
+            response.setCode(0);
+            response.setMessage("OK");
+            response.setDetails("Mail sent successfully");
 
-            LOGGER.log(Level.INFO, "Message sent to {0}", tokens[0]);
+            ObjectOutputStream outputStream = new ObjectOutputStream(out) ;
+            outputStream.writeObject(response) ;
+
+            LOGGER.log(Level.INFO, "Message sent to {0}", command.getRecipient());
 
         }  catch (MessagingException e) {
             out = clientSocket.getOutputStream() ;
             LOGGER.log(Level.SEVERE, "Error in sending email. Error message following {0}", e.getMessage());
             out.write("F".getBytes());
+
+            MailServerResponseBean response = new MailServerResponseBean() ;
+            response.setCode(1);
+            response.setMessage("ERROR");
+            response.setDetails("Error in sending mail, details follow "+ e.getMessage());
+
+            ObjectOutputStream outputStream = new ObjectOutputStream(out) ;
+            outputStream.writeObject(response) ;
+
             out.close() ;
         } finally {
             assert out != null ;
