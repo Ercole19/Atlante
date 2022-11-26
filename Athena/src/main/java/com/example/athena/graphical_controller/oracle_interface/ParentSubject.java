@@ -5,9 +5,12 @@ import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
 
 public class ParentSubject extends AbstractSubject {
-
-     private Parent parent = new VBox() ;
+     private Parent parent ;
      private static ParentSubject instance;
+
+    private ParentSubject() {
+        this.parent = new VBox() ;
+    }
 
     public static synchronized ParentSubject getInstance()
     {
