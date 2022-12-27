@@ -18,6 +18,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 
@@ -36,6 +37,7 @@ public class MainGraphicalController implements AbstractObserver, Initializable{
     private final CommandParser parser = new CommandParser();
 
     public void parseCommand() {
+
         if (commandField.getText().equals("")) {
             ParentSubject.getInstance().setCurrentParent(new LabelView().prepareParent("Insert something before"));
         }
@@ -62,6 +64,8 @@ public class MainGraphicalController implements AbstractObserver, Initializable{
 
             }
         }
+
+        commandField.requestFocus();
     }
 
     @Override
@@ -75,6 +79,12 @@ public class MainGraphicalController implements AbstractObserver, Initializable{
         ParentSubject.getInstance().attachObserver(this);
     }
 
-
+    @FXML
+    public void onKeyTyped(KeyEvent event) {
+        if(Objects.equals(event.getCharacter(), "\r")) {
+            enterButton.requestFocus();
+            parseCommand();
+        }
+    }
 
 }
