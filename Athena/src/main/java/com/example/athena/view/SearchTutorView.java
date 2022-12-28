@@ -38,6 +38,8 @@ public class SearchTutorView {
             formatBundle.setEntryNumber(size);
             formatBundle.setEntryPercents(30, 30, 30, 10);
             formatBundle.setEntrySize(100) ;
+            formatBundle.setWidth(containerWidth);
+            formatBundle.setHeight(formatBundle.getEntrySize()* formatBundle.getEntryNumber());
             result = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
             this.controller.setValues(result);
         }

@@ -6,6 +6,7 @@ import javafx.geometry.Orientation;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 public class HorizontalScrollBarDecorator extends SearchResultFormatterDecorator{
 
@@ -13,21 +14,21 @@ public class HorizontalScrollBarDecorator extends SearchResultFormatterDecorator
     public AnchorPane buildScene(FormatBundle formatBundle){
         formatBundle.setContainerHeight(formatBundle.getContainerHeight() -20);
         AnchorPane resultPane = super.buildScene(formatBundle) ;
-        return applyHorizontalScrollBar(resultPane, formatBundle.getContainerWidth(), formatBundle.getContainerHeight() + 20, formatBundle.getEntryNumber() * formatBundle.getEntrySize()) ;
+        return applyHorizontalScrollBar(resultPane, formatBundle.getContainerWidth(), formatBundle.getContainerHeight() + 20, formatBundle.getWidth()) ;
     }
 
     public HorizontalScrollBarDecorator(SearchResultFormatterComponent component) {
         super(component);
     }
 
-    private ScrollBar getHorizontalScrollBar(double containerWidth, double containerHeight, double listSize)
+    private ScrollBar getHorizontalScrollBar(double containerWidth, double containerHeight, double width)
     {
         ScrollBar scrollBar = new ScrollBar() ;
         scrollBar.setOrientation(Orientation.HORIZONTAL) ;
         scrollBar.setLayoutY(containerHeight -20) ;
         scrollBar.setPrefSize(containerWidth, 20);
         scrollBar.setMin(0) ;
-        scrollBar.setMax(listSize - containerWidth + 25.0) ;
+        scrollBar.setMax(width - containerWidth + 25.0) ;
         return scrollBar ;
     }
 
@@ -39,7 +40,7 @@ public class HorizontalScrollBarDecorator extends SearchResultFormatterDecorator
 
         scrollBar.valueProperty().addListener((observableValue, number, newVal) -> {
             SearchResultsGraphicalController pageGraphController = new SearchResultsGraphicalController() ;
-            pageGraphController.scrollResultsHorizontal((HBox) pane.lookup("#resultList"), newVal);
+            pageGraphController.scrollResultsHorizontal((Pane) pane.lookup("#resultList"), newVal);
         });
 
         return pane ;

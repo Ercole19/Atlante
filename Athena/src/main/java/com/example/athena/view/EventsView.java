@@ -34,6 +34,8 @@ public class EventsView {
             formatBundle.setEntryNumber(size);
             formatBundle.setEntryPercents(20, 15, 15, 20, 10, 10, 10);
             formatBundle.setEntrySize(100);
+            formatBundle.setWidth(containerWidth);
+            formatBundle.setHeight(formatBundle.getEntrySize()* formatBundle.getEntryNumber());
             this.result = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
             this.controller.setValues(this.result);
         }

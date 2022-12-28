@@ -38,6 +38,8 @@ public class ReceivedBidsView {
             formatBundle.setEntryNumber(size);
             formatBundle.setEntryPercents(30, 15, 25, 15, 15);
             formatBundle.setEntrySize(100);
+            formatBundle.setWidth(width);
+            formatBundle.setHeight(formatBundle.getEntrySize()* formatBundle.getEntryNumber());
             this.receivedBids = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
             this.controller.setValues(this.receivedBids);
         }

@@ -5,30 +5,30 @@ import com.example.athena.graphical_controller.normal_interface.SearchResultsGra
 import javafx.geometry.Orientation;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane;
 
-public class VerticalScrollBarDecorator extends SearchResultFormatterDecorator{
+public class VerticalScrollBarDecorator extends SearchResultFormatterDecorator {
 
 
     @Override
     public AnchorPane buildScene(FormatBundle formatBundle){
         formatBundle.setContainerWidth(formatBundle.getContainerWidth() -20);
         AnchorPane resultPane = super.buildScene(formatBundle) ;
-        return applyVerticalScrollBar(resultPane, formatBundle.getContainerWidth() + 20, formatBundle.getContainerHeight(), formatBundle.getEntryNumber() * formatBundle.getEntrySize()) ;
+        return applyVerticalScrollBar(resultPane, formatBundle.getContainerWidth() + 20, formatBundle.getContainerHeight(), formatBundle.getHeight()) ;
     }
 
     public VerticalScrollBarDecorator(SearchResultFormatterComponent component) {
         super(component);
     }
 
-    private ScrollBar getVerticalScrollBar(double containerWidth, double containerHeight, double listSize)
+    private ScrollBar getVerticalScrollBar(double containerWidth, double containerHeight, double height)
     {
         ScrollBar scrollBar = new ScrollBar() ;
         scrollBar.setOrientation(Orientation.VERTICAL) ;
         scrollBar.setLayoutX(containerWidth -20) ;
         scrollBar.setPrefSize(20, containerHeight) ;
         scrollBar.setMin(0) ;
-        scrollBar.setMax(listSize - containerHeight + 25.0) ;
+        scrollBar.setMax(height - containerHeight + 25.0) ;
         return scrollBar ;
     }
 
@@ -40,7 +40,7 @@ public class VerticalScrollBarDecorator extends SearchResultFormatterDecorator{
 
         scrollBar.valueProperty().addListener((observableValue, number, newVal) -> {
             SearchResultsGraphicalController pageGraphController = new SearchResultsGraphicalController() ;
-            pageGraphController.scrollResultsVertical((VBox) pane.lookup("#resultList"), newVal) ;
+            pageGraphController.scrollResultsVertical((Pane) pane.lookup("#resultList"), newVal) ;
         });
 
         return pane ;

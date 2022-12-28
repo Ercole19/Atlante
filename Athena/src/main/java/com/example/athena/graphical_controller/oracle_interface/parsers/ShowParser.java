@@ -17,7 +17,8 @@ public class ShowParser {
                 break;
             case "plots" :
                 ShowPlotsParser showPlotsParser = new ShowPlotsParser();
-                showPlotsParser.parseShowPlots();
+                commandToken.remove(0) ;
+                showPlotsParser.parseShowPlots(commandToken);
                 break;
             case "exams_completion":
                 ShowExamsCompletionParser showExamsCompletionParser = new ShowExamsCompletionParser();

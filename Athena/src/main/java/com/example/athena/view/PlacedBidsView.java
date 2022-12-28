@@ -34,6 +34,8 @@ public class PlacedBidsView {
             formatBundle.setEntryNumber(size);
             formatBundle.setEntryPercents(30, 20, 30, 10, 10);
             formatBundle.setEntrySize(100);
+            formatBundle.setWidth(width);
+            formatBundle.setHeight(formatBundle.getEntrySize()* formatBundle.getEntryNumber());
             this.placedBids = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
             this.controller.setValues(this.placedBids);
         }
