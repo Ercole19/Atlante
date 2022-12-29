@@ -13,69 +13,64 @@ import javafx.scene.layout.RowConstraints;
 
 public class TableView {
 
-    private GridPane root ;
-    private int rows ;
-    private int cols ;
+    private final GridPane root ;
 
-    private double containerWidth ;
-    private double containerHeight;
+    private final TableFormatBundle bundle ;
 
     public TableView(TableFormatBundle bundle) {
+
         root = new GridPane() ;
-        root.setId("resultList");
         root.setPrefSize(bundle.getWidth(), bundle.getHeight()) ;
 
-        rows = bundle.getRows();
-        cols = bundle.getCols() ;
-
-        containerWidth = bundle.getContainerWidth();
-        containerHeight = bundle.getContainerHeight();
-
-        for (int i : bundle.getHorizontalPercents()) {
-            ColumnConstraints contstraint = new ColumnConstraints() ;
-            contstraint.setPercentWidth(i) ;
-            root.getColumnConstraints().add(contstraint) ;
-        }
-
-        for (int i : bundle.getVerticalPercents()) {
-            RowConstraints contstraint = new RowConstraints() ;
-            contstraint.setPercentHeight(i);
-            root.getRowConstraints().add(contstraint) ;
-        }
+        this.bundle = bundle ;
     }
 
     public void setGridPaneEntry(int xCoor, int yCoor, Node element) throws IndexOutOfBoundsException {
-        if(!((xCoor >= 0) && (xCoor < rows)&&((yCoor >= 0) && (yCoor < cols)))) throw new IndexOutOfBoundsException("Wrong coordinates") ;
+        if(!((xCoor >= 0) && (xCoor < bundle.getRows())&&((yCoor >= 0) && (yCoor < bundle.getCols())))) throw new IndexOutOfBoundsException("Wrong coordinates") ;
 
         root.add(element, xCoor, yCoor) ;
     }
 
     public Pane getRoot() {
+
+        for (double i : bundle.getVerticalPercents()) {
+            ColumnConstraints contstraint = new ColumnConstraints() ;
+            contstraint.setPercentWidth(i) ;
+            root.getColumnConstraints().add(contstraint) ;
+        }
+
+        for (double i : bundle.getHorizontalPercents()) {
+            RowConstraints contstraint = new RowConstraints() ;
+            contstraint.setPercentHeight(i);
+            root.getRowConstraints().add(contstraint) ;
+        }
+
         return this.root ;
     }
 
     public Pane getPrettyRoot() {
-        if(this.containerWidth < root.getPrefWidth() || this.containerHeight < root.getPrefHeight()) {
+        if(this.bundle.getContainerWidth() < root.getPrefWidth() || this.bundle.getContainerHeight() < root.getPrefHeight()) {
+            root.setId("resultList");
             SearchResultFormatterComponent adapter = new TableViewAdapter(this) ;
 
             FormatBundle bundle = new FormatBundle() ;
 
-            bundle.setContainerWidth(this.containerWidth) ;
-            bundle.setContainerHeight(this.containerHeight);
+            bundle.setContainerWidth(this.bundle.getContainerWidth()) ;
+            bundle.setContainerHeight(this.bundle.getContainerHeight());
             bundle.setWidth(root.getPrefWidth());
             bundle.setHeight(root.getPrefHeight());
 
-            if(containerWidth < root.getPrefWidth()) {
+            if(this.bundle.getContainerWidth() < root.getPrefWidth()) {
                 adapter = new HorizontalScrollBarDecorator(adapter) ;
             }
 
-            if(containerHeight < root.getPrefHeight()) {
+            if(this.bundle.getContainerHeight() < root.getPrefHeight()) {
                 adapter = new VerticalScrollBarDecorator(adapter) ;
             }
 
             return adapter.buildScene(bundle) ;
         }
 
-        return this.root ;
+        return this.getRoot() ;
     }
 }

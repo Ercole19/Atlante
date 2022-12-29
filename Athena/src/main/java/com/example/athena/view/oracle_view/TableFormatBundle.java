@@ -17,8 +17,8 @@ public class TableFormatBundle {
 
     private double containerHeight ;
 
-    private List<Integer> horizontalPercents ;
-    private List<Integer> verticalPercents ;
+    private List<Double> horizontalPercents ;
+    private List<Double> verticalPercents ;
 
     public double getWidth() {
         return width;
@@ -52,52 +52,41 @@ public class TableFormatBundle {
         this.cols = cols;
     }
 
-    public List<Integer> getHorizontalPercents() {
+    public List<Double> getHorizontalPercents() {
         return horizontalPercents;
     }
 
-    public void setHorizontalPercents(int ... percents) throws PercentFormatException, WrongIndexNumberException {
+    private List<Double> checkPercents(int size, double ... percents) throws PercentFormatException, WrongIndexNumberException{
+        if(percents.length != size) throw new WrongIndexNumberException("Not enough percents") ;
 
-        if(percents.length != cols) throw new WrongIndexNumberException("Not enough percents") ;
-
-        int sum = 0 ;
-        for(int i : percents) {
+        double sum = 0 ;
+        for(double i : percents) {
             sum = sum+i ;
         }
 
-        if(sum != 100) throw new PercentFormatException("The percents don't add up to 100") ;
+        if(sum > 101.0) throw new PercentFormatException("The percents don't add up to 100") ;
         else {
-            ArrayList<Integer> list = new ArrayList<>() ;
-            for (int i : percents) {
+            ArrayList<Double> list = new ArrayList<>() ;
+            for (double i : percents) {
                 list.add(i) ;
             }
 
-            this.horizontalPercents = list ;
+            return list ;
         }
     }
 
-    public List<Integer> getVerticalPercents() {
+    public void setHorizontalPercents(double ... percents) throws PercentFormatException, WrongIndexNumberException {
+
+        this.horizontalPercents = checkPercents(cols, percents) ;
+    }
+
+    public List<Double> getVerticalPercents() {
         return verticalPercents;
     }
 
-    public void setVerticalPercents(int ... percents) throws PercentFormatException, WrongIndexNumberException {
+    public void setVerticalPercents(double ... percents) throws PercentFormatException, WrongIndexNumberException {
 
-        if(percents.length != rows) throw new WrongIndexNumberException("Not enough percents") ;
-
-        int sum = 0 ;
-        for(int i : percents) {
-            sum = sum+i ;
-        }
-
-        if(sum != 100) throw new PercentFormatException("The percents don't add up to 100") ;
-        else {
-            ArrayList<Integer> list = new ArrayList<>() ;
-            for (int i : percents) {
-                list.add(i) ;
-            }
-
-            this.verticalPercents = list ;
-        }
+        this.verticalPercents = checkPercents(rows, percents) ;
     }
 
     public double getContainerWidth() {

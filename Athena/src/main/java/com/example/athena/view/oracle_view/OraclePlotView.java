@@ -17,20 +17,20 @@ public class OraclePlotView {
         int timeEntries = controller.getTimeEntries() ;
 
         TableFormatBundle bundle = new TableFormatBundle() ;
-        bundle.setWidth(2042);
-        bundle.setHeight(1122);
-        bundle.setCols(timeEntries +1);
+        bundle.setWidth(220*(plotNum+1));
+        bundle.setHeight(50*(timeEntries+2));
         bundle.setRows(plotNum +1);
+        bundle.setCols(timeEntries +2);
         bundle.setContainerWidth(1021);
         bundle.setContainerHeight(561);
-        int[] rowPercents = new int[plotNum +1] ;
+        double[] rowPercents = new double[plotNum +1] ;
         for (int i = 0 ; i < plotNum +1 ; i++) {
-            rowPercents[i] = 100/(plotNum+1) ;
+            rowPercents[i] = 100.0/(plotNum+1) ;
         }
 
-        int[] colPercents = new int[timeEntries +1] ;
-        for (int i = 0 ; i < timeEntries +1 ; i++) {
-            colPercents[i] = 100/(timeEntries +1) ;
+        double[] colPercents = new double[timeEntries +2] ;
+        for (int i = 0 ; i < timeEntries +2 ; i++) {
+            colPercents[i] = 100.0/(timeEntries +2) ;
         }
 
         try {
@@ -44,13 +44,7 @@ public class OraclePlotView {
 
         TableView view = new TableView(bundle) ;
 
-        view.setGridPaneEntry(1,0, LabelBuilder.buildLabel("SS"));
-        view.setGridPaneEntry(2,0, LabelBuilder.buildLabel("LT"));
-        view.setGridPaneEntry(3,0, LabelBuilder.buildLabel("OT"));
-        view.setGridPaneEntry(0,1, LabelBuilder.buildLabel("3"));
-        view.setGridPaneEntry(0,2, LabelBuilder.buildLabel("3"));
-        view.setGridPaneEntry(0,3, LabelBuilder.buildLabel("3"));
-        view.setGridPaneEntry(0,4, LabelBuilder.buildLabel("3"));
+        controller.setPlotData(view) ;
 
         ParentSubject.getInstance().setCurrentParent(view.getPrettyRoot());
     }

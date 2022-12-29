@@ -11,7 +11,6 @@ import java.util.List;
 
 public class ShowPlotsParser {
     private final LabelView view = new LabelView() ;
-    SceneSwitcher switcher = SceneSwitcher.getInstance();
     public void parseShowPlots(List<String> commands) {
         try{
             if (Student.getInstance().getEmail() != null){
