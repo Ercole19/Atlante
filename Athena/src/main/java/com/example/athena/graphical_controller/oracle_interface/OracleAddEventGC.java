@@ -100,6 +100,8 @@ public class OracleAddEventGC implements OnYesOrNoController{
         bean.setType(this.eventType);
         if(this.eventDescription != null) {
             bean.setDescription(this.eventDescription) ;
+        } else {
+            bean.setDescription("");
         }
 
         if (this.minutesBefore != 0 || this.hoursBefore != 0) {
