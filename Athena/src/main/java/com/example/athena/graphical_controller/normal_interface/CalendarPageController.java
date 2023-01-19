@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class CalendarPageController implements Initializable, AbstractObserver {
+public class CalendarPageController extends HomeScreenController implements Initializable, AbstractObserver {
 
 
     @FXML

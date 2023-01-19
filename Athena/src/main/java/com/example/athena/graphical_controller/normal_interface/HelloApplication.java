@@ -16,6 +16,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         System.setProperty("oracle", "false");
         SceneSwitcher switcher = SceneSwitcher.getInstance() ;
+        stage.setResizable(false) ;
         switcher.pushStage(stage) ;
         switcher.switcher("LoginPage.fxml") ;
         stage.setTitle("Athena");

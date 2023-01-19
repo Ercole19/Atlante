@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class StudentsReviewTutorsGraphicalController implements PostInitialize
+public class StudentsReviewTutorsGraphicalController extends HomeScreenController implements PostInitialize
 {
     private Parent root;
     private Scene scene;

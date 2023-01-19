@@ -75,7 +75,7 @@ public class EventsViewGC {
                 });
                 searchResultProduct.setEntry(i, 5, delete);
 
-                Button edit = new Button("edit");
+                Button edit = new Button("Edit");
                 edit.setOnAction(event -> {
                     ArrayList<Object> params = new ArrayList<>();
                     params.add(eventBean);

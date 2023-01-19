@@ -9,9 +9,15 @@ import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.SearchTutorUseCaseController;
 import com.example.athena.view.LabelBuilder;
 import com.example.athena.view.SearchTutorView;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +43,8 @@ public class SearchTutorViewGC {
     public void setValues(SearchResultProduct searchResultProduct) {
         searchResultProduct.setLegend(0, LabelBuilder.buildLabel("Name and Surname"));
         searchResultProduct.setLegend(1, LabelBuilder.buildLabel("Taught subject"));
-        searchResultProduct.setLegend(2, LabelBuilder.buildLabel("Reviews score"));
-        searchResultProduct.setLegend(3, LabelBuilder.buildLabel("Visit page"));
+        searchResultProduct.setLegend(2, LabelBuilder.buildLabel("Review score"));
+        searchResultProduct.setLegend(3, LabelBuilder.buildLabel(""));
         try{
             int i = 0 ;
             for(TutorSearchResultBean result : searchResults){
@@ -46,7 +52,15 @@ public class SearchTutorViewGC {
 
                 searchResultProduct.setEntry(i, 1, LabelBuilder.buildLabel(result.getTaughtSubject())) ;
 
-                searchResultProduct.setEntry(i, 2, LabelBuilder.buildLabel(result.getStarNumber())) ;
+                HBox stars = new HBox() ;
+                ImageView starIcon = new ImageView("file:./src/main/resources/assets/starIcon.png") ;
+                starIcon.setPreserveRatio(true);
+                starIcon.setFitWidth(40);
+                Label score = LabelBuilder.buildLabel(result.getStarNumber()) ;
+                stars.setAlignment(Pos.CENTER_LEFT);
+                stars.getChildren().addAll(score, starIcon) ;
+
+                searchResultProduct.setEntry(i, 2, stars) ;
 
                 Button visitPage = new Button("Visit page") ;
                 searchResultProduct.setEntry(i, 3, visitPage);

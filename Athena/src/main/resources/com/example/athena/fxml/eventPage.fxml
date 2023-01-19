@@ -11,37 +11,37 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.normal_interface.EventPageGC">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.normal_interface.EventPageGC">
 
    <children>
-      <Label fx:id="label1" layoutX="300.0" layoutY="42.0" prefHeight="64.0" prefWidth="253.0" text="Label" textFill="#ffd775">
+      <Label fx:id="label1" layoutX="300.0" layoutY="50.0" prefHeight="64.0" prefWidth="253.0" text="Label" textFill="#ffd775">
          <font>
             <Font size="40.0" />
          </font></Label>
-      <Text fill="#ffd775" layoutX="555.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="events">
+      <Text fill="#ffd775" layoutX="555.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="events">
          <font>
             <Font size="40.0" />
          </font></Text>
-      <SubScene fx:id="results" height="293.0" layoutX="17.0" layoutY="104.0" width="966.0">
+      <SubScene fx:id="results" height="293.0" layoutX="17.0" layoutY="115.0" width="966.0">
         <root>
           <Region />
         </root>
       </SubScene>
-      <AnchorPane layoutX="-8.0" layoutY="-2.0" minWidth="-Infinity" opacity="0.79" prefHeight="50.0" prefWidth="1014.0" style="-fx-background-color: #2d8bba;">
+      <AnchorPane minWidth="-Infinity" prefHeight="56.0" prefWidth="1000.0" style="-fx-background-color: #2d8bba;">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="726.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="705.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../assets/title.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="73.0" layoutX="926.0" layoutY="-1.0">
+            <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="905.0" layoutY="3.0" preserveRatio="true">
                <image>
                   <Image url="@../../../../assets/guff.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <Button fx:id="close" layoutX="437.0" layoutY="425.0" mnemonicParsing="false" onAction="#close" prefHeight="51.0" prefWidth="125.0" style="-fx-background-radius: 20; -fx-background-color: #2d8bba;" text="Close" textFill="WHITE">
+      <Button fx:id="close" layoutX="437.0" layoutY="427.0" mnemonicParsing="false" onAction="#close" prefHeight="51.0" prefWidth="125.0" style="-fx-background-radius: 20; -fx-background-color: #2d8bba;" text="Close" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>

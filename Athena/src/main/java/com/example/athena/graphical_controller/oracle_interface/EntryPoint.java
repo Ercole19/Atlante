@@ -12,6 +12,7 @@ public class EntryPoint extends Application {
     public void start(Stage stage) throws Exception {
         SceneSwitcher switcher = SceneSwitcher.getInstance();
         System.setProperty("oracle", "true");
+        stage.setResizable(false) ;
         switcher.pushStage(stage);
         switcher.switcher("mainView.fxml");
         stage.setTitle("Athena");

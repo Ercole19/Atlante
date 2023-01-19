@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
-public class ControllerSearchTutor {
+public class ControllerSearchTutor extends HomeScreenController {
 
     @FXML
     private TextField searchBar ;

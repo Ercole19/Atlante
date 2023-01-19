@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.normal_interface.LoginPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.normal_interface.LoginPageController">
    <children>
       <Text fill="#ffd775" layoutX="455.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ATHENA" textOrigin="CENTER">
          <font>
@@ -33,12 +33,12 @@
             <Font size="24.0" />
          </font>
       </PasswordField>
-      <Text fill="#ffd775" layoutX="904.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New User?" textOrigin="CENTER">
+      <Text fill="#ffd775" layoutX="904.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New User?" textOrigin="CENTER">
          <font>
             <Font size="65.0" />
          </font>
       </Text>
-      <Button layoutX="975.0" layoutY="332.0" mnemonicParsing="false" onAction="#switchToSignUpPage" style="-fx-background-radius: 20; -fx-background-color: #2d8bba;" text="Sign Up" textFill="WHITE">
+      <Button layoutX="1009.0" layoutY="336.0" mnemonicParsing="false" onAction="#switchToSignUpPage" style="-fx-background-radius: 20; -fx-background-color: #2d8bba;" text="Sign Up" textFill="WHITE">
          <font>
             <Font size="26.0" />
          </font>

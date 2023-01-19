@@ -18,7 +18,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.*;
 
-public class PlotPageGraphicalController implements Initializable
+public class PlotPageGraphicalController extends  HomeScreenController implements Initializable
 {
 
     @FXML

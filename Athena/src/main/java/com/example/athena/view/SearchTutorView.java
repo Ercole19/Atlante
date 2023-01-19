@@ -36,7 +36,7 @@ public class SearchTutorView {
             formatBundle.setContainerWidth(containerWidth);
             formatBundle.setContainerHeight(containerHeight);
             formatBundle.setEntryNumber(size);
-            formatBundle.setEntryPercents(30, 30, 30, 10);
+            formatBundle.setEntryPercents(30, 40, 20, 10);
             formatBundle.setEntrySize(100) ;
             formatBundle.setWidth(containerWidth);
             formatBundle.setHeight(formatBundle.getEntrySize()* formatBundle.getEntryNumber());

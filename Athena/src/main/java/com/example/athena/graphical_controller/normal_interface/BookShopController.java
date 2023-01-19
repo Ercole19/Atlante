@@ -6,14 +6,9 @@ import javafx.scene.Node;
 import javafx.stage.Stage;
 
 
-public class BookShopController {
+public class BookShopController extends HomeScreenController {
 
     private final SceneSwitcher switcher = SceneSwitcher.getInstance();
-
-    @FXML
-    protected void onHomeButtonClick() {
-        switcher.switcher("MainPageStudents.fxml");
-    }
 
     @FXML
     protected void onBackButtonClick() {

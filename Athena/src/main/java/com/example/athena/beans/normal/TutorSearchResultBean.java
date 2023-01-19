@@ -21,7 +21,7 @@ public class TutorSearchResultBean
     }
 
     public void setStarNumber(float starNumber) {
-        this.starNumber = String.format("%.2f*", starNumber);
+        this.starNumber = String.format("%.2f", starNumber);
     }
 
     public void setId(String id){
