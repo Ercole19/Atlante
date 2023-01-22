@@ -81,7 +81,7 @@ public class OracleEditEventGC {
 
     public void setType(String type)
     {
-        bean.setType(type) ;
+        bean.setType(type.toUpperCase().replace(" ", "_")) ;
     }
 
     public void setStart(LocalTime start) {

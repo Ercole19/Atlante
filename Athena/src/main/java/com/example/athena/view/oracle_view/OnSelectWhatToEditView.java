@@ -11,26 +11,33 @@ public class OnSelectWhatToEditView {
 
     private final Parent root ;
 
+    private final Button editDesc ;
+
+    private final Button editTime ;
+
+    private final Button editReminder ;
+
+    private final Button editType ;
+
+    private final Button saveChanges ;
+
     public OnSelectWhatToEditView(OnSelectWhatToEditGC controller) {
         VBox finalRoot = new VBox() ;
 
         finalRoot.getChildren().add(LabelBuilder.buildLabel("Select what you want to edit:")) ;
-        Button editDesc = new Button("Edit Description") ;
-        editDesc.setOnAction(event -> {
-            controller.setChoice(EditStatesEnum.EDIT_DESC) ;
-        });
+        editDesc = new Button("Edit Description") ;
 
-        Button editTime = new Button("Edit Time") ;
-        editTime.setOnAction(event -> controller.setChoice(EditStatesEnum.EDIT_TIME));
+        editTime = new Button("Edit Time") ;
 
-        Button editReminder = new Button("Edit reminder") ;
-        editReminder.setOnAction(event -> controller.setChoice(EditStatesEnum.EDIT_REMINDER));
 
-        Button editType = new Button("Edit type") ;
-        editType.setOnAction(event -> controller.setChoice(EditStatesEnum.EDIT_TYPE));
+        editReminder = new Button("Edit reminder") ;
 
-        Button saveChanges = new Button("Save event") ;
-        saveChanges.setOnAction(event -> controller.setChoice(EditStatesEnum.SAVE_EVENT)) ;
+
+        editType = new Button("Edit type") ;
+
+
+        saveChanges = new Button("Save event") ;
+
 
         finalRoot.getChildren().addAll(editTime, editType, editReminder, editDesc, saveChanges) ;
 
@@ -39,5 +46,25 @@ public class OnSelectWhatToEditView {
 
     public Parent getRoot() {
         return this.root ;
+    }
+
+    public Button getEditDesc() {
+        return editDesc;
+    }
+
+    public Button getEditTime() {
+        return editTime;
+    }
+
+    public Button getEditReminder() {
+        return editReminder;
+    }
+
+    public Button getEditType() {
+        return editType;
+    }
+
+    public Button getSaveChanges() {
+        return saveChanges;
     }
 }

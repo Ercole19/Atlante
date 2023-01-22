@@ -50,7 +50,7 @@ public class CalendarSubject extends AbstractSubject {
 
     public void deleteEvent(EventEntity event) throws EventException {
         this.getEntity(YearMonth.of(event.getDay().getYear(), event.getDay().getMonth())).deleteEventEntity(event);
-        this.calendarMap.remove(YearMonth.of(event.getDay().getYear(), event.getDay().getMonth()),  this.getEntity(YearMonth.of(event.getDay().getYear(), event.getDay().getMonth())));
+        this.calendarMap.put(YearMonth.of(event.getDay().getYear(), event.getDay().getMonth()),  this.getEntity(YearMonth.of(event.getDay().getYear(), event.getDay().getMonth())));
         super.notifyObserver();
     }
 

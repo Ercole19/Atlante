@@ -4,7 +4,9 @@ import com.example.athena.exceptions.EventException;
 import com.example.athena.beans.normal.EventBean;
 import com.example.athena.beans.normal.PresenceOfEventsBean;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.YearMonth;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class CalendarEntity {
@@ -38,7 +40,8 @@ public class CalendarEntity {
             eventBean.setEnd(event.getEnd());
             eventBean.setDescription(event.getDescription());
             eventBean.setType(event.getType().toString()) ;
-            if (event.getDateOfReminder() != null) eventBean.setDateOfReminder(event.getDateOfReminder().toLocalDateTime().getHour(), event.getDateOfReminder().toLocalDateTime().getMinute());
+            long period = event.getDateOfReminder().toLocalDateTime().until(LocalDateTime.of(event.getDay(), event.getStart()), ChronoUnit.MINUTES) ;
+            if (event.getDateOfReminder() != null) eventBean.setDateOfReminder((int) period / 60, (int) period % 60);
             dailyEvents.add(eventBean);
         }
         return dailyEvents;

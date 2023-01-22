@@ -16,13 +16,9 @@ public class OnEditTypeGC {
     }
 
     private void setUpInterface() {
-        this.view.getChoiceBox().getItems().addAll("Study Session", "Lecture Time", "Other");
+        this.view.getChoiceBox().getItems().addAll("Study session", "Lecture time", "Other");
         String type = controller.getType() ;
-        String[] tokens = type.split("_") ;
-        for (String token : tokens) {
-            type = token.charAt(0) + token.substring(1) + " " ;
-        }
-        type = type.substring(0, type.length() -1) ;
+        type = type.charAt(0) + type.substring(1).toLowerCase().replace("_", " ") ;
         this.view.getChoiceBox().setValue(type) ;
 
         this.view.getDoneButton().setOnAction(event -> onSaveClick()) ;

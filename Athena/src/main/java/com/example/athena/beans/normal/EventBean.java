@@ -22,7 +22,8 @@ public class EventBean {
 
     public void setDateOfReminder(int hoursBefore, int minutesBefore)
     {
-        this.dateOfReminder = Timestamp.valueOf(LocalDateTime.of(this.getDate(), this.getStart()).minusHours(hoursBefore).minusMinutes(minutesBefore));
+        if (hoursBefore == 0 && minutesBefore == 0) this.dateOfReminder = null ;
+        else this.dateOfReminder = Timestamp.valueOf(LocalDateTime.of(this.getDate(), this.getStart()).minusHours(hoursBefore).minusMinutes(minutesBefore));
     }
 
     public void setDate(LocalDate date) {
