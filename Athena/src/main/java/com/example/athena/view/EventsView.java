@@ -6,7 +6,8 @@ import com.example.athena.engineering_classes.search_result_factory.ProductTypeE
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.exceptions.PercentFormatException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.graphical_controller.normal_interface.EventsViewGC;
+import com.example.athena.graphical_controller.EventsViewGC;
+import com.example.athena.graphical_controller.normal_interface.NormalEventsViewGC;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 
@@ -19,10 +20,10 @@ public class EventsView {
     private SearchResultProduct result ;
     private static final String FATAL_ERROR = "FATAL ERROR: The application is unable to load content. If the problem persists after restarting, try reinstalling the application.";
 
-    public EventsView (double containerWidth, double containerHeight) {
+    public EventsView (double containerWidth, double containerHeight, EventsViewGC controller) {
         this.containerHeight = containerHeight;
         this.containerWidth = containerWidth;
-        this.controller = new EventsViewGC(this);
+        this.controller = controller;
     }
 
     public AnchorPane getRoot (LocalDate date){

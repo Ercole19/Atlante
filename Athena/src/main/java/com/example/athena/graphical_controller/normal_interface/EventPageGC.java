@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller.normal_interface;
 
+import com.example.athena.graphical_controller.EventsViewGC;
 import com.example.athena.view.EventsView;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -17,10 +18,10 @@ public class EventPageGC implements PostInitialize {
 
     @Override
     public void postInitialize(ArrayList<Object> params) {
-        EventsView eventsView = new EventsView(results.getWidth(), results.getHeight());
+        EventsViewGC helpController = new NormalEventsViewGC(results.getWidth(), results.getHeight());
         label1.setText(String.valueOf(params.get(0))) ;
         LocalDate dayToLoad = (LocalDate) params.get(0);
-        this.results.setRoot(eventsView.getRoot(dayToLoad));
+        this.results.setRoot(helpController.getRoot(dayToLoad));
     }
 
     public void close() {

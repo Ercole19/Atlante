@@ -24,7 +24,7 @@ public class StudentsReviewTutorsGraphicalController extends HomeScreenControlle
 {
     private Parent root;
     private Scene scene;
-    private static final String REVIEW_SECTION_PROMPT = "#reviewSectionPrompt";
+    private static final String REVIEW_SECTION_PROMPT = "#reviewSubscene";
     private String code ;
 
     @FXML

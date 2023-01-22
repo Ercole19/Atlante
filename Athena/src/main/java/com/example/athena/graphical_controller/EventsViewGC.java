@@ -1,32 +1,30 @@
-package com.example.athena.graphical_controller.normal_interface;
+package com.example.athena.graphical_controller;
 
+import com.example.athena.beans.normal.EventBean;
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.entities.CalendarSubject;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.beans.normal.EventBean;
+import com.example.athena.graphical_controller.normal_interface.SceneSwitcher;
 import com.example.athena.graphical_controller.oracle_interface.parsers.ShowEventParser;
 import com.example.athena.use_case_controllers.ManageEventUCC;
 import com.example.athena.view.EventsView;
 import com.example.athena.view.LabelBuilder;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+
+import java.awt.event.ActionEvent;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventsViewGC {
+public abstract class EventsViewGC {
 
-
-    private final EventsView view;
+    protected EventsView view;
     private List<EventBean> searchResults;
-    private SceneSwitcher switcher = SceneSwitcher.getInstance();
-
-    public EventsViewGC(EventsView view) {
-        this.view = view;
-    }
 
     public int getResultSize(LocalDate date) {
         try {
@@ -57,7 +55,7 @@ public class EventsViewGC {
                 description.setOnAction(event -> {
                     ArrayList<Object> params = new ArrayList<>() ;
                     params.add(eventBean.getDescription());
-                    switcher.popup("EventDescription.fxml", "Event description", params);
+                    SceneSwitcher.getInstance().popup("EventDescription.fxml", "Event description", params);
                 });
 
                 searchResultProduct.setEntry(i, 4, description);
@@ -77,10 +75,7 @@ public class EventsViewGC {
 
                 Button edit = new Button("Edit");
                 edit.setOnAction(event -> {
-                    ArrayList<Object> params = new ArrayList<>();
-                    params.add(eventBean);
-                    switcher.popup("AddEventScreen.fxml", "Edit your event", params);
-                    refreshScreen(eventBean.getDate()) ;
+                    editButtonBehavior(eventBean) ;
                 });
                 searchResultProduct.setEntry(i, 6, edit);
                 i++ ;
@@ -92,15 +87,11 @@ public class EventsViewGC {
         }
     }
 
-    private void refreshScreen(LocalDate date) {
-        ArrayList<Object> params = new ArrayList<>() ;
-        params.add(date);
-        if (System.getProperty("oracle").equals("false")) {switcher.switcher("eventPage.fxml", params);}
-        else {
-            ShowEventParser parser = new ShowEventParser();
-            List<String> list = new ArrayList<>();
-            list.add(String.valueOf(date));
-            parser.showEventParse(list);
-        }
+    protected abstract void editButtonBehavior(EventBean eventBean) ;
+
+    protected abstract void refreshScreen(LocalDate date) ;
+
+    public Parent getRoot(LocalDate day) {
+        return this.view.getRoot(day) ;
     }
 }

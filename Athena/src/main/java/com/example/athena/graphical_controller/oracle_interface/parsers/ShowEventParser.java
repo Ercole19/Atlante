@@ -2,6 +2,8 @@ package com.example.athena.graphical_controller.oracle_interface.parsers;
 
 import com.example.athena.entities.Student;
 import com.example.athena.exceptions.LoggedUserException;
+import com.example.athena.graphical_controller.EventsViewGC;
+import com.example.athena.graphical_controller.oracle_interface.OracleEventsViewGC;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.view.EventsView;
 import com.example.athena.view.oracle_view.LabelView;
@@ -20,8 +22,8 @@ public class ShowEventParser {
         }
         try {
             if (Student.getInstance().getEmail() != null) {
-                EventsView view = new EventsView(1021, 561);
-                ParentSubject.getInstance().setCurrentParent(view.getRoot(LocalDate.parse(commandToken.get(0), DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
+                EventsViewGC helpController = new OracleEventsViewGC(1021, 561);
+                ParentSubject.getInstance().setCurrentParent(helpController.getRoot(LocalDate.parse(commandToken.get(0), DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
             } else {
                 ParentSubject.getInstance().setCurrentParent(labelView.prepareParent("You must login before writing any command"));
             }
