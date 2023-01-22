@@ -187,14 +187,20 @@ public class MailServer implements Runnable {
 
                 switch (setting) {
                     case "M":
-                        CommandSocketWrapper wrapper = new CommandSocketWrapper(clientSocket, receivedMessage);
+                        CommandSocketWrapper wrapper = new CommandSocketWrapper(objectOutputStream, receivedMessage);
                         DIRECTMAILQUEUE.add(wrapper);
                         break;
                     case "N": {
-                        OutputStream out = clientSocket.getOutputStream();
 
                         String mailAuthName = receivedMessage.getMailAccount();
-                        if (!this.sessionMap.containsKey(mailAuthName)) out.write("F".getBytes());
+                        if (!this.sessionMap.containsKey(mailAuthName)) {
+                            MailServerResponseBean response = new MailServerResponseBean() ;
+                            response.setCode(1);
+                            response.setMessage("Event not found");
+                            response.setDetails("Event not found");
+
+                            objectOutputStream.writeObject(response) ;
+                        }
                         else {
                             String dateToParse = receivedMessage.getSendMoment();
                             List<MailServerBean> elements = REMINDERSMAP.getOrDefault(LocalDateTime.parse(dateToParse).truncatedTo(ChronoUnit.MINUTES), new ArrayList<>());
@@ -206,13 +212,11 @@ public class MailServer implements Runnable {
                             response.setMessage("OK");
                             response.setDetails("Registration successful");
 
-                            ObjectOutputStream outputStream = new ObjectOutputStream(out) ;
-                            outputStream.writeObject(response) ;
+                            objectOutputStream.writeObject(response) ;
                         }
                         break;
                     }
                     case "R": {
-                        OutputStream out = clientSocket.getOutputStream();
 
                         String dateToParse = receivedMessage.getSendMoment();
                         List<MailServerBean> elements = REMINDERSMAP.getOrDefault(LocalDateTime.parse(dateToParse).truncatedTo(ChronoUnit.SECONDS), new ArrayList<>());
@@ -224,21 +228,17 @@ public class MailServer implements Runnable {
                         response.setMessage("OK");
                         response.setDetails("Elimination from queue successful");
 
-                        ObjectOutputStream outputStream = new ObjectOutputStream(out) ;
-                        outputStream.writeObject(response) ;
+                        objectOutputStream.writeObject(response) ;
 
                         break;
                     }
                     default: {
-                        OutputStream out = clientSocket.getOutputStream();
 
                         MailServerResponseBean response = new MailServerResponseBean() ;
                         response.setCode(3);
                         response.setMessage("Bad request");
                         response.setDetails("Unable to detect message type");
-
-                        ObjectOutputStream outputStream = new ObjectOutputStream(out) ;
-                        outputStream.writeObject(response) ;
+                        objectOutputStream.writeObject(response) ;
                     }
                 }
             }
@@ -347,52 +347,46 @@ public class MailServer implements Runnable {
 
     private void sendMailDirectly() throws IOException {
         MailServerBean command = null;
-        Socket clientSocket = null;
+        ObjectOutputStream clientSocketOS = null;
         CommandSocketWrapper wrapper;
         try {
 
             wrapper = DIRECTMAILQUEUE.take();
 
             command = wrapper.getCommand();
-            clientSocket = wrapper.getClientSocket();
+            clientSocketOS = wrapper.getClientSocketOS() ;
         } catch (InterruptedException e) {
             LOGGER.log(Level.SEVERE, "Error in retrieving from queue. Details: {0}", e.getMessage());
             Thread.currentThread().interrupt();
         }
 
-        assert clientSocket != null;
+        assert clientSocketOS != null;
         assert command != null;
 
-        try (ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream())) {
+        try {
 
-            try {
+            SessionInfo info = this.sessionMap.get(command.getMailAccount());
+            sendMail(info, command.getRecipient(), command.getMailObject(), command.getContent());
 
-                SessionInfo info = this.sessionMap.get(command.getMailAccount());
-                sendMail(info, command.getRecipient(), command.getMailObject(), command.getContent());
+            MailServerResponseBean response = new MailServerResponseBean();
+            response.setCode(0);
+            response.setMessage("OK");
+            response.setDetails("Mail sent successfully");
 
-                MailServerResponseBean response = new MailServerResponseBean();
-                response.setCode(0);
-                response.setMessage("OK");
-                response.setDetails("Mail sent successfully");
+            clientSocketOS.writeObject(response);
 
-                ObjectOutputStream outputStream = new ObjectOutputStream(out);
-                outputStream.writeObject(response);
+            LOGGER.log(Level.INFO, "Message sent to {0}", command.getRecipient());
 
-                LOGGER.log(Level.INFO, "Message sent to {0}", command.getRecipient());
+        } catch (MessagingException e) {
+            LOGGER.log(Level.SEVERE, "Error in sending email. Error message following {0}", e.getMessage());
 
-            } catch (MessagingException e) {
-                LOGGER.log(Level.SEVERE, "Error in sending email. Error message following {0}", e.getMessage());
-                out.write("F".getBytes());
+            MailServerResponseBean response = new MailServerResponseBean();
+            response.setCode(1);
+            response.setMessage("ERROR");
+            response.setDetails("Error in sending mail, details follow " + e.getMessage());
 
-                MailServerResponseBean response = new MailServerResponseBean();
-                response.setCode(1);
-                response.setMessage("ERROR");
-                response.setDetails("Error in sending mail, details follow " + e.getMessage());
+            clientSocketOS.writeObject(response);
 
-                ObjectOutputStream outputStream = new ObjectOutputStream(out);
-                outputStream.writeObject(response);
-
-            }
         }
     }
 }
