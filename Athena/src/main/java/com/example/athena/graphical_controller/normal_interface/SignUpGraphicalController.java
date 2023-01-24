@@ -8,6 +8,7 @@ import com.example.athena.beans.normal.UserBean;
 import com.example.athena.use_case_controllers.SignUpUCC;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
@@ -60,6 +61,8 @@ public class SignUpGraphicalController {
             try
             {
                 controller.preRegister(bean);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Registration successful", ButtonType.CLOSE);
+                alert.showAndWait();
                 ArrayList<Object> params = new ArrayList<>() ;
                 params.add(emailField.getText()) ;
                 switcher.switcher("validate_signup.fxml", params);

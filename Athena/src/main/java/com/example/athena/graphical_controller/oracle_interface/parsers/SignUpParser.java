@@ -12,7 +12,7 @@ public class SignUpParser {
     public void parseSignUp(List<String> commandToken){
         if (commandToken.size() < 4) {
             LabelView view = new LabelView();
-            Parent product = view.prepareParent("insert name surname email and password after signup command");
+            Parent product = view.prepareParent("Usage : signup#name#surname#email#(STUDENT | TUTOR)");
             ParentSubject.getInstance().setCurrentParent(product);
         }
         else

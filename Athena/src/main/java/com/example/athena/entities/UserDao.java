@@ -1,9 +1,6 @@
 package com.example.athena.entities;
 
 import com.example.athena.exceptions.*;
-import com.jcraft.jsch.IO;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 
 import java.io.*;
 import java.sql.PreparedStatement;
@@ -36,8 +33,6 @@ public class UserDao extends AbstractDAO {
             stmt.setString(1, email);
             stmt.setString(2, code);
             stmt.executeUpdate();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Registration successful", ButtonType.CLOSE);
-            alert.showAndWait();
             return true;
 
         } catch (SQLException | IOException exception) {
@@ -301,8 +296,6 @@ public class UserDao extends AbstractDAO {
             stmt.setString(5, surname);
             stmt.setString(6, code);
             stmt.executeUpdate();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Registration successful", ButtonType.CLOSE);
-            alert.showAndWait();
 
         } catch (SQLException | IOException exception) {
             throw new UserRegistrationException(exception.getMessage());

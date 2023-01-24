@@ -8,27 +8,36 @@ import com.example.athena.view.oracle_view.LabelView;
 import com.example.athena.view.oracle_view.SignUpView;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.security.NoSuchAlgorithmException;
 
 public class OracleSignUpGC {
 
-    private final TextField confirmTextField ;
+    private final PasswordField passwordField ;
+    private final PasswordField confirmTextField ;
     private final String name;
     private final String surname;
     private final String email;
-    private final String pass;
+
+    private final String type ;
     private Parent parent;
 
-    public OracleSignUpGC(String name, String surname, String email, String password) {
+    public OracleSignUpGC(String name, String surname, String email, String type) {
         SignUpView signUpView = new SignUpView();
-        this.confirmTextField = (TextField) signUpView.lookup("#confirmTextfield") ;
-        Button confirmButton = (Button) signUpView.lookup("#confirmButton");
+        this.confirmTextField = signUpView.getConfirmPassword() ;
+        this.passwordField = signUpView.getPassword() ;
+
+        Button confirmButton = signUpView.getConfirm() ;
         this.name = name ;
-        this.pass = password ;
-        this.email = email;
+        this.email = email ;
         this.surname = surname;
+        this.type = type ;
+        if (!type.toUpperCase().matches("STUDENT|TUTOR")) {
+            ParentSubject.getInstance().setCurrentParent(new LabelView().prepareParent("User type must be \"STUDENT\" or \"TUTOR\""));
+            return ;
+        }
         this.parent = signUpView.getParent();
         confirmButton.setOnAction(event -> onConfirmButtonClick());
         ParentSubject.getInstance().setCurrentParent(this.parent) ;
@@ -39,11 +48,12 @@ public class OracleSignUpGC {
         LabelView view = new LabelView();
 
 
-        if (this.confirmTextField.getText().equals(this.pass)) {
-            bean.setPassword(pass);
+        if (this.confirmTextField.getText().equals(this.passwordField.getText())) {
+            bean.setPassword(passwordField.getText());
             bean.setEmail(email);
             bean.setName(name);
             bean.setSurname(surname);
+            bean.setRole(type) ;
             SignUpUCC signUpUCC = new SignUpUCC();
             try {
                 signUpUCC.preRegister(bean);
