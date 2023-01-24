@@ -12,29 +12,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #002730;" stylesheets="@../../../../css/buttonStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.normal_interface.TutorPersonalPageController">
-   <AnchorPane opacity="0.79" prefHeight="50.0" prefWidth="1280.0" style="-fx-background-color: #2d8bba;">
-      <children>
-         <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="977.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../../../../assets/title.png" />
-            </image>
-         </ImageView>
-         <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="1175.0" layoutY="-1.0">
-            <image>
-               <Image url="@../../../../assets/guff.png" />
-            </image>
-         </ImageView>
-      </children>
-   </AnchorPane>
-   <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#014a61" height="670.0" layoutX="278.0" layoutY="63.0" stroke="BLACK" strokeType="INSIDE" width="1018.0" />
-   <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#ffd775" height="85.0" layoutX="343.0" layoutY="92.0" stroke="BLACK" strokeType="INSIDE" width="703.0" />
-   <Label fx:id="tutorName" layoutX="377.0" layoutY="111.0" prefHeight="46.0" prefWidth="223.0" text="Nome" textFill="#002730">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="1021.0" style="-fx-background-color: #393e43;" stylesheets="@../../../../css/buttonStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.normal_interface.TutorPersonalPageController">
+   <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#d01414" height="85.0" layoutX="33.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" width="703.0" />
+   <Label fx:id="tutorName" layoutX="54.0" layoutY="35.0" prefHeight="46.0" prefWidth="223.0" text="Nome" textFill="WHITE">
       <font>
          <Font name="Bookman Old Style" size="35.0" />
       </font>
    </Label>
-   <TextArea fx:id="aboutMe" layoutX="346.0" layoutY="261.0" prefHeight="170.0" prefWidth="297.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@../../../../css/textAreaStyle.css" text="&#10;" wrapText="true">
+   <TextArea fx:id="aboutMe" layoutX="24.0" layoutY="155.0" prefHeight="170.0" prefWidth="300.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@../../../../css/textAreaStyle.css" text="&#10;" wrapText="true">
       .a={
       border-radius:10px
       border: 1px solid #000
@@ -49,7 +34,7 @@
          <String fx:value="viewport" />
       </styleClass>
    </TextArea>
-   <TextArea fx:id="coursesArea" editable="false" layoutX="768.0" layoutY="232.0" prefHeight="170.0" prefWidth="310.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@../../../../css/textAreaStyle.css" wrapText="true">
+   <TextArea fx:id="coursesArea" editable="false" layoutX="430.0" layoutY="155.0" prefHeight="170.0" prefWidth="300.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@../../../../css/textAreaStyle.css" wrapText="true">
       <font>
          <Font name="Bookman Old Style" size="20.0" />
       </font>
@@ -60,7 +45,7 @@
          <String fx:value="viewport" />
       </styleClass>
    </TextArea>
-   <TextArea fx:id="sessionInfos" layoutX="411.0" layoutY="484.0" prefHeight="150.0" prefWidth="297.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@../../../../css/textAreaStyle.css" wrapText="true">
+   <TextArea fx:id="sessionInfos" layoutX="24.0" layoutY="377.0" prefHeight="170.0" prefWidth="300.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@../../../../css/textAreaStyle.css" wrapText="true">
       <font>
          <Font name="Bookman Old Style" size="20.0" />
       </font>
@@ -71,7 +56,7 @@
          <String fx:value="viewport" />
       </styleClass>
    </TextArea>
-   <TextArea fx:id="contactNumbers" layoutX="838.0" layoutY="473.0" prefHeight="160.0" prefWidth="310.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@../../../../css/textAreaStyle.css" text="&#10;" wrapText="true">
+   <TextArea fx:id="contactNumbers" layoutX="430.0" layoutY="377.0" prefHeight="170.0" prefWidth="300.0" style="-fx-control-inner-background: #b6dbed; -fx-text-fill: #002730; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@../../../../css/textAreaStyle.css" text="&#10;" wrapText="true">
       <font>
          <Font name="Bookman Old Style" size="20.0" />
       </font>
@@ -82,12 +67,7 @@
          <String fx:value="viewport" />
       </styleClass>
    </TextArea>
-   <Button fx:id="backBtn" disable="true" layoutX="24.0" layoutY="84.0" mnemonicParsing="false" onAction="#clickOnBackButton" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn" visible="false">
-      <cursor>
-         <Cursor fx:constant="HAND" />
-      </cursor>
-   </Button>
-   <Button layoutX="43.0" layoutY="511.0" mnemonicParsing="false" onAction="#onCVButtonClick" prefHeight="46.0" prefWidth="198.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" stylesheets="@../../../../css/buttonStyle.css" text="CV" textFill="WHITE">
+   <Button layoutX="782.0" layoutY="439.0" mnemonicParsing="false" onAction="#onCVButtonClick" prefHeight="46.0" prefWidth="198.0" style="-fx-background-color: #d01414; -fx-background-radius: 20;" stylesheets="@../../../../css/buttonStyle.css" text="CV" textFill="WHITE">
       <font>
          <Font name="Bookman Old Style" size="20.0" />
       </font>
@@ -95,40 +75,55 @@
          <Cursor fx:constant="HAND" />
       </cursor>
    </Button>
-   <Label fx:id="tutorSurname" layoutX="583.0" layoutY="111.0" prefHeight="46.0" prefWidth="223.0" text="Cognome" textFill="#002730">
+   <Label fx:id="tutorSurname" layoutX="430.0" layoutY="35.0" prefHeight="46.0" prefWidth="223.0" text="Cognome" textFill="WHITE">
       <font>
          <Font name="Bookman Old Style" size="35.0" />
       </font>
    </Label>
-   <Text fill="#ffd775" layoutX="355.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="About me" textOrigin="CENTER">
+   <Text fill="WHITE" layoutX="33.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="About me" textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <Text fill="#ffd775" layoutX="377.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prices and available days" textOrigin="CENTER">
+   <Text fill="WHITE" layoutX="24.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prices and available days" textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <Text fill="#ffd775" layoutX="778.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Courses" textOrigin="CENTER">
+   <Text fill="WHITE" layoutX="430.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Courses" textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <Text fill="#ffd775" layoutX="845.0" layoutY="451.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact numbers" textOrigin="CENTER">
+   <Text fill="WHITE" layoutX="430.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact numbers" textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <Text fx:id="reviewText" fill="#ffd775" layoutX="314.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tutor reviews (from 0.1 to 5.0) :     " textOrigin="CENTER">
+   <Text fx:id="reviewText" fill="WHITE" layoutX="748.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tutor reviews" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="266.0">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <Text fx:id="reviewAverage" fill="#ffd775" layoutX="743.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Average" textOrigin="CENTER">
+   <Text fx:id="reviewAverage" fill="WHITE" layoutX="837.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3.0" textAlignment="CENTER" textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
+   <Text fill="WHITE" layoutX="756.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(from 1.0 to 5.0):" textAlignment="CENTER">
+      <font>
+         <Font size="30.0" />
+      </font>
+   </Text>
+   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="885.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../../../assets/starIcon.png" />
+      </image>
+   </ImageView>
+   <Button fx:id="backBtn" disable="true" layoutX="24.0" layoutY="27.0" mnemonicParsing="false" onAction="#clickOnBackButton" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn" visible="false">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </Button>
 
 </AnchorPane>

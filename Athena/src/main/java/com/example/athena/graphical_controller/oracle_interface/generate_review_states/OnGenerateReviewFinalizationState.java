@@ -18,7 +18,7 @@ public class OnGenerateReviewFinalizationState implements GenerateReviewAbstract
             ParentSubject.getInstance().setCurrentParent(new LabelView().prepareParent("Process failed. Details:" + e.getMessage()));
             return;
         }
-        ParentSubject.getInstance().setCurrentParent(new LabelView().prepareParent("Code generated successfully." + code));
+        ParentSubject.getInstance().setCurrentParent(new LabelView().prepareParent("Code generated successfully.\n" + code));
     }
 
     @Override

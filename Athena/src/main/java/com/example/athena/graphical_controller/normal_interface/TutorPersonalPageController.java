@@ -166,12 +166,7 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
             aboutMe.setText(tutorInfosBean.getAboutMe());
             sessionInfos.setText(tutorInfosBean.getSessionInfos());
             contactNumbers.setText(tutorInfosBean.getContactNumbers());
-            if (tutorInfosBean.getAvgReview() == 0.0){
-                reviewAverage.setText("No reviews");
-            }
-            else {
-                reviewAverage.setText(String.valueOf(tutorInfosBean.getAvgReview()));
-            }
+            reviewAverage.setText(String.valueOf(tutorInfosBean.getAvgReview()));
 
             coursesArea.clear();
             for (String course : tutorInfosBean.getTutorCourses()) {
