@@ -109,7 +109,7 @@ public class OpriscanTests {
     private String pushCodeToDB(ReviewInfoBean usernameBean) {
         String reviewCode = null;
         try {
-            reviewCode = TutorReviewCodesGenerator.generateReviewCode(5);
+            reviewCode = RandomCodesGenerator.generateReviewCode(5);
             ReviewEntity review = new ReviewEntity(usernameBean, reviewCode) ;
             review.toDB() ;
 

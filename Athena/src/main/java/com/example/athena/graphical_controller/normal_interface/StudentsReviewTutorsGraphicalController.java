@@ -3,6 +3,7 @@ package com.example.athena.graphical_controller.normal_interface;
 import com.example.athena.beans.ReviewCodeBean;
 import com.example.athena.beans.ReviewTutorBean;
 import com.example.athena.beans.TutoringInformationBean;
+import com.example.athena.engineering_classes.DayStartEndFormatter;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.TutorReviewException;
 import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
@@ -16,6 +17,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -36,7 +39,7 @@ public class StudentsReviewTutorsGraphicalController extends HomeScreenControlle
         switcher.switcher("tutorSearchPage.fxml");
     }
 
-    public void clickOnSubmitButton() throws IOException
+    public void clickOnSubmitButton()
     {
         try
         {
@@ -56,7 +59,10 @@ public class StudentsReviewTutorsGraphicalController extends HomeScreenControlle
 
             tutorName.setText(reviewInfo.getTutorsName()) ;
             tutoringSubject.setText(reviewInfo.getTutoringSubject()) ;
-            tutoringDay.setText(reviewInfo.getTutoringDaysHour()) ;
+
+            String tutoringDayHours = DayStartEndFormatter.formatDayStartEnd(reviewInfo.getTutoringDay(), reviewInfo.getTutoringStart(), reviewInfo. getTutoringEnd());
+
+            tutoringDay.setText(tutoringDayHours) ;
 
             scene = switcher.getTopStage().getScene();
             SubScene reviewSubscene = (SubScene) scene.lookup(REVIEW_SECTION_PROMPT) ;

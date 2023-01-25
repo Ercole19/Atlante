@@ -2,7 +2,7 @@ package com.example.athena.use_case_controllers;
 
 import com.example.athena.boundaries.SendCodeMailBean;
 import com.example.athena.boundaries.SendRegistrationCodeBoundary;
-import com.example.athena.entities.TutorReviewCodesGenerator;
+import com.example.athena.entities.RandomCodesGenerator;
 import com.example.athena.entities.UserDao;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.UserRegistrationException;
@@ -17,7 +17,7 @@ public class SignUpUCC {
 
     public void preRegister(UserBean bean) throws UserRegistrationException , SendEmailException, NoSuchAlgorithmException{
         String code;
-        code = TutorReviewCodesGenerator.generateReviewCode(5);
+        code = RandomCodesGenerator.generateReviewCode(5);
         SendCodeMailBean params = new SendCodeMailBean(bean.getEmail(), code);
         SendRegistrationCodeBoundary.getInstance().sendCode(params);
 

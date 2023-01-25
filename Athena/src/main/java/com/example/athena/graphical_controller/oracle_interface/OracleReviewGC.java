@@ -2,6 +2,7 @@ package com.example.athena.graphical_controller.oracle_interface;
 
 import com.example.athena.beans.ReviewTutorBean;
 import com.example.athena.beans.TutoringInformationBean;
+import com.example.athena.engineering_classes.DayStartEndFormatter;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.TutorReviewException;
 import com.example.athena.graphical_controller.normal_interface.PostInitialize;
@@ -12,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class OracleReviewGC implements PostInitialize {
@@ -50,7 +52,8 @@ public class OracleReviewGC implements PostInitialize {
     private void setLabels(TutoringInformationBean bean) {
         tutorName.setText(bean.getTutorsName()) ;
         tutoringSubject.setText(bean.getTutoringSubject()) ;
-        tutoringDay.setText(bean.getTutoringDaysHour()) ;
+
+        tutoringDay.setText(DayStartEndFormatter.formatDayStartEnd(bean.getTutoringDay(), bean.getTutoringStart(), bean.getTutoringEnd())) ;
     }
 
     public void clickOnSubmitReviewButton()

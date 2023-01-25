@@ -4,7 +4,7 @@ import com.example.athena.beans.*;
 import com.example.athena.boundaries.SendCodeMailBean;
 import com.example.athena.boundaries.SendReviewCodeEmailBoundary;
 import com.example.athena.entities.ReviewEntity;
-import com.example.athena.entities.TutorReviewCodesGenerator;
+import com.example.athena.entities.RandomCodesGenerator;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.TutorReviewException;
 
@@ -17,7 +17,7 @@ public class ReviewTutorUseCaseController
 
         String reviewCode;
         try {
-            reviewCode = TutorReviewCodesGenerator.generateReviewCode(5);
+            reviewCode = RandomCodesGenerator.generateReviewCode(5);
         } catch (NoSuchAlgorithmException e) {
             throw new TutorReviewException("Unable to generate review code");
         }
@@ -40,7 +40,10 @@ public class ReviewTutorUseCaseController
 
         tutoringInformationBean.setTutorsName(review.getTutorUsername());
         tutoringInformationBean.setTutoringSubject(review.getSubject());
-        tutoringInformationBean.setTutoringDaysHour(review.getDay(), review.getStartTime(), review.getEndTime());
+        tutoringInformationBean.setTutoringDay(review.getDay()) ;
+        tutoringInformationBean.setTutoringStart(review.getStartTime()) ;
+        tutoringInformationBean.setTutoringEnd(review.getEndTime()) ;
+
         return tutoringInformationBean;
     }
 

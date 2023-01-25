@@ -4,9 +4,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
 
-public class TutorReviewCodesGenerator
+public class RandomCodesGenerator
 {
-    private TutorReviewCodesGenerator(){
+    private RandomCodesGenerator(){
 
     }
 
