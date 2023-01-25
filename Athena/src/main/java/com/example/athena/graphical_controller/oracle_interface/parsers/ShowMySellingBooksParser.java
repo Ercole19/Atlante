@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
-import com.example.athena.entities.Student;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.graphical_controller.normal_interface.SceneSwitcher;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
@@ -10,7 +10,7 @@ public class ShowMySellingBooksParser {
     private LabelView view = new LabelView();
     public void parseShowMySellingBooks(){
         try{
-            if (Student.getInstance().getEmail() != null){
+            if (LoggedStudent.getInstance().getEmail() != null){
                 SceneSwitcher switcher = SceneSwitcher.getInstance();
                 ParentSubject.getInstance().setCurrentParent(switcher.preload("OracleSellingView.fxml"));
             }

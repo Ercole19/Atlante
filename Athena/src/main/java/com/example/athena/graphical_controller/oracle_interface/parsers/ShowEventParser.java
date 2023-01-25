@@ -1,11 +1,10 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
-import com.example.athena.entities.Student;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.graphical_controller.EventsViewGC;
 import com.example.athena.graphical_controller.oracle_interface.OracleEventsViewGC;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
-import com.example.athena.view.EventsView;
 import com.example.athena.view.oracle_view.LabelView;
 
 import java.time.LocalDate;
@@ -21,7 +20,7 @@ public class ShowEventParser {
             return;
         }
         try {
-            if (Student.getInstance().getEmail() != null) {
+            if (LoggedStudent.getInstance().getEmail() != null) {
                 EventsViewGC helpController = new OracleEventsViewGC(1021, 561);
                 ParentSubject.getInstance().setCurrentParent(helpController.getRoot(LocalDate.parse(commandToken.get(0), DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
             } else {

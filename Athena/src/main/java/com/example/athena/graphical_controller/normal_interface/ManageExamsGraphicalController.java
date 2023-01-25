@@ -2,9 +2,9 @@ package com.example.athena.graphical_controller.normal_interface;
 
 
 import com.example.athena.beans.ExamBean;
+import com.example.athena.beans.NormalExamBean;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.beans.NormalExamBean;
 import com.example.athena.use_case_controllers.ManageExamsUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

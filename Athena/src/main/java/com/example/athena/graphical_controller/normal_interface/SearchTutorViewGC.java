@@ -1,10 +1,10 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.beans.SearchTutorQueryBean;
+import com.example.athena.beans.TutorSearchResultBean;
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.entities.ByCourseOrNameEnum;
 import com.example.athena.exceptions.FindTutorException;
-import com.example.athena.beans.TutorSearchResultBean;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.SearchTutorUseCaseController;
 import com.example.athena.view.LabelBuilder;

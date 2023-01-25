@@ -2,13 +2,13 @@ package com.example.athena.graphical_controller.normal_interface;
 
 
 import com.example.athena.beans.BidBean;
+import com.example.athena.beans.BookBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
 import com.example.athena.entities.BooksSubject;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.entities.SellerOrBuyerEnum;
-import com.example.athena.entities.Student;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.beans.BookBean;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.SellBooksUseCaseController;
 import javafx.collections.FXCollections;
@@ -57,7 +57,7 @@ public class SellController implements Initializable, AbstractObserver {
     }
 
     public void onSellBtnClick() {
-        if(Student.getInstance().getRepNum() > 50){
+        if(LoggedStudent.getInstance().getRepNum() > 50){
             Alert alert = new Alert(Alert.AlertType.WARNING, "You can't sell books anymore, you received too many reports", ButtonType.CLOSE);
             alert.showAndWait();
         }

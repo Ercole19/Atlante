@@ -1,6 +1,5 @@
 package com.example.athena.beans;
 
-import com.example.athena.beans.ExamBean;
 import com.example.athena.exceptions.ExamException;
 
 public class OracleExamBean implements ExamBean {

@@ -1,12 +1,14 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.beans.ReviewInfoBean;
-import com.example.athena.entities.*;
+import com.example.athena.beans.TutorInfosBean;
+import com.example.athena.beans.UserBean;
+import com.example.athena.entities.LoggedTutor;
+import com.example.athena.entities.StringHoursConverter;
+import com.example.athena.entities.TutorPersonalPageSubject;
 import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.TutorReviewException;
-import com.example.athena.beans.TutorInfosBean;
-import com.example.athena.beans.UserBean;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
 import javafx.fxml.FXML;
@@ -61,7 +63,7 @@ public class TutorReviewPageGraphicalController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         UserBean bean = new UserBean();
-        bean.setEmail(Tutor.getInstance().getEmail());
+        bean.setEmail(LoggedTutor.getInstance().getEmail());
         try {
             TutorInfosBean tutorInfosBean = TutorPersonalPageSubject.getInstance().getTutorInfos(bean);
             starsNumber.setText(String.valueOf(tutorInfosBean.getAvgReview())) ;

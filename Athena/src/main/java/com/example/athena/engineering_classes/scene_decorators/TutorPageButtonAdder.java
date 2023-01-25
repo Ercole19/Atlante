@@ -1,6 +1,5 @@
 package com.example.athena.engineering_classes.scene_decorators;
 
-import com.example.athena.graphical_controller.normal_interface.SceneSwitcher;
 import com.example.athena.graphical_controller.normal_interface.TutorPersonalPageController;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;

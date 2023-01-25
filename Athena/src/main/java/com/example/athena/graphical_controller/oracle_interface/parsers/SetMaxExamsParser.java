@@ -1,10 +1,11 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
-import com.example.athena.entities.Student;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.graphical_controller.oracle_interface.OracleSetMaxExamsGC;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.view.oracle_view.LabelView;
+
 import java.util.List;
 
 public class SetMaxExamsParser {
@@ -13,7 +14,7 @@ public class SetMaxExamsParser {
         LabelView view = new LabelView();
         OracleSetMaxExamsGC controller = new OracleSetMaxExamsGC();
         try {
-            if (Student.getInstance().getEmail() != null) {
+            if (LoggedStudent.getInstance().getEmail() != null) {
                 controller.setMaxExams(commandToken.get(0));
             } else {
                 ParentSubject.getInstance().setCurrentParent(view.prepareParent("You need to login before writing commands"));

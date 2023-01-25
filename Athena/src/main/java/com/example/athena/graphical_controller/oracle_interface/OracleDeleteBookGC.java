@@ -8,6 +8,7 @@ import com.example.athena.use_case_controllers.SellBooksUseCaseController;
 import com.example.athena.view.oracle_view.DeleteWhichBookView;
 import com.example.athena.view.oracle_view.LabelView;
 import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.List;
 

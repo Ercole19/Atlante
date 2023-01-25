@@ -1,8 +1,7 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
-import com.example.athena.entities.Tutor;
+import com.example.athena.entities.LoggedTutor;
 import com.example.athena.exceptions.LoggedUserException;
-import com.example.athena.graphical_controller.normal_interface.SceneSwitcher;
 import com.example.athena.graphical_controller.oracle_interface.OracleGenerateReviewGC;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.view.oracle_view.LabelView;
@@ -16,7 +15,7 @@ public class GenerateReviewParser {
         if(tokens.size() != 4) {ParentSubject.getInstance().setCurrentParent(view.prepareParent("Incorrect arguments passed"));}
         else {
             try {
-                if (Tutor.getInstance().getEmail() != null) {
+                if (LoggedTutor.getInstance().getEmail() != null) {
                     OracleGenerateReviewGC controller = new OracleGenerateReviewGC();
                     controller.confirmGeneration(tokens.get(0), tokens.get(1), tokens.get(2), tokens.get(3));
                 } else {

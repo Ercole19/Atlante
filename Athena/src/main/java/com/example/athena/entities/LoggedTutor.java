@@ -2,27 +2,27 @@ package com.example.athena.entities;
 
 import com.example.athena.exceptions.LoggedUserException;
 
-public class Tutor extends User
+public class LoggedTutor extends LoggedUser
 {
-    private Tutor()
+    private LoggedTutor()
     {
 
     }
 
-    public static Tutor getInstance() throws LoggedUserException
+    public static LoggedTutor getInstance() throws LoggedUserException
     {
-        if(User.instance == null)
+        if(LoggedUser.instance == null)
         {
-            User.instance = new Tutor() ;
-            User.who = TutorStudentLogged.TUTOR ;
+            LoggedUser.instance = new LoggedTutor() ;
+            LoggedUser.who = TutorStudentLogged.TUTOR ;
         }
 
-        if(User.who == TutorStudentLogged.STUDENT)
+        if(LoggedUser.who == TutorStudentLogged.STUDENT)
         {
             throw new LoggedUserException("Accessed as a Tutor while logged as a Student") ;
         }
 
-        return (Tutor)User.instance ;
+        return (LoggedTutor) LoggedUser.instance ;
     }
 
     @Override

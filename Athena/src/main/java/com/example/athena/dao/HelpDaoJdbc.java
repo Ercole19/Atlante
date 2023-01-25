@@ -1,6 +1,7 @@
-package com.example.athena.entities;
+package com.example.athena.dao;
 
 import com.example.athena.exceptions.HelpDaoException;
+
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -2,7 +2,7 @@ package com.example.athena.graphical_controller.oracle_interface;
 
 import com.example.athena.beans.BookBean;
 import com.example.athena.entities.BooksSubject;
-import com.example.athena.entities.Student;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
 import com.example.athena.exceptions.UserInfoException;
@@ -110,7 +110,7 @@ public class OracleUpdateBookGC extends UpdatedShiftImageController {
         this.updatedBean.setIsNegotiable(view.getNegotiability());
         this.updatedBean.setImage(super.files);
         this.updatedBean.setTimeStamp(selectedBean.getTimeStamp());
-        this.updatedBean.setOwner(Student.getInstance().getEmail());
+        this.updatedBean.setOwner(LoggedStudent.getInstance().getEmail());
 
         this.goNext();
     }

@@ -1,11 +1,10 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.entities.Student;
 import com.example.athena.beans.BookBean;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.ReportSellerUCC;
-
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -21,7 +20,7 @@ public class ReportSellerGC implements PostInitialize {
     public void onYesBtnClick() { //if you want to test the report log with user : 'test@test.it' pass : 'test'
         try {
             ReportSellerUCC controller = new ReportSellerUCC();
-            controller.reportSeller(this.book, Student.getInstance().getEmail());
+            controller.reportSeller(this.book, LoggedStudent.getInstance().getEmail());
         }
         catch (BookException e){
             if (e.getMessage().contains("Duplicate entry")) {

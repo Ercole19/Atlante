@@ -1,7 +1,6 @@
 package com.example.athena.view.oracle_view;
 
 import com.example.athena.graphical_controller.oracle_interface.OracleShowExamsCompletionGC;
-import com.example.athena.graphical_controller.oracle_interface.ShowCfusCompletionGC;
 import com.example.athena.view.LabelBuilder;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;

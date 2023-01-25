@@ -1,8 +1,6 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.stage.Stage;
 
 public class RecentActivitiesGC {
 

@@ -1,9 +1,11 @@
 package com.example.athena.entities;
 
+import com.example.athena.beans.BookBean;
+import com.example.athena.dao.BookDao;
+import com.example.athena.dao.UserDao;
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
 import com.example.athena.exceptions.BidException;
 import com.example.athena.exceptions.BookException;
-import com.example.athena.beans.BookBean;
 import com.example.athena.exceptions.UserInfoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -76,7 +78,7 @@ public class BooksSubject extends AbstractSubject {
         BookDao bookDao = new BookDao();
         this.totalBooksOnSell.addAll(bookDao.getList());
         UserDao dao = new UserDao();
-        this.sellerNameAndSurname = dao.getName(Student.getInstance().getEmail());
+        this.sellerNameAndSurname = dao.getName(LoggedStudent.getInstance().getEmail());
     }
 
     public ObservableList<BookBean> getBooksBeansList() throws BookException, UserInfoException{
@@ -93,7 +95,7 @@ public class BooksSubject extends AbstractSubject {
             bean.setPrice(String.valueOf(entity.getPrice()));
             bean.setIsNegotiable(entity.getNegotiable());
             bean.setImage(entity.getImage());
-            bean.setOwner(Student.getInstance().getEmail());
+            bean.setOwner(LoggedStudent.getInstance().getEmail());
             bean.setIndex(i);
             bean.setTimeStamp(entity.getSaleTimestamp());
             bookBeanList.add(bean);

@@ -5,7 +5,6 @@ import com.example.athena.graphical_controller.normal_interface.SearchResultsGra
 import javafx.geometry.Orientation;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 public class HorizontalScrollBarDecorator extends SearchResultFormatterDecorator{

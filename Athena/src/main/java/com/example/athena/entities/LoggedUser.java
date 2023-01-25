@@ -1,14 +1,14 @@
 package com.example.athena.entities;
 
-public abstract class User {
+public abstract class LoggedUser {
 
-    protected static User instance = null ;
+    protected static LoggedUser instance = null ;
     protected static TutorStudentLogged who = TutorStudentLogged.USER ;
     protected String email ;
 
     public static void logout()
     {
-        User.instance = null ;
+        LoggedUser.instance = null ;
         CalendarSubject.getInstance().refreshOnLogOut() ;
         ExamsSubject.getInstance().logOut();
         BooksSubject.getInstance().logOut();

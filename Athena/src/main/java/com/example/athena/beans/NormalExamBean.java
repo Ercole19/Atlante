@@ -1,8 +1,6 @@
 package com.example.athena.beans;
 
 
-
-import com.example.athena.beans.ExamBean;
 import com.example.athena.exceptions.ExamException;
 
 import java.time.DateTimeException;

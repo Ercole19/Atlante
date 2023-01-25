@@ -14,6 +14,7 @@ import com.example.athena.view.ReceivedBidsView;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
+
 import java.util.ArrayList;
 import java.util.List;
 

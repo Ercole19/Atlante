@@ -1,7 +1,7 @@
 package com.example.athena.view.oracle_view;
 
 import com.example.athena.beans.UserBean;
-import com.example.athena.entities.Tutor;
+import com.example.athena.entities.LoggedTutor;
 import com.example.athena.entities.TutorPersonalPageSubject;
 import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.UserInfoException;
@@ -24,7 +24,7 @@ public class ChooseSubjectView {
         List<String> courses ;
         try {
             UserBean userBean = new UserBean() ;
-            userBean.setEmail(Tutor.getInstance().getEmail());
+            userBean.setEmail(LoggedTutor.getInstance().getEmail());
             courses = TutorPersonalPageSubject.getInstance().getTutorInfos(userBean).getTutorCourses() ;
         } catch (UserInfoException | CourseException e) {
             this.root = new LabelView().prepareParent("Error in accessing information about your courses :" + e.getMessage());

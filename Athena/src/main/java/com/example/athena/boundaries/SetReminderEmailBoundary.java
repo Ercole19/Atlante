@@ -1,12 +1,11 @@
 package com.example.athena.boundaries;
 
+import com.example.athena.beans.EventBean;
 import com.example.athena.beans.MailServerBean;
 import com.example.athena.beans.MailServerResponseBean;
-import com.example.athena.entities.Student;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
-import com.example.athena.beans.EventBean;
-
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -23,7 +22,7 @@ public class SetReminderEmailBoundary extends SocketBoundary
 
     public static void sendToServer(EventBean eventInfo, boolean remove) throws SendEmailException
     {
-        MailServerBean query = prepareQueryForServer(eventInfo, Student.getInstance().getEmail(), remove) ;
+        MailServerBean query = prepareQueryForServer(eventInfo, LoggedStudent.getInstance().getEmail(), remove) ;
 
         try
         {

@@ -4,7 +4,6 @@ import com.example.athena.graphical_controller.oracle_interface.OracleAverageGC;
 import javafx.scene.Parent;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 
 public class AverageView {
 

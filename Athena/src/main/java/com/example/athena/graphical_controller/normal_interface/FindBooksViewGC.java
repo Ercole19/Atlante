@@ -1,10 +1,10 @@
 package com.example.athena.graphical_controller.normal_interface;
 
+import com.example.athena.beans.BookBean;
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.entities.SellerOrBuyerEnum;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.FindBookException;
-import com.example.athena.beans.BookBean;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.BuyControllerUCC;
 import javafx.scene.control.Alert;

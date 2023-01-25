@@ -1,8 +1,7 @@
-package com.example.athena.entities;
+package com.example.athena.dao;
 
+import com.example.athena.entities.LoggedTutor;
 import com.example.athena.exceptions.CourseException;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -16,7 +15,7 @@ public class CourseDao extends AbstractDAO {
     public void addCourse(String course) throws CourseException {
         try (PreparedStatement statement = this.getConnection().prepareStatement("INSERT INTO corsi (nomecorso , emailtutor) VALUES (?,?)")) {
             statement.setString(1, course);
-            statement.setString(2, Tutor.getInstance().getEmail());
+            statement.setString(2, LoggedTutor.getInstance().getEmail());
             statement.executeUpdate();
         } catch (SQLException | IOException e) {
             throw new CourseException(e.getMessage());
@@ -27,7 +26,7 @@ public class CourseDao extends AbstractDAO {
     public void deleteCourse(String course) throws CourseException {
         try (PreparedStatement statement = this.getConnection().prepareStatement("call athena.deleteCourse(?,?)")) {
             statement.setString(1, course);
-            statement.setString(2, Tutor.getInstance().getEmail());
+            statement.setString(2, LoggedTutor.getInstance().getEmail());
             statement.executeUpdate();
         } catch (SQLException | IOException e) {
             throw new CourseException(e.getMessage());

@@ -1,5 +1,7 @@
-package com.example.athena.entities;
+package com.example.athena.dao;
 
+import com.example.athena.entities.EntityExam;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.ExamException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ExamDao extends AbstractDAO {
-    private final String emailcurrent =  Student.getInstance().getEmail() ;
+    private final String emailcurrent =  LoggedStudent.getInstance().getEmail() ;
 
 
     public ObservableList<EntityExam>  getExamlist() throws ExamException  {

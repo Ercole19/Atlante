@@ -1,8 +1,8 @@
 package com.example.athena.view;
 
-import com.example.athena.engineering_classes.search_result_factory.SearchResultFactory;
 import com.example.athena.engineering_classes.search_result_factory.FormatBundle;
 import com.example.athena.engineering_classes.search_result_factory.ProductTypeEnum;
+import com.example.athena.engineering_classes.search_result_factory.SearchResultFactory;
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.FindBookException;

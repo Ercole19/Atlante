@@ -1,10 +1,12 @@
 package com.example.athena.entities;
 
 import com.example.athena.beans.OutputExamBean;
+import com.example.athena.dao.ExamDao;
+import com.example.athena.dao.UserDao;
 import com.example.athena.engineering_classes.ExamsComparator;
+import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
 import com.example.athena.exceptions.CareerStatusException;
 import com.example.athena.exceptions.ExamException;
-import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
 import com.example.athena.exceptions.UserInfoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,8 +35,8 @@ public class  ExamsSubject extends AbstractSubject {
        UserDao uDao = new UserDao();
        this.totalExamsNumber = uDao.getAllExams();
        this.totalCfus = uDao.getAllCfus();
-       this.takenExamsNumber = eDao.getTakenExamsNumber(User.instance.getEmail());
-       this.gainedCfusNumber = eDao.getTakenCfus(User.instance.getEmail());
+       this.takenExamsNumber = eDao.getTakenExamsNumber(LoggedUser.instance.getEmail());
+       this.gainedCfusNumber = eDao.getTakenCfus(LoggedUser.instance.getEmail());
    }
    
    public static synchronized ExamsSubject getInstance() 

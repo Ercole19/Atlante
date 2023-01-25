@@ -1,31 +1,32 @@
 package com.example.athena.entities;
 
+import com.example.athena.dao.UserDao;
 import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.exceptions.UserInfoException;
 
-public class Student extends User
+public class LoggedStudent extends LoggedUser
 {
     private int repNum ;
 
-    private Student()
+    private LoggedStudent()
     {
 
     }
 
-    public static Student getInstance() throws LoggedUserException
+    public static LoggedStudent getInstance() throws LoggedUserException
     {
-        if(User.instance == null)
+        if(LoggedUser.instance == null)
         {
-            User.instance = new Student() ;
-            User.who = TutorStudentLogged.STUDENT ;
+            LoggedUser.instance = new LoggedStudent() ;
+            LoggedUser.who = TutorStudentLogged.STUDENT ;
         }
 
-        if(User.who == TutorStudentLogged.TUTOR)
+        if(LoggedUser.who == TutorStudentLogged.TUTOR)
         {
             throw new LoggedUserException("Accessed as a Student while logged as a Tutor") ;
         }
 
-        return (Student)User.instance ;
+        return (LoggedStudent) LoggedUser.instance ;
     }
     
     public int getRepNum()

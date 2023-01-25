@@ -1,5 +1,9 @@
-package com.example.athena.entities;
+package com.example.athena.dao;
 
+import com.example.athena.entities.ByCourseOrNameEnum;
+import com.example.athena.entities.ExamsOrCfusEnum;
+import com.example.athena.entities.LoggedStudent;
+import com.example.athena.entities.LoggedTutor;
 import com.example.athena.exceptions.*;
 
 import java.io.*;
@@ -81,7 +85,7 @@ public class UserDao extends AbstractDAO {
             statement.setString(1, about);
             statement.setString(2, sessionInfos);
             statement.setString(3, contactNumbers);
-            statement.setString(4, Tutor.getInstance().getEmail());
+            statement.setString(4, LoggedTutor.getInstance().getEmail());
 
             statement.executeUpdate();
         } catch (SQLException | IOException exc) {
@@ -169,7 +173,7 @@ public class UserDao extends AbstractDAO {
     public void insertCv(File cv)  throws UserInfoException {
         try (PreparedStatement preparedStatement = this.getConnection().prepareStatement("update athena.tutordescription  set CV = ?    where emailuser = ?")) {
             preparedStatement.setBlob(1, new BufferedInputStream(new FileInputStream(cv)));
-            preparedStatement.setString(2, Tutor.getInstance().getEmail());
+            preparedStatement.setString(2, LoggedTutor.getInstance().getEmail());
             preparedStatement.execute();
 
 
@@ -217,7 +221,7 @@ public class UserDao extends AbstractDAO {
         try (PreparedStatement statement = this.getConnection().prepareStatement(setQuery)) {
 
             statement.setInt(1, data);
-            statement.setString(2, Student.getInstance().getEmail());
+            statement.setString(2, LoggedStudent.getInstance().getEmail());
 
             statement.execute();
 
@@ -233,7 +237,7 @@ public class UserDao extends AbstractDAO {
         int total = 0;
         try (PreparedStatement statement = this.getConnection().prepareStatement("Select max_exams from athena.student_infos where email =? ")) {
 
-            statement.setString(1, Student.getInstance().getEmail());
+            statement.setString(1, LoggedStudent.getInstance().getEmail());
             ResultSet set = statement.executeQuery();
 
             set.next();
@@ -253,7 +257,7 @@ public class UserDao extends AbstractDAO {
         try (PreparedStatement statement = this.getConnection().prepareStatement("Select max_cfus from athena.student_infos where email =? ")) {
 
 
-            statement.setString(1, Student.getInstance().getEmail());
+            statement.setString(1, LoggedStudent.getInstance().getEmail());
             ResultSet set = statement.executeQuery();
 
             set.next();

@@ -1,10 +1,13 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.beans.*;
+import com.example.athena.beans.ReviewCodeBean;
+import com.example.athena.beans.ReviewInfoBean;
+import com.example.athena.beans.ReviewTutorBean;
+import com.example.athena.beans.TutoringInformationBean;
 import com.example.athena.boundaries.SendCodeMailBean;
 import com.example.athena.boundaries.SendReviewCodeEmailBoundary;
-import com.example.athena.entities.ReviewEntity;
 import com.example.athena.entities.RandomCodesGenerator;
+import com.example.athena.entities.ReviewEntity;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.TutorReviewException;
 

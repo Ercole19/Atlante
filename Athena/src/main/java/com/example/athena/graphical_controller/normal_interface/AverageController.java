@@ -1,9 +1,9 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 
+import com.example.athena.beans.ExamAverageInformationBean;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.beans.ExamAverageInformationBean;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.AverageUCC;
 import javafx.collections.FXCollections;

@@ -1,6 +1,5 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
-import com.example.athena.graphical_controller.normal_interface.ValidateSignUpGC;
 import com.example.athena.graphical_controller.oracle_interface.OracleValidateSignUpGC;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.view.oracle_view.LabelView;

@@ -5,7 +5,6 @@ import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.WrongIndexNumberException;
 import com.example.athena.graphical_controller.oracle_interface.OraclePlotGC;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
-import com.example.athena.view.LabelBuilder;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 

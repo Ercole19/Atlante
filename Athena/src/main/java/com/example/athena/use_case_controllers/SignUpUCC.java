@@ -1,13 +1,13 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.boundaries.SendCodeMailBean;
-import com.example.athena.boundaries.SendRegistrationCodeBoundary;
-import com.example.athena.entities.RandomCodesGenerator;
-import com.example.athena.entities.UserDao;
-import com.example.athena.exceptions.SendEmailException;
-import com.example.athena.exceptions.UserRegistrationException;
 import com.example.athena.beans.RegistrationBean;
 import com.example.athena.beans.UserBean;
+import com.example.athena.boundaries.SendCodeMailBean;
+import com.example.athena.boundaries.SendRegistrationCodeBoundary;
+import com.example.athena.dao.UserDao;
+import com.example.athena.entities.RandomCodesGenerator;
+import com.example.athena.exceptions.SendEmailException;
+import com.example.athena.exceptions.UserRegistrationException;
 
 import java.security.NoSuchAlgorithmException;
 

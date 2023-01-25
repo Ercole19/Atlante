@@ -1,6 +1,5 @@
 package com.example.athena.view.oracle_view;
 
-import com.example.athena.graphical_controller.oracle_interface.OracleAverageGC;
 import com.example.athena.graphical_controller.oracle_interface.OracleTakenExamsGC;
 import javafx.scene.Parent;
 import javafx.scene.control.TextArea;

@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
-import com.example.athena.entities.Tutor;
+import com.example.athena.entities.LoggedTutor;
 import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.graphical_controller.oracle_interface.OracleDeleteCourseGC;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
@@ -13,7 +13,7 @@ public class DeleteCourseParser {
         LabelView view = new LabelView();
         OracleDeleteCourseGC controller = new OracleDeleteCourseGC();
         try {
-            if (Tutor.getInstance().getEmail() != null) {
+            if (LoggedTutor.getInstance().getEmail() != null) {
                 if (commandToken.size() != 1) {
                     ParentSubject.getInstance().setCurrentParent(view.prepareParent("Incorrect arguments passed"));
                 } else {

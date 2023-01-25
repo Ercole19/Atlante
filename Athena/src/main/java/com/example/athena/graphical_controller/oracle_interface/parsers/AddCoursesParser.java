@@ -1,8 +1,7 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
-import com.example.athena.entities.Tutor;
+import com.example.athena.entities.LoggedTutor;
 import com.example.athena.exceptions.LoggedUserException;
-import com.example.athena.graphical_controller.normal_interface.SceneSwitcher;
 import com.example.athena.graphical_controller.oracle_interface.OracleAddCourseGC;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.view.oracle_view.LabelView;
@@ -14,7 +13,7 @@ public class AddCoursesParser {
         LabelView view = new LabelView();
         OracleAddCourseGC controller = new OracleAddCourseGC();
         try {
-            if (Tutor.getInstance().getEmail() != null) {
+            if (LoggedTutor.getInstance().getEmail() != null) {
                 if (commandToken.size() != 1) {
                     ParentSubject.getInstance().setCurrentParent(view.prepareParent("Incorrect arguments passed"));
                 } else {

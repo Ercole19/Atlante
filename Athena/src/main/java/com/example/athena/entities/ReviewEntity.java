@@ -1,6 +1,7 @@
 package com.example.athena.entities;
 
 import com.example.athena.beans.ReviewInfoBean;
+import com.example.athena.dao.ReviewDAO;
 import com.example.athena.exceptions.TutorReviewException;
 
 import java.time.LocalDate;
@@ -21,7 +22,7 @@ public class ReviewEntity
     {
         setReviewCode(reviewCode) ;
         setStudentUsername(usernameBean.getUsername()) ;
-        setTutorUsername(Tutor.getInstance().getEmail()) ;
+        setTutorUsername(LoggedTutor.getInstance().getEmail()) ;
         setSubject(usernameBean.getSubject()) ;
         setDay(usernameBean.getDay()) ;
         setStartTime(usernameBean.getStartTime()) ;

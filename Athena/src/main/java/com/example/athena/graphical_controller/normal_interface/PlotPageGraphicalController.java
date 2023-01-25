@@ -1,10 +1,10 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.beans.ActivityPlotsBean;
+import com.example.athena.beans.PlotSearchQueryBean;
 import com.example.athena.entities.PlottingOptionsEnum;
 import com.example.athena.entities.TimePeriodsEnum;
 import com.example.athena.exceptions.PlottingException;
-import com.example.athena.beans.PlotSearchQueryBean;
 import com.example.athena.use_case_controllers.GeneratePlotsUseCaseController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,7 +16,10 @@ import javafx.scene.control.ChoiceBox;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 public class PlotPageGraphicalController extends  HomeScreenController implements Initializable
 {

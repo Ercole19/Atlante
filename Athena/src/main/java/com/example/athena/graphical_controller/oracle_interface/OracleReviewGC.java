@@ -13,7 +13,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class OracleReviewGC implements PostInitialize {

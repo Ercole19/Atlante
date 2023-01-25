@@ -1,13 +1,12 @@
 package com.example.athena.view;
 
-import com.example.athena.engineering_classes.search_result_factory.SearchResultFactory;
 import com.example.athena.engineering_classes.search_result_factory.FormatBundle;
 import com.example.athena.engineering_classes.search_result_factory.ProductTypeEnum;
+import com.example.athena.engineering_classes.search_result_factory.SearchResultFactory;
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.exceptions.PercentFormatException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.graphical_controller.EventsViewGC;
-import com.example.athena.graphical_controller.normal_interface.NormalEventsViewGC;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 

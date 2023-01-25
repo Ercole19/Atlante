@@ -1,5 +1,6 @@
 package com.example.athena.entities;
 
+import com.example.athena.dao.EventDao;
 import com.example.athena.exceptions.EventException;
 
 import java.sql.Timestamp;

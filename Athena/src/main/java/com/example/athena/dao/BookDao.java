@@ -1,9 +1,17 @@
-package com.example.athena.entities;
+package com.example.athena.dao;
 
 
-import com.example.athena.exceptions.*;
+import com.example.athena.entities.BidEntity;
+import com.example.athena.entities.BidStatusEnum;
+import com.example.athena.entities.BookEntity;
+import com.example.athena.entities.LoggedStudent;
+import com.example.athena.exceptions.BidException;
+import com.example.athena.exceptions.BookException;
+import com.example.athena.exceptions.FindException;
+import com.example.athena.exceptions.PurchaseException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import java.io.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +22,7 @@ import java.util.List;
 
 
 public class BookDao extends AbstractDAO {
-    private final String email = Student.getInstance().getEmail();
+    private final String email = LoggedStudent.getInstance().getEmail();
     private int i = 1 ;
     private static int imageCount = 0;
 
@@ -283,7 +291,7 @@ public class BookDao extends AbstractDAO {
 
     public List<BidEntity> getBidderBids() throws BidException{
         try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT * FROM athena.books_bids WHERE Bidder = ?")){
-            statement.setString(1, Student.getInstance().getEmail()) ;
+            statement.setString(1, LoggedStudent.getInstance().getEmail()) ;
             ResultSet set = statement.executeQuery() ;
             return extractBidsFromResultSet(set) ;
         }

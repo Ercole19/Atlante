@@ -2,8 +2,6 @@ package com.example.athena.graphical_controller.oracle_interface.edit_event_stat
 
 import com.example.athena.graphical_controller.oracle_interface.OnSelectWhatToEditGC;
 import com.example.athena.graphical_controller.oracle_interface.OracleEditEventGC;
-import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
-import com.example.athena.view.oracle_view.LabelView;
 
 public class OnSelectWhatToEdit implements EditEventAbstractState{
 

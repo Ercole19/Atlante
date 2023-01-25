@@ -1,9 +1,8 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
-import com.example.athena.entities.Student;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.graphical_controller.oracle_interface.OracleUpdateBookGC;
-import com.example.athena.graphical_controller.oracle_interface.OracleUpdateExamGC;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.view.oracle_view.LabelView;
 
@@ -17,7 +16,7 @@ public class UpdateBookParser {
         }
         else {
             try {
-                if (Student.getInstance().getEmail() != null) {
+                if (LoggedStudent.getInstance().getEmail() != null) {
                     OracleUpdateBookGC controller = new OracleUpdateBookGC();
                     controller.updateBook(tokens.get(0));
                 }

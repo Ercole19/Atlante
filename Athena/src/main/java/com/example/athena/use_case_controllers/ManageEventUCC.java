@@ -1,13 +1,13 @@
 package com.example.athena.use_case_controllers;
 
 
+import com.example.athena.beans.EventBean;
 import com.example.athena.boundaries.SetReminderEmailBoundary;
 import com.example.athena.entities.ActivityTypesEnum;
 import com.example.athena.entities.CalendarSubject;
 import com.example.athena.entities.EventEntity;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
-import com.example.athena.beans.EventBean;
 
 public class ManageEventUCC {
     private EventEntity eventEntity;

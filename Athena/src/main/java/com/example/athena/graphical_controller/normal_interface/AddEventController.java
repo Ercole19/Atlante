@@ -1,12 +1,12 @@
 package com.example.athena.graphical_controller.normal_interface;
 
+import com.example.athena.beans.EventBean;
 import com.example.athena.entities.ActivityTypesEnum;
 import com.example.athena.entities.ReminderTypesEnum;
 import com.example.athena.entities.StringHoursConverter;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.beans.EventBean;
 import com.example.athena.use_case_controllers.ManageEventUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

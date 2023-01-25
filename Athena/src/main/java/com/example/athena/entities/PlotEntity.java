@@ -2,10 +2,8 @@ package com.example.athena.entities;
 
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.PlottingException;
-import javafx.scene.chart.XYChart;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
 
 public class PlotEntity

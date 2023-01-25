@@ -1,4 +1,4 @@
-package com.example.athena.entities;
+package com.example.athena.dao;
 
 public enum HelpDaoEnum
 {

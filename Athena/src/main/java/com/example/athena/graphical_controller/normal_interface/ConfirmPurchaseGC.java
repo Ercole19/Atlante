@@ -1,10 +1,11 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.exceptions.PurchaseException;
-import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.beans.BookBean;
 import com.example.athena.beans.PurchaseResultBean;
+import com.example.athena.exceptions.PurchaseException;
+import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.BuyControllerUCC;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -12,8 +13,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
-
-import javafx.event.ActionEvent;
 
 import java.util.ArrayList;
 

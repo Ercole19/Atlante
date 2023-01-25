@@ -3,7 +3,7 @@ package com.example.athena.graphical_controller.normal_interface;
 import com.example.athena.beans.BidBean;
 import com.example.athena.beans.BookBean;
 import com.example.athena.entities.BidStatusEnum;
-import com.example.athena.entities.Student;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.BidException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.PlaceBidUCC;
@@ -47,7 +47,7 @@ public class PlaceBidGC implements PostInitialize{
                 return;
             }
 
-            bidBean.setBidder(Student.getInstance().getEmail());
+            bidBean.setBidder(LoggedStudent.getInstance().getEmail());
             bidBean.setOwner(this.bookBean.getOwner());
             bidBean.setBookTimestamp(this.bookBean.getTimeStamp());
             bidBean.setBookIsbn(this.bookBean.getIsbn());

@@ -1,6 +1,5 @@
 package com.example.athena.beans;
 
-import com.example.athena.entities.BidStatusEnum;
 import com.example.athena.exceptions.BidException;
 
 public class BidBean {

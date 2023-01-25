@@ -1,17 +1,22 @@
-package com.example.athena.entities;
+package com.example.athena.dao;
 
+import com.example.athena.entities.ActivityTypesEnum;
+import com.example.athena.entities.EventEntity;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.EventException;
 
 import java.io.IOException;
 import java.sql.*;
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
 
 
 public class EventDao extends AbstractDAO {
-    private final String email = Student.getInstance().getEmail();
+    private final String email = LoggedStudent.getInstance().getEmail();
 
     public void addEvent(LocalDate date , String name , LocalTime start ,LocalTime end , String description , String type, LocalDateTime dateOfReminder) throws EventException {
 
@@ -63,7 +68,7 @@ public class EventDao extends AbstractDAO {
             ArrayList<EventEntity> events = new ArrayList<>() ;
             Date start = Date.valueOf(timeSpan) ;
 
-            statement.setString(1, Student.getInstance().getEmail()) ;
+            statement.setString(1, LoggedStudent.getInstance().getEmail()) ;
             statement.setString(2, type.toString()) ;
             statement.setDate(3, start) ;
 
@@ -93,7 +98,7 @@ public class EventDao extends AbstractDAO {
         try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT * from athena.eventi where DATE_FORMAT(eventDate, '%Y-%m') = ? and utente = ?")){
 
             statement.setString(1, String.valueOf(yearMonth));
-            statement.setString(2, Student.getInstance().getEmail());
+            statement.setString(2, LoggedStudent.getInstance().getEmail());
             ResultSet set = statement.executeQuery();
 
             while (set.next()) {

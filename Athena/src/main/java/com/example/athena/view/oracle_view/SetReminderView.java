@@ -4,7 +4,9 @@ import com.example.athena.exceptions.EventException;
 import com.example.athena.graphical_controller.oracle_interface.OracleAddEventGC;
 import com.example.athena.view.LabelBuilder;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class SetReminderView {

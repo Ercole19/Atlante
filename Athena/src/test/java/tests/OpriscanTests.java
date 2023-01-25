@@ -33,7 +33,7 @@ public class OpriscanTests {
         boolean retVal = searchBy(ByCourseOrNameEnum.BY_COURSE, "Fondamenti") && searchBy(ByCourseOrNameEnum.BY_NAME, "Kanye") ;
         assertTrue(retVal) ;
 
-        User.logout();
+        LoggedUser.logout();
 
     }
 
@@ -51,7 +51,7 @@ public class OpriscanTests {
 
         String code = pushCodeToDB(bean) ;
 
-        User.logout();
+        LoggedUser.logout();
 
         login(TEST_USERNAME, TEST_PARTICULAR_WORD_FOR_ACCESS) ;
 
@@ -63,7 +63,7 @@ public class OpriscanTests {
             fail() ;
         }
 
-        User.logout() ;
+        LoggedUser.logout() ;
 
         assertTrue(true);
 
@@ -81,7 +81,7 @@ public class OpriscanTests {
             fail() ;
         }
 
-        User.logout() ;
+        LoggedUser.logout() ;
 
         login("student@student.it", "student") ;
 
@@ -95,10 +95,10 @@ public class OpriscanTests {
                 if (eventBean.getName().equals("AABBAA")) fail() ;
             }
 
-            User.logout();
+            LoggedUser.logout();
             login(TEST_USERNAME, TEST_PARTICULAR_WORD_FOR_ACCESS);
             entity.deleteEventEntity(event);
-            User.logout();
+            LoggedUser.logout();
         } catch (EventException e) {
             fail() ;
         }

@@ -1,7 +1,7 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.beans.BidBean;
-import com.example.athena.entities.Student;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.view.ReceivedBidsView;
 import javafx.fxml.FXML;
 import javafx.scene.SubScene;
@@ -18,7 +18,7 @@ public class BidPageGC implements PostInitialize {
     @Override
     public void postInitialize(ArrayList<Object> params) {
         BidBean book = (BidBean) params.get(0);
-        String seller = Student.getInstance().getEmail();
+        String seller = LoggedStudent.getInstance().getEmail();
         String isbn = book.getBookIsbn();
         String timestamp = book.getBookTimestamp();
 

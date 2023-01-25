@@ -1,7 +1,5 @@
 package com.example.athena.beans;
 
-import com.example.athena.beans.TutorCvInfoBean;
-
 import java.io.File;
 
 public class OracleTutorCvInfoBean implements TutorCvInfoBean {

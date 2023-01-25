@@ -1,9 +1,11 @@
 package com.example.athena.entities;
 
-import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
-import com.example.athena.exceptions.CourseException;
 import com.example.athena.beans.TutorInfosBean;
 import com.example.athena.beans.UserBean;
+import com.example.athena.dao.CourseDao;
+import com.example.athena.dao.UserDao;
+import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
+import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.UserInfoException;
 
 import java.util.List;
@@ -60,7 +62,7 @@ public class TutorPersonalPageSubject extends AbstractSubject {
     public void addCourse(String name) throws CourseException, UserInfoException {
         CourseDao dao = new CourseDao() ;
         dao.addCourse(name);
-        if (this.entity == null) {getAllInfos(Tutor.getInstance().getEmail());}
+        if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail());}
         this.entity.getCourses().add(name) ;
         super.notifyObserver();
 
@@ -68,7 +70,7 @@ public class TutorPersonalPageSubject extends AbstractSubject {
     public void deleteCourse(String name) throws CourseException, UserInfoException {
         CourseDao dao = new CourseDao();
         dao.deleteCourse(name);
-        if (this.entity == null) {getAllInfos(Tutor.getInstance().getEmail());}
+        if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail());}
         this.entity.getCourses().remove(name);
         super.notifyObserver();
     }
@@ -77,7 +79,7 @@ public class TutorPersonalPageSubject extends AbstractSubject {
     public void updateTutorInfos(TutorInfoEntity entity) throws UserInfoException, CourseException {
         UserDao dao = new UserDao();
         dao.updateTutorInfos(entity.getAboutMe(), entity.getSessionInfos(), entity.getContactNumbers());
-        if (this.entity == null) {getAllInfos(Tutor.getInstance().getEmail());}
+        if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail());}
         this.entity.setTutorInfos(entity.getAboutMe(), entity.getSessionInfos(), entity.getContactNumbers());
         super.notifyObserver();
     }

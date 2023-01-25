@@ -1,11 +1,10 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.graphical_controller.EventsViewGC;
-import com.example.athena.view.EventsView;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.SubScene;
 import javafx.scene.control.Label;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 

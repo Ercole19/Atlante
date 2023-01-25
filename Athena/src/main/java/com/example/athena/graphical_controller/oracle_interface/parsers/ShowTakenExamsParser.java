@@ -1,9 +1,8 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
-import com.example.athena.entities.Student;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
-import com.example.athena.view.oracle_view.AverageView;
 import com.example.athena.view.oracle_view.LabelView;
 import com.example.athena.view.oracle_view.TakenExams;
 
@@ -11,7 +10,7 @@ public class ShowTakenExamsParser {
     public void parseTakenExams() {
         LabelView labelView = new LabelView();
         try {
-            if (Student.getInstance().getEmail() != null) {
+            if (LoggedStudent.getInstance().getEmail() != null) {
                 TakenExams view = new TakenExams();
                 ParentSubject.getInstance().setCurrentParent(view.getParent());
             } else {

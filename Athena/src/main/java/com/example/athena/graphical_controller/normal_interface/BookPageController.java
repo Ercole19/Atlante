@@ -1,9 +1,9 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.entities.BooksSubject;
-import com.example.athena.entities.SellerOrBuyerEnum;
-import com.example.athena.entities.Student;
 import com.example.athena.beans.BookBean;
+import com.example.athena.entities.BooksSubject;
+import com.example.athena.entities.LoggedStudent;
+import com.example.athena.entities.SellerOrBuyerEnum;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.UserInfoException;
@@ -74,7 +74,7 @@ public class BookPageController extends ShiftImageController implements PostInit
             try {
                 this.sellerName = (BooksSubject.getInstance().getSellerName());
                 this.sellerSurname = (BooksSubject.getInstance().getSellerSurname());
-                this.reportNumber = controller.getReportNumber(Student.getInstance().getEmail());
+                this.reportNumber = controller.getReportNumber(LoggedStudent.getInstance().getEmail());
             } catch (BookException | UserInfoException e) {
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
                 alert.showAndWait();
