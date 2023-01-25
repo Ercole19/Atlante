@@ -1,6 +1,6 @@
 package com.example.athena.view.oracle_view;
 
-import com.example.athena.beans.normal.BookBean;
+import com.example.athena.beans.BookBean;
 import com.example.athena.graphical_controller.oracle_interface.OracleUpdateBookGC;
 import com.example.athena.view.LabelBuilder;
 import javafx.geometry.Insets;

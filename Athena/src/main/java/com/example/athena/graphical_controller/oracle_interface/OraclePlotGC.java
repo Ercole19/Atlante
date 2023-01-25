@@ -1,7 +1,7 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
-import com.example.athena.beans.normal.ActivityPlotsBean;
-import com.example.athena.beans.normal.PlotSearchQueryBean;
+import com.example.athena.beans.ActivityPlotsBean;
+import com.example.athena.beans.PlotSearchQueryBean;
 import com.example.athena.entities.ActivityTypesEnum;
 import com.example.athena.entities.TimePeriodsEnum;
 import com.example.athena.exceptions.PlottingException;
@@ -14,10 +14,8 @@ import com.example.athena.view.oracle_view.TableView;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

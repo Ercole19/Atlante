@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
-import com.example.athena.beans.normal.ExamAverageInformationBean;
+import com.example.athena.beans.ExamAverageInformationBean;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.AverageUCC;

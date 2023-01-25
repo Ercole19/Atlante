@@ -1,7 +1,6 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.beans.normal.BidBean;
-import com.example.athena.beans.normal.BookBean;
+import com.example.athena.beans.BidBean;
 import com.example.athena.entities.Student;
 import com.example.athena.view.ReceivedBidsView;
 import javafx.fxml.FXML;

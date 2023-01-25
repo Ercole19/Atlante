@@ -4,7 +4,7 @@ import com.example.athena.entities.Student;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.beans.normal.BookBean;
+import com.example.athena.beans.BookBean;
 import com.example.athena.use_case_controllers.SellBooksUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,13 +18,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 

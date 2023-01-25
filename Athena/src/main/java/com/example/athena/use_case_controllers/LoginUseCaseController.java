@@ -4,7 +4,7 @@ import com.example.athena.entities.*;
 import com.example.athena.exceptions.FindException;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.exceptions.UserNotFoundException;
-import com.example.athena.beans.normal.UserBean;
+import com.example.athena.beans.UserBean;
 
 
 public class LoginUseCaseController {

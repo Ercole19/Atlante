@@ -2,8 +2,8 @@ package com.example.athena.entities;
 
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
 import com.example.athena.exceptions.CourseException;
-import com.example.athena.beans.normal.TutorInfosBean;
-import com.example.athena.beans.normal.UserBean;
+import com.example.athena.beans.TutorInfosBean;
+import com.example.athena.beans.UserBean;
 import com.example.athena.exceptions.UserInfoException;
 
 import java.util.List;

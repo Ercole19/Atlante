@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
-import com.example.athena.beans.normal.UserBean;
+import com.example.athena.beans.UserBean;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.UserRegistrationException;
 import com.example.athena.use_case_controllers.SignUpUCC;
@@ -9,7 +9,6 @@ import com.example.athena.view.oracle_view.SignUpView;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 
 import java.security.NoSuchAlgorithmException;
 

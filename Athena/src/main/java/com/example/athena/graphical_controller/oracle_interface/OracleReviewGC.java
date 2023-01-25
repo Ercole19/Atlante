@@ -1,7 +1,7 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
-import com.example.athena.beans.normal.SendReviewBean;
-import com.example.athena.beans.normal.TutoringInformationBean;
+import com.example.athena.beans.ReviewTutorBean;
+import com.example.athena.beans.TutoringInformationBean;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.TutorReviewException;
 import com.example.athena.graphical_controller.normal_interface.PostInitialize;
@@ -84,14 +84,14 @@ public class OracleReviewGC implements PostInitialize {
             return ;
         }
 
-        SendReviewBean reviewBean = new SendReviewBean(reviewStars, this.code) ;
+        ReviewTutorBean reviewBean = new ReviewTutorBean(reviewStars, this.code) ;
         ReviewTutorUseCaseController controller = new ReviewTutorUseCaseController() ;
 
         LabelView view = new LabelView() ;
         
         try
         {
-            controller.sendReview(reviewBean) ;
+            controller.reviewTutor(reviewBean) ;
             ParentSubject.getInstance().setCurrentParent(view.prepareParent("Review submitted successfully!"));
         }catch (TutorReviewException e)
         {

@@ -4,7 +4,7 @@ import com.example.athena.engineering_classes.search_result_factory.SearchResult
 import com.example.athena.entities.SellerOrBuyerEnum;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.FindBookException;
-import com.example.athena.beans.normal.BookBean;
+import com.example.athena.beans.BookBean;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.BuyControllerUCC;
 import javafx.scene.control.Alert;

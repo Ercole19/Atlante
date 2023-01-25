@@ -1,13 +1,12 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.beans.normal.NormalReviewTutorSendUsernameBean;
+import com.example.athena.beans.ReviewInfoBean;
 import com.example.athena.entities.*;
 import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.TutorReviewException;
-import com.example.athena.beans.ReviewTutorSendUsernameBean;
-import com.example.athena.beans.normal.TutorInfosBean;
-import com.example.athena.beans.normal.UserBean;
+import com.example.athena.beans.TutorInfosBean;
+import com.example.athena.beans.UserBean;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
 import javafx.fxml.FXML;
@@ -17,6 +16,7 @@ import javafx.scene.control.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class TutorReviewPageGraphicalController implements Initializable
@@ -111,14 +111,22 @@ public class TutorReviewPageGraphicalController implements Initializable
         int endHour = endHourSpinner.getValue() ;
         int endMinute = endMinuteSpinner.getValue() ;
 
-        NormalReviewTutorSendUsernameBean dataBean = new NormalReviewTutorSendUsernameBean(
-                username, subject, day, startHour, startMinute, endHour, endMinute) ;
+        LocalTime startTime = LocalTime.of(startHour, startMinute) ;
+        LocalTime endTime = LocalTime.of(endHour, endMinute) ;
+
+        ReviewInfoBean dataBean = new ReviewInfoBean() ;
+
+        dataBean.setUsername(username);
+        dataBean.setDay(day) ;
+        dataBean.setStartTime(startTime) ;
+        dataBean.setEndTime(endTime) ;
+        dataBean.setSubject(subject) ;
 
         ReviewTutorUseCaseController controller = new ReviewTutorUseCaseController() ;
 
         try
         {
-            String generatedCode = controller.generateReview(dataBean) ;
+            String generatedCode = controller.insertReview(dataBean) ;
             reviewCode.setText(generatedCode) ;
             resultMessage.setText("Here is your review code") ;
         }

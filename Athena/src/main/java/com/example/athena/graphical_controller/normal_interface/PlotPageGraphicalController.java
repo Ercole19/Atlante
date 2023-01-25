@@ -1,10 +1,10 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.beans.normal.ActivityPlotsBean;
+import com.example.athena.beans.ActivityPlotsBean;
 import com.example.athena.entities.PlottingOptionsEnum;
 import com.example.athena.entities.TimePeriodsEnum;
 import com.example.athena.exceptions.PlottingException;
-import com.example.athena.beans.normal.PlotSearchQueryBean;
+import com.example.athena.beans.PlotSearchQueryBean;
 import com.example.athena.use_case_controllers.GeneratePlotsUseCaseController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

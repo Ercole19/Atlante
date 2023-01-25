@@ -1,12 +1,10 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.beans.normal.ISBNBean;
+import com.example.athena.beans.ISBNBean;
 import com.example.athena.entities.*;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
-import com.example.athena.beans.normal.BookBean;
-
-import java.io.IOException;
+import com.example.athena.beans.BookBean;
 
 import static com.example.athena.boundaries.IsbnCheckBoundary.isbnCheck;
 

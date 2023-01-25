@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
-import com.example.athena.beans.oracle.OracleTutorCvInfoBean;
+import com.example.athena.beans.OracleTutorCvInfoBean;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.TutorPersonalPageUCC;
 import com.example.athena.view.oracle_view.LabelView;

@@ -5,7 +5,7 @@ import com.example.athena.entities.ExamsSubject;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
-import com.example.athena.beans.normal.NormalExamBean;
+import com.example.athena.beans.NormalExamBean;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.ManageExamsUCC;
 import javafx.collections.FXCollections;

@@ -1,10 +1,8 @@
 package com.example.servers;
 
-import com.example.athena.beans.normal.MailServerBean;
+import com.example.athena.beans.MailServerBean;
 
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.Socket;
 
 public class CommandSocketWrapper
 {

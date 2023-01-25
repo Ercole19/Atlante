@@ -1,9 +1,8 @@
 package tests;
 
-import com.example.athena.beans.ExamBean;
-import com.example.athena.beans.normal.EventBean;
-import com.example.athena.beans.normal.NormalExamBean;
-import com.example.athena.beans.normal.UserBean;
+import com.example.athena.beans.EventBean;
+import com.example.athena.beans.NormalExamBean;
+import com.example.athena.beans.UserBean;
 import com.example.athena.entities.CalendarSubject;
 import com.example.athena.entities.ExamsSubject;
 import com.example.athena.exceptions.*;

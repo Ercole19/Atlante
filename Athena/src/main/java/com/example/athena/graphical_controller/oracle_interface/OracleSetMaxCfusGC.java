@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
-import com.example.athena.beans.normal.SetMaxCfusOrExamsBean;
+import com.example.athena.beans.SetMaxCfusOrExamsBean;
 import com.example.athena.entities.ExamsOrCfusEnum;
 import com.example.athena.exceptions.CareerStatusException;
 import com.example.athena.use_case_controllers.SetMaxCfusOrExamsUCC;

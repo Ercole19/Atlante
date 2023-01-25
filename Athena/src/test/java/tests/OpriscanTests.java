@@ -1,7 +1,6 @@
 package tests;
 
-import com.example.athena.beans.ReviewTutorSendUsernameBean;
-import com.example.athena.beans.normal.*;
+import com.example.athena.beans.*;
 import com.example.athena.entities.*;
 import com.example.athena.exceptions.*;
 
@@ -42,12 +41,13 @@ public class OpriscanTests {
     public void testTutorReviewSystem() {
         login("Paolo-dentici22@gmail.com", "salmone") ;
 
-        ReviewTutorSendUsernameBean bean = new NormalReviewTutorSendUsernameBean(
-                TEST_USERNAME,
-                "Fondamenti",
-                LocalDate.of(2021,12, 8),
-                13, 13,13,14
-        ) ;
+        ReviewInfoBean bean = new ReviewInfoBean() ;
+
+        bean.setUsername(TEST_USERNAME) ;
+        bean.setSubject("Fondamenti") ;
+        bean.setDay(LocalDate.of(2021,12, 8));
+        bean.setStartTime(LocalTime.of(13, 13));
+        bean.setEndTime(LocalTime.of(14, 30)) ;
 
         String code = pushCodeToDB(bean) ;
 
@@ -55,10 +55,10 @@ public class OpriscanTests {
 
         login(TEST_USERNAME, TEST_PARTICULAR_WORD_FOR_ACCESS) ;
 
-        SendReviewBean review = new SendReviewBean(5, code) ;
+        ReviewTutorBean review = new ReviewTutorBean(5, code) ;
 
         try {
-            new ReviewTutorUseCaseController().sendReview(review) ;
+            new ReviewTutorUseCaseController().reviewTutor(review) ;
         } catch (TutorReviewException e) {
             fail() ;
         }
@@ -106,7 +106,7 @@ public class OpriscanTests {
         assertTrue(true) ;
     }
 
-    private String pushCodeToDB(ReviewTutorSendUsernameBean usernameBean) {
+    private String pushCodeToDB(ReviewInfoBean usernameBean) {
         String reviewCode = null;
         try {
             reviewCode = TutorReviewCodesGenerator.generateReviewCode(5);

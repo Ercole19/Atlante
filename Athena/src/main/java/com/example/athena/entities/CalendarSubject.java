@@ -2,7 +2,7 @@ package com.example.athena.entities;
 
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
 import com.example.athena.exceptions.EventException;
-import com.example.athena.beans.normal.PresenceOfEventsBean;
+import com.example.athena.beans.PresenceOfEventsBean;
 import com.example.athena.exceptions.SizedAlert;
 import javafx.scene.control.Alert;
 

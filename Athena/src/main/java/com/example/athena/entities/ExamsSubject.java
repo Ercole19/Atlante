@@ -1,11 +1,9 @@
 package com.example.athena.entities;
 
-import com.example.athena.beans.ExamBean;
 import com.example.athena.beans.OutputExamBean;
 import com.example.athena.engineering_classes.ExamsComparator;
 import com.example.athena.exceptions.CareerStatusException;
 import com.example.athena.exceptions.ExamException;
-import com.example.athena.beans.normal.NormalExamBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
 import com.example.athena.exceptions.UserInfoException;
 import javafx.collections.FXCollections;

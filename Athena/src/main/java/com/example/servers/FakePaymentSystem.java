@@ -1,6 +1,6 @@
 package com.example.servers;
 
-import com.example.athena.beans.normal.MailServerResponseBean;
+import com.example.athena.beans.MailServerResponseBean;
 import com.example.athena.boundaries.IsbnCheckBoundary;
 
 import java.io.BufferedOutputStream;

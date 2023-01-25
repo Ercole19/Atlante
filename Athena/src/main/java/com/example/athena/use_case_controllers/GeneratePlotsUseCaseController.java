@@ -2,8 +2,8 @@ package com.example.athena.use_case_controllers;
 
 import com.example.athena.entities.*;
 import com.example.athena.exceptions.PlottingException;
-import com.example.athena.beans.normal.ActivityPlotsBean;
-import com.example.athena.beans.normal.PlotSearchQueryBean;
+import com.example.athena.beans.ActivityPlotsBean;
+import com.example.athena.beans.PlotSearchQueryBean;
 
 import java.util.ArrayList;
 import java.util.List;

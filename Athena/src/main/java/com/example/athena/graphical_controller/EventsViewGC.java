@@ -1,13 +1,12 @@
 package com.example.athena.graphical_controller;
 
-import com.example.athena.beans.normal.EventBean;
+import com.example.athena.beans.EventBean;
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.entities.CalendarSubject;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.graphical_controller.normal_interface.SceneSwitcher;
-import com.example.athena.graphical_controller.oracle_interface.parsers.ShowEventParser;
 import com.example.athena.use_case_controllers.ManageEventUCC;
 import com.example.athena.view.EventsView;
 import com.example.athena.view.LabelBuilder;
@@ -15,7 +14,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
-import java.awt.event.ActionEvent;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;

@@ -4,7 +4,7 @@ package com.example.athena.graphical_controller.normal_interface;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.UserRegistrationException;
-import com.example.athena.beans.normal.UserBean;
+import com.example.athena.beans.UserBean;
 import com.example.athena.use_case_controllers.SignUpUCC;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

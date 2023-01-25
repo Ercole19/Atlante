@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.beans.normal.BidBean;
+import com.example.athena.beans.BidBean;
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.exceptions.BidException;
 import com.example.athena.exceptions.SizedAlert;
@@ -10,7 +10,6 @@ import com.example.athena.view.PlacedBidsView;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlacedBidsViewGC {

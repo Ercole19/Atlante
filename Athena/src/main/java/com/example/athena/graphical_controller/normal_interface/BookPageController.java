@@ -3,7 +3,7 @@ package com.example.athena.graphical_controller.normal_interface;
 import com.example.athena.entities.BooksSubject;
 import com.example.athena.entities.SellerOrBuyerEnum;
 import com.example.athena.entities.Student;
-import com.example.athena.beans.normal.BookBean;
+import com.example.athena.beans.BookBean;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.UserInfoException;

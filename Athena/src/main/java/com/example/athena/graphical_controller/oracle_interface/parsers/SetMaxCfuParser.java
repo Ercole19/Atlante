@@ -1,6 +1,5 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
-import com.example.athena.beans.normal.SetMaxCfusOrExamsBean;
 import com.example.athena.entities.Student;
 import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.graphical_controller.oracle_interface.OracleSetMaxCfusGC;

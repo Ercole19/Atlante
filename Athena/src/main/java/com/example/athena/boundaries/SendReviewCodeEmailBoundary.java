@@ -1,14 +1,6 @@
 package com.example.athena.boundaries;
 
-import com.example.athena.beans.normal.MailServerBean;
-import com.example.athena.exceptions.SendEmailException;
-import org.apache.log4j.Logger;
-
-import java.io.*;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import com.example.athena.beans.MailServerBean;
 
 public final class SendReviewCodeEmailBoundary extends CodeEmailBoundary
 {

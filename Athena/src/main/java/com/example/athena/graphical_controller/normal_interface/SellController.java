@@ -1,14 +1,14 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 
-import com.example.athena.beans.normal.BidBean;
+import com.example.athena.beans.BidBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
 import com.example.athena.entities.BooksSubject;
 import com.example.athena.entities.SellerOrBuyerEnum;
 import com.example.athena.entities.Student;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.beans.normal.BookBean;
+import com.example.athena.beans.BookBean;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.SellBooksUseCaseController;
 import javafx.collections.FXCollections;

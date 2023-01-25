@@ -1,11 +1,8 @@
 package com.example.athena.boundaries;
 
 import com.example.athena.exceptions.PurchaseException;
-import com.example.athena.beans.normal.PurchaseResultBean;
+import com.example.athena.beans.PurchaseResultBean;
 import com.example.servers.FakePaymentSystemBoundary;
-import com.example.servers.FakePaymentSystemClientApp;
-
-import java.io.IOException;
 
 public class PurchaseBoundary
 {

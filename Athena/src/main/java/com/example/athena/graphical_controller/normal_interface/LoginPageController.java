@@ -1,7 +1,7 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.exceptions.*;
-import com.example.athena.beans.normal.UserBean;
+import com.example.athena.beans.UserBean;
 import com.example.athena.use_case_controllers.LoginUseCaseController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

@@ -1,7 +1,6 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
-import com.example.athena.beans.normal.UserBean;
-import com.example.athena.exceptions.ExceededLoginsException;
+import com.example.athena.beans.UserBean;
 import com.example.athena.exceptions.FindException;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.exceptions.UserNotFoundException;

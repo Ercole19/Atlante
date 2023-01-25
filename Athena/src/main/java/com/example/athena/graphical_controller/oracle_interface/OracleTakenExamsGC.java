@@ -1,8 +1,6 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
 import com.example.athena.beans.OutputExamBean;
-import com.example.athena.beans.normal.NormalExamBean;
-import com.example.athena.beans.oracle.OracleExamBean;
 import com.example.athena.entities.ExamsSubject;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.UserInfoException;

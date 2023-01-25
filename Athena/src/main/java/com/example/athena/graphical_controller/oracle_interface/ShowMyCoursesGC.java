@@ -1,7 +1,7 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
-import com.example.athena.beans.normal.TutorInfosBean;
-import com.example.athena.beans.normal.UserBean;
+import com.example.athena.beans.TutorInfosBean;
+import com.example.athena.beans.UserBean;
 import com.example.athena.entities.Tutor;
 import com.example.athena.entities.TutorPersonalPageSubject;
 import com.example.athena.exceptions.CourseException;

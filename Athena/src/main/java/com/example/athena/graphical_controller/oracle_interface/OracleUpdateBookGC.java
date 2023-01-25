@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
-import com.example.athena.beans.normal.BookBean;
+import com.example.athena.beans.BookBean;
 import com.example.athena.entities.BooksSubject;
 import com.example.athena.entities.Student;
 import com.example.athena.exceptions.BookException;
@@ -11,7 +11,6 @@ import com.example.athena.graphical_controller.oracle_interface.update_book_stat
 import com.example.athena.graphical_controller.oracle_interface.update_book_states.OnSelectWhichBookState;
 import com.example.athena.graphical_controller.oracle_interface.update_book_states.UpdateBookAbstractState;
 import com.example.athena.use_case_controllers.SellBooksUseCaseController;
-import com.example.athena.view.LabelBuilder;
 import com.example.athena.view.oracle_view.LabelView;
 import com.example.athena.view.oracle_view.ModifyParametersView;
 import javafx.collections.ObservableList;

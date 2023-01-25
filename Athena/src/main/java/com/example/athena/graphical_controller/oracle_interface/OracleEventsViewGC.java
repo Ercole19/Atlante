@@ -1,10 +1,9 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
-import com.example.athena.beans.normal.EventBean;
+import com.example.athena.beans.EventBean;
 import com.example.athena.graphical_controller.EventsViewGC;
 import com.example.athena.graphical_controller.oracle_interface.parsers.ShowEventParser;
 import com.example.athena.view.EventsView;
-import com.example.athena.view.oracle_view.LabelView;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

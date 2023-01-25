@@ -1,8 +1,8 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.beans.normal.ReviewCodeBean;
-import com.example.athena.beans.normal.SendReviewBean;
-import com.example.athena.beans.normal.TutoringInformationBean;
+import com.example.athena.beans.ReviewCodeBean;
+import com.example.athena.beans.ReviewTutorBean;
+import com.example.athena.beans.TutoringInformationBean;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.TutorReviewException;
 import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
@@ -46,7 +46,7 @@ public class StudentsReviewTutorsGraphicalController extends HomeScreenControlle
 
             ReviewCodeBean rc = new ReviewCodeBean();
             rc.setReviewCode(reviewCode);
-            TutoringInformationBean reviewInfo = reviewController.reviewTutor(rc) ;
+            TutoringInformationBean reviewInfo = reviewController.getReviewFromCode(rc) ;
 
             root = switcher.preload( "tutorPersonalReview.fxml", new ArrayList<>(Collections.singleton(reviewCode)));
 
@@ -104,12 +104,12 @@ public class StudentsReviewTutorsGraphicalController extends HomeScreenControlle
             return ;
         }
 
-        SendReviewBean reviewBean = new SendReviewBean(reviewStars, this.code) ;
+        ReviewTutorBean reviewBean = new ReviewTutorBean(reviewStars, this.code) ;
         ReviewTutorUseCaseController controller = new ReviewTutorUseCaseController() ;
 
         try
         {
-            controller.sendReview(reviewBean) ;
+            controller.reviewTutor(reviewBean) ;
             reviewSubscene.setRoot(new AnchorPane()) ;
         }catch (TutorReviewException e)
         {

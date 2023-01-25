@@ -1,6 +1,6 @@
 package com.example.athena.view.oracle_view;
 
-import com.example.athena.beans.normal.UserBean;
+import com.example.athena.beans.UserBean;
 import com.example.athena.entities.Tutor;
 import com.example.athena.entities.TutorPersonalPageSubject;
 import com.example.athena.exceptions.CourseException;

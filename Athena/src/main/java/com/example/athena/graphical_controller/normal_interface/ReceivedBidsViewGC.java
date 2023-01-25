@@ -1,7 +1,7 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.beans.normal.BidBean;
-import com.example.athena.beans.normal.BookBean;
+import com.example.athena.beans.BidBean;
+import com.example.athena.beans.BookBean;
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.entities.BidStatusEnum;
 import com.example.athena.exceptions.BidException;

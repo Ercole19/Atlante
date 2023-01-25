@@ -1,14 +1,13 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.beans.normal.NormalTutorCvInfoBean;
+import com.example.athena.beans.NormalTutorCvInfoBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
-import com.example.athena.entities.Tutor;
 import com.example.athena.entities.TutorPersonalPageSubject;
 import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.NoCvException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.beans.normal.TutorInfosBean;
-import com.example.athena.beans.normal.UserBean;
+import com.example.athena.beans.TutorInfosBean;
+import com.example.athena.beans.UserBean;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.TutorPersonalPageUCC;
 import com.example.athena.use_case_controllers.ViewTutorPageUseCaseController;

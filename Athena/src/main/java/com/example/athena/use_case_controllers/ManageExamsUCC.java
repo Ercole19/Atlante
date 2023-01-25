@@ -4,7 +4,6 @@ import com.example.athena.beans.ExamBean;
 import com.example.athena.entities.EntityExam;
 import com.example.athena.entities.ExamsSubject;
 import com.example.athena.exceptions.ExamException;
-import com.example.athena.beans.normal.NormalExamBean;
 
 public class ManageExamsUCC {
     

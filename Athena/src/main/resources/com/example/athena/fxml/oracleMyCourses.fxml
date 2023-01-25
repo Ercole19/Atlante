@@ -4,10 +4,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="666.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.oracle_interface.ShowMyCoursesGC">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="666.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.oracle_interface.ShowMyCoursesGC">
    <children>
-      <TextArea fx:id="coursesArea" layoutX="233.0" layoutY="142.0" prefHeight="200.0" prefWidth="200.0" />
-      <Text layoutX="302.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Courses" />
+      <TextArea fx:id="coursesArea" editable="false" layoutX="14.0" layoutY="29.0" prefHeight="200.0" prefWidth="200.0" />
+      <Text layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Courses" />
    </children>
 </AnchorPane>

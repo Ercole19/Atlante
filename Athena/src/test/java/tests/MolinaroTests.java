@@ -1,8 +1,8 @@
 package tests;
 
-import com.example.athena.beans.normal.BookBean;
-import com.example.athena.beans.normal.ExamAverageInformationBean;
-import com.example.athena.beans.normal.UserBean;
+import com.example.athena.beans.BookBean;
+import com.example.athena.beans.ExamAverageInformationBean;
+import com.example.athena.beans.UserBean;
 import com.example.athena.boundaries.PurchaseBoundary;
 import com.example.athena.exceptions.*;
 import com.example.athena.graphical_controller.oracle_interface.OracleAverageGC;

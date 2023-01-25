@@ -1,6 +1,6 @@
 package com.example.athena.view.oracle_view;
 
-import com.example.athena.beans.normal.BookBean;
+import com.example.athena.beans.BookBean;
 import com.example.athena.graphical_controller.oracle_interface.OracleUpdateBookGC;
 
 public class UpdateWhichBookView extends SelectWhichBookView{

@@ -3,7 +3,7 @@ package com.example.athena.use_case_controllers;
 import com.example.athena.entities.BookDao;
 import com.example.athena.entities.BookEntity;
 import com.example.athena.exceptions.BookException;
-import com.example.athena.beans.normal.BookBean;
+import com.example.athena.beans.BookBean;
 
 import java.util.ArrayList;
 import java.util.List;

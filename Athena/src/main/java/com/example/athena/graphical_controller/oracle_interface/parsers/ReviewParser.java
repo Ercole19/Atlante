@@ -1,12 +1,11 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
-import com.example.athena.beans.normal.ReviewCodeBean;
-import com.example.athena.beans.normal.TutoringInformationBean;
+import com.example.athena.beans.ReviewCodeBean;
+import com.example.athena.beans.TutoringInformationBean;
 import com.example.athena.entities.Student;
 import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.exceptions.TutorReviewException;
 import com.example.athena.graphical_controller.normal_interface.SceneSwitcher;
-import com.example.athena.graphical_controller.normal_interface.StudentsReviewTutorsGraphicalController;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
 import com.example.athena.view.oracle_view.LabelView;
@@ -28,7 +27,7 @@ public class ReviewParser {
                 ReviewTutorUseCaseController reviewController = new ReviewTutorUseCaseController() ;
                 ReviewCodeBean rc = new ReviewCodeBean();
                 rc.setReviewCode(commandToken.get(0));
-                TutoringInformationBean reviewInfo = reviewController.reviewTutor(rc) ;
+                TutoringInformationBean reviewInfo = reviewController.getReviewFromCode(rc) ;
                 params.add(reviewInfo);
                 ParentSubject.getInstance().setCurrentParent(SceneSwitcher.getInstance().preload("OracleReview.fxml", params));
             }
