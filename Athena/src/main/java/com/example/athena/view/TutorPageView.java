@@ -16,7 +16,7 @@ public class TutorPageView implements TutorPageComponent
     {
         SceneSwitcher switcher = SceneSwitcher.getInstance();
         List<Object> params = new ArrayList<>() ;
-        params.add(LoggedTutor.getInstance().getEmail()) ;
+        params.add(LoggedTutor.getInstance().getEmail().getMail()) ;
         params.add(false) ;
         return switcher.preload("tutorPersonalPage.fxml", params) ;
     }

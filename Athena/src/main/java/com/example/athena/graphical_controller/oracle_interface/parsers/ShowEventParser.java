@@ -20,7 +20,7 @@ public class ShowEventParser {
             return;
         }
         try {
-            if (LoggedStudent.getInstance().getEmail() != null) {
+            if (LoggedStudent.getInstance().getEmail().getMail() != null) {
                 EventsViewGC helpController = new OracleEventsViewGC(1021, 561);
                 ParentSubject.getInstance().setCurrentParent(helpController.getRoot(LocalDate.parse(commandToken.get(0), DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
             } else {

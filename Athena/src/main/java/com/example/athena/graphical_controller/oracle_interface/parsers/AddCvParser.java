@@ -12,7 +12,7 @@ public class AddCvParser {
     
     public void parseAddCV(List<String> commandTokens) {
         LabelView view = new LabelView();
-        if(LoggedTutor.getInstance().getEmail() == null){
+        if(LoggedTutor.getInstance().getEmail().getMail() == null){
             ParentSubject.getInstance().setCurrentParent(view.prepareParent("you must login before writing commands"));
         }
         else {

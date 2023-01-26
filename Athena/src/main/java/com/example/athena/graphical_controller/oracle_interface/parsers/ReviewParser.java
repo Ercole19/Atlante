@@ -21,7 +21,7 @@ public class ReviewParser {
             ParentSubject.getInstance().setCurrentParent(view.prepareParent("insert code after review command"));
         }
         try{
-            if (LoggedStudent.getInstance().getEmail() != null){
+            if (LoggedStudent.getInstance().getEmail().getMail() != null){
                 List<Object> params = new ArrayList<>() ;
                 params.add(commandToken.get(0)) ;
                 ReviewTutorUseCaseController reviewController = new ReviewTutorUseCaseController() ;

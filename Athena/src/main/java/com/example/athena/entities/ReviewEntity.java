@@ -24,7 +24,7 @@ public class ReviewEntity
     {
         setReviewCode(reviewCode) ;
         setStudentUsername(usernameBean.getUsername()) ;
-        setTutorUsername(LoggedTutor.getInstance().getEmail()) ;
+        setTutorUsername(LoggedTutor.getInstance().getEmail().getMail()) ;
         setSubject(usernameBean.getSubject()) ;
         setDay(usernameBean.getDay()) ;
         setStartTime(usernameBean.getStartTime()) ;

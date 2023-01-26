@@ -18,7 +18,7 @@ public class ShowTutorsParser {
         }
         else  {
             try {
-                if (LoggedStudent.getInstance().getEmail() != null) {
+                if (LoggedStudent.getInstance().getEmail().getMail() != null) {
                     SearchTutorView view = new SearchTutorView(1020, 560);
                     if (commandToken.get(0).equals("byName")) {
                         ParentSubject.getInstance().setCurrentParent(view.getRoot(commandToken.get(1), ByCourseOrNameEnum.BY_NAME, Boolean.parseBoolean(commandToken.get(2))));

@@ -22,7 +22,7 @@ import java.util.List;
 
 
 public class BookDao extends AbstractDAO {
-    private final String email = LoggedStudent.getInstance().getEmail();
+    private final String email = LoggedStudent.getInstance().getEmail().getMail();
     private int i = 1 ;
     private static int imageCount = 0;
 
@@ -291,7 +291,7 @@ public class BookDao extends AbstractDAO {
 
     public List<BidEntity> getBidderBids() throws BidException{
         try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT * FROM athena.books_bids WHERE Bidder = ?")){
-            statement.setString(1, LoggedStudent.getInstance().getEmail()) ;
+            statement.setString(1, LoggedStudent.getInstance().getEmail().getMail()) ;
             ResultSet set = statement.executeQuery() ;
             return extractBidsFromResultSet(set) ;
         }

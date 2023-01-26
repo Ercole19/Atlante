@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ExamDao extends AbstractDAO {
-    private final String emailcurrent =  LoggedStudent.getInstance().getEmail() ;
+    private final String emailcurrent =  LoggedStudent.getInstance().getEmail().getMail() ;
 
 
     public ObservableList<EntityExam>  getExamlist() throws ExamException  {

@@ -91,7 +91,7 @@ public class SellModuleController extends UpdatedShiftImageController implements
             this.book.setPrice(bookPrice.getText());
             this.book.setIsNegotiable(bookNegotiability.isSelected());
             this.book.setImage(super.files);
-            this.book.setOwner(LoggedStudent.getInstance().getEmail());
+            this.book.setOwner(LoggedStudent.getInstance().getEmail().getMail());
         }
         catch (BookException e)
         {

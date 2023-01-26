@@ -78,7 +78,7 @@ public class BooksSubject extends AbstractSubject {
         BookDao bookDao = new BookDao();
         this.totalBooksOnSell.addAll(bookDao.getList());
         UserDao dao = new UserDao();
-        this.sellerNameAndSurname = dao.getName(LoggedStudent.getInstance().getEmail());
+        this.sellerNameAndSurname = dao.getName(LoggedStudent.getInstance().getEmail().getMail());
     }
 
     public ObservableList<BookBean> getBooksBeansList() throws BookException, UserInfoException{
@@ -95,7 +95,7 @@ public class BooksSubject extends AbstractSubject {
             bean.setPrice(String.valueOf(entity.getPrice()));
             bean.setIsNegotiable(entity.getNegotiable());
             bean.setImage(entity.getImage());
-            bean.setOwner(LoggedStudent.getInstance().getEmail());
+            bean.setOwner(LoggedStudent.getInstance().getEmail().getMail());
             bean.setIndex(i);
             bean.setTimeStamp(entity.getSaleTimestamp());
             bookBeanList.add(bean);

@@ -16,7 +16,7 @@ public class DeleteBookParser {
         }
         else {
             try {
-                if (LoggedStudent.getInstance().getEmail() != null) {
+                if (LoggedStudent.getInstance().getEmail().getMail() != null) {
                     OracleDeleteBookGC controller = new OracleDeleteBookGC();
                     controller.deleteBook(tokens.get(0));
                 }

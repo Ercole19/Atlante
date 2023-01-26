@@ -14,7 +14,7 @@ public class SetMaxExamsParser {
         LabelView view = new LabelView();
         OracleSetMaxExamsGC controller = new OracleSetMaxExamsGC();
         try {
-            if (LoggedStudent.getInstance().getEmail() != null) {
+            if (LoggedStudent.getInstance().getEmail().getMail() != null) {
                 controller.setMaxExams(commandToken.get(0));
             } else {
                 ParentSubject.getInstance().setCurrentParent(view.prepareParent("You need to login before writing commands"));

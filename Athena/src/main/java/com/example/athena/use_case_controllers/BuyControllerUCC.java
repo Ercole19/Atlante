@@ -44,7 +44,7 @@ public class BuyControllerUCC {
     
     public PurchaseResultBean purchase(BookBean book) throws PurchaseException {
         PurchaseResultBean bean = PurchaseBoundary.purchase() ;
-        if(bean.getPurchaseResult()) dao.finalizePurchase(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), LoggedStudent.getInstance().getEmail(), book.getOwner(), book.getTimeStamp());
+        if(bean.getPurchaseResult()) dao.finalizePurchase(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), LoggedStudent.getInstance().getEmail().getMail(), book.getOwner(), book.getTimeStamp());
         return bean ;
     }
 

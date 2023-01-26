@@ -28,7 +28,7 @@ public class RecentPurchasesView {
 
     public AnchorPane getRoot() {
         try {
-            int size = this.controller.getResultSize(LoggedStudent.getInstance().getEmail());
+            int size = this.controller.getResultSize(LoggedStudent.getInstance().getEmail().getMail());
             if(size == 0)
             {
                 return new ErrorSceneView().createErrorScreen("No purchases made yet", this.containerWidth, this.containerHeight) ;

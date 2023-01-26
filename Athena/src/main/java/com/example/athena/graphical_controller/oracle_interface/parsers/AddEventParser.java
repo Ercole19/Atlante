@@ -16,7 +16,7 @@ public class AddEventParser {
         }
         else {
             try{
-                if (LoggedStudent.getInstance().getEmail() != null){
+                if (LoggedStudent.getInstance().getEmail().getMail() != null){
                     new OracleAddEventGC(commandToken.get(0), commandToken.get(1), commandToken.get(2), commandToken.get(3));
                 }
                 else{

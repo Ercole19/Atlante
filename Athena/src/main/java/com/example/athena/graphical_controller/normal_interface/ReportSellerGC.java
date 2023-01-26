@@ -20,7 +20,7 @@ public class ReportSellerGC implements PostInitialize {
     public void onYesBtnClick() { //if you want to test the report log with user : 'test@test.it' pass : 'test'
         try {
             ReportSellerUCC controller = new ReportSellerUCC();
-            controller.reportSeller(this.book, LoggedStudent.getInstance().getEmail());
+            controller.reportSeller(this.book, LoggedStudent.getInstance().getEmail().getMail());
         }
         catch (BookException e){
             if (e.getMessage().contains("Duplicate entry")) {

@@ -49,14 +49,14 @@ public class ReviewDAO extends AbstractDAO
             if(resultTutoring.next())
             {
                 String studentUsername = resultTutoring.getString(3) ;
-                if(!studentUsername.equals(LoggedStudent.getInstance().getEmail())) throw new TutorReviewException("No information found") ;
+                if(!studentUsername.equals(LoggedStudent.getInstance().getEmail().getMail())) throw new TutorReviewException("No information found") ;
                 String reviewedTutor = resultTutoring.getString(2) ;
                 Date reviewDay = resultTutoring.getDate(4) ;
                 String reviewSubject = resultTutoring.getString(5) ;
                 Time startTime = resultTutoring.getTime(6) ;
                 Time endTime = resultTutoring.getTime(7) ;
 
-                return new ReviewEntity(reviewCode, reviewedTutor, LoggedStudent.getInstance().getEmail(), reviewSubject,
+                return new ReviewEntity(reviewCode, reviewedTutor, LoggedStudent.getInstance().getEmail().getMail(), reviewSubject,
                         reviewDay.toLocalDate(), startTime.toLocalTime(), endTime.toLocalTime()) ;
             }
             else throw new TutorReviewException("No information found") ;

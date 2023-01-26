@@ -35,8 +35,8 @@ public class  ExamsSubject extends AbstractSubject {
        UserDao uDao = new UserDao();
        this.totalExamsNumber = uDao.getAllExams();
        this.totalCfus = uDao.getAllCfus();
-       this.takenExamsNumber = eDao.getTakenExamsNumber(LoggedUser.instance.getEmail());
-       this.gainedCfusNumber = eDao.getTakenCfus(LoggedUser.instance.getEmail());
+       this.takenExamsNumber = eDao.getTakenExamsNumber(LoggedUser.instance.getEmail().getMail());
+       this.gainedCfusNumber = eDao.getTakenCfus(LoggedUser.instance.getEmail().getMail());
    }
    
    public static synchronized ExamsSubject getInstance() 

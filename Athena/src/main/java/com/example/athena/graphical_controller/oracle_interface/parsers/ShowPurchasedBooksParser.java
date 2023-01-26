@@ -11,7 +11,7 @@ public class ShowPurchasedBooksParser {
     public void showPurchasesParse() {
         LabelView labelView = new LabelView();
         try{
-            if (LoggedStudent.getInstance().getEmail() != null) {
+            if (LoggedStudent.getInstance().getEmail().getMail() != null) {
                 RecentPurchasesView view = new RecentPurchasesView(1200, 560);
                 ParentSubject.getInstance().setCurrentParent(view.getRoot());
             }

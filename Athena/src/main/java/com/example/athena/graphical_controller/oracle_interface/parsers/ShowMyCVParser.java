@@ -17,7 +17,7 @@ public class ShowMyCVParser {
     private final LabelView labelView = new LabelView();
     public void parseInfos() {
         try{
-            if (LoggedTutor.getInstance().getEmail() != null) {
+            if (LoggedTutor.getInstance().getEmail().getMail() != null) {
                     ViewTutorPageUseCaseController tutorPage = new ViewTutorPageUseCaseController();
                     tutorPage.getCV();
                     String name = "tempCV.html" ;

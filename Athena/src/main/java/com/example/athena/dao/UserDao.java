@@ -85,7 +85,7 @@ public class UserDao extends AbstractDAO {
         try (PreparedStatement statement = this.getConnection().prepareStatement(setQuery)) {
 
             statement.setInt(1, data);
-            statement.setString(2, LoggedStudent.getInstance().getEmail());
+            statement.setString(2, LoggedStudent.getInstance().getEmail().getMail());
 
             statement.execute();
 
@@ -101,7 +101,7 @@ public class UserDao extends AbstractDAO {
         int total = 0;
         try (PreparedStatement statement = this.getConnection().prepareStatement("Select max_exams from athena.student_infos where email =? ")) {
 
-            statement.setString(1, LoggedStudent.getInstance().getEmail());
+            statement.setString(1, LoggedStudent.getInstance().getEmail().getMail());
             ResultSet set = statement.executeQuery();
 
             set.next();
@@ -121,7 +121,7 @@ public class UserDao extends AbstractDAO {
         try (PreparedStatement statement = this.getConnection().prepareStatement("Select max_cfus from athena.student_infos where email =? ")) {
 
 
-            statement.setString(1, LoggedStudent.getInstance().getEmail());
+            statement.setString(1, LoggedStudent.getInstance().getEmail().getMail());
             ResultSet set = statement.executeQuery();
 
             set.next();

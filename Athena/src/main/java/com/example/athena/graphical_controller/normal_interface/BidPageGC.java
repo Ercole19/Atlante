@@ -18,7 +18,7 @@ public class BidPageGC implements PostInitialize {
     @Override
     public void postInitialize(ArrayList<Object> params) {
         BidBean book = (BidBean) params.get(0);
-        String seller = LoggedStudent.getInstance().getEmail();
+        String seller = LoggedStudent.getInstance().getEmail().getMail();
         String isbn = book.getBookIsbn();
         String timestamp = book.getBookTimestamp();
 

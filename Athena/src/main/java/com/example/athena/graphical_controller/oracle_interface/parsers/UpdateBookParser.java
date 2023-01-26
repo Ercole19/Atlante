@@ -16,7 +16,7 @@ public class UpdateBookParser {
         }
         else {
             try {
-                if (LoggedStudent.getInstance().getEmail() != null) {
+                if (LoggedStudent.getInstance().getEmail().getMail() != null) {
                     OracleUpdateBookGC controller = new OracleUpdateBookGC();
                     controller.updateBook(tokens.get(0));
                 }

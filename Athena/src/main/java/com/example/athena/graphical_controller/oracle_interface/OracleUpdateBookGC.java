@@ -110,7 +110,7 @@ public class OracleUpdateBookGC extends UpdatedShiftImageController {
         this.updatedBean.setIsNegotiable(view.getNegotiability());
         this.updatedBean.setImage(super.files);
         this.updatedBean.setTimeStamp(selectedBean.getTimeStamp());
-        this.updatedBean.setOwner(LoggedStudent.getInstance().getEmail());
+        this.updatedBean.setOwner(LoggedStudent.getInstance().getEmail().getMail());
 
         this.goNext();
     }

@@ -1,5 +1,7 @@
 package com.example.athena.entities;
 
+import com.example.athena.beans.LoggedUserMailBean;
+
 public abstract class LoggedUser {
 
     protected static LoggedUser instance = null ;
@@ -15,5 +17,5 @@ public abstract class LoggedUser {
         TutorPersonalPageSubject.getInstance().resetEntity(); ;
     }
 
-    public abstract String getEmail() ;
+    public abstract LoggedUserMailBean getEmail() ;
 }

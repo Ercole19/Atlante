@@ -11,7 +11,7 @@ public class ShowAllAveragesParser {
     public void parseAllAverages() {
         LabelView labelView = new LabelView();
             try {
-                if (LoggedStudent.getInstance().getEmail() != null) {
+                if (LoggedStudent.getInstance().getEmail().getMail() != null) {
                     AverageView view = new AverageView();
                     ParentSubject.getInstance().setCurrentParent(view.getParent());
                 } else {

@@ -51,20 +51,20 @@ public class TutorPersonalPageSubject extends AbstractSubject {
 
 
     public void addCourse(String name) throws CourseException, UserInfoException {
-        if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail());}
+        if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail().getMail());}
         this.entity.addCourse(name);
         super.notifyObserver();
 
     }
     public void deleteCourse(String name) throws CourseException, UserInfoException {
-        if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail());}
+        if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail().getMail());}
         this.entity.deleteCourse(name);
         super.notifyObserver();
     }
 
 
     public void updateTutorInfos(String abMe, String contactNums, String sessionInfos) throws UserInfoException, CourseException {
-        if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail());}
+        if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail().getMail());}
         String oldAbMe = this.entity.getAboutMe() ;
         String oldSessionInfos = this.entity.getSessionInfos() ;
         String oldContactNum = this.entity.getContactNumbers() ;
@@ -82,7 +82,7 @@ public class TutorPersonalPageSubject extends AbstractSubject {
 
     public void getCV() throws UserInfoException, NoCvException {
         try {
-            if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail());}
+            if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail().getMail());}
             this.entity.getCV() ;
         } catch (CourseException e) {
             throw new UserInfoException("Error in retrieving tutor data. Details : " + e.getMessage()) ;
@@ -91,7 +91,7 @@ public class TutorPersonalPageSubject extends AbstractSubject {
 
     public void insertCV(File cv) throws UserInfoException {
         try {
-            if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail());}
+            if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail().getMail());}
             this.entity.insertCV(cv);
         } catch (CourseException e) {
             throw new UserInfoException("Error in retrieving tutor data. Details : " + e.getMessage()) ;

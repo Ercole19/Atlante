@@ -11,7 +11,7 @@ public class ShowMyInfosParser {
     public void parseMyInfos() {
         LabelView view = new LabelView();
         try{
-            if (LoggedTutor.getInstance().getEmail() != null) {
+            if (LoggedTutor.getInstance().getEmail().getMail() != null) {
                 MyInfosView infoView = new MyInfosView();
                 ParentSubject.getInstance().setCurrentParent(infoView.prepareView());
             }

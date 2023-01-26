@@ -17,7 +17,7 @@ public class ShowBooksParser {
         }
         else  {
             try {
-                if (LoggedStudent.getInstance().getEmail() != null) {
+                if (LoggedStudent.getInstance().getEmail().getMail() != null) {
                     FindBooksView view = new FindBooksView(1200, 560);
                     ParentSubject.getInstance().setCurrentParent(view.getRoot(commandToken.get(0)));
                 } else {

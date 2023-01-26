@@ -30,7 +30,7 @@ public class OnChooseSubjectGC {
         List<String> courses ;
         try {
             UserBean userBean = new UserBean() ;
-            userBean.setEmail(LoggedTutor.getInstance().getEmail());
+            userBean.setEmail(LoggedTutor.getInstance().getEmail().getMail());
             courses = TutorPersonalPageSubject.getInstance().getTutorInfos(userBean).getTutorCourses() ;
         } catch (UserInfoException | CourseException e) {
             ParentSubject.getInstance().setCurrentParent(new LabelView().prepareParent("Error in accessing information about your courses :" + e.getMessage())) ;

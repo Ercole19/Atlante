@@ -22,7 +22,7 @@ public class ShowMyCoursesGC implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         UserBean userBean = new UserBean();
-        userBean.setEmail(LoggedTutor.getInstance().getEmail());
+        userBean.setEmail(LoggedTutor.getInstance().getEmail().getMail());
         try {
             TutorInfosBean bean = TutorPersonalPageSubject.getInstance().getTutorInfos(userBean);
             for (String course : bean.getTutorCourses()) {

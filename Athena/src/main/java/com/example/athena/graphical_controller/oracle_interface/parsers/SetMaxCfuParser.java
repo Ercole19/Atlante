@@ -13,7 +13,7 @@ public class SetMaxCfuParser {
         LabelView view = new LabelView();
         OracleSetMaxCfusGC controller = new OracleSetMaxCfusGC();
         try{
-            if (LoggedStudent.getInstance().getEmail() != null){
+            if (LoggedStudent.getInstance().getEmail().getMail() != null){
                 controller.setMaxCfus(commandTokens.get(0));
             }
             else{

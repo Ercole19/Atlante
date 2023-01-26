@@ -11,7 +11,7 @@ public class ShowCfusCompletionParser {
     public void parseCfusCompletion() {
         LabelView labelView = new LabelView();
         try {
-            if (LoggedStudent.getInstance().getEmail() != null) {
+            if (LoggedStudent.getInstance().getEmail().getMail() != null) {
                 CfusCompletion view = new CfusCompletion();
                 ParentSubject.getInstance().setCurrentParent(view.getParent());
             } else {

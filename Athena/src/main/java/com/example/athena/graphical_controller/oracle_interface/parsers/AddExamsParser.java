@@ -14,7 +14,7 @@ public class AddExamsParser {
         LabelView view = new LabelView();
         
         try{
-            if (LoggedStudent.getInstance().getEmail() != null){
+            if (LoggedStudent.getInstance().getEmail().getMail() != null){
                 if (commandToken.size() != 4){
                     ParentSubject.getInstance().setCurrentParent(view.prepareParent("you need to insert name cfus date and grade after add_exam command"));
                 }

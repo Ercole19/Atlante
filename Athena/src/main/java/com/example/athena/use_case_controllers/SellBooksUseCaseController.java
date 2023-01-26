@@ -16,21 +16,21 @@ public class SellBooksUseCaseController {
         ISBNBean bean = new ISBNBean();
         bean.setISBN(book.getIsbn());
         if (!isbnCheck(bean).getResult()) throw new ISBNException("Check failed") ;
-        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), book.getPrice(), book.getNegotiable() , book.getImage(), LoggedStudent.getInstance().getEmail());
+        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), book.getPrice(), book.getNegotiable() , book.getImage(), LoggedStudent.getInstance().getEmail().getMail());
         BooksSubject.getInstance().addBook(bookE);
     }
 
     public void updateProduct(BookBean oldBook, BookBean newBook) throws ISBNException, BookException
     {
-        BookEntity oldBookEntity = new BookEntity(oldBook.getBookTitle(), oldBook.getIsbn(), oldBook.getPrice(), oldBook.getNegotiable() , oldBook.getImage(), LoggedStudent.getInstance().getEmail(), oldBook.getTimeStamp() ) ;
-        BookEntity newBookEntity = new BookEntity(newBook.getBookTitle(), newBook.getIsbn(), newBook.getPrice(), newBook.getNegotiable(), newBook.getImage(), LoggedStudent.getInstance().getEmail());
+        BookEntity oldBookEntity = new BookEntity(oldBook.getBookTitle(), oldBook.getIsbn(), oldBook.getPrice(), oldBook.getNegotiable() , oldBook.getImage(), LoggedStudent.getInstance().getEmail().getMail(), oldBook.getTimeStamp() ) ;
+        BookEntity newBookEntity = new BookEntity(newBook.getBookTitle(), newBook.getIsbn(), newBook.getPrice(), newBook.getNegotiable(), newBook.getImage(), LoggedStudent.getInstance().getEmail().getMail());
         BooksSubject.getInstance().deleteBook(oldBookEntity, oldBook.getIndex());
         BooksSubject.getInstance().addBook(newBookEntity);
     }
 
     public void deleteProduct(BookBean book) throws BookException
     {
-        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), book.getPrice(), book.getNegotiable() , book.getImage(), LoggedStudent.getInstance().getEmail(), book.getTimeStamp()) ;
+        BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), book.getPrice(), book.getNegotiable() , book.getImage(), LoggedStudent.getInstance().getEmail().getMail(), book.getTimeStamp()) ;
         BooksSubject.getInstance().deleteBook(bookE, book.getIndex());
     }
 

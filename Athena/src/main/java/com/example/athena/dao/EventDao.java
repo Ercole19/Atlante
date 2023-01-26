@@ -16,7 +16,7 @@ import java.util.List;
 
 
 public class EventDao extends AbstractDAO {
-    private final String email = LoggedStudent.getInstance().getEmail();
+    private final String email = LoggedStudent.getInstance().getEmail().getMail();
 
     public void addEvent(LocalDate date , String name , LocalTime start ,LocalTime end , String description , String type, LocalDateTime dateOfReminder) throws EventException {
 
@@ -68,7 +68,7 @@ public class EventDao extends AbstractDAO {
             ArrayList<EventEntity> events = new ArrayList<>() ;
             Date start = Date.valueOf(timeSpan) ;
 
-            statement.setString(1, LoggedStudent.getInstance().getEmail()) ;
+            statement.setString(1, LoggedStudent.getInstance().getEmail().getMail()) ;
             statement.setString(2, type.toString()) ;
             statement.setDate(3, start) ;
 
@@ -98,7 +98,7 @@ public class EventDao extends AbstractDAO {
         try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT * from athena.eventi where DATE_FORMAT(eventDate, '%Y-%m') = ? and utente = ?")){
 
             statement.setString(1, String.valueOf(yearMonth));
-            statement.setString(2, LoggedStudent.getInstance().getEmail());
+            statement.setString(2, LoggedStudent.getInstance().getEmail().getMail());
             ResultSet set = statement.executeQuery();
 
             while (set.next()) {

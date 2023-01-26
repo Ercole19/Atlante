@@ -13,7 +13,7 @@ public class DeleteCourseParser {
         LabelView view = new LabelView();
         OracleDeleteCourseGC controller = new OracleDeleteCourseGC();
         try {
-            if (LoggedTutor.getInstance().getEmail() != null) {
+            if (LoggedTutor.getInstance().getEmail().getMail() != null) {
                 if (commandToken.size() != 1) {
                     ParentSubject.getInstance().setCurrentParent(view.prepareParent("Incorrect arguments passed"));
                 } else {

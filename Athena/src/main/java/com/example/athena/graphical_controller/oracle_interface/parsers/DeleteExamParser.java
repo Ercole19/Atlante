@@ -14,7 +14,7 @@ public class DeleteExamParser {
         LabelView view = new LabelView();
         OracleDeleteExamGC controller = new OracleDeleteExamGC();
         try{
-            if (LoggedStudent.getInstance().getEmail() != null){
+            if (LoggedStudent.getInstance().getEmail().getMail() != null){
                 if (commandToken.size() != 4){
                     ParentSubject.getInstance().setCurrentParent(view.prepareParent("Correct usage: exam_name exam_date"));
                 }

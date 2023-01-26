@@ -29,7 +29,7 @@ public class RecentSoldItemsView {
 
     public AnchorPane getRoot() {
         try {
-            int size = this.controller.getResultSize(LoggedStudent.getInstance().getEmail()) ;
+            int size = this.controller.getResultSize(LoggedStudent.getInstance().getEmail().getMail()) ;
             if(size == 0) {
                 return new ErrorSceneView().createErrorScreen("No books sold yet", this.containerWidth, this.containerHeight) ;
             }

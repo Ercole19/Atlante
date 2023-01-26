@@ -11,7 +11,7 @@ public class ShowExamsCompletionParser {
     public void parseExamsCompletion(){
         LabelView labelView = new LabelView();
         try {
-            if (LoggedStudent.getInstance().getEmail() != null) {
+            if (LoggedStudent.getInstance().getEmail().getMail() != null) {
                 ExamsCompletion view = new ExamsCompletion();
                 ParentSubject.getInstance().setCurrentParent(view.getParent());
             } else {

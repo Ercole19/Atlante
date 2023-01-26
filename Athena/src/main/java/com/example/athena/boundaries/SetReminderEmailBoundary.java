@@ -22,7 +22,7 @@ public class SetReminderEmailBoundary extends SocketBoundary
 
     public static void sendToServer(ReminderBean event) throws SendEmailException
     {
-        MailServerBean query = prepareQueryForServer(event, LoggedStudent.getInstance().getEmail()) ;
+        MailServerBean query = prepareQueryForServer(event, LoggedStudent.getInstance().getEmail().getMail()) ;
 
         try
         {

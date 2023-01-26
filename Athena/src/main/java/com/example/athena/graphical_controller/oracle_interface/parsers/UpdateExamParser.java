@@ -12,7 +12,7 @@ public class UpdateExamParser {
     public void parseUpdateExam(List<String> commandTokens) {
         LabelView view = new LabelView();
         try {
-            if (LoggedStudent.getInstance().getEmail() != null) {
+            if (LoggedStudent.getInstance().getEmail().getMail() != null) {
                 if (commandTokens.size() != 8) {
                     ParentSubject.getInstance().setCurrentParent(view.prepareParent("Correct usage: old _name old_date old_grade old_cfu new_name new_date new_grade new_cfu"));
                 } else {

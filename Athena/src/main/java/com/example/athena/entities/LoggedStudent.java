@@ -1,5 +1,6 @@
 package com.example.athena.entities;
 
+import com.example.athena.beans.LoggedUserMailBean;
 import com.example.athena.dao.UserDao;
 import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.exceptions.UserInfoException;
@@ -35,9 +36,11 @@ public class LoggedStudent extends LoggedUser
     }
 
     @Override
-    public String getEmail()
+    public LoggedUserMailBean getEmail()
     {
-        return this.email;
+        LoggedUserMailBean value = new LoggedUserMailBean() ;
+        value.setMail(this.email);
+        return value ;
     }
     
     public void initStudent(String emailStudent) throws UserInfoException

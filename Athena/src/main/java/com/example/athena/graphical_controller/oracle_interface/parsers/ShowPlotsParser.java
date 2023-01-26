@@ -12,7 +12,7 @@ public class ShowPlotsParser {
     private final LabelView view = new LabelView() ;
     public void parseShowPlots(List<String> commands) {
         try{
-            if (LoggedStudent.getInstance().getEmail() != null){
+            if (LoggedStudent.getInstance().getEmail().getMail() != null){
                 new OraclePlotGC(commands) ;
             }
             else{

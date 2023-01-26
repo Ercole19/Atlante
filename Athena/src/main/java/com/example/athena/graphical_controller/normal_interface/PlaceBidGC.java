@@ -47,7 +47,7 @@ public class PlaceBidGC implements PostInitialize{
                 return;
             }
 
-            bidBean.setBidder(LoggedStudent.getInstance().getEmail());
+            bidBean.setBidder(LoggedStudent.getInstance().getEmail().getMail());
             bidBean.setOwner(this.bookBean.getOwner());
             bidBean.setBookTimestamp(this.bookBean.getTimeStamp());
             bidBean.setBookIsbn(this.bookBean.getIsbn());

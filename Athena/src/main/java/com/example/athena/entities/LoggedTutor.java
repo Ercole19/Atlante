@@ -1,5 +1,6 @@
 package com.example.athena.entities;
 
+import com.example.athena.beans.LoggedUserMailBean;
 import com.example.athena.exceptions.LoggedUserException;
 
 public class LoggedTutor extends LoggedUser
@@ -26,9 +27,11 @@ public class LoggedTutor extends LoggedUser
     }
 
     @Override
-    public String getEmail()
+    public LoggedUserMailBean getEmail()
     {
-        return this.email;
+        LoggedUserMailBean value = new LoggedUserMailBean() ;
+        value.setMail(this.email);
+        return value ;
     }
 
     public void initTutor(String emailTutor)

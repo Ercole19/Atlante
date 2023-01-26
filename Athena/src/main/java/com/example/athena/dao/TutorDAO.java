@@ -76,7 +76,7 @@ public class TutorDAO extends AbstractDAO {
     public void addCourse(String course) throws CourseException {
         try (PreparedStatement statement = this.getConnection().prepareStatement("INSERT INTO corsi (nomecorso , emailtutor) VALUES (?,?)")) {
             statement.setString(1, course);
-            statement.setString(2, LoggedTutor.getInstance().getEmail());
+            statement.setString(2, LoggedTutor.getInstance().getEmail().getMail());
             statement.executeUpdate();
         } catch (SQLException | IOException e) {
             throw new CourseException(e.getMessage());
@@ -87,7 +87,7 @@ public class TutorDAO extends AbstractDAO {
     public void deleteCourse(String course) throws CourseException {
         try (PreparedStatement statement = this.getConnection().prepareStatement("call athena.deleteCourse(?,?)")) {
             statement.setString(1, course);
-            statement.setString(2, LoggedTutor.getInstance().getEmail());
+            statement.setString(2, LoggedTutor.getInstance().getEmail().getMail());
             statement.executeUpdate();
         } catch (SQLException | IOException e) {
             throw new CourseException(e.getMessage());
@@ -112,7 +112,7 @@ public class TutorDAO extends AbstractDAO {
     public void insertCv(File cv)  throws UserInfoException {
         try (PreparedStatement preparedStatement = this.getConnection().prepareStatement("update athena.tutordescription  set CV = ?    where emailuser = ?")) {
             preparedStatement.setBlob(1, new BufferedInputStream(new FileInputStream(cv)));
-            preparedStatement.setString(2, LoggedTutor.getInstance().getEmail());
+            preparedStatement.setString(2, LoggedTutor.getInstance().getEmail().getMail());
             preparedStatement.execute();
 
 

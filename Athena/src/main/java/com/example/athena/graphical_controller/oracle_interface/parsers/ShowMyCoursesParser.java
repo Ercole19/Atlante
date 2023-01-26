@@ -11,7 +11,7 @@ public class ShowMyCoursesParser {
     public void parseMyCourses(){
         LabelView labelView = new LabelView();
         try{
-            if (LoggedTutor.getInstance().getEmail() != null) {
+            if (LoggedTutor.getInstance().getEmail().getMail() != null) {
                 MyCoursesView coursesView = new MyCoursesView();
                 ParentSubject.getInstance().setCurrentParent(coursesView.createParent());
             }

@@ -10,7 +10,7 @@ public class ShowMySellingBooksParser {
     private LabelView view = new LabelView();
     public void parseShowMySellingBooks(){
         try{
-            if (LoggedStudent.getInstance().getEmail() != null){
+            if (LoggedStudent.getInstance().getEmail().getMail() != null){
                 SceneSwitcher switcher = SceneSwitcher.getInstance();
                 ParentSubject.getInstance().setCurrentParent(switcher.preload("OracleSellingView.fxml"));
             }

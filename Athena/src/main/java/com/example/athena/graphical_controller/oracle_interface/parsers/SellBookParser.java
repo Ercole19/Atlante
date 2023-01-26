@@ -16,7 +16,7 @@ public class SellBookParser {
         }
         else {
             try {
-                if (LoggedStudent.getInstance().getEmail() != null) {
+                if (LoggedStudent.getInstance().getEmail().getMail() != null) {
                     OracleSellBookGC controller = new OracleSellBookGC();
                     controller.sellBook(tokens.get(0), tokens.get(1), tokens.get(2));
                 }

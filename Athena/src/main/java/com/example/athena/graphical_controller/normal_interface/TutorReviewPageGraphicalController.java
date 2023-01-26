@@ -63,7 +63,7 @@ public class TutorReviewPageGraphicalController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         UserBean bean = new UserBean();
-        bean.setEmail(LoggedTutor.getInstance().getEmail());
+        bean.setEmail(LoggedTutor.getInstance().getEmail().getMail());
         try {
             TutorInfosBean tutorInfosBean = TutorPersonalPageSubject.getInstance().getTutorInfos(bean);
             starsNumber.setText(String.valueOf(tutorInfosBean.getAvgReview())) ;

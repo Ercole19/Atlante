@@ -74,7 +74,7 @@ public class BookPageController extends ShiftImageController implements PostInit
             try {
                 this.sellerName = (BooksSubject.getInstance().getSellerName());
                 this.sellerSurname = (BooksSubject.getInstance().getSellerSurname());
-                this.reportNumber = controller.getReportNumber(LoggedStudent.getInstance().getEmail());
+                this.reportNumber = controller.getReportNumber(LoggedStudent.getInstance().getEmail().getMail());
             } catch (BookException | UserInfoException e) {
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
                 alert.showAndWait();

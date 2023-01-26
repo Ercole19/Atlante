@@ -15,7 +15,7 @@ public class GenerateReviewParser {
         if(tokens.size() != 4) {ParentSubject.getInstance().setCurrentParent(view.prepareParent("Incorrect arguments passed"));}
         else {
             try {
-                if (LoggedTutor.getInstance().getEmail() != null) {
+                if (LoggedTutor.getInstance().getEmail().getMail() != null) {
                     new OracleGenerateReviewGC(tokens.get(0), tokens.get(1), tokens.get(2), tokens.get(3));
                 } else {
                     ParentSubject.getInstance().setCurrentParent(view.prepareParent("You must login/signup before writing any command"));

@@ -10,7 +10,7 @@ public class ShowTakenExamsParser {
     public void parseTakenExams() {
         LabelView labelView = new LabelView();
         try {
-            if (LoggedStudent.getInstance().getEmail() != null) {
+            if (LoggedStudent.getInstance().getEmail().getMail() != null) {
                 TakenExams view = new TakenExams();
                 ParentSubject.getInstance().setCurrentParent(view.getParent());
             } else {
