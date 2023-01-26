@@ -58,41 +58,6 @@ public class UserDao extends AbstractDAO {
         }
     }
 
-    public String[] findTutor(String query, ByCourseOrNameEnum searchEnum, boolean byBestReviews) throws FindException {
-        String prepStatement;
-
-        if (searchEnum.toString().equals("BY_COURSE")) {prepStatement = "select utenti.nome , utenti.surname , corsi.nomecorso , tutordescription.Average , utenti.email from athena.tutordescription join athena.corsi on tutordescription.emailuser = corsi.emailtutor join athena.utenti on tutordescription.emailuser = utenti.email where  nomecorso like concat('%' , ? , '%') ";}
-        else { prepStatement = "SELECT  utenti.nome ,  utenti.surname , corsi.nomecorso , tutordescription.Average ,  utenti.email FROM athena.utenti join athena.tutordescription on utenti.email = tutordescription.emailuser join athena.corsi on utenti.email = corsi.emailtutor WHERE CONCAT( nome,  ' ', surname ) LIKE  concat ('%' , ? , '%')";}
-
-        if (byBestReviews) {prepStatement = prepStatement + "order by tutordescription.average DESC";}
-
-        String[] tutorInfos = new String[500];
-        int i = 0;
-        try (PreparedStatement statement = this.getConnection().prepareStatement(prepStatement)) {
-
-            statement.setString(1, query);
-
-
-            ResultSet set = statement.executeQuery();
-            while (set.next()) {
-                tutorInfos[i] = set.getString(1);
-                tutorInfos[i + 1] = set.getString(2);
-                tutorInfos[i + 2] = set.getString(3);
-                tutorInfos[i + 3] = Float.toString(set.getFloat(4));
-                tutorInfos[i + 4] = set.getString(5);
-                i = i + 5;
-            }
-
-        } catch (SQLException | IOException exc) {
-            throw new FindException(exc.getMessage());
-        }
-
-        return tutorInfos;
-
-
-    }
-
-
     public String[] getName(String email) throws UserInfoException{
 
         String[] infos = new String[2];
