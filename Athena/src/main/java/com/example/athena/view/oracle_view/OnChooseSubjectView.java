@@ -15,30 +15,21 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-public class ChooseSubjectView {
+public class OnChooseSubjectView {
 
     private final Parent root ;
-    private ChoiceBox<String> choiceBox ;
+    private final ChoiceBox<String> choiceBox ;
 
-    public ChooseSubjectView(OracleGenerateReviewGC controller) {
-        List<String> courses ;
-        try {
-            UserBean userBean = new UserBean() ;
-            userBean.setEmail(LoggedTutor.getInstance().getEmail());
-            courses = TutorPersonalPageSubject.getInstance().getTutorInfos(userBean).getTutorCourses() ;
-        } catch (UserInfoException | CourseException e) {
-            this.root = new LabelView().prepareParent("Error in accessing information about your courses :" + e.getMessage());
-            return;
-        }
+    private final Button submit ;
+
+    public OnChooseSubjectView() {
 
         VBox box = new VBox() ;
 
         Label title = LabelBuilder.buildLabel("Choose the subject of the tutoring") ;
         this.choiceBox = new ChoiceBox<>() ;
-        this.choiceBox.getItems().addAll(courses) ;
 
-        Button submit = new Button("Generate review") ;
-        submit.setOnAction(event -> controller.receiveSubject(this)) ;
+        submit = new Button("Generate review") ;
 
         box.getChildren().addAll(title, choiceBox, submit) ;
 
@@ -49,7 +40,11 @@ public class ChooseSubjectView {
         return this.root ;
     }
 
-    public String getChoiceBoxSelection() {
-        return this.choiceBox.getValue() ;
+    public ChoiceBox<String> getChoiceBox() {
+        return this.choiceBox ;
+    }
+
+    public Button getSubmit() {
+        return submit;
     }
 }

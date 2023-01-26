@@ -4,9 +4,10 @@ import com.example.athena.beans.ReviewInfoBean;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.TutorReviewException;
 import com.example.athena.graphical_controller.oracle_interface.generate_review_states.GenerateReviewAbstractState;
+import com.example.athena.graphical_controller.oracle_interface.generate_review_states.GenerateReviewSM;
 import com.example.athena.graphical_controller.oracle_interface.generate_review_states.OnChooseSubjectState;
 import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
-import com.example.athena.view.oracle_view.ChooseSubjectView;
+import com.example.athena.view.oracle_view.OnChooseSubjectView;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -14,19 +15,20 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class OracleGenerateReviewGC {
-    private String student;
-    private String date;
-    private String startHour;
-    private String endHour;
-    private GenerateReviewAbstractState state;
+    private final String student;
+    private final String date;
+    private final String startHour;
+    private final String endHour;
     private String subject;
 
-    public void confirmGeneration(String student, String date, String startHour, String endHour) {
+    private final GenerateReviewSM machine ;
+
+    public OracleGenerateReviewGC(String student, String date, String startHour, String endHour) {
         this.student = student;
         this.date = date;
         this.endHour = endHour;
         this.startHour = startHour;
-        this.state = new OnChooseSubjectState(this);
+        this.machine = new GenerateReviewSM(this, new OnChooseSubjectState(this)) ;
     }
 
     public String generateReview() throws TutorReviewException {
@@ -36,8 +38,8 @@ public class OracleGenerateReviewGC {
         try {
             bean.setUsername(student) ;
             bean.setDay(LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            bean.setStartTime(LocalTime.parse(startHour, DateTimeFormatter.ofPattern("hh.mm"))) ;
-            bean.setEndTime(LocalTime.parse(endHour, DateTimeFormatter.ofPattern("hh:mm"))) ;
+            bean.setStartTime(LocalTime.parse(startHour, DateTimeFormatter.ofPattern("HH:mm"))) ;
+            bean.setEndTime(LocalTime.parse(endHour, DateTimeFormatter.ofPattern("HH:mm"))) ;
             bean.setSubject(subject) ;
             return controller.insertReview(bean).getReviewCode() ;
         }
@@ -46,16 +48,11 @@ public class OracleGenerateReviewGC {
         }
     }
 
-    public void receiveSubject(ChooseSubjectView view) {
-        this.subject = view.getChoiceBoxSelection() ;
-        this.goNext() ;
+    public void setSubject(String subject) {
+        this.subject = subject ;
     }
 
-    public void setState(GenerateReviewAbstractState nextState) {
-        this.state = nextState ;
-    }
-
-    public void goNext() {
-        this.state.goNext(this) ;
+    public void advance() {
+        this.machine.goNext() ;
     }
 }

@@ -16,8 +16,7 @@ public class GenerateReviewParser {
         else {
             try {
                 if (LoggedTutor.getInstance().getEmail() != null) {
-                    OracleGenerateReviewGC controller = new OracleGenerateReviewGC();
-                    controller.confirmGeneration(tokens.get(0), tokens.get(1), tokens.get(2), tokens.get(3));
+                    new OracleGenerateReviewGC(tokens.get(0), tokens.get(1), tokens.get(2), tokens.get(3));
                 } else {
                     ParentSubject.getInstance().setCurrentParent(view.prepareParent("You must login/signup before writing any command"));
                 }

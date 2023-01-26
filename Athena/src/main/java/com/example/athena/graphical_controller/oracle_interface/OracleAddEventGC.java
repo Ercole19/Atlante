@@ -15,10 +15,10 @@ import java.time.format.DateTimeFormatter;
 
 public class OracleAddEventGC {
 
-    private String eventName ;
-    private LocalDate eventDay ;
-    private LocalTime eventStart ;
-    private LocalTime eventEnd ;
+    private final String eventName ;
+    private final LocalDate eventDay ;
+    private final LocalTime eventStart ;
+    private final LocalTime eventEnd ;
     private String eventType ;
     private String eventDescription ;
     private int hoursBefore ;
@@ -64,64 +64,16 @@ public class OracleAddEventGC {
         this.machine.goNext() ;
     }
 
-    public String getEventName() {
-        return eventName;
-    }
-
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
-    }
-
-    public LocalDate getEventDay() {
-        return eventDay;
-    }
-
-    public void setEventDay(LocalDate eventDay) {
-        this.eventDay = eventDay;
-    }
-
-    public LocalTime getEventStart() {
-        return eventStart;
-    }
-
-    public void setEventStart(LocalTime eventStart) {
-        this.eventStart = eventStart;
-    }
-
-    public LocalTime getEventEnd() {
-        return eventEnd;
-    }
-
-    public void setEventEnd(LocalTime eventEnd) {
-        this.eventEnd = eventEnd;
-    }
-
-    public String getEventType() {
-        return eventType;
-    }
-
     public void setEventType(String eventType) {
         this.eventType = eventType;
-    }
-
-    public String getEventDescription() {
-        return eventDescription;
     }
 
     public void setEventDescription(String eventDescription) {
         this.eventDescription = eventDescription;
     }
 
-    public int getHoursBefore() {
-        return hoursBefore;
-    }
-
     public void setHoursBefore(int hoursBefore) {
         this.hoursBefore = hoursBefore;
-    }
-
-    public int getMinutesBefore() {
-        return minutesBefore;
     }
 
     public void setMinutesBefore(int minutesBefore) {

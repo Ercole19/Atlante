@@ -22,7 +22,7 @@ public class OnGenerateReviewFinalizationState implements GenerateReviewAbstract
     }
 
     @Override
-    public void goNext(OracleGenerateReviewGC contextStateMachine) {
+    public void goNext(GenerateReviewSM contextStateMachine) {
         throw new UnsupportedOperationException("The state is an ending one");
     }
 }
