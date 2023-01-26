@@ -19,9 +19,7 @@ public class ShowMyCVParser {
         try{
             if (LoggedTutor.getInstance().getEmail() != null) {
                     ViewTutorPageUseCaseController tutorPage = new ViewTutorPageUseCaseController();
-                    UserBean bean = new UserBean() ;
-                    bean.setEmail(LoggedTutor.getInstance().getEmail());
-                    tutorPage.getCV(bean);
+                    tutorPage.getCV();
                     String name = "tempCV.html" ;
                     ArrayList<Object> params = new ArrayList<>() ;
                     params.add(name) ;

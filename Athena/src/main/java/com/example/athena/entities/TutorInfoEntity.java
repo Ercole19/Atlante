@@ -1,34 +1,38 @@
 package com.example.athena.entities;
 
+import com.example.athena.dao.TutorDAO;
+import com.example.athena.exceptions.CourseException;
+import com.example.athena.exceptions.NoCvException;
+import com.example.athena.exceptions.UserInfoException;
+
+import java.io.File;
 import java.util.List;
 
 public class TutorInfoEntity {
+
+    private String email ;
     private  String aboutMe;
     private  String sessionInfos;
     private  String contactNumbers;
     private  String name;
     private  String surname;
     private  float avgReview;
+
+    private File cv ;
+
+    private int reviewNumber ;
     private  List<String> courses;
 
-    public TutorInfoEntity(String abMe, String sesInf, String contNum, String tutorName, String tutorSurname, float avg, List<String> coursesList) {
+    public TutorInfoEntity(String email, String abMe, String sesInf, String contNum, String tutorName, String tutorSurname, float avg, int reviewNumber, List<String> coursesList) {
+        this.email = email ;
         this.aboutMe = abMe;
         this.sessionInfos = sesInf;
         this.contactNumbers = contNum;
         this.name = tutorName;
         this.surname = tutorSurname;
         this.avgReview = avg;
+        this.reviewNumber = reviewNumber ;
         this.courses = coursesList;
-    }
-
-    public TutorInfoEntity (String aboutMe, String contactNumbers, String sessionInfos) {
-        this.aboutMe = aboutMe;
-        this.sessionInfos = sessionInfos;
-        this.contactNumbers = contactNumbers;
-        this.name = null;
-        this.surname = null;
-        this.avgReview = 0;
-        this.courses = null;
     }
 
     public String getSessionInfos() {
@@ -55,6 +59,82 @@ public class TutorInfoEntity {
         this.aboutMe = aboutMe;
         this.sessionInfos = sessionInfos;
         this.contactNumbers = contactNumbers;
+    }
+
+    public void setCourses(List<String> courses) {
+        this.courses = courses ;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
+    }
+
+    public void setSessionInfos(String sessionInfos) {
+        this.sessionInfos = sessionInfos;
+    }
+
+    public void setContactNumbers(String contactNumbers) {
+        this.contactNumbers = contactNumbers;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setAvgReview(float avgReview) {
+        this.avgReview = avgReview;
+    }
+
+    public int getReviewNumber() {
+        return reviewNumber;
+    }
+
+    public File getCV() throws UserInfoException, NoCvException {
+        if(this.cv == null) {
+            this.cv = new TutorDAO().getCV(this.getEmail()) ;
+        }
+
+        return this.cv ;
+    }
+
+    public void insertCV(File cv) throws UserInfoException {
+        new TutorDAO().insertCv(cv) ;
+        this.cv = cv ;
+    }
+
+    public void addCourse(String course) throws CourseException {
+        new TutorDAO().addCourse(course) ;
+        this.courses.add(course) ;
+    }
+
+    public void deleteCourse(String course) throws CourseException {
+        new TutorDAO().deleteCourse(course);
+        this.courses.remove(course) ;
+    }
+
+    public void updateAverage(float review) {
+        this.avgReview = (this.avgReview * this.reviewNumber + review) / (this.reviewNumber +1) ;
+        this.reviewNumber = this.reviewNumber +1 ;
+    }
+
+    public void saveInDB() throws UserInfoException {
+        new TutorDAO().saveInDB(this) ;
+    }
+
+    public static TutorInfoEntity getFromDB(String email) throws UserInfoException, CourseException{
+        return new TutorDAO().getTutorFromDB(email) ;
     }
 
 }

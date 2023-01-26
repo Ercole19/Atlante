@@ -52,7 +52,7 @@ public class ReviewTutorUseCaseController
 
     public void reviewTutor(ReviewTutorBean review) throws TutorReviewException
     {
-        ReviewEntity.finalizeReview(review.getReviewStars() , review.getCode());
+        ReviewEntity.getFromDB(review.getCode()).finalizeReview(review.getReviewStars()) ;
     }
 
 }

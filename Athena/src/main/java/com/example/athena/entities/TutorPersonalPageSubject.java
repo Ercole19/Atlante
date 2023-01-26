@@ -2,13 +2,12 @@ package com.example.athena.entities;
 
 import com.example.athena.beans.TutorInfosBean;
 import com.example.athena.beans.UserBean;
-import com.example.athena.dao.CourseDao;
-import com.example.athena.dao.UserDao;
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
 import com.example.athena.exceptions.CourseException;
+import com.example.athena.exceptions.NoCvException;
 import com.example.athena.exceptions.UserInfoException;
 
-import java.util.List;
+import java.io.File;
 
 
 public class TutorPersonalPageSubject extends AbstractSubject {
@@ -33,15 +32,7 @@ public class TutorPersonalPageSubject extends AbstractSubject {
     }
 
     private void getAllInfos(String email) throws CourseException, UserInfoException {
-        UserDao userDao = new UserDao() ;
-        CourseDao courseDao = new CourseDao() ;
-
-        List<String> tutorInfos = userDao.fillTutorInfosProcedure(email);
-        String[] tutorName = userDao.getName(email);
-        float tutorAvgReviews = userDao.getAvg(email);
-        List<String> tutorCourses = courseDao.fillCourses(email);
-        this.entity = new TutorInfoEntity(tutorInfos.get(0), tutorInfos.get(1), tutorInfos.get(2), tutorName[0], tutorName[1], tutorAvgReviews, tutorCourses) ;
-
+        this.entity = TutorInfoEntity.getFromDB(email) ;
     }
 
     public TutorInfosBean getTutorInfos(UserBean bean) throws CourseException, UserInfoException {
@@ -60,34 +51,54 @@ public class TutorPersonalPageSubject extends AbstractSubject {
 
 
     public void addCourse(String name) throws CourseException, UserInfoException {
-        CourseDao dao = new CourseDao() ;
-        dao.addCourse(name);
         if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail());}
-        this.entity.getCourses().add(name) ;
+        this.entity.addCourse(name);
         super.notifyObserver();
 
     }
     public void deleteCourse(String name) throws CourseException, UserInfoException {
-        CourseDao dao = new CourseDao();
-        dao.deleteCourse(name);
         if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail());}
-        this.entity.getCourses().remove(name);
+        this.entity.deleteCourse(name);
         super.notifyObserver();
     }
 
 
-    public void updateTutorInfos(TutorInfoEntity entity) throws UserInfoException, CourseException {
-        UserDao dao = new UserDao();
-        dao.updateTutorInfos(entity.getAboutMe(), entity.getSessionInfos(), entity.getContactNumbers());
+    public void updateTutorInfos(String abMe, String contactNums, String sessionInfos) throws UserInfoException, CourseException {
         if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail());}
-        this.entity.setTutorInfos(entity.getAboutMe(), entity.getSessionInfos(), entity.getContactNumbers());
+        String oldAbMe = this.entity.getAboutMe() ;
+        String oldSessionInfos = this.entity.getSessionInfos() ;
+        String oldContactNum = this.entity.getContactNumbers() ;
+
+        try {
+            this.entity.setTutorInfos(abMe, sessionInfos, contactNums);
+            this.entity.saveInDB();
+        } catch (UserInfoException e) {
+            this.entity.setTutorInfos(oldAbMe, oldSessionInfos, oldContactNum) ;
+            throw new UserInfoException("Error in updating personal information. Details: " + e.getMessage()) ;
+        }
+
         super.notifyObserver();
+    }
+
+    public void getCV() throws UserInfoException, NoCvException {
+        try {
+            if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail());}
+            this.entity.getCV() ;
+        } catch (CourseException e) {
+            throw new UserInfoException("Error in retrieving tutor data. Details : " + e.getMessage()) ;
+        }
+    }
+
+    public void insertCV(File cv) throws UserInfoException {
+        try {
+            if (this.entity == null) {getAllInfos(LoggedTutor.getInstance().getEmail());}
+            this.entity.insertCV(cv);
+        } catch (CourseException e) {
+            throw new UserInfoException("Error in retrieving tutor data. Details : " + e.getMessage()) ;
+        }
     }
 
     public void resetEntity() {
         this.entity = null;
     }
-
-
-
 }

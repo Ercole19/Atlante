@@ -10,8 +10,6 @@ import java.io.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserDao extends AbstractDAO {
 
@@ -59,41 +57,6 @@ public class UserDao extends AbstractDAO {
             throw new UserInfoException(exc.getMessage());
         }
     }
-
-    public List<String> fillTutorInfosProcedure(String email) throws UserInfoException {
-        List<String> infos = new ArrayList<>();
-        try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT  aboutme ,  sessioninfos  , contactnumbers  FROM athena.tutordescription WHERE emailuser = ? ")) {
-
-            statement.setString(1, email);
-            ResultSet set = statement.executeQuery();
-            while (set.next()) {
-                infos.add(set.getString(1));
-                infos.add(set.getString(2));
-                infos.add(set.getString(3));
-            }
-        } catch (SQLException | IOException exc) {
-            throw new UserInfoException(exc.getMessage());
-        }
-
-        return infos;
-
-    }
-
-
-    public void updateTutorInfos(String about, String sessionInfos, String contactNumbers) throws UserInfoException{
-        try (PreparedStatement statement = this.getConnection().prepareStatement("UPDATE athena.tutordescription SET aboutme = ?,  sessioninfos=?, contactnumbers=?  WHERE emailuser= ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
-            statement.setString(1, about);
-            statement.setString(2, sessionInfos);
-            statement.setString(3, contactNumbers);
-            statement.setString(4, LoggedTutor.getInstance().getEmail());
-
-            statement.executeUpdate();
-        } catch (SQLException | IOException exc) {
-            throw new UserInfoException(exc.getMessage());
-        }
-
-    }
-
 
     public String[] findTutor(String query, ByCourseOrNameEnum searchEnum, boolean byBestReviews) throws FindException {
         String prepStatement;
@@ -146,70 +109,6 @@ public class UserDao extends AbstractDAO {
            throw new UserInfoException(e.getMessage());
         }
         return infos;
-    }
-
-
-    public float getAvg(String email) throws UserInfoException {
-        float avg = 0;
-
-        try (PreparedStatement statement = this.getConnection().prepareStatement("select average from athena.tutordescription where emailuser =?")) {
-
-            statement.setString(1, email);
-            ResultSet set = statement.executeQuery();
-
-            while (set.next()) {
-                avg = set.getFloat(1);
-            }
-
-
-        } catch (SQLException | IOException e) {
-            throw new UserInfoException(e.getMessage());
-        }
-        return avg;
-
-    }
-
-
-    public void insertCv(File cv)  throws UserInfoException {
-        try (PreparedStatement preparedStatement = this.getConnection().prepareStatement("update athena.tutordescription  set CV = ?    where emailuser = ?")) {
-            preparedStatement.setBlob(1, new BufferedInputStream(new FileInputStream(cv)));
-            preparedStatement.setString(2, LoggedTutor.getInstance().getEmail());
-            preparedStatement.execute();
-
-
-        } catch (SQLException | IOException exc) {
-            throw new UserInfoException(exc.getMessage());
-        }
-    }
-
-
-    public void getCV(String email) throws UserInfoException, NoCvException {
-        try (PreparedStatement statement = this.getConnection().prepareStatement("Select CV from athena.tutordescription where emailuser = ? ")) {
-
-            statement.setString(1, email);
-            ResultSet set = statement.executeQuery();
-
-            while (set.next()) {
-                byte[] cvBytes = set.getBlob(1).getBytes(1, (int) set.getBlob(1).length());
-                String pathname = "src/main/resources/tutor_cv/tempCV.html" ;
-                writeCv(cvBytes, pathname);
-            }
-
-        } catch (SQLException | IOException exc) {
-            throw new UserInfoException (exc.getMessage());
-        } catch (NullPointerException e) {
-            throw new NoCvException("No CV found") ;
-        }
-    }
-
-    private void writeCv(byte[] cv, String pathname) throws IOException
-    {
-        File file = new File(pathname);
-        file.deleteOnExit();
-        try(OutputStream writeStream = new FileOutputStream(file))
-        {
-            writeStream.write(cv, 0, cv.length);
-        }
     }
 
     public void setCfusOrExams(int data, ExamsOrCfusEnum cfuOrExams) throws CareerStatusException {
@@ -306,8 +205,3 @@ public class UserDao extends AbstractDAO {
         }
     }
 }
-
-
-
-
-

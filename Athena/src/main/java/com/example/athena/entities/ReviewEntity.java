@@ -2,7 +2,9 @@ package com.example.athena.entities;
 
 import com.example.athena.beans.ReviewInfoBean;
 import com.example.athena.dao.ReviewDAO;
+import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.TutorReviewException;
+import com.example.athena.exceptions.UserInfoException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -53,15 +55,17 @@ public class ReviewEntity
         return reviewDAO.getReview(reviewCode) ;
     }
 
-    public static void removeFromDB(String reviewCode) throws TutorReviewException
-    {
-        ReviewDAO reviewDAO = new ReviewDAO() ;
-        reviewDAO.deleteReview(reviewCode) ;
-    }
+    public void finalizeReview (int reviewStars) throws TutorReviewException {
 
-    public static void finalizeReview (int reviewStars , String reviewCode) throws TutorReviewException {
-        ReviewDAO reviewDAO = new ReviewDAO() ;
-        reviewDAO.finalizee(reviewCode , reviewStars) ;
+        try {
+            ReviewDAO reviewDAO = new ReviewDAO() ;
+            TutorInfoEntity entity = TutorInfoEntity.getFromDB(this.tutorUsername) ;
+            entity.updateAverage(reviewStars) ;
+            reviewDAO.deleteReview(this.reviewCode) ;
+            entity.saveInDB() ;
+        } catch (UserInfoException | CourseException e) {
+            throw new TutorReviewException("Tutor not found") ;
+        }
 
     }
 

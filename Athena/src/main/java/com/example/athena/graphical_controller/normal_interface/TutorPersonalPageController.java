@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.beans.NormalTutorCvInfoBean;
+import com.example.athena.beans.TutorCvInfoBean;
 import com.example.athena.beans.TutorInfosBean;
 import com.example.athena.beans.UserBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
@@ -72,9 +72,7 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
     {
         ViewTutorPageUseCaseController tutorPage = new ViewTutorPageUseCaseController();
         try {
-            UserBean bean = new UserBean() ;
-            bean.setEmail(this.email);
-            tutorPage.getCV(bean);
+            tutorPage.getCV();
         } catch (UserInfoException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error in retrieving cv from db, try restarting application", ButtonType.CLOSE);
             alert.showAndWait();
@@ -110,7 +108,7 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
     public void onCVButtonClickTutor()
     {
         TutorPersonalPageUCC controller = new TutorPersonalPageUCC();
-        NormalTutorCvInfoBean bean = new NormalTutorCvInfoBean();
+        TutorCvInfoBean bean = new TutorCvInfoBean();
 
         JFileChooser fc = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
