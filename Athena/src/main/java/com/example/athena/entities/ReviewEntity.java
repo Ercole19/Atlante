@@ -66,7 +66,6 @@ public class ReviewEntity
         } catch (UserInfoException | CourseException e) {
             throw new TutorReviewException("Tutor not found") ;
         }
-
     }
 
     public void setReviewCode(String reviewCode)

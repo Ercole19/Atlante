@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller.normal_interface;
 
+import com.example.athena.beans.EventPresencesForMonthBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
 import com.example.athena.entities.CalendarSubject;
 import com.example.athena.exceptions.EventException;
@@ -59,7 +60,7 @@ public class CalendarPageController extends HomeScreenController implements Init
         Set<LocalDate> eventsPresence;
         try
         {
-            eventsPresence = CalendarSubject.getInstance().getEventPresencesByYearMonth(this.currentYearMonth).getEventSet() ;
+            eventsPresence = CalendarSubject.getInstance().getEventPresencesByYearMonth(new EventPresencesForMonthBean(this.currentYearMonth)).getEventSet() ;
         }
         catch (EventException e)
         {

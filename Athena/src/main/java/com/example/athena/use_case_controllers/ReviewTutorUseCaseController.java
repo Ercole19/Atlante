@@ -15,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class ReviewTutorUseCaseController
 {
-    public String insertReview(ReviewInfoBean reviewBean) throws TutorReviewException, SendEmailException
+    public ReviewCodeBean insertReview(ReviewInfoBean reviewBean) throws TutorReviewException, SendEmailException
     {
 
         String reviewCode;
@@ -31,7 +31,9 @@ public class ReviewTutorUseCaseController
         SendCodeMailBean mailInformation = new SendCodeMailBean(reviewBean.getUsername(), reviewCode) ;
         SendReviewCodeEmailBoundary.getInstance().sendCode(mailInformation) ;
 
-        return reviewCode ;
+        ReviewCodeBean retVal = new ReviewCodeBean() ;
+        retVal.setReviewCode(reviewCode) ;
+        return retVal ;
     }
 
     public TutoringInformationBean getReviewFromCode(ReviewCodeBean reviewCode) throws TutorReviewException

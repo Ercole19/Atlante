@@ -128,7 +128,7 @@ public class TutorReviewPageGraphicalController implements Initializable
 
         try
         {
-            String generatedCode = controller.insertReview(dataBean) ;
+            String generatedCode = controller.insertReview(dataBean).getReviewCode() ;
             reviewCode.setText(generatedCode) ;
             resultMessage.setText("Here is your review code") ;
         }

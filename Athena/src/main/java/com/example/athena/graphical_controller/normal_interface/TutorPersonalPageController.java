@@ -63,7 +63,7 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
     public void clickOnBackButton(ActionEvent event)
     {
         switcher.switcher("tutorSearchPage.fxml") ;
-        TutorPersonalPageSubject.getInstance().resetEntity();
+        new ViewTutorPageUseCaseController().exitPage() ;
         TutorPersonalPageSubject.getInstance().detachObserver(this);
 
     }

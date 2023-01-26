@@ -88,8 +88,7 @@ public class OpriscanTests {
 
 
         try {
-            CalendarEntity entity = CalendarSubject.getInstance().getEntity(YearMonth.of(2021, 12)) ;
-            List<EventBean> list = entity.getEvents(LocalDate.of(2021, 12, 12)) ;
+            List<EventBean> list = CalendarSubject.getInstance().getEventsOfDay(new EventsDayBean(LocalDate.of(2021, 12, 12))) ;
             
             for(EventBean eventBean : list) {
                 if (eventBean.getName().equals("AABBAA")) fail() ;
@@ -97,7 +96,7 @@ public class OpriscanTests {
 
             LoggedUser.logout();
             login(TEST_USERNAME, TEST_PARTICULAR_WORD_FOR_ACCESS);
-            entity.deleteEventEntity(event);
+            CalendarSubject.getInstance().deleteEvent(event) ;
             LoggedUser.logout();
         } catch (EventException e) {
             fail() ;

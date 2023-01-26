@@ -1,6 +1,7 @@
 package com.example.athena.graphical_controller;
 
 import com.example.athena.beans.EventBean;
+import com.example.athena.beans.EventsDayBean;
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.entities.CalendarSubject;
 import com.example.athena.exceptions.EventException;
@@ -26,7 +27,7 @@ public abstract class EventsViewGC {
 
     public int getResultSize(LocalDate date) {
         try {
-            this.searchResults = CalendarSubject.getInstance().getEntity(YearMonth.of(date.getYear(), date.getMonth())).getEvents(date) ;
+            this.searchResults = CalendarSubject.getInstance().getEventsOfDay(new EventsDayBean(date)) ;
         } catch (EventException e ) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(),800, 600);
             alert.showAndWait();

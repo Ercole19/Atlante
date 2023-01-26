@@ -1,8 +1,8 @@
 package com.example.athena.boundaries;
 
-import com.example.athena.beans.EventBean;
 import com.example.athena.beans.MailServerBean;
 import com.example.athena.beans.MailServerResponseBean;
+import com.example.athena.beans.ReminderBean;
 import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
@@ -20,9 +20,9 @@ public class SetReminderEmailBoundary extends SocketBoundary
 
     }
 
-    public static void sendToServer(EventBean eventInfo, boolean remove) throws SendEmailException
+    public static void sendToServer(ReminderBean event) throws SendEmailException
     {
-        MailServerBean query = prepareQueryForServer(eventInfo, LoggedStudent.getInstance().getEmail(), remove) ;
+        MailServerBean query = prepareQueryForServer(event, LoggedStudent.getInstance().getEmail()) ;
 
         try
         {
@@ -38,7 +38,7 @@ public class SetReminderEmailBoundary extends SocketBoundary
         }
     }
 
-    private static MailServerBean prepareQueryForServer(EventBean eventInfo, String recipient, boolean remove) throws SendEmailException {
+    private static MailServerBean prepareQueryForServer(ReminderBean eventInfo, String recipient) throws SendEmailException {
 
         Timestamp moment;
         try {
@@ -56,7 +56,7 @@ public class SetReminderEmailBoundary extends SocketBoundary
         String description = eventInfo.getDescription() ;
         LocalDateTime momentForServer = moment.toLocalDateTime() ;
         MailServerBean bean = new MailServerBean() ;
-        if (remove) bean.setClassName("R");
+        if (eventInfo.isRemove()) bean.setClassName("R");
         else bean.setClassName("N");
 
         bean.setMailAccount("athena.services") ;

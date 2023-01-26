@@ -1,6 +1,7 @@
 package tests;
 
 import com.example.athena.beans.EventBean;
+import com.example.athena.beans.EventsDayBean;
 import com.example.athena.beans.NormalExamBean;
 import com.example.athena.beans.UserBean;
 import com.example.athena.entities.CalendarSubject;
@@ -48,7 +49,7 @@ public class ErcoleTests {
         int after;
         ManageEventUCC controller = new ManageEventUCC();
         try {
-            prev = CalendarSubject.getInstance().getEntity(YearMonth.of(2022, 9)).getEvents(LocalDate.parse(date)).size();
+            prev = CalendarSubject.getInstance().getEventsOfDay(new EventsDayBean(LocalDate.parse(date))).size() ;
             EventBean eventBean = new EventBean();
             eventBean.setDate(LocalDate.parse(date));
             eventBean.setName("Event");
@@ -58,7 +59,7 @@ public class ErcoleTests {
             eventBean.setType("OTHER");
             controller.addEvent(eventBean);
 
-            after = CalendarSubject.getInstance().getEntity(YearMonth.of(2022, 9)).getEvents(LocalDate.parse(date)).size();
+            after = CalendarSubject.getInstance().getEventsOfDay(new EventsDayBean(LocalDate.parse(date))).size() ;
             assertEquals(after, prev + 1);
         }
         catch (EventException | SendEmailException e) {

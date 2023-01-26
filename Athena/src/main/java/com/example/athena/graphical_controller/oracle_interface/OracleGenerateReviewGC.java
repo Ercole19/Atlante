@@ -39,7 +39,7 @@ public class OracleGenerateReviewGC {
             bean.setStartTime(LocalTime.parse(startHour, DateTimeFormatter.ofPattern("hh.mm"))) ;
             bean.setEndTime(LocalTime.parse(endHour, DateTimeFormatter.ofPattern("hh:mm"))) ;
             bean.setSubject(subject) ;
-            return controller.insertReview(bean);
+            return controller.insertReview(bean).getReviewCode() ;
         }
         catch (DateTimeParseException | TutorReviewException | SendEmailException e) {
             throw new TutorReviewException("Error in generating code, details follow: " + e.getMessage());

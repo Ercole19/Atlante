@@ -8,6 +8,10 @@ import com.example.athena.exceptions.UserInfoException;
 
 public class ViewTutorPageUseCaseController {
 
+    public void exitPage() {
+        TutorPersonalPageSubject.getInstance().resetEntity() ;
+    }
+
     public void getCV() throws UserInfoException, NoCvException {
         TutorPersonalPageSubject.getInstance().getCV() ;
     }
