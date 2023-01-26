@@ -17,8 +17,7 @@ public class AddEventParser {
         else {
             try{
                 if (LoggedStudent.getInstance().getEmail() != null){
-                    OracleAddEventGC controller = new OracleAddEventGC();
-                    controller.addEvent(commandToken.get(0), commandToken.get(1), commandToken.get(2), commandToken.get(3));
+                    new OracleAddEventGC(commandToken.get(0), commandToken.get(1), commandToken.get(2), commandToken.get(3));
                 }
                 else{
                     ParentSubject.getInstance().setCurrentParent(view.prepareParent("You need to login before writing commands"));

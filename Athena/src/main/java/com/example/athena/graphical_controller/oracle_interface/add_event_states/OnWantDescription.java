@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller.oracle_interface.add_event_states;
 
+import com.example.athena.graphical_controller.oracle_interface.EventYesOrNoController;
 import com.example.athena.graphical_controller.oracle_interface.OracleAddEventGC;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.view.oracle_view.WantToView;
@@ -8,15 +9,15 @@ public class OnWantDescription implements AddEventAbstractState{
 
 
     public OnWantDescription(OracleAddEventGC controller) {
-        ParentSubject.getInstance().setCurrentParent(new WantToView("Want to set description?", controller).getRoot());
+        new EventYesOrNoController("Want to set description?", controller) ;
     }
 
     @Override
-    public void goNext(OracleAddEventGC contextStateMachine) {
-        if(contextStateMachine.getDecision()) {
-            contextStateMachine.setState(new OnInsertDescription(contextStateMachine));
+    public void goNext(AddEventSM contextStateMachine) {
+        if(contextStateMachine.getController().getDecision()) {
+            contextStateMachine.setState(new OnInsertDescription(contextStateMachine.getController()));
         } else {
-            contextStateMachine.setState(new OnWantReminder(contextStateMachine)) ;
+            contextStateMachine.setState(new OnWantReminder(contextStateMachine.getController())) ;
         }
     }
 
