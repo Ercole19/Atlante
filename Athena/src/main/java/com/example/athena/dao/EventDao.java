@@ -83,7 +83,10 @@ public class EventDao extends AbstractDAO {
                 LocalDate eventDay = results.getDate(5).toLocalDate() ;
                 Timestamp reminderDate = results.getTimestamp(6);
 
-                events.add(new EventEntity(eventName, eventDay, startTime, endTime, eventDescription, type, reminderDate.toLocalDateTime())) ;
+                if (reminderDate != null)
+                    events.add(new EventEntity(eventName, eventDay, startTime, endTime, eventDescription, type, reminderDate.toLocalDateTime())) ;
+                else
+                    events.add(new EventEntity(eventName, eventDay, startTime, endTime, eventDescription, type)) ;
             }
 
             return events ;
@@ -110,7 +113,10 @@ public class EventDao extends AbstractDAO {
                 ActivityTypesEnum type = ActivityTypesEnum.valueOf(set.getString(7));
                 Timestamp dateOfReminder = set.getTimestamp(8);
 
-                events.add(new EventEntity(eventName, eventDay, startTime, endTime, eventDescription, type, dateOfReminder.toLocalDateTime() )) ;
+                if (dateOfReminder != null)
+                    events.add(new EventEntity(eventName, eventDay, startTime, endTime, eventDescription, type, dateOfReminder.toLocalDateTime())) ;
+                else
+                    events.add(new EventEntity(eventName, eventDay, startTime, endTime, eventDescription, type)) ;
             }
 
         }
