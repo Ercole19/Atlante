@@ -6,6 +6,7 @@ import com.example.athena.exceptions.NoCvException;
 import com.example.athena.exceptions.UserInfoException;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TutorInfoEntity {
@@ -23,16 +24,16 @@ public class TutorInfoEntity {
     private int reviewNumber ;
     private  List<String> courses;
 
-    public TutorInfoEntity(String email, String abMe, String sesInf, String contNum, String tutorName, String tutorSurname, float avg, int reviewNumber, List<String> coursesList) {
+    public TutorInfoEntity(String email, String tutorName, String tutorSurname, float avg, int reviewNumber, TutorDetails details) {
         this.email = email ;
-        this.aboutMe = abMe;
-        this.sessionInfos = sesInf;
-        this.contactNumbers = contNum;
+        this.aboutMe = details.getAboutMe();
+        this.sessionInfos = details.getSessionInfos();
+        this.contactNumbers = details.getContactNumbers();
         this.name = tutorName;
         this.surname = tutorSurname;
         this.avgReview = avg;
         this.reviewNumber = reviewNumber ;
-        this.courses = coursesList;
+        this.courses = new ArrayList<>();
     }
 
     public String getSessionInfos() {

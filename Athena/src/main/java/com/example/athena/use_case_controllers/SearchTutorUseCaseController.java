@@ -14,7 +14,7 @@ import java.util.List;
 public class SearchTutorUseCaseController {
 
     public List<TutorSearchResultBean> formatSearchResults(SearchTutorQueryBean bean) throws FindTutorException {
-        int i = 0;
+
         List<TutorSearchResult> tutorinfos;
         try {
             ByCourseOrNameEnum searchEnum = ByCourseOrNameEnum.valueOf(bean.getSearchType()) ;

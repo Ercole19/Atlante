@@ -14,7 +14,7 @@ public abstract class LoggedUser {
         CalendarSubject.getInstance().refreshOnLogOut() ;
         ExamsSubject.getInstance().logOut();
         BooksSubject.getInstance().logOut();
-        TutorPersonalPageSubject.getInstance().resetEntity(); ;
+        TutorPersonalPageSubject.getInstance().resetEntity();
     }
 
     public abstract LoggedUserMailBean getEmail() ;

@@ -73,9 +73,7 @@ public abstract class EventsViewGC {
                 searchResultProduct.setEntry(i, 5, delete);
 
                 Button edit = new Button("Edit");
-                edit.setOnAction(event -> {
-                    editButtonBehavior(eventBean) ;
-                });
+                edit.setOnAction(event -> editButtonBehavior(eventBean));
                 searchResultProduct.setEntry(i, 6, edit);
                 i++ ;
             }

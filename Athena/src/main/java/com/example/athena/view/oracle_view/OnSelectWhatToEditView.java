@@ -20,7 +20,7 @@ public class OnSelectWhatToEditView {
 
     private final Button saveChanges ;
 
-    public OnSelectWhatToEditView(OnSelectWhatToEditGC controller) {
+    public OnSelectWhatToEditView() {
         VBox finalRoot = new VBox() ;
 
         finalRoot.getChildren().add(LabelBuilder.buildLabel("Select what you want to edit:")) ;

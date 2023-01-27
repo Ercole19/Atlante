@@ -53,12 +53,12 @@ public class TableView {
             root.setId("resultList");
             SearchResultFormatterComponent adapter = new TableViewAdapter(this) ;
 
-            FormatBundle bundle = new FormatBundle() ;
+            FormatBundle formatBundle = new FormatBundle() ;
 
-            bundle.setContainerWidth(this.bundle.getContainerWidth()) ;
-            bundle.setContainerHeight(this.bundle.getContainerHeight());
-            bundle.setWidth(root.getPrefWidth());
-            bundle.setHeight(root.getPrefHeight());
+            formatBundle.setContainerWidth(this.bundle.getContainerWidth()) ;
+            formatBundle.setContainerHeight(this.bundle.getContainerHeight());
+            formatBundle.setWidth(root.getPrefWidth());
+            formatBundle.setHeight(root.getPrefHeight());
 
             if(this.bundle.getContainerWidth() < root.getPrefWidth()) {
                 adapter = new HorizontalScrollBarDecorator(adapter) ;
@@ -68,7 +68,7 @@ public class TableView {
                 adapter = new VerticalScrollBarDecorator(adapter) ;
             }
 
-            return adapter.buildScene(bundle) ;
+            return adapter.buildScene(formatBundle) ;
         }
 
         return this.getRoot() ;

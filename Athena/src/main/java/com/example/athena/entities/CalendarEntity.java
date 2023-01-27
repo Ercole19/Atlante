@@ -43,8 +43,10 @@ public class CalendarEntity {
             eventBean.setEnd(event.getEnd());
             eventBean.setDescription(event.getDescription());
             eventBean.setType(event.getType().toString()) ;
-            long period = event.getDateOfReminder().toLocalDateTime().until(LocalDateTime.of(event.getDay(), event.getStart()), ChronoUnit.MINUTES) ;
-            if (event.getDateOfReminder() != null) eventBean.setDateOfReminder((int) period / 60, (int) period % 60);
+            if (event.getDateOfReminder() != null) {
+                long period = event.getDateOfReminder().toLocalDateTime().until(LocalDateTime.of(event.getDay(), event.getStart()), ChronoUnit.MINUTES) ;
+                eventBean.setDateOfReminder((int) period / 60, (int) period % 60);
+            }
             dailyEvents.add(eventBean);
         }
         return dailyEvents;
@@ -58,9 +60,12 @@ public class CalendarEntity {
     }
 
     public void addEvent(EventEntity eventEntity){
-        this.events.add(eventEntity);
+
+        if (!this.events.contains(eventEntity)) this.events.add(eventEntity);
+
         List<EventEntity> list = this.map.getOrDefault(eventEntity.getDay(), new ArrayList<>()) ;
-        list.add(eventEntity) ;
+        if (!list.contains(eventEntity)) list.add(eventEntity) ;
+
         this.map.put(eventEntity.getDay(), list) ;
     }
 
@@ -68,6 +73,8 @@ public class CalendarEntity {
         this.events.remove(event);
         List<EventEntity> list = this.map.getOrDefault(event.getDay(), new ArrayList<>()) ;
         list.remove(event);
-        this.map.put(event.getDay(), list);
+
+        if (list.isEmpty()) this.map.remove(event.getDay()) ;
+        else this.map.put(event.getDay(), list);
     }
 }

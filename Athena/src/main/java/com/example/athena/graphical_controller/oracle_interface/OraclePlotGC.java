@@ -99,15 +99,27 @@ public class OraclePlotGC {
             return;
         }
 
-        int i = 1 ;
         LocalDate startDate = beans.get(0).getPlotStartTime() ;
+
+        setDateGrid(startDate, view) ;
+
+        setContent(startDate, beans, view);
+
+    }
+
+    private void setDateGrid(LocalDate startDate, TableView view) {
+        int i = 1 ;
         LocalDate date = startDate ;
         while (date.isBefore(LocalDate.now()) || date.isEqual(LocalDate.now())) {
             view.setGridPaneEntry(0, i, LabelBuilder.buildSmallLabel(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
             date = date.plusDays(1) ;
             i++ ;
         }
+    }
 
+    private void setContent(LocalDate startDate, List<ActivityPlotsBean> beans, TableView view) {
+        LocalDate date ;
+        int i ;
         int j = 1 ;
         for(ActivityPlotsBean bean : beans) {
             view.setGridPaneEntry(j,0, LabelBuilder.buildSmallLabel(bean.getPlotName()));
@@ -115,7 +127,7 @@ public class OraclePlotGC {
             i = 1 ;
             Map<LocalDate, Long> data = bean.getPlotSeries() ;
 
-            long max = 0;
+            long max = 1;
             for (Long entry : data.values()) {
                 if(entry > max) max = entry ;
             }

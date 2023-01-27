@@ -16,6 +16,6 @@ public class OnSaveEvent implements EditEventAbstractState {
     }
     @Override
     public void goNext(EditEventSM contextStateMachine) throws UnsupportedOperationException {
-
+        throw new UnsupportedOperationException("End State") ;
     }
 }

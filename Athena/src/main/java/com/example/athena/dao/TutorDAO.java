@@ -1,6 +1,7 @@
 package com.example.athena.dao;
 
 import com.example.athena.entities.LoggedTutor;
+import com.example.athena.entities.TutorDetails;
 import com.example.athena.entities.TutorInfoEntity;
 import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.NoCvException;
@@ -61,9 +62,9 @@ public class TutorDAO extends AbstractDAO {
                 float average = set.getFloat(6) ;
                 int reviewsNumber = set.getInt(7) ;
 
-                List<String> courses = new ArrayList<>() ;
+                TutorDetails details = new TutorDetails(aboutMe, sessionInfos, contactNumbers) ;
 
-                return new TutorInfoEntity(email, aboutMe, sessionInfos, contactNumbers, name, surname, average, reviewsNumber, courses) ;
+                return new TutorInfoEntity(email, name, surname, average, reviewsNumber, details) ;
             }
 
             throw new UserInfoException("User not found") ;

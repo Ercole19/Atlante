@@ -14,7 +14,7 @@ public class OnSelectWhatToEditGC {
     public OnSelectWhatToEditGC(OracleEditEventGC controller, OnSelectWhatToEdit state) {
         this.controller = controller ;
         this.state = state ;
-        this.view = new OnSelectWhatToEditView(this) ;
+        this.view = new OnSelectWhatToEditView() ;
         setUpInterface() ;
         ParentSubject.getInstance().setCurrentParent(view.getRoot()) ;
 
