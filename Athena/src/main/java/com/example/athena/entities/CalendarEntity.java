@@ -44,7 +44,7 @@ public class CalendarEntity {
             eventBean.setDescription(event.getDescription());
             eventBean.setType(event.getType().toString()) ;
             if (event.getDateOfReminder() != null) {
-                long period = event.getDateOfReminder().toLocalDateTime().until(LocalDateTime.of(event.getDay(), event.getStart()), ChronoUnit.MINUTES) ;
+                long period = event.getDateOfReminder().until(LocalDateTime.of(event.getDay(), event.getStart()), ChronoUnit.MINUTES) ;
                 eventBean.setDateOfReminder((int) period / 60, (int) period % 60);
             }
             dailyEvents.add(eventBean);

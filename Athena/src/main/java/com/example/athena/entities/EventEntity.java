@@ -15,9 +15,9 @@ public class EventEntity
     private LocalTime end ;
     private String description ;
     private ActivityTypesEnum type ;
-    private Timestamp dateOfReminder;
+    private LocalDateTime dateOfReminder;
 
-    public EventEntity(String name, LocalDate day, LocalTime start, LocalTime end, String description, ActivityTypesEnum type, Timestamp reminderDate)
+    public EventEntity(String name, LocalDate day, LocalTime start, LocalTime end, String description, ActivityTypesEnum type, LocalDateTime reminderDate)
     {
         this.setName(name) ;
         this.setDay(day) ;
@@ -118,7 +118,7 @@ public class EventEntity
 
     public ActivityTypesEnum getType() {return type;}
 
-    public Timestamp getDateOfReminder() {return dateOfReminder;}
+    public LocalDateTime getDateOfReminder() {return dateOfReminder;}
 
     public void deleteEntity() throws EventException {
         EventDao dao = new EventDao() ;
@@ -129,7 +129,7 @@ public class EventEntity
         EventDao dao = new EventDao() ;
         LocalDateTime dateOfReminderParam = null ;
         if(this.dateOfReminder != null) {
-            dateOfReminderParam = this.dateOfReminder.toLocalDateTime() ;
+            dateOfReminderParam = this.dateOfReminder ;
         }
 
         dao.addEvent(this.day, this.name, this.start, this.end, this.description, String.valueOf(this.type), dateOfReminderParam);

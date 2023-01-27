@@ -9,7 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TutorInfoEntity {
+public class Tutor {
 
     private String email ;
     private  String aboutMe;
@@ -24,7 +24,7 @@ public class TutorInfoEntity {
     private int reviewNumber ;
     private  List<String> courses;
 
-    public TutorInfoEntity(String email, String tutorName, String tutorSurname, float avg, int reviewNumber, TutorDetails details) {
+    public Tutor(String email, String tutorName, String tutorSurname, float avg, int reviewNumber, TutorDetails details) {
         this.email = email ;
         this.aboutMe = details.getAboutMe();
         this.sessionInfos = details.getSessionInfos();
@@ -134,7 +134,7 @@ public class TutorInfoEntity {
         new TutorDAO().saveInDB(this) ;
     }
 
-    public static TutorInfoEntity getFromDB(String email) throws UserInfoException, CourseException{
+    public static Tutor getFromDB(String email) throws UserInfoException, CourseException{
         return new TutorDAO().getTutorFromDB(email) ;
     }
 

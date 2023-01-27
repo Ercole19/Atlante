@@ -35,7 +35,7 @@ public class OracleEditEventGC {
             this.oldBean.setDescription(eventToEdit.getDescription()) ;
             this.oldBean.setType(eventToEdit.getType()) ;
             if (eventToEdit.isThereAReminder()) {
-                LocalDateTime reminder = eventToEdit.getDateOfReminder().toLocalDateTime() ;
+                LocalDateTime reminder = eventToEdit.getDateOfReminder() ;
                 LocalDateTime eventStart = LocalDateTime.of(eventToEdit.getDate(), eventToEdit.getStart()) ;
                 long distance = reminder.until(eventStart, ChronoUnit.MINUTES) ;
                 int minutesBefore = (int)distance % 60 ;
@@ -70,7 +70,7 @@ public class OracleEditEventGC {
         return bean.getType() ;
     }
 
-    public Timestamp getDateOfReminder() throws EventException{
+    public LocalDateTime getDateOfReminder() throws EventException{
         return bean.getDateOfReminder() ;
     }
 

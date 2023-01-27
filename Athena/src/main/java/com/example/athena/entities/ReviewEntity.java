@@ -59,7 +59,7 @@ public class ReviewEntity
 
         try {
             ReviewDAO reviewDAO = new ReviewDAO() ;
-            TutorInfoEntity entity = TutorInfoEntity.getFromDB(this.tutorUsername) ;
+            Tutor entity = Tutor.getFromDB(this.tutorUsername) ;
             entity.updateAverage(reviewStars) ;
             reviewDAO.deleteReview(this.reviewCode) ;
             entity.saveInDB() ;

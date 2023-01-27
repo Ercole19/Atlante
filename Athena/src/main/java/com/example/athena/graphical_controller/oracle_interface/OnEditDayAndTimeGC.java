@@ -1,5 +1,7 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
+import com.example.athena.engineering_classes.HourValueFactory;
+import com.example.athena.engineering_classes.MinuteValueFactory;
 import com.example.athena.view.oracle_view.OnEditDayAndTimeView;
 import javafx.scene.control.SpinnerValueFactory;
 
@@ -21,10 +23,10 @@ public class OnEditDayAndTimeGC {
         LocalTime startTime = controller.getEventStart() ;
         LocalTime endTime = controller.getEnd() ;
 
-        this.view.getFirstHourSpinner().setValueFactory(createHourValueFactory(startTime.getHour())) ;
-        this.view.getFirstMinuteSpinner().setValueFactory(createMinuteValueFactory(startTime.getMinute())) ;
-        this.view.getSecondHourSpinner().setValueFactory(createHourValueFactory(endTime.getHour())) ;
-        this.view.getSecondMinuteSpinner().setValueFactory(createMinuteValueFactory(endTime.getMinute())) ;
+        this.view.getFirstHourSpinner().setValueFactory(HourValueFactory.createHourValueFactory(startTime.getHour())) ;
+        this.view.getFirstMinuteSpinner().setValueFactory(MinuteValueFactory.createMinuteValueFactory(startTime.getMinute())) ;
+        this.view.getSecondHourSpinner().setValueFactory(HourValueFactory.createHourValueFactory(endTime.getHour())) ;
+        this.view.getSecondMinuteSpinner().setValueFactory(MinuteValueFactory.createMinuteValueFactory(endTime.getMinute())) ;
 
         this.view.getDone().setOnAction(event -> onSaveClick());
     }
@@ -35,21 +37,5 @@ public class OnEditDayAndTimeGC {
         this.controller.setStart(startTime) ;
         this.controller.setEnd(endTime) ;
         this.controller.advance() ;
-    }
-
-    private SpinnerValueFactory<Integer> createHourValueFactory(int value) {
-        SpinnerValueFactory<Integer> hourValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,23) ;
-        hourValueFactory.setWrapAround(true) ;
-        if (value >= 0 && value < 24) hourValueFactory.setValue(value) ;
-        else hourValueFactory.setValue(0) ;
-        return hourValueFactory ;
-    }
-
-    private SpinnerValueFactory<Integer> createMinuteValueFactory(int value) {
-        SpinnerValueFactory<Integer> minuteValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,59) ;
-        minuteValueFactory.setWrapAround(true) ;
-        if (value >= 0 && value < 60) minuteValueFactory.setValue(value) ;
-        else minuteValueFactory.setValue(0) ;
-        return minuteValueFactory ;
     }
 }

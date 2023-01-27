@@ -2,7 +2,7 @@ package com.example.athena.dao;
 
 import com.example.athena.entities.LoggedTutor;
 import com.example.athena.entities.TutorDetails;
-import com.example.athena.entities.TutorInfoEntity;
+import com.example.athena.entities.Tutor;
 import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.NoCvException;
 import com.example.athena.exceptions.UserInfoException;
@@ -25,13 +25,13 @@ public class TutorDAO extends AbstractDAO {
                                             "WHERE emailuser = ?" ;
 
 
-    public TutorInfoEntity getTutorFromDB(String mail) throws UserInfoException, CourseException{
-        TutorInfoEntity retVal = getBaseInfo(mail) ;
+    public Tutor getTutorFromDB(String mail) throws UserInfoException, CourseException{
+        Tutor retVal = getBaseInfo(mail) ;
         retVal.setCourses(getTutorCourses(mail));
         return retVal ;
     }
 
-    public void saveInDB(TutorInfoEntity tutor) throws UserInfoException {
+    public void saveInDB(Tutor tutor) throws UserInfoException {
         try (PreparedStatement statement = this.getConnection().prepareStatement(SAVE_TUTOR)) {
 
             statement.setString(1, tutor.getAboutMe());
@@ -47,7 +47,7 @@ public class TutorDAO extends AbstractDAO {
         }
     }
 
-    private TutorInfoEntity getBaseInfo(String email) throws UserInfoException {
+    private Tutor getBaseInfo(String email) throws UserInfoException {
 
         try (PreparedStatement statement = this.getConnection().prepareStatement(GET_BASE_INFO)) {
 
@@ -64,7 +64,7 @@ public class TutorDAO extends AbstractDAO {
 
                 TutorDetails details = new TutorDetails(aboutMe, sessionInfos, contactNumbers) ;
 
-                return new TutorInfoEntity(email, name, surname, average, reviewsNumber, details) ;
+                return new Tutor(email, name, surname, average, reviewsNumber, details) ;
             }
 
             throw new UserInfoException("User not found") ;

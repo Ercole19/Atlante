@@ -13,7 +13,7 @@ import java.io.File;
 public class TutorPersonalPageSubject extends AbstractSubject {
 
     private static TutorPersonalPageSubject instance = null ;
-    private TutorInfoEntity entity = null ;
+    private Tutor entity = null ;
 
 
     private TutorPersonalPageSubject()
@@ -32,7 +32,7 @@ public class TutorPersonalPageSubject extends AbstractSubject {
     }
 
     private void getAllInfos(String email) throws CourseException, UserInfoException {
-        this.entity = TutorInfoEntity.getFromDB(email) ;
+        this.entity = Tutor.getFromDB(email) ;
     }
 
     public TutorInfosBean getTutorInfos(UserBean bean) throws CourseException, UserInfoException {

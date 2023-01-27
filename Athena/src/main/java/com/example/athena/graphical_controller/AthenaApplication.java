@@ -1,33 +1,25 @@
-package com.example.athena.graphical_controller.normal_interface;
+package com.example.athena.graphical_controller;
 
+import com.example.athena.graphical_controller.normal_interface.SceneSwitcher;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 
-public class HelloApplication extends Application {
-
-  
+public abstract class AthenaApplication extends Application {
 
     @Override
-
-    public void start(Stage stage) throws IOException {
-        System.setProperty("oracle", "false");
+    public void start(Stage stage) throws Exception {
         SceneSwitcher switcher = SceneSwitcher.getInstance() ;
         stage.setResizable(false) ;
         switcher.pushStage(stage) ;
-        switcher.switcher("LoginPage.fxml") ;
+        prepareInterface() ;
         stage.setTitle("Athena");
         Image icon = new Image(new File("src/main/resources/assets/icon.png").toURI().toString());
         stage.getIcons().add(icon);
         stage.show();
-
     }
 
-    public static void main(String[] args) {
-        launch();
-        System.exit(0);
-    }
+    protected abstract void prepareInterface() ;
 }

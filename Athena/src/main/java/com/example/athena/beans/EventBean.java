@@ -9,21 +9,21 @@ import java.time.LocalTime;
 
 public class EventBean {
 
-    private LocalDate date ;
-    private String name ;
-    private LocalTime start ;
-    private LocalTime end ;
-    private String description ;
-    private String type ;
+    protected LocalDate date ;
+    protected String name ;
+    protected LocalTime start ;
+    protected LocalTime end ;
+    protected String description ;
+    protected String type ;
 
-    private Timestamp dateOfReminder ;
+    protected LocalDateTime dateOfReminder ;
 
 
 
     public void setDateOfReminder(int hoursBefore, int minutesBefore)
     {
         if (hoursBefore == 0 && minutesBefore == 0) this.dateOfReminder = null ;
-        else this.dateOfReminder = Timestamp.valueOf(LocalDateTime.of(this.getDate(), this.getStart()).minusHours(hoursBefore).minusMinutes(minutesBefore));
+        else this.dateOfReminder = LocalDateTime.of(this.getDate(), this.getStart()).minusHours(hoursBefore).minusMinutes(minutesBefore) ;
     }
 
     public void setDate(LocalDate date) {
@@ -87,7 +87,7 @@ public class EventBean {
     }
 
 
-    public Timestamp getDateOfReminder()throws EventException
+    public LocalDateTime getDateOfReminder()throws EventException
     {
         if(!this.isThereAReminder()) throw new EventException("Reminder couldn't be fetched because it doesn't exist");
         return this.dateOfReminder ;

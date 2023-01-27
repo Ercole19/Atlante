@@ -40,7 +40,7 @@ public class SetReminderEmailBoundary extends SocketBoundary
 
     private static MailServerBean prepareQueryForServer(ReminderBean eventInfo, String recipient) throws SendEmailException {
 
-        Timestamp moment;
+        LocalDateTime moment;
         try {
             moment = eventInfo.getDateOfReminder() ;
         }
@@ -54,7 +54,7 @@ public class SetReminderEmailBoundary extends SocketBoundary
         LocalTime start = eventInfo.getStart() ;
         LocalTime end = eventInfo.getEnd() ;
         String description = eventInfo.getDescription() ;
-        LocalDateTime momentForServer = moment.toLocalDateTime() ;
+        LocalDateTime momentForServer = moment ;
         MailServerBean bean = new MailServerBean() ;
         if (eventInfo.isRemove()) bean.setClassName("R");
         else bean.setClassName("N");
