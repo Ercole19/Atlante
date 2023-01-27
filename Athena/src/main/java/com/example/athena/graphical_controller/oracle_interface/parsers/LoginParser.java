@@ -12,7 +12,7 @@ public class LoginParser {
     public void parseLogin(List<String> commandToken) {
         if (commandToken.size() != 1){
             LabelView view = new LabelView();
-            ParentSubject.getInstance().setCurrentParent(view.prepareParent("insert email and password after login command"));
+            ParentSubject.getInstance().setCurrentParent(view.prepareParent("Usage: login#email"));
         } else {
             new OracleLoginGC(commandToken.get(0));
         }

@@ -10,8 +10,8 @@ public class ShowParser {
     public void parseShowCommand(List<String> commandToken) {
         LabelView view = new LabelView();
         switch (commandToken.get(0)) {
-            case "events":
-                ShowEventParser showEventParser = new ShowEventParser();
+            case "calendar":
+                ShowCalendarParser showEventParser = new ShowCalendarParser();
                 commandToken.remove(0);
                 showEventParser.showEventParse(commandToken);
                 break;

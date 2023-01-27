@@ -12,7 +12,7 @@ public class ValidateSignUpParser {
         OracleValidateSignUpGC controller = new OracleValidateSignUpGC();
         if (commandToken.size() < 2){
             LabelView view = new LabelView();
-            ParentSubject.getInstance().setCurrentParent(view.prepareParent("insert email and code after validate command"));
+            ParentSubject.getInstance().setCurrentParent(view.prepareParent("Usage: validate_signup#email#code"));
         } else {
             controller.createParent(commandToken.get(0), commandToken.get(1));
         }

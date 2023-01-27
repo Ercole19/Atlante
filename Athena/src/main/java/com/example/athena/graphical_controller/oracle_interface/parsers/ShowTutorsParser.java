@@ -14,7 +14,7 @@ public class ShowTutorsParser {
     public void parseShowTutor(List<String> commandToken) {
         LabelView labelView = new LabelView();
         if (commandToken.size() != 3 || !((commandToken.get(2).equals("true")) || (commandToken.get(2).equals("false"))) ) {
-            ParentSubject.getInstance().setCurrentParent(labelView.prepareParent("Incorrect arguments passed"));
+            ParentSubject.getInstance().setCurrentParent(labelView.prepareParent("Usage : show#tutors#query#(byName | byCourse)#(true | false)"));
         }
         else  {
             try {

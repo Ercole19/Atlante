@@ -32,7 +32,7 @@ public class OraclePlotGC {
         this.tokens = tokens ;
         if (tokens.size() != 2 || !checkPlotType() || !checkTimePeriod()) {
             ParentSubject.getInstance().setCurrentParent(new LabelView().prepareParent(
-                    "Usage: show#plots#[ALL][STUDY_SESSION][LECTURE_TIME][OTHER]#[LAST_WEEK][LAST_TWO_WEEKS][LAST_MONTH][LAST_TWO_MONTHS]"));
+                    "Usage: show#plots#(ALL | STUDY_SESSION | LECTURE_TIME | OTHER)#(LAST_WEEK | LAST_TWO_WEEKS | LAST_MONTH | LAST_TWO_MONTHS)"));
             return ;
         }
         this.view = new OraclePlotView(this) ;

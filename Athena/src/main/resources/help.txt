@@ -1,29 +1,47 @@
 commands list:
+
+    login#username
+    signup#name#surname#email#(STUDENT | TUTOR)
+    validate_signup#email#code
+
+    student commands :
+              add_event#eventName#eventDate#eventStart#eventEnd
+              review#code
+
+              show#
+                    calendar#day
+                    plots#(ALL | STUDY_SESSION | LECTURE_TIME | OTHER)#(LAST_WEEK | LAST_TWO_WEEKS | LAST_MONTH | LAST_TWO_MONTHS)
+                    tutors#query#(byName | byCourse)#(true | false)
+
+    tutor commands :
+              generate_review#student#tutoringDay#startHour#endHour
+              add_course#name
+              delete_course#name
+              add_cv#[pathname]
+
+              show#
+                    my_courses
+                    my_infos
+                    my_cv
+
+
+
+
+
+
+
+    unimplemented :
               update_exam#[oldname#olddate#oldgrade#oldcfu#newName#newDate#newGrade#newCfu]
-              login#[username#password]
-              signup#[name#surname#email#password]
-              validate_signup#[code]
-              add_event
               show#my_selling_books
-                   plots
                    exams_completion
                    cfu_completion
                    taken_exams
                    averages
-                   tutors#[Type#name#ordered]
                    books#[name/isbn]
                    sold_books
                    purchased_books
-                   my_courses
-                   my_infos
-                   my_cv
-              generate_review
-              review#[code]
               sell_book
-              add_course#[name]
-              add_cv#[pathname]
               set_maxCfus#[newmax]
               set_maxExams#[newmax]
-              delete_course#[name]
               add_exam#[name#cfu#grade#date]
               delete_exam#[name#date#grade#cfu]

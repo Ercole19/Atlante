@@ -12,7 +12,7 @@ public class AddEventParser {
     private final LabelView view = new LabelView();
     public void parseAddEvent(List<String> commandToken){
         if (commandToken.size() != 4) {
-            ParentSubject.getInstance().setCurrentParent(view.prepareParent("Incorrect usage"));
+            ParentSubject.getInstance().setCurrentParent(view.prepareParent("Usage: add_event#eventName#eventDate#eventStart#eventEnd"));
         }
         else {
             try{
