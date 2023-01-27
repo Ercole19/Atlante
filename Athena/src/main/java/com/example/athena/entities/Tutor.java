@@ -112,7 +112,7 @@ public class Tutor {
 
     public void insertCV(File cv) throws UserInfoException {
         new TutorDAO().insertCv(cv) ;
-        this.cv = cv ;
+        this.cv = null ;
     }
 
     public void addCourse(String course) throws CourseException {

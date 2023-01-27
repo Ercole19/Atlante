@@ -103,10 +103,4 @@ public class LoginPageController{
     public void switchToSignUpPage() {
         switcher.switcher("signUpView.fxml");
     }
-
-
-    public void fillFast() {
-        emailField.setText("alba@student.it");
-        passField.setText("tramonto");
-    }
 }
