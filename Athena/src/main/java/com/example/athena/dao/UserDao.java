@@ -1,7 +1,6 @@
 package com.example.athena.dao;
 
 import com.example.athena.entities.ByCourseOrNameEnum;
-import com.example.athena.entities.ExamsOrCfusEnum;
 import com.example.athena.entities.LoggedStudent;
 import com.example.athena.entities.LoggedTutor;
 import com.example.athena.exceptions.*;
@@ -74,64 +73,6 @@ public class UserDao extends AbstractDAO {
            throw new UserInfoException(e.getMessage());
         }
         return infos;
-    }
-
-    public void setCfusOrExams(int data, ExamsOrCfusEnum cfuOrExams) throws CareerStatusException {
-        String setQuery;
-
-        if (cfuOrExams.toString().equals("SET_MAX_EXAMS")) { setQuery = "Update athena.student_infos set max_exams = ? where email = ?";}
-        else {setQuery = "Update athena.student_infos set max_cfus = ? where email = ?";}
-
-        try (PreparedStatement statement = this.getConnection().prepareStatement(setQuery)) {
-
-            statement.setInt(1, data);
-            statement.setString(2, LoggedStudent.getInstance().getEmail().getMail());
-
-            statement.execute();
-
-
-        } catch (SQLException | IOException exc) {
-            throw new CareerStatusException("Unable to update career status. Details follow: " + exc.getMessage());
-        }
-    }
-
-
-    public int getAllExams() throws UserInfoException {
-
-        int total = 0;
-        try (PreparedStatement statement = this.getConnection().prepareStatement("Select max_exams from athena.student_infos where email =? ")) {
-
-            statement.setString(1, LoggedStudent.getInstance().getEmail().getMail());
-            ResultSet set = statement.executeQuery();
-
-            set.next();
-            total = set.getInt(1);
-
-
-        } catch (SQLException | IOException exc) {
-            throw new UserInfoException(exc.getMessage());
-        }
-        return total;
-    }
-
-
-    public int getAllCfus() throws UserInfoException {
-        int total = 0;
-
-        try (PreparedStatement statement = this.getConnection().prepareStatement("Select max_cfus from athena.student_infos where email =? ")) {
-
-
-            statement.setString(1, LoggedStudent.getInstance().getEmail().getMail());
-            ResultSet set = statement.executeQuery();
-
-            set.next();
-            total = set.getInt(1);
-
-
-        } catch (SQLException | IOException exception) {
-            throw new UserInfoException(exception.getMessage());
-        }
-        return total;
     }
 
 

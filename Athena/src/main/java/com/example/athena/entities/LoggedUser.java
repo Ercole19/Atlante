@@ -12,8 +12,6 @@ public abstract class LoggedUser {
     {
         LoggedUser.instance = null ;
         CalendarSubject.getInstance().refreshOnLogOut() ;
-        ExamsSubject.getInstance().logOut();
-        BooksSubject.getInstance().logOut();
         TutorPersonalPageSubject.getInstance().resetEntity();
     }
 

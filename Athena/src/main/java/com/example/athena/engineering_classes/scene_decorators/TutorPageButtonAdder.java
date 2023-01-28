@@ -16,6 +16,7 @@ public class TutorPageButtonAdder extends TutorPageDecorator{
         super(component) ;
     }
 
+    @Override
     public Parent build()
     {
         AnchorPane originalScene = (AnchorPane) super.build();

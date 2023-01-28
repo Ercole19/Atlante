@@ -2,6 +2,7 @@ package com.example.athena.boundaries;
 
 import com.example.athena.beans.MailServerResponseBean;
 import com.example.athena.beans.SocketBean;
+import com.example.athena.engineering_classes.SecureObjectInputStream;
 
 import java.io.*;
 import java.net.Socket;
@@ -23,7 +24,7 @@ public abstract class SocketBoundary
 
             writeStream.writeObject(bean);
 
-            ObjectInputStream readStream = new ObjectInputStream(in) ;
+            ObjectInputStream readStream = new SecureObjectInputStream(in) ;
 
             return (MailServerResponseBean) readStream.readObject();
 
@@ -41,7 +42,7 @@ public abstract class SocketBoundary
     {
         try(Socket socket = new Socket("localhost", port) ; InputStream in = socket.getInputStream())
         {
-            ObjectInputStream readStream = new ObjectInputStream(in) ;
+            ObjectInputStream readStream = new SecureObjectInputStream(in) ;
 
             return (MailServerResponseBean) readStream.readObject() ;
 

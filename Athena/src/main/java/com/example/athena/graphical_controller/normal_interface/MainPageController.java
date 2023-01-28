@@ -6,17 +6,8 @@ public class MainPageController {
 
     private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 
-    public void onExamsButtonClick() {
-        switcher.switcher( "ExamHomepageView.fxml");
-    }
-
     public void onCalendarButtonClick()  {
         switcher.switcher("CalendarPage.fxml");
-    }
-
-
-    public void onShopButtonClick()  {
-        switcher.switcher("bookshop-choose-view.fxml");
     }
 
 

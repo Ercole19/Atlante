@@ -53,8 +53,6 @@ public class GenerateReviewTutorGC implements Initializable
     @FXML
     private DatePicker dayDatePicker ;
 
-    private ReviewTutorUCC controller ;
-
     public void clickOnBackButton() throws IOException
     {
         SceneSwitcher switcher = SceneSwitcher.getInstance();
@@ -126,7 +124,7 @@ public class GenerateReviewTutorGC implements Initializable
         dataBean.setTutoringEndTime(endTime) ;
         dataBean.setTutoringSubject(subject) ;
 
-        this.controller = new ReviewTutorUCC() ;
+        ReviewTutorUCC controller = new ReviewTutorUCC() ;
 
         try
         {

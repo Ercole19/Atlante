@@ -15,7 +15,6 @@ public class ReviewDAO extends AbstractDAO
             "VALUES (?, ?, ?, ?, ?, ?, ?)" ;
     private String getReview = "SELECT * FROM reviews WHERE reviewCode = ?" ;
     private String deleteReview = "DELETE FROM reviews WHERE reviewCode = ?" ;
-    private String finalizeReview ="CALL athena.finalize(? , ?)" ;
 
     public void addReview(ReviewEntity entity) throws TutorReviewException
     {
@@ -26,7 +25,7 @@ public class ReviewDAO extends AbstractDAO
             statement.setString(3, entity.getStudentUsername()) ;
             Date date = Date.valueOf(entity.getDay());
             statement.setString(4, date.toString()) ;
-            statement.setString(5, entity.getSubject()); ;
+            statement.setString(5, entity.getSubject());
             Time sqlStartTime = Time.valueOf(entity.getStartTime()) ;
             statement.setString(6, sqlStartTime.toString()) ;
             Time sqlEndTime = Time.valueOf(entity.getEndTime()) ;

@@ -20,43 +20,10 @@ public class ShowParser {
                 commandToken.remove(0) ;
                 showPlotsParser.parseShowPlots(commandToken);
                 break;
-            case "exams_completion":
-                ShowExamsCompletionParser showExamsCompletionParser = new ShowExamsCompletionParser();
-                showExamsCompletionParser.parseExamsCompletion();
-                break;
-            case "cfu_completion" :
-                ShowCfusCompletionParser showCfusCompletionParser = new ShowCfusCompletionParser();
-                showCfusCompletionParser.parseCfusCompletion();
-                break;
-            case "taken_exams" :
-                ShowTakenExamsParser showTakenExamsParser = new ShowTakenExamsParser();
-                showTakenExamsParser.parseTakenExams();
-                break;
-            case "averages" :
-                ShowAllAveragesParser showAllAveragesParser = new ShowAllAveragesParser();
-                showAllAveragesParser.parseAllAverages();
-                break ;
             case "tutors" :
                 ShowTutorsParser showTutorsParser = new ShowTutorsParser();
                 commandToken.remove(0);
                 showTutorsParser.parseShowTutor(commandToken);
-                break;
-            case "books" :
-                ShowBooksParser showBooksParser = new ShowBooksParser();
-                commandToken.remove(0);
-                showBooksParser.parseShowBooks(commandToken);
-                break;
-            case "sold_books" :
-                ShowSoldBooksParser soldBooksParser = new ShowSoldBooksParser();
-                soldBooksParser.parseSoldBooks();
-                break;
-            case "purchased_books" :
-                ShowPurchasedBooksParser purchasesParser = new ShowPurchasedBooksParser() ;
-                purchasesParser.showPurchasesParse();
-                break;
-            case "my_selling_books":
-                ShowMySellingBooksParser showMySellingBooksParser = new ShowMySellingBooksParser();
-                showMySellingBooksParser.parseShowMySellingBooks();
                 break;
             case "my_courses" :
                 ShowMyCoursesParser coursesParser = new ShowMyCoursesParser() ;

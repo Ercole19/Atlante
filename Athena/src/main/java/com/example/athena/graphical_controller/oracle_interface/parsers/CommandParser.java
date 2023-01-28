@@ -50,60 +50,15 @@ public class CommandParser {
                 commandToken.remove(0);
                 reviewParser.parseReview(commandToken);
                 break;
-            case "sell_book" :
-                SellBookParser sellBookParser = new SellBookParser();
-                commandToken.remove(0);
-                sellBookParser.parseSellBook(commandToken);
-                break;
-            case "add_course" :
-                AddCoursesParser addCoursesParser = new AddCoursesParser();
-                commandToken.remove(0);
-                addCoursesParser.parseAddCourse(commandToken);
-                break ;
-            case "update_book":
-                UpdateBookParser updateBookParser = new UpdateBookParser() ;
-                commandToken.remove(0) ;
-                updateBookParser.parseUpdateBook(commandToken) ;
-                break;
-            case "delete_book":
-                DeleteBookParser deleteBookParser = new DeleteBookParser();
-                commandToken.remove(0);
-                deleteBookParser.parseDeleteBook(commandToken);
-                break;
             case "add_cv":
                 AddCvParser addCvParser = new AddCvParser();
                 commandToken.remove(0);
                 addCvParser.parseAddCV(commandToken);
                 break;
-            case "set_maxCfus":
-                SetMaxCfuParser setMaxCfuParser = new SetMaxCfuParser();
-                commandToken.remove(0);
-                setMaxCfuParser.parseSetMaxCfus(commandToken);
-                break;
-            case "add_exam":
-                AddExamsParser addExamsParser = new AddExamsParser();
-                commandToken.remove(0);
-                addExamsParser.parseAddExams(commandToken);
-                break;
-            case "set_maxExams" :
-                SetMaxExamsParser setMaxExamsParser = new SetMaxExamsParser();
-                commandToken.remove(0);
-                setMaxExamsParser.parseSetMaxExams(commandToken);
-                break;
             case "delete_course" :
                 DeleteCourseParser deleteCourseParser = new DeleteCourseParser();
                 commandToken.remove(0);
                 deleteCourseParser.parseDeleteCourse(commandToken);
-                break;
-            case "delete_exam" :
-                DeleteExamParser deleteExamParser = new DeleteExamParser();
-                commandToken.remove(0);
-                deleteExamParser.parseDeleteExams(commandToken);
-                break;
-            case "update_exam" :
-                UpdateExamParser updateExamParser = new UpdateExamParser();
-                commandToken.remove(0);
-                updateExamParser.parseUpdateExam(commandToken);
                 break;
             case "help" :
                 HelpParser helpParser = new HelpParser();
