@@ -109,5 +109,4 @@ public class BookEntity {
         this.saleTimestamp = timestamp;
     }
 
-    public void setPurchaser(String purchaser) {this.purchaser = purchaser;}
 }

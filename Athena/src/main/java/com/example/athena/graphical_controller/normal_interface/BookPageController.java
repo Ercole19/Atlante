@@ -100,10 +100,6 @@ public class BookPageController extends ShiftImageController implements PostInit
             }
             buyButton.setVisible(true);
             buyButton.setDisable(false);
-            if(Boolean.TRUE.equals(book.getNegotiable())) {
-                buyButton.setText("Place bid");
-                buyButton.setOnAction(this::onNegotiateButtonClick);
-            }
             backBtn.setOnAction(this::onBackBtnClick);
         }
 
@@ -148,7 +144,6 @@ public class BookPageController extends ShiftImageController implements PostInit
         switcher.switcher("sell-view.fxml");
     }
 
-
     public void onBuyBookButtonClick(ActionEvent event){
         List<Object> params = new ArrayList<>();
         params.add(this.book);
@@ -163,12 +158,6 @@ public class BookPageController extends ShiftImageController implements PostInit
             stage.close();
             ParentSubject.getInstance().setCurrentParent(new AnchorPane());
         }
-    }
-
-    public void onNegotiateButtonClick(ActionEvent event) {
-        List<Object> params = new ArrayList<>();
-        params.add(this.book);
-        switcher.popup("PlaceBidPage.fxml", "Place bid", params);
     }
 
     @Override

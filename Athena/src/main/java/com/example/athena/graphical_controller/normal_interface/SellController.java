@@ -1,7 +1,6 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 
-import com.example.athena.beans.normal.BidBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
 import com.example.athena.entities.BooksSubject;
 import com.example.athena.entities.SellerOrBuyerEnum;
@@ -85,7 +84,6 @@ public class SellController implements Initializable, AbstractObserver {
                                 Text delete;
                                 Button editButton;
                                 Button goToBookPage;
-                                Button manageOffers;
 
                                 HBox manageBtn;
                                 if (empty) {
@@ -98,7 +96,6 @@ public class SellController implements Initializable, AbstractObserver {
 
                                     editButton = new Button("Edit ");
                                     goToBookPage = new Button("Book Page");
-                                    manageOffers = new Button("Offers");
                                     if (System.getProperty("oracle").equals("true")) {
                                         goToBookPage.setDisable(true);
                                         goToBookPage.setVisible(false);
@@ -136,17 +133,7 @@ public class SellController implements Initializable, AbstractObserver {
                                         }
                                     });
 
-                                    manageOffers.setOnAction(event-> {
-                                        BookBean bean = bookTable.getSelectionModel().getSelectedItem();
-                                        List<Object> params = new ArrayList<>();
-                                        BidBean bidBean = new BidBean();
-                                        bidBean.setBookIsbn(bean.getIsbn());
-                                        bidBean.setBookTimestamp(bean.getTimeStamp());
-                                        params.add(bidBean);
-                                        switcher.switcher("ManageBidsPage.fxml", params);
-                                    });
-
-                                    manageBtn = new HBox(editButton, delete, goToBookPage, manageOffers);
+                                    manageBtn = new HBox(editButton, delete, goToBookPage);
                                     manageBtn.setStyle("-fx-alignment : center");
                                     HBox.setMargin(editButton, new Insets(2, 2, 0, 3));
                                     HBox.setMargin(delete, new Insets(2, 3, 0, 2));
