@@ -44,7 +44,7 @@ public class TutorPersonalPageSubject extends AbstractSubject {
         returnBean.setSessionInfos(this.entity.getSessionInfos());
         returnBean.setTutorCourses(this.entity.getCourses());
         returnBean.setContactNumbers(this.entity.getContactNumbers());
-        returnBean.setAvgReview(this.entity.getAvgReview());
+        returnBean.setAvgReview(this.entity.getAverageReview());
         return returnBean ;
     }
 

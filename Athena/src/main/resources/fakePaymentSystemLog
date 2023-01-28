@@ -1,2 +1,6 @@
-set 01, 2022 11:29:02 PM com.example.servers.FakePaymentSystem run
-INFORMAZIONI: Type 'quit' to quit
+Nov 23, 2022 8:19:26 PM com.example.servers.FakePaymentSystem main
+INFO: Type 'quit' to quit
+Nov 23, 2022 8:20:44 PM com.example.servers.FakePaymentSystem clientAcceptance
+INFO: Payment successful for /127.0.0.1
+Nov 23, 2022 8:20:44 PM com.example.servers.FakePaymentSystem main
+INFO: Type 'quit' to quit

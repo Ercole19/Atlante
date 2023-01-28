@@ -37,7 +37,7 @@ public class TutorDAO extends AbstractDAO {
             statement.setString(1, tutor.getAboutMe());
             statement.setString(2, tutor.getSessionInfos());
             statement.setString(3, tutor.getContactNumbers());
-            statement.setFloat(4, tutor.getAvgReview());
+            statement.setFloat(4, tutor.getAverageReview());
             statement.setInt(5, tutor.getReviewNumber());
             statement.setString(6, tutor.getEmail()) ;
             statement.execute();

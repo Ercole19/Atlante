@@ -7,7 +7,7 @@ import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.exceptions.TutorReviewException;
 import com.example.athena.graphical_controller.normal_interface.SceneSwitcher;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
-import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
+import com.example.athena.use_case_controllers.ReviewTutorUCC;
 import com.example.athena.view.oracle_view.LabelView;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class ReviewParser {
             if (LoggedStudent.getInstance().getEmail().getMail() != null){
                 List<Object> params = new ArrayList<>() ;
                 params.add(commandToken.get(0)) ;
-                ReviewTutorUseCaseController reviewController = new ReviewTutorUseCaseController() ;
+                ReviewTutorUCC reviewController = new ReviewTutorUCC() ;
                 ReviewCodeBean rc = new ReviewCodeBean();
                 rc.setReviewCode(commandToken.get(0));
                 TutoringInformationBean reviewInfo = reviewController.getReviewFromCode(rc) ;

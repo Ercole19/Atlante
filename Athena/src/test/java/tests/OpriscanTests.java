@@ -5,14 +5,13 @@ import com.example.athena.entities.*;
 import com.example.athena.exceptions.*;
 
 import com.example.athena.use_case_controllers.LoginUseCaseController;
-import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
+import com.example.athena.use_case_controllers.ReviewTutorUCC;
 import com.example.athena.use_case_controllers.SearchTutorUseCaseController;
 import org.junit.jupiter.api.Test;
 
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,11 +42,11 @@ public class OpriscanTests {
 
         ReviewInfoBean bean = new ReviewInfoBean() ;
 
-        bean.setUsername(TEST_USERNAME) ;
-        bean.setSubject("Fondamenti") ;
-        bean.setDay(LocalDate.of(2021,12, 8));
-        bean.setStartTime(LocalTime.of(13, 13));
-        bean.setEndTime(LocalTime.of(14, 30)) ;
+        bean.setStudentMail(TEST_USERNAME) ;
+        bean.setTutoringSubject("Fondamenti") ;
+        bean.setTutoringDay(LocalDate.of(2021,12, 8));
+        bean.setTutoringStartTime(LocalTime.of(13, 13));
+        bean.setTutoringEndTime(LocalTime.of(14, 30)) ;
 
         String code = pushCodeToDB(bean) ;
 
@@ -58,7 +57,7 @@ public class OpriscanTests {
         ReviewTutorBean review = new ReviewTutorBean(5, code) ;
 
         try {
-            new ReviewTutorUseCaseController().reviewTutor(review) ;
+            new ReviewTutorUCC().reviewTutor(review) ;
         } catch (TutorReviewException e) {
             fail() ;
         }
@@ -108,7 +107,7 @@ public class OpriscanTests {
     private String pushCodeToDB(ReviewInfoBean usernameBean) {
         String reviewCode = null;
         try {
-            reviewCode = RandomCodesGenerator.generateReviewCode(5);
+            reviewCode = RandomCodesGenerator.generateRandomCode(5);
             ReviewEntity review = new ReviewEntity(usernameBean, reviewCode) ;
             review.toDB() ;
 

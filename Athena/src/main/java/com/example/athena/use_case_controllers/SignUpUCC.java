@@ -17,7 +17,7 @@ public class SignUpUCC {
 
     public void preRegister(UserBean bean) throws UserRegistrationException , SendEmailException, NoSuchAlgorithmException{
         String code;
-        code = RandomCodesGenerator.generateReviewCode(5);
+        code = RandomCodesGenerator.generateRandomCode(5);
         SendCodeMailBean params = new SendCodeMailBean(bean.getEmail(), code);
         SendRegistrationCodeBoundary.getInstance().sendCode(params);
 

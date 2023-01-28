@@ -6,7 +6,7 @@ import com.example.athena.beans.TutoringInformationBean;
 import com.example.athena.engineering_classes.DayStartEndFormatter;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.TutorReviewException;
-import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
+import com.example.athena.use_case_controllers.ReviewTutorUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -24,12 +24,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class StudentsReviewTutorsGraphicalController extends HomeScreenController implements PostInitialize
+public class StudentReviewTutorGC extends HomeScreenController implements PostInitialize
 {
     private Parent root;
     private Scene scene;
     private static final String REVIEW_SECTION_PROMPT = "#reviewSubscene";
     private String code ;
+
+    private ReviewTutorUCC controller ;
 
     @FXML
     private TextField reviewCodeTextField ;
@@ -44,13 +46,13 @@ public class StudentsReviewTutorsGraphicalController extends HomeScreenControlle
     {
         try
         {
-            ReviewTutorUseCaseController reviewController = new ReviewTutorUseCaseController() ;
+            this.controller = new ReviewTutorUCC() ;
 
             String reviewCode = this.reviewCodeTextField.getText() ;
 
             ReviewCodeBean rc = new ReviewCodeBean();
             rc.setReviewCode(reviewCode);
-            TutoringInformationBean reviewInfo = reviewController.getReviewFromCode(rc) ;
+            TutoringInformationBean reviewInfo = controller.getReviewFromCode(rc) ;
 
             root = switcher.preload( "tutorPersonalReview.fxml", new ArrayList<>(Collections.singleton(reviewCode)));
 
@@ -112,7 +114,7 @@ public class StudentsReviewTutorsGraphicalController extends HomeScreenControlle
         }
 
         ReviewTutorBean reviewBean = new ReviewTutorBean(reviewStars, this.code) ;
-        ReviewTutorUseCaseController controller = new ReviewTutorUseCaseController() ;
+        this.controller = new ReviewTutorUCC() ;
 
         try
         {

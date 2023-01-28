@@ -6,7 +6,7 @@ import com.example.athena.engineering_classes.DayStartEndFormatter;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.TutorReviewException;
 import com.example.athena.graphical_controller.normal_interface.PostInitialize;
-import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
+import com.example.athena.use_case_controllers.ReviewTutorUCC;
 import com.example.athena.view.oracle_view.LabelView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -87,7 +87,7 @@ public class OracleReviewGC implements PostInitialize {
         }
 
         ReviewTutorBean reviewBean = new ReviewTutorBean(reviewStars, this.code) ;
-        ReviewTutorUseCaseController controller = new ReviewTutorUseCaseController() ;
+        ReviewTutorUCC controller = new ReviewTutorUCC() ;
 
         LabelView view = new LabelView() ;
         

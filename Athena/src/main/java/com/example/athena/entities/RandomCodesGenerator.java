@@ -11,7 +11,7 @@ public class RandomCodesGenerator
     }
 
 
-    public static String generateReviewCode(int length) throws NoSuchAlgorithmException
+    public static String generateRandomCode(int length) throws NoSuchAlgorithmException
     {
         Random random = SecureRandom.getInstanceStrong();
         String charsPool = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" ;

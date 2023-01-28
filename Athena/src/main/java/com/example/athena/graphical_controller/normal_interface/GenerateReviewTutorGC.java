@@ -10,7 +10,7 @@ import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.TutorReviewException;
 import com.example.athena.exceptions.UserInfoException;
-import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
+import com.example.athena.use_case_controllers.ReviewTutorUCC;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
-public class TutorReviewPageGraphicalController implements Initializable
+public class GenerateReviewTutorGC implements Initializable
 {
     @FXML
     private Label starsNumber ;
@@ -52,6 +52,8 @@ public class TutorReviewPageGraphicalController implements Initializable
 
     @FXML
     private DatePicker dayDatePicker ;
+
+    private ReviewTutorUCC controller ;
 
     public void clickOnBackButton() throws IOException
     {
@@ -118,13 +120,13 @@ public class TutorReviewPageGraphicalController implements Initializable
 
         ReviewInfoBean dataBean = new ReviewInfoBean() ;
 
-        dataBean.setUsername(username);
-        dataBean.setDay(day) ;
-        dataBean.setStartTime(startTime) ;
-        dataBean.setEndTime(endTime) ;
-        dataBean.setSubject(subject) ;
+        dataBean.setStudentMail(username);
+        dataBean.setTutoringDay(day) ;
+        dataBean.setTutoringStartTime(startTime) ;
+        dataBean.setTutoringEndTime(endTime) ;
+        dataBean.setTutoringSubject(subject) ;
 
-        ReviewTutorUseCaseController controller = new ReviewTutorUseCaseController() ;
+        this.controller = new ReviewTutorUCC() ;
 
         try
         {

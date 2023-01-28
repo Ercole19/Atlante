@@ -17,7 +17,7 @@ public class Tutor {
     private  String contactNumbers;
     private  String name;
     private  String surname;
-    private  float avgReview;
+    private  float averageReview;
 
     private File cv ;
 
@@ -31,7 +31,7 @@ public class Tutor {
         this.contactNumbers = details.getContactNumbers();
         this.name = tutorName;
         this.surname = tutorSurname;
-        this.avgReview = avg;
+        this.averageReview = avg;
         this.reviewNumber = reviewNumber ;
         this.courses = new ArrayList<>();
     }
@@ -48,7 +48,7 @@ public class Tutor {
         return this.aboutMe;
     }
 
-    public float getAvgReview() {return this.avgReview;}
+    public float getAverageReview() {return this.averageReview;}
 
     public String getName() {return this.name;}
 
@@ -94,10 +94,6 @@ public class Tutor {
         this.surname = surname;
     }
 
-    public void setAvgReview(float avgReview) {
-        this.avgReview = avgReview;
-    }
-
     public int getReviewNumber() {
         return reviewNumber;
     }
@@ -126,7 +122,7 @@ public class Tutor {
     }
 
     public void updateAverage(float review) {
-        this.avgReview = (this.avgReview * this.reviewNumber + review) / (this.reviewNumber +1) ;
+        this.averageReview = (this.averageReview * this.reviewNumber + review) / (this.reviewNumber +1) ;
         this.reviewNumber = this.reviewNumber +1 ;
     }
 

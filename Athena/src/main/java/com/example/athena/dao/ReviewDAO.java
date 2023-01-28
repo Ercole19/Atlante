@@ -17,20 +17,19 @@ public class ReviewDAO extends AbstractDAO
     private String deleteReview = "DELETE FROM reviews WHERE reviewCode = ?" ;
     private String finalizeReview ="CALL athena.finalize(? , ?)" ;
 
-    public void addReview(String reviewCode, String tutorUsername, String studentUsername, LocalDate tutoringDay, String tutoringSubject,
-                          LocalTime startTime, LocalTime endTime) throws TutorReviewException
+    public void addReview(ReviewEntity entity) throws TutorReviewException
     {
         try (PreparedStatement statement = this.getConnection().prepareStatement(addReview))
         {
-            statement.setString(1, reviewCode) ;
-            statement.setString(2, tutorUsername) ;
-            statement.setString(3, studentUsername) ;
-            Date date = Date.valueOf(tutoringDay);
+            statement.setString(1, entity.getReviewCode()) ;
+            statement.setString(2, entity.getTutorUsername()) ;
+            statement.setString(3, entity.getStudentUsername()) ;
+            Date date = Date.valueOf(entity.getDay());
             statement.setString(4, date.toString()) ;
-            statement.setString(5, tutoringSubject) ;
-            Time sqlStartTime = Time.valueOf(startTime) ;
+            statement.setString(5, entity.getSubject()); ;
+            Time sqlStartTime = Time.valueOf(entity.getStartTime()) ;
             statement.setString(6, sqlStartTime.toString()) ;
-            Time sqlEndTime = Time.valueOf(endTime) ;
+            Time sqlEndTime = Time.valueOf(entity.getEndTime()) ;
             statement.setString(7, sqlEndTime.toString()) ;
             statement.executeUpdate() ;
         }catch (SQLException | IOException e)
@@ -75,17 +74,6 @@ public class ReviewDAO extends AbstractDAO
         }catch (SQLException | IOException e)
         {
             throw new TutorReviewException("Failed to remove from DB") ;
-        }
-    }
-    public void finalizee(String reviewCode , int reviewStars) throws TutorReviewException {
-
-        try (PreparedStatement statement = this.getConnection().prepareStatement(finalizeReview)) {
-            statement.setString(1 , reviewCode);
-            statement.setInt(2 , reviewStars);
-            statement.executeQuery() ;
-
-        } catch (SQLException | IOException exc) {
-            throw new TutorReviewException("Failed to connect to DB") ;
         }
     }
 }

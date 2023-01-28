@@ -2,16 +2,16 @@ package com.example.athena.boundaries;
 
 import com.example.athena.beans.MailServerBean;
 
-public final class SendReviewCodeEmailBoundary extends CodeEmailBoundary
+public final class SendReviewCodeToStudentBoundary extends CodeEmailBoundary
 {
-    private static SendReviewCodeEmailBoundary instance = null ;
-    private SendReviewCodeEmailBoundary(){
+    private static SendReviewCodeToStudentBoundary instance = null ;
+    private SendReviewCodeToStudentBoundary(){
 
     }
 
-    public static synchronized SendReviewCodeEmailBoundary getInstance() {
+    public static synchronized SendReviewCodeToStudentBoundary getInstance() {
         if(instance == null) {
-            instance = new SendReviewCodeEmailBoundary() ;
+            instance = new SendReviewCodeToStudentBoundary() ;
         }
 
         return instance ;

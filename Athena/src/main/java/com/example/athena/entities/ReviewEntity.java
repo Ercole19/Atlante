@@ -23,12 +23,12 @@ public class ReviewEntity
     public ReviewEntity(ReviewInfoBean usernameBean, String reviewCode)
     {
         setReviewCode(reviewCode) ;
-        setStudentUsername(usernameBean.getUsername()) ;
+        setStudentUsername(usernameBean.getStudentMail()) ;
         setTutorUsername(LoggedTutor.getInstance().getEmail().getMail()) ;
-        setSubject(usernameBean.getSubject()) ;
-        setDay(usernameBean.getDay()) ;
-        setStartTime(usernameBean.getStartTime()) ;
-        setEndTime(usernameBean.getEndTime()) ;
+        setSubject(usernameBean.getTutoringSubject()) ;
+        setDay(usernameBean.getTutoringDay()) ;
+        setStartTime(usernameBean.getTutoringStartTime()) ;
+        setEndTime(usernameBean.getTutoringEndTime()) ;
     }
 
     public ReviewEntity(String reviewCode, String tutorUsername, String studentUsername, String subject, LocalDate day,
@@ -46,7 +46,7 @@ public class ReviewEntity
     public void toDB() throws TutorReviewException
     {
         ReviewDAO reviewDao = new ReviewDAO() ;
-        reviewDao.addReview(this.reviewCode, this.tutorUsername, this.studentUsername, this.day, this.subject, this.startTime, this.endTime) ;
+        reviewDao.addReview(this) ;
     }
 
     public static ReviewEntity getFromDB(String reviewCode) throws TutorReviewException
