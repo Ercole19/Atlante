@@ -42,7 +42,7 @@ public class OnChooseSubjectGC {
         view.getSubmit().setOnAction(event -> onClickOnSubmit());
     }
 
-    private void onClickOnSubmit() {
+    public void onClickOnSubmit() {
         this.controller.setSubject(view.getChoiceBox().getValue());
         controller.advance() ;
     }

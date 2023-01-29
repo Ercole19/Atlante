@@ -72,21 +72,15 @@ public class OpriscanTests {
     public void testCalendarSubjectRefreshOnLogout() {
         login(TEST_USERNAME, TEST_PARTICULAR_WORD_FOR_ACCESS) ;
 
-        EventEntity event = new EventEntity("AABBAA", LocalDate.of(2021, 12, 12), LocalTime.of(10, 30), LocalTime.of(11, 30),"Desc", ActivityTypesEnum.OTHER) ;
-
         try {
+            EventEntity event = new EventEntity("AABBAA", LocalDate.of(2021, 12, 12), LocalTime.of(10, 30), LocalTime.of(11, 30),"Desc", ActivityTypesEnum.OTHER) ;
             CalendarSubject.getInstance().addEvent(event);
-        } catch (EventException e) {
-            fail() ;
-        }
 
-        LoggedUser.logout() ;
+            LoggedUser.logout() ;
 
-        login("student@student.it", "student") ;
+            login("student@student.it", "student") ;
 
 
-
-        try {
             List<EventBean> list = CalendarSubject.getInstance().getEventsOfDay(new EventsDayBean(LocalDate.of(2021, 12, 12))) ;
             
             for(EventBean eventBean : list) {

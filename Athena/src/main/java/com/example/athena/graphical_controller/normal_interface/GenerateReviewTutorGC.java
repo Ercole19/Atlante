@@ -94,7 +94,7 @@ public class GenerateReviewTutorGC implements Initializable
 
     public void generateReviewCode()
     {
-        String username = studentUsername.getText() ;
+        String username = LoggedTutor.getInstance().getEmail().getMail() ;
         String subject ;
         try
         {

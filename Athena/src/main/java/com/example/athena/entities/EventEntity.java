@@ -17,8 +17,9 @@ public class EventEntity
     private ActivityTypesEnum type ;
     private LocalDateTime dateOfReminder;
 
-    public EventEntity(String name, LocalDate day, LocalTime start, LocalTime end, String description, ActivityTypesEnum type, LocalDateTime reminderDate)
+    public EventEntity(String name, LocalDate day, LocalTime start, LocalTime end, String description, ActivityTypesEnum type, LocalDateTime reminderDate) throws EventException
     {
+        if (end.isBefore(start)) throw new EventException("End hour is before start hour") ;
         this.setName(name) ;
         this.setDay(day) ;
         this.setStart(start) ;
@@ -28,8 +29,9 @@ public class EventEntity
         this.dateOfReminder = reminderDate;
     }
 
-    public EventEntity(String name, LocalDate day, LocalTime start, LocalTime end, String description, ActivityTypesEnum type)
+    public EventEntity(String name, LocalDate day, LocalTime start, LocalTime end, String description, ActivityTypesEnum type) throws EventException
     {
+        if (end.isBefore(start)) throw new EventException("End hour is before start hour") ;
         this.setName(name) ;
         this.setDay(day) ;
         this.setStart(start) ;
