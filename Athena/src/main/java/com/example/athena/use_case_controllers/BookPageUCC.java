@@ -1,16 +1,15 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.dao.UserDao;
-import com.example.athena.exceptions.UserInfoException;
+import com.example.athena.beans.StudentInfosBean;
+import com.example.athena.entities.Student;
+import com.example.athena.exceptions.StudentInfoException;
 
 public class BookPageUCC {
-    private final UserDao dao = new UserDao();
-
-    public  String[] getUserName(String email) throws UserInfoException{
-        return dao.getName(email);
-    }
-
-    public int getReportNumber(String vendor) throws UserInfoException {
-        return dao.getTotalReport(vendor);
+    public StudentInfosBean getStudentInfos(StudentInfosBean bean) throws StudentInfoException {
+        Student student = new Student();
+        student.setEmail(bean.getStudent());
+        bean.setFullName(student.getFullName());
+        bean.setRepNum(student.getReportNumber());
+        return bean;
     }
 }

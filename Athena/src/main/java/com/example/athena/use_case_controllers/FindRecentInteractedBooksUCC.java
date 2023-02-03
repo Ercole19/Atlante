@@ -1,6 +1,7 @@
 package com.example.athena.use_case_controllers;
 
 import com.example.athena.beans.BookBean;
+import com.example.athena.beans.FindRecentBooksBean;
 import com.example.athena.dao.BookDao;
 import com.example.athena.entities.BookEntity;
 import com.example.athena.exceptions.BookException;
@@ -11,12 +12,12 @@ import java.util.List;
 public class RecentActivitiesUCC {
     private final BookDao dao = new BookDao();
 
-    public List<BookBean> formatPurchasesResults(String email) throws BookException {
+    public List<BookBean> formatPurchasesResults(FindRecentBooksBean bean) throws BookException {
         List<BookEntity> list = dao.getRecentPurchasesResults(email);
         return getBookBeanList(list);
     }
     
-    public List<BookBean> formatSoldItemsResults(String email) throws BookException {
+    public List<BookBean> formatSoldItemsResults(FindRecentBooksBean bean) throws BookException {
         List<BookEntity> list = dao.getRecentSoldItemsFromDB(email);
         return getBookBeanList(list);
     }
