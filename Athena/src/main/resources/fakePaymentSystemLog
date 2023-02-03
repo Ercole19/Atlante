@@ -1,6 +1,10 @@
-Nov 23, 2022 8:19:26 PM com.example.servers.FakePaymentSystem main
-INFO: Type 'quit' to quit
-Nov 23, 2022 8:20:44 PM com.example.servers.FakePaymentSystem clientAcceptance
-INFO: Payment successful for /127.0.0.1
-Nov 23, 2022 8:20:44 PM com.example.servers.FakePaymentSystem main
-INFO: Type 'quit' to quit
+gen 30, 2023 10:24:51 PM com.example.servers.FakePaymentSystem main
+INFORMAZIONI: Type 'quit' to quit
+gen 30, 2023 10:25:55 PM com.example.servers.FakePaymentSystem clientAcceptance
+INFORMAZIONI: Payment successful for /127.0.0.1
+gen 30, 2023 10:25:55 PM com.example.servers.FakePaymentSystem main
+INFORMAZIONI: Type 'quit' to quit
+gen 30, 2023 10:30:20 PM com.example.servers.FakePaymentSystem clientAcceptance
+INFORMAZIONI: Payment successful for /127.0.0.1
+gen 30, 2023 10:30:20 PM com.example.servers.FakePaymentSystem main
+INFORMAZIONI: Type 'quit' to quit

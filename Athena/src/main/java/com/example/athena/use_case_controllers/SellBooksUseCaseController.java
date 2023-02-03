@@ -2,6 +2,8 @@ package com.example.athena.use_case_controllers;
 
 import com.example.athena.beans.BookBean;
 import com.example.athena.beans.ISBNBean;
+import com.example.athena.beans.IsThereANotificationBean;
+import com.example.athena.dao.BookDao;
 import com.example.athena.entities.BookEntity;
 import com.example.athena.entities.BooksSubject;
 import com.example.athena.entities.LoggedStudent;
@@ -32,6 +34,12 @@ public class SellBooksUseCaseController {
     {
         BookEntity bookE = new BookEntity(book.getBookTitle(), book.getIsbn(), book.getPrice(), book.getNegotiable() , book.getImage(), LoggedStudent.getInstance().getEmail().getMail(), book.getTimeStamp()) ;
         BooksSubject.getInstance().deleteBook(bookE, book.getIndex());
+    }
+
+    public IsThereANotificationBean getNotification() throws BookException {
+        IsThereANotificationBean bean = new IsThereANotificationBean();
+        bean.setNot(BooksSubject.getInstance().getNotifications());
+        return bean;
     }
 
 }

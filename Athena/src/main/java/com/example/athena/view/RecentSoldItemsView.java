@@ -7,6 +7,7 @@ import com.example.athena.engineering_classes.search_result_factory.SearchResult
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.BookException;
+import com.example.athena.exceptions.FindException;
 import com.example.athena.exceptions.PercentFormatException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.graphical_controller.normal_interface.RecentSoldItemsViewGC;
@@ -45,7 +46,7 @@ public class RecentSoldItemsView {
             this.result = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle) ;
             this.controller.setValues(this.result) ;
         }
-        catch (PercentFormatException| BookException e){
+        catch (PercentFormatException | BookException | FindException e){
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, FATAL_ERROR, 800, 600) ;
             alert.showAndWait() ;
             System.exit(1) ;

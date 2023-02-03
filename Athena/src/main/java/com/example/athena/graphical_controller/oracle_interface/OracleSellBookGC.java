@@ -45,9 +45,6 @@ public class OracleSellBookGC extends UpdatedShiftImageController implements OnY
         super.shiftIndex(-1);
     }
 
-    public void deleteImage() {super.deleteImageOnScreen();}
-    public void uploadImage() {super.onUploadBtnClick();}
-
     public void putBookOnSale() throws BookException, ISBNException {
         BookBean bean = new BookBean() ;
         bean.setBookTitle(this.bookName) ;

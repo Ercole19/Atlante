@@ -3,9 +3,8 @@ package com.example.athena.graphical_controller.normal_interface;
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
 import com.example.athena.entities.ExamsOrCfusEnum;
 import com.example.athena.entities.ExamsSubject;
-import com.example.athena.exceptions.ExamException;
-import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.exceptions.UserInfoException;
+import com.example.athena.entities.LoggedStudent;
+import com.example.athena.exceptions.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class CareerStatusController implements Initializable, AbstractObserver {
+public class CareerStatusController implements Initializable {
 
     @FXML
     private PieChart examsPieChart;
@@ -43,15 +42,14 @@ public class CareerStatusController implements Initializable, AbstractObserver {
     public void initialize(URL url, ResourceBundle rb) {
 
         try {
-            ExamsSubject.getInstance().attachObserver(this);
 
-            setGraphs();
             takenExams.setText(String.valueOf(ExamsSubject.getInstance().getTakenExamsNumber()));
             gainedCfus.setText(String.valueOf(ExamsSubject.getInstance().getGainedCfusNumber()));
-            totalCfus.setText(String.valueOf(ExamsSubject.getInstance().getTotalCfusNumber()));
-            totalExams.setText(String.valueOf(ExamsSubject.getInstance().getTotalExamsNumber()));
+            totalCfus.setText(String.valueOf(LoggedStudent.getInstance().getCurrentStudent().getMaxCfu()));
+            totalExams.setText(String.valueOf(LoggedStudent.getInstance().getCurrentStudent().getMaxExams()));
+            setGraphs();
 
-        } catch (ExamException | UserInfoException exc) {
+        } catch (ExamException exc) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage(), 800, 600);
             alert.showAndWait();
         }
@@ -61,16 +59,11 @@ public class CareerStatusController implements Initializable, AbstractObserver {
     private void setGraphs() {
         ObservableList<PieChart.Data> examsData = FXCollections.observableArrayList();
         ObservableList<PieChart.Data> cfusData = FXCollections.observableArrayList();
-        try {
-            examsData.add(new PieChart.Data("Taken Exams", ExamsSubject.getInstance().getTakenExamsNumber()));
-            cfusData.add(new PieChart.Data("Gained Cfus", ExamsSubject.getInstance().getGainedCfusNumber()));
+        examsData.add(new PieChart.Data("Taken Exams", Integer.parseInt(takenExams.getText())));
+        cfusData.add(new PieChart.Data("Gained Cfus", Integer.parseInt(gainedCfus.getText())));
 
-            examsData.add(new PieChart.Data("Remaining exams", ExamsSubject.getInstance().getTotalExamsNumber() - ExamsSubject.getInstance().getTakenExamsNumber()));
-            cfusData.add(new PieChart.Data("Remaining cfus", ExamsSubject.getInstance().getTotalCfusNumber() - ExamsSubject.getInstance().getGainedCfusNumber()));
-        } catch (ExamException | UserInfoException exc) {
-            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage(), 800, 600);
-            alert.showAndWait();
-        }
+        examsData.add(new PieChart.Data("Remaining exams", Integer.parseInt(totalExams.getText()) - Integer.parseInt(takenExams.getText())));
+        cfusData.add(new PieChart.Data("Remaining cfus", Integer.parseInt(totalCfus.getText()) - Integer.parseInt(gainedCfus.getText())));
 
         examsPieChart.setData(examsData);
         examsPieChartcfu.setData(cfusData);
@@ -78,16 +71,17 @@ public class CareerStatusController implements Initializable, AbstractObserver {
     }
 
     public void goBack(ActionEvent event) {
-        ExamsSubject.getInstance().detachObserver(this);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
     public void onSetCfuBtn() {
         List<Object> params = new ArrayList<>();
-
         params.add(ExamsOrCfusEnum.SET_MAX_CFUS);
         switcher.popup("SetMaxCfuOrExams.fxml", "Set max cfus", params);
+        this.totalCfus.setText(String.valueOf(LoggedStudent.getInstance().getCurrentStudent().getMaxCfu()));
+        setGraphs();
+
 
     }
 
@@ -95,18 +89,8 @@ public class CareerStatusController implements Initializable, AbstractObserver {
         List<Object> params = new ArrayList<>();
         params.add(ExamsOrCfusEnum.SET_MAX_EXAMS);
         switcher.popup("SetMaxCfuOrExams.fxml", "Set max cfus", params);
+        this.totalExams.setText(String.valueOf(LoggedStudent.getInstance().getCurrentStudent().getMaxExams()));
+        setGraphs();
     }
 
-    @Override
-    public void update() {
-        try {
-            totalExams.setText(String.valueOf(ExamsSubject.getInstance().getTotalExamsNumber()));
-            totalCfus.setText(String.valueOf(ExamsSubject.getInstance().getTotalCfusNumber()));
-            setGraphs();
-        }
-        catch (ExamException | UserInfoException exc) {
-            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage(), 800, 600);
-            alert.showAndWait();
-        }
-    }
 }

@@ -1,7 +1,9 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
 import com.example.athena.beans.OracleExamBean;
+import com.example.athena.exceptions.CareerStatusException;
 import com.example.athena.exceptions.ExamException;
+import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.ManageExamsUCC;
 import com.example.athena.view.oracle_view.LabelView;
 

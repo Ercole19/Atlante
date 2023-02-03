@@ -119,7 +119,7 @@ public class OpriscanTests {
         LoginUseCaseController controller = new LoginUseCaseController() ;
         try {
             controller.findUser(params) ;
-        } catch (UserNotFoundException | UserInfoException | FindException e) {
+        } catch (UserNotFoundException | UserInfoException | FindException | StudentInfoException e) {
             fail() ;
         }
     }

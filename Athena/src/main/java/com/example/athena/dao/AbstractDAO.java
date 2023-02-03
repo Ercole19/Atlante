@@ -52,12 +52,12 @@ public abstract class AbstractDAO
         if(dbConnection == null)
         {
             getCredentials();
-            try {
+            /*try {
                 this.prepareSession();
             }catch(JSchException e)
             {
                 throw new SQLException(e.getMessage()) ;
-            }
+            }*/
             dbConnection = DriverManager.getConnection(dbUrl, user, pass);
         }
 

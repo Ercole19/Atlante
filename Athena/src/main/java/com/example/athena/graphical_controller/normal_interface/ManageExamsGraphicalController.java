@@ -3,8 +3,10 @@ package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.beans.ExamBean;
 import com.example.athena.beans.NormalExamBean;
+import com.example.athena.exceptions.CareerStatusException;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.SizedAlert;
+import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.ManageExamsUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,25 +41,12 @@ public class ManageExamsGraphicalController implements PostInitialize {
 
         NormalExamBean examBean = new NormalExamBean();
         try {
-            int grade = Integer.parseInt(examGrade.getText());
-            int cfu = Integer.parseInt(examCFU.getText());
-            name = examName.getText();
-
-            if (!((grade < 18 || grade > 30) || (cfu < 2 || cfu > 18))){
-                examBean.setExamName(name);
-                examBean.setExamGrade(examGrade.getText());
-                examBean.setExamCfu(examCFU.getText());
-                examBean.setExamDate(examDate.getValue());
-
+                setBeanValues(examBean);
                 ManageExamsUCC useCaseController = new ManageExamsUCC();
                 useCaseController.addExam(examBean);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.close();
-            }
-            else{
-                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Inserted data are not valid!", 800, 600);
-                alert.showAndWait();
-            }
+
         } catch (ExamException e) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
             alert.showAndWait();
@@ -73,17 +62,7 @@ public class ManageExamsGraphicalController implements PostInitialize {
 
         NormalExamBean newExam = new NormalExamBean();
         try {
-            int grade = Integer.parseInt(examGrade.getText());
-            int cfu = Integer.parseInt(examCFU.getText());
-            name = examName.getText();
-
-            if(!((grade < 18 || grade > 30) || (cfu < 2 || cfu > 18))){
-                newExam.setExamName(name);
-                newExam.setExamGrade(examGrade.getText());
-                newExam.setExamCfu(examCFU.getText());
-                newExam.setExamDate(examDate.getValue());
-            }
-
+            setBeanValues(newExam);
             ManageExamsUCC controller = new ManageExamsUCC();
             controller.updateExamFromDB(newExam, oldExam);
 
@@ -97,6 +76,20 @@ public class ManageExamsGraphicalController implements PostInitialize {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Grades or cfus are not numbers", 800, 600) ;
             alert.showAndWait() ;
         }
+    }
+
+    public void setBeanValues(NormalExamBean examBean) throws ExamException {
+        int grade = Integer.parseInt(examGrade.getText());
+        int cfu = Integer.parseInt(examCFU.getText());
+        name = examName.getText();
+
+        if (!((grade < 18 || grade > 30) || (cfu < 2 || cfu > 18))) {
+            examBean.setExamName(name);
+            examBean.setExamGrade(examGrade.getText());
+            examBean.setExamCfu(examCFU.getText());
+            examBean.setExamDate(examDate.getValue());
+        }
+        else throw new ExamException("Data inserted not valid !");
     }
 
 

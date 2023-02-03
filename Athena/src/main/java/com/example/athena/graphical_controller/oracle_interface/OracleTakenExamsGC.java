@@ -15,7 +15,7 @@ public class OracleTakenExamsGC {
         ObservableList<OutputExamBean> totalExams = FXCollections.observableArrayList() ;
         try {
             totalExams = ExamsSubject.getInstance().getExams();
-        } catch (ExamException | UserInfoException e) {
+        } catch (ExamException e) {
             ParentSubject.getInstance().setCurrentParent(labelView.prepareParent("Error in retrieving informations, details follow: " + e.getMessage()));
         }
         for (OutputExamBean bean : totalExams) {

@@ -18,8 +18,6 @@ public class BookBean {
     private int index ;
     private String purchaser;
     private String timeStamp ;
-    private String bid;
-
 
     public List<Image> getImageList(){
         List<Image> imageList = new ArrayList<>();
@@ -28,7 +26,6 @@ public class BookBean {
         }
         return imageList;
     }
-
 
     public String getBookTitle() {
         return this.bookTitle;
@@ -114,14 +111,5 @@ public class BookBean {
 
     public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp ;
-    }
-
-    public void setBid(String bid) throws BookException {
-        syntacticCheckPrice(bid);
-        this.bid = bid;
-    }
-
-    public String getBid() {
-        return bid;
     }
 }

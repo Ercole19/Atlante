@@ -1,47 +1,19 @@
-commands list:
-
-    login#username
-    signup#name#surname#email#(STUDENT | TUTOR)
-    validate_signup#email#code
-
-    student commands :
-              add_event#eventName#eventDate#eventStart#eventEnd
-              review#code
-
-              show#
-                    calendar#day
-                    plots#(ALL | STUDY_SESSION | LECTURE_TIME | OTHER)#(LAST_WEEK | LAST_TWO_WEEKS | LAST_MONTH | LAST_TWO_MONTHS)
-                    tutors#query#(byName | byCourse)#(true | false)
-
-    tutor commands :
-              generate_review#student#tutoringDay#startHour#endHour
-              add_course#name
-              delete_course#name
-              add_cv#[pathname]
-
-              show#
-                    my_courses
-                    my_infos
-                    my_cv
-
-
-
-
-
-
-
-    unimplemented :
-              update_exam#[oldname#olddate#oldgrade#oldcfu#newName#newDate#newGrade#newCfu]
-              show#my_selling_books
-                   exams_completion
-                   cfu_completion
-                   taken_exams
-                   averages
-                   books#[name/isbn]
-                   sold_books
-                   purchased_books
-              sell_book
-              set_maxCfus#[newmax]
-              set_maxExams#[newmax]
-              add_exam#[name#cfu#grade#date]
-              delete_exam#[name#date#grade#cfu]
+commands:                    '#' is used for splitting arguments of a command;     T stays for tutor only command; S for students
+        login#email												                    show#(plots is included in show commands)
+        signup#name#surname#email#(STUDENT|TUTOR)										          events#date (S)
+        validate_signup#email#code                                    plots#(ALL | STUDY_SESSION | LECTURE_TIME | OTHER)#(LAST_WEEK | LAST_TWO_WEEKS | LAST_MONTH | LAST_TWO_MONTHS)(S)
+        add_event#name#date#start#end (S)											                    exams_completion  (S)
+        generate_review#studentEmail#date#startingHour#endingHour (T)         		                                    cfu_completion    (S)
+        sell_book#name#isbn#price (S)												                    taken_exams       (S)
+        update_book#isbn (S)														                    averages		(S)
+        delete_book#isbn (S)														                    tutors#byName/byCourse#query#true/false(true for sorting by best reviews)
+        add_cv#pathname (T)														                    books#query(can be name or isbn)
+        set_maxCfus#maxCfus (S)													                    sold_books (S)
+        set_maxExams#maxExams (S)													                    purchased_books (S)
+        add_course#courseName (T)													                    my_selling_books (S)
+        delete_course#courseName (T)												                    my_courses (T)
+        add_exam#name#cfu#date#grade (S)											                    my_infos (T)
+        delete_exam#name#date (S)													                    my_cv	 (T)
+        update_exam#oldName#oldDate#oldGrade#oldCfu#newName#newDate#newGrade#newCfu(S)
+        review#code
+        help

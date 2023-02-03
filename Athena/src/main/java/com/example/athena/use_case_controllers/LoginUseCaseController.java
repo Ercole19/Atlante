@@ -7,13 +7,14 @@ import com.example.athena.entities.LoggedTutor;
 import com.example.athena.entities.LoggedUser;
 import com.example.athena.entities.TutorStudentLogged;
 import com.example.athena.exceptions.FindException;
+import com.example.athena.exceptions.StudentInfoException;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.exceptions.UserNotFoundException;
 
 
 public class LoginUseCaseController {
 
-    public UserBean findUser(UserBean bean) throws UserNotFoundException, UserInfoException, FindException {
+    public UserBean findUser(UserBean bean) throws UserNotFoundException, StudentInfoException, FindException, UserInfoException {
 
         UserDao dao = new UserDao() ;
         if (dao.findStudent(bean.getEmail(), bean.getPassword())){

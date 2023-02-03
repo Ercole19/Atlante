@@ -14,12 +14,11 @@ import com.example.athena.exceptions.PurchaseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuyControllerUCC {
+public class BuyUCC {
 
     public PurchaseResultBean purchase(BookBean book) throws PurchaseException {
-        BookDao dao = new BookDao();
         PurchaseResultBean bean = PurchaseBoundary.purchase() ;
-        if(bean.getPurchaseResult()) dao.finalizePurchase(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), LoggedStudent.getInstance().getEmail().getMail(), book.getOwner(), book.getTimeStamp());
+        if(bean.getPurchaseResult()) LoggedStudent.getInstance().getCurrentStudent().finalizePurchase(book.getBookTitle(), book.getIsbn(), Float.parseFloat(book.getPrice()), book.getOwner(), book.getTimeStamp());
         return bean ;
     }
 

@@ -18,8 +18,6 @@ public class  ExamsSubject extends AbstractSubject {
    private List<EntityExam> totalExams = new ArrayList<>() ;
    private static ExamsSubject instance = null;
 
-   private int totalExamsNumber;
-   private int totalCfus;
    private int takenExamsNumber ;
    private int gainedCfusNumber;
    
@@ -27,16 +25,14 @@ public class  ExamsSubject extends AbstractSubject {
    {
    }
 
-   private void getCacheExams() throws ExamException, UserInfoException
+   private void getCacheExams() throws ExamException
    {
        ExamDao eDao = new ExamDao();
        this.totalExams.addAll(eDao.getExamlist()) ;
-
-       UserDao uDao = new UserDao();
-       this.totalExamsNumber = uDao.getAllExams();
-       this.totalCfus = uDao.getAllCfus();
-       this.takenExamsNumber = eDao.getTakenExamsNumber(LoggedUser.instance.getEmail().getMail());
-       this.gainedCfusNumber = eDao.getTakenCfus(LoggedUser.instance.getEmail().getMail());
+       for (EntityExam exam: this.totalExams) {
+           takenExamsNumber++;
+           gainedCfusNumber = gainedCfusNumber + exam.getCfu();
+       }
    }
    
    public static synchronized ExamsSubject getInstance() 
@@ -71,17 +67,8 @@ public class  ExamsSubject extends AbstractSubject {
        super.notifyObserver();
    }
 
-   public void setNewMax(int max, ExamsOrCfusEnum type) throws CareerStatusException {
-       UserDao dao = new UserDao();
-       dao.setCfusOrExams(max, type);
-
-       if (type.toString().equals(("SET_MAX_CFUS"))) {this.totalCfus = max;}
-       else {this.totalExamsNumber = max;}
-
-       super.notifyObserver();
-   }
    
-   public ObservableList<OutputExamBean> getExams() throws ExamException, UserInfoException {
+   public ObservableList<OutputExamBean> getExams() throws ExamException {
        ObservableList<OutputExamBean> observableList = FXCollections.observableArrayList() ;
        if(totalExams.isEmpty()) {
            getCacheExams();
@@ -97,28 +84,12 @@ public class  ExamsSubject extends AbstractSubject {
        return observableList;
    }
 
-   public ObservableList<OutputExamBean> getSortedExams()  throws ExamException, UserInfoException {
+   public ObservableList<OutputExamBean> getSortedExams()  throws ExamException {
        ExamsComparator comparator = new ExamsComparator();
        return this.getExams().sorted(comparator);
    }
 
-   public int getTotalExamsNumber() throws ExamException, UserInfoException
-   {
-       if(this.totalExamsNumber == -1) {
-           getCacheExams();
-       }
-       return this.totalExamsNumber;
-   }
-
-   public int getTotalCfusNumber() throws ExamException, UserInfoException
-   {
-       if(this.totalCfus == -1) {
-           getCacheExams();
-       }
-       return this.totalCfus;
-   }
-
-   public int getTakenExamsNumber() throws ExamException, UserInfoException
+   public int getTakenExamsNumber() throws ExamException
    {
        if (this.takenExamsNumber == -1) {
            getCacheExams();
@@ -126,7 +97,7 @@ public class  ExamsSubject extends AbstractSubject {
        return this.takenExamsNumber ;
    }
 
-   public int getGainedCfusNumber () throws ExamException, UserInfoException {
+   public int getGainedCfusNumber () throws ExamException {
        if (this.gainedCfusNumber == -1) {
            getCacheExams();
        }
@@ -136,8 +107,6 @@ public class  ExamsSubject extends AbstractSubject {
    public void logOut()
    {
        this.totalExams.clear() ;
-       this.totalExamsNumber = -1 ;
-       this.totalCfus = -1 ;
        this.takenExamsNumber = -1 ;
        this.gainedCfusNumber = -1 ;
    }

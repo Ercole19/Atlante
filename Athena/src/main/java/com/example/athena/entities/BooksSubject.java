@@ -19,7 +19,6 @@ import java.util.List;
 public class BooksSubject extends AbstractSubject {
     private final List<BookEntity> totalBooksOnSell = new ArrayList<>();
     private static BooksSubject instance;
-    private String[] sellerNameAndSurname;
 
     private  BooksSubject ()
     {
@@ -53,35 +52,12 @@ public class BooksSubject extends AbstractSubject {
         super.notifyObserver();
     }
 
-    public void addBid(BidEntity bid) throws BidException {
-        BookDao dao = new BookDao();
-        dao.addBookBid(bid);
-    }
-
-    public String getSellerName() throws BookException, UserInfoException
-    {
-        if(this.sellerNameAndSurname == null) {
-            getBooks();
-        }
-        return this.sellerNameAndSurname[0];
-    }
-
-    public String getSellerSurname() throws BookException, UserInfoException
-    {
-        if(this.sellerNameAndSurname == null) {
-            getBooks();
-        }
-        return this.sellerNameAndSurname[1];
-    }
-
-    private void getBooks() throws BookException, UserInfoException {
+    private void getBooks() throws BookException {
         BookDao bookDao = new BookDao();
         this.totalBooksOnSell.addAll(bookDao.getList());
-        UserDao dao = new UserDao();
-        this.sellerNameAndSurname = dao.getName(LoggedStudent.getInstance().getEmail().getMail());
     }
 
-    public ObservableList<BookBean> getBooksBeansList() throws BookException, UserInfoException{
+    public ObservableList<BookBean> getBooksBeansList() throws BookException{
         ObservableList<BookBean> bookBeanList = FXCollections.observableArrayList();
         int i = 0 ;
         if(this.totalBooksOnSell.isEmpty()) {
@@ -105,9 +81,12 @@ public class BooksSubject extends AbstractSubject {
         return  bookBeanList;
     }
 
+    public boolean getNotifications() throws BookException {
+        return new BookDao().getNotificationsFromDb();
+    }
+
     public void logOut()
     {
         BooksSubject.instance.totalBooksOnSell.clear();
-        BooksSubject.instance.sellerNameAndSurname = null ;
     }
 }

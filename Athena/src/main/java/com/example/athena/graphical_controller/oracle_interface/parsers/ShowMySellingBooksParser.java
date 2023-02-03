@@ -5,14 +5,15 @@ import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.graphical_controller.normal_interface.SceneSwitcher;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.view.oracle_view.LabelView;
+import com.example.athena.view.oracle_view.MySellingBooksView;
 
 public class ShowMySellingBooksParser {
     private LabelView view = new LabelView();
     public void parseShowMySellingBooks(){
         try{
             if (LoggedStudent.getInstance().getEmail().getMail() != null){
-                SceneSwitcher switcher = SceneSwitcher.getInstance();
-                ParentSubject.getInstance().setCurrentParent(switcher.preload("OracleSellingView.fxml"));
+                MySellingBooksView view = new MySellingBooksView();
+                ParentSubject.getInstance().setCurrentParent(view.getParent());
             }
             else{
                 ParentSubject.getInstance().setCurrentParent(view.prepareParent("You must login/signup before writing any command"));

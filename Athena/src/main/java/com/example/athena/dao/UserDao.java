@@ -1,11 +1,7 @@
 package com.example.athena.dao;
 
-import com.example.athena.entities.ByCourseOrNameEnum;
-import com.example.athena.entities.ExamsOrCfusEnum;
-import com.example.athena.entities.LoggedStudent;
-import com.example.athena.entities.LoggedTutor;
-import com.example.athena.exceptions.*;
 
+import com.example.athena.exceptions.*;
 import java.io.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -56,102 +52,6 @@ public class UserDao extends AbstractDAO {
         } catch (SQLException | IOException exc) {
             throw new UserInfoException(exc.getMessage());
         }
-    }
-
-    public String[] getName(String email) throws UserInfoException{
-
-        String[] infos = new String[2];
-        try (PreparedStatement statement = this.getConnection().prepareStatement("select nome,surname from athena.utenti where email = ? ")) {
-
-            statement.setString(1, email);
-            ResultSet set = statement.executeQuery();
-            while (set.next()) {
-                infos[0] = set.getString(1);
-                infos[1] = set.getString(2);
-            }
-
-        } catch (SQLException | IOException e) {
-           throw new UserInfoException(e.getMessage());
-        }
-        return infos;
-    }
-
-    public void setCfusOrExams(int data, ExamsOrCfusEnum cfuOrExams) throws CareerStatusException {
-        String setQuery;
-
-        if (cfuOrExams.toString().equals("SET_MAX_EXAMS")) { setQuery = "Update athena.student_infos set max_exams = ? where email = ?";}
-        else {setQuery = "Update athena.student_infos set max_cfus = ? where email = ?";}
-
-        try (PreparedStatement statement = this.getConnection().prepareStatement(setQuery)) {
-
-            statement.setInt(1, data);
-            statement.setString(2, LoggedStudent.getInstance().getEmail().getMail());
-
-            statement.execute();
-
-
-        } catch (SQLException | IOException exc) {
-            throw new CareerStatusException("Unable to update career status. Details follow: " + exc.getMessage());
-        }
-    }
-
-
-    public int getAllExams() throws UserInfoException {
-
-        int total = 0;
-        try (PreparedStatement statement = this.getConnection().prepareStatement("Select max_exams from athena.student_infos where email =? ")) {
-
-            statement.setString(1, LoggedStudent.getInstance().getEmail().getMail());
-            ResultSet set = statement.executeQuery();
-
-            set.next();
-            total = set.getInt(1);
-
-
-        } catch (SQLException | IOException exc) {
-            throw new UserInfoException(exc.getMessage());
-        }
-        return total;
-    }
-
-
-    public int getAllCfus() throws UserInfoException {
-        int total = 0;
-
-        try (PreparedStatement statement = this.getConnection().prepareStatement("Select max_cfus from athena.student_infos where email =? ")) {
-
-
-            statement.setString(1, LoggedStudent.getInstance().getEmail().getMail());
-            ResultSet set = statement.executeQuery();
-
-            set.next();
-            total = set.getInt(1);
-
-
-        } catch (SQLException | IOException exception) {
-            throw new UserInfoException(exception.getMessage());
-        }
-        return total;
-    }
-
-
-    public int getTotalReport(String email) throws UserInfoException {
-
-        int repNum = 0;
-        try(PreparedStatement statement = this.getConnection().prepareStatement("Select report_number from athena.student_infos where email = ?")){
-
-            statement.setString(1, email);
-
-            ResultSet set = statement.executeQuery();
-
-            set.next();
-            repNum = set.getInt(1);
-
-
-        }catch (SQLException | IOException exc){
-            throw new UserInfoException(exc.getMessage());
-        }
-        return repNum;
     }
 
     public void preRegistration(String email, String password, String type, String name, String surname, String code) throws UserRegistrationException {

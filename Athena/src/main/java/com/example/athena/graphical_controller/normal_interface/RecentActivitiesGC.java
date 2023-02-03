@@ -23,6 +23,4 @@ public class RecentActivitiesGC {
     public void onRecentSoldItemsBtnClick() {
         switcher.switcher("recentSoldItems.fxml");
     }
-
-    public void onPlacedBidsBtnClick() {switcher.switcher("PlacedBids.fxml");}
 }

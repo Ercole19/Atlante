@@ -60,4 +60,14 @@
          <Button mnemonicParsing="false" onAction="#onRecentActivitiesBtnClick" opacity="0.0" prefHeight="169.0" prefWidth="327.0" style="-fx-background-color: #2d8bba;" text="sellBtn" />
       </children>
    </AnchorPane>
+   <Text fx:id="notText1" disable="true" fill="#f20909" layoutX="777.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="One or more books were sold !!" visible="false">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Text>
+   <Text fx:id="notText2" disable="true" fill="#f20909" layoutX="777.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You can find them in recent sold books section" visible="false">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Text>
 </AnchorPane>

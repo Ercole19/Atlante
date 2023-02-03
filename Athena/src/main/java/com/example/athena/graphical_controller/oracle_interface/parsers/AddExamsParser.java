@@ -21,6 +21,7 @@ public class AddExamsParser {
                 else {
                     OracleAddExamsGC controller = new OracleAddExamsGC();
                     controller.addExam(commandToken.get(0), commandToken.get(1), commandToken.get(2), commandToken.get(3));
+                    ParentSubject.getInstance().setCurrentParent(view.prepareParent("Exam added"));
                 }
             }
             else{

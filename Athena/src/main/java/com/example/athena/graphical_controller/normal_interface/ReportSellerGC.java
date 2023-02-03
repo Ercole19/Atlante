@@ -1,8 +1,10 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.beans.BookBean;
+import com.example.athena.beans.RecentBooksSearchResultBean;
 import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.BookException;
+import com.example.athena.exceptions.ReportException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.ReportSellerUCC;
 import javafx.event.ActionEvent;
@@ -15,14 +17,16 @@ import java.util.ArrayList;
 
 public class ReportSellerGC implements PostInitialize {
 
-    private BookBean book;
+    private RecentBooksSearchResultBean book;
 
-    public void onYesBtnClick() { //if you want to test the report log with user : 'test@test.it' pass : 'test'
+    public void onYesBtnClick(ActionEvent event) {
         try {
             ReportSellerUCC controller = new ReportSellerUCC();
-            controller.reportSeller(this.book, LoggedStudent.getInstance().getEmail().getMail());
+            controller.reportSeller(this.book);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
         }
-        catch (BookException e){
+        catch (ReportException e){
             if (e.getMessage().contains("Duplicate entry")) {
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Seller already reported ", ButtonType.CLOSE);
                 alert.showAndWait();
@@ -43,7 +47,7 @@ public class ReportSellerGC implements PostInitialize {
 
     @Override
     public void postInitialize(ArrayList<Object> params) {
-        this.book = (BookBean) params.get(0);
+        this.book = (RecentBooksSearchResultBean) params.get(0);
     }
 
 

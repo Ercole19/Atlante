@@ -1,11 +1,8 @@
 package com.example.athena.dao;
 
 
-import com.example.athena.entities.BidEntity;
-import com.example.athena.entities.BidStatusEnum;
 import com.example.athena.entities.BookEntity;
 import com.example.athena.entities.LoggedStudent;
-import com.example.athena.exceptions.BidException;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.FindException;
 import com.example.athena.exceptions.PurchaseException;
@@ -13,10 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -171,189 +165,15 @@ public class BookDao extends AbstractDAO {
         return books;
     }
 
-    public void finalizePurchase(String title, String isbn, Float price, String emailBuyer, String emailVendor, String timestamp) throws PurchaseException
-    {
-        try(PreparedStatement statement = this.getConnection().prepareStatement("CALL finalizePurchase(?,?,?,?,?,?)")) {
-
-            statement.setString(1, title);
-            statement.setString(2, isbn);
-            statement.setFloat(3, price);
-            statement.setString(4, emailBuyer);
-            statement.setString(5, emailVendor);
-            statement.setTimestamp(6, Timestamp.valueOf(timestamp));
-
-            statement.execute();
-
-        }catch (SQLException | IOException exc) {
-            throw new PurchaseException(exc.getMessage());
+    public boolean getNotificationsFromDb() throws BookException {
+        try (CallableStatement call = this.getConnection().prepareCall("call athena.getNots(?,?) ")) {
+            call.setString(1, LoggedStudent.getInstance().getEmail().getMail());
+            call.registerOutParameter(2, Types.BOOLEAN);
+            call.executeUpdate();
+            return call.getBoolean(2);
         }
-    }
-
-    public List<BookEntity> getRecentPurchasesResults(String email) throws BookException {
-        List<BookEntity> booksList = new ArrayList<>();
-        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT vendorEmail, bookTitle, bookIsbn, bookPrice from athena.recent_purchases where purchaserEmail = ?")) {
-
-            statement.setString(1, email);
-            ResultSet set = statement.executeQuery();
-
-            while (set.next()) {
-                BookEntity book = new BookEntity(set.getString(2), set.getString(3), set.getString(4), set.getString(1), 1 );
-                booksList.add(book);
-            }
-
-        }catch (SQLException | IOException exc) {
-            throw new BookException(exc.getMessage()) ;
-        }
-        return booksList;
-    }
-
-
-    public List<BookEntity> getRecentSoldItemsFromDB(String vendorEmail) throws BookException{
-        List<BookEntity> booksEntityList = new ArrayList<>();
-        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT purchaserEmail, bookTitle, bookIsbn, bookPrice from athena.recent_purchases where vendorEmail = ?")) {
-
-            statement.setString(1, vendorEmail);
-            ResultSet set = statement.executeQuery();
-
-            while (set.next()) {
-                BookEntity book = new BookEntity(set.getString(2), set.getString(3), set.getString(4), set.getString(1), 0);
-                booksEntityList.add(book);
-            }
-
-        }catch (SQLException | IOException exc) {
-            throw new BookException(exc.getMessage()) ;
-        }
-        return booksEntityList;
-    }
-
-
-    public void daoReportSeller(String buyer, String seller) throws BookException {
-        try(PreparedStatement statement = this.getConnection().prepareStatement("call athena.reportSeller(?,?)")) {
-
-            statement.setString(1, buyer);
-            statement.setString(2, seller);
-
-            statement.execute();
-        } catch (SQLException | IOException exc) {
-            throw new BookException(exc.getMessage());
-        }
-    }
-
-    public void addBookBid(BidEntity bid) throws BidException {
-        try(PreparedStatement statement = this.getConnection().prepareStatement("CALL add_new_bid (?,?,?,?,?)")){
-            statement.setString(1, bid.getOwner());
-            statement.setString(2,bid.getBidder());
-            statement.setString(3, bid.getNewPrice());
-            statement.setString(4, bid.getBookIsbn());
-            statement.setTimestamp(5, Timestamp.valueOf(bid.getBookTimestamp()));
-
-            statement.execute();
-        }
-        catch (SQLException | IOException e){
-            throw new BidException(e.getMessage());
-        }
-    }
-
-    public List<BidEntity> getBookBids(String seller, String isbn, String timeStamp) throws BidException{
-        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT * FROM athena.books_bids WHERE Seller = ? AND BookIsbn = ? AND BookTimestamp = ? AND BidStatus != 'REJECTED'")){
-
-            statement.setString(1, seller) ;
-            statement.setString(2, isbn);
-            statement.setTimestamp(3, Timestamp.valueOf(timeStamp)) ;
-            ResultSet set = statement.executeQuery();
-            return extractBidsFromResultSet(set) ;
-        }
-        catch (SQLException | IOException e){
-            throw new BidException(e.getMessage());
-        }
-    }
-
-    public BidEntity getAcceptedBid(String seller, String isbn, String timeStamp) throws BidException{
-        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT * FROM athena.books_bids WHERE Seller = ? AND BookIsbn = ? AND BookTimestamp = ? AND BidStatus = 'ACCEPTED'")){
-
-            statement.setString(1, seller) ;
-            statement.setString(2, isbn);
-            statement.setTimestamp(3, Timestamp.valueOf(timeStamp)) ;
-            ResultSet set = statement.executeQuery();
-            if (set.next()) {
-                return new BidEntity(set.getString(1),
-                        set.getString(2),
-                        set.getString(3),
-                        set.getTimestamp(5).toString(),
-                        set.getString(4),
-                        BidStatusEnum.valueOf(set.getString(6))) ;
-            } else throw new BidException("No bid found") ;
-        }
-        catch (SQLException | IOException e){
-            throw new BidException(e.getMessage());
-        }
-    }
-
-    public List<BidEntity> getBidderBids() throws BidException{
-        try(PreparedStatement statement = this.getConnection().prepareStatement("SELECT * FROM athena.books_bids WHERE Bidder = ?")){
-            statement.setString(1, LoggedStudent.getInstance().getEmail().getMail()) ;
-            ResultSet set = statement.executeQuery() ;
-            return extractBidsFromResultSet(set) ;
-        }
-        catch (SQLException | IOException e){
-            throw new BidException(e.getMessage());
-        }
-    }
-
-    private List<BidEntity> extractBidsFromResultSet(ResultSet set) throws SQLException {
-
-        List<BidEntity> retVal = new ArrayList<>() ;
-
-        while (set.next()) {
-            BidEntity bid = new BidEntity(set.getString(1),
-                    set.getString(2),
-                    set.getString(3),
-                    set.getTimestamp(5).toString(),
-                    set.getString(4),
-                    BidStatusEnum.valueOf(set.getString(6))) ;
-            retVal.add(bid) ;
-        }
-
-        return retVal ;
-    }
-
-    public void deleteBid(BidEntity entity) throws BidException {
-        try(PreparedStatement statement = this.getConnection().prepareStatement("DELETE FROM athena.books_bids WHERE Seller = ? AND Bidder = ? AND BookIsbn = ? AND BookTimeStamp = ? ")){
-            statement.setString(1, entity.getOwner());
-            statement.setString(2, entity.getBidder());
-            statement.setString(3, entity.getBookIsbn());
-            statement.setTimestamp(4, Timestamp.valueOf(entity.getBookTimestamp()));
-            statement.execute() ;
-        }
-        catch (SQLException | IOException e){
-            throw new BidException(e.getMessage());
-        }
-    }
-
-    public void updateBidStatus(BidEntity entity) throws BidException {
-        try(PreparedStatement statement = this.getConnection().prepareStatement("UPDATE athena.books_bids SET BidStatus = ? WHERE Seller = ? AND Bidder = ? AND BookIsbn = ? AND BookTimeStamp = ?")){
-            statement.setString(1, entity.getStatus().toString());
-            statement.setString(2, entity.getOwner());
-            statement.setString(3, entity.getBidder());
-            statement.setString(4, entity.getBookIsbn());
-            statement.setTimestamp(5, Timestamp.valueOf(entity.getBookTimestamp()));
-            statement.execute() ;
-        }
-        catch (SQLException | IOException e){
-            throw new BidException(e.getMessage());
-        }
-    }
-
-    public void payAcceptedBid(BidEntity bid) throws BidException {
-        try(PreparedStatement statement = this.getConnection().prepareStatement("CALL finalize_accept_bid(?,?,?,?)")){
-            statement.setString(1, bid.getOwner());
-            statement.setString(2, bid.getBidder());
-            statement.setString(3, bid.getBookIsbn());
-            statement.setTimestamp(4, Timestamp.valueOf(bid.getBookTimestamp()));
-            statement.execute() ;
-        }
-        catch (SQLException | IOException e){
-            throw new BidException(e.getMessage());
+        catch (SQLException | IOException e) {
+            throw new BookException(e.getMessage());
         }
     }
 }

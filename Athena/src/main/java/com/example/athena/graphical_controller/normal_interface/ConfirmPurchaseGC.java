@@ -4,7 +4,7 @@ import com.example.athena.beans.BookBean;
 import com.example.athena.beans.PurchaseResultBean;
 import com.example.athena.exceptions.PurchaseException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.use_case_controllers.BuyControllerUCC;
+import com.example.athena.use_case_controllers.BuyUCC;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -34,7 +34,7 @@ public class ConfirmPurchaseGC implements PostInitialize {
         noButton.setDisable(true) ;
         stage.setOnCloseRequest(Event::consume);
 
-        BuyControllerUCC controller = new BuyControllerUCC();
+        BuyUCC controller = new BuyUCC();
         try {
             PurchaseResultBean purchaseResultBean = controller.purchase(this.bean) ;
             SizedAlert sizedAlert;

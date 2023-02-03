@@ -2,8 +2,8 @@ package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.beans.SetMaxCfusOrExamsBean;
 import com.example.athena.entities.ExamsOrCfusEnum;
-import com.example.athena.exceptions.CareerStatusException;
-import com.example.athena.exceptions.SizedAlert;
+import com.example.athena.entities.ExamsSubject;
+import com.example.athena.exceptions.*;
 import com.example.athena.use_case_controllers.SetMaxCfusOrExamsUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,17 +41,24 @@ public class SetMaxCfusOrExamsGC implements PostInitialize {
 
     public void onConfirmBtnClick(ActionEvent event) {
         SetMaxCfusOrExamsUCC controllerCfusExams = new SetMaxCfusOrExamsUCC();
+        SetMaxCfusOrExamsBean infos = new SetMaxCfusOrExamsBean();
         try {
-            SetMaxCfusOrExamsBean infos = new SetMaxCfusOrExamsBean();
             infos.setNewMax(textFieldMax.getText());
-            infos.setType(this.examsOrCfus);
+            if ((this.examsOrCfus.toString().equals(("SET_MAX_CFUS")) && (Integer.parseInt(textFieldMax.getText()) < ExamsSubject.getInstance().getGainedCfusNumber()))) {
+                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "New max cfu can not be lower than gained cfus", 800, 600);
+                alert.showAndWait();
+            } else if (this.examsOrCfus.toString().equals(("SET_MAX_EXAMS")) && (Integer.parseInt(textFieldMax.getText()) < ExamsSubject.getInstance().getTakenExamsNumber())) {
+                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "New max exams can not be lower than taken exams", 800, 600);
+                alert.showAndWait();
+            }
+            else {
+                infos.setType(this.examsOrCfus);
+                controllerCfusExams.setInfos(infos);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.close();
+            }
 
-            controllerCfusExams.setInfos(infos);
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-
-        } catch (CareerStatusException e) {
+        } catch (CareerStatusException | ExamException | StudentInfoException e) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);
             alert.showAndWait();
         }

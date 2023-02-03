@@ -1,12 +1,11 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.beans.BookBean;
-import com.example.athena.entities.BooksSubject;
+import com.example.athena.beans.StudentInfosBean;
 import com.example.athena.entities.LoggedStudent;
 import com.example.athena.entities.SellerOrBuyerEnum;
-import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.exceptions.UserInfoException;
+import com.example.athena.exceptions.StudentInfoException;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.use_case_controllers.BookPageUCC;
 import javafx.event.ActionEvent;
@@ -61,9 +60,7 @@ public class BookPageController extends ShiftImageController implements PostInit
     private String sellerSurname;
     private int reportNumber;
     private String searchQuery ;
-
     private final SceneSwitcher switcher = SceneSwitcher.getInstance() ;
-    private final BookPageUCC controller = new BookPageUCC() ;
 
     @Override
     public void postInitialize(ArrayList<Object> params) {
@@ -71,50 +68,36 @@ public class BookPageController extends ShiftImageController implements PostInit
         this.book = (BookBean) params.get(1);
 
         if (params.get(0) == SellerOrBuyerEnum.SELLER) {
-            try {
-                this.sellerName = (BooksSubject.getInstance().getSellerName());
-                this.sellerSurname = (BooksSubject.getInstance().getSellerSurname());
-                this.reportNumber = controller.getReportNumber(LoggedStudent.getInstance().getEmail().getMail());
-            } catch (BookException | UserInfoException e) {
-                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
-                alert.showAndWait();
-            }
-
-
+            this.sellerName = LoggedStudent.getInstance().getCurrentStudent().getNameSurname()[0];
+            this.sellerSurname = LoggedStudent.getInstance().getCurrentStudent().getNameSurname()[1];
+            this.reportNumber = LoggedStudent.getInstance().getCurrentStudent().getRepNum();
         } else {
             this.searchQuery = (String) params.get(2) ;
-            String[] vendorFullName = new String[0];
+            StudentInfosBean studentInfosBean = new StudentInfosBean();
+            studentInfosBean.setStudent(this.book.getOwner());
             try {
-                vendorFullName = controller.getUserName(book.getOwner());
-            } catch (UserInfoException e) {
-                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
+                BookPageUCC controller = new BookPageUCC();
+                controller.getStudentInfos(studentInfosBean);
+                this.reportNumber = studentInfosBean.getRepNum();
+                this.sellerName = studentInfosBean.getFullName()[0];
+                this.sellerSurname = studentInfosBean.getFullName()[1];
+                buyButton.setVisible(true);
+                buyButton.setDisable(false);
+                backBtn.setOnAction(this::onBackBtnClick);
+            }
+            catch (StudentInfoException e) {
+                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Error in connecting to DB, details follow: " + e.getMessage(), 800, 600);
                 alert.showAndWait();
+                System.exit(0);
             }
-            this.sellerName = vendorFullName[0];
-            this.sellerSurname = vendorFullName[1];
-            try {
-                this.reportNumber = controller.getReportNumber(book.getOwner());
-            } catch (UserInfoException e) {
-                SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
-                alert.showAndWait() ;
-            }
-            buyButton.setVisible(true);
-            buyButton.setDisable(false);
-            if(Boolean.TRUE.equals(book.getNegotiable())) {
-                buyButton.setText("Place bid");
-                buyButton.setOnAction(this::onNegotiateButtonClick);
-            }
-            backBtn.setOnAction(this::onBackBtnClick);
         }
-
-        this.bookImages = book.getImageList();
-
+        this.bookImages = this.book.getImageList();
         super.bookImage = this.image;
         super.images = bookImages;
         super.leftArrowImage = lArrowImage;
         super.rightArrowImage = rArrowImage;
 
-        populatePage(book);
+        populatePage(this.book);
 
     }
 
@@ -165,11 +148,6 @@ public class BookPageController extends ShiftImageController implements PostInit
         }
     }
 
-    public void onNegotiateButtonClick(ActionEvent event) {
-        List<Object> params = new ArrayList<>();
-        params.add(this.book);
-        switcher.popup("PlaceBidPage.fxml", "Place bid", params);
-    }
 
     @Override
     public void rightArrowClick() {

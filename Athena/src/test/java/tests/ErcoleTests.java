@@ -85,7 +85,7 @@ public class ErcoleTests {
             afterCfus = ExamsSubject.getInstance().getGainedCfusNumber();
             assertEquals(afterCfus, prevCfus + 9);
 
-        }catch (ExamException | UserInfoException e) {
+        }catch (ExamException e) {
             fail();
         }
     }
@@ -98,7 +98,7 @@ public class ErcoleTests {
 
         try {
             controller.findUser(params) ;
-        } catch (UserNotFoundException | UserInfoException | FindException e) {
+        } catch (UserNotFoundException | UserInfoException | FindException | StudentInfoException e) {
             fail() ;
         }
     }

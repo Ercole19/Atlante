@@ -1,13 +1,15 @@
 package com.example.athena.entities;
 
 import com.example.athena.beans.LoggedUserMailBean;
+import com.example.athena.dao.StudentDAO;
 import com.example.athena.dao.UserDao;
 import com.example.athena.exceptions.LoggedUserException;
+import com.example.athena.exceptions.StudentInfoException;
 import com.example.athena.exceptions.UserInfoException;
 
 public class LoggedStudent extends LoggedUser
 {
-    private int repNum ;
+    private Student currentStudent;
 
     private LoggedStudent()
     {
@@ -29,11 +31,7 @@ public class LoggedStudent extends LoggedUser
 
         return (LoggedStudent) LoggedUser.instance ;
     }
-    
-    public int getRepNum()
-    {
-        return this.repNum;
-    }
+
 
     @Override
     public LoggedUserMailBean getEmail()
@@ -43,11 +41,15 @@ public class LoggedStudent extends LoggedUser
         return value ;
     }
     
-    public void initStudent(String emailStudent) throws UserInfoException
+    public void initStudent(String emailStudent) throws StudentInfoException
     {
        this.email = emailStudent;
-       UserDao userDao = new UserDao();
-       this.repNum = userDao.getTotalReport(emailStudent);
+       this.currentStudent = new Student(this.email);
+
+    }
+
+    public Student getCurrentStudent() {
+        return this.currentStudent;
     }
 
 }

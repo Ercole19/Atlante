@@ -33,13 +33,12 @@
          <Cursor fx:constant="HAND" />
       </cursor>
    </Button>
-   <TableView fx:id="bookTable" layoutX="93.0" layoutY="220.0" prefHeight="346.0" prefWidth="1103.0">
+   <TableView fx:id="bookTable" layoutX="93.0" layoutY="220.0" prefHeight="346.0" prefWidth="889.0">
       <columns>
          <TableColumn fx:id="colName" prefWidth="222.0" text="Title" />
          <TableColumn fx:id="colIsbn" prefWidth="222.0" text="ISBN 10" />
          <TableColumn prefWidth="222.0" text="ISBN 13" />
          <TableColumn fx:id="colPrice" prefWidth="222.0" text="Price" />
-         <TableColumn fx:id="colManage" prefWidth="222.0" text="Edit/Remove" />
       </columns>
    </TableView>
    <ImageView fitHeight="40.0" fitWidth="436.0" layoutX="162.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">

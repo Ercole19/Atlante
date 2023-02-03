@@ -40,7 +40,7 @@ public class MolinaroTests {
         LoginUseCaseController controller = new LoginUseCaseController();
         try {
             controller.findUser(params);
-        } catch (UserNotFoundException | UserInfoException | FindException e) {
+        } catch (UserNotFoundException | UserInfoException | FindException | StudentInfoException e) {
             fail();
         }
         BookBean bean = new BookBean();
@@ -64,7 +64,7 @@ public class MolinaroTests {
         LoginUseCaseController uController = new LoginUseCaseController();
         try {
             uController.findUser(params);
-        } catch (UserNotFoundException | UserInfoException | FindException e) {
+        } catch (UserNotFoundException | UserInfoException | FindException | StudentInfoException e) {
             fail();
         }
         DecimalFormat format = new DecimalFormat("+#.00;-#.00");

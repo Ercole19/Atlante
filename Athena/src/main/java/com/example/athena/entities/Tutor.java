@@ -74,18 +74,6 @@ public class Tutor {
         this.email = email;
     }
 
-    public void setAboutMe(String aboutMe) {
-        this.aboutMe = aboutMe;
-    }
-
-    public void setSessionInfos(String sessionInfos) {
-        this.sessionInfos = sessionInfos;
-    }
-
-    public void setContactNumbers(String contactNumbers) {
-        this.contactNumbers = contactNumbers;
-    }
-
     public void setName(String name) {
         this.name = name;
     }

@@ -137,7 +137,7 @@ public class ExamsHomePageGCC implements AbstractObserver, Initializable {
         ObservableList<OutputExamBean> totalExams = FXCollections.observableArrayList() ;
         try {
             totalExams = ExamsSubject.getInstance().getExams();
-        } catch (ExamException | UserInfoException e) {
+        } catch (ExamException  e) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
             alert.showAndWait();
         }
