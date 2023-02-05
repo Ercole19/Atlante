@@ -12,7 +12,6 @@ public class NormalExamBean implements ExamBean {
     private int examGrade;
     private int examCfu;
     private String examDate;
-    private int examIndex;
 
 
     public void setExamCfu(String cfus) throws ExamException {
@@ -67,14 +66,5 @@ public class NormalExamBean implements ExamBean {
     @Override
     public String getExamName() {
         return examName;
-    }
-
-    @Override
-    public int getExamIndex() {
-        return examIndex;
-    }
-    
-    public void setExamIndex(int examIndex) {
-        this.examIndex = examIndex;
     }
 }

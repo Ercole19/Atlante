@@ -12,8 +12,8 @@ public class ShowMySellingBooksParser {
     public void parseShowMySellingBooks(){
         try{
             if (LoggedStudent.getInstance().getEmail().getMail() != null){
-                MySellingBooksView view = new MySellingBooksView();
-                ParentSubject.getInstance().setCurrentParent(view.getParent());
+                MySellingBooksView mySellingBooksView = new MySellingBooksView();
+                ParentSubject.getInstance().setCurrentParent(mySellingBooksView.getParent());
             }
             else{
                 ParentSubject.getInstance().setCurrentParent(view.prepareParent("You must login/signup before writing any command"));

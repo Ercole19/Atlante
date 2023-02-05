@@ -10,6 +10,6 @@
       <TextField fx:id="bidTextField" layoutX="90.0" layoutY="147.0" prefHeight="25.0" prefWidth="552.0" />
       <Text layoutX="90.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert new price here" />
       <Button layoutX="324.0" layoutY="445.0" mnemonicParsing="false" onAction="#sendBid" text="Confirm" />
-      <Button layoutX="27.0" layoutY="84.0" mnemonicParsing="false" text="Back" />
+      <Button layoutX="27.0" layoutY="84.0" mnemonicParsing="false" onAction="#onBackBtnClick" text="Back" />
    </children>
 </AnchorPane>

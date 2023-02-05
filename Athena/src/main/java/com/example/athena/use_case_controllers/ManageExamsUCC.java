@@ -11,7 +11,7 @@ public class ManageExamsUCC {
     
     public void deleteExams(ExamBean bean) throws ExamException {
         EntityExam exam = new EntityExam(bean.getExamName(), bean.getExamGrade(), bean.getExamCfu(), bean.getExamDate());
-        ExamsSubject.getInstance().deleteExam(exam, bean.getExamIndex());
+        ExamsSubject.getInstance().deleteExam(exam);
     }
 
     public void addExam (ExamBean bean) throws ExamException{
@@ -34,7 +34,7 @@ public class ManageExamsUCC {
         else {
             EntityExam entityOldExam = new EntityExam(oldExam.getExamName(), oldExam.getExamGrade(), oldExam.getExamCfu(), oldExam.getExamDate());
             EntityExam entityNewExam = new EntityExam(newExam.getExamName(), newExam.getExamGrade(), newExam.getExamCfu(), newExam.getExamDate());
-            ExamsSubject.getInstance().deleteExam(entityOldExam, oldExam.getExamIndex());
+            ExamsSubject.getInstance().deleteExam(entityOldExam);
             ExamsSubject.getInstance().addExam(entityNewExam);
         }
     }

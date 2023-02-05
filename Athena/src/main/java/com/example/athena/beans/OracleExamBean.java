@@ -8,7 +8,6 @@ public class OracleExamBean implements ExamBean {
     private int examGrade ;
     private String examDate ;
     private String examName ;
-    private int examIndex ;
 
     public void setExamCfus(String cfu) throws ExamException{
         if(!cfu.matches("\\d{2}")) throw new ExamException("Incorrect cfu format") ;
@@ -31,10 +30,6 @@ public class OracleExamBean implements ExamBean {
 
     }
 
-    public void setExamIndex(int index) {
-        this.examIndex = index ;
-    }
-
     @Override
     public int getExamCfu() {
         return this.examCfus ;
@@ -53,10 +48,5 @@ public class OracleExamBean implements ExamBean {
     @Override
     public String getExamName() {
         return this.examName;
-    }
-
-    @Override
-    public int getExamIndex() {
-        return this.examIndex;
     }
 }

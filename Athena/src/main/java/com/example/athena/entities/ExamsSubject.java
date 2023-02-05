@@ -53,13 +53,9 @@ public class  ExamsSubject extends AbstractSubject {
        super.notifyObserver() ;
    }
    
-   public void deleteExam(EntityExam exam, Integer index) throws ExamException
+   public void deleteExam(EntityExam exam) throws ExamException
    {
-       if (index != null) this.totalExams.remove(index.intValue());
-       else {
-           this.totalExams.remove(this.totalExams.indexOf(exam));
-       }
-
+       this.totalExams.remove(exam);
        this.takenExamsNumber--;
        this.gainedCfusNumber -= exam.getCfu();
        ExamDao examDao = new ExamDao();

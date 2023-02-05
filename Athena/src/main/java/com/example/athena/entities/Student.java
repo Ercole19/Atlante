@@ -48,6 +48,10 @@ public class Student {
         this.email = email;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public int getMaxCfu() {
         return this.maxCfu;
     }

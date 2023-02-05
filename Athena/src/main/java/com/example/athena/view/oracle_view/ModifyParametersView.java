@@ -12,7 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
-public class ModifyParametersView extends ShiftImageView<OracleUpdateBookGC> {
+public class ModifyParametersView extends UpdatedShiftImageView<OracleUpdateBookGC> {
 
     private TextField name;
     private CheckBox negotiability;
@@ -52,12 +52,12 @@ public class ModifyParametersView extends ShiftImageView<OracleUpdateBookGC> {
 
     @Override
     protected void finalizeCollection() {
-        this.controller.getUpdatedInformation(this) ;
+        this.updatedController.getUpdatedInformation(this) ;
     }
 
     @Override
     protected void initializeGraphicalElements() {
-        this.controller.getUploadControls(this);
+        this.updatedController.getUploadControls(this);
     }
 
     public ImageView getLeftArrowImage() {

@@ -70,6 +70,15 @@ public class ShowParser {
                 ShowMyCVParser myCVParser = new ShowMyCVParser();
                 myCVParser.parseInfos();
                 break;
+            case "my_placed_bids":
+                ShowMyPlacedBidsParser placedBidsParser = new ShowMyPlacedBidsParser();
+                placedBidsParser.parsePlacedBids();
+                break;
+            case "my_received_bids":
+                ShowMyReceivedBidsView receivedBidsView = new ShowMyReceivedBidsView();
+                commandToken.remove(0);
+                receivedBidsView.parsePlacedBids(commandToken);
+                break;
             default:
                 ParentSubject.getInstance().setCurrentParent(view.prepareParent("this command do not exists: type help to see the full list"));
         }

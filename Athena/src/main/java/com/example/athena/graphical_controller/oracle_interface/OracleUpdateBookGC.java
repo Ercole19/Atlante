@@ -13,6 +13,7 @@ import com.example.athena.graphical_controller.oracle_interface.update_book_stat
 import com.example.athena.use_case_controllers.SellBooksUseCaseController;
 import com.example.athena.view.oracle_view.LabelView;
 import com.example.athena.view.oracle_view.ModifyParametersView;
+import com.example.athena.view.oracle_view.OnPlaceBidView;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
@@ -36,6 +37,7 @@ public class OracleUpdateBookGC extends UpdatedShiftImageController {
             if (count > 1) this.state = new OnSelectWhichBookState(this);
             else {
                 setSuperParam(list.get(0));
+                this.selectedBean = list.get(0);
                 this.state = new OnModifyParametersState(this);
             }
         }
@@ -114,6 +116,7 @@ public class OracleUpdateBookGC extends UpdatedShiftImageController {
 
         this.goNext();
     }
+
 
     public BookBean getSelectedBean() {return this.selectedBean;}
 

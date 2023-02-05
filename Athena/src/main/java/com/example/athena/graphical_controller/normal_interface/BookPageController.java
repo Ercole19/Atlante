@@ -83,6 +83,10 @@ public class BookPageController extends ShiftImageController implements PostInit
                 this.sellerSurname = studentInfosBean.getFullName()[1];
                 buyButton.setVisible(true);
                 buyButton.setDisable(false);
+                if(Boolean.TRUE.equals(book.getNegotiable())) {
+                    buyButton.setText("Place bid");
+                    buyButton.setOnAction(this::onNegotiateButtonClick);
+                }
                 backBtn.setOnAction(this::onBackBtnClick);
             }
             catch (StudentInfoException e) {
@@ -146,6 +150,12 @@ public class BookPageController extends ShiftImageController implements PostInit
             stage.close();
             ParentSubject.getInstance().setCurrentParent(new AnchorPane());
         }
+    }
+
+    public void onNegotiateButtonClick(ActionEvent event) {
+        List<Object> params = new ArrayList<>();
+        params.add(this.book);
+        switcher.popup("PlaceBidPage.fxml", "Place bid", params);
     }
 
 

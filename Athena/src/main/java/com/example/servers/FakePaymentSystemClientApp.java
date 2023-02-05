@@ -14,15 +14,10 @@ public class FakePaymentSystemClientApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        ArrayList<Object> params = new ArrayList<>() ;
-        params.add(response) ;
-
-        Parent paymentScreen = SceneSwitcher.getInstance().preload("PaymentForm.fxml", params) ;
-        stage.setScene(new Scene(paymentScreen)) ;
-        stage.showAndWait() ;
+        this.response.setResponse(new FakePaymentSystemClientController().pay().getServerResponse());
     }
 
     public Response getResponse() {
-        return response ;
+        return this.response ;
     }
 }

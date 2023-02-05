@@ -34,7 +34,6 @@ public class ManageExamsGraphicalController implements PostInitialize {
     @FXML
     private Button confirm;
 
-    private  String name ;
     private ExamBean oldExam;
 
     public void onConfirmButtonClick(ActionEvent event) {
@@ -81,7 +80,7 @@ public class ManageExamsGraphicalController implements PostInitialize {
     public void setBeanValues(NormalExamBean examBean) throws ExamException {
         int grade = Integer.parseInt(examGrade.getText());
         int cfu = Integer.parseInt(examCFU.getText());
-        name = examName.getText();
+        String name = examName.getText();
 
         if (!((grade < 18 || grade > 30) || (cfu < 2 || cfu > 18))) {
             examBean.setExamName(name);

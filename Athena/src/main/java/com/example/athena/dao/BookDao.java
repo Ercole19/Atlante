@@ -5,7 +5,6 @@ import com.example.athena.entities.BookEntity;
 import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.FindException;
-import com.example.athena.exceptions.PurchaseException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -18,11 +17,6 @@ import java.util.List;
 public class BookDao extends AbstractDAO {
     private final String email = LoggedStudent.getInstance().getEmail().getMail();
     private int i = 1 ;
-    private static int imageCount = 0;
-
-    private static synchronized void incrementImageCounter() {
-        imageCount++ ;
-    }
 
     public void insertBook(String title , String isbn , String price , boolean negotiability, List<File> images, Timestamp timestamp) throws BookException
     {
@@ -92,7 +86,7 @@ public class BookDao extends AbstractDAO {
                 String price = set.getString(3);
                 boolean negotiable = set.getBoolean(4) ;
                 String timestamp = set.getTimestamp(5).toString();
-                List<File> images = getBookImages(isbn, email, timestamp);
+                List<File> images = getPersonalBookImages(isbn, email, timestamp, true);
 
                 BookEntity book = new BookEntity(title, isbn, price, negotiable, images, email, timestamp);
 
@@ -106,10 +100,13 @@ public class BookDao extends AbstractDAO {
         return list ;
     }
 
-    private List<File> getBookImages(String isbn, String email, String timestamp) throws SQLException, IOException
+    private List<File> getPersonalBookImages(String isbn, String email, String timestamp, boolean personal) throws SQLException, IOException
     {
         List<File> list = new ArrayList<>();
-        try (PreparedStatement statement = this.getConnection().prepareStatement("SELECT image from athena.book_images where email = ? and isbn  = ? and bookSaleTimestamp = ?  order by count_image")) {
+        String preparedStatement;
+        if (personal) preparedStatement = "SELECT image from athena.book_images where email = ? and isbn  = ? and bookSaleTimestamp = ?  order by count_image";
+        else preparedStatement = "SELECT image from athena.book_images where email != ? and isbn  = ? and bookSaleTimestamp = ?  order by count_image";
+        try (PreparedStatement statement = this.getConnection().prepareStatement(preparedStatement)) {
 
             statement.setString(1,email) ;
             statement.setString(2, isbn) ;
@@ -148,13 +145,7 @@ public class BookDao extends AbstractDAO {
 
             ResultSet set = statement.executeQuery();
             while (set.next()) {
-                List<File> booksFiles = new ArrayList<>();
-                if (set.getBlob(5) != null && set.getBlob(5).length() != 0) {
-                    byte[] image = set.getBlob(5).getBytes(1,(int) set.getBlob(5).length()) ;
-                    String pathname = "image" + imageCount + ".png" ;
-                    booksFiles.add(writeImage(image, pathname));
-                    BookDao.incrementImageCounter();
-                }
+                List<File> booksFiles = getPersonalBookImages(set.getString(2), email, String.valueOf(set.getTimestamp(7)),false);
                 BookEntity bookEntity = new BookEntity(set.getString(1), set.getString(2), set.getString(3), set.getString(4), set.getBoolean(6), booksFiles, String.valueOf(set.getTimestamp(7)));
                 books.add(bookEntity);
             }

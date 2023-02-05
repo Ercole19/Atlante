@@ -52,4 +52,14 @@
          <Button mnemonicParsing="false" onAction="#onRecentPurchasesBtnClick" opacity="0.0" prefHeight="169.0" prefWidth="327.0" style="-fx-background-color: #2d8bba;" text="sellBtn" />
       </children>
    </AnchorPane>
+   <AnchorPane layoutX="477.0" layoutY="557.0" prefHeight="169.0" prefWidth="279.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;">
+      <children>
+         <Text fill="#ffd775" layoutX="50.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Placed Bids" wrappingWidth="238.13671875">
+            <font>
+               <Font size="40.0" />
+            </font>
+         </Text>
+         <Button layoutY="6.0" mnemonicParsing="false" onAction="#onPlacedBidsBtnClick" opacity="0.0" prefHeight="169.0" prefWidth="327.0" style="-fx-background-color: #2d8bba;" text="sellBtn" />
+      </children>
+   </AnchorPane>
 </AnchorPane>

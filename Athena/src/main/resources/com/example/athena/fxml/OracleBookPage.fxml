@@ -7,33 +7,26 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.normal_interface.BookPageController">
-   <AnchorPane opacity="0.79" prefHeight="50.0" prefWidth="1280.0" style="-fx-background-color: #2d8bba;">
-      <children>
-         <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="977.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../../../../assets/title.png" />
-            </image>
-         </ImageView>
-         <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="1175.0" layoutY="-1.0">
-            <image>
-               <Image url="@../../../../assets/guff.png" />
-            </image>
-         </ImageView>
-      </children>
-   </AnchorPane>
-   <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#014a61" height="641.0" layoutX="278.0" layoutY="79.0" stroke="BLACK" strokeType="INSIDE" width="1018.0" />
-   <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#ffd775" height="85.0" layoutX="343.0" layoutY="92.0" stroke="BLACK" strokeType="INSIDE" width="703.0" />
-   <Label fx:id="nome" layoutX="377.0" layoutY="111.0" prefHeight="46.0" prefWidth="223.0" text="Nome" textFill="#002730">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="1155.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.normal_interface.BookPageController">
+   <Label fx:id="nome" layoutX="255.0" layoutY="41.0" prefHeight="46.0" prefWidth="223.0" text="Nome" textFill="#002730">
       <font>
          <Font name="Bookman Old Style" size="35.0" />
       </font>
    </Label>
-   <Button fx:id="buyButton" layoutX="43.0" layoutY="511.0" mnemonicParsing="false" onAction="#onBuyBookButtonClick" prefHeight="46.0" prefWidth="198.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Buy Book" textFill="WHITE">
+   <ImageView disable="true" fitHeight="63.0" fitWidth="82.0" layoutX="14.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <image>
+         <Image url="@../../../../assets/backBtn.png" />
+      </image>
+   </ImageView>
+   <Button fx:id="backBtn" disable="true" layoutX="24.0" layoutY="84.0" mnemonicParsing="false" onAction="#onBackBtnClickSeller" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn" visible="false">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </Button>
+   <Button fx:id="buyButton" disable="true" layoutX="43.0" layoutY="400.0" mnemonicParsing="false" onAction="#onBuyBookButtonClick" prefHeight="46.0" prefWidth="198.0" style="-fx-background-color: #2d8bba; -fx-background-radius: 20;" text="Buy Book" textFill="WHITE" visible="false">
       <font>
          <Font name="Bookman Old Style" size="20.0" />
       </font>
@@ -41,95 +34,100 @@
          <Cursor fx:constant="HAND" />
       </cursor>
    </Button>
-   <Label fx:id="cognome" layoutX="583.0" layoutY="111.0" prefHeight="46.0" prefWidth="223.0" text="Cognome" textFill="#002730">
+   <Label fx:id="cognome" layoutX="751.0" layoutY="50.0" prefHeight="46.0" prefWidth="223.0" text="Cognome" textFill="#002730">
       <font>
          <Font name="Bookman Old Style" size="35.0" />
       </font>
    </Label>
-   <Text fill="WHITE" layoutX="304.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book title :" textOrigin="CENTER">
+   <Text fill="WHITE" layoutX="43.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book title :" textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <Text fill="WHITE" layoutX="306.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN :" textOrigin="CENTER">
+   <Text fill="WHITE" layoutX="43.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN :" textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <Text fx:id="scamText" fill="WHITE" layoutX="314.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Seller reports :     " textOrigin="CENTER">
+   <Text fx:id="scamText" fill="WHITE" layoutX="269.0" layoutY="537.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Seller reports :     " textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <Text fx:id="scamNumber" fill="#ffd775" layoutX="586.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number" textOrigin="CENTER">
+   <Text fx:id="scamNumber" fill="#ffd775" layoutX="542.0" layoutY="537.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number" textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <ImageView fx:id="image" fitHeight="241.0" fitWidth="314.0" layoutX="810.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="image" fitHeight="241.0" fitWidth="314.0" layoutX="810.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../../../../assets/NoImage.png" />
       </image></ImageView>
-   <Text fill="WHITE" layoutX="848.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book Images:" textOrigin="CENTER">
+   <Text fill="WHITE" layoutX="848.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book Images:" textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <ImageView fx:id="lArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="711.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="lArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="711.0" layoutY="348.0" onMouseClicked="#onLeftArrowClick" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../../../../assets/backBtn.png" />
       </image>
-   </ImageView>
-   <Button fx:id="lArrow" layoutX="711.0" layoutY="348.0" mnemonicParsing="false" onAction="#onLeftArrowClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor>
-   </Button>
-   <ImageView fx:id="rArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="1105.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true" rotate="178.3">
+   </ImageView>
+   <ImageView fx:id="rArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="1060.0" layoutY="340.0" onMouseClicked="#onRightArrowClick" pickOnBounds="true" preserveRatio="true" rotate="178.3">
       <image>
          <Image url="@../../../../assets/backBtn.png" />
       </image>
-   </ImageView>
-   <Button fx:id="rArrow" layoutX="1105.0" layoutY="348.0" mnemonicParsing="false" onAction="#onRightArrowClick" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor>
-   </Button>
-   <Text fill="WHITE" layoutX="304.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price (Euros) :" textOrigin="CENTER">
+   </ImageView>
+   <Text fill="WHITE" layoutX="43.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price (Euros) :" textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <CheckBox fx:id="negotiable" disable="true" layoutX="305.0" layoutY="470.0" mnemonicParsing="false" text="Negotiable" textFill="WHITE">
+   <CheckBox fx:id="negotiable" disable="true" layoutX="45.0" layoutY="273.0" mnemonicParsing="false" text="Negotiable" textFill="WHITE">
       <font>
          <Font size="26.0" />
       </font>
    </CheckBox>
-   <Text fill="WHITE" layoutX="306.0" layoutY="570.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendor's email :" textOrigin="CENTER">
+   <Text fill="WHITE" layoutX="43.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendor's email :" textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <Text fx:id="title" fill="#ffd775" layoutX="460.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" textOrigin="CENTER">
+   <Text fx:id="title" fill="#ffd775" layoutX="196.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <Text fx:id="isbn" fill="#ffd775" layoutX="418.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="isbn" textOrigin="CENTER">
+   <Text fx:id="isbn" fill="#ffd775" layoutX="121.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="isbn" textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <Text fx:id="price" fill="#ffd775" layoutX="500.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price " textOrigin="CENTER">
+   <Text fx:id="price" fill="#ffd775" layoutX="233.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price " textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <Text fx:id="email" fill="#ffd775" layoutX="530.0" layoutY="570.0" strokeType="OUTSIDE" strokeWidth="0.0" text="email" textOrigin="CENTER">
+   <Text fx:id="email" fill="#ffd775" layoutX="263.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="email" textOrigin="CENTER">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <Button fx:id="backBtn" disable="true" layoutX="82.0" layoutY="115.0" mnemonicParsing="false" text="Button" visible="false" />
+   <Text fill="WHITE" layoutX="86.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seller name :" textOrigin="CENTER">
+      <font>
+         <Font size="30.0" />
+      </font>
+   </Text>
+   <Text fill="WHITE" layoutX="542.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seller surname :" textOrigin="CENTER">
+      <font>
+         <Font size="30.0" />
+      </font>
+   </Text>
 
 </AnchorPane>

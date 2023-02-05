@@ -7,7 +7,11 @@ import com.example.athena.entities.SellerOrBuyerEnum;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.FindBookException;
 import com.example.athena.exceptions.SizedAlert;
+import com.example.athena.exceptions.StudentInfoException;
+import com.example.athena.graphical_controller.oracle_interface.OracleBookPageGC;
+import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.use_case_controllers.FindBooksUCC;
+import com.example.athena.view.oracle_view.BookPageView;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -71,7 +75,11 @@ public class FindBooksViewGC {
                     params.add(bookBean);
                     params.add(query) ;
                     if (System.getProperty("oracle").equals("false")) switcher.switcher("Book-Page2.fxml", params) ;
-                    else switcher.popup("OracleBookPage.fxml", "Book Page", params);
+                    else {
+                        OracleBookPageGC controller = new OracleBookPageGC(bookBean);
+                        ParentSubject.getInstance().setCurrentParent(new BookPageView(controller).getRoot());
+                        ParentSubject.getInstance().getParent().requestFocus();
+                    }
 
 
                 });
