@@ -14,13 +14,14 @@ public class MySellingBooksView {
         this.controller = new OracleMySellingBooksGC();
         this.root = new AnchorPane() ;
         this.area = new TextArea() ;
+        this.area.appendText("TITLE       ISBN        PRICE        NEGOTIABLE           SALE TIMESTAMP" +  '\n');
         area.setEditable(false);
         ((AnchorPane)this.root).getChildren().add(area) ;
     }
 
     public Parent getParent() {
         String result = this.controller.getMyBooks();
-        this.area.setText(result);
+        this.area.appendText(result);
         return this.root ;
     }
 }

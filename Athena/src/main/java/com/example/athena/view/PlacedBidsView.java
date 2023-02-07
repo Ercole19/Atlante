@@ -36,7 +36,7 @@ public class PlacedBidsView {
             formatBundle.setWidth(width);
             formatBundle.setHeight(formatBundle.getEntrySize()* formatBundle.getEntryNumber());
             this.placedBids = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
-            this.controller.setValues(this.placedBids);
+            this.controller.setVal(this.placedBids);
         }
         catch (PercentFormatException e){
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, FATAL_ERROR, 800, 600) ;

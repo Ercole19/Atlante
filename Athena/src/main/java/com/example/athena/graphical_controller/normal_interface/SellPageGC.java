@@ -99,11 +99,6 @@ public class SellPageGC implements Initializable, AbstractObserver {
                                     goToBookPage = new Button("Book Page");
                                     manageOffers = new Button("Offers");
 
-                                    if (System.getProperty("oracle").equals("true")) {
-                                        goToBookPage.setDisable(true);
-                                        goToBookPage.setVisible(false);
-                                    }
-
                                     editButton.setOnAction(event -> {
 
                                         BookBean book = bookTable.getSelectionModel().getSelectedItem();

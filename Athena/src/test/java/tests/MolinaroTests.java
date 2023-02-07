@@ -25,16 +25,14 @@ public class MolinaroTests {
 
     @Test
     public void boundaryTest() {
-          new Thread(() -> {
-                    Platform.startup( () -> {
-                        try {
-                            PurchaseBoundary.purchase();
-                            assertFalse(false);
-                        } catch (PurchaseException e) {
-                            fail();
-                        }
-                    });
-            }).start();
+          new Thread(() -> Platform.startup( () -> {
+              try {
+                  PurchaseBoundary.purchase();
+                  assertFalse(false);
+              } catch (PurchaseException e) {
+                  fail();
+              }
+          })).start();
     }
 
     @Test

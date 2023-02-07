@@ -25,7 +25,6 @@ public class ReceivedBidsViewGC {
     private final ReceivedBidsView view;
     private final GetReceivedBidsUCC getReceivedBidsUCC = new GetReceivedBidsUCC();
     private final ManageBidsUCC manageBidsUCC = new ManageBidsUCC();
-    private Boolean isThereAnAcceptedBid = null;
 
     public ReceivedBidsViewGC(ReceivedBidsView view) {
         this.view = view;
@@ -44,21 +43,6 @@ public class ReceivedBidsViewGC {
         }
         return this.results.size() ;
     }
-
-
-    /*private boolean isThereAnAcceptedBid() {
-        if (this.isThereAnAcceptedBid == null) {
-            this.isThereAnAcceptedBid = false;
-            for (BidBean bid : this.results) {
-                if (bid.getStatus().equals("Accepted")) {
-                    this.isThereAnAcceptedBid = true;
-                    break;
-                }
-            }
-        }
-        return isThereAnAcceptedBid;
-    }*/
-
 
     public void setValues(SearchResultProduct product){
         product.setLegend(0, LabelBuilder.buildLabel("Bidder"));
@@ -125,7 +109,6 @@ public class ReceivedBidsViewGC {
     private void refreshScreen(BidBean book) {
         ArrayList<Object> params = new ArrayList<>() ;
         params.add(book);
-        this.isThereAnAcceptedBid = null;
         if (System.getProperty("oracle").equals("false"))SceneSwitcher.getInstance().switcher("ManageBidsPage.fxml", params) ;
         else ParentSubject.getInstance().setCurrentParent(SceneSwitcher.getInstance().preload("OracleManageBids.fxml", params));
     }

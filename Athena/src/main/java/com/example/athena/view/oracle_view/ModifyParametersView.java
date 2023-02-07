@@ -59,15 +59,15 @@ public class ModifyParametersView extends UpdatedShiftImageView<OracleUpdateBook
     protected void initializeGraphicalElements() {
         this.updatedController.getUploadControls(this);
     }
-
+    @Override
     public ImageView getLeftArrowImage() {
         return this.leftArrowImage ;
     }
-
+    @Override
     public ImageView getRightArrowImage() {
         return this.rightArrowImage ;
     }
-
+    @Override
     public ImageView getBookImageView() {
         return this.bookImage ;
     }

@@ -34,7 +34,7 @@ public class PlacedBidsViewGC {
         return this.results.size() ;
     }
 
-    public void setValues(SearchResultProduct product){
+    public void setVal(SearchResultProduct product){
         product.setLegend(0, LabelBuilder.buildLabel("ISBN"));
         product.setLegend(1, LabelBuilder.buildLabel("Offer"));
         product.setLegend(2, LabelBuilder.buildLabel("Status"));
