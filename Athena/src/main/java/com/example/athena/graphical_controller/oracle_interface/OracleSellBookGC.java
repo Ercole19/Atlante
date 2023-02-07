@@ -6,7 +6,7 @@ import com.example.athena.exceptions.ISBNException;
 import com.example.athena.graphical_controller.normal_interface.UpdatedShiftImageController;
 import com.example.athena.graphical_controller.oracle_interface.sell_book_states.OnSelectNegotiabilityState;
 import com.example.athena.graphical_controller.oracle_interface.sell_book_states.SellBookAbstractState;
-import com.example.athena.use_case_controllers.SellBooksUseCaseController;
+import com.example.athena.use_case_controllers.ManageYourSellingBooksUCC;
 import com.example.athena.view.oracle_view.SelectNegotiabilityView;
 import com.example.athena.view.oracle_view.UploadImageView;
 
@@ -53,7 +53,7 @@ public class OracleSellBookGC extends UpdatedShiftImageController implements OnY
         bean.setIsNegotiable(this.negotiability);
         bean.setImage(super.files) ;
 
-        new SellBooksUseCaseController().putOnSale(bean) ;
+        new ManageYourSellingBooksUCC().putOnSale(bean) ;
     }
 
     public void setState(SellBookAbstractState nextState) {

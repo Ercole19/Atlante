@@ -4,13 +4,12 @@ package com.example.athena.graphical_controller.normal_interface;
 import com.example.athena.beans.BidBean;
 import com.example.athena.beans.BookBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
-import com.example.athena.entities.BooksSubject;
+import com.example.athena.entities.PersonalBookShelf;
 import com.example.athena.entities.LoggedStudent;
 import com.example.athena.entities.SellerOrBuyerEnum;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.exceptions.UserInfoException;
-import com.example.athena.use_case_controllers.SellBooksUseCaseController;
+import com.example.athena.use_case_controllers.ManageYourSellingBooksUCC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class SellController implements Initializable, AbstractObserver {
+public class SellPageGC implements Initializable, AbstractObserver {
 
     @FXML
     private TableView<BookBean> bookTable ;
@@ -47,12 +46,12 @@ public class SellController implements Initializable, AbstractObserver {
     private TableColumn<BookBean, Void> colManage ;
 
 
-    private final ObservableList<BookBean> bookList  = FXCollections.observableArrayList() ;
+
     private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 
     @FXML
     protected void onBackButtonClick() throws IOException {
-        BooksSubject.getInstance().detachObserver(this);
+        PersonalBookShelf.getInstance().detachObserver(this);
         switcher.switcher("bookshop-choose-view.fxml");
     }
 
@@ -128,7 +127,7 @@ public class SellController implements Initializable, AbstractObserver {
                                         try {
 
                                             BookBean book = bookTable.getSelectionModel().getSelectedItem();
-                                            SellBooksUseCaseController controller = new SellBooksUseCaseController();
+                                            ManageYourSellingBooksUCC controller = new ManageYourSellingBooksUCC();
                                             controller.deleteProduct(book);
 
                                         } catch (BookException exc) {
@@ -139,12 +138,18 @@ public class SellController implements Initializable, AbstractObserver {
 
                                     manageOffers.setOnAction(event-> {
                                         BookBean bean = bookTable.getSelectionModel().getSelectedItem();
-                                        List<Object> params = new ArrayList<>();
-                                        BidBean bidBean = new BidBean();
-                                        bidBean.setBookIsbn(bean.getIsbn());
-                                        bidBean.setBookTimestamp(bean.getTimeStamp());
-                                        params.add(bidBean);
-                                        switcher.switcher("ManageBidsPage.fxml", params);
+                                        if (!(bean.getNegotiable())) {
+                                            SizedAlert alert = new SizedAlert(Alert.AlertType.WARNING, "Only books with negotiability can receive offers");
+                                            alert.showAndWait();
+                                        }
+                                        else {
+                                            List<Object> params = new ArrayList<>();
+                                            BidBean bidBean = new BidBean();
+                                            bidBean.setBookIsbn(bean.getIsbn());
+                                            bidBean.setBookTimestamp(bean.getTimeStamp());
+                                            params.add(bidBean);
+                                            switcher.switcher("ManageBidsPage.fxml", params);
+                                        }
                                     });
 
                                     manageBtn = new HBox(editButton, delete, goToBookPage, manageOffers);
@@ -159,16 +164,15 @@ public class SellController implements Initializable, AbstractObserver {
         }};
         colManage.setCellFactory(cellFactory) ;
 
-        BooksSubject.getInstance().attachObserver(this);
+        PersonalBookShelf.getInstance().attachObserver(this);
     }
 
     @Override
     public void update()
     {
         try {
-            bookList.clear();
             ObservableList<BookBean> totalBooks;
-            totalBooks = BooksSubject.getInstance().getBooksBeansList();
+            totalBooks = PersonalBookShelf.getInstance().getBooksBeansList();
             bookTable.setItems(totalBooks);
         }
         catch (BookException exc)

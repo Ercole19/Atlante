@@ -146,7 +146,7 @@ public class BookDao extends AbstractDAO {
             ResultSet set = statement.executeQuery();
             while (set.next()) {
                 List<File> booksFiles = getPersonalBookImages(set.getString(2), email, String.valueOf(set.getTimestamp(7)),false);
-                BookEntity bookEntity = new BookEntity(set.getString(1), set.getString(2), set.getString(3), set.getString(4), set.getBoolean(6), booksFiles, String.valueOf(set.getTimestamp(7)));
+                BookEntity bookEntity = new BookEntity(set.getString(1), set.getString(2), set.getString(3), set.getBoolean(6), booksFiles, set.getString(4), String.valueOf(set.getTimestamp(7)));
                 books.add(bookEntity);
             }
 

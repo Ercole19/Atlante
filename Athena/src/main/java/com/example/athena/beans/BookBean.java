@@ -16,7 +16,6 @@ public class BookBean {
     private List<File> image ;
     private String owner ;
     private int index ;
-    private String purchaser;
     private String timeStamp ;
 
     public List<Image> getImageList(){
@@ -96,14 +95,6 @@ public class BookBean {
         return index;
     }
 
-
-    public void setPurchaser(String purchaser) {
-        this.purchaser = purchaser;
-    }
-
-    public String getPurchaser() {
-        return purchaser;
-    }
 
     public String getTimeStamp() {
         return this.timeStamp ;

@@ -2,7 +2,7 @@ package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.use_case_controllers.SellBooksUseCaseController;
+import com.example.athena.use_case_controllers.ManageYourSellingBooksUCC;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -47,7 +47,7 @@ public class BookShopController extends HomeScreenController implements Initiali
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            if (new SellBooksUseCaseController().getNotification().isThereANot()) {
+            if (new ManageYourSellingBooksUCC().getNotification().isThereANot()) {
                 notText1.setVisible(true);
                 notText2.setVisible(true);
             }

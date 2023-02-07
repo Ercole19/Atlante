@@ -1,8 +1,7 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
 import com.example.athena.entities.ExamsOrCfusEnum;
-import com.example.athena.entities.ExamsSubject;
+import com.example.athena.entities.PersonalTakenExams;
 import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.*;
 import javafx.collections.FXCollections;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class CareerStatusController implements Initializable {
+public class CareerStatusPageGC implements Initializable {
 
     @FXML
     private PieChart examsPieChart;
@@ -43,8 +42,8 @@ public class CareerStatusController implements Initializable {
 
         try {
 
-            takenExams.setText(String.valueOf(ExamsSubject.getInstance().getTakenExamsNumber()));
-            gainedCfus.setText(String.valueOf(ExamsSubject.getInstance().getGainedCfusNumber()));
+            takenExams.setText(String.valueOf(PersonalTakenExams.getInstance().getTakenExamsNumber()));
+            gainedCfus.setText(String.valueOf(PersonalTakenExams.getInstance().getGainedCfusNumber()));
             totalCfus.setText(String.valueOf(LoggedStudent.getInstance().getCurrentStudent().getMaxCfu()));
             totalExams.setText(String.valueOf(LoggedStudent.getInstance().getCurrentStudent().getMaxExams()));
             setGraphs();

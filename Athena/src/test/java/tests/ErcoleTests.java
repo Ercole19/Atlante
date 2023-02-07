@@ -5,7 +5,7 @@ import com.example.athena.beans.EventsDayBean;
 import com.example.athena.beans.NormalExamBean;
 import com.example.athena.beans.UserBean;
 import com.example.athena.entities.CalendarSubject;
-import com.example.athena.entities.ExamsSubject;
+import com.example.athena.entities.PersonalTakenExams;
 import com.example.athena.exceptions.*;
 import com.example.athena.use_case_controllers.LoginUseCaseController;
 import com.example.athena.use_case_controllers.ManageEventUCC;
@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.YearMonth;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -79,10 +78,10 @@ public class ErcoleTests {
             bean.setExamGrade("22");
             bean.setExamName("Exam");
 
-            prevCfus = ExamsSubject.getInstance().getGainedCfusNumber();
+            prevCfus = PersonalTakenExams.getInstance().getGainedCfusNumber();
             ManageExamsUCC controller = new ManageExamsUCC();
             controller.addExam(bean);
-            afterCfus = ExamsSubject.getInstance().getGainedCfusNumber();
+            afterCfus = PersonalTakenExams.getInstance().getGainedCfusNumber();
             assertEquals(afterCfus, prevCfus + 9);
 
         }catch (ExamException e) {

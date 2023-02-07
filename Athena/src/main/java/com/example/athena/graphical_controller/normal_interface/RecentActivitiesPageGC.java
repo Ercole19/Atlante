@@ -2,7 +2,7 @@ package com.example.athena.graphical_controller.normal_interface;
 
 import javafx.fxml.FXML;
 
-public class RecentActivitiesGC {
+public class RecentActivitiesPageGC {
 
     private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 

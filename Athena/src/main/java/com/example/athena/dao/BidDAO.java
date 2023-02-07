@@ -85,7 +85,7 @@ public class BidDAO extends AbstractDAO {
     }
 
     public void updateBidStatus(BidEntity entity) throws BidException {
-        try(PreparedStatement statement = this.getConnection().prepareStatement("UPDATE athena.books_bids SET BidStatus = ? WHERE Seller = ? AND Bidder = ? AND BookIsbn = ? AND BookTimeStamp = ?")){
+        try(PreparedStatement statement = this.getConnection().prepareStatement("call athena.update_status(?,?,?,?,?)")){
             statement.setString(1, entity.getStatus().toString());
             statement.setString(2, entity.getOwner());
             statement.setString(3, entity.getBidder());

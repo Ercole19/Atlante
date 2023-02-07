@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public class ManageExamsGraphicalController implements PostInitialize {
+public class InsertNewExamModuleGC implements PostInitialize {
 
     @FXML
     private TextField examName;
@@ -36,15 +36,14 @@ public class ManageExamsGraphicalController implements PostInitialize {
 
     private ExamBean oldExam;
 
-    public void onConfirmButtonClick(ActionEvent event) {
+    public void addExam() {
 
         NormalExamBean examBean = new NormalExamBean();
         try {
                 setBeanValues(examBean);
                 ManageExamsUCC useCaseController = new ManageExamsUCC();
                 useCaseController.addExam(examBean);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.close();
+                SceneSwitcher.getInstance().getTopStage().close();
 
         } catch (ExamException e) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
@@ -57,16 +56,14 @@ public class ManageExamsGraphicalController implements PostInitialize {
     }
 
 
-    public void updateExam(ActionEvent event) {
+    public void updateExam() {
 
         NormalExamBean newExam = new NormalExamBean();
         try {
             setBeanValues(newExam);
             ManageExamsUCC controller = new ManageExamsUCC();
             controller.updateExamFromDB(newExam, oldExam);
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
+            SceneSwitcher.getInstance().getTopStage().close();
         } catch (ExamException e) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
             alert.showAndWait();
@@ -107,7 +104,7 @@ public class ManageExamsGraphicalController implements PostInitialize {
         examDate.setValue(LocalDate.parse(oldExam.getExamDate()));
 
         confirm.setText("Update");
-        confirm.setOnAction(this::updateExam) ;
+        confirm.setOnAction(event -> updateExam()) ;
     }
 }
 

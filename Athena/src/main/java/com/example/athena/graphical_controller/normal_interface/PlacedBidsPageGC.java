@@ -8,7 +8,7 @@ import javafx.scene.SubScene;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PlacedBidsGC implements Initializable {
+public class PlacedBidsPageGC implements Initializable {
     @FXML
     private SubScene subScene;
 

@@ -3,10 +3,9 @@ package com.example.athena.graphical_controller.normal_interface;
 import com.example.athena.beans.NormalExamBean;
 import com.example.athena.beans.OutputExamBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
-import com.example.athena.entities.ExamsSubject;
+import com.example.athena.entities.PersonalTakenExams;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.ManageExamsUCC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,7 +26,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
-public class ExamsHomePageGCC implements AbstractObserver, Initializable {
+public class ExamsHomePageGC implements AbstractObserver, Initializable {
 
 
     @FXML
@@ -68,7 +67,7 @@ public class ExamsHomePageGCC implements AbstractObserver, Initializable {
     }
 
     public void onBackButtonClick() throws IOException {
-        ExamsSubject.getInstance().detachObserver(this);
+        PersonalTakenExams.getInstance().detachObserver(this);
         switcher.switcher("MainPageStudents.fxml");
      }
 
@@ -128,7 +127,7 @@ public class ExamsHomePageGCC implements AbstractObserver, Initializable {
             }
         };
         colEDit.setCellFactory(cellFactory);
-        ExamsSubject.getInstance().attachObserver(this);
+        PersonalTakenExams.getInstance().attachObserver(this);
     }
 
     public void update()
@@ -136,7 +135,7 @@ public class ExamsHomePageGCC implements AbstractObserver, Initializable {
         examList.clear() ;
         ObservableList<OutputExamBean> totalExams = FXCollections.observableArrayList() ;
         try {
-            totalExams = ExamsSubject.getInstance().getExams();
+            totalExams = PersonalTakenExams.getInstance().getExams();
         } catch (ExamException  e) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
             alert.showAndWait();

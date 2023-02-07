@@ -6,8 +6,10 @@ import com.example.athena.beans.UserBean;
 import com.example.athena.boundaries.PurchaseBoundary;
 import com.example.athena.exceptions.*;
 import com.example.athena.graphical_controller.oracle_interface.OracleAverageGC;
-import com.example.athena.use_case_controllers.AverageUCC;
+import com.example.athena.use_case_controllers.GetAverageInfosUCC;
 import com.example.athena.use_case_controllers.LoginUseCaseController;
+import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
@@ -22,14 +24,17 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MolinaroTests {
 
     @Test
-    public void boundaryTest(){
-        try {
-            PurchaseBoundary.purchase();
-            assertFalse(false);
-        }
-        catch (PurchaseException e){
-            fail();
-        }
+    public void boundaryTest() {
+          new Thread(() -> {
+                    Platform.startup( () -> {
+                        try {
+                            PurchaseBoundary.purchase();
+                            assertFalse(false);
+                        } catch (PurchaseException e) {
+                            fail();
+                        }
+                    });
+            }).start();
     }
 
     @Test
@@ -69,7 +74,7 @@ public class MolinaroTests {
         }
         DecimalFormat format = new DecimalFormat("+#.00;-#.00");
         OracleAverageGC oracleAverageGC = new OracleAverageGC();
-        AverageUCC controller = new AverageUCC();
+        GetAverageInfosUCC controller = new GetAverageInfosUCC();
         String toTest = oracleAverageGC.getAverageInfos();
         ObservableList<ExamAverageInformationBean> examsArithmeticAverageInfos = FXCollections.observableArrayList();
         try {

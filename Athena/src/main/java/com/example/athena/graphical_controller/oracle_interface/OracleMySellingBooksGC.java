@@ -1,7 +1,7 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
 import com.example.athena.beans.BookBean;
-import com.example.athena.entities.BooksSubject;
+import com.example.athena.entities.PersonalBookShelf;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.view.oracle_view.LabelView;
 import javafx.collections.FXCollections;
@@ -13,7 +13,7 @@ public class OracleMySellingBooksGC {
         String booksString = "";
         ObservableList<BookBean> books = FXCollections.observableArrayList() ;
         try {
-            books = BooksSubject.getInstance().getBooksBeansList();
+            books = PersonalBookShelf.getInstance().getBooksBeansList();
         } catch (BookException e) {
             ParentSubject.getInstance().setCurrentParent(labelView.prepareParent("Error in retrieving informations, details follow: " + e.getMessage()));
         }

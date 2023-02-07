@@ -1,27 +1,25 @@
 package com.example.athena.entities;
 
+import com.example.athena.beans.ExamBean;
 import com.example.athena.beans.OutputExamBean;
 import com.example.athena.dao.ExamDao;
-import com.example.athena.dao.UserDao;
 import com.example.athena.engineering_classes.ExamsComparator;
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
-import com.example.athena.exceptions.CareerStatusException;
 import com.example.athena.exceptions.ExamException;
-import com.example.athena.exceptions.UserInfoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class  ExamsSubject extends AbstractSubject {
+public class PersonalTakenExams extends AbstractSubject {
    private List<EntityExam> totalExams = new ArrayList<>() ;
-   private static ExamsSubject instance = null;
+   private static PersonalTakenExams instance = null;
 
    private int takenExamsNumber ;
    private int gainedCfusNumber;
    
-   private ExamsSubject()
+   private PersonalTakenExams()
    {
    }
 
@@ -29,22 +27,23 @@ public class  ExamsSubject extends AbstractSubject {
    {
        ExamDao eDao = new ExamDao();
        this.totalExams.addAll(eDao.getExamlist()) ;
+       this.takenExamsNumber = this.totalExams.size();
        for (EntityExam exam: this.totalExams) {
-           takenExamsNumber++;
            gainedCfusNumber = gainedCfusNumber + exam.getCfu();
        }
    }
    
-   public static synchronized ExamsSubject getInstance() 
+   public static synchronized PersonalTakenExams getInstance()
    {
        if (instance == null) {
-           instance = new ExamsSubject();
+           instance = new PersonalTakenExams();
        }
        return instance;
    }
    
-   public void addExam(EntityExam exam) throws ExamException
+   public void addExam(ExamBean bean) throws ExamException
    {
+       EntityExam exam = new EntityExam(bean.getExamName(), bean.getExamGrade(), bean.getExamCfu(), bean.getExamDate()) ;
        this.totalExams.add(exam);
        this.takenExamsNumber++ ;
        this.gainedCfusNumber += exam.getCfu() ;
@@ -53,8 +52,9 @@ public class  ExamsSubject extends AbstractSubject {
        super.notifyObserver() ;
    }
    
-   public void deleteExam(EntityExam exam) throws ExamException
+   public void deleteExam(ExamBean bean) throws ExamException
    {
+       EntityExam exam = new EntityExam(bean.getExamName(), bean.getExamGrade(), bean.getExamCfu(), bean.getExamDate());
        this.totalExams.remove(exam);
        this.takenExamsNumber--;
        this.gainedCfusNumber -= exam.getCfu();

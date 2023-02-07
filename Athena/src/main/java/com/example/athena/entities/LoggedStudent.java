@@ -45,7 +45,6 @@ public class LoggedStudent extends LoggedUser
     {
        this.email = emailStudent;
        this.currentStudent = new Student(this.email);
-
     }
 
     public Student getCurrentStudent() {

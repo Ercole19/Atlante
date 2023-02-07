@@ -7,7 +7,7 @@ import com.example.athena.entities.SellerOrBuyerEnum;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.StudentInfoException;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
-import com.example.athena.use_case_controllers.BookPageUCC;
+import com.example.athena.use_case_controllers.GetStudentInfosUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -76,7 +76,7 @@ public class BookPageController extends ShiftImageController implements PostInit
             StudentInfosBean studentInfosBean = new StudentInfosBean();
             studentInfosBean.setStudent(this.book.getOwner());
             try {
-                BookPageUCC controller = new BookPageUCC();
+                GetStudentInfosUCC controller = new GetStudentInfosUCC();
                 controller.getStudentInfos(studentInfosBean);
                 this.reportNumber = studentInfosBean.getRepNum();
                 this.sellerName = studentInfosBean.getFullName()[0];
@@ -136,20 +136,10 @@ public class BookPageController extends ShiftImageController implements PostInit
     }
 
 
-    public void onBuyBookButtonClick(ActionEvent event){
+    public void onBuyBookButtonClick(){
         List<Object> params = new ArrayList<>();
         params.add(this.book);
         switcher.popup("purchaseConfirm.fxml", "Confirm purchase", params);
-        List<Object> goBackParams = new ArrayList<>() ;
-        if (System.getProperty("oracle").equals("false")) {
-            goBackParams.add(this.searchQuery) ;
-            switcher.switcher("buy-view2.fxml", goBackParams);
-        }
-        else {
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow() ;
-            stage.close();
-            ParentSubject.getInstance().setCurrentParent(new AnchorPane());
-        }
     }
 
     public void onNegotiateButtonClick(ActionEvent event) {

@@ -1,7 +1,7 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
 import com.example.athena.beans.BookBean;
-import com.example.athena.entities.BooksSubject;
+import com.example.athena.entities.PersonalBookShelf;
 import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
@@ -10,10 +10,9 @@ import com.example.athena.graphical_controller.normal_interface.UpdatedShiftImag
 import com.example.athena.graphical_controller.oracle_interface.update_book_states.OnModifyParametersState;
 import com.example.athena.graphical_controller.oracle_interface.update_book_states.OnSelectWhichBookState;
 import com.example.athena.graphical_controller.oracle_interface.update_book_states.UpdateBookAbstractState;
-import com.example.athena.use_case_controllers.SellBooksUseCaseController;
+import com.example.athena.use_case_controllers.ManageYourSellingBooksUCC;
 import com.example.athena.view.oracle_view.LabelView;
 import com.example.athena.view.oracle_view.ModifyParametersView;
-import com.example.athena.view.oracle_view.OnPlaceBidView;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
@@ -47,11 +46,11 @@ public class OracleUpdateBookGC extends UpdatedShiftImageController {
     }
 
     public void executeBookUpdate() throws ISBNException, BookException {
-        new SellBooksUseCaseController().updateProduct(selectedBean, updatedBean) ;
+        new ManageYourSellingBooksUCC().updateProduct(selectedBean, updatedBean) ;
     }
 
     private int countBeans(String isbn) throws BookException, UserInfoException {
-        ObservableList<BookBean> beanList = BooksSubject.getInstance().getBooksBeansList();
+        ObservableList<BookBean> beanList = PersonalBookShelf.getInstance().getBooksBeansList();
         for (BookBean book : beanList) {
             if (book.getIsbn().equals(isbn)) {
                 this.list.add(book);

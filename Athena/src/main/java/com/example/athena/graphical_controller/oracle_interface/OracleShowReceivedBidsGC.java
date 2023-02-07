@@ -2,7 +2,7 @@ package com.example.athena.graphical_controller.oracle_interface;
 
 import com.example.athena.beans.BidBean;
 import com.example.athena.beans.BookBean;
-import com.example.athena.entities.BooksSubject;
+import com.example.athena.entities.PersonalBookShelf;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.graphical_controller.normal_interface.SceneSwitcher;
@@ -60,7 +60,7 @@ public class OracleShowReceivedBidsGC {
 
 
     private int countBeans(String isbn) throws BookException, UserInfoException {
-        ObservableList<BookBean> beanList = BooksSubject.getInstance().getBooksBeansList();
+        ObservableList<BookBean> beanList = PersonalBookShelf.getInstance().getBooksBeansList();
         for (BookBean book : beanList) {
             if (book.getIsbn().equals(isbn) && book.getNegotiable()) {
                 this.list.add(book);

@@ -11,8 +11,8 @@ import com.example.athena.exceptions.StudentInfoException;
 import com.example.athena.graphical_controller.normal_interface.ShiftImageController;
 import com.example.athena.graphical_controller.oracle_interface.place_bid_states.OnBookPageBid;
 import com.example.athena.graphical_controller.oracle_interface.place_bid_states.PlaceBidAbstractState;
-import com.example.athena.use_case_controllers.BookPageUCC;
-import com.example.athena.use_case_controllers.BuyUCC;
+import com.example.athena.use_case_controllers.GetStudentInfosUCC;
+import com.example.athena.use_case_controllers.PurchaseUCC;
 import com.example.athena.use_case_controllers.ManageBidsUCC;
 import com.example.athena.view.oracle_view.BookPageView;
 import com.example.athena.view.oracle_view.LabelView;
@@ -30,7 +30,7 @@ public class OracleBookPageGC extends ShiftImageController {
     public void populateView(BookPageView view) {
         try {
             StudentInfosBean infosBean = new StudentInfosBean();
-            BookPageUCC bookPageUCC = new BookPageUCC();
+            GetStudentInfosUCC bookPageUCC = new GetStudentInfosUCC();
             infosBean.setStudent(bean.getOwner());
             bookPageUCC.getStudentInfos(infosBean);
 
@@ -93,7 +93,7 @@ public class OracleBookPageGC extends ShiftImageController {
     }
 
     public void purchaseBook() {
-            BuyUCC controller = new BuyUCC();
+            PurchaseUCC controller = new PurchaseUCC();
             try {
                 PurchaseResultBean purchaseResultBean = controller.purchase(this.bean);
                 if (purchaseResultBean.getPurchaseResult()) {

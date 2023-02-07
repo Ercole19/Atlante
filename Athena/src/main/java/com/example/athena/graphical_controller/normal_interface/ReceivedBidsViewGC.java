@@ -46,7 +46,7 @@ public class ReceivedBidsViewGC {
     }
 
 
-    private boolean isThereAnAcceptedBid() {
+    /*private boolean isThereAnAcceptedBid() {
         if (this.isThereAnAcceptedBid == null) {
             this.isThereAnAcceptedBid = false;
             for (BidBean bid : this.results) {
@@ -57,7 +57,7 @@ public class ReceivedBidsViewGC {
             }
         }
         return isThereAnAcceptedBid;
-    }
+    }*/
 
 
     public void setValues(SearchResultProduct product){
@@ -107,9 +107,9 @@ public class ReceivedBidsViewGC {
                     }
                 });
 
-                if (isThereAnAcceptedBid()) {
+                if (bidBean.getStatus().equals("Accepted")) {
                     accept.setDisable(true);
-                    refuse.setDisable(true);
+                    refuse.setDisable(false);
                 }
 
                 i++ ;

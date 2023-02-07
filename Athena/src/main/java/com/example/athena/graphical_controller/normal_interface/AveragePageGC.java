@@ -5,7 +5,7 @@ import com.example.athena.beans.ExamAverageInformationBean;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.UserInfoException;
-import com.example.athena.use_case_controllers.AverageUCC;
+import com.example.athena.use_case_controllers.GetAverageInfosUCC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,7 +22,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class AverageController implements Initializable {
+public class AveragePageGC implements Initializable {
     @FXML
     private LineChart<String , Number> averageGraph;
     @FXML
@@ -34,7 +34,7 @@ public class AverageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            AverageUCC controller = new AverageUCC();
+            GetAverageInfosUCC controller = new GetAverageInfosUCC();
 
             ObservableList<ExamAverageInformationBean> arithmeticAverageInformations = controller.getExamsArithmeticAverageInformation() ;
             ObservableList<ExamAverageInformationBean> weightedAverageInformations = controller.getExamsWeightedAverageInformation();

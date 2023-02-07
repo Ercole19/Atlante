@@ -5,7 +5,7 @@ import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.use_case_controllers.SellBooksUseCaseController;
+import com.example.athena.use_case_controllers.ManageYourSellingBooksUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 
 
 
-public class SellModuleController extends UpdatedShiftImageController implements Initializable , PostInitialize {
+public class InsertNewBookModuleGC extends UpdatedShiftImageController implements Initializable , PostInitialize {
 
     @FXML
     private TextField bookTitle ;
@@ -45,19 +45,19 @@ public class SellModuleController extends UpdatedShiftImageController implements
     @FXML
     private Button confirmButton ;
 
-    private final BookBean book = new BookBean();
+    private BookBean bookToUpdate;
+    private final ManageYourSellingBooksUCC manageYourSellingBooksUCC = new ManageYourSellingBooksUCC();
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 
-    private BookBean oldBook;
-
-    public void onConfirmButtonClick(ActionEvent event)  {
+    public void onConfirmButtonClick()  {
 
 
         try {
-            setBeanValues();
-            SellBooksUseCaseController sellBooksUseCaseController = new SellBooksUseCaseController();
-            sellBooksUseCaseController.putOnSale(book);
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
-            stage.close();
+            BookBean newBook = new BookBean();
+            setBeanValues(newBook);
+            manageYourSellingBooksUCC.putOnSale(newBook);
+            switcher.getTopStage().close();
+
         }
         catch (ISBNException | BookException e ){
             Alert alert = new Alert(Alert.AlertType.ERROR) ;
@@ -66,15 +66,14 @@ public class SellModuleController extends UpdatedShiftImageController implements
         }
     }
 
-    public void onUpdateButtonClick(ActionEvent event)
+    public void onUpdateButtonClick()
     {
 
         try {
-            setBeanValues();
-            SellBooksUseCaseController sellBooksUseCaseController = new SellBooksUseCaseController();
-            sellBooksUseCaseController.updateProduct(oldBook, book);
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow() ;
-            stage.close();
+            BookBean newBook = new BookBean();
+            setBeanValues(newBook);
+            manageYourSellingBooksUCC.updateProduct(bookToUpdate, newBook);
+            switcher.getTopStage().close();
         }
         catch (ISBNException | BookException e){
             Alert alert = new Alert(Alert.AlertType.ERROR) ;
@@ -83,15 +82,14 @@ public class SellModuleController extends UpdatedShiftImageController implements
         }
     }
 
-    private void setBeanValues()
+    private void setBeanValues(BookBean newBook)
     {
         try {
-            this.book.setBookTitle(bookTitle.getText());
-            this.book.setIsbn(bookISBN.getText());
-            this.book.setPrice(bookPrice.getText());
-            this.book.setIsNegotiable(bookNegotiability.isSelected());
-            this.book.setImage(super.files);
-            this.book.setOwner(LoggedStudent.getInstance().getEmail().getMail());
+            newBook.setBookTitle(bookTitle.getText());
+            newBook.setIsbn(bookISBN.getText());
+            newBook.setPrice(bookPrice.getText());
+            newBook.setIsNegotiable(bookNegotiability.isSelected());
+            newBook.setImage(super.files);
         }
         catch (BookException e)
         {
@@ -104,7 +102,6 @@ public class SellModuleController extends UpdatedShiftImageController implements
 
     @FXML
     public void onBackButtonClick() throws IOException {
-        SceneSwitcher switcher = SceneSwitcher.getInstance();
         switcher.switcher("bookshop-choose-view.fxml");
     }
 
@@ -126,17 +123,17 @@ public class SellModuleController extends UpdatedShiftImageController implements
     @Override
     public void postInitialize(ArrayList<Object> params){
 
-        oldBook = (BookBean) params.get(0);
-        bookTitle.setText(oldBook.getBookTitle());
-        bookISBN.setText(oldBook.getIsbn());
+        bookToUpdate = (BookBean) params.get(0);
+        bookTitle.setText(bookToUpdate.getBookTitle());
+        bookISBN.setText(bookToUpdate.getIsbn());
         bookISBN.setDisable(true);
-        bookPrice.setText(oldBook.getPrice());
-        bookNegotiability.setSelected(oldBook.getNegotiable());
+        bookPrice.setText(bookToUpdate.getPrice());
+        bookNegotiability.setSelected(bookToUpdate.getNegotiable());
 
         confirmButton.setText("Update");
-        confirmButton.setOnAction(this::onUpdateButtonClick);
+        confirmButton.setOnAction(event -> onUpdateButtonClick());
 
-        for (File file : oldBook.getImage()) {
+        for (File file : bookToUpdate.getImage()) {
             super.images.add(new Image(String.valueOf(file.toURI())));
             files.add(file);
         }

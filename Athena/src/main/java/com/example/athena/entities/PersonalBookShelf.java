@@ -2,11 +2,8 @@ package com.example.athena.entities;
 
 import com.example.athena.beans.BookBean;
 import com.example.athena.dao.BookDao;
-import com.example.athena.dao.UserDao;
 import com.example.athena.engineering_classes.observer_pattern.AbstractSubject;
-import com.example.athena.exceptions.BidException;
 import com.example.athena.exceptions.BookException;
-import com.example.athena.exceptions.UserInfoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -16,45 +13,42 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BooksSubject extends AbstractSubject {
+public class PersonalBookShelf extends AbstractSubject {
     private final List<BookEntity> totalBooksOnSell = new ArrayList<>();
-    private static BooksSubject instance;
+    private static PersonalBookShelf instance;
+    private final BookDao dao = new BookDao() ;
 
-    private  BooksSubject ()
+    private PersonalBookShelf()
     {
 
     }
 
-    public static synchronized BooksSubject getInstance()
+    public static synchronized PersonalBookShelf getInstance()
     {
         if (instance == null) {
-            instance = new BooksSubject();
+            instance = new PersonalBookShelf();
         }
         return instance;
     }
 
-    public void addBook(BookEntity book) throws BookException
+    public void addBook(BookBean bean) throws BookException
     {
-        BookDao dao = new BookDao() ;
-        Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-        dao.insertBook(book.getTitle(), book.getIsbn(), book.getPrice(), book.getNegotiable(), book.getImage(), timestamp);
-        book.setSaleTimestamp(String.valueOf(timestamp));
+        BookEntity book = new BookEntity(bean.getBookTitle(), bean.getIsbn(), bean.getPrice(), bean.getNegotiable() , bean.getImage(), String.valueOf(Timestamp.valueOf(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS))));
+        dao.insertBook(book.getTitle(), book.getIsbn(), book.getPrice(), book.getNegotiable(), book.getImage(), Timestamp.valueOf(book.getSaleTimestamp()));
         this.totalBooksOnSell.add(book);
         super.notifyObserver();
     }
 
 
-    public void deleteBook(BookEntity book, int index) throws BookException
+    public void deleteBook(BookBean book) throws BookException
     {
-        this.totalBooksOnSell.remove(index);
-        BookDao dao = new BookDao() ;
-        dao.deleteBook(book.getIsbn(), book.getSaleTimestamp());
+        this.totalBooksOnSell.remove(book.getIndex());
+        dao.deleteBook(book.getIsbn(), book.getTimeStamp());
         super.notifyObserver();
     }
 
     private void getBooks() throws BookException {
-        BookDao bookDao = new BookDao();
-        this.totalBooksOnSell.addAll(bookDao.getList());
+        this.totalBooksOnSell.addAll(dao.getList());
     }
 
     public ObservableList<BookBean> getBooksBeansList() throws BookException{
@@ -82,11 +76,12 @@ public class BooksSubject extends AbstractSubject {
     }
 
     public boolean getNotifications() throws BookException {
-        return new BookDao().getNotificationsFromDb();
+        return dao.getNotificationsFromDb();
     }
 
     public void logOut()
     {
-        BooksSubject.instance.totalBooksOnSell.clear();
+        this.totalBooksOnSell.clear();
+        instance = null;
     }
 }

@@ -37,8 +37,8 @@ public class Student {
         else this.maxCfu = max;
     }
 
-    public void finalizePurchase(String title, String isbn, float price, String seller, String timestamp) throws PurchaseException {
-        studentDAO.finalizePurchase(title, isbn, price, seller, timestamp, this.email);
+    public void finalizePurchase(BookEntity book) throws PurchaseException {
+        studentDAO.finalizePurchase(book.getTitle(), book.getIsbn(), Float.valueOf(book.getPrice()), book.getOwner(), book.getSaleTimestamp(), this.email);
     }
     public void reportSeller(String seller) throws ReportException {
         studentDAO.daoReportSeller(this.email, seller);

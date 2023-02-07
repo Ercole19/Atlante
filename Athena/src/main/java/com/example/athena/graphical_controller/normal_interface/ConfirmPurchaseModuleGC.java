@@ -4,11 +4,8 @@ import com.example.athena.beans.BookBean;
 import com.example.athena.beans.PurchaseResultBean;
 import com.example.athena.exceptions.PurchaseException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.use_case_controllers.BuyUCC;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
+import com.example.athena.use_case_controllers.PurchaseUCC;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -16,53 +13,50 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class ConfirmPurchaseGC implements PostInitialize {
+public class ConfirmPurchaseModuleGC implements PostInitialize {
 
-    private BookBean bean;
-    private Stage stage;
+    private BookBean bookToBuy;
 
     @FXML
     private Button yesButton ;
-
     @FXML
     private Button noButton ;
+    private SceneSwitcher switcher = SceneSwitcher.getInstance();
 
-    public void onYesBtnClick(ActionEvent event) {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow() ;
-
+    public void onYesBtnClick() {
         yesButton.setDisable(true) ;
         noButton.setDisable(true) ;
-        stage.setOnCloseRequest(Event::consume);
 
-        BuyUCC controller = new BuyUCC();
+        PurchaseUCC controller = new PurchaseUCC();
         try {
-            PurchaseResultBean purchaseResultBean = controller.purchase(this.bean) ;
+            PurchaseResultBean purchaseResultBean = controller.purchase(this.bookToBuy) ;
             SizedAlert sizedAlert;
             if(purchaseResultBean.getPurchaseResult())
             {
                 sizedAlert = new SizedAlert(Alert.AlertType.CONFIRMATION, "Your purchase has been made! You can see it in recent purchase window.", ButtonType.CLOSE);
+                sizedAlert.showAndWait();
+                switcher.getTopStage().close();
+                switcher.popStage();
+                switcher.switcher("buy-view.fxml");
+                switcher.pushStage(new Stage());
             }else {
                 sizedAlert = new SizedAlert(Alert.AlertType.ERROR, "Your purchase has been declined", ButtonType.CLOSE);
+                sizedAlert.showAndWait();
             }
-            sizedAlert.showAndWait();
-
         }
         catch (PurchaseException e) {
             SizedAlert sizedAlert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.CLOSE);
             sizedAlert.showAndWait();
         }
-
-
-        stage.close();
+        switcher.getTopStage().close();
     }
 
-    public void onNoBtnClick(ActionEvent event) {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+    public void onNoBtnClick() {
+        switcher.getTopStage().close();
     }
 
     @Override
     public void postInitialize(ArrayList<Object> params) {
-        this.bean = (BookBean) params.get(0);
+        this.bookToBuy = (BookBean) params.get(0);
     }
 }

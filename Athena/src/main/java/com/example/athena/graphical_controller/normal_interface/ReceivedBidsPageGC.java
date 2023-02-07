@@ -8,7 +8,7 @@ import javafx.scene.SubScene;
 
 import java.util.ArrayList;
 
-public class BidPageGC implements PostInitialize {
+public class ReceivedBidsPageGC implements PostInitialize {
     @FXML
     private SubScene subScene;
 

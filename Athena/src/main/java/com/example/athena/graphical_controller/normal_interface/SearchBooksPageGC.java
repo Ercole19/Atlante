@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class BuyController implements Initializable, PostInitialize {
+public class SearchBooksPageGC implements Initializable, PostInitialize {
 
 
     @FXML

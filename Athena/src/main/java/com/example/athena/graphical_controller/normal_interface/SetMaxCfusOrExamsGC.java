@@ -2,7 +2,7 @@ package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.beans.SetMaxCfusOrExamsBean;
 import com.example.athena.entities.ExamsOrCfusEnum;
-import com.example.athena.entities.ExamsSubject;
+import com.example.athena.entities.PersonalTakenExams;
 import com.example.athena.exceptions.*;
 import com.example.athena.use_case_controllers.SetMaxCfusOrExamsUCC;
 import javafx.event.ActionEvent;
@@ -44,10 +44,10 @@ public class SetMaxCfusOrExamsGC implements PostInitialize {
         SetMaxCfusOrExamsBean infos = new SetMaxCfusOrExamsBean();
         try {
             infos.setNewMax(textFieldMax.getText());
-            if ((this.examsOrCfus.toString().equals(("SET_MAX_CFUS")) && (Integer.parseInt(textFieldMax.getText()) < ExamsSubject.getInstance().getGainedCfusNumber()))) {
+            if ((this.examsOrCfus.toString().equals(("SET_MAX_CFUS")) && (Integer.parseInt(textFieldMax.getText()) < PersonalTakenExams.getInstance().getGainedCfusNumber()))) {
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "New max cfu can not be lower than gained cfus", 800, 600);
                 alert.showAndWait();
-            } else if (this.examsOrCfus.toString().equals(("SET_MAX_EXAMS")) && (Integer.parseInt(textFieldMax.getText()) < ExamsSubject.getInstance().getTakenExamsNumber())) {
+            } else if (this.examsOrCfus.toString().equals(("SET_MAX_EXAMS")) && (Integer.parseInt(textFieldMax.getText()) < PersonalTakenExams.getInstance().getTakenExamsNumber())) {
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "New max exams can not be lower than taken exams", 800, 600);
                 alert.showAndWait();
             }

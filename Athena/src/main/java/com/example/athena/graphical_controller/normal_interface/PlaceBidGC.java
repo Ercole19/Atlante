@@ -21,6 +21,7 @@ public class PlaceBidGC implements PostInitialize{
     private BookBean bookBean;
     @FXML
     private TextField bidTextField ;
+    private SceneSwitcher switcher = SceneSwitcher.getInstance();
 
 
     @Override
@@ -28,7 +29,7 @@ public class PlaceBidGC implements PostInitialize{
         this.bookBean = (BookBean) params.get(0) ;
     }
 
-    public void sendBid(ActionEvent event) {
+    public void sendBid() {
         ManageBidsUCC controller = new ManageBidsUCC();
         BidBean bidBean = new BidBean();
         try {
@@ -54,7 +55,7 @@ public class PlaceBidGC implements PostInitialize{
 
             controller.placeBid(bidBean);
 
-            ((Stage) ((Node)event.getSource()).getScene().getWindow()).close() ;
+            switcher.getTopStage().close();
 
         } catch (BidException e) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800 ,600);

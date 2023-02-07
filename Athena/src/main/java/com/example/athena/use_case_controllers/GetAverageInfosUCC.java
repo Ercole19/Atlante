@@ -2,17 +2,17 @@ package com.example.athena.use_case_controllers;
 
 import com.example.athena.beans.ExamAverageInformationBean;
 import com.example.athena.beans.OutputExamBean;
-import com.example.athena.entities.ExamsSubject;
+import com.example.athena.entities.PersonalTakenExams;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.UserInfoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class AverageUCC  {
+public class GetAverageInfosUCC {
 
     public ObservableList<ExamAverageInformationBean> getExamsArithmeticAverageInformation() throws ExamException, UserInfoException {
 
-        ObservableList<OutputExamBean> exams = ExamsSubject.getInstance().getSortedExams();
+        ObservableList<OutputExamBean> exams = PersonalTakenExams.getInstance().getSortedExams();
         ObservableList<ExamAverageInformationBean> examsArithmeticAverageInfos = FXCollections.observableArrayList();
         int count = 1;
         double average ;
@@ -41,7 +41,7 @@ public class AverageUCC  {
 
     public ObservableList<ExamAverageInformationBean> getExamsWeightedAverageInformation() throws ExamException, UserInfoException {
 
-        ObservableList<OutputExamBean> exams = ExamsSubject.getInstance().getSortedExams() ;
+        ObservableList<OutputExamBean> exams = PersonalTakenExams.getInstance().getSortedExams() ;
         ObservableList<ExamAverageInformationBean> examsWeightedAverageInfos = FXCollections.observableArrayList();
         int  cfus = 0 ;
         double average ;
