@@ -14,15 +14,12 @@ public class PurchaseBoundary
     public static PurchaseResultBean purchase() throws PurchaseException
     {
         try
-        {   /*
-            */
-
+        {
             FakePaymentSystemBoundary boundary = new FakePaymentSystemBoundary() ;
             boolean result = boundary.submitPayment() ;
             PurchaseResultBean bean = new PurchaseResultBean() ;
             bean.setPurchaseResult(result) ;
             return bean ;
-
         }
         catch (Exception e)
         {

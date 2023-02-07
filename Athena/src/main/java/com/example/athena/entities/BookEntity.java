@@ -17,9 +17,7 @@ public class BookEntity {
     private String owner ;
     private String saleTimestamp;
 
-    public BookEntity () {
-
-    }
+    public BookEntity () {}
 
     public BookEntity(String title , String isbn, String price, String owner, String saleTimestamp){
         this.title = title;
