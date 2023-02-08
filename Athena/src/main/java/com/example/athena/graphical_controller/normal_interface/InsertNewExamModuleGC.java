@@ -35,15 +35,17 @@ public class InsertNewExamModuleGC implements PostInitialize {
     private Button confirm;
 
     private ExamBean oldExam;
+    private final ManageExamsUCC controller  = new ManageExamsUCC();
+    private SceneSwitcher switcher  = SceneSwitcher.getInstance();
 
     public void addExam() {
 
-        NormalExamBean examBean = new NormalExamBean();
+        NormalExamBean newExam = new NormalExamBean();
         try {
-                setBeanValues(examBean);
-                ManageExamsUCC useCaseController = new ManageExamsUCC();
-                useCaseController.addExam(examBean);
-                SceneSwitcher.getInstance().getTopStage().close();
+                setBeanValues(newExam);
+                if (confirm.getText().equals("Update")) {controller.updateExamFromDB(newExam, oldExam);}
+                else {controller.addExam(newExam);}
+                switcher.getTopStage().close();
 
         } catch (ExamException e) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
@@ -55,24 +57,6 @@ public class InsertNewExamModuleGC implements PostInitialize {
         }
     }
 
-
-    public void updateExam() {
-
-        NormalExamBean newExam = new NormalExamBean();
-        try {
-            setBeanValues(newExam);
-            ManageExamsUCC controller = new ManageExamsUCC();
-            controller.updateExamFromDB(newExam, oldExam);
-            SceneSwitcher.getInstance().getTopStage().close();
-        } catch (ExamException e) {
-            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage());
-            alert.showAndWait();
-        }
-        catch (NumberFormatException e) {
-            SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Grades or cfus are not numbers", 800, 600) ;
-            alert.showAndWait() ;
-        }
-    }
 
     public void setBeanValues(NormalExamBean examBean) throws ExamException {
         int grade = Integer.parseInt(examGrade.getText());
@@ -104,7 +88,6 @@ public class InsertNewExamModuleGC implements PostInitialize {
         examDate.setValue(LocalDate.parse(oldExam.getExamDate()));
 
         confirm.setText("Update");
-        confirm.setOnAction(event -> updateExam()) ;
     }
 }
 

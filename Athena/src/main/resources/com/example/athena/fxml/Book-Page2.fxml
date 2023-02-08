@@ -76,16 +76,11 @@
          <Font size="30.0" />
       </font>
    </Text>
-   <ImageView fx:id="image" fitHeight="241.0" fitWidth="314.0" layoutX="810.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="image" fitHeight="415.0" fitWidth="416.0" layoutX="788.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../../../../assets/NoImage.png" />
       </image></ImageView>
-   <Text fill="WHITE" layoutX="848.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book Images:" textOrigin="CENTER">
-      <font>
-         <Font size="30.0" />
-      </font>
-   </Text>
-   <ImageView fx:id="lArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="711.0" layoutY="348.0" onMouseClicked="#onLeftArrowClick" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="lArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="711.0" layoutY="420.0" onMouseClicked="#onLeftArrowClick" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../../../../assets/backBtn.png" />
       </image>
@@ -93,7 +88,7 @@
          <Cursor fx:constant="HAND" />
       </cursor>
    </ImageView>
-   <ImageView fx:id="rArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="1105.0" layoutY="348.0" onMouseClicked="#onRightArrowClick" pickOnBounds="true" preserveRatio="true" rotate="178.3">
+   <ImageView fx:id="rArrowImage" fitHeight="63.0" fitWidth="82.0" layoutX="1190.0" layoutY="420.0" onMouseClicked="#onRightArrowClick" pickOnBounds="true" preserveRatio="true" rotate="178.3">
       <image>
          <Image url="@../../../../assets/backBtn.png" />
       </image>

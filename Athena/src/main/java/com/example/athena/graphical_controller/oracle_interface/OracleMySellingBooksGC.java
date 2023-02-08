@@ -18,7 +18,7 @@ public class OracleMySellingBooksGC {
             ParentSubject.getInstance().setCurrentParent(labelView.prepareParent("Error in retrieving informations, details follow: " + e.getMessage()));
         }
         for (BookBean bean : books) {
-            booksString = booksString.concat(bean.getBookTitle() + "  " + bean.getIsbn() + "  " + bean.getPrice() + "  " + "Negotiable: " + bean.getNegotiable() + "  " + "Put on sale on: " + bean.getTimeStamp() + "\n");
+            booksString = booksString.concat(bean.getBookTitle() + "    " + bean.getIsbn() + "    " + bean.getPrice() + "    " + bean.getNegotiable() + "    " + bean.getTimeStamp() + "\n");
         }
         return booksString;
     }

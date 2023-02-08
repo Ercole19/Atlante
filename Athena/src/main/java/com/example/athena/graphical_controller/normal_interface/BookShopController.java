@@ -26,11 +26,6 @@ public class BookShopController extends HomeScreenController implements Initiali
         switcher.switcher("MainPageStudents.fxml");
     }
 
-    @FXML
-    protected void onBookBtnClick(){
-        switcher.switcher("BuyBookPage.fxml");
-    }
-
     public void onBuyButtonClick(){
         switcher.switcher("buy-view2.fxml");
     }

@@ -51,31 +51,15 @@ public class InsertNewBookModuleGC extends UpdatedShiftImageController implement
 
     public void onConfirmButtonClick()  {
 
-
         try {
             BookBean newBook = new BookBean();
             setBeanValues(newBook);
-            manageYourSellingBooksUCC.putOnSale(newBook);
+            if (confirmButton.getText().equals("Update")) manageYourSellingBooksUCC.updateProduct(this.bookToUpdate, newBook);
+            else manageYourSellingBooksUCC.putOnSale(newBook);
             switcher.getTopStage().close();
 
         }
         catch (ISBNException | BookException e ){
-            Alert alert = new Alert(Alert.AlertType.ERROR) ;
-            alert.setContentText(e.getMessage()) ;
-            alert.showAndWait() ;
-        }
-    }
-
-    public void onUpdateButtonClick()
-    {
-
-        try {
-            BookBean newBook = new BookBean();
-            setBeanValues(newBook);
-            manageYourSellingBooksUCC.updateProduct(bookToUpdate, newBook);
-            switcher.getTopStage().close();
-        }
-        catch (ISBNException | BookException e){
             Alert alert = new Alert(Alert.AlertType.ERROR) ;
             alert.setContentText(e.getMessage()) ;
             alert.showAndWait() ;
@@ -131,7 +115,6 @@ public class InsertNewBookModuleGC extends UpdatedShiftImageController implement
         bookNegotiability.setSelected(bookToUpdate.getNegotiable());
 
         confirmButton.setText("Update");
-        confirmButton.setOnAction(event -> onUpdateButtonClick());
 
         for (File file : bookToUpdate.getImage()) {
             super.images.add(new Image(String.valueOf(file.toURI())));

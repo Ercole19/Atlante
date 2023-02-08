@@ -21,7 +21,7 @@ public class PlaceBidGC implements PostInitialize{
     private BookBean bookBean;
     @FXML
     private TextField bidTextField ;
-    private SceneSwitcher switcher = SceneSwitcher.getInstance();
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 
 
     @Override
@@ -65,6 +65,6 @@ public class PlaceBidGC implements PostInitialize{
 
     public void onBackBtnClick()
     {
-        SceneSwitcher.getInstance().getTopStage().close();
+        switcher.getTopStage().close();
     }
 }
