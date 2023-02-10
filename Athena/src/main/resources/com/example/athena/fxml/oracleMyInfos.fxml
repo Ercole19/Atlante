@@ -4,7 +4,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="913.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.oracle_interface.ShowMyInfosGC">
    <children>
       <TextArea fx:id="description" layoutX="75.0" layoutY="57.0" prefHeight="164.0" prefWidth="200.0" />

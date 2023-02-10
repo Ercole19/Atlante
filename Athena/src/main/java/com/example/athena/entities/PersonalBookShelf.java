@@ -79,13 +79,9 @@ public class PersonalBookShelf extends AbstractSubject {
         return dao.getNotificationsFromDb();
     }
 
-    private static void resetInstance() {
-        instance = null;
-    }
 
     public void logOut()
     {
         this.totalBooksOnSell.clear();
-        resetInstance();
     }
 }

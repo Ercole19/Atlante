@@ -8,7 +8,6 @@ import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;

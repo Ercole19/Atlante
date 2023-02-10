@@ -74,14 +74,14 @@ public class BookBean {
         return owner;
     }
 
-    public void syntacticCheckIsbn(String isbn) throws BookException
+    private void syntacticCheckIsbn(String isbn) throws BookException
     {
         if (!(isbn.matches("\\d{9}[\\dX]") || isbn.matches("\\d{13}"))){
             throw new BookException("Error in ISBN format") ;
         }
     }
 
-    public void syntacticCheckPrice(String price)throws BookException{
+    private void syntacticCheckPrice(String price)throws BookException{
         if (!(price.matches("\\d{1,3}\\.\\d{2}"))){
             throw new BookException("Error in price format");
         }

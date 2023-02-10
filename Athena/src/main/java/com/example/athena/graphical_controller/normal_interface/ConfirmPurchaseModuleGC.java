@@ -37,7 +37,7 @@ public class ConfirmPurchaseModuleGC implements PostInitialize {
                 sizedAlert.showAndWait();
                 switcher.getTopStage().close();
                 switcher.popStage();
-                switcher.switcher("buy-view.fxml");
+                switcher.switcher("buy-view2.fxml");
                 switcher.pushStage(new Stage());
             }else {
                 sizedAlert = new SizedAlert(Alert.AlertType.ERROR, "Your purchase has been declined", ButtonType.CLOSE);

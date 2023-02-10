@@ -1,7 +1,7 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
-import com.example.athena.entities.PersonalTakenExams;
 import com.example.athena.entities.LoggedStudent;
+import com.example.athena.entities.PersonalTakenExams;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.view.oracle_view.LabelView;
 

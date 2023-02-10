@@ -8,12 +8,10 @@ import com.example.athena.exceptions.*;
 import com.example.athena.graphical_controller.oracle_interface.OracleAverageGC;
 import com.example.athena.use_case_controllers.GetAverageInfosUCC;
 import com.example.athena.use_case_controllers.LoginUseCaseController;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
-
 
 import java.text.DecimalFormat;
 

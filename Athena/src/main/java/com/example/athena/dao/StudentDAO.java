@@ -2,7 +2,9 @@ package com.example.athena.dao;
 
 import com.example.athena.entities.ExamsOrCfusEnum;
 import com.example.athena.entities.LoggedStudent;
-import com.example.athena.exceptions.*;
+import com.example.athena.exceptions.PurchaseException;
+import com.example.athena.exceptions.ReportException;
+import com.example.athena.exceptions.StudentInfoException;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;

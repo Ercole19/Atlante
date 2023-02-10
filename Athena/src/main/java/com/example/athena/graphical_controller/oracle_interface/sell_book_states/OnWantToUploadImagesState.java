@@ -2,8 +2,6 @@ package com.example.athena.graphical_controller.oracle_interface.sell_book_state
 
 import com.example.athena.graphical_controller.oracle_interface.BookYesOrNoController;
 import com.example.athena.graphical_controller.oracle_interface.OracleSellBookGC;
-import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
-import com.example.athena.view.oracle_view.WantToView;
 
 public class OnWantToUploadImagesState implements SellBookAbstractState {
 

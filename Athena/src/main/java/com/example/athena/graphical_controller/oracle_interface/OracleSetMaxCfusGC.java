@@ -5,7 +5,6 @@ import com.example.athena.entities.ExamsOrCfusEnum;
 import com.example.athena.exceptions.CareerStatusException;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.StudentInfoException;
-import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.SetMaxCfusOrExamsUCC;
 import com.example.athena.view.oracle_view.LabelView;
 

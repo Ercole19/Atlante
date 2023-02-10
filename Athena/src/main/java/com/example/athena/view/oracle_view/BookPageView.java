@@ -1,6 +1,5 @@
 package com.example.athena.view.oracle_view;
 
-import com.example.athena.exceptions.StudentInfoException;
 import com.example.athena.graphical_controller.oracle_interface.OracleBookPageGC;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;

@@ -1,22 +1,18 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.beans.BookBean;
-import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.ManageYourSellingBooksUCC;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -82,17 +78,10 @@ public class InsertNewBookModuleGC extends UpdatedShiftImageController implement
         }
     }
 
-
-
     @FXML
     public void onBackButtonClick() throws IOException {
         switcher.switcher("bookshop-choose-view.fxml");
     }
-
-    public void onUploadBtnClick() {
-        super.onUploadBtnClick();
-    }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -127,10 +116,6 @@ public class InsertNewBookModuleGC extends UpdatedShiftImageController implement
             bookImage.setImage(images.get(0));
             super.shiftIndex(0);
         }
-    }
-
-    public void deleteImageOnScreen (){
-        super.deleteImageOnScreen();
     }
 
     @Override

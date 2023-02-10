@@ -1,6 +1,5 @@
 package com.example.athena.view.oracle_view;
 
-import com.example.athena.graphical_controller.oracle_interface.OnYesOrNoController;
 import com.example.athena.view.LabelBuilder;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;

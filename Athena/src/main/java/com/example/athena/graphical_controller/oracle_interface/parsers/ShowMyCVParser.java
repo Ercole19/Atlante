@@ -1,7 +1,6 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
 
-import com.example.athena.beans.UserBean;
 import com.example.athena.entities.LoggedTutor;
 import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.exceptions.NoCvException;

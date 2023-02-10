@@ -2,7 +2,6 @@ package com.example.athena.dao;
 
 
 import com.example.athena.entities.RecentInteractedBooksSearchResult;
-import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.FindException;
 
 import java.io.IOException;

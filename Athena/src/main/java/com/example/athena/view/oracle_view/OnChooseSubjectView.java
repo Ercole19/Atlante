@@ -1,19 +1,11 @@
 package com.example.athena.view.oracle_view;
 
-import com.example.athena.beans.UserBean;
-import com.example.athena.entities.LoggedTutor;
-import com.example.athena.entities.TutorPersonalPageSubject;
-import com.example.athena.exceptions.CourseException;
-import com.example.athena.exceptions.UserInfoException;
-import com.example.athena.graphical_controller.oracle_interface.OracleGenerateReviewGC;
 import com.example.athena.view.LabelBuilder;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-
-import java.util.List;
 
 public class OnChooseSubjectView {
 

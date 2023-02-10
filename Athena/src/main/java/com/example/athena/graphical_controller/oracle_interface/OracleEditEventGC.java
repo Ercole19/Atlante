@@ -10,7 +10,6 @@ import com.example.athena.use_case_controllers.ManageEventUCC;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;

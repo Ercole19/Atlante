@@ -2,7 +2,6 @@ package com.example.athena.use_case_controllers;
 
 import com.example.athena.beans.SearchTutorQueryBean;
 import com.example.athena.beans.TutorSearchResultBean;
-import com.example.athena.dao.UserDao;
 import com.example.athena.entities.ByCourseOrNameEnum;
 import com.example.athena.entities.TutorSearchResult;
 import com.example.athena.exceptions.FindException;

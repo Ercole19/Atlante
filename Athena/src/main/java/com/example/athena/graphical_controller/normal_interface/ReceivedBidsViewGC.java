@@ -1,11 +1,9 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.beans.BidBean;
-import com.example.athena.beans.BookBean;
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.entities.BidStatusEnum;
 import com.example.athena.exceptions.BidException;
-import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.use_case_controllers.GetReceivedBidsUCC;

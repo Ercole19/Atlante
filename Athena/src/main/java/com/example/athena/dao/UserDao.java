@@ -1,8 +1,11 @@
 package com.example.athena.dao;
 
 
-import com.example.athena.exceptions.*;
-import java.io.*;
+import com.example.athena.exceptions.FindException;
+import com.example.athena.exceptions.UserInfoException;
+import com.example.athena.exceptions.UserRegistrationException;
+
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -2,11 +2,6 @@ package com.example.athena.beans;
 
 import com.example.athena.exceptions.EventException;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
 public class ReminderBean extends EventBean{
 
     private boolean remove;

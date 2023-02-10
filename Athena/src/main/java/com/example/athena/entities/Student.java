@@ -1,7 +1,6 @@
 package com.example.athena.entities;
 
 import com.example.athena.dao.StudentDAO;
-import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.PurchaseException;
 import com.example.athena.exceptions.ReportException;
 import com.example.athena.exceptions.StudentInfoException;

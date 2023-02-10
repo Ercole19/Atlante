@@ -1,8 +1,8 @@
 package com.example.athena.dao;
 
 import com.example.athena.entities.LoggedTutor;
-import com.example.athena.entities.TutorDetails;
 import com.example.athena.entities.Tutor;
+import com.example.athena.entities.TutorDetails;
 import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.NoCvException;
 import com.example.athena.exceptions.UserInfoException;

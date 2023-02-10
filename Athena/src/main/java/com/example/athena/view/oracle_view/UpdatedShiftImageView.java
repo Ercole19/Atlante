@@ -1,6 +1,5 @@
 package com.example.athena.view.oracle_view;
 
-import com.example.athena.graphical_controller.normal_interface.ShiftImageController;
 import com.example.athena.graphical_controller.normal_interface.UpdatedShiftImageController;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;

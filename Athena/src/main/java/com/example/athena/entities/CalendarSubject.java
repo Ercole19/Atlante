@@ -9,7 +9,6 @@ import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SizedAlert;
 import javafx.scene.control.Alert;
 
-import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.HashMap;
 import java.util.List;

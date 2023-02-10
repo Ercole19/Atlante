@@ -1,12 +1,8 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.beans.BookBean;
 import com.example.athena.beans.FindRecentBooksBean;
 import com.example.athena.beans.RecentBooksSearchResultBean;
-import com.example.athena.dao.BookDao;
-import com.example.athena.entities.BookEntity;
 import com.example.athena.entities.RecentInteractedBooksSearchResult;
-import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.FindException;
 
 import java.util.ArrayList;

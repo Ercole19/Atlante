@@ -1,9 +1,8 @@
 package com.example.athena.use_case_controllers;
 
 import com.example.athena.beans.ExamBean;
-import com.example.athena.entities.EntityExam;
-import com.example.athena.entities.PersonalTakenExams;
 import com.example.athena.entities.LoggedStudent;
+import com.example.athena.entities.PersonalTakenExams;
 import com.example.athena.exceptions.ExamException;
 
 public class ManageExamsUCC {

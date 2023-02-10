@@ -93,7 +93,7 @@ public class PlacedBidsViewGC {
     }
 
     private void refreshScreen() {
-        if (System.getProperty("oracle").equals("false"))SceneSwitcher.getInstance().switcher("ManageBidsPage.fxml") ;
-        else ParentSubject.getInstance().setCurrentParent(SceneSwitcher.getInstance().preload("OracleManageBids.fxml")); 
+        if (System.getProperty("oracle").equals("false"))SceneSwitcher.getInstance().switcher("PlacedBids.fxml") ;
+        else ParentSubject.getInstance().setCurrentParent(new PlacedBidsView(1200, 560).getRoot());
     }
 }

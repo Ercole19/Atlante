@@ -3,7 +3,6 @@ package tests;
 import com.example.athena.beans.*;
 import com.example.athena.entities.*;
 import com.example.athena.exceptions.*;
-
 import com.example.athena.use_case_controllers.LoginUseCaseController;
 import com.example.athena.use_case_controllers.ReviewTutorUCC;
 import com.example.athena.use_case_controllers.SearchTutorUseCaseController;
@@ -15,9 +14,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals ;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail ;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**Sebastian Roberto Opriscan**/
 public class OpriscanTests {

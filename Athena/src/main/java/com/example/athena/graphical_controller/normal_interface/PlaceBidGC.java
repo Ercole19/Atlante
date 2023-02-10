@@ -7,12 +7,9 @@ import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.BidException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.ManageBidsUCC;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 

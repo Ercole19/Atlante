@@ -7,6 +7,7 @@ import com.example.athena.entities.BidEntity;
 import com.example.athena.entities.BidStatusEnum;
 import com.example.athena.exceptions.BidException;
 import com.example.athena.exceptions.PurchaseException;
+import javafx.scene.control.Alert;
 
 public class ManageBidsUCC {
 
@@ -36,6 +37,8 @@ public class ManageBidsUCC {
 
         BidEntity entity = new BidEntity(bean.getOwner(), bean.getBidder(), bean.getNewPrice(), bean.getBookTimestamp(), bean.getBookIsbn(), BidStatusEnum.valueOf(bean.getStatus()));
         entity.payBid();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Book purchased !");
+        alert.showAndWait();
     }
 
 }

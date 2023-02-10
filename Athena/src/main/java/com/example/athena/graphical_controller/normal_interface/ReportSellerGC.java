@@ -1,9 +1,6 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.beans.BookBean;
 import com.example.athena.beans.RecentBooksSearchResultBean;
-import com.example.athena.entities.LoggedStudent;
-import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ReportException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.use_case_controllers.ReportSellerUCC;

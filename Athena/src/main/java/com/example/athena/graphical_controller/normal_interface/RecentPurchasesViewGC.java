@@ -1,6 +1,5 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.beans.BookBean;
 import com.example.athena.beans.FindRecentBooksBean;
 import com.example.athena.beans.RecentBooksSearchResultBean;
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;

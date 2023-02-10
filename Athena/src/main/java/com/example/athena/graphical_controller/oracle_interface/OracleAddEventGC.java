@@ -6,8 +6,6 @@ import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.graphical_controller.oracle_interface.add_event_states.AddEventSM;
 import com.example.athena.graphical_controller.oracle_interface.add_event_states.OnSelectType;
 import com.example.athena.use_case_controllers.ManageEventUCC;
-import com.example.athena.view.oracle_view.InsertDescriptionView;
-import com.example.athena.view.oracle_view.OnSelectTypeView;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

@@ -7,7 +7,6 @@ import com.example.athena.entities.SellerOrBuyerEnum;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.FindBookException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.exceptions.StudentInfoException;
 import com.example.athena.graphical_controller.oracle_interface.OracleBookPageGC;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.use_case_controllers.FindBooksUCC;

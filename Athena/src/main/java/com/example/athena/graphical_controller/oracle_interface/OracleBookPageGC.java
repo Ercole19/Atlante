@@ -12,8 +12,8 @@ import com.example.athena.graphical_controller.normal_interface.ShiftImageContro
 import com.example.athena.graphical_controller.oracle_interface.place_bid_states.OnBookPageBid;
 import com.example.athena.graphical_controller.oracle_interface.place_bid_states.PlaceBidAbstractState;
 import com.example.athena.use_case_controllers.GetStudentInfosUCC;
-import com.example.athena.use_case_controllers.PurchaseUCC;
 import com.example.athena.use_case_controllers.ManageBidsUCC;
+import com.example.athena.use_case_controllers.PurchaseUCC;
 import com.example.athena.view.oracle_view.BookPageView;
 import com.example.athena.view.oracle_view.LabelView;
 import com.example.athena.view.oracle_view.OnPlaceBidView;

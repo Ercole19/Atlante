@@ -1,9 +1,10 @@
 package com.example.athena.graphical_controller.normal_interface;
 
 import com.example.athena.entities.ExamsOrCfusEnum;
-import com.example.athena.entities.PersonalTakenExams;
 import com.example.athena.entities.LoggedStudent;
-import com.example.athena.exceptions.*;
+import com.example.athena.entities.PersonalTakenExams;
+import com.example.athena.exceptions.ExamException;
+import com.example.athena.exceptions.SizedAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

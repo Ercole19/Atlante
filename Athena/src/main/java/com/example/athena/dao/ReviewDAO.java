@@ -6,8 +6,6 @@ import com.example.athena.exceptions.TutorReviewException;
 
 import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class ReviewDAO extends AbstractDAO
 {
