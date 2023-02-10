@@ -33,7 +33,7 @@ public class LoggedStudent extends LoggedUser
     public LoggedUserMailBean getEmail()
     {
         LoggedUserMailBean value = new LoggedUserMailBean() ;
-        value.setMail(this.currentStudent.getEmail());
+        value.setMail(this.email);
         return value ;
     }
     
