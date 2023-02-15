@@ -10,6 +10,7 @@ import java.util.List;
 
 public class FindRecentInteractedBooksUCC {
 
+    public int a;
     public List<RecentBooksSearchResultBean> formatPurchasesResults(FindRecentBooksBean bean) throws FindException {
         List<RecentInteractedBooksSearchResult> list = RecentInteractedBooksSearchResult.getRecentPurchasedBooks(bean.getEmail());
         return getBeanList(list);
