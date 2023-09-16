@@ -1,8 +1,8 @@
 package com.example.athena.view;
 
-import com.example.athena.entities.Tutor;
-import com.example.athena.graphical_controller.normal_interface.SceneSwitcher;
 import com.example.athena.engineering_classes.scene_decorators.TutorPageComponent;
+import com.example.athena.entities.LoggedTutor;
+import com.example.athena.graphical_controller.normal_interface.SceneSwitcher;
 import javafx.scene.Parent;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class TutorPageView implements TutorPageComponent
     {
         SceneSwitcher switcher = SceneSwitcher.getInstance();
         List<Object> params = new ArrayList<>() ;
-        params.add(Tutor.getInstance().getEmail()) ;
+        params.add(LoggedTutor.getInstance().getEmail().getMail()) ;
         params.add(false) ;
         return switcher.preload("tutorPersonalPage.fxml", params) ;
     }

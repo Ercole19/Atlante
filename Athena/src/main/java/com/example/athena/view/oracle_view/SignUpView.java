@@ -1,37 +1,62 @@
 package com.example.athena.view.oracle_view;
 
 import com.example.athena.view.LabelBuilder;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class SignUpView {
     private Parent confirmParent ;
+
+    private Button confirm ;
+
+    private PasswordField password ;
+
+    private PasswordField confirmPassword ;
 
     public SignUpView() {
         this.confirmParent = prepareConfirmPArent() ;
     }
 
     private Parent prepareConfirmPArent() {
-        HBox box = new HBox();
+
+        VBox mainBox = new VBox() ;
+
+        HBox passwordBox = new HBox() ;
+        Label insert = LabelBuilder.buildLabel("Insert Password") ;
+        password = new PasswordField();
+
+        passwordBox.getChildren().addAll(insert, password) ;
+
+        HBox confirmBox = new HBox();
         Label label = LabelBuilder.buildLabel("Confirm password");
-        TextField textField = new TextField();
-        Button button = new Button("Confirm");
-        textField.setId("confirmTextfield");
-        button.setId("confirmButton");
-        box.getChildren().addAll(label, textField, button);
-        return box;
+        confirmPassword = new PasswordField() ;
+
+        confirmBox.getChildren().addAll(label, confirmPassword) ;
+
+        confirm = new Button("Confirm");
+
+        mainBox.getChildren().addAll(passwordBox, confirmBox, confirm);
+
+        return mainBox;
     }
 
     public Parent getParent() {
         return this.confirmParent ;
     }
 
-    public Node lookup(String id) {
-        return this.confirmParent.lookup(id) ;
+    public Button getConfirm() {
+        return confirm;
+    }
+
+    public PasswordField getPassword() {
+        return password;
+    }
+
+    public PasswordField getConfirmPassword() {
+        return confirmPassword;
     }
 }

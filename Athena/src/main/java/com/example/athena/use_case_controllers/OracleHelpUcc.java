@@ -1,9 +1,9 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.beans.oracle.HelpBean;
+import com.example.athena.beans.HelpBean;
+import com.example.athena.dao.HelpDao;
+import com.example.athena.dao.HelpDaoEnum;
 import com.example.athena.engineering_classes.help_factory.HelpDaoFactory;
-import com.example.athena.entities.HelpDao;
-import com.example.athena.entities.HelpDaoEnum;
 import com.example.athena.exceptions.HelpDaoException;
 
 public class OracleHelpUcc {

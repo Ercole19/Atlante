@@ -1,10 +1,7 @@
 package com.example.athena.view.oracle_view;
 
 import com.example.athena.graphical_controller.oracle_interface.OracleHelpGC;
-import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import javafx.scene.Parent;
-
-import java.util.List;
 
 public class HelpView {
 

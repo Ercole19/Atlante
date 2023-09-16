@@ -1,8 +1,8 @@
 package com.example.athena.view;
 
-import com.example.athena.engineering_classes.search_result_factory.SearchResultFactory;
 import com.example.athena.engineering_classes.search_result_factory.FormatBundle;
 import com.example.athena.engineering_classes.search_result_factory.ProductTypeEnum;
+import com.example.athena.engineering_classes.search_result_factory.SearchResultFactory;
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.FindBookException;
@@ -37,6 +37,8 @@ public class FindBooksView {
             formatBundle.setEntryNumber(size);
             formatBundle.setEntrySize(150);
             formatBundle.setEntryPercents(40, 20, 20, 20);
+            formatBundle.setHeight(containerHeight);
+            formatBundle.setWidth(formatBundle.getEntrySize()* formatBundle.getEntryNumber());
             this.result = SearchResultFactory.createProduct(ProductTypeEnum.HORIZONTAL_ENTRY, formatBundle);
             this.controller.setValues(this.result, formatBundle.getEntrySize(), query);
         }

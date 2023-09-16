@@ -1,17 +1,16 @@
 package com.example.athena.graphical_controller.oracle_interface.add_event_states;
 
+import com.example.athena.graphical_controller.oracle_interface.OnSetReminderGC;
 import com.example.athena.graphical_controller.oracle_interface.OracleAddEventGC;
-import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
-import com.example.athena.view.oracle_view.SetReminderView;
 
 public class OnSetReminder implements AddEventAbstractState{
 
     public OnSetReminder(OracleAddEventGC controller) {
-        ParentSubject.getInstance().setCurrentParent(new SetReminderView(controller).getRoot());
+        new OnSetReminderGC(controller) ;
     }
 
     @Override
-    public void goNext(OracleAddEventGC contextStateMachine) {
-        contextStateMachine.setState(new OnFinalization(contextStateMachine)) ;
+    public void goNext(AddEventSM contextStateMachine) {
+        contextStateMachine.setState(new OnFinalization(contextStateMachine.getController())) ;
     }
 }

@@ -1,7 +1,7 @@
 package com.example.athena.boundaries;
 
-import com.example.athena.beans.normal.ISBNBean;
-import com.example.athena.beans.normal.ISBNCheckResultBean;
+import com.example.athena.beans.ISBNBean;
+import com.example.athena.beans.ISBNCheckResultBean;
 import com.example.athena.exceptions.ISBNException;
 
 import java.io.FileNotFoundException;

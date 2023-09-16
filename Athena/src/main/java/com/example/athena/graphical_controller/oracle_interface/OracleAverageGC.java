@@ -1,9 +1,9 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
-import com.example.athena.beans.normal.ExamAverageInformationBean;
+import com.example.athena.beans.ExamAverageInformationBean;
 import com.example.athena.exceptions.ExamException;
 import com.example.athena.exceptions.UserInfoException;
-import com.example.athena.use_case_controllers.AverageUCC;
+import com.example.athena.use_case_controllers.GetAverageInfosUCC;
 import com.example.athena.view.oracle_view.LabelView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +15,7 @@ public class OracleAverageGC {
     private final DecimalFormat format = new DecimalFormat("+#.00;-#.00") ;
 
     public String getAverageInfos() {
-        AverageUCC controller = new AverageUCC();
+        GetAverageInfosUCC controller = new GetAverageInfosUCC();
         LabelView view = new LabelView();
         String allAverages = "";
         ObservableList<ExamAverageInformationBean> examsArithmeticAverageInfos = FXCollections.observableArrayList();

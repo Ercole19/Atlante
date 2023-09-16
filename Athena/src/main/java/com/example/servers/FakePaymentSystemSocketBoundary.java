@@ -1,7 +1,7 @@
 package com.example.servers;
 
-import com.example.athena.beans.normal.MailServerResponseBean;
-import com.example.athena.beans.normal.PurchaseResultBean;
+import com.example.athena.beans.MailServerResponseBean;
+import com.example.athena.beans.PurchaseResultBean;
 import com.example.athena.boundaries.SocketBoundary;
 
 import java.io.IOException;

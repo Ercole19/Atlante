@@ -10,14 +10,15 @@ public class ShowParser {
     public void parseShowCommand(List<String> commandToken) {
         LabelView view = new LabelView();
         switch (commandToken.get(0)) {
-            case "events":
-                ShowEventParser showEventParser = new ShowEventParser();
+            case "calendar":
+                ShowCalendarParser showEventParser = new ShowCalendarParser();
                 commandToken.remove(0);
                 showEventParser.showEventParse(commandToken);
                 break;
             case "plots" :
                 ShowPlotsParser showPlotsParser = new ShowPlotsParser();
-                showPlotsParser.parseShowPlots();
+                commandToken.remove(0) ;
+                showPlotsParser.parseShowPlots(commandToken);
                 break;
             case "exams_completion":
                 ShowExamsCompletionParser showExamsCompletionParser = new ShowExamsCompletionParser();
@@ -68,6 +69,15 @@ public class ShowParser {
             case "my_cv" :
                 ShowMyCVParser myCVParser = new ShowMyCVParser();
                 myCVParser.parseInfos();
+                break;
+            case "my_placed_bids":
+                ShowMyPlacedBidsParser placedBidsParser = new ShowMyPlacedBidsParser();
+                placedBidsParser.parsePlacedBids();
+                break;
+            case "my_received_bids":
+                ShowMyReceivedBidsView receivedBidsView = new ShowMyReceivedBidsView();
+                commandToken.remove(0);
+                receivedBidsView.parsePlacedBids(commandToken);
                 break;
             default:
                 ParentSubject.getInstance().setCurrentParent(view.prepareParent("this command do not exists: type help to see the full list"));

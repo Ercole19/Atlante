@@ -1,12 +1,12 @@
 package com.example.athena.view;
 
-import com.example.athena.engineering_classes.search_result_factory.SearchResultFactory;
 import com.example.athena.engineering_classes.search_result_factory.FormatBundle;
 import com.example.athena.engineering_classes.search_result_factory.ProductTypeEnum;
+import com.example.athena.engineering_classes.search_result_factory.SearchResultFactory;
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.exceptions.PercentFormatException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.graphical_controller.normal_interface.EventsViewGC;
+import com.example.athena.graphical_controller.EventsViewGC;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 
@@ -19,10 +19,10 @@ public class EventsView {
     private SearchResultProduct result ;
     private static final String FATAL_ERROR = "FATAL ERROR: The application is unable to load content. If the problem persists after restarting, try reinstalling the application.";
 
-    public EventsView (double containerWidth, double containerHeight) {
+    public EventsView (double containerWidth, double containerHeight, EventsViewGC controller) {
         this.containerHeight = containerHeight;
         this.containerWidth = containerWidth;
-        this.controller = new EventsViewGC(this);
+        this.controller = controller;
     }
 
     public AnchorPane getRoot (LocalDate date){
@@ -34,6 +34,8 @@ public class EventsView {
             formatBundle.setEntryNumber(size);
             formatBundle.setEntryPercents(20, 15, 15, 20, 10, 10, 10);
             formatBundle.setEntrySize(100);
+            formatBundle.setWidth(containerWidth);
+            formatBundle.setHeight(formatBundle.getEntrySize()* formatBundle.getEntryNumber());
             this.result = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
             this.controller.setValues(this.result);
         }

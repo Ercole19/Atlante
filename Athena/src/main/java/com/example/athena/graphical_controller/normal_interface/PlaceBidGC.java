@@ -1,27 +1,24 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.beans.normal.BidBean;
-import com.example.athena.beans.normal.BookBean;
+import com.example.athena.beans.BidBean;
+import com.example.athena.beans.BookBean;
 import com.example.athena.entities.BidStatusEnum;
-import com.example.athena.entities.Student;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.BidException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.use_case_controllers.PlaceBidUCC;
-import javafx.event.ActionEvent;
+import com.example.athena.use_case_controllers.ManageBidsUCC;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class PlaceBidGC implements PostInitialize{
 
     private BookBean bookBean;
-
     @FXML
     private TextField bidTextField ;
+    private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 
 
     @Override
@@ -29,8 +26,8 @@ public class PlaceBidGC implements PostInitialize{
         this.bookBean = (BookBean) params.get(0) ;
     }
 
-    public void sendBid(ActionEvent event) {
-        PlaceBidUCC controller = new PlaceBidUCC() ;
+    public void sendBid() {
+        ManageBidsUCC controller = new ManageBidsUCC();
         BidBean bidBean = new BidBean();
         try {
             if (bidTextField.getText().equals("")) {
@@ -47,7 +44,7 @@ public class PlaceBidGC implements PostInitialize{
                 return;
             }
 
-            bidBean.setBidder(Student.getInstance().getEmail());
+            bidBean.setBidder(LoggedStudent.getInstance().getEmail().getMail());
             bidBean.setOwner(this.bookBean.getOwner());
             bidBean.setBookTimestamp(this.bookBean.getTimeStamp());
             bidBean.setBookIsbn(this.bookBean.getIsbn());
@@ -55,11 +52,16 @@ public class PlaceBidGC implements PostInitialize{
 
             controller.placeBid(bidBean);
 
-            ((Stage) ((Node)event.getSource()).getScene().getWindow()).close() ;
+            switcher.getTopStage().close();
 
         } catch (BidException e) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800 ,600);
             alert.showAndWait();
         }
+    }
+
+    public void onBackBtnClick()
+    {
+        switcher.getTopStage().close();
     }
 }

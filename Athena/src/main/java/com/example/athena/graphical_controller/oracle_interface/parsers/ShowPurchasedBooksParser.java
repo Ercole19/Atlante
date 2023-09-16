@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
-import com.example.athena.entities.Student;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.view.RecentPurchasesView;
@@ -11,7 +11,7 @@ public class ShowPurchasedBooksParser {
     public void showPurchasesParse() {
         LabelView labelView = new LabelView();
         try{
-            if (Student.getInstance().getEmail() != null) {
+            if (LoggedStudent.getInstance().getEmail().getMail() != null) {
                 RecentPurchasesView view = new RecentPurchasesView(1200, 560);
                 ParentSubject.getInstance().setCurrentParent(view.getRoot());
             }

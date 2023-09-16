@@ -1,11 +1,12 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
-import com.example.athena.beans.normal.SendReviewBean;
-import com.example.athena.beans.normal.TutoringInformationBean;
+import com.example.athena.beans.ReviewTutorBean;
+import com.example.athena.beans.TutoringInformationBean;
+import com.example.athena.engineering_classes.DayStartEndFormatter;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.TutorReviewException;
 import com.example.athena.graphical_controller.normal_interface.PostInitialize;
-import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
+import com.example.athena.use_case_controllers.ReviewTutorUCC;
 import com.example.athena.view.oracle_view.LabelView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -50,7 +51,8 @@ public class OracleReviewGC implements PostInitialize {
     private void setLabels(TutoringInformationBean bean) {
         tutorName.setText(bean.getTutorsName()) ;
         tutoringSubject.setText(bean.getTutoringSubject()) ;
-        tutoringDay.setText(bean.getTutoringDaysHour()) ;
+
+        tutoringDay.setText(DayStartEndFormatter.formatDayStartEnd(bean.getTutoringDay(), bean.getTutoringStart(), bean.getTutoringEnd())) ;
     }
 
     public void clickOnSubmitReviewButton()
@@ -84,14 +86,14 @@ public class OracleReviewGC implements PostInitialize {
             return ;
         }
 
-        SendReviewBean reviewBean = new SendReviewBean(reviewStars, this.code) ;
-        ReviewTutorUseCaseController controller = new ReviewTutorUseCaseController() ;
+        ReviewTutorBean reviewBean = new ReviewTutorBean(reviewStars, this.code) ;
+        ReviewTutorUCC controller = new ReviewTutorUCC() ;
 
         LabelView view = new LabelView() ;
         
         try
         {
-            controller.sendReview(reviewBean) ;
+            controller.reviewTutor(reviewBean) ;
             ParentSubject.getInstance().setCurrentParent(view.prepareParent("Review submitted successfully!"));
         }catch (TutorReviewException e)
         {

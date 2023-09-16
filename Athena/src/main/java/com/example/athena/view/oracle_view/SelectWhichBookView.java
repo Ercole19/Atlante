@@ -1,11 +1,7 @@
 package com.example.athena.view.oracle_view;
 
 
-import com.example.athena.beans.normal.BookBean;
-import com.example.athena.entities.BooksSubject;
-import com.example.athena.exceptions.BookException;
-import com.example.athena.exceptions.UserInfoException;
-import com.example.athena.graphical_controller.oracle_interface.OracleUpdateBookGC;
+import com.example.athena.beans.BookBean;
 import com.example.athena.view.LabelBuilder;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;

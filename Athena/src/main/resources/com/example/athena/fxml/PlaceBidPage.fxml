@@ -4,12 +4,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="541.0" prefWidth="707.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.normal_interface.PlaceBidGC">
    <children>
       <TextField fx:id="bidTextField" layoutX="90.0" layoutY="147.0" prefHeight="25.0" prefWidth="552.0" />
       <Text layoutX="90.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert new price here" />
       <Button layoutX="324.0" layoutY="445.0" mnemonicParsing="false" onAction="#sendBid" text="Confirm" />
-      <Button layoutX="27.0" layoutY="84.0" mnemonicParsing="false" text="Back" />
+      <Button layoutX="27.0" layoutY="84.0" mnemonicParsing="false" onAction="#onBackBtnClick" text="Back" />
    </children>
 </AnchorPane>

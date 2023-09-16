@@ -1,8 +1,7 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
-import com.example.athena.entities.Student;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.LoggedUserException;
-import com.example.athena.graphical_controller.normal_interface.SceneSwitcher;
 import com.example.athena.graphical_controller.oracle_interface.OracleSellBookGC;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.view.oracle_view.LabelView;
@@ -17,7 +16,7 @@ public class SellBookParser {
         }
         else {
             try {
-                if (Student.getInstance().getEmail() != null) {
+                if (LoggedStudent.getInstance().getEmail().getMail() != null) {
                     OracleSellBookGC controller = new OracleSellBookGC();
                     controller.sellBook(tokens.get(0), tokens.get(1), tokens.get(2));
                 }

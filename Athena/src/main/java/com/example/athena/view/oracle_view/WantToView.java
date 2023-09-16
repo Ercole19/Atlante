@@ -1,6 +1,5 @@
 package com.example.athena.view.oracle_view;
 
-import com.example.athena.graphical_controller.oracle_interface.OnYesOrNoController;
 import com.example.athena.view.LabelBuilder;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -11,24 +10,35 @@ public class WantToView {
 
     private Parent root ;
 
-    public WantToView(String message, OnYesOrNoController controller) {
+    private final Button yes ;
+
+    private final Button no ;
+
+
+    public WantToView(String message) {
         VBox box = new VBox() ;
         box.getChildren().add(LabelBuilder.buildLabel(message)) ;
         HBox yesOrNo = new HBox() ;
         box.getChildren().add(yesOrNo) ;
 
-        Button yesButton = new Button("Yes") ;
-        yesButton.setOnAction(event -> controller.onYes());
-        yesOrNo.getChildren().add(yesButton) ;
+        yes = new Button("Yes") ;
+        yesOrNo.getChildren().add(yes) ;
 
-        Button noButton = new Button("No") ;
-        noButton.setOnAction(event -> controller.onNo());
-        yesOrNo.getChildren().add(noButton) ;
+        no = new Button("No") ;
+        yesOrNo.getChildren().add(no) ;
 
         this.root = box ;
     }
 
     public Parent getRoot() {
         return this.root ;
+    }
+
+    public Button getYes() {
+        return yes;
+    }
+
+    public Button getNo() {
+        return no;
     }
 }

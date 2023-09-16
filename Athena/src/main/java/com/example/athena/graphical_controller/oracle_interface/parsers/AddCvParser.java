@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
-import com.example.athena.entities.Tutor;
+import com.example.athena.entities.LoggedTutor;
 import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.graphical_controller.oracle_interface.OracleAddCvGC;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
@@ -12,7 +12,7 @@ public class AddCvParser {
     
     public void parseAddCV(List<String> commandTokens) {
         LabelView view = new LabelView();
-        if(Tutor.getInstance().getEmail() == null){
+        if(LoggedTutor.getInstance().getEmail().getMail() == null){
             ParentSubject.getInstance().setCurrentParent(view.prepareParent("you must login before writing commands"));
         }
         else {

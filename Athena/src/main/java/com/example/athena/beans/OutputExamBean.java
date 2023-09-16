@@ -42,9 +42,4 @@ public class OutputExamBean implements ExamBean{
     public String getExamName() {
         return this.name;
     }
-
-    @Override
-    public int getExamIndex() {
-        return 0;
-    }
 }

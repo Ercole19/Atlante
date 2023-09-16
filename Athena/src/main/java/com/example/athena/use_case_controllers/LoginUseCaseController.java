@@ -1,15 +1,20 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.entities.*;
+import com.example.athena.beans.UserBean;
+import com.example.athena.dao.UserDao;
+import com.example.athena.entities.LoggedStudent;
+import com.example.athena.entities.LoggedTutor;
+import com.example.athena.entities.LoggedUser;
+import com.example.athena.entities.TutorStudentLogged;
 import com.example.athena.exceptions.FindException;
+import com.example.athena.exceptions.StudentInfoException;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.exceptions.UserNotFoundException;
-import com.example.athena.beans.normal.UserBean;
 
 
 public class LoginUseCaseController {
 
-    public UserBean findUser(UserBean bean) throws UserNotFoundException, UserInfoException, FindException {
+    public UserBean findUser(UserBean bean) throws UserNotFoundException, StudentInfoException, FindException, UserInfoException {
 
         UserDao dao = new UserDao() ;
         if (dao.findStudent(bean.getEmail(), bean.getPassword())){
@@ -19,11 +24,11 @@ public class LoginUseCaseController {
             TutorStudentLogged roleEnum = TutorStudentLogged.valueOf((String) dao.getUserType(bean.getEmail()));
             if(roleEnum == TutorStudentLogged.STUDENT)
             {
-                Student.getInstance().initStudent(bean.getEmail());
+                LoggedStudent.getInstance().initStudent(bean.getEmail());
             }
             else
             {
-                Tutor.getInstance().initTutor(bean.getEmail());
+                LoggedTutor.getInstance().initTutor(bean.getEmail());
             }
             bean.setRole(role);
             return bean ;
@@ -34,6 +39,6 @@ public class LoginUseCaseController {
     }
 
     public void logout() {
-        User.logout() ;
+        LoggedUser.logout() ;
     }
 }

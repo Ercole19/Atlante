@@ -1,11 +1,10 @@
 package com.example.athena.boundaries;
 
-import com.example.athena.beans.normal.MailServerResponseBean;
-import com.example.athena.beans.normal.SocketBean;
+import com.example.athena.beans.MailServerResponseBean;
+import com.example.athena.beans.SocketBean;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 
 public abstract class SocketBoundary
 {

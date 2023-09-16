@@ -1,6 +1,6 @@
 package com.example.athena.view.oracle_view;
 
-import com.example.athena.beans.normal.BookBean;
+import com.example.athena.beans.BookBean;
 import com.example.athena.graphical_controller.oracle_interface.OracleUpdateBookGC;
 import com.example.athena.view.LabelBuilder;
 import javafx.geometry.Insets;
@@ -12,7 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
-public class ModifyParametersView extends ShiftImageView<OracleUpdateBookGC> {
+public class ModifyParametersView extends UpdatedShiftImageView<OracleUpdateBookGC> {
 
     private TextField name;
     private CheckBox negotiability;
@@ -52,22 +52,22 @@ public class ModifyParametersView extends ShiftImageView<OracleUpdateBookGC> {
 
     @Override
     protected void finalizeCollection() {
-        this.controller.getUpdatedInformation(this) ;
+        this.updatedController.getUpdatedInformation(this) ;
     }
 
     @Override
     protected void initializeGraphicalElements() {
-        this.controller.getUploadControls(this);
+        this.updatedController.getUploadControls(this);
     }
-
+    @Override
     public ImageView getLeftArrowImage() {
         return this.leftArrowImage ;
     }
-
+    @Override
     public ImageView getRightArrowImage() {
         return this.rightArrowImage ;
     }
-
+    @Override
     public ImageView getBookImageView() {
         return this.bookImage ;
     }

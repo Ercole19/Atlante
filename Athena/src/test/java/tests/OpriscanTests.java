@@ -1,25 +1,21 @@
 package tests;
 
-import com.example.athena.beans.ReviewTutorSendUsernameBean;
-import com.example.athena.beans.normal.*;
+import com.example.athena.beans.*;
 import com.example.athena.entities.*;
 import com.example.athena.exceptions.*;
-
 import com.example.athena.use_case_controllers.LoginUseCaseController;
-import com.example.athena.use_case_controllers.ReviewTutorUseCaseController;
+import com.example.athena.use_case_controllers.ReviewTutorUCC;
 import com.example.athena.use_case_controllers.SearchTutorUseCaseController;
 import org.junit.jupiter.api.Test;
 
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals ;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail ;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**Sebastian Roberto Opriscan**/
 public class OpriscanTests {
@@ -34,7 +30,7 @@ public class OpriscanTests {
         boolean retVal = searchBy(ByCourseOrNameEnum.BY_COURSE, "Fondamenti") && searchBy(ByCourseOrNameEnum.BY_NAME, "Kanye") ;
         assertTrue(retVal) ;
 
-        User.logout();
+        LoggedUser.logout();
 
     }
 
@@ -42,28 +38,29 @@ public class OpriscanTests {
     public void testTutorReviewSystem() {
         login("Paolo-dentici22@gmail.com", "salmone") ;
 
-        ReviewTutorSendUsernameBean bean = new NormalReviewTutorSendUsernameBean(
-                TEST_USERNAME,
-                "Fondamenti",
-                LocalDate.of(2021,12, 8),
-                13, 13,13,14
-        ) ;
+        ReviewInfoBean bean = new ReviewInfoBean() ;
+
+        bean.setStudentMail(TEST_USERNAME) ;
+        bean.setTutoringSubject("Fondamenti") ;
+        bean.setTutoringDay(LocalDate.of(2021,12, 8));
+        bean.setTutoringStartTime(LocalTime.of(13, 13));
+        bean.setTutoringEndTime(LocalTime.of(14, 30)) ;
 
         String code = pushCodeToDB(bean) ;
 
-        User.logout();
+        LoggedUser.logout();
 
         login(TEST_USERNAME, TEST_PARTICULAR_WORD_FOR_ACCESS) ;
 
-        SendReviewBean review = new SendReviewBean(5, code) ;
+        ReviewTutorBean review = new ReviewTutorBean(5, code) ;
 
         try {
-            new ReviewTutorUseCaseController().sendReview(review) ;
+            new ReviewTutorUCC().reviewTutor(review) ;
         } catch (TutorReviewException e) {
             fail() ;
         }
 
-        User.logout() ;
+        LoggedUser.logout() ;
 
         assertTrue(true);
 
@@ -73,32 +70,25 @@ public class OpriscanTests {
     public void testCalendarSubjectRefreshOnLogout() {
         login(TEST_USERNAME, TEST_PARTICULAR_WORD_FOR_ACCESS) ;
 
-        EventEntity event = new EventEntity("AABBAA", LocalDate.of(2021, 12, 12), LocalTime.of(10, 30), LocalTime.of(11, 30),"Desc", ActivityTypesEnum.OTHER) ;
-
         try {
+            EventEntity event = new EventEntity("AABBAA", LocalDate.of(2021, 12, 12), LocalTime.of(10, 30), LocalTime.of(11, 30),"Desc", ActivityTypesEnum.OTHER) ;
             CalendarSubject.getInstance().addEvent(event);
-        } catch (EventException e) {
-            fail() ;
-        }
 
-        User.logout() ;
+            LoggedUser.logout() ;
 
-        login("student@student.it", "student") ;
+            login("student@student.it", "student") ;
 
 
-
-        try {
-            CalendarEntity entity = CalendarSubject.getInstance().getEntity(YearMonth.of(2021, 12)) ;
-            List<EventBean> list = entity.getEvents(LocalDate.of(2021, 12, 12)) ;
+            List<EventBean> list = CalendarSubject.getInstance().getEventsOfDay(new EventsDayBean(LocalDate.of(2021, 12, 12))) ;
             
             for(EventBean eventBean : list) {
                 if (eventBean.getName().equals("AABBAA")) fail() ;
             }
 
-            User.logout();
+            LoggedUser.logout();
             login(TEST_USERNAME, TEST_PARTICULAR_WORD_FOR_ACCESS);
-            entity.deleteEventEntity(event);
-            User.logout();
+            CalendarSubject.getInstance().deleteEvent(event) ;
+            LoggedUser.logout();
         } catch (EventException e) {
             fail() ;
         }
@@ -106,10 +96,10 @@ public class OpriscanTests {
         assertTrue(true) ;
     }
 
-    private String pushCodeToDB(ReviewTutorSendUsernameBean usernameBean) {
+    private String pushCodeToDB(ReviewInfoBean usernameBean) {
         String reviewCode = null;
         try {
-            reviewCode = TutorReviewCodesGenerator.generateReviewCode(5);
+            reviewCode = RandomCodesGenerator.generateRandomCode(5);
             ReviewEntity review = new ReviewEntity(usernameBean, reviewCode) ;
             review.toDB() ;
 
@@ -127,7 +117,7 @@ public class OpriscanTests {
         LoginUseCaseController controller = new LoginUseCaseController() ;
         try {
             controller.findUser(params) ;
-        } catch (UserNotFoundException | UserInfoException | FindException e) {
+        } catch (UserNotFoundException | UserInfoException | FindException | StudentInfoException e) {
             fail() ;
         }
     }

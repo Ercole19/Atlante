@@ -1,8 +1,8 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
-import com.example.athena.beans.normal.BookBean;
-import com.example.athena.entities.BooksSubject;
-import com.example.athena.entities.Student;
+import com.example.athena.beans.BookBean;
+import com.example.athena.entities.LoggedStudent;
+import com.example.athena.entities.PersonalBookShelf;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.ISBNException;
 import com.example.athena.exceptions.UserInfoException;
@@ -10,8 +10,7 @@ import com.example.athena.graphical_controller.normal_interface.UpdatedShiftImag
 import com.example.athena.graphical_controller.oracle_interface.update_book_states.OnModifyParametersState;
 import com.example.athena.graphical_controller.oracle_interface.update_book_states.OnSelectWhichBookState;
 import com.example.athena.graphical_controller.oracle_interface.update_book_states.UpdateBookAbstractState;
-import com.example.athena.use_case_controllers.SellBooksUseCaseController;
-import com.example.athena.view.LabelBuilder;
+import com.example.athena.use_case_controllers.ManageYourSellingBooksUCC;
 import com.example.athena.view.oracle_view.LabelView;
 import com.example.athena.view.oracle_view.ModifyParametersView;
 import javafx.collections.ObservableList;
@@ -37,6 +36,7 @@ public class OracleUpdateBookGC extends UpdatedShiftImageController {
             if (count > 1) this.state = new OnSelectWhichBookState(this);
             else {
                 setSuperParam(list.get(0));
+                this.selectedBean = list.get(0);
                 this.state = new OnModifyParametersState(this);
             }
         }
@@ -46,11 +46,11 @@ public class OracleUpdateBookGC extends UpdatedShiftImageController {
     }
 
     public void executeBookUpdate() throws ISBNException, BookException {
-        new SellBooksUseCaseController().updateProduct(selectedBean, updatedBean) ;
+        new ManageYourSellingBooksUCC().updateProduct(selectedBean, updatedBean) ;
     }
 
     private int countBeans(String isbn) throws BookException, UserInfoException {
-        ObservableList<BookBean> beanList = BooksSubject.getInstance().getBooksBeansList();
+        ObservableList<BookBean> beanList = PersonalBookShelf.getInstance().getBooksBeansList();
         for (BookBean book : beanList) {
             if (book.getIsbn().equals(isbn)) {
                 this.list.add(book);
@@ -104,17 +104,18 @@ public class OracleUpdateBookGC extends UpdatedShiftImageController {
         try {
             this.updatedBean.setIsbn(this.isbn);
             this.updatedBean.setPrice(view.getPrice());
+            this.updatedBean.setBookTitle(view.getBookTitle());
         } catch (BookException e) {
             ParentSubject.getInstance().setCurrentParent(labelView.prepareParent("Error in updating book, details follow: " + e.getMessage()));
         }
-        this.updatedBean.setBookTitle(view.getBookTitle());
         this.updatedBean.setIsNegotiable(view.getNegotiability());
         this.updatedBean.setImage(super.files);
         this.updatedBean.setTimeStamp(selectedBean.getTimeStamp());
-        this.updatedBean.setOwner(Student.getInstance().getEmail());
+        this.updatedBean.setOwner(LoggedStudent.getInstance().getEmail().getMail());
 
         this.goNext();
     }
+
 
     public BookBean getSelectedBean() {return this.selectedBean;}
 

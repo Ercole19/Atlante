@@ -22,7 +22,7 @@ public class OnFinalization implements AddEventAbstractState {
     }
 
     @Override
-    public void goNext(OracleAddEventGC contextStateMachine) {
+    public void goNext(AddEventSM contextStateMachine) {
         throw new UnsupportedOperationException("The state is an ending state") ;
     }
 }

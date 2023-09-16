@@ -1,33 +1,32 @@
 package com.example.servers;
 
-import com.example.athena.beans.normal.MailServerBean;
+import com.example.athena.beans.MailServerBean;
 
-import java.net.Socket;
+import java.io.ObjectOutputStream;
 
 public class CommandSocketWrapper
 {
-    private Socket clientSocket ;
+    private ObjectOutputStream clientSocketOS ;
+
     private MailServerBean command ;
 
-    public CommandSocketWrapper(Socket clientSocket, MailServerBean command)
+    public CommandSocketWrapper( ObjectOutputStream clientSocketOS, MailServerBean command)
     {
-        setClientSocket(clientSocket) ;
+        setClientSocketOS(clientSocketOS) ;
         setCommand(command) ;
     }
 
-    public void setClientSocket(Socket clientSocket)
-    {
-        this.clientSocket = clientSocket ;
+    public ObjectOutputStream getClientSocketOS() {
+        return clientSocketOS;
+    }
+
+    public void setClientSocketOS(ObjectOutputStream clientSocketOS) {
+        this.clientSocketOS = clientSocketOS;
     }
 
     public void setCommand(MailServerBean command)
     {
         this.command = command ;
-    }
-
-    public Socket getClientSocket()
-    {
-        return this.clientSocket ;
     }
 
     public MailServerBean getCommand()

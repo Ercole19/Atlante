@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.StackedBarChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.normal_interface.PlotPageGraphicalController">
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.normal_interface.PlotPageGraphicalController">
     <children>
       <ChoiceBox fx:id="activityTypeChoiceBox" layoutX="79.0" layoutY="295.0" prefHeight="42.0" prefWidth="310.0" />
-      <StackedBarChart fx:id="activitiesPlot" layoutX="448.0" layoutY="263.0" prefHeight="425.0" prefWidth="774.0">
+      <StackedBarChart fx:id="activitiesPlot" layoutX="408.0" layoutY="205.0" prefHeight="488.0" prefWidth="857.0">
         <xAxis>
           <CategoryAxis fx:id="activityPlot" side="BOTTOM" />
         </xAxis>
@@ -23,36 +20,36 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </StackedBarChart>
-      <Text fill="#ffd775" layoutX="390.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plots">
+      <Text fill="#ffd775" layoutX="273.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plots">
          <font>
             <Font size="48.0" />
          </font>
       </Text>
-      <AnchorPane opacity="0.79" prefHeight="50.0" prefWidth="1280.0" style="-fx-background-color: #2d8bba;">
+      <AnchorPane prefHeight="56.0" prefWidth="1280.0" style="-fx-background-color: #2d8bba;">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="995.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="985.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../assets/title.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="1199.0" layoutY="-1.0">
+            <ImageView fitHeight="50.0" fitWidth="95.0" layoutX="1185.0" layoutY="3.0">
                <image>
                   <Image url="@../../../../assets/guff.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="121.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="50.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../assets/backBtn.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="124.0" fitWidth="213.0" layoutX="205.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="124.0" fitWidth="213.0" layoutX="101.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../assets/graphSymbol.png" />
          </image>
       </ImageView>
-      <Button layoutX="122.0" layoutY="132.0" mnemonicParsing="false" onAction="#clickOnBackButton" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
+      <Button layoutX="50.0" layoutY="100.0" mnemonicParsing="false" onAction="#clickOnBackButton" opacity="0.0" prefHeight="61.0" prefWidth="82.0" text="backBtn">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -68,6 +65,12 @@
             <Font size="24.0" />
          </font>
       </Text>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../assets/homeBtn.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="8.0" layoutY="7.0" mnemonicParsing="false" onAction="#onHomeButtonClick" opacity="0.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #2d8bba;" text="homeBtn" />
     </children>
 
 </AnchorPane>

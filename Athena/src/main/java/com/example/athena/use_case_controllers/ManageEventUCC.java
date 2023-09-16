@@ -1,13 +1,14 @@
 package com.example.athena.use_case_controllers;
 
 
+import com.example.athena.beans.EventBean;
+import com.example.athena.beans.ReminderBean;
 import com.example.athena.boundaries.SetReminderEmailBoundary;
 import com.example.athena.entities.ActivityTypesEnum;
 import com.example.athena.entities.CalendarSubject;
 import com.example.athena.entities.EventEntity;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
-import com.example.athena.beans.normal.EventBean;
 
 public class ManageEventUCC {
     private EventEntity eventEntity;
@@ -18,7 +19,7 @@ public class ManageEventUCC {
         eventEntity.addEntity();
         CalendarSubject.getInstance().addEvent(eventEntity);
         if(event.isThereAReminder()) {
-            SetReminderEmailBoundary.sendToServer(event, false) ;
+            SetReminderEmailBoundary.sendToServer(new ReminderBean(event, false)) ;
         }
     }
 
@@ -32,6 +33,6 @@ public class ManageEventUCC {
         else eventEntity = new EventEntity(event.getName(), event.getDate(), event.getStart(), event.getEnd(), event.getDescription(), ActivityTypesEnum.valueOf(event.getType()));
         eventEntity.deleteEntity();
         CalendarSubject.getInstance().deleteEvent(eventEntity);
-        if(event.isThereAReminder()) SetReminderEmailBoundary.sendToServer(event, true) ;
+        if(event.isThereAReminder()) SetReminderEmailBoundary.sendToServer(new ReminderBean(event, true)) ;
     }
 }

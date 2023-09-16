@@ -9,7 +9,5 @@ public interface ExamBean {
     String getExamDate() ;
 
     String getExamName() ;
-
-    int getExamIndex() ;
     
 }

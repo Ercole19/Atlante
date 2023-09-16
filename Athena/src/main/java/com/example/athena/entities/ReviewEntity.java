@@ -1,7 +1,10 @@
 package com.example.athena.entities;
 
+import com.example.athena.beans.ReviewInfoBean;
+import com.example.athena.dao.ReviewDAO;
+import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.TutorReviewException;
-import com.example.athena.beans.ReviewTutorSendUsernameBean;
+import com.example.athena.exceptions.UserInfoException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,15 +20,15 @@ public class ReviewEntity
     private LocalTime endTime ;
 
 
-    public ReviewEntity(ReviewTutorSendUsernameBean usernameBean, String reviewCode)
+    public ReviewEntity(ReviewInfoBean usernameBean, String reviewCode)
     {
         setReviewCode(reviewCode) ;
-        setStudentUsername(usernameBean.getUsername()) ;
-        setTutorUsername(Tutor.getInstance().getEmail()) ;
-        setSubject(usernameBean.getSubject()) ;
-        setDay(usernameBean.getDay()) ;
-        setStartTime(usernameBean.getStartTime()) ;
-        setEndTime(usernameBean.getEndTime()) ;
+        setStudentUsername(usernameBean.getStudentMail()) ;
+        setTutorUsername(LoggedTutor.getInstance().getEmail().getMail()) ;
+        setSubject(usernameBean.getTutoringSubject()) ;
+        setDay(usernameBean.getTutoringDay()) ;
+        setStartTime(usernameBean.getTutoringStartTime()) ;
+        setEndTime(usernameBean.getTutoringEndTime()) ;
     }
 
     public ReviewEntity(String reviewCode, String tutorUsername, String studentUsername, String subject, LocalDate day,
@@ -43,7 +46,7 @@ public class ReviewEntity
     public void toDB() throws TutorReviewException
     {
         ReviewDAO reviewDao = new ReviewDAO() ;
-        reviewDao.addReview(this.reviewCode, this.tutorUsername, this.studentUsername, this.day, this.subject, this.startTime, this.endTime) ;
+        reviewDao.addReview(this) ;
     }
 
     public static ReviewEntity getFromDB(String reviewCode) throws TutorReviewException
@@ -52,16 +55,17 @@ public class ReviewEntity
         return reviewDAO.getReview(reviewCode) ;
     }
 
-    public static void removeFromDB(String reviewCode) throws TutorReviewException
-    {
-        ReviewDAO reviewDAO = new ReviewDAO() ;
-        reviewDAO.deleteReview(reviewCode) ;
-    }
+    public void finalizeReview (int reviewStars) throws TutorReviewException {
 
-    public static void finalizeReview (int reviewStars , String reviewCode) throws TutorReviewException {
-        ReviewDAO reviewDAO = new ReviewDAO() ;
-        reviewDAO.finalizee(reviewCode , reviewStars) ;
-
+        try {
+            ReviewDAO reviewDAO = new ReviewDAO() ;
+            Tutor entity = Tutor.getFromDB(this.tutorUsername) ;
+            entity.updateAverage(reviewStars) ;
+            reviewDAO.deleteReview(this.reviewCode) ;
+            entity.saveInDB() ;
+        } catch (UserInfoException | CourseException e) {
+            throw new TutorReviewException("Tutor not found") ;
+        }
     }
 
     public void setReviewCode(String reviewCode)

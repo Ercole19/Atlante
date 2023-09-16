@@ -1,14 +1,13 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
-import com.example.athena.beans.normal.TutorInfosBean;
-import com.example.athena.beans.normal.UserBean;
-import com.example.athena.entities.Tutor;
+import com.example.athena.beans.TutorInfosBean;
+import com.example.athena.beans.UserBean;
+import com.example.athena.entities.LoggedTutor;
 import com.example.athena.entities.TutorPersonalPageSubject;
 import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.TutorPersonalPageUCC;
 import com.example.athena.view.oracle_view.LabelView;
-import com.example.athena.view.oracle_view.MyInfosView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
@@ -41,7 +40,7 @@ public class ShowMyInfosGC implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         UserBean userBean = new UserBean();
-        userBean.setEmail(Tutor.getInstance().getEmail());
+        userBean.setEmail(LoggedTutor.getInstance().getEmail().getMail());
         try {
             TutorInfosBean bean = TutorPersonalPageSubject.getInstance().getTutorInfos(userBean);
             description.setText(bean.getAboutMe());

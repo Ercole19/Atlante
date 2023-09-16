@@ -1,7 +1,6 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
-import com.example.athena.beans.normal.SetMaxCfusOrExamsBean;
-import com.example.athena.entities.Student;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.graphical_controller.oracle_interface.OracleSetMaxCfusGC;
 import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
@@ -14,7 +13,7 @@ public class SetMaxCfuParser {
         LabelView view = new LabelView();
         OracleSetMaxCfusGC controller = new OracleSetMaxCfusGC();
         try{
-            if (Student.getInstance().getEmail() != null){
+            if (LoggedStudent.getInstance().getEmail().getMail() != null){
                 controller.setMaxCfus(commandTokens.get(0));
             }
             else{

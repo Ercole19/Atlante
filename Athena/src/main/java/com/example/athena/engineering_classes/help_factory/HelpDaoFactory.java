@@ -1,9 +1,9 @@
 package com.example.athena.engineering_classes.help_factory;
 
-import com.example.athena.entities.HelpDao;
-import com.example.athena.entities.HelpDaoEnum;
-import com.example.athena.entities.HelpDaoFileSystem;
-import com.example.athena.entities.HelpDaoJdbc;
+import com.example.athena.dao.HelpDao;
+import com.example.athena.dao.HelpDaoEnum;
+import com.example.athena.dao.HelpDaoFileSystem;
+import com.example.athena.dao.HelpDaoJdbc;
 
 public class HelpDaoFactory {
 

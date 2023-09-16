@@ -1,40 +1,30 @@
 package com.example.athena.use_case_controllers;
 
-import com.example.athena.beans.normal.BidBean;
-import com.example.athena.beans.normal.PurchaseResultBean;
+import com.example.athena.beans.BidBean;
+import com.example.athena.beans.PurchaseResultBean;
 import com.example.athena.boundaries.PurchaseBoundary;
 import com.example.athena.entities.BidEntity;
 import com.example.athena.entities.BidStatusEnum;
-import com.example.athena.entities.BookDao;
 import com.example.athena.exceptions.BidException;
 import com.example.athena.exceptions.PurchaseException;
-
-import java.util.ArrayList;
-import java.util.List;
+import javafx.scene.control.Alert;
 
 public class ManageBidsUCC {
-    private final BookDao dao = new BookDao();
 
-    public void updateBid(BidBean bean) throws BidException {
-        BidEntity entity = new BidEntity(bean.getOwner(), bean.getBidder(), bean.getNewPrice(), bean.getBookTimestamp(), bean.getBookIsbn(), BidStatusEnum.valueOf(bean.getStatus()));
-        dao.updateBidStatus(entity);
+
+    public void placeBid(BidBean bidBean) throws BidException {
+        BidEntity bid = new BidEntity(bidBean.getOwner(), bidBean.getBidder(), bidBean.getNewPrice(), bidBean.getBookTimestamp(), bidBean.getBookIsbn(), BidStatusEnum.valueOf(bidBean.getStatus()));
+        bid.placeBid();
     }
 
-    public List<BidBean> getPlacedBids() throws BidException {
-        List<BidEntity> entityBids = dao.getBidderBids();
-        List<BidBean> beanBids = new ArrayList<>();
-        for (BidEntity entity : entityBids) {
-            BidBean bean = new BidBean();
-            bean.setOwner(entity.getOwner());
-            bean.setStatus(entity.getStatus().toString());
-            bean.setBookTimestamp(entity.getBookTimestamp());
-            bean.setBookIsbn(entity.getBookIsbn());
-            bean.setBidder(entity.getBidder());
-            bean.setNewPrice(entity.getNewPrice());
-            beanBids.add(bean) ;
-        }
+    public void cancelBid(BidBean bean) throws BidException{
+        BidEntity entity = new BidEntity(bean.getOwner(), bean.getBidder(), bean.getNewPrice(), bean.getBookTimestamp(), bean.getBookIsbn(), BidStatusEnum.valueOf(bean.getStatus()));
+        entity.deleteBid();
+    }
 
-        return beanBids ;
+    public void updateBidStatus(BidBean bean) throws BidException {
+        BidEntity entity = new BidEntity(bean.getOwner(), bean.getBidder(), bean.getNewPrice(), bean.getBookTimestamp(), bean.getBookIsbn(), BidStatusEnum.valueOf(bean.getStatus()));
+        entity.updateBidStatus();
     }
 
     public void payBid(BidBean bean) throws BidException {
@@ -46,11 +36,9 @@ public class ManageBidsUCC {
         }
 
         BidEntity entity = new BidEntity(bean.getOwner(), bean.getBidder(), bean.getNewPrice(), bean.getBookTimestamp(), bean.getBookIsbn(), BidStatusEnum.valueOf(bean.getStatus()));
-        dao.payAcceptedBid(entity);
+        entity.payBid();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Book purchased !");
+        alert.showAndWait();
     }
 
-    public void cancelBid(BidBean bean) throws BidException{
-        BidEntity entity = new BidEntity(bean.getOwner(), bean.getBidder(), bean.getNewPrice(), bean.getBookTimestamp(), bean.getBookIsbn(), BidStatusEnum.valueOf(bean.getStatus()));
-        dao.deleteBid(entity);
-    }
 }

@@ -1,12 +1,12 @@
 package com.example.athena.graphical_controller.normal_interface;
 
+import com.example.athena.beans.EventBean;
 import com.example.athena.entities.ActivityTypesEnum;
 import com.example.athena.entities.ReminderTypesEnum;
 import com.example.athena.entities.StringHoursConverter;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.beans.normal.EventBean;
 import com.example.athena.use_case_controllers.ManageEventUCC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -68,6 +69,9 @@ public class AddEventController implements Initializable , PostInitialize {
     private Text minutesText;
     @FXML
     private Button confirm;
+
+    @FXML
+    private Text screenTitle ;
     private EventBean oldEventBean;
     private Stage stage;
     private final ManageEventUCC controller = new ManageEventUCC();
@@ -82,7 +86,7 @@ public class AddEventController implements Initializable , PostInitialize {
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Event's start time must be before event's end");
                 alert.showAndWait();
             }
-            else if (setReminderCheckBox.isSelected() && (eventToRegister.getDateOfReminder().toLocalDateTime().isBefore(LocalDateTime.now()))) {
+            else if (setReminderCheckBox.isSelected() && (eventToRegister.getDateOfReminder().isBefore(LocalDateTime.now()))) {
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, "Reminder's start time must be after actual time");
                 alert.showAndWait();
             }
@@ -248,6 +252,8 @@ public class AddEventController implements Initializable , PostInitialize {
     @Override
     public void postInitialize(ArrayList<Object> params) {
 
+        this.screenTitle.setText("Edit your Event");
+
         this.oldEventBean = (EventBean) params.get(0);
 
         eventName.setText(this.oldEventBean.getName());
@@ -260,15 +266,18 @@ public class AddEventController implements Initializable , PostInitialize {
         eventType.setValue(this.oldEventBean.getType());
         setReminderCheckBox.setSelected(this.oldEventBean.isThereAReminder());
 
-        disable(eventDate);
+        eventDate.setDisable(true) ;
+        eventName.setDisable(true) ;
 
         if(setReminderCheckBox.isSelected())
         {
             try {
                 String custom = ReminderTypesEnum.CUSTOM.toString() ;
                 reminderType.setValue(custom.charAt(0) + custom.substring(1).toLowerCase().replace("_", " ")) ;
-                reminderHour.getValueFactory().setValue(this.oldEventBean.getDateOfReminder().toLocalDateTime().getHour());
-                reminderMinute.getValueFactory().setValue(this.oldEventBean.getDateOfReminder().toLocalDateTime().getMinute());
+                long duration = oldEventBean.getDateOfReminder().until(LocalDateTime.of(oldEventBean.getDate(), oldEventBean.getStart()), ChronoUnit.MINUTES);
+                reminderHour.getValueFactory().setValue((int) duration / 60);
+                reminderMinute.getValueFactory().setValue((int) duration % 60);
+                enable(reminderType) ;
             }
             catch(EventException e){
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(), 800, 600);

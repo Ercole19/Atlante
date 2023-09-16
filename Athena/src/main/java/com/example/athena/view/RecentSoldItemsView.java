@@ -1,12 +1,13 @@
 package com.example.athena.view;
 
 
-import com.example.athena.engineering_classes.search_result_factory.SearchResultFactory;
 import com.example.athena.engineering_classes.search_result_factory.FormatBundle;
 import com.example.athena.engineering_classes.search_result_factory.ProductTypeEnum;
+import com.example.athena.engineering_classes.search_result_factory.SearchResultFactory;
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
-import com.example.athena.entities.Student;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.BookException;
+import com.example.athena.exceptions.FindException;
 import com.example.athena.exceptions.PercentFormatException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.graphical_controller.normal_interface.RecentSoldItemsViewGC;
@@ -29,7 +30,7 @@ public class RecentSoldItemsView {
 
     public AnchorPane getRoot() {
         try {
-            int size = this.controller.getResultSize(Student.getInstance().getEmail()) ;
+            int size = this.controller.getResultSize(LoggedStudent.getInstance().getEmail().getMail()) ;
             if(size == 0) {
                 return new ErrorSceneView().createErrorScreen("No books sold yet", this.containerWidth, this.containerHeight) ;
             }
@@ -40,10 +41,12 @@ public class RecentSoldItemsView {
             formatBundle.setEntryNumber(size) ;
             formatBundle.setEntryPercents(30, 25, 25, 20);
             formatBundle.setEntrySize(100) ;
+            formatBundle.setWidth(containerWidth);
+            formatBundle.setHeight(formatBundle.getEntrySize()* formatBundle.getEntryNumber());
             this.result = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle) ;
             this.controller.setValues(this.result) ;
         }
-        catch (PercentFormatException| BookException e){
+        catch (PercentFormatException | BookException | FindException e){
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, FATAL_ERROR, 800, 600) ;
             alert.showAndWait() ;
             System.exit(1) ;

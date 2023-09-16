@@ -1,13 +1,14 @@
 package com.example.athena.graphical_controller.oracle_interface;
 
-import com.example.athena.beans.normal.BookBean;
-import com.example.athena.entities.BooksSubject;
+import com.example.athena.beans.BookBean;
+import com.example.athena.entities.PersonalBookShelf;
 import com.example.athena.exceptions.BookException;
 import com.example.athena.exceptions.UserInfoException;
-import com.example.athena.use_case_controllers.SellBooksUseCaseController;
+import com.example.athena.use_case_controllers.ManageYourSellingBooksUCC;
 import com.example.athena.view.oracle_view.DeleteWhichBookView;
 import com.example.athena.view.oracle_view.LabelView;
 import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class OracleDeleteBookGC {
     private final List<BookBean> list = new ArrayList<>();
 
     private int countBeans(String isbn) throws BookException, UserInfoException {
-        ObservableList<BookBean> beanList = BooksSubject.getInstance().getBooksBeansList();
+        ObservableList<BookBean> beanList = PersonalBookShelf.getInstance().getBooksBeansList();
         for (BookBean book : beanList) {
             if (book.getIsbn().equals(isbn)) {
                 this.list.add(book);
@@ -44,7 +45,7 @@ public class OracleDeleteBookGC {
 
     public void deleteBookUseCase(BookBean bean) {
         try {
-            new SellBooksUseCaseController().deleteProduct(bean);
+            new ManageYourSellingBooksUCC().deleteProduct(bean);
             ParentSubject.getInstance().setCurrentParent(labelView.prepareParent("Book deleted successfully"));
         }catch (BookException e) {
             ParentSubject.getInstance().setCurrentParent(labelView.prepareParent("Error in deleting book, details follow: " + e.getMessage()));

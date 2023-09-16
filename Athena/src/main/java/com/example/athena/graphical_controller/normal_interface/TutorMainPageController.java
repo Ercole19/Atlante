@@ -1,9 +1,9 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.use_case_controllers.LoginUseCaseController;
-import com.example.athena.view.TutorPageView;
 import com.example.athena.engineering_classes.scene_decorators.TutorPageButtonAdder;
 import com.example.athena.engineering_classes.scene_decorators.TutorPageComponent;
+import com.example.athena.use_case_controllers.LoginUseCaseController;
+import com.example.athena.view.TutorPageView;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 

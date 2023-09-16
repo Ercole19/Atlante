@@ -1,6 +1,5 @@
 package com.example.athena.view.oracle_view;
 
-import com.example.athena.graphical_controller.oracle_interface.OracleAddEventGC;
 import com.example.athena.view.LabelBuilder;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -12,25 +11,29 @@ public class InsertDescriptionView {
     private Parent root ;
     private TextArea desc ;
 
-    public InsertDescriptionView(OracleAddEventGC controller) {
+    private Button confirm ;
+
+    public InsertDescriptionView() {
         VBox box = new VBox() ;
         box.getChildren().add(LabelBuilder.buildLabel("Insert Description")) ;
         this.desc = new TextArea() ;
         box.getChildren().add(this.desc) ;
-        Button button = new Button("Confirm") ;
+        confirm = new Button("Confirm") ;
 
-        button.setOnAction(event -> controller.obtainDescription(this)) ;
-        box.getChildren().add(button) ;
+        box.getChildren().add(confirm) ;
 
         this.root = box ;
-
     }
 
-    public String getDescription() {
-        return this.desc.getText() ;
+    public TextArea getDesc() {
+        return this.desc ;
     }
 
     public Parent getRoot() {
         return this.root ;
+    }
+
+    public Button getConfirm() {
+        return confirm;
     }
 }

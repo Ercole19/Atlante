@@ -1,14 +1,13 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.beans.normal.NormalTutorCvInfoBean;
+import com.example.athena.beans.TutorCvInfoBean;
+import com.example.athena.beans.TutorInfosBean;
+import com.example.athena.beans.UserBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
-import com.example.athena.entities.Tutor;
 import com.example.athena.entities.TutorPersonalPageSubject;
 import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.NoCvException;
 import com.example.athena.exceptions.SizedAlert;
-import com.example.athena.beans.normal.TutorInfosBean;
-import com.example.athena.beans.normal.UserBean;
 import com.example.athena.exceptions.UserInfoException;
 import com.example.athena.use_case_controllers.TutorPersonalPageUCC;
 import com.example.athena.use_case_controllers.ViewTutorPageUseCaseController;
@@ -64,7 +63,7 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
     public void clickOnBackButton(ActionEvent event)
     {
         switcher.switcher("tutorSearchPage.fxml") ;
-        TutorPersonalPageSubject.getInstance().resetEntity();
+        new ViewTutorPageUseCaseController().exitPage() ;
         TutorPersonalPageSubject.getInstance().detachObserver(this);
 
     }
@@ -73,9 +72,7 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
     {
         ViewTutorPageUseCaseController tutorPage = new ViewTutorPageUseCaseController();
         try {
-            UserBean bean = new UserBean() ;
-            bean.setEmail(this.email);
-            tutorPage.getCV(bean);
+            tutorPage.getCV();
         } catch (UserInfoException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error in retrieving cv from db, try restarting application", ButtonType.CLOSE);
             alert.showAndWait();
@@ -111,7 +108,7 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
     public void onCVButtonClickTutor()
     {
         TutorPersonalPageUCC controller = new TutorPersonalPageUCC();
-        NormalTutorCvInfoBean bean = new NormalTutorCvInfoBean();
+        TutorCvInfoBean bean = new TutorCvInfoBean();
 
         JFileChooser fc = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -166,12 +163,7 @@ public class TutorPersonalPageController implements PostInitialize, Initializabl
             aboutMe.setText(tutorInfosBean.getAboutMe());
             sessionInfos.setText(tutorInfosBean.getSessionInfos());
             contactNumbers.setText(tutorInfosBean.getContactNumbers());
-            if (tutorInfosBean.getAvgReview() == 0.0){
-                reviewAverage.setText("No reviews");
-            }
-            else {
-                reviewAverage.setText(String.valueOf(tutorInfosBean.getAvgReview()));
-            }
+            reviewAverage.setText(String.valueOf(tutorInfosBean.getAvgReview()));
 
             coursesArea.clear();
             for (String course : tutorInfosBean.getTutorCourses()) {

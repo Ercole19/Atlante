@@ -1,7 +1,6 @@
 package com.example.athena.engineering_classes;
 
 import com.example.athena.beans.OutputExamBean;
-import com.example.athena.beans.normal.NormalExamBean;
 
 import java.util.Comparator;
 

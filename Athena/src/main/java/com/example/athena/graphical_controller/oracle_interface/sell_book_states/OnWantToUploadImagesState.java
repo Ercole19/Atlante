@@ -1,13 +1,12 @@
 package com.example.athena.graphical_controller.oracle_interface.sell_book_states;
 
+import com.example.athena.graphical_controller.oracle_interface.BookYesOrNoController;
 import com.example.athena.graphical_controller.oracle_interface.OracleSellBookGC;
-import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
-import com.example.athena.view.oracle_view.WantToView;
 
 public class OnWantToUploadImagesState implements SellBookAbstractState {
 
     public OnWantToUploadImagesState(OracleSellBookGC controller) {
-        ParentSubject.getInstance().setCurrentParent(new WantToView("Do you want to add images ?", controller).getRoot());
+        new BookYesOrNoController("Do you want to add images ?", controller) ;
     }
 
     @Override

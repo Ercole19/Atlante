@@ -22,7 +22,6 @@ public class PlacedBidsView {
         this.controller = new PlacedBidsViewGC(this);
         this.width = width;
         this.height = height;
-
     }
 
     public AnchorPane getRoot() {
@@ -34,8 +33,10 @@ public class PlacedBidsView {
             formatBundle.setEntryNumber(size);
             formatBundle.setEntryPercents(30, 20, 30, 10, 10);
             formatBundle.setEntrySize(100);
+            formatBundle.setWidth(width);
+            formatBundle.setHeight(formatBundle.getEntrySize()* formatBundle.getEntryNumber());
             this.placedBids = SearchResultFactory.createProduct(ProductTypeEnum.VERTICAL_ENTRY, formatBundle);
-            this.controller.setValues(this.placedBids);
+            this.controller.setVal(this.placedBids);
         }
         catch (PercentFormatException e){
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, FATAL_ERROR, 800, 600) ;

@@ -1,6 +1,6 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.beans.normal.CourseBean;
+import com.example.athena.beans.CourseBean;
 import com.example.athena.exceptions.CourseException;
 import com.example.athena.exceptions.SizedAlert;
 import com.example.athena.exceptions.UserInfoException;

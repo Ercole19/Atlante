@@ -1,5 +1,6 @@
 package com.example.athena.graphical_controller.normal_interface;
 
+import com.example.athena.beans.EventPresencesForMonthBean;
 import com.example.athena.engineering_classes.observer_pattern.AbstractObserver;
 import com.example.athena.entities.CalendarSubject;
 import com.example.athena.exceptions.EventException;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class CalendarPageController implements Initializable, AbstractObserver {
+public class CalendarPageController extends HomeScreenController implements Initializable, AbstractObserver {
 
 
     @FXML
@@ -59,7 +60,7 @@ public class CalendarPageController implements Initializable, AbstractObserver {
         Set<LocalDate> eventsPresence;
         try
         {
-            eventsPresence = CalendarSubject.getInstance().getEventPresencesByYearMonth(this.currentYearMonth).getEventSet() ;
+            eventsPresence = CalendarSubject.getInstance().getEventPresencesByYearMonth(new EventPresencesForMonthBean(this.currentYearMonth)).getEventSet() ;
         }
         catch (EventException e)
         {

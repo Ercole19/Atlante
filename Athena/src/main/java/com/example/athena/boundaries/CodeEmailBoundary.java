@@ -1,7 +1,7 @@
 package com.example.athena.boundaries;
 
-import com.example.athena.beans.normal.MailServerBean;
-import com.example.athena.beans.normal.MailServerResponseBean;
+import com.example.athena.beans.MailServerBean;
+import com.example.athena.beans.MailServerResponseBean;
 import com.example.athena.exceptions.SendEmailException;
 
 import java.io.IOException;

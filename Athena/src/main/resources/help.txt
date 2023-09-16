@@ -1,29 +1,25 @@
-commands list:
-              update_exam#[oldname#olddate#oldgrade#oldcfu#newName#newDate#newGrade#newCfu]
-              login#[username#password]
-              signup#[name#surname#email#password]
-              validate_signup#[code]
-              add_event
-              show#my_selling_books
-                   plots
-                   exams_completion
-                   cfu_completion
-                   taken_exams
-                   averages
-                   tutors#[Type#name#ordered]
-                   books#[name/isbn]
-                   sold_books
-                   purchased_books
-                   my_courses
-                   my_infos
-                   my_cv
-              generate_review
-              review#[code]
-              sell_book
-              add_course#[name]
-              add_cv#[pathname]
-              set_maxCfus#[newmax]
-              set_maxExams#[newmax]
-              delete_course#[name]
-              add_exam#[name#cfu#grade#date]
-              delete_exam#[name#date#grade#cfu]
+commands:                    '#' is used for splitting arguments of a command;     T stays for tutor only command; S for students
+        login#email												                    show#
+        signup#name#surname#email#(STUDENT|TUTOR)							       events#date (S)
+        validate_signup#email#code                                                                                                 exams_completion  (S)
+        add_event#name#date#start#end (S)										       cfu_completion    (S)
+        generate_review#studentEmail#date#startingHour#endingHour (T)         		               taken_exams       (S)
+        sell_book#name#isbn#price (S)											       averages		(S)
+        update_book#isbn (S)													       tutors#byName/byCourse#query#true/false(true for sorting by best reviews)
+        delete_book#isbn (S)													       books#query(can be name or isbn)
+        add_cv#pathname (T)													       sold_books (S)
+        set_maxCfus#maxCfus (S)												       purchased_books (S)
+        set_maxExams#maxExams (S)												      my_selling_books (S)
+        add_course#courseName (T)												      my_courses (T)
+        delete_course#courseName (T)										              my_infos (T)
+        add_exam#name#cfu#date#grade (S)										      my_cv	 (T)
+        delete_exam#name#date (S)
+        update_exam#oldName#oldDate#oldGrade#oldCfu#newName#newDate#newGrade#newCfu(S)
+        review#code
+        help
+
+        (Other show commands)
+        show#
+                  plots#(ALL | STUDY_SESSION | LECTURE_TIME | OTHER)#(LAST_WEEK | LAST_TWO_WEEKS | LAST_MONTH | LAST_TWO_MONTHS)(S)
+                  my_placed_bids (S)
+                  my_received_bids#isbn (S)

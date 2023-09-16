@@ -1,15 +1,13 @@
 package com.example.athena.boundaries;
 
-import com.example.athena.beans.normal.MailServerBean;
-import com.example.athena.beans.normal.MailServerResponseBean;
-import com.example.athena.entities.Student;
+import com.example.athena.beans.MailServerBean;
+import com.example.athena.beans.MailServerResponseBean;
+import com.example.athena.beans.ReminderBean;
+import com.example.athena.entities.LoggedStudent;
 import com.example.athena.exceptions.EventException;
 import com.example.athena.exceptions.SendEmailException;
-import com.example.athena.beans.normal.EventBean;
-
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -21,9 +19,9 @@ public class SetReminderEmailBoundary extends SocketBoundary
 
     }
 
-    public static void sendToServer(EventBean eventInfo, boolean remove) throws SendEmailException
+    public static void sendToServer(ReminderBean event) throws SendEmailException
     {
-        MailServerBean query = prepareQueryForServer(eventInfo, Student.getInstance().getEmail(), remove) ;
+        MailServerBean query = prepareQueryForServer(event, LoggedStudent.getInstance().getEmail().getMail()) ;
 
         try
         {
@@ -39,9 +37,9 @@ public class SetReminderEmailBoundary extends SocketBoundary
         }
     }
 
-    private static MailServerBean prepareQueryForServer(EventBean eventInfo, String recipient, boolean remove) throws SendEmailException {
+    private static MailServerBean prepareQueryForServer(ReminderBean eventInfo, String recipient) throws SendEmailException {
 
-        Timestamp moment;
+        LocalDateTime moment;
         try {
             moment = eventInfo.getDateOfReminder() ;
         }
@@ -55,9 +53,9 @@ public class SetReminderEmailBoundary extends SocketBoundary
         LocalTime start = eventInfo.getStart() ;
         LocalTime end = eventInfo.getEnd() ;
         String description = eventInfo.getDescription() ;
-        LocalDateTime momentForServer = moment.toLocalDateTime() ;
+        LocalDateTime momentForServer = moment ;
         MailServerBean bean = new MailServerBean() ;
-        if (remove) bean.setClassName("R");
+        if (eventInfo.isRemove()) bean.setClassName("R");
         else bean.setClassName("N");
 
         bean.setMailAccount("athena.services") ;

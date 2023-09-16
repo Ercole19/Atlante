@@ -1,7 +1,7 @@
 package com.example.athena.graphical_controller.normal_interface;
 
+import com.example.athena.beans.UserBean;
 import com.example.athena.exceptions.*;
-import com.example.athena.beans.normal.UserBean;
 import com.example.athena.use_case_controllers.LoginUseCaseController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -58,7 +58,7 @@ public class LoginPageController{
                 }
 
         }
-        catch (LoggedUserException | UserInfoException | FindException exc)
+        catch (LoggedUserException | UserInfoException | FindException | StudentInfoException exc)
         {
                 SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, exc.getMessage());
                 alert.showAndWait();
@@ -102,11 +102,5 @@ public class LoginPageController{
 
     public void switchToSignUpPage() {
         switcher.switcher("signUpView.fxml");
-    }
-
-
-    public void fillFast() {
-        emailField.setText("alba@student.it");
-        passField.setText("tramonto");
     }
 }

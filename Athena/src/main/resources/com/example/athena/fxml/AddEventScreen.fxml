@@ -4,9 +4,9 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
-<AnchorPane prefHeight="900.0" prefWidth="600.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.normal_interface.AddEventController">
+<AnchorPane prefHeight="900.0" prefWidth="600.0" style="-fx-background-color: #002730;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.athena.graphical_controller.normal_interface.AddEventController">
    <children>
-      <Text fill="WHITE" layoutX="131.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert a new Event">
+      <Text fx:id="screenTitle" fill="WHITE" layoutX="131.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert a new Event" textAlignment="CENTER">
          <font>
             <Font size="36.0" />
          </font>

@@ -1,21 +1,23 @@
 package com.example.athena.graphical_controller.normal_interface;
 
-import com.example.athena.beans.normal.BidBean;
+import com.example.athena.beans.BidBean;
 import com.example.athena.engineering_classes.search_result_factory.SearchResultProduct;
 import com.example.athena.exceptions.BidException;
 import com.example.athena.exceptions.SizedAlert;
+import com.example.athena.graphical_controller.oracle_interface.ParentSubject;
 import com.example.athena.use_case_controllers.ManageBidsUCC;
+import com.example.athena.use_case_controllers.SeePlacedBidsUCC;
 import com.example.athena.view.LabelBuilder;
 import com.example.athena.view.PlacedBidsView;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlacedBidsViewGC {
     private PlacedBidsView view;
-    private final ManageBidsUCC controller = new ManageBidsUCC();
+    private final SeePlacedBidsUCC seePlacedBidsUCC = new SeePlacedBidsUCC();
+    private final ManageBidsUCC manageBidsUCC = new ManageBidsUCC();
     private List<BidBean> results;
 
     public PlacedBidsViewGC (PlacedBidsView view) {
@@ -24,7 +26,7 @@ public class PlacedBidsViewGC {
 
     public int getResultSize() {
         try {
-            this.results =  controller.getPlacedBids();
+            this.results =  seePlacedBidsUCC.getPlacedBids();
         } catch (BidException e) {
             SizedAlert alert = new SizedAlert(Alert.AlertType.ERROR, e.getMessage(),800, 600);
             alert.showAndWait();
@@ -32,7 +34,7 @@ public class PlacedBidsViewGC {
         return this.results.size() ;
     }
 
-    public void setValues(SearchResultProduct product){
+    public void setVal(SearchResultProduct product){
         product.setLegend(0, LabelBuilder.buildLabel("ISBN"));
         product.setLegend(1, LabelBuilder.buildLabel("Offer"));
         product.setLegend(2, LabelBuilder.buildLabel("Status"));
@@ -53,7 +55,7 @@ public class PlacedBidsViewGC {
                 product.setEntry(i,3, pay);
                 pay.setOnAction(event -> {
                     try {
-                        this.controller.payBid(bidBean);
+                        manageBidsUCC.payBid(bidBean);
                         refreshScreen();
                     }
                     catch(BidException e){
@@ -66,7 +68,7 @@ public class PlacedBidsViewGC {
                 product.setEntry(i, 4, cancel);
                 cancel.setOnAction(event -> {
                     try {
-                        this.controller.cancelBid(bidBean);
+                        manageBidsUCC.cancelBid(bidBean);
                         refreshScreen();
                     }
                     catch(BidException e){
@@ -91,6 +93,7 @@ public class PlacedBidsViewGC {
     }
 
     private void refreshScreen() {
-        SceneSwitcher.getInstance().switcher("PlacedBids.fxml") ;
+        if (System.getProperty("oracle").equals("false"))SceneSwitcher.getInstance().switcher("PlacedBids.fxml") ;
+        else ParentSubject.getInstance().setCurrentParent(new PlacedBidsView(1200, 560).getRoot());
     }
 }

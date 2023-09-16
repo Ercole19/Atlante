@@ -1,10 +1,11 @@
 package com.example.athena.graphical_controller.normal_interface;
 
+import com.example.athena.beans.RegistrationBean;
 import com.example.athena.exceptions.UserRegistrationException;
-import com.example.athena.beans.normal.RegistrationBean;
 import com.example.athena.use_case_controllers.SignUpUCC;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -31,6 +32,8 @@ public class ValidateSignUpGC implements PostInitialize {
         bean.setCode(registrationCodeField.getText());
         try {
             signUpUCC.register(bean) ;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Registration successful", ButtonType.CLOSE);
+            alert.showAndWait();
             switcher.switcher("LoginPage.fxml");
         } catch (UserRegistrationException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage()) ;

@@ -1,8 +1,7 @@
 package com.example.athena.graphical_controller.oracle_interface.parsers;
 
 
-import com.example.athena.beans.normal.UserBean;
-import com.example.athena.entities.Tutor;
+import com.example.athena.entities.LoggedTutor;
 import com.example.athena.exceptions.LoggedUserException;
 import com.example.athena.exceptions.NoCvException;
 import com.example.athena.exceptions.UserInfoException;
@@ -17,11 +16,9 @@ public class ShowMyCVParser {
     private final LabelView labelView = new LabelView();
     public void parseInfos() {
         try{
-            if (Tutor.getInstance().getEmail() != null) {
+            if (LoggedTutor.getInstance().getEmail().getMail() != null) {
                     ViewTutorPageUseCaseController tutorPage = new ViewTutorPageUseCaseController();
-                    UserBean bean = new UserBean() ;
-                    bean.setEmail(Tutor.getInstance().getEmail());
-                    tutorPage.getCV(bean);
+                    tutorPage.getCV();
                     String name = "tempCV.html" ;
                     ArrayList<Object> params = new ArrayList<>() ;
                     params.add(name) ;

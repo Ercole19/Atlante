@@ -1,8 +1,8 @@
 package com.example.athena.entities;
 
+import com.example.athena.dao.EventDao;
 import com.example.athena.exceptions.EventException;
 
-import java.sql.Timestamp;
 import java.time.*;
 import java.util.List;
 
@@ -14,10 +14,11 @@ public class EventEntity
     private LocalTime end ;
     private String description ;
     private ActivityTypesEnum type ;
-    private Timestamp dateOfReminder;
+    private LocalDateTime dateOfReminder;
 
-    public EventEntity(String name, LocalDate day, LocalTime start, LocalTime end, String description, ActivityTypesEnum type, Timestamp reminderDate)
+    public EventEntity(String name, LocalDate day, LocalTime start, LocalTime end, String description, ActivityTypesEnum type, LocalDateTime reminderDate) throws EventException
     {
+        if (end.isBefore(start)) throw new EventException("End hour is before start hour") ;
         this.setName(name) ;
         this.setDay(day) ;
         this.setStart(start) ;
@@ -27,8 +28,9 @@ public class EventEntity
         this.dateOfReminder = reminderDate;
     }
 
-    public EventEntity(String name, LocalDate day, LocalTime start, LocalTime end, String description, ActivityTypesEnum type)
+    public EventEntity(String name, LocalDate day, LocalTime start, LocalTime end, String description, ActivityTypesEnum type) throws EventException
     {
+        if (end.isBefore(start)) throw new EventException("End hour is before start hour") ;
         this.setName(name) ;
         this.setDay(day) ;
         this.setStart(start) ;
@@ -117,7 +119,7 @@ public class EventEntity
 
     public ActivityTypesEnum getType() {return type;}
 
-    public Timestamp getDateOfReminder() {return dateOfReminder;}
+    public LocalDateTime getDateOfReminder() {return dateOfReminder;}
 
     public void deleteEntity() throws EventException {
         EventDao dao = new EventDao() ;
@@ -128,7 +130,7 @@ public class EventEntity
         EventDao dao = new EventDao() ;
         LocalDateTime dateOfReminderParam = null ;
         if(this.dateOfReminder != null) {
-            dateOfReminderParam = this.dateOfReminder.toLocalDateTime() ;
+            dateOfReminderParam = this.dateOfReminder ;
         }
 
         dao.addEvent(this.day, this.name, this.start, this.end, this.description, String.valueOf(this.type), dateOfReminderParam);

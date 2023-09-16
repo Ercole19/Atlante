@@ -10,6 +10,11 @@ public class FormatBundle {
     private double containerHeight ;
     private int entryNumber ;
     private double entrySize ;
+
+    private double width ;
+
+    private double height ;
+
     private List<Integer> entryPercents = new ArrayList<>() ;
 
 
@@ -62,4 +67,19 @@ public class FormatBundle {
         this.containerWidth = containerWidth;
     }
 
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
 }
