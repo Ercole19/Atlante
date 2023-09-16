@@ -44,8 +44,9 @@ public class BookBean {
 
     public List<File> getImage() {return this.image; }
 
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
+    public void setBookTitle(String bookTitle) throws BookException {
+        if (bookTitle.trim().isEmpty()) throw new BookException("Book title must be insert !");
+        else this.bookTitle = bookTitle;
     }
 
     public void setIsbn(String isbn)throws BookException {

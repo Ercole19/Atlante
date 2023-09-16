@@ -15,7 +15,6 @@ import java.util.List;
 
 public class CalendarSubject extends AbstractSubject {
 
-    private static CalendarSubject instance = null ;
     private final HashMap<YearMonth, CalendarEntity> calendarMap;
 
     private CalendarSubject()
@@ -23,14 +22,13 @@ public class CalendarSubject extends AbstractSubject {
         this.calendarMap = new HashMap<>() ;
     }
 
+    private static class SingletonHelper {
+        private static final CalendarSubject instance = new CalendarSubject();
+    }
+
     public static synchronized CalendarSubject getInstance()
     {
-        if(CalendarSubject.instance == null)
-        {
-            CalendarSubject.instance = new CalendarSubject() ;
-        }
-
-        return CalendarSubject.instance ;
+        return SingletonHelper.instance;
     }
 
     public List<EventBean> getEventsOfDay(EventsDayBean date) throws EventException {

@@ -104,10 +104,10 @@ public class OracleUpdateBookGC extends UpdatedShiftImageController {
         try {
             this.updatedBean.setIsbn(this.isbn);
             this.updatedBean.setPrice(view.getPrice());
+            this.updatedBean.setBookTitle(view.getBookTitle());
         } catch (BookException e) {
             ParentSubject.getInstance().setCurrentParent(labelView.prepareParent("Error in updating book, details follow: " + e.getMessage()));
         }
-        this.updatedBean.setBookTitle(view.getBookTitle());
         this.updatedBean.setIsNegotiable(view.getNegotiability());
         this.updatedBean.setImage(super.files);
         this.updatedBean.setTimeStamp(selectedBean.getTimeStamp());

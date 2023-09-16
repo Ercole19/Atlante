@@ -46,7 +46,6 @@ public class InsertNewBookModuleGC extends UpdatedShiftImageController implement
     private final SceneSwitcher switcher = SceneSwitcher.getInstance();
 
     public void onConfirmButtonClick()  {
-
         try {
             BookBean newBook = new BookBean();
             setBeanValues(newBook);
